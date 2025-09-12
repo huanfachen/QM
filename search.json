@@ -1,0 +1,215 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome",
+    "section": "",
+    "text": "This template is intended to help you get started with CASA’s in-house ‘Quarto’ style. Note that we can do useful things like inserting a module name Module Name (casaXXXX) dynamically. This can be especially useful for submission deadlines which are stated on multiple pages of a web site.\nWe also have a presentation style that you can use.\nEverywhere in-line code execution is supported, as are included QMD files and other tricks to make it easy to re-use content, streamline maintenance of your module’s materials, and keep everything nice and clean.",
+    "crumbs": [
+      "Step 1."
+    ]
+  },
+  {
+    "objectID": "L1_EDA_I.html#understanding-and-describing-data",
+    "href": "L1_EDA_I.html#understanding-and-describing-data",
+    "title": "A Title for my Slides",
+    "section": "Understanding and describing data",
+    "text": "Understanding and describing data\n\nQuantitative research is the process of collecting and analysing numerical data to describe, model, and predict variables of interest.\nGarbage in, garbage out.\n\n\nThis lecture focuses on understanding and describing data."
+  },
+  {
+    "objectID": "L1_EDA_I.html#learning-objectives",
+    "href": "L1_EDA_I.html#learning-objectives",
+    "title": "A Title for my Slides",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this lecture you should:\n\nUnderstand basic data types;\nConsider how to summarise and represent data."
+  },
+  {
+    "objectID": "L1_EDA_I.html#four-levels-of-measurements",
+    "href": "L1_EDA_I.html#four-levels-of-measurements",
+    "title": "A Title for my Slides",
+    "section": "Four levels of measurements",
+    "text": "Four levels of measurements\n\n\n\n\nNominal\nOrdinal\nInterval\nRatio\n\n\n\n\nCategorizes and labels variables\n✔\n✔\n✔\n✔\n\n\nRanks categories in order\n\n✔\n✔\n✔\n\n\nHas known, equal intervals\n\n\n✔\n✔\n\n\nHas a true or meaningful zero\n\n\n\n✔\n\n\n\n\nDeveloped by psychologist Stanley Smith Stevens (1906 - 1973)"
+  },
+  {
+    "objectID": "L1_EDA_I.html#nominal",
+    "href": "L1_EDA_I.html#nominal",
+    "title": "A Title for my Slides",
+    "section": "Nominal",
+    "text": "Nominal\n\nDifferentiates items based only on names; no order between them.\nAlso called categorical data\nExample: colour, gender, country names\nWhat can be said about them?\n\nEquality: ‘apple’ is not ‘pear’, ‘apple’ is ‘apple’\nMode: the most common item"
+  },
+  {
+    "objectID": "L1_EDA_I.html#ordinal",
+    "href": "L1_EDA_I.html#ordinal",
+    "title": "A Title for my Slides",
+    "section": "Ordinal",
+    "text": "Ordinal\n\nAllow for rank order, but not the relative degree of difference\nExample: measurement of opinions\n\ncompletely agree\nmostly agree\nneither degree nor disagree\nmostly disagree\ncompletely disagree\n\nWhat can be said about them?\n\n✅ Equality; mode\n✅ Median: middle-ranked item\n❌ Differences between two levels; arithmetic mean"
+  },
+  {
+    "objectID": "L1_EDA_I.html#interval",
+    "href": "L1_EDA_I.html#interval",
+    "title": "A Title for my Slides",
+    "section": "Interval",
+    "text": "Interval\n\nAllow for degree of difference between items, but not the ratio\nThe zero value is arbitrary\nExample: Celsius temperature\n\nDefinition: define 0°C & 100°C, and then separate them into 100 intervals.\nDepends on altitude/elevation\n\nWhat can be said about them?\n\n✅ equality, mode, median\n✅ addition, arithmetic mean\n❌ ratio (100°C is NOT twice 50°C)"
+  },
+  {
+    "objectID": "L1_EDA_I.html#interval-1",
+    "href": "L1_EDA_I.html#interval-1",
+    "title": "A Title for my Slides",
+    "section": "Interval",
+    "text": "Interval\n\nAnother example: longtitude & latitude coordinates\nThe coordinate of 8 is twice as far as that of 4? ❌"
+  },
+  {
+    "objectID": "L1_EDA_I.html#ratio",
+    "href": "L1_EDA_I.html#ratio",
+    "title": "A Title for my Slides",
+    "section": "Ratio",
+    "text": "Ratio\n\nAllow for ratio between items\nThe zero value is unique and non-arbitrary.\nExample: mass, length, energy\nWhat can be said about them?\n\n✅ Equality, mode, median, arithmetic mean\n✅ Ratio (2kg is twice as heavy as 1kg)"
+  },
+  {
+    "objectID": "L1_EDA_I.html#notes",
+    "href": "L1_EDA_I.html#notes",
+    "title": "A Title for my Slides",
+    "section": "Notes",
+    "text": "Notes\n\n‘Encoding’ does not change the nature of a measurement.\nGender variable (male, female, others) is NOMINAL.\nIf this variable is encodeded {male:0, female:1, others:2}, is it NOMINAL, or INTERVAL?"
+  },
+  {
+    "objectID": "L1_EDA_I.html#another-categorisation-numerical-vs.-categorical",
+    "href": "L1_EDA_I.html#another-categorisation-numerical-vs.-categorical",
+    "title": "A Title for my Slides",
+    "section": "Another categorisation: numerical vs. categorical",
+    "text": "Another categorisation: numerical vs. categorical\n\n\n\n\n\n\n\n\nType\nCategory\nNotes\n\n\n\n\nQuantitative (numerical) data\nDiscrete data\nOnly in whole numbers, e.g. number of staffs\n\n\n\nContinuous data\ne.g. temperature, 23°C, 23.4°C\n\n\nQualitative (categorical) data\nNominal\nSame as nominal in ‘Levels of measurement’\n\n\n\nOrdinal\nSee above"
+  },
+  {
+    "objectID": "L1_EDA_I.html#quiz-time",
+    "href": "L1_EDA_I.html#quiz-time",
+    "title": "A Title for my Slides",
+    "section": "Quiz time",
+    "text": "Quiz time\n\nMentimeter quiz"
+  },
+  {
+    "objectID": "L1_EDA_I.html#key-metrics",
+    "href": "L1_EDA_I.html#key-metrics",
+    "title": "A Title for my Slides",
+    "section": "Key metrics",
+    "text": "Key metrics\n\n\n\nQuantity\nThe middle\nThe spread"
+  },
+  {
+    "objectID": "L1_EDA_I.html#us-city-population",
+    "href": "L1_EDA_I.html#us-city-population",
+    "title": "A Title for my Slides",
+    "section": "US city population",
+    "text": "US city population\n\n\n\nQuantity: 282 values\nThe middle: Mean 302869.3\nThe middle: Median 167744.5 (Very different from mean)\nThe middle: Mode 106433 (Useful? ❌)\nShould use mean or median? median is better than mean, as data is unlikely normal distributed"
+  },
+  {
+    "objectID": "L1_EDA_I.html#variance-quantifying-spread",
+    "href": "L1_EDA_I.html#variance-quantifying-spread",
+    "title": "A Title for my Slides",
+    "section": "Variance: quantifying spread",
+    "text": "Variance: quantifying spread\nDenote city population by \\([y_1, y_2, ..., y_n]\\) and variance by \\(\\sigma^2\\)\n\\[\n\\begin{aligned}\n\\sigma^2 &= \\frac{\\sum_{i=1}^{n} (y_i - \\bar{y})^2}{n} \\\\\n&= \\frac{(y_1 - \\bar{y})^2 + (y_2 - \\bar{y})^2 + \\dots + (y_n - \\bar{y})^2}{n}\n\\end{aligned}\n\\]\nA large variance means considerable spreadedness in data."
+  },
+  {
+    "objectID": "L1_EDA_I.html#standard-deviation-sigma",
+    "href": "L1_EDA_I.html#standard-deviation-sigma",
+    "title": "A Title for my Slides",
+    "section": "Standard deviation \\(\\sigma\\)",
+    "text": "Standard deviation \\(\\sigma\\)\n\\[\n\\begin{aligned}\n\\text{Standard Deviation} = \\sqrt{\\text{Variance}}\n\\end{aligned}\n\\]\n\nUnit: if \\(y\\) is in unit of meter (m), then St. Dev is in unit of m, variance in unit of \\(\\text{m}^2\\)"
+  },
+  {
+    "objectID": "L1_EDA_I.html#summary-of-key-metrics",
+    "href": "L1_EDA_I.html#summary-of-key-metrics",
+    "title": "A Title for my Slides",
+    "section": "Summary of key metrics",
+    "text": "Summary of key metrics\n\n\nQuantity\nThe middle: mean, median, mode\nThe spread: variance, standard deviation\nVisualising data is also important: BOXPLOT!\nPlease check two types of SPECIAL VALUES before computing these metrics."
+  },
+  {
+    "objectID": "L1_EDA_I.html#ft-visual-vocabulary",
+    "href": "L1_EDA_I.html#ft-visual-vocabulary",
+    "title": "A Title for my Slides",
+    "section": "FT visual vocabulary",
+    "text": "FT visual vocabulary\n\nhttps://ft-interactive.github.io/visual-vocabulary/"
+  },
+  {
+    "objectID": "L1_EDA_I.html#boxplot-for-a-dataset",
+    "href": "L1_EDA_I.html#boxplot-for-a-dataset",
+    "title": "A Title for my Slides",
+    "section": "Boxplot for a dataset",
+    "text": "Boxplot for a dataset\n\nShowing distribution of a dataset"
+  },
+  {
+    "objectID": "L1_EDA_I.html#boxplot-for-comparing-multiple-datasets",
+    "href": "L1_EDA_I.html#boxplot-for-comparing-multiple-datasets",
+    "title": "A Title for my Slides",
+    "section": "Boxplot for comparing multiple datasets",
+    "text": "Boxplot for comparing multiple datasets"
+  },
+  {
+    "objectID": "L1_EDA_I.html#when-boxplot-fails",
+    "href": "L1_EDA_I.html#when-boxplot-fails",
+    "title": "A Title for my Slides",
+    "section": "When boxplot fails?",
+    "text": "When boxplot fails?\n\nWhen there are lots of ‘outliers’ in the data\nWhat are ‘Outliers’?"
+  },
+  {
+    "objectID": "L1_EDA_I.html#null-values",
+    "href": "L1_EDA_I.html#null-values",
+    "title": "A Title for my Slides",
+    "section": "Null values",
+    "text": "Null values\n\nRepresenting the absence of data or an unknow value\nDifferent from zero or a blank space\nNull values should be excluded before computing mean or std"
+  },
+  {
+    "objectID": "L1_EDA_I.html#null-island-in-geography",
+    "href": "L1_EDA_I.html#null-island-in-geography",
+    "title": "A Title for my Slides",
+    "section": "Null island in geography",
+    "text": "Null island in geography\n\nlong=0, lat=0. Not even an island!\nIt became famous because some software assigned “0,0” for long-lat when location is missing\nMany events were mapped to this one, including lots on Strava\nSource: wikipedia.org"
+  },
+  {
+    "objectID": "L1_EDA_I.html#outliers",
+    "href": "L1_EDA_I.html#outliers",
+    "title": "A Title for my Slides",
+    "section": "Outliers",
+    "text": "Outliers\n\nA data point that differs significantly from other observations\nThere are three types of outliers\nPlease explain the rationale for removing any identified outliers, including the criteria and methods used"
+  },
+  {
+    "objectID": "L1_EDA_I.html#outliers-1",
+    "href": "L1_EDA_I.html#outliers-1",
+    "title": "A Title for my Slides",
+    "section": "Outliers",
+    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\nFrom mistakes in data collection/entry/measurement, e.g. a temperature sensor reading 500 °C\nShould be corrected or removed\n\n\nIrregular Pattern Outliers\n\n\n\n\nInfluential Outliers"
+  },
+  {
+    "objectID": "L1_EDA_I.html#outliers-2",
+    "href": "L1_EDA_I.html#outliers-2",
+    "title": "A Title for my Slides",
+    "section": "Outliers",
+    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\n\n\n\n\nIrregular Pattern Outliers\nGenuinely occur, but do not follow general pattern or relationship in the dataset, e.g. sudden spikes in sales in Black Friday\nThey might indicate unusual events or anomalies worth investigating. If the purpose is to study overall pattern, they should be removed\n\n\nInfluential Outliers"
+  },
+  {
+    "objectID": "L1_EDA_I.html#outliers-3",
+    "href": "L1_EDA_I.html#outliers-3",
+    "title": "A Title for my Slides",
+    "section": "Outliers",
+    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\n\n\n\n\nIrregular Pattern Outliers\n\n\n\n\nInfluential Outliers\nAppear extreme but are integral to the underlying pattern or model, e.g. NYC in US city population data\nShould keep them, as removing them could distort the analysis or overlook important features of the data"
+  },
+  {
+    "objectID": "L1_EDA_I.html#detecting-outlier-interquartile-range-iqr",
+    "href": "L1_EDA_I.html#detecting-outlier-interquartile-range-iqr",
+    "title": "A Title for my Slides",
+    "section": "Detecting outlier: interquartile range (IQR)",
+    "text": "Detecting outlier: interquartile range (IQR)"
+  },
+  {
+    "objectID": "L1_EDA_I.html#quiz-which-type-of-outliers",
+    "href": "L1_EDA_I.html#quiz-which-type-of-outliers",
+    "title": "A Title for my Slides",
+    "section": "Quiz: which type of outliers?",
+    "text": "Quiz: which type of outliers?\n\nerror vs. irregular pattern vs. influential\n\n\nIn building height data, 10-storey building with 1m height\nIn gender ratios of countries data, Vatican City with gender ratio of 7:1\nIn UK city GDP data, GDP of Greater London"
+  },
+  {
+    "objectID": "L1_EDA_I.html#summary-describing-a-dataset",
+    "href": "L1_EDA_I.html#summary-describing-a-dataset",
+    "title": "A Title for my Slides",
+    "section": "Summary: describing a dataset",
+    "text": "Summary: describing a dataset\n\nKey metrics\nNull values and outliers (and handle them!)\nVisualising data"
+  }
+]
