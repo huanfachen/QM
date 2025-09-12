@@ -1,215 +1,1468 @@
 [
   {
+    "objectID": "sessions/week5.html#overview-of-lecture-4",
+    "href": "sessions/week5.html#overview-of-lecture-4",
+    "title": "Hypothesis Testing",
+    "section": "Overview of lecture 4",
+    "text": "Overview of lecture 4\nLooked at data analysis.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#hypothesising",
+    "href": "sessions/week5.html#hypothesising",
+    "title": "Hypothesis Testing",
+    "section": "Hypothesising",
+    "text": "Hypothesising\nResearch science is about coming up with hypotheses and evaluating them.\n\nThis lecture thinking about posing and answering reserach questions.\nI have this great idea - considering the data is this idea plausibly true?",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#learning-objectives",
+    "href": "sessions/week5.html#learning-objectives",
+    "title": "Hypothesis Testing",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this lecture you should:\n\nEstablish a hypothesis.\nDefine the Type I and Type II errors. - Define the Type I and Type II errors.\nCalculate the p-value.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#how-do-we-know-what-to-believe",
+    "href": "sessions/week5.html#how-do-we-know-what-to-believe",
+    "title": "Hypothesis Testing",
+    "section": "How do we know what to believe?",
+    "text": "How do we know what to believe?\n\n\nWhat we see in the news\n\nIs London less safe for cyclists than ten years ago?\nAre x days above 30 degrees in London indicative of a warming climate?\nIs London’s murder rate higher than New York?",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#what-is-a-hypothesis",
+    "href": "sessions/week5.html#what-is-a-hypothesis",
+    "title": "Hypothesis Testing",
+    "section": "What is a hypothesis?",
+    "text": "What is a hypothesis?\n\n\n\nYou have a coin.\nYou think it’s a fair coin.\nYou toss it 10 times.\nIt comes up heads 7 times.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#what-question-can-you-ask",
+    "href": "sessions/week5.html#what-question-can-you-ask",
+    "title": "Hypothesis Testing",
+    "section": "What question can you ask?",
+    "text": "What question can you ask?\n\n\n\nYou have a coin.\nYou think it’s a fair coin.\nYou toss it 10 times.\nIt comes up heads 7 times.\n\n\n\nIs it a fair coin? NO!\nWhat’s the probability that it’s fair? NO!\nIf the coin is fair, how likely would it be to see 7 heads out of 10 flips? ALMOST!",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#what-question-should-you-ask",
+    "href": "sessions/week5.html#what-question-should-you-ask",
+    "title": "Hypothesis Testing",
+    "section": "What question should you ask?",
+    "text": "What question should you ask?\n\n\n\nYou have a coin.\nYou think it’s a fair coin.\nYou toss it 10 times.\nIt comes up heads 7 times.\n\n\nCorrect formulation:\nIf the coin is fair, how likely would it be to see 7 heads out of 10 flips OR AN EVEN MORE EXTREME RESULT?",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#step-1",
+    "href": "sessions/week5.html#step-1",
+    "title": "Hypothesis Testing",
+    "section": "Step 1",
+    "text": "Step 1\nDefine the question\nNull hypothesis – the status quo. The alternative hypothesis – need some evidence to verify.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#step-2",
+    "href": "sessions/week5.html#step-2",
+    "title": "Hypothesis Testing",
+    "section": "Step 2",
+    "text": "Step 2\nSet you significance level\n\nDecide what “too unlikely” means BEFORE YOU DO THE TEST.\ne.g. 𝜶 = 0.05 (5% significance)\nThis means that if we see evidence that would have less than a 5% chance of occurring if the null hypothesis is true, then we reject the null hypothesis.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#step-3",
+    "href": "sessions/week5.html#step-3",
+    "title": "Hypothesis Testing",
+    "section": "Step 3",
+    "text": "Step 3\nIdentify the evidence\n\nExample: data collection – i.e urine sample for pregnancy test",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#step-4",
+    "href": "sessions/week5.html#step-4",
+    "title": "Hypothesis Testing",
+    "section": "Step 4",
+    "text": "Step 4\nCalculate the p-value\n\nThe p-value is the probability of seeing the evidence, or something even more extreme, if the null hypothesis is true.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#step-5",
+    "href": "sessions/week5.html#step-5",
+    "title": "Hypothesis Testing",
+    "section": "Step 5",
+    "text": "Step 5\nCompare p-value with hypothesis level\n\np-value &gt; 𝜶 - Evidence not that unlikely. Not enough evidence to reject H0.\np-value ⩽ 𝜶 - Evidence very unlikely. Reject H0 and accept H1.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#the-steps",
+    "href": "sessions/week5.html#the-steps",
+    "title": "Hypothesis Testing",
+    "section": "The steps",
+    "text": "The steps\n\nDefine the question\nSet you significance level\nIdentify the evidence\nCalculate the p-value\nCompare p-value with hypothesis level",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#example",
+    "href": "sessions/week5.html#example",
+    "title": "Hypothesis Testing",
+    "section": "Example",
+    "text": "Example\nCyclists in London.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#type-i-error",
+    "href": "sessions/week5.html#type-i-error",
+    "title": "Hypothesis Testing",
+    "section": "Type I error",
+    "text": "Type I error",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#type-ii-error",
+    "href": "sessions/week5.html#type-ii-error",
+    "title": "Hypothesis Testing",
+    "section": "Type II error",
+    "text": "Type II error",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#example-1",
+    "href": "sessions/week5.html#example-1",
+    "title": "Hypothesis Testing",
+    "section": "Example",
+    "text": "Example",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#matrix-of-errors",
+    "href": "sessions/week5.html#matrix-of-errors",
+    "title": "Hypothesis Testing",
+    "section": "Matrix of errors",
+    "text": "Matrix of errors",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#understanding-the-literature-and-the-context",
+    "href": "sessions/week5.html#understanding-the-literature-and-the-context",
+    "title": "Hypothesis Testing",
+    "section": "Understanding the literature and the context",
+    "text": "Understanding the literature and the context\nHypothesis doesn’t come out of thin air",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#asking-ethical-hypothesis-questions",
+    "href": "sessions/week5.html#asking-ethical-hypothesis-questions",
+    "title": "Hypothesis Testing",
+    "section": "Asking ethical hypothesis questions",
+    "text": "Asking ethical hypothesis questions\n\nnot making unethical assumptions in choosing the hypothesis.\nExample: correlation between ethnicity and crime\nUse contextual knowledge to consider correlation vs causation",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#correlation-vs.-causation",
+    "href": "sessions/week5.html#correlation-vs.-causation",
+    "title": "Hypothesis Testing",
+    "section": "Correlation vs. Causation",
+    "text": "Correlation vs. Causation\nLots of things can be correlated - but it doesn’t mean one event caused another.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#aliens-and-taxes",
+    "href": "sessions/week5.html#aliens-and-taxes",
+    "title": "Hypothesis Testing",
+    "section": "Aliens and taxes",
+    "text": "Aliens and taxes\nExample from spurious correlations",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#correlation-is-not-causation",
+    "href": "sessions/week5.html#correlation-is-not-causation",
+    "title": "Hypothesis Testing",
+    "section": "Correlation IS NOT causation",
+    "text": "Correlation IS NOT causation\nYou might not know whether events are correlated, or causing each other.\nThe point of the hypothesis test is to test your idea – but use your contextual understanding to come up with plausible (and ethical) initial questions",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#the-point-of-the-scientific-method",
+    "href": "sessions/week5.html#the-point-of-the-scientific-method",
+    "title": "Hypothesis Testing",
+    "section": "The point of the scientific method",
+    "text": "The point of the scientific method\nThe process of coming up with a question, testing, iterating.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#parametric-vs.-non-parametric-tests",
+    "href": "sessions/week5.html#parametric-vs.-non-parametric-tests",
+    "title": "Hypothesis Testing",
+    "section": "Parametric vs. Non-parametric tests",
+    "text": "Parametric vs. Non-parametric tests",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#parametric-tests",
+    "href": "sessions/week5.html#parametric-tests",
+    "title": "Hypothesis Testing",
+    "section": "Parametric Tests",
+    "text": "Parametric Tests\n\nEvaluate hypothesis for specific parameters\nTypically have assumptions about the distribution - e.g. assumed normal distribution",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#non-parametric-tests",
+    "href": "sessions/week5.html#non-parametric-tests",
+    "title": "Hypothesis Testing",
+    "section": "Non-parametric Tests",
+    "text": "Non-parametric Tests\n\nEvaluate hypotheis for entire population distirbution\nTypcially less assumptions on the ditribution",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#how-many-tails",
+    "href": "sessions/week5.html#how-many-tails",
+    "title": "Hypothesis Testing",
+    "section": "How many tails",
+    "text": "How many tails\nTests can be one-tailed or two-tailed.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#t-test",
+    "href": "sessions/week5.html#t-test",
+    "title": "Hypothesis Testing",
+    "section": "T-test",
+    "text": "T-test\nAssumes the data is normally distributed.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#t-test-example",
+    "href": "sessions/week5.html#t-test-example",
+    "title": "Hypothesis Testing",
+    "section": "T-test example",
+    "text": "T-test example\nWhat is the probability of someone age 15 being a student on CASA007?\nThe probability is very small so we reject.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#regression-t-tests",
+    "href": "sessions/week5.html#regression-t-tests",
+    "title": "Hypothesis Testing",
+    "section": "Regression T-tests",
+    "text": "Regression T-tests\nIs the gradient non-zero?\nThis indicates a correlation between the two variables.\n…\nThis will be covered further in lecture X on linear regression.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#mean-comparison-t-test",
+    "href": "sessions/week5.html#mean-comparison-t-test",
+    "title": "Hypothesis Testing",
+    "section": "Mean comparison t-test",
+    "text": "Mean comparison t-test\nCompares the mean of two distributions.",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#kolmogorov-smirnov-test",
+    "href": "sessions/week5.html#kolmogorov-smirnov-test",
+    "title": "Hypothesis Testing",
+    "section": "Kolmogorov-Smirnov test",
+    "text": "Kolmogorov-Smirnov test\n\nCompares two probability distributions\nCan be used to test whether an observed sameple came from a given distribution\nOr to test whether two samples both came from the same distribution",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#kernel-density-estimate",
+    "href": "sessions/week5.html#kernel-density-estimate",
+    "title": "Hypothesis Testing",
+    "section": "Kernel density estimate",
+    "text": "Kernel density estimate\n\nUsed to generate a smooth PDF for a random variable dataset.\nThink of it as getting a smooth function to describe a histogram of data.\nThere are no assumptions about the prior distribution",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#overview-of-lecture-2",
+    "href": "sessions/week3.html#overview-of-lecture-2",
+    "title": "Hypothesis Testing",
+    "section": "Overview of lecture 2",
+    "text": "Overview of lecture 2\nLooked at data analysis.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#hypothesising",
+    "href": "sessions/week3.html#hypothesising",
+    "title": "Hypothesis Testing",
+    "section": "Hypothesising",
+    "text": "Hypothesising\nResearch science is about coming up with hypotheses and evaluating them.\n\nThis lecture thinking about posing and answering reserach questions.\nI have this great idea - considering the data is this idea plausibly true?",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#learning-objectives",
+    "href": "sessions/week3.html#learning-objectives",
+    "title": "Hypothesis Testing",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this lecture you should:\n\nEstablish a hypothesis.\nDefine the Type I and Type II errors. - Define the Type I and Type II errors.\nCalculate the p-value.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#how-do-we-know-what-to-believe",
+    "href": "sessions/week3.html#how-do-we-know-what-to-believe",
+    "title": "Hypothesis Testing",
+    "section": "How do we know what to believe?",
+    "text": "How do we know what to believe?\n\n\nWhat we see in the news\n\nIs London less safe for cyclists than ten years ago?\nAre x days above 30 degrees in London indicative of a warming climate?\nIs London’s murder rate higher than New York?",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#what-is-a-hypothesis",
+    "href": "sessions/week3.html#what-is-a-hypothesis",
+    "title": "Hypothesis Testing",
+    "section": "What is a hypothesis?",
+    "text": "What is a hypothesis?\n\n\n\nYou have a coin.\nYou think it’s a fair coin.\nYou toss it 10 times.\nIt comes up heads 7 times.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#what-question-can-you-ask",
+    "href": "sessions/week3.html#what-question-can-you-ask",
+    "title": "Hypothesis Testing",
+    "section": "What question can you ask?",
+    "text": "What question can you ask?\n\n\n\nYou have a coin.\nYou think it’s a fair coin.\nYou toss it 10 times.\nIt comes up heads 7 times.\n\n\n\nIs it a fair coin? NO!\nWhat’s the probability that it’s fair? NO!\nIf the coin is fair, how likely would it be to see 7 heads out of 10 flips? ALMOST!",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#what-question-should-you-ask",
+    "href": "sessions/week3.html#what-question-should-you-ask",
+    "title": "Hypothesis Testing",
+    "section": "What question should you ask?",
+    "text": "What question should you ask?\n\n\n\nYou have a coin.\nYou think it’s a fair coin.\nYou toss it 10 times.\nIt comes up heads 7 times.\n\n\nCorrect formulation:\nIf the coin is fair, how likely would it be to see 7 heads out of 10 flips OR AN EVEN MORE EXTREME RESULT?",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#step-1",
+    "href": "sessions/week3.html#step-1",
+    "title": "Hypothesis Testing",
+    "section": "Step 1",
+    "text": "Step 1\nDefine the question\nNull hypothesis – the status quo. The alternative hypothesis – need some evidence to verify.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#step-2",
+    "href": "sessions/week3.html#step-2",
+    "title": "Hypothesis Testing",
+    "section": "Step 2",
+    "text": "Step 2\nSet you significance level\n\nDecide what “too unlikely” means BEFORE YOU DO THE TEST.\ne.g. 𝜶 = 0.05 (5% significance)\nThis means that if we see evidence that would have less than a 5% chance of occurring if the null hypothesis is true, then we reject the null hypothesis.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#step-3",
+    "href": "sessions/week3.html#step-3",
+    "title": "Hypothesis Testing",
+    "section": "Step 3",
+    "text": "Step 3\nIdentify the evidence\n\nExample: data collection – i.e urine sample for pregnancy test",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#step-4",
+    "href": "sessions/week3.html#step-4",
+    "title": "Hypothesis Testing",
+    "section": "Step 4",
+    "text": "Step 4\nCalculate the p-value\n\nThe p-value is the probability of seeing the evidence, or something even more extreme, if the null hypothesis is true.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#step-5",
+    "href": "sessions/week3.html#step-5",
+    "title": "Hypothesis Testing",
+    "section": "Step 5",
+    "text": "Step 5\nCompare p-value with hypothesis level\n\np-value &gt; 𝜶 - Evidence not that unlikely. Not enough evidence to reject H0.\np-value ⩽ 𝜶 - Evidence very unlikely. Reject H0 and accept H1.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#the-steps",
+    "href": "sessions/week3.html#the-steps",
+    "title": "Hypothesis Testing",
+    "section": "The steps",
+    "text": "The steps\n\nDefine the question\nSet you significance level\nIdentify the evidence\nCalculate the p-value\nCompare p-value with hypothesis level",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#example",
+    "href": "sessions/week3.html#example",
+    "title": "Hypothesis Testing",
+    "section": "Example",
+    "text": "Example\nCyclists in London.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#type-i-error",
+    "href": "sessions/week3.html#type-i-error",
+    "title": "Hypothesis Testing",
+    "section": "Type I error",
+    "text": "Type I error",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#type-ii-error",
+    "href": "sessions/week3.html#type-ii-error",
+    "title": "Hypothesis Testing",
+    "section": "Type II error",
+    "text": "Type II error",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#example-1",
+    "href": "sessions/week3.html#example-1",
+    "title": "Hypothesis Testing",
+    "section": "Example",
+    "text": "Example",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#matrix-of-errors",
+    "href": "sessions/week3.html#matrix-of-errors",
+    "title": "Hypothesis Testing",
+    "section": "Matrix of errors",
+    "text": "Matrix of errors",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#understanding-the-literature-and-the-context",
+    "href": "sessions/week3.html#understanding-the-literature-and-the-context",
+    "title": "Hypothesis Testing",
+    "section": "Understanding the literature and the context",
+    "text": "Understanding the literature and the context\nHypothesis doesn’t come out of thin air",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#asking-ethical-hypothesis-questions",
+    "href": "sessions/week3.html#asking-ethical-hypothesis-questions",
+    "title": "Hypothesis Testing",
+    "section": "Asking ethical hypothesis questions",
+    "text": "Asking ethical hypothesis questions\n\nnot making unethical assumptions in choosing the hypothesis.\nExample: correlation between ethnicity and crime\nUse contextual knowledge to consider correlation vs causation",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#correlation-vs.-causation",
+    "href": "sessions/week3.html#correlation-vs.-causation",
+    "title": "Hypothesis Testing",
+    "section": "Correlation vs. Causation",
+    "text": "Correlation vs. Causation\nLots of things can be correlated - but it doesn’t mean one event caused another.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#aliens-and-taxes",
+    "href": "sessions/week3.html#aliens-and-taxes",
+    "title": "Hypothesis Testing",
+    "section": "Aliens and taxes",
+    "text": "Aliens and taxes\nExample from spurious correlations",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#correlation-is-not-causation",
+    "href": "sessions/week3.html#correlation-is-not-causation",
+    "title": "Hypothesis Testing",
+    "section": "Correlation IS NOT causation",
+    "text": "Correlation IS NOT causation\nYou might not know whether events are correlated, or causing each other.\nThe point of the hypothesis test is to test your idea – but use your contextual understanding to come up with plausible (and ethical) initial questions",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#the-point-of-the-scientific-method",
+    "href": "sessions/week3.html#the-point-of-the-scientific-method",
+    "title": "Hypothesis Testing",
+    "section": "The point of the scientific method",
+    "text": "The point of the scientific method\nThe process of coming up with a question, testing, iterating.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#parametric-vs.-non-parametric-tests",
+    "href": "sessions/week3.html#parametric-vs.-non-parametric-tests",
+    "title": "Hypothesis Testing",
+    "section": "Parametric vs. Non-parametric tests",
+    "text": "Parametric vs. Non-parametric tests",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#parametric-tests",
+    "href": "sessions/week3.html#parametric-tests",
+    "title": "Hypothesis Testing",
+    "section": "Parametric Tests",
+    "text": "Parametric Tests\n\nEvaluate hypothesis for specific parameters\nTypically have assumptions about the distribution - e.g. assumed normal distribution",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#non-parametric-tests",
+    "href": "sessions/week3.html#non-parametric-tests",
+    "title": "Hypothesis Testing",
+    "section": "Non-parametric Tests",
+    "text": "Non-parametric Tests\n\nEvaluate hypotheis for entire population distirbution\nTypcially less assumptions on the ditribution",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#how-many-tails",
+    "href": "sessions/week3.html#how-many-tails",
+    "title": "Hypothesis Testing",
+    "section": "How many tails",
+    "text": "How many tails\nTests can be one-tailed or two-tailed.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#t-test",
+    "href": "sessions/week3.html#t-test",
+    "title": "Hypothesis Testing",
+    "section": "T-test",
+    "text": "T-test\nAssumes the data is normally distributed.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#t-test-example",
+    "href": "sessions/week3.html#t-test-example",
+    "title": "Hypothesis Testing",
+    "section": "T-test example",
+    "text": "T-test example\nWhat is the probability of someone age 15 being a student on CASA007?\nThe probability is very small so we reject.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#regression-t-tests",
+    "href": "sessions/week3.html#regression-t-tests",
+    "title": "Hypothesis Testing",
+    "section": "Regression T-tests",
+    "text": "Regression T-tests\nIs the gradient non-zero?\nThis indicates a correlation between the two variables.\n…\nThis will be covered further in lecture X on linear regression.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#mean-comparison-t-test",
+    "href": "sessions/week3.html#mean-comparison-t-test",
+    "title": "Hypothesis Testing",
+    "section": "Mean comparison t-test",
+    "text": "Mean comparison t-test\nCompares the mean of two distributions.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#kolmogorov-smirnov-test",
+    "href": "sessions/week3.html#kolmogorov-smirnov-test",
+    "title": "Hypothesis Testing",
+    "section": "Kolmogorov-Smirnov test",
+    "text": "Kolmogorov-Smirnov test\n\nCompares two probability distributions\nCan be used to test whether an observed sameple came from a given distribution\nOr to test whether two samples both came from the same distribution",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#kernel-density-estimate",
+    "href": "sessions/week3.html#kernel-density-estimate",
+    "title": "Hypothesis Testing",
+    "section": "Kernel density estimate",
+    "text": "Kernel density estimate\n\nUsed to generate a smooth PDF for a random variable dataset.\nThink of it as getting a smooth function to describe a histogram of data.\nThere are no assumptions about the prior distribution",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#understanding-and-describing-data",
+    "href": "sessions/week1.html#understanding-and-describing-data",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Understanding and describing data",
+    "text": "Understanding and describing data\n\nQuantitative research is the process of collecting and analysing numerical data to describe, model, and predict variables of interest.\nGarbage in, garbage out.\n\n\nThis lecture focuses on understanding and describing data.",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#learning-objectives",
+    "href": "sessions/week1.html#learning-objectives",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this lecture you should:\n\nUnderstand basic data types;\nConsider how to summarise and represent data.",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#four-levels-of-measurements",
+    "href": "sessions/week1.html#four-levels-of-measurements",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Four levels of measurements",
+    "text": "Four levels of measurements\n\n\n\n\nNominal\nOrdinal\nInterval\nRatio\n\n\n\n\nCategorizes and labels variables\n✔\n✔\n✔\n✔\n\n\nRanks categories in order\n\n✔\n✔\n✔\n\n\nHas known, equal intervals\n\n\n✔\n✔\n\n\nHas a true or meaningful zero\n\n\n\n✔\n\n\n\n\nDeveloped by psychologist Stanley Smith Stevens (1906 - 1973)",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#nominal",
+    "href": "sessions/week1.html#nominal",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Nominal",
+    "text": "Nominal\n\nDifferentiates items based only on names; no order between them.\nAlso called categorical data\nExample: colour, gender, country names\nWhat can be said about them?\n\nEquality: ‘apple’ is not ‘pear’, ‘apple’ is ‘apple’\nMode: the most common item",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#ordinal",
+    "href": "sessions/week1.html#ordinal",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Ordinal",
+    "text": "Ordinal\n\nAllow for rank order, but not the relative degree of difference\nExample: measurement of opinions\n\ncompletely agree\nmostly agree\nneither degree nor disagree\nmostly disagree\ncompletely disagree\n\nWhat can be said about them?\n\n✅ Equality; mode\n✅ Median: middle-ranked item\n❌ Differences between two levels; arithmetic mean",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#interval",
+    "href": "sessions/week1.html#interval",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Interval",
+    "text": "Interval\n\nAllow for degree of difference between items, but not the ratio\nThe zero value is arbitrary\nExample: Celsius temperature\n\nDefinition: define 0°C & 100°C, and then separate them into 100 intervals.\nDepends on altitude/elevation\n\nWhat can be said about them?\n\n✅ equality, mode, median\n✅ addition, arithmetic mean\n❌ ratio (100°C is NOT twice 50°C)",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#interval-1",
+    "href": "sessions/week1.html#interval-1",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Interval",
+    "text": "Interval\n\nAnother example: longtitude & latitude coordinates\nThe coordinate of 8 is twice as far as that of 4? ❌",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#ratio",
+    "href": "sessions/week1.html#ratio",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Ratio",
+    "text": "Ratio\n\nAllow for ratio between items\nThe zero value is unique and non-arbitrary.\nExample: mass, length, energy\nWhat can be said about them?\n\n✅ Equality, mode, median, arithmetic mean\n✅ Ratio (2kg is twice as heavy as 1kg)",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#notes",
+    "href": "sessions/week1.html#notes",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Notes",
+    "text": "Notes\n\n‘Encoding’ does not change the nature of a measurement.\nGender variable (male, female, others) is NOMINAL.\nIf this variable is encodeded {male:0, female:1, others:2}, is it NOMINAL, or INTERVAL?",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#another-categorisation-numerical-vs.-categorical",
+    "href": "sessions/week1.html#another-categorisation-numerical-vs.-categorical",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Another categorisation: numerical vs. categorical",
+    "text": "Another categorisation: numerical vs. categorical\n\n\n\n\n\n\n\n\nType\nCategory\nNotes\n\n\n\n\nQuantitative (numerical) data\nDiscrete data\nOnly in whole numbers, e.g. number of staffs\n\n\n\nContinuous data\ne.g. temperature, 23°C, 23.4°C\n\n\nQualitative (categorical) data\nNominal\nSame as nominal in ‘Levels of measurement’\n\n\n\nOrdinal\nSee above",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#quiz-time",
+    "href": "sessions/week1.html#quiz-time",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Quiz time",
+    "text": "Quiz time\n\nMentimeter quiz",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#key-metrics",
+    "href": "sessions/week1.html#key-metrics",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Key metrics",
+    "text": "Key metrics\n\n\n\nQuantity\nThe middle\nThe spread",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#us-city-population",
+    "href": "sessions/week1.html#us-city-population",
+    "title": "Exploratory Data Analysis #1",
+    "section": "US city population",
+    "text": "US city population\n\n\n\nQuantity: 282 values\nThe middle: Mean 302869.3\nThe middle: Median 167744.5 (Very different from mean)\nThe middle: Mode 106433 (Useful? ❌)\nShould use mean or median? median is better than mean, as data is unlikely normal distributed",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#variance-quantifying-spread",
+    "href": "sessions/week1.html#variance-quantifying-spread",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Variance: quantifying spread",
+    "text": "Variance: quantifying spread\nDenote city population by \\([y_1, y_2, ..., y_n]\\) and variance by \\(\\sigma^2\\)\n\\[\n\\begin{aligned}\n\\sigma^2 &= \\frac{\\sum_{i=1}^{n} (y_i - \\bar{y})^2}{n} \\\\\n&= \\frac{(y_1 - \\bar{y})^2 + (y_2 - \\bar{y})^2 + \\dots + (y_n - \\bar{y})^2}{n}\n\\end{aligned}\n\\]\nA large variance means considerable spreadedness in data.",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#standard-deviation-sigma",
+    "href": "sessions/week1.html#standard-deviation-sigma",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Standard deviation \\(\\sigma\\)",
+    "text": "Standard deviation \\(\\sigma\\)\n\\[\n\\begin{aligned}\n\\text{Standard Deviation} = \\sqrt{\\text{Variance}}\n\\end{aligned}\n\\]\n\nUnit: if \\(y\\) is in unit of meter (m), then St. Dev is in unit of m, variance in unit of \\(\\text{m}^2\\)",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#summary-of-key-metrics",
+    "href": "sessions/week1.html#summary-of-key-metrics",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Summary of key metrics",
+    "text": "Summary of key metrics\n\n\nQuantity\nThe middle: mean, median, mode\nThe spread: variance, standard deviation\nVisualising data is also important: BOXPLOT!\nPlease check two types of SPECIAL VALUES before computing these metrics.",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#ft-visual-vocabulary",
+    "href": "sessions/week1.html#ft-visual-vocabulary",
+    "title": "Exploratory Data Analysis #1",
+    "section": "FT visual vocabulary",
+    "text": "FT visual vocabulary\n\nhttps://ft-interactive.github.io/visual-vocabulary/",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#boxplot-for-a-dataset",
+    "href": "sessions/week1.html#boxplot-for-a-dataset",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Boxplot for a dataset",
+    "text": "Boxplot for a dataset\n\nShowing distribution of a dataset",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#boxplot-for-comparing-multiple-datasets",
+    "href": "sessions/week1.html#boxplot-for-comparing-multiple-datasets",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Boxplot for comparing multiple datasets",
+    "text": "Boxplot for comparing multiple datasets",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#when-boxplot-fails",
+    "href": "sessions/week1.html#when-boxplot-fails",
+    "title": "Exploratory Data Analysis #1",
+    "section": "When boxplot fails?",
+    "text": "When boxplot fails?\n\nWhen there are lots of ‘outliers’ in the data\nWhat are ‘Outliers’?",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#null-values",
+    "href": "sessions/week1.html#null-values",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Null values",
+    "text": "Null values\n\nRepresenting the absence of data or an unknow value\nDifferent from zero or a blank space\nNull values should be excluded before computing mean or std",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#null-island-in-geography",
+    "href": "sessions/week1.html#null-island-in-geography",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Null island in geography",
+    "text": "Null island in geography\n\nlong=0, lat=0. Not even an island!\nIt became famous because some software assigned “0,0” for long-lat when location is missing\nMany events were mapped to this one, including lots on Strava\nSource: wikipedia.org",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#outliers",
+    "href": "sessions/week1.html#outliers",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Outliers",
+    "text": "Outliers\n\nA data point that differs significantly from other observations\nThere are three types of outliers\nPlease explain the rationale for removing any identified outliers, including the criteria and methods used",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#outliers-1",
+    "href": "sessions/week1.html#outliers-1",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Outliers",
+    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\nFrom mistakes in data collection/entry/measurement, e.g. a temperature sensor reading 500 °C\nShould be corrected or removed\n\n\nIrregular Pattern Outliers\n\n\n\n\nInfluential Outliers",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#outliers-2",
+    "href": "sessions/week1.html#outliers-2",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Outliers",
+    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\n\n\n\n\nIrregular Pattern Outliers\nGenuinely occur, but do not follow general pattern or relationship in the dataset, e.g. sudden spikes in sales in Black Friday\nThey might indicate unusual events or anomalies worth investigating. If the purpose is to study overall pattern, they should be removed\n\n\nInfluential Outliers",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#outliers-3",
+    "href": "sessions/week1.html#outliers-3",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Outliers",
+    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\n\n\n\n\nIrregular Pattern Outliers\n\n\n\n\nInfluential Outliers\nAppear extreme but are integral to the underlying pattern or model, e.g. NYC in US city population data\nShould keep them, as removing them could distort the analysis or overlook important features of the data",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#detecting-outlier-interquartile-range-iqr",
+    "href": "sessions/week1.html#detecting-outlier-interquartile-range-iqr",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Detecting outlier: interquartile range (IQR)",
+    "text": "Detecting outlier: interquartile range (IQR)",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#quiz-which-type-of-outliers",
+    "href": "sessions/week1.html#quiz-which-type-of-outliers",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Quiz: which type of outliers?",
+    "text": "Quiz: which type of outliers?\n\nerror vs. irregular pattern vs. influential\n\n\nIn building height data, 10-storey building with 1m height\nIn gender ratios of countries data, Vatican City with gender ratio of 7:1\nIn UK city GDP data, GDP of Greater London",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#summary-describing-a-dataset",
+    "href": "sessions/week1.html#summary-describing-a-dataset",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Summary: describing a dataset",
+    "text": "Summary: describing a dataset\n\nKey metrics\nNull values and outliers (and handle them!)\nVisualising data",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Welcome",
     "section": "",
-    "text": "This template is intended to help you get started with CASA’s in-house ‘Quarto’ style. Note that we can do useful things like inserting a module name Module Name (casaXXXX) dynamically. This can be especially useful for submission deadlines which are stated on multiple pages of a web site.\nWe also have a presentation style that you can use.\nEverywhere in-line code execution is supported, as are included QMD files and other tricks to make it easy to re-use content, streamline maintenance of your module’s materials, and keep everything nice and clean.",
+    "text": "The Quantitative Methods (QM) module is a compulsory element of CASA’s MSc/MRes USS programmes and is intended provide an introduction to quantitative methods for all students.\nAs data becomes central to decision-making across all sectors, the ability to move beyond simple description to robust and evidence-based analysis is essential for researchers and practitioners in geography and urban studies. Making sense of the complex patterns that define our world requires a firm understanding of the language of data. This module provides the essential grammar for that language and aims to equip students with the foundational quantitative skills needed to describe data, build models, and derive meaningful insights from numerical evidence.\nTo achieve this, the module is structured progressively across three core sections. The first section establishes the fundamental toolkit for quantitative analysts. Beginning with Exploratory Data Analysis, students will learn how to visualise, summarise, and critically interrogate datasets. This is followed by a rigorous grounding in the principles of statistical inference through hypothesis testing, and an introduction to the linear algebra that provides the mathematical architecture for many of the models used in modern data science.\nThe second section builds upon this foundation to explore the core of statistical modelling: understanding and quantifying relationships between variables. Students will progress from measuring correlations to building sophisticated regression models. The curriculum covers the workhorse of social science, the Generalised Linear Model (GLM), before advancing to Multilevel Models, a critical technique for handling the nested and hierarchical data that is common in geographical and social research.\nThe final section of the course introduces advanced techniques for uncovering hidden structures within complex, high-dimensional datasets. Students will learn methods for dimensionality reduction to simplify complexity without losing vital information, and clustering analysis to identify natural groupings and patterns in data.\nTherefore, this module guides students on a complete analytical journey, from foundational principles to the application of advanced modelling techniques. It serves as a vital prerequisite for more specialised analytical modules and is essential for students wishing to undertake quantitative geospatial research. Ultimately, this module will provide quantitative skills that are in high demand across public, private, and academic sectors."
+  },
+  {
+    "objectID": "index.html#acknowledgements",
+    "href": "index.html#acknowledgements",
+    "title": "Welcome",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\nWe really appreciate the support from various people:\n\nJon for setting up this wonderful CASA-themed quarto template.\nOllie and Andy for inspiring us to pursue a Quarto-based module website."
+  },
+  {
+    "objectID": "sessions/week2.html#overview-of-lecture-1",
+    "href": "sessions/week2.html#overview-of-lecture-1",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Overview of lecture 1",
+    "text": "Overview of lecture 1\nLooked at data analysis. Different types of data.",
     "crumbs": [
-      "Step 1."
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
     ]
   },
   {
-    "objectID": "L1_EDA_I.html#understanding-and-describing-data",
-    "href": "L1_EDA_I.html#understanding-and-describing-data",
-    "title": "A Title for my Slides",
-    "section": "Understanding and describing data",
-    "text": "Understanding and describing data\n\nQuantitative research is the process of collecting and analysing numerical data to describe, model, and predict variables of interest.\nGarbage in, garbage out.\n\n\nThis lecture focuses on understanding and describing data."
+    "objectID": "sessions/week2.html#first-things-first",
+    "href": "sessions/week2.html#first-things-first",
+    "title": "Exploratory Data Analysis #2",
+    "section": "First things first",
+    "text": "First things first\nExploratory data analysis is the first step of any data science project\n\nlink to scientific process and how we iterate over ideas and concepts",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#learning-objectives",
-    "href": "L1_EDA_I.html#learning-objectives",
-    "title": "A Title for my Slides",
+    "objectID": "sessions/week2.html#introducing-statistical-concepts",
+    "href": "sessions/week2.html#introducing-statistical-concepts",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Introducing statistical concepts",
+    "text": "Introducing statistical concepts\nThis lecture looking at statistical concepts.\nData science is about using ideas from statistics to describe large datasets\nHere looking to describe numerical data – focus on probability distributions.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#learning-objectives",
+    "href": "sessions/week2.html#learning-objectives",
+    "title": "Exploratory Data Analysis #2",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of this lecture you should:\n\nUnderstand basic data types;\nConsider how to summarise and represent data."
+    "text": "Learning Objectives\nBy the end of this lecture you should:\n\nEvaluate whether a dataset is representative.\nDefine the probability density function.\nIdentify common probability distributions.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#four-levels-of-measurements",
-    "href": "L1_EDA_I.html#four-levels-of-measurements",
-    "title": "A Title for my Slides",
-    "section": "Four levels of measurements",
-    "text": "Four levels of measurements\n\n\n\n\nNominal\nOrdinal\nInterval\nRatio\n\n\n\n\nCategorizes and labels variables\n✔\n✔\n✔\n✔\n\n\nRanks categories in order\n\n✔\n✔\n✔\n\n\nHas known, equal intervals\n\n\n✔\n✔\n\n\nHas a true or meaningful zero\n\n\n\n✔\n\n\n\n\nDeveloped by psychologist Stanley Smith Stevens (1906 - 1973)"
+    "objectID": "sessions/week2.html#what-is-the-likelihood-of-events-occuring",
+    "href": "sessions/week2.html#what-is-the-likelihood-of-events-occuring",
+    "title": "Exploratory Data Analysis #2",
+    "section": "What is the likelihood of events occuring?",
+    "text": "What is the likelihood of events occuring?\n\nWhat is the probability of someone in this lecture theatre being over 6ft?\nNeed to first understand the distribution of heights.\n\n\nThis week thinking about the distribution of data.\nNext week, thinking about formulating and answering the research question.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#nominal",
-    "href": "L1_EDA_I.html#nominal",
-    "title": "A Title for my Slides",
-    "section": "Nominal",
-    "text": "Nominal\n\nDifferentiates items based only on names; no order between them.\nAlso called categorical data\nExample: colour, gender, country names\nWhat can be said about them?\n\nEquality: ‘apple’ is not ‘pear’, ‘apple’ is ‘apple’\nMode: the most common item"
+    "objectID": "sessions/week2.html#the-dream-vs-reality",
+    "href": "sessions/week2.html#the-dream-vs-reality",
+    "title": "Exploratory Data Analysis #2",
+    "section": "The dream vs reality",
+    "text": "The dream vs reality\nIdeally, we would like all the relevant data – but in reality normally have a subset\n\nIt would be great if I knew the height of every adult in the UK, but unrealistic to collect – however maybe I could collect all adults at UCL.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#ordinal",
-    "href": "L1_EDA_I.html#ordinal",
-    "title": "A Title for my Slides",
-    "section": "Ordinal",
-    "text": "Ordinal\n\nAllow for rank order, but not the relative degree of difference\nExample: measurement of opinions\n\ncompletely agree\nmostly agree\nneither degree nor disagree\nmostly disagree\ncompletely disagree\n\nWhat can be said about them?\n\n✅ Equality; mode\n✅ Median: middle-ranked item\n❌ Differences between two levels; arithmetic mean"
+    "objectID": "sessions/week2.html#approximating",
+    "href": "sessions/week2.html#approximating",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Approximating",
+    "text": "Approximating\nExpect what happens in the sample to approximate what happens in the whole population.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#interval",
-    "href": "L1_EDA_I.html#interval",
-    "title": "A Title for my Slides",
-    "section": "Interval",
-    "text": "Interval\n\nAllow for degree of difference between items, but not the ratio\nThe zero value is arbitrary\nExample: Celsius temperature\n\nDefinition: define 0°C & 100°C, and then separate them into 100 intervals.\nDepends on altitude/elevation\n\nWhat can be said about them?\n\n✅ equality, mode, median\n✅ addition, arithmetic mean\n❌ ratio (100°C is NOT twice 50°C)"
+    "objectID": "sessions/week2.html#bias",
+    "href": "sessions/week2.html#bias",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Bias",
+    "text": "Bias\nIt’s important to understand if your dataset truly representative or is it susceptible to bias?",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#interval-1",
-    "href": "L1_EDA_I.html#interval-1",
-    "title": "A Title for my Slides",
-    "section": "Interval",
-    "text": "Interval\n\nAnother example: longtitude & latitude coordinates\nThe coordinate of 8 is twice as far as that of 4? ❌"
+    "objectID": "sessions/week2.html#cognitive-bias",
+    "href": "sessions/week2.html#cognitive-bias",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Cognitive bias",
+    "text": "Cognitive bias\nSystematic patterns in how we think about, and perceive, the world.\n\n\nWe all have cognitive biases.\nThese can impact our research, in particular dataset collection, selection and processing.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#ratio",
-    "href": "L1_EDA_I.html#ratio",
-    "title": "A Title for my Slides",
-    "section": "Ratio",
-    "text": "Ratio\n\nAllow for ratio between items\nThe zero value is unique and non-arbitrary.\nExample: mass, length, energy\nWhat can be said about them?\n\n✅ Equality, mode, median, arithmetic mean\n✅ Ratio (2kg is twice as heavy as 1kg)"
+    "objectID": "sessions/week2.html#why-is-this-important",
+    "href": "sessions/week2.html#why-is-this-important",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Why is this important?",
+    "text": "Why is this important?\nIf we’re not careful we can propagate bias to the reserach, and hence results.\nThis can lead to incorrect conclusions.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#notes",
-    "href": "L1_EDA_I.html#notes",
-    "title": "A Title for my Slides",
-    "section": "Notes",
-    "text": "Notes\n\n‘Encoding’ does not change the nature of a measurement.\nGender variable (male, female, others) is NOMINAL.\nIf this variable is encodeded {male:0, female:1, others:2}, is it NOMINAL, or INTERVAL?"
+    "objectID": "sessions/week2.html#types-of-bias",
+    "href": "sessions/week2.html#types-of-bias",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Types of bias",
+    "text": "Types of bias\nExamples of dataset bias include historical bias and selection bias.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#another-categorisation-numerical-vs.-categorical",
-    "href": "L1_EDA_I.html#another-categorisation-numerical-vs.-categorical",
-    "title": "A Title for my Slides",
-    "section": "Another categorisation: numerical vs. categorical",
-    "text": "Another categorisation: numerical vs. categorical\n\n\n\n\n\n\n\n\nType\nCategory\nNotes\n\n\n\n\nQuantitative (numerical) data\nDiscrete data\nOnly in whole numbers, e.g. number of staffs\n\n\n\nContinuous data\ne.g. temperature, 23°C, 23.4°C\n\n\nQualitative (categorical) data\nNominal\nSame as nominal in ‘Levels of measurement’\n\n\n\nOrdinal\nSee above"
+    "objectID": "sessions/week2.html#historical-bias",
+    "href": "sessions/week2.html#historical-bias",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Historical bias",
+    "text": "Historical bias\nReflects existing, real world, inequalities\nExamples:\n\nPolice profiling\nHungry judges",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#quiz-time",
-    "href": "L1_EDA_I.html#quiz-time",
-    "title": "A Title for my Slides",
-    "section": "Quiz time",
-    "text": "Quiz time\n\nMentimeter quiz"
+    "objectID": "sessions/week2.html#selection-bias",
+    "href": "sessions/week2.html#selection-bias",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Selection bias",
+    "text": "Selection bias\nWhen the sample chosen doesn’t represent the whole population of interest\nThis can be due to not having an adequately random sample.\nExample:\n\nThe health of people in hospital is worse than the general population.\n\nOr self-selection bias, where the people who contribute to the data exhibit specific attributes.\nExample:\n\nWEIRD study.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#key-metrics",
-    "href": "L1_EDA_I.html#key-metrics",
-    "title": "A Title for my Slides",
-    "section": "Key metrics",
-    "text": "Key metrics\n\n\n\nQuantity\nThe middle\nThe spread"
+    "objectID": "sessions/week2.html#can-data-ever-be-truly-representative",
+    "href": "sessions/week2.html#can-data-ever-be-truly-representative",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Can data ever be truly representative?",
+    "text": "Can data ever be truly representative?\nProbably not.\n## Failing that\n\nAcknowledge our biases!",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#us-city-population",
-    "href": "L1_EDA_I.html#us-city-population",
-    "title": "A Title for my Slides",
-    "section": "US city population",
-    "text": "US city population\n\n\n\nQuantity: 282 values\nThe middle: Mean 302869.3\nThe middle: Median 167744.5 (Very different from mean)\nThe middle: Mode 106433 (Useful? ❌)\nShould use mean or median? median is better than mean, as data is unlikely normal distributed"
+    "objectID": "sessions/week2.html#uniquely-described-by-two-equations",
+    "href": "sessions/week2.html#uniquely-described-by-two-equations",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Uniquely described by two equations",
+    "text": "Uniquely described by two equations\nMean:\n\\[\\begin{align}\nE[x]\n\\end{align}\\]\nStandard deviation:\n\\[\\begin{align}\nE[x]\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#variance-quantifying-spread",
-    "href": "L1_EDA_I.html#variance-quantifying-spread",
-    "title": "A Title for my Slides",
-    "section": "Variance: quantifying spread",
-    "text": "Variance: quantifying spread\nDenote city population by \\([y_1, y_2, ..., y_n]\\) and variance by \\(\\sigma^2\\)\n\\[\n\\begin{aligned}\n\\sigma^2 &= \\frac{\\sum_{i=1}^{n} (y_i - \\bar{y})^2}{n} \\\\\n&= \\frac{(y_1 - \\bar{y})^2 + (y_2 - \\bar{y})^2 + \\dots + (y_n - \\bar{y})^2}{n}\n\\end{aligned}\n\\]\nA large variance means considerable spreadedness in data."
+    "objectID": "sessions/week2.html#and-a-probability-distribution-function",
+    "href": "sessions/week2.html#and-a-probability-distribution-function",
+    "title": "Exploratory Data Analysis #2",
+    "section": "and a probability distribution function",
+    "text": "and a probability distribution function\nProbability density function (PDF) describes the likelihood of different outcomes for a random variable\nThe PDF of the normal distribution is:\n\\[\\begin{align}\nE[x]\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#standard-deviation-sigma",
-    "href": "L1_EDA_I.html#standard-deviation-sigma",
-    "title": "A Title for my Slides",
-    "section": "Standard deviation \\(\\sigma\\)",
-    "text": "Standard deviation \\(\\sigma\\)\n\\[\n\\begin{aligned}\n\\text{Standard Deviation} = \\sqrt{\\text{Variance}}\n\\end{aligned}\n\\]\n\nUnit: if \\(y\\) is in unit of meter (m), then St. Dev is in unit of m, variance in unit of \\(\\text{m}^2\\)"
+    "objectID": "sessions/week2.html#key-features",
+    "href": "sessions/week2.html#key-features",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Key features",
+    "text": "Key features\n\nCharacteristic size (all data points close to the mean): symmetric and single peak\nData is equally likely to be larger or smaller than average (symmetric): Smooth tails on both sides\nData is continuous (it is something you measure not something you count)",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#summary-of-key-metrics",
-    "href": "L1_EDA_I.html#summary-of-key-metrics",
-    "title": "A Title for my Slides",
-    "section": "Summary of key metrics",
-    "text": "Summary of key metrics\n\n\nQuantity\nThe middle: mean, median, mode\nThe spread: variance, standard deviation\nVisualising data is also important: BOXPLOT!\nPlease check two types of SPECIAL VALUES before computing these metrics."
+    "objectID": "sessions/week2.html#sampling-distributions",
+    "href": "sessions/week2.html#sampling-distributions",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Sampling distributions",
+    "text": "Sampling distributions\nNote importance of sampling distributions.\nIn the case of the normal distribution: Std represented by σ vs std represented by σ/√n",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#ft-visual-vocabulary",
-    "href": "L1_EDA_I.html#ft-visual-vocabulary",
-    "title": "A Title for my Slides",
-    "section": "FT visual vocabulary",
-    "text": "FT visual vocabulary\n\nhttps://ft-interactive.github.io/visual-vocabulary/"
+    "objectID": "sessions/week2.html#example-distance-to-school",
+    "href": "sessions/week2.html#example-distance-to-school",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Example: distance to school",
+    "text": "Example: distance to school",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#boxplot-for-a-dataset",
-    "href": "L1_EDA_I.html#boxplot-for-a-dataset",
-    "title": "A Title for my Slides",
-    "section": "Boxplot for a dataset",
-    "text": "Boxplot for a dataset\n\nShowing distribution of a dataset"
+    "objectID": "sessions/week2.html#not-everything-is-normal",
+    "href": "sessions/week2.html#not-everything-is-normal",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Not everything is normal",
+    "text": "Not everything is normal\nMany real world datasets are approximately normally distributed.\nBut not all, things might not have a characteristic size, or not continuous, or not symmetric",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#boxplot-for-comparing-multiple-datasets",
-    "href": "L1_EDA_I.html#boxplot-for-comparing-multiple-datasets",
-    "title": "A Title for my Slides",
-    "section": "Boxplot for comparing multiple datasets",
-    "text": "Boxplot for comparing multiple datasets"
+    "objectID": "sessions/week2.html#continous-vs.-discrete",
+    "href": "sessions/week2.html#continous-vs.-discrete",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Continous vs. Discrete",
+    "text": "Continous vs. Discrete",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#when-boxplot-fails",
-    "href": "L1_EDA_I.html#when-boxplot-fails",
-    "title": "A Title for my Slides",
-    "section": "When boxplot fails?",
-    "text": "When boxplot fails?\n\nWhen there are lots of ‘outliers’ in the data\nWhat are ‘Outliers’?"
+    "objectID": "sessions/week2.html#back-to-the-probability-density-function",
+    "href": "sessions/week2.html#back-to-the-probability-density-function",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Back to the probability density function",
+    "text": "Back to the probability density function\nWhy it’s useful – see next week, allows us to evaluate the probability of events, and hence evaluate hypotheses",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#null-values",
-    "href": "L1_EDA_I.html#null-values",
-    "title": "A Title for my Slides",
-    "section": "Null values",
-    "text": "Null values\n\nRepresenting the absence of data or an unknow value\nDifferent from zero or a blank space\nNull values should be excluded before computing mean or std"
+    "objectID": "sessions/week2.html#sampling-distributions-1",
+    "href": "sessions/week2.html#sampling-distributions-1",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Sampling distributions",
+    "text": "Sampling distributions\nSpecific for different probability distributions (/n)",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#null-island-in-geography",
-    "href": "L1_EDA_I.html#null-island-in-geography",
-    "title": "A Title for my Slides",
-    "section": "Null island in geography",
-    "text": "Null island in geography\n\nlong=0, lat=0. Not even an island!\nIt became famous because some software assigned “0,0” for long-lat when location is missing\nMany events were mapped to this one, including lots on Strava\nSource: wikipedia.org"
+    "objectID": "sessions/week2.html#skewed-and-long-tails",
+    "href": "sessions/week2.html#skewed-and-long-tails",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Skewed and long tails",
+    "text": "Skewed and long tails\nIn reality, few things are actually normal. Anscombe’s quartet",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#outliers",
-    "href": "L1_EDA_I.html#outliers",
-    "title": "A Title for my Slides",
-    "section": "Outliers",
-    "text": "Outliers\n\nA data point that differs significantly from other observations\nThere are three types of outliers\nPlease explain the rationale for removing any identified outliers, including the criteria and methods used"
+    "objectID": "sessions/week2.html#coin-toss",
+    "href": "sessions/week2.html#coin-toss",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Coin toss",
+    "text": "Coin toss\n\nIf I flip a coin 10 times, how often can I expect to get at least 7 heads?\nDescribes the frequency of successes in a test with 2 outcomes",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#outliers-1",
-    "href": "L1_EDA_I.html#outliers-1",
-    "title": "A Title for my Slides",
-    "section": "Outliers",
-    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\nFrom mistakes in data collection/entry/measurement, e.g. a temperature sensor reading 500 °C\nShould be corrected or removed\n\n\nIrregular Pattern Outliers\n\n\n\n\nInfluential Outliers"
+    "objectID": "sessions/week2.html#death-by-horse-kicks",
+    "href": "sessions/week2.html#death-by-horse-kicks",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Death by horse kicks",
+    "text": "Death by horse kicks\n\n\n\nIt’s 1894.\nYou’re the statistician Ladislaus Bortkiewicz.\nAnd you’re wondering,\nHow many soldiers in the Prussian army have been killed by horse kicks?",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#outliers-2",
-    "href": "L1_EDA_I.html#outliers-2",
-    "title": "A Title for my Slides",
-    "section": "Outliers",
-    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\n\n\n\n\nIrregular Pattern Outliers\nGenuinely occur, but do not follow general pattern or relationship in the dataset, e.g. sudden spikes in sales in Black Friday\nThey might indicate unusual events or anomalies worth investigating. If the purpose is to study overall pattern, they should be removed\n\n\nInfluential Outliers"
+    "objectID": "sessions/week2.html#measuring-rare-events",
+    "href": "sessions/week2.html#measuring-rare-events",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Measuring rare events",
+    "text": "Measuring rare events\n\nImagine a situation where certain rare events (like arrival of mail) can occur in an independent fashion.\nThe Poisson distribution estimates how many such events are expected within a time interval\nFixed interval (e.g. one minute)\nFixed rate of events (λ) (e.g. 4 cars per minute, λ = 4)\nEvents occur independently.\nPoisson Distribution gives the probability of k events.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#outliers-3",
-    "href": "L1_EDA_I.html#outliers-3",
-    "title": "A Title for my Slides",
-    "section": "Outliers",
-    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\n\n\n\n\nIrregular Pattern Outliers\n\n\n\n\nInfluential Outliers\nAppear extreme but are integral to the underlying pattern or model, e.g. NYC in US city population data\nShould keep them, as removing them could distort the analysis or overlook important features of the data"
+    "objectID": "sessions/week2.html#probability-density-function",
+    "href": "sessions/week2.html#probability-density-function",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Probability density function",
+    "text": "Probability density function",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#detecting-outlier-interquartile-range-iqr",
-    "href": "L1_EDA_I.html#detecting-outlier-interquartile-range-iqr",
-    "title": "A Title for my Slides",
-    "section": "Detecting outlier: interquartile range (IQR)",
-    "text": "Detecting outlier: interquartile range (IQR)"
+    "objectID": "sessions/week2.html#exponentials",
+    "href": "sessions/week2.html#exponentials",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Exponentials",
+    "text": "Exponentials\nIf the Poisson measures the probability of x events within a time period, then the Exponential measures how long we are likely to wait between events.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#quiz-which-type-of-outliers",
-    "href": "L1_EDA_I.html#quiz-which-type-of-outliers",
-    "title": "A Title for my Slides",
-    "section": "Quiz: which type of outliers?",
-    "text": "Quiz: which type of outliers?\n\nerror vs. irregular pattern vs. influential\n\n\nIn building height data, 10-storey building with 1m height\nIn gender ratios of countries data, Vatican City with gender ratio of 7:1\nIn UK city GDP data, GDP of Greater London"
+    "objectID": "sessions/week2.html#at-it-like-rabbits",
+    "href": "sessions/week2.html#at-it-like-rabbits",
+    "title": "Exploratory Data Analysis #2",
+    "section": "At it like rabbits",
+    "text": "At it like rabbits\n\n\nRapid growth of rabbit populations",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
   },
   {
-    "objectID": "L1_EDA_I.html#summary-describing-a-dataset",
-    "href": "L1_EDA_I.html#summary-describing-a-dataset",
-    "title": "A Title for my Slides",
-    "section": "Summary: describing a dataset",
-    "text": "Summary: describing a dataset\n\nKey metrics\nNull values and outliers (and handle them!)\nVisualising data"
+    "objectID": "sessions/week2.html#estimating-rabbit-populations",
+    "href": "sessions/week2.html#estimating-rabbit-populations",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Estimating rabbit populations",
+    "text": "Estimating rabbit populations\nAllows us to answer questions like: “how many rabbits at t=10?”\nAnswering questions like “Or when will the rabbit population=250?”\nThis is easier said than done – the best way is to invert the equation – this requires",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#logarithms",
+    "href": "sessions/week2.html#logarithms",
+    "title": "Exploratory Data Analysis #2",
+    "section": "Logarithms",
+    "text": "Logarithms\n\nIt is an inverse operation. Multiply and divide are inverse operations of one another (they reverse the process)",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#overview-of-lecture-2",
+    "href": "sessions/week4.html#overview-of-lecture-2",
+    "title": "Linear Algebra",
+    "section": "Overview of lecture 2",
+    "text": "Overview of lecture 2\nLooked at data analysis.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#hypothesising",
+    "href": "sessions/week4.html#hypothesising",
+    "title": "Linear Algebra",
+    "section": "Hypothesising",
+    "text": "Hypothesising\nResearch science is about coming up with hypotheses and evaluating them.\n\nThis lecture thinking about posing and answering reserach questions.\nI have this great idea - considering the data is this idea plausibly true?",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#learning-objectives",
+    "href": "sessions/week4.html#learning-objectives",
+    "title": "Linear Algebra",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this lecture you should:\n\nEstablish a hypothesis.\nDefine the Type I and Type II errors. - Define the Type I and Type II errors.\nCalculate the p-value.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
   }
 ]
