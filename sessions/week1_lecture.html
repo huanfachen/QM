@@ -7,7 +7,10 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-da61f9a05e9cefe097d79e8430a73dd4.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-da61f9a05e9cefe097d79e8430a73dd4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.24">
 
   <meta name="author" content="Huanfa Chen">
@@ -148,47 +151,489 @@
 
 
 </section>
-<section id="introduction" class="slide level2">
-<h2>Introduction</h2>
-<p>This week will introduce data types and key metrics for describing and representing data.</p>
+<section>
+<section id="this-week" class="title-slide slide level1 center">
+<h1>This week</h1>
+
+</section>
+<section id="understanding-and-describing-data" class="slide level2">
+<h2>Understanding and describing data</h2>
+<ul>
+<li><p>Quantitative research is the process of collecting and analysing <strong>numerical data</strong> to describe, model, and predict variables of interest.</p></li>
+<li><p>Garbage in, garbage out.</p></li>
+</ul>
+<aside class="notes">
+<p>This lecture focuses on understanding and describing data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="learning-objectives" class="slide level2">
 <h2>Learning Objectives</h2>
-<p>By the end of this week, you will be able to:</p>
+<p>By the end of this lecture you should:</p>
 <ol type="1">
-<li>Understand data types for quantitative research.</li>
-<li>Describe and represent data using key metrics.</li>
-<li>Visualise data with boxplot.</li>
+<li>Understand basic data types;</li>
+<li>Consider how to summarise and represent data.</li>
+</ol>
+</section></section>
+<section>
+<section id="data-types" class="title-slide slide level1 center">
+<h1>Data types</h1>
+
+</section>
+<section id="four-levels-of-measurements" class="slide level2">
+<h2>Four levels of measurements</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Nominal</th>
+<th style="text-align: center;">Ordinal</th>
+<th style="text-align: center;">Interval</th>
+<th style="text-align: center;">Ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Categorizes and labels variables</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
+</tr>
+<tr class="even">
+<td>Ranks categories in order</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
+</tr>
+<tr class="odd">
+<td>Has known, equal intervals</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✔</td>
+<td style="text-align: center;">✔</td>
+</tr>
+<tr class="even">
+<td>Has a true or meaningful zero</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✔</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Developed by psychologist Stanley Smith Stevens (1906 - 1973)</li>
+</ul>
+</section>
+<section id="nominal" class="slide level2">
+<h2>Nominal</h2>
+<ul>
+<li>Differentiates items based only on names; no order between them.</li>
+<li>Also called <strong>categorical data</strong></li>
+<li>Example: colour, gender, country names</li>
+<li>What can be said about them?
+<ul>
+<li><em>Equality</em>: ‘apple’ is not ‘pear’, ‘apple’ is ‘apple’</li>
+<li><em>Mode</em>: the most common item</li>
+</ul></li>
+</ul>
+</section>
+<section id="ordinal" class="slide level2">
+<h2>Ordinal</h2>
+<ul>
+<li>Allow for rank order, but not the relative degree of difference</li>
+<li>Example: measurement of opinions
+<ul>
+<li><em>completely agree</em></li>
+<li><em>mostly agree</em></li>
+<li><em>neither degree nor disagree</em></li>
+<li><em>mostly disagree</em></li>
+<li><em>completely disagree</em></li>
+</ul></li>
+<li>What can be said about them?
+<ul>
+<li>✅ Equality; mode</li>
+<li>✅ Median: middle-ranked item</li>
+<li>❌ Differences between two levels; arithmetic mean</li>
+</ul></li>
+</ul>
+</section>
+<section id="interval" class="slide level2">
+<h2>Interval</h2>
+<ul>
+<li>Allow for degree of difference between items, but not the ratio</li>
+<li>The <em>zero</em> value is arbitrary</li>
+<li>Example: Celsius temperature
+<ul>
+<li>Definition: define 0°C &amp; 100°C, and then separate them into 100 intervals.</li>
+<li>Depends on altitude/elevation</li>
+</ul></li>
+<li>What can be said about them?
+<ul>
+<li>✅ equality, mode, median</li>
+<li>✅ addition, arithmetic mean</li>
+<li>❌ ratio (<em>100°C is NOT twice 50°C</em>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="interval-1" class="slide level2">
+<h2>Interval</h2>
+<ul>
+<li>Another example: longtitude &amp; latitude coordinates</li>
+<li><em>The coordinate of 8 is twice as far as that of 4</em>? ❌</li>
+</ul>
+</section>
+<section id="ratio" class="slide level2">
+<h2>Ratio</h2>
+<ul>
+<li>Allow for <strong>ratio</strong> between items</li>
+<li>The zero value is unique and non-arbitrary.</li>
+<li>Example: mass, length, energy</li>
+<li>What can be said about them?
+<ul>
+<li>✅ Equality, mode, median, arithmetic mean</li>
+<li>✅ Ratio (<em>2kg is twice as heavy as 1kg</em>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="notes" class="slide level2">
+<h2>Notes</h2>
+<ul>
+<li>‘Encoding’ does not change the nature of a measurement.</li>
+<li>Gender variable (male, female, others) is NOMINAL.</li>
+<li>If this variable is encodeded {male:0, female:1, others:2}, is it NOMINAL, or INTERVAL?</li>
+</ul>
+</section>
+<section id="another-categorisation-numerical-vs.-categorical" class="slide level2">
+<h2>Another categorisation: numerical vs.&nbsp;categorical</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 16%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Category</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Quantitative (numerical) data</td>
+<td>Discrete data</td>
+<td>Only in whole numbers, <em>e.g.</em> number of staffs</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Continuous data</td>
+<td><em>e.g.</em> temperature, 23°C, 23.4°C</td>
+</tr>
+<tr class="odd">
+<td>Qualitative (categorical) data</td>
+<td>Nominal</td>
+<td>Same as nominal in ‘Levels of measurement’</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Ordinal</td>
+<td>See above</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="quiz-time" class="slide level2">
+<h2>Quiz time</h2>
+<aside class="notes">
+<p>Mentimeter quiz</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="how-do-you-descibe-a-ratio-data" class="title-slide slide level1 center">
+<h1>How do you descibe a ratio data?</h1>
+
+</section>
+<section id="key-metrics" class="slide level2">
+<h2>Key metrics</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment">Quantity</li>
+<li class="fragment">The middle</li>
+<li class="fragment">The spread</li>
+</ul>
+</div></div>
+</section>
+<section id="us-city-population" class="slide level2">
+<h2>US city population</h2>
+<div class="columns">
+<div class="column" style="width:100%;">
+<ul>
+<li class="fragment">Quantity: 282 values</li>
+<li class="fragment">The middle: Mean 302869.3</li>
+<li class="fragment">The middle: Median 167744.5 (<em>Very different from mean</em>)</li>
+<li class="fragment">The middle: Mode 106433 (Useful? ❌)</li>
+<li class="fragment">Should use mean or median? median is better than mean, as data is unlikely normal distributed</li>
+</ul>
+</div></div>
+</section>
+<section id="variance-quantifying-spread" class="slide level2">
+<h2>Variance: quantifying spread</h2>
+<p>Denote city population by <span class="math inline">\([y_1, y_2, ..., y_n]\)</span> and variance by <span class="math inline">\(\sigma^2\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\sigma^2 &amp;= \frac{\sum_{i=1}^{n} (y_i - \bar{y})^2}{n} \\
+&amp;= \frac{(y_1 - \bar{y})^2 + (y_2 - \bar{y})^2 + \dots + (y_n - \bar{y})^2}{n}
+\end{aligned}
+\]</span></p>
+<p>A large variance means considerable spreadedness in data.</p>
+</section>
+<section id="standard-deviation-sigma" class="slide level2">
+<h2>Standard deviation <span class="math inline">\(\sigma\)</span></h2>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Standard Deviation} = \sqrt{\text{Variance}}
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Unit: if <span class="math inline">\(y\)</span> is in unit of meter (m), then St.&nbsp;Dev is in unit of m, variance in unit of <span class="math inline">\(\text{m}^2\)</span></li>
+</ul>
+</section>
+<section id="summary-of-key-metrics" class="slide level2">
+<h2>Summary of key metrics</h2>
+<div class="columns">
+<ul>
+<li class="fragment">Quantity</li>
+<li class="fragment">The middle: mean, median, mode</li>
+<li class="fragment">The spread: variance, standard deviation</li>
+<li class="fragment"><em>Visualising data is also important</em>: BOXPLOT!</li>
+<li class="fragment"><em>Please check two types of SPECIAL VALUES before computing these metrics.</em></li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="visualising-data" class="title-slide slide level1 center">
+<h1>Visualising data</h1>
+<p><a href="images/picture_worth_thousand_words.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="images/picture_worth_thousand_words.jpg" style="max-width:70%; max-height:70%; margin:auto;"></a></p>
+</section>
+<section id="ft-visual-vocabulary" class="slide level2">
+<h2>FT visual vocabulary</h2>
+<ul>
+<li>https://ft-interactive.github.io/visual-vocabulary/ <img data-src="images/FT_visual_vocabulary.jpg" style="max-width:90%; max-height:90%; margin:auto;"></li>
+</ul>
+</section>
+<section id="boxplot-for-a-dataset" class="slide level2">
+<h2>Boxplot for a dataset</h2>
+<ul>
+<li>Showing distribution of a dataset</li>
+</ul>
+<p><a href="images/Boxplot.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="images/Boxplot.jpg" style="width:70%; height:70%;"></a></p>
+</section>
+<section id="boxplot-for-comparing-multiple-datasets" class="slide level2">
+<h2>Boxplot for comparing multiple datasets</h2>
+</section>
+<section id="when-boxplot-fails" class="slide level2">
+<h2>When boxplot fails?</h2>
+<ul>
+<li>When there are lots of ‘outliers’ in the data</li>
+<li>What are ‘Outliers’?</li>
+</ul>
+</section></section>
+<section>
+<section id="special-values-null-and-outliers" class="title-slide slide level1 center">
+<h1>Special values: null and outliers</h1>
+
+</section>
+<section id="null-values" class="slide level2">
+<h2><em>Null</em> values</h2>
+<ul>
+<li>Representing the absence of data or an unknow value</li>
+<li>Different from <em>zero</em> or <em>a blank space</em></li>
+<li>Null values should be excluded before computing mean or std</li>
+</ul>
+</section>
+<section id="null-island-in-geography" class="slide level2">
+<h2>Null island in geography</h2>
+<ul>
+<li>long=0, lat=0. Not even an island!</li>
+<li>It became famous because some software assigned “0,0” for long-lat when location is missing</li>
+<li>Many events were mapped to this one, including lots on Strava</li>
+<li>Source: wikipedia.org</li>
+</ul>
+<p><img data-src="images/map_null_island.jpg" height="300"> <img data-src="images/image_null_island_2017.jpg" height="300"></p>
+</section>
+<section id="outliers" class="slide level2">
+<h2>Outliers</h2>
+<ul>
+<li>A data point that differs significantly from other observations</li>
+<li>There are three types of outliers</li>
+<li>Please explain the rationale for removing any identified outliers, including the criteria and methods used</li>
+</ul>
+</section>
+<section id="outliers-1" class="slide level2">
+<h2>Outliers</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Source</th>
+<th>Handling</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Error Outliers</strong></td>
+<td>From mistakes in data collection/entry/measurement, e.g.&nbsp;a temperature sensor reading 500 °C</td>
+<td>Should be corrected or removed</td>
+</tr>
+<tr class="even">
+<td><strong>Irregular Pattern Outliers</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Influential Outliers</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="outliers-2" class="slide level2">
+<h2>Outliers</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Source</th>
+<th>Handling</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Error Outliers</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Irregular Pattern Outliers</strong></td>
+<td>Genuinely occur, but do not follow general pattern or relationship in the dataset, e.g.&nbsp;sudden spikes in sales in Black Friday</td>
+<td>They might indicate unusual events or anomalies worth investigating. If the purpose is to study overall pattern, they should be removed</td>
+</tr>
+<tr class="odd">
+<td><strong>Influential Outliers</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="outliers-3" class="slide level2">
+<h2>Outliers</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Source</th>
+<th>Handling</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Error Outliers</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Irregular Pattern Outliers</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Influential Outliers</strong></td>
+<td>Appear extreme but are integral to the underlying pattern or model, e.g.&nbsp;NYC in US city population data</td>
+<td>Should keep them, as removing them could distort the analysis or overlook important features of the data</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="detecting-outlier-interquartile-range-iqr" class="slide level2">
+<h2>Detecting outlier: interquartile range (IQR)</h2>
+<p><a href="images/outlier_detection_Tukey_Fences.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="images/outlier_detection_Tukey_Fences.jpg"></a></p>
+</section>
+<section id="quiz-which-type-of-outliers" class="slide level2">
+<h2>Quiz: which type of outliers?</h2>
+<ul>
+<li>error vs.&nbsp;irregular pattern vs.&nbsp;influential</li>
+</ul>
+<ol type="1">
+<li>In building height data, 10-storey building with 1m height</li>
+<li>In gender ratios of countries data, Vatican City with gender ratio of 7:1</li>
+<li>In UK city GDP data, GDP of Greater London</li>
 </ol>
 </section>
-<section id="lecture" class="slide level2">
-<h2>Lecture</h2>
-<p>To access the lecture notes: <a href="../sessions/week1_lecture.html">Week 1 lecture</a></p>
+<section id="summary-describing-a-dataset" class="slide level2">
+<h2>Summary: describing a dataset</h2>
+<ul>
+<li>Key metrics</li>
+<li>Null values and outliers (and handle them!)</li>
+<li>Visualising data</li>
+</ul>
+</section></section>
+<section id="overview" class="title-slide slide level1 center">
+<h1>Overview</h1>
+<p>We’ve covered:</p>
+<ul>
+<li>Data types: levels of measurements; quantitative &amp; qualitative</li>
+<li>Key metrics</li>
+<li>Null values and outliers</li>
+<li>Visualising data</li>
+</ul>
 </section>
-<section id="practical" class="slide level2">
-<h2>Practical</h2>
-<p>:::</p>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>To save a copy of notebook to your own GitHub Repo: follow the GitHub link, click on <code>Raw</code> and then <code>Save File As...</code> to save it to your own computer. Make sure to change the extension from <code>.ipynb.txt</code> (which will probably be the default) to <code>.ipynb</code>before adding the file to <em>your</em> GitHub repository.</p>
-</div>
-</div>
-</div>
-<p>To access the practical:</p>
-<ol type="1">
-<li><a href="week1_practical.html">Preview</a></li>
-<li><a href="week1_practical.ipynb">Download</a></li>
-</ol>
-</section>
-<section id="further-resources" class="slide level2">
-<h2>Further resources</h2>
+
+<section id="practical" class="title-slide slide level1 center">
+<h1>Practical</h1>
+<p>Practical will focus on setting up Python environment.</p>
+<ul>
+<li>Have questions prepared!</li>
+</ul>
 
 
 </section>
@@ -576,6 +1021,38 @@
         }
       });
       </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>

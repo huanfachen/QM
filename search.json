@@ -946,367 +946,207 @@
     ]
   },
   {
-    "objectID": "sessions/week1.html#understanding-and-describing-data",
-    "href": "sessions/week1.html#understanding-and-describing-data",
+    "objectID": "sessions/week1_lecture.html#understanding-and-describing-data",
+    "href": "sessions/week1_lecture.html#understanding-and-describing-data",
     "title": "Exploratory Data Analysis #1",
     "section": "Understanding and describing data",
-    "text": "Understanding and describing data\n\nQuantitative research is the process of collecting and analysing numerical data to describe, model, and predict variables of interest.\nGarbage in, garbage out.\n\n\nThis lecture focuses on understanding and describing data.",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Understanding and describing data\n\nQuantitative research is the process of collecting and analysing numerical data to describe, model, and predict variables of interest.\nGarbage in, garbage out.\n\n\nThis lecture focuses on understanding and describing data."
   },
   {
-    "objectID": "sessions/week1.html#learning-objectives",
-    "href": "sessions/week1.html#learning-objectives",
+    "objectID": "sessions/week1_lecture.html#learning-objectives",
+    "href": "sessions/week1_lecture.html#learning-objectives",
     "title": "Exploratory Data Analysis #1",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of this lecture you should:\n\nUnderstand basic data types;\nConsider how to summarise and represent data.",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Learning Objectives\nBy the end of this lecture you should:\n\nUnderstand basic data types;\nConsider how to summarise and represent data."
   },
   {
-    "objectID": "sessions/week1.html#four-levels-of-measurements",
-    "href": "sessions/week1.html#four-levels-of-measurements",
+    "objectID": "sessions/week1_lecture.html#four-levels-of-measurements",
+    "href": "sessions/week1_lecture.html#four-levels-of-measurements",
     "title": "Exploratory Data Analysis #1",
     "section": "Four levels of measurements",
-    "text": "Four levels of measurements\n\n\n\n\nNominal\nOrdinal\nInterval\nRatio\n\n\n\n\nCategorizes and labels variables\n✔\n✔\n✔\n✔\n\n\nRanks categories in order\n\n✔\n✔\n✔\n\n\nHas known, equal intervals\n\n\n✔\n✔\n\n\nHas a true or meaningful zero\n\n\n\n✔\n\n\n\n\nDeveloped by psychologist Stanley Smith Stevens (1906 - 1973)",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Four levels of measurements\n\n\n\n\nNominal\nOrdinal\nInterval\nRatio\n\n\n\n\nCategorizes and labels variables\n✔\n✔\n✔\n✔\n\n\nRanks categories in order\n\n✔\n✔\n✔\n\n\nHas known, equal intervals\n\n\n✔\n✔\n\n\nHas a true or meaningful zero\n\n\n\n✔\n\n\n\n\nDeveloped by psychologist Stanley Smith Stevens (1906 - 1973)"
   },
   {
-    "objectID": "sessions/week1.html#nominal",
-    "href": "sessions/week1.html#nominal",
+    "objectID": "sessions/week1_lecture.html#nominal",
+    "href": "sessions/week1_lecture.html#nominal",
     "title": "Exploratory Data Analysis #1",
     "section": "Nominal",
-    "text": "Nominal\n\nDifferentiates items based only on names; no order between them.\nAlso called categorical data\nExample: colour, gender, country names\nWhat can be said about them?\n\nEquality: ‘apple’ is not ‘pear’, ‘apple’ is ‘apple’\nMode: the most common item",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Nominal\n\nDifferentiates items based only on names; no order between them.\nAlso called categorical data\nExample: colour, gender, country names\nWhat can be said about them?\n\nEquality: ‘apple’ is not ‘pear’, ‘apple’ is ‘apple’\nMode: the most common item"
   },
   {
-    "objectID": "sessions/week1.html#ordinal",
-    "href": "sessions/week1.html#ordinal",
+    "objectID": "sessions/week1_lecture.html#ordinal",
+    "href": "sessions/week1_lecture.html#ordinal",
     "title": "Exploratory Data Analysis #1",
     "section": "Ordinal",
-    "text": "Ordinal\n\nAllow for rank order, but not the relative degree of difference\nExample: measurement of opinions\n\ncompletely agree\nmostly agree\nneither degree nor disagree\nmostly disagree\ncompletely disagree\n\nWhat can be said about them?\n\n✅ Equality; mode\n✅ Median: middle-ranked item\n❌ Differences between two levels; arithmetic mean",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Ordinal\n\nAllow for rank order, but not the relative degree of difference\nExample: measurement of opinions\n\ncompletely agree\nmostly agree\nneither degree nor disagree\nmostly disagree\ncompletely disagree\n\nWhat can be said about them?\n\n✅ Equality; mode\n✅ Median: middle-ranked item\n❌ Differences between two levels; arithmetic mean"
   },
   {
-    "objectID": "sessions/week1.html#interval",
-    "href": "sessions/week1.html#interval",
+    "objectID": "sessions/week1_lecture.html#interval",
+    "href": "sessions/week1_lecture.html#interval",
     "title": "Exploratory Data Analysis #1",
     "section": "Interval",
-    "text": "Interval\n\nAllow for degree of difference between items, but not the ratio\nThe zero value is arbitrary\nExample: Celsius temperature\n\nDefinition: define 0°C & 100°C, and then separate them into 100 intervals.\nDepends on altitude/elevation\n\nWhat can be said about them?\n\n✅ equality, mode, median\n✅ addition, arithmetic mean\n❌ ratio (100°C is NOT twice 50°C)",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Interval\n\nAllow for degree of difference between items, but not the ratio\nThe zero value is arbitrary\nExample: Celsius temperature\n\nDefinition: define 0°C & 100°C, and then separate them into 100 intervals.\nDepends on altitude/elevation\n\nWhat can be said about them?\n\n✅ equality, mode, median\n✅ addition, arithmetic mean\n❌ ratio (100°C is NOT twice 50°C)"
   },
   {
-    "objectID": "sessions/week1.html#interval-1",
-    "href": "sessions/week1.html#interval-1",
+    "objectID": "sessions/week1_lecture.html#interval-1",
+    "href": "sessions/week1_lecture.html#interval-1",
     "title": "Exploratory Data Analysis #1",
     "section": "Interval",
-    "text": "Interval\n\nAnother example: longtitude & latitude coordinates\nThe coordinate of 8 is twice as far as that of 4? ❌",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Interval\n\nAnother example: longtitude & latitude coordinates\nThe coordinate of 8 is twice as far as that of 4? ❌"
   },
   {
-    "objectID": "sessions/week1.html#ratio",
-    "href": "sessions/week1.html#ratio",
+    "objectID": "sessions/week1_lecture.html#ratio",
+    "href": "sessions/week1_lecture.html#ratio",
     "title": "Exploratory Data Analysis #1",
     "section": "Ratio",
-    "text": "Ratio\n\nAllow for ratio between items\nThe zero value is unique and non-arbitrary.\nExample: mass, length, energy\nWhat can be said about them?\n\n✅ Equality, mode, median, arithmetic mean\n✅ Ratio (2kg is twice as heavy as 1kg)",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Ratio\n\nAllow for ratio between items\nThe zero value is unique and non-arbitrary.\nExample: mass, length, energy\nWhat can be said about them?\n\n✅ Equality, mode, median, arithmetic mean\n✅ Ratio (2kg is twice as heavy as 1kg)"
   },
   {
-    "objectID": "sessions/week1.html#notes",
-    "href": "sessions/week1.html#notes",
+    "objectID": "sessions/week1_lecture.html#notes",
+    "href": "sessions/week1_lecture.html#notes",
     "title": "Exploratory Data Analysis #1",
     "section": "Notes",
-    "text": "Notes\n\n‘Encoding’ does not change the nature of a measurement.\nGender variable (male, female, others) is NOMINAL.\nIf this variable is encodeded {male:0, female:1, others:2}, is it NOMINAL, or INTERVAL?",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Notes\n\n‘Encoding’ does not change the nature of a measurement.\nGender variable (male, female, others) is NOMINAL.\nIf this variable is encodeded {male:0, female:1, others:2}, is it NOMINAL, or INTERVAL?"
   },
   {
-    "objectID": "sessions/week1.html#another-categorisation-numerical-vs.-categorical",
-    "href": "sessions/week1.html#another-categorisation-numerical-vs.-categorical",
+    "objectID": "sessions/week1_lecture.html#another-categorisation-numerical-vs.-categorical",
+    "href": "sessions/week1_lecture.html#another-categorisation-numerical-vs.-categorical",
     "title": "Exploratory Data Analysis #1",
     "section": "Another categorisation: numerical vs. categorical",
-    "text": "Another categorisation: numerical vs. categorical\n\n\n\n\n\n\n\n\nType\nCategory\nNotes\n\n\n\n\nQuantitative (numerical) data\nDiscrete data\nOnly in whole numbers, e.g. number of staffs\n\n\n\nContinuous data\ne.g. temperature, 23°C, 23.4°C\n\n\nQualitative (categorical) data\nNominal\nSame as nominal in ‘Levels of measurement’\n\n\n\nOrdinal\nSee above",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Another categorisation: numerical vs. categorical\n\n\n\n\n\n\n\n\nType\nCategory\nNotes\n\n\n\n\nQuantitative (numerical) data\nDiscrete data\nOnly in whole numbers, e.g. number of staffs\n\n\n\nContinuous data\ne.g. temperature, 23°C, 23.4°C\n\n\nQualitative (categorical) data\nNominal\nSame as nominal in ‘Levels of measurement’\n\n\n\nOrdinal\nSee above"
   },
   {
-    "objectID": "sessions/week1.html#quiz-time",
-    "href": "sessions/week1.html#quiz-time",
+    "objectID": "sessions/week1_lecture.html#quiz-time",
+    "href": "sessions/week1_lecture.html#quiz-time",
     "title": "Exploratory Data Analysis #1",
     "section": "Quiz time",
-    "text": "Quiz time\n\nMentimeter quiz",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Quiz time\n\nMentimeter quiz"
   },
   {
-    "objectID": "sessions/week1.html#key-metrics",
-    "href": "sessions/week1.html#key-metrics",
+    "objectID": "sessions/week1_lecture.html#key-metrics",
+    "href": "sessions/week1_lecture.html#key-metrics",
     "title": "Exploratory Data Analysis #1",
     "section": "Key metrics",
-    "text": "Key metrics\n\n\n\nQuantity\nThe middle\nThe spread",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Key metrics\n\n\n\nQuantity\nThe middle\nThe spread"
   },
   {
-    "objectID": "sessions/week1.html#us-city-population",
-    "href": "sessions/week1.html#us-city-population",
+    "objectID": "sessions/week1_lecture.html#us-city-population",
+    "href": "sessions/week1_lecture.html#us-city-population",
     "title": "Exploratory Data Analysis #1",
     "section": "US city population",
-    "text": "US city population\n\n\n\nQuantity: 282 values\nThe middle: Mean 302869.3\nThe middle: Median 167744.5 (Very different from mean)\nThe middle: Mode 106433 (Useful? ❌)\nShould use mean or median? median is better than mean, as data is unlikely normal distributed",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "US city population\n\n\n\nQuantity: 282 values\nThe middle: Mean 302869.3\nThe middle: Median 167744.5 (Very different from mean)\nThe middle: Mode 106433 (Useful? ❌)\nShould use mean or median? median is better than mean, as data is unlikely normal distributed"
   },
   {
-    "objectID": "sessions/week1.html#variance-quantifying-spread",
-    "href": "sessions/week1.html#variance-quantifying-spread",
+    "objectID": "sessions/week1_lecture.html#variance-quantifying-spread",
+    "href": "sessions/week1_lecture.html#variance-quantifying-spread",
     "title": "Exploratory Data Analysis #1",
     "section": "Variance: quantifying spread",
-    "text": "Variance: quantifying spread\nDenote city population by \\([y_1, y_2, ..., y_n]\\) and variance by \\(\\sigma^2\\)\n\\[\n\\begin{aligned}\n\\sigma^2 &= \\frac{\\sum_{i=1}^{n} (y_i - \\bar{y})^2}{n} \\\\\n&= \\frac{(y_1 - \\bar{y})^2 + (y_2 - \\bar{y})^2 + \\dots + (y_n - \\bar{y})^2}{n}\n\\end{aligned}\n\\]\nA large variance means considerable spreadedness in data.",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Variance: quantifying spread\nDenote city population by \\([y_1, y_2, ..., y_n]\\) and variance by \\(\\sigma^2\\)\n\\[\n\\begin{aligned}\n\\sigma^2 &= \\frac{\\sum_{i=1}^{n} (y_i - \\bar{y})^2}{n} \\\\\n&= \\frac{(y_1 - \\bar{y})^2 + (y_2 - \\bar{y})^2 + \\dots + (y_n - \\bar{y})^2}{n}\n\\end{aligned}\n\\]\nA large variance means considerable spreadedness in data."
   },
   {
-    "objectID": "sessions/week1.html#standard-deviation-sigma",
-    "href": "sessions/week1.html#standard-deviation-sigma",
+    "objectID": "sessions/week1_lecture.html#standard-deviation-sigma",
+    "href": "sessions/week1_lecture.html#standard-deviation-sigma",
     "title": "Exploratory Data Analysis #1",
     "section": "Standard deviation \\(\\sigma\\)",
-    "text": "Standard deviation \\(\\sigma\\)\n\\[\n\\begin{aligned}\n\\text{Standard Deviation} = \\sqrt{\\text{Variance}}\n\\end{aligned}\n\\]\n\nUnit: if \\(y\\) is in unit of meter (m), then St. Dev is in unit of m, variance in unit of \\(\\text{m}^2\\)",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Standard deviation \\(\\sigma\\)\n\\[\n\\begin{aligned}\n\\text{Standard Deviation} = \\sqrt{\\text{Variance}}\n\\end{aligned}\n\\]\n\nUnit: if \\(y\\) is in unit of meter (m), then St. Dev is in unit of m, variance in unit of \\(\\text{m}^2\\)"
   },
   {
-    "objectID": "sessions/week1.html#summary-of-key-metrics",
-    "href": "sessions/week1.html#summary-of-key-metrics",
+    "objectID": "sessions/week1_lecture.html#summary-of-key-metrics",
+    "href": "sessions/week1_lecture.html#summary-of-key-metrics",
     "title": "Exploratory Data Analysis #1",
     "section": "Summary of key metrics",
-    "text": "Summary of key metrics\n\n\nQuantity\nThe middle: mean, median, mode\nThe spread: variance, standard deviation\nVisualising data is also important: BOXPLOT!\nPlease check two types of SPECIAL VALUES before computing these metrics.",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Summary of key metrics\n\n\nQuantity\nThe middle: mean, median, mode\nThe spread: variance, standard deviation\nVisualising data is also important: BOXPLOT!\nPlease check two types of SPECIAL VALUES before computing these metrics."
   },
   {
-    "objectID": "sessions/week1.html#ft-visual-vocabulary",
-    "href": "sessions/week1.html#ft-visual-vocabulary",
+    "objectID": "sessions/week1_lecture.html#ft-visual-vocabulary",
+    "href": "sessions/week1_lecture.html#ft-visual-vocabulary",
     "title": "Exploratory Data Analysis #1",
     "section": "FT visual vocabulary",
-    "text": "FT visual vocabulary\n\nhttps://ft-interactive.github.io/visual-vocabulary/",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "FT visual vocabulary\n\nhttps://ft-interactive.github.io/visual-vocabulary/"
   },
   {
-    "objectID": "sessions/week1.html#boxplot-for-a-dataset",
-    "href": "sessions/week1.html#boxplot-for-a-dataset",
+    "objectID": "sessions/week1_lecture.html#boxplot-for-a-dataset",
+    "href": "sessions/week1_lecture.html#boxplot-for-a-dataset",
     "title": "Exploratory Data Analysis #1",
     "section": "Boxplot for a dataset",
-    "text": "Boxplot for a dataset\n\nShowing distribution of a dataset",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Boxplot for a dataset\n\nShowing distribution of a dataset"
   },
   {
-    "objectID": "sessions/week1.html#boxplot-for-comparing-multiple-datasets",
-    "href": "sessions/week1.html#boxplot-for-comparing-multiple-datasets",
+    "objectID": "sessions/week1_lecture.html#boxplot-for-comparing-multiple-datasets",
+    "href": "sessions/week1_lecture.html#boxplot-for-comparing-multiple-datasets",
     "title": "Exploratory Data Analysis #1",
     "section": "Boxplot for comparing multiple datasets",
-    "text": "Boxplot for comparing multiple datasets",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Boxplot for comparing multiple datasets"
   },
   {
-    "objectID": "sessions/week1.html#when-boxplot-fails",
-    "href": "sessions/week1.html#when-boxplot-fails",
+    "objectID": "sessions/week1_lecture.html#when-boxplot-fails",
+    "href": "sessions/week1_lecture.html#when-boxplot-fails",
     "title": "Exploratory Data Analysis #1",
     "section": "When boxplot fails?",
-    "text": "When boxplot fails?\n\nWhen there are lots of ‘outliers’ in the data\nWhat are ‘Outliers’?",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "When boxplot fails?\n\nWhen there are lots of ‘outliers’ in the data\nWhat are ‘Outliers’?"
   },
   {
-    "objectID": "sessions/week1.html#null-values",
-    "href": "sessions/week1.html#null-values",
+    "objectID": "sessions/week1_lecture.html#null-values",
+    "href": "sessions/week1_lecture.html#null-values",
     "title": "Exploratory Data Analysis #1",
     "section": "Null values",
-    "text": "Null values\n\nRepresenting the absence of data or an unknow value\nDifferent from zero or a blank space\nNull values should be excluded before computing mean or std",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Null values\n\nRepresenting the absence of data or an unknow value\nDifferent from zero or a blank space\nNull values should be excluded before computing mean or std"
   },
   {
-    "objectID": "sessions/week1.html#null-island-in-geography",
-    "href": "sessions/week1.html#null-island-in-geography",
+    "objectID": "sessions/week1_lecture.html#null-island-in-geography",
+    "href": "sessions/week1_lecture.html#null-island-in-geography",
     "title": "Exploratory Data Analysis #1",
     "section": "Null island in geography",
-    "text": "Null island in geography\n\nlong=0, lat=0. Not even an island!\nIt became famous because some software assigned “0,0” for long-lat when location is missing\nMany events were mapped to this one, including lots on Strava\nSource: wikipedia.org",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Null island in geography\n\nlong=0, lat=0. Not even an island!\nIt became famous because some software assigned “0,0” for long-lat when location is missing\nMany events were mapped to this one, including lots on Strava\nSource: wikipedia.org"
   },
   {
-    "objectID": "sessions/week1.html#outliers",
-    "href": "sessions/week1.html#outliers",
+    "objectID": "sessions/week1_lecture.html#outliers",
+    "href": "sessions/week1_lecture.html#outliers",
     "title": "Exploratory Data Analysis #1",
     "section": "Outliers",
-    "text": "Outliers\n\nA data point that differs significantly from other observations\nThere are three types of outliers\nPlease explain the rationale for removing any identified outliers, including the criteria and methods used",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Outliers\n\nA data point that differs significantly from other observations\nThere are three types of outliers\nPlease explain the rationale for removing any identified outliers, including the criteria and methods used"
   },
   {
-    "objectID": "sessions/week1.html#outliers-1",
-    "href": "sessions/week1.html#outliers-1",
+    "objectID": "sessions/week1_lecture.html#outliers-1",
+    "href": "sessions/week1_lecture.html#outliers-1",
     "title": "Exploratory Data Analysis #1",
     "section": "Outliers",
-    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\nFrom mistakes in data collection/entry/measurement, e.g. a temperature sensor reading 500 °C\nShould be corrected or removed\n\n\nIrregular Pattern Outliers\n\n\n\n\nInfluential Outliers",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\nFrom mistakes in data collection/entry/measurement, e.g. a temperature sensor reading 500 °C\nShould be corrected or removed\n\n\nIrregular Pattern Outliers\n\n\n\n\nInfluential Outliers"
   },
   {
-    "objectID": "sessions/week1.html#outliers-2",
-    "href": "sessions/week1.html#outliers-2",
+    "objectID": "sessions/week1_lecture.html#outliers-2",
+    "href": "sessions/week1_lecture.html#outliers-2",
     "title": "Exploratory Data Analysis #1",
     "section": "Outliers",
-    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\n\n\n\n\nIrregular Pattern Outliers\nGenuinely occur, but do not follow general pattern or relationship in the dataset, e.g. sudden spikes in sales in Black Friday\nThey might indicate unusual events or anomalies worth investigating. If the purpose is to study overall pattern, they should be removed\n\n\nInfluential Outliers",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\n\n\n\n\nIrregular Pattern Outliers\nGenuinely occur, but do not follow general pattern or relationship in the dataset, e.g. sudden spikes in sales in Black Friday\nThey might indicate unusual events or anomalies worth investigating. If the purpose is to study overall pattern, they should be removed\n\n\nInfluential Outliers"
   },
   {
-    "objectID": "sessions/week1.html#outliers-3",
-    "href": "sessions/week1.html#outliers-3",
+    "objectID": "sessions/week1_lecture.html#outliers-3",
+    "href": "sessions/week1_lecture.html#outliers-3",
     "title": "Exploratory Data Analysis #1",
     "section": "Outliers",
-    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\n\n\n\n\nIrregular Pattern Outliers\n\n\n\n\nInfluential Outliers\nAppear extreme but are integral to the underlying pattern or model, e.g. NYC in US city population data\nShould keep them, as removing them could distort the analysis or overlook important features of the data",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Outliers\n\n\n\n\n\n\n\n\nType\nSource\nHandling\n\n\n\n\nError Outliers\n\n\n\n\nIrregular Pattern Outliers\n\n\n\n\nInfluential Outliers\nAppear extreme but are integral to the underlying pattern or model, e.g. NYC in US city population data\nShould keep them, as removing them could distort the analysis or overlook important features of the data"
   },
   {
-    "objectID": "sessions/week1.html#detecting-outlier-interquartile-range-iqr",
-    "href": "sessions/week1.html#detecting-outlier-interquartile-range-iqr",
+    "objectID": "sessions/week1_lecture.html#detecting-outlier-interquartile-range-iqr",
+    "href": "sessions/week1_lecture.html#detecting-outlier-interquartile-range-iqr",
     "title": "Exploratory Data Analysis #1",
     "section": "Detecting outlier: interquartile range (IQR)",
-    "text": "Detecting outlier: interquartile range (IQR)",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Detecting outlier: interquartile range (IQR)"
   },
   {
-    "objectID": "sessions/week1.html#quiz-which-type-of-outliers",
-    "href": "sessions/week1.html#quiz-which-type-of-outliers",
+    "objectID": "sessions/week1_lecture.html#quiz-which-type-of-outliers",
+    "href": "sessions/week1_lecture.html#quiz-which-type-of-outliers",
     "title": "Exploratory Data Analysis #1",
     "section": "Quiz: which type of outliers?",
-    "text": "Quiz: which type of outliers?\n\nerror vs. irregular pattern vs. influential\n\n\nIn building height data, 10-storey building with 1m height\nIn gender ratios of countries data, Vatican City with gender ratio of 7:1\nIn UK city GDP data, GDP of Greater London",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
+    "text": "Quiz: which type of outliers?\n\nerror vs. irregular pattern vs. influential\n\n\nIn building height data, 10-storey building with 1m height\nIn gender ratios of countries data, Vatican City with gender ratio of 7:1\nIn UK city GDP data, GDP of Greater London"
   },
   {
-    "objectID": "sessions/week1.html#summary-describing-a-dataset",
-    "href": "sessions/week1.html#summary-describing-a-dataset",
+    "objectID": "sessions/week1_lecture.html#summary-describing-a-dataset",
+    "href": "sessions/week1_lecture.html#summary-describing-a-dataset",
     "title": "Exploratory Data Analysis #1",
     "section": "Summary: describing a dataset",
-    "text": "Summary: describing a dataset\n\nKey metrics\nNull values and outliers (and handle them!)\nVisualising data",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome",
-    "section": "",
-    "text": "The Quantitative Methods (QM) module is a compulsory element of CASA’s MSc/MRes USS programmes and is intended provide an introduction to quantitative methods for all students.\nAs data becomes central to decision-making across all sectors, the ability to move beyond simple description to robust and evidence-based analysis is essential for researchers and practitioners in geography and urban studies. Making sense of the complex patterns that define our world requires a firm understanding of the language of data. This module provides the essential grammar for that language and aims to equip students with the foundational quantitative skills needed to describe data, build models, and derive meaningful insights from numerical evidence.\nTo achieve this, the module is structured progressively across three core sections. The first section establishes the fundamental toolkit for quantitative analysts. Beginning with Exploratory Data Analysis, students will learn how to visualise, summarise, and critically interrogate datasets. This is followed by a rigorous grounding in the principles of statistical inference through hypothesis testing, and an introduction to the linear algebra that provides the mathematical architecture for many of the models used in modern data science.\nThe second section builds upon this foundation to explore the core of statistical modelling: understanding and quantifying relationships between variables. Students will progress from measuring correlations to building sophisticated regression models. The curriculum covers the workhorse of social science, the Generalised Linear Model (GLM), before advancing to Multilevel Models, a critical technique for handling the nested and hierarchical data that is common in geographical and social research.\nThe final section of the course introduces advanced techniques for uncovering hidden structures within complex, high-dimensional datasets. Students will learn methods for dimensionality reduction to simplify complexity without losing vital information, and clustering analysis to identify natural groupings and patterns in data.\nTherefore, this module guides students on a complete analytical journey, from foundational principles to the application of advanced modelling techniques. It serves as a vital prerequisite for more specialised analytical modules and is essential for students wishing to undertake quantitative geospatial research. Ultimately, this module will provide quantitative skills that are in high demand across public, private, and academic sectors."
-  },
-  {
-    "objectID": "index.html#acknowledgements",
-    "href": "index.html#acknowledgements",
-    "title": "Welcome",
-    "section": "Acknowledgements",
-    "text": "Acknowledgements\nWe really appreciate the support from various people:\n\nJon for setting up this wonderful CASA-themed quarto template.\nOllie and Andy for inspiring us to pursue a Quarto-based module website."
-  },
-  {
-    "objectID": "assessments/index.html",
-    "href": "assessments/index.html",
-    "title": "CASA0007 Assessment",
-    "section": "",
-    "text": "This Assessment is worth 100% of the grade for this course.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "assessments/index.html#assessment-aims",
-    "href": "assessments/index.html#assessment-aims",
-    "title": "CASA0007 Assessment",
-    "section": "Assessment Aims",
-    "text": "Assessment Aims\nThis assessment is designed to test your understanding of the quantitative methods introduced in this course, but also, crucially, your ability to really understand how, if used correctly and applied to appropriate data, these methods can help you tell a powerful story and be the underpinning evidence-base for a relevant local, national or international issue.\nUsing quantitative methods to contribute to public debates is vital if students, academics and universities are to demonstrate our value to the wider world. We don’t want you to just apply a method and regurgitate unintelligible coefficients. Quantitative methods can only have real value if they are used to support wider debates in ways that everyone should be able to understand.\nWe are not testing your coding abilities – you may use either of the main coding languages taught this term (R or Python). We are not testing your ability to write a standard piece of academic writing. But we are testing your ability to use quantitative methods appropriately and with a clear connection between the data, methods and outputs, to help others understand a particular issue through a data lens.\n\nPart 1 - Article\nYour task is to write a short 800-1000-word piece of ‘public-facing scholarly writing’ in the style of an article that that could appear in The Conversation or the Financial Times in their data section. This piece could relate to a local, national or international topic which could be either serious or frivolous but must employ appropriate quantitative methods learned in this course to derive novel insights from a particular dataset (or range of datasets) associated with a particular topic of your choosing. Data analysis and the use of quantitative methods should be central to your piece, but outputs must be appropriate for a general (non-academic) audience with your piece illuminated by appropriate visual outputs – maps, graphs or other data visualisations. Your piece should contain a range of graphical or tabular elements.\n\n\nPart 2 - Technical Appendix\nYour 800-1000-word article should be accompanied by a max 1000-word technical appendix detailing the analysis you have carried out behind the scenes to allow you to make the observations you have in your article. Here you might want to include additional exploratory visualisations, tabular outputs, interpretations of those outputs, equations etc. and you could also include any observations about the dataset or the validity / statistical significance of any models you employ. The purpose of the appendix is to reassure anyone who wants to delve deeper, that the observations you made in your main article are valid and reliable and your interpretations valid.\n\n\nTopic\nYour topic can be anything you like broadly related to human, urban or social issues, as long as you can find some suitable data to analyse. For inspiration on relevant topics, you might want to review some of the articles that John Burn-Murdoch has written for the Financial Times in recent years - https://www.ft.com/john-burn-murdoch (you can log-in via your UCL credentials) or some of the pieces in the Conversation - https://theconversation.com/.\nIf you are struggling for inspiration, you are welcome to explore an educational topic using DfE schools data used in class, but you are encouraged to be creative in your data choices (as you are being partially marked on your originality), and you should not repeat analyses carried out on variables in any of the practical sessions. The only topic we will not permit in this assessment is anything related to AirBnB as this is the focus of CASA0013.\n\n\nArticle Content\nYou will note that most of John Burn-Murdoch’s articles generally contain the sorts of analyses we would describe as exploratory. While your article should contain basic exploratory analysis in the form of visualisations, you should also use an appropriate method from the second half of the course (lectures 5-10) related to either more sophisticated exploratory analysis like multivariate statistical analysis (e.g. dimensionality reduction or cluster analysis) or some explanatory / predictive methods such as ANOVA, linear regression or some of the generalised linear models also introduced.\n\n\nStyle of Briefing\nYou should write in plain English and avoid the use of jargon or technical language. For tips on how to write in this style, The Conversation has produced a guide: https://socsci.web.ox.ac.uk/files/conversation-writing-public-why-and-how\n\n\nTypes of Data Permissible and Sources\nAnything you like, but you should choose carefully so that you are able to demonstrate the appropriate skills. There are many potential sources of data – these could be linked from FT or Conversation articles, or you could try sites like:\nhttps://data.gov/\nhttps://www.data.gov.uk/\nhttps://opendata.nhsbsa.net/\nhttps://tfl.gov.uk/info-for/open-data-users/  \nhttps://data.europa.eu/data/datasets?locale=en\nhttps://data.worldbank.org/\nhttps://data.london.gov.uk/\nYou can probably find many more!\n\n\nReferencing\nWe will not expect standard academic referencing in this piece, however, this doesn’t mean that you shouldn’t include references – you should. In this style of public facing scholarly writing, it is common to use hyperlinks and footnotes and you should make use of these to support your narrative.\n\n\nFormat of the Piece\nExamples – Here is just one example of the kind of article you might produce (minus the technical appendix), but read widely around the data journalism sites linked from publications like the Financial Times, New York Times, Guardian.\nhttps://theconversation.com/constituency-level-data-reveals-which-parties-are-most-threatened-by-reform-264422\n\n\nDeadline and Handing In\nThe Deadline for the assessment is Tuesday, 13 January 2026 @ 10:00.\nYour report and technical appendix should be uploaded to Moodle as a single PDF document.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "assessments/index.html#mark-scheme",
-    "href": "assessments/index.html#mark-scheme",
-    "title": "CASA0007 Assessment",
-    "section": "Mark Scheme",
-    "text": "Mark Scheme\nThis is how we will mark your work - take note of them\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCriterion\n80-100%\n70-79% (A)\n60-69% (B)\n50-59% (C)\n40-49% (D)\n1-39% (E)\n\n\n\n\nExploratory Analysis (25%)\nOutstanding selection of exploratory statistics and/or sophisticated data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations in the data with absolute clarity. Graphics are labelled such that readers are in no doubt about what is being shown. Data may have been transformed, normalised or standardised in some way to reveal otherwise hidden patterns and justified impeccably.\nExcellent selection of exploratory statistics and/or sophisticated data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations in the data. Graphics are labelled such that readers are in no doubt about what is being shown. Data may have been transformed, normalised or standardised in some way to reveal otherwise hidden patterns and justified.\nGood selection of exploratory statistics and/or data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations. Graphics are labelled such that readers are able to interpret the plots with ease.\nAdequate selection of exploratory statistics and/or data visualisations which illuminate some of the underlying data, revealing some distributions / trends / relationships and associations. Graphics are labelled, but may lack clarity. Data may not be transformed, normalised or standardised in a way to reveal patterns.\nInadequate selection of statistics or visualisations. Graphics are poorly labelled or unclear, and do not illuminate the underlying data. Data transformations are incorrect or missing.\nNegligible use of statistics or visualisations. Any visualisations are irrelevant, inaccurate, or inaccessible. The analysis shows no grasp of the underlying data.\n\n\nUse of multivariate statistical analysis or explanatory / predictive methods (25%)\nExceptional selection of data / variables entirely appropriate for the chosen article topic. Masterful understanding of the nuances related to the careful pruning and selection of appropriate variables. Outstanding understanding of the methods employed and their interaction with the data to hand with masterful understanding of outputs produced\nExcellent selection of data / variables entirely appropriate for the chosen article topic. Highly competent understanding of the nuances related to the careful pruning and selection of appropriate variables. Highly competent understanding of the methods employed and their interaction with the data to hand.\nGood selection of data / variables appropriate for the chosen article topic. Competent understanding of the methods employed and their interaction with the data.\nAdequate selection of data / variables for the chosen article topic. Basic understanding of the methods employed and their interaction with the data. May get some of the nuances in the outputs, but may also ignore some key features in the data\nInadequate selection of data / variables for the chosen article topic. Little to no understanding of the methods employed or how they interact with the data.\nNegligible or irrelevant selection of data / variables. No grasp of the methods or their application to the data.\n\n\nOriginality, article narrative and communication (25%)\nHighly original topic selection, or of exceptional relevance to a contemporary debate in the society, the media or politics at a local, national or international level with broad interest. Article narrative shows flare or originality which draws the reader in and reveals something entirely new. Writing style is highly accessible - clear, concise and creative and the reader is left without query or misunderstanding.\nExcellent topic selection, of high relevance to a contemporary debate. The narrative is engaging and written with excellent clarity, flowing well from one section to the next. The work is of a very high standard. Writing style clear and concise with few wasted words.\nGood topic selection, of relevance to a contemporary debate. The narrative is clear and well-structured. The work shows some evidence of originality. The narrative is good and the message emerging from the analysis is conveyed well.\nAdequate topic selection, but may lack relevance or wider interest. The narrative is satisfactory but may lack clarity or logical flow  ideas appearing slightly disorganised. The reader can understand the piece but may have to work hard to derive meaning from it.\nInadequate topic selection  perhaps dated or totally irrelevant to the degree programme (i.e. not even a human topic). The narrative is lacking in clarity and is difficult to follow. Deriving meaning from the work is a challenge.\nThe work has no clear topic or narrative. The communication is confused, unclear, or inaccessible.\n\n\nConceptual understanding and Critical Reflection (25%)\nBoth the Article and Technical Appendix show exemplary understanding of the topic / wider issues associated with it and of the methods employed to interrogate the data. A clear understanding of any data / methodological shortcomings / issues / challenges is presented with a highly sophisticated degree of critical reflection in relation to the substantive topic and / or methods employed is demonstrated.\nArticle and Technical Appendix show excellent and highly competent conceptual understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a thorough understanding of the chosen example and recognises and reflects lucidly on any shortcomings and / or the wider significance of the findings in a way that is not contrived or formulaic but shows a sophisticated level of insight.\nArticle and Technical Appendix show good understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a sound understanding of the chosen example and recognises and reflects lucidly on any shortcomings and / or the wider significance of the findings in a way that is not contrived or formulaic but shows a sophisticated level of insight.\nArticle and Technical Appendix show basic understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a rudimentary understanding of the chosen example and recognises and may offer only some reflection on the shortcomings of the work or not at all / contrived at the bottom end.\nInadequate and insufficient conceptual understanding of key concepts and theories. The work demonstrates an invalid or lack of understanding of the concepts introduced. Any analysis attempted fails to support the observations made.\nNegligible or no conceptual understanding of key concepts and theories. The work demonstrates an irrelevant, inaccurate, confused, unclear, or inaccessible understanding of the concepts.\n\n\n\n\n\n\nThe purpose of this assessment is to test your understanding of the various methods introduced in this course and your ability to apply them appropriately to a topic of your choice. One of the differentiators at Masters level is the ability to think both creatively and critically while showing an awareness or knowledge of contemporary issues either in relation to your specific discipline of study or more widely. Being able to demonstrate how established techniques of research and enquiry can be used to create and interpret knowledge is at the core of Masters level thinking and this assessment piece. The ability to demonstrate self-direction (in choosing an appropriate topic for this assessment) and to think autonomously in designing your own article.\n\nMark Scheme – Explained\nLevel 7 Descriptors - https://www.qaa.ac.uk/docs/qaa/quality-code/the-frameworks-for-higher-education-qualifications-of-uk-degree-awarding-bodies-2024.pdf - p26\nMaster’s degree\nThe descriptor provided for this level of the Frameworks is for any master’s degree which should meet the descriptor in full. This qualification descriptor should also be used as a reference point for other qualifications at Level 7 on the FHEQ/SCQF Level 11 on the FQHEIS, including postgraduate certificates and postgraduate diplomas.\nMaster’s degrees are awarded to students who have demonstrated:\n•         a systematic understanding of knowledge, and a critical awareness of current problems and/or new insights, much of which is at, or informed by, the forefront of their academic discipline, field of study or area of professional practice\n•         a comprehensive understanding of techniques applicable to their own research or advanced scholarship\n•         originality in the application of knowledge, together with a practical understanding of how established techniques of research and enquiry are used to create and interpret knowledge in the discipline\n•         conceptual understanding that enables the student:\n•         to evaluate critically current research and advanced scholarship in the discipline\n•         to evaluate methodologies and develop critiques of them and, where appropriate, to propose new hypotheses.\nTypically, holders of the qualification will be able to:\n•         deal with complex issues - both systematically and creatively, make sound judgements in the absence of complete data, and communicate their conclusions clearly to specialist and non-specialist audiences\n•         demonstrate self-direction and originality in tackling and solving problems, and act autonomously in planning and implementing tasks at a professional or equivalent level\n•         continue to advance their knowledge and understanding, and to develop new skills to a high level. \nAnd holders will have:\n•         the qualities and transferable skills necessary for employment requiring:  \n•         the exercise of initiative and personal responsibility\n•         decision-making in complex and unpredictable situations\n•         the independent learning ability required for continuing professional development.",
-    "crumbs": [
-      "Overview"
-    ]
+    "text": "Summary: describing a dataset\n\nKey metrics\nNull values and outliers (and handle them!)\nVisualising data"
   },
   {
     "objectID": "sessions/index.html",
@@ -1436,6 +1276,105 @@
     "text": "Github Feedback\nYou can also give feedback on Github issues.",
     "crumbs": [
       "Overview"
+    ]
+  },
+  {
+    "objectID": "assessments/index.html",
+    "href": "assessments/index.html",
+    "title": "CASA0007 Assessment",
+    "section": "",
+    "text": "This Assessment is worth 100% of the grade for this course.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "assessments/index.html#assessment-aims",
+    "href": "assessments/index.html#assessment-aims",
+    "title": "CASA0007 Assessment",
+    "section": "Assessment Aims",
+    "text": "Assessment Aims\nThis assessment is designed to test your understanding of the quantitative methods introduced in this course, but also, crucially, your ability to really understand how, if used correctly and applied to appropriate data, these methods can help you tell a powerful story and be the underpinning evidence-base for a relevant local, national or international issue.\nUsing quantitative methods to contribute to public debates is vital if students, academics and universities are to demonstrate our value to the wider world. We don’t want you to just apply a method and regurgitate unintelligible coefficients. Quantitative methods can only have real value if they are used to support wider debates in ways that everyone should be able to understand.\nWe are not testing your coding abilities – you may use either of the main coding languages taught this term (R or Python). We are not testing your ability to write a standard piece of academic writing. But we are testing your ability to use quantitative methods appropriately and with a clear connection between the data, methods and outputs, to help others understand a particular issue through a data lens.\n\nPart 1 - Article\nYour task is to write a short 800-1000-word piece of ‘public-facing scholarly writing’ in the style of an article that that could appear in The Conversation or the Financial Times in their data section. This piece could relate to a local, national or international topic which could be either serious or frivolous but must employ appropriate quantitative methods learned in this course to derive novel insights from a particular dataset (or range of datasets) associated with a particular topic of your choosing. Data analysis and the use of quantitative methods should be central to your piece, but outputs must be appropriate for a general (non-academic) audience with your piece illuminated by appropriate visual outputs – maps, graphs or other data visualisations. Your piece should contain a range of graphical or tabular elements.\n\n\nPart 2 - Technical Appendix\nYour 800-1000-word article should be accompanied by a max 1000-word technical appendix detailing the analysis you have carried out behind the scenes to allow you to make the observations you have in your article. Here you might want to include additional exploratory visualisations, tabular outputs, interpretations of those outputs, equations etc. and you could also include any observations about the dataset or the validity / statistical significance of any models you employ. The purpose of the appendix is to reassure anyone who wants to delve deeper, that the observations you made in your main article are valid and reliable and your interpretations valid.\n\n\nTopic\nYour topic can be anything you like broadly related to human, urban or social issues, as long as you can find some suitable data to analyse. For inspiration on relevant topics, you might want to review some of the articles that John Burn-Murdoch has written for the Financial Times in recent years - https://www.ft.com/john-burn-murdoch (you can log-in via your UCL credentials) or some of the pieces in the Conversation - https://theconversation.com/.\nIf you are struggling for inspiration, you are welcome to explore an educational topic using DfE schools data used in class, but you are encouraged to be creative in your data choices (as you are being partially marked on your originality), and you should not repeat analyses carried out on variables in any of the practical sessions. The only topic we will not permit in this assessment is anything related to AirBnB as this is the focus of CASA0013.\n\n\nArticle Content\nYou will note that most of John Burn-Murdoch’s articles generally contain the sorts of analyses we would describe as exploratory. While your article should contain basic exploratory analysis in the form of visualisations, you should also use an appropriate method from the second half of the course (lectures 5-10) related to either more sophisticated exploratory analysis like multivariate statistical analysis (e.g. dimensionality reduction or cluster analysis) or some explanatory / predictive methods such as ANOVA, linear regression or some of the generalised linear models also introduced.\n\n\nStyle of Briefing\nYou should write in plain English and avoid the use of jargon or technical language. For tips on how to write in this style, The Conversation has produced a guide: https://socsci.web.ox.ac.uk/files/conversation-writing-public-why-and-how\n\n\nTypes of Data Permissible and Sources\nAnything you like, but you should choose carefully so that you are able to demonstrate the appropriate skills. There are many potential sources of data – these could be linked from FT or Conversation articles, or you could try sites like:\nhttps://data.gov/\nhttps://www.data.gov.uk/\nhttps://opendata.nhsbsa.net/\nhttps://tfl.gov.uk/info-for/open-data-users/  \nhttps://data.europa.eu/data/datasets?locale=en\nhttps://data.worldbank.org/\nhttps://data.london.gov.uk/\nYou can probably find many more!\n\n\nReferencing\nWe will not expect standard academic referencing in this piece, however, this doesn’t mean that you shouldn’t include references – you should. In this style of public facing scholarly writing, it is common to use hyperlinks and footnotes and you should make use of these to support your narrative.\n\n\nFormat of the Piece\nExamples – Here is just one example of the kind of article you might produce (minus the technical appendix), but read widely around the data journalism sites linked from publications like the Financial Times, New York Times, Guardian.\nhttps://theconversation.com/constituency-level-data-reveals-which-parties-are-most-threatened-by-reform-264422\n\n\nDeadline and Handing In\nThe Deadline for the assessment is Tuesday, 13 January 2026 @ 10:00.\nYour report and technical appendix should be uploaded to Moodle as a single PDF document.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "assessments/index.html#mark-scheme",
+    "href": "assessments/index.html#mark-scheme",
+    "title": "CASA0007 Assessment",
+    "section": "Mark Scheme",
+    "text": "Mark Scheme\nThis is how we will mark your work - take note of them\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCriterion\n80-100%\n70-79% (A)\n60-69% (B)\n50-59% (C)\n40-49% (D)\n1-39% (E)\n\n\n\n\nExploratory Analysis (25%)\nOutstanding selection of exploratory statistics and/or sophisticated data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations in the data with absolute clarity. Graphics are labelled such that readers are in no doubt about what is being shown. Data may have been transformed, normalised or standardised in some way to reveal otherwise hidden patterns and justified impeccably.\nExcellent selection of exploratory statistics and/or sophisticated data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations in the data. Graphics are labelled such that readers are in no doubt about what is being shown. Data may have been transformed, normalised or standardised in some way to reveal otherwise hidden patterns and justified.\nGood selection of exploratory statistics and/or data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations. Graphics are labelled such that readers are able to interpret the plots with ease.\nAdequate selection of exploratory statistics and/or data visualisations which illuminate some of the underlying data, revealing some distributions / trends / relationships and associations. Graphics are labelled, but may lack clarity. Data may not be transformed, normalised or standardised in a way to reveal patterns.\nInadequate selection of statistics or visualisations. Graphics are poorly labelled or unclear, and do not illuminate the underlying data. Data transformations are incorrect or missing.\nNegligible use of statistics or visualisations. Any visualisations are irrelevant, inaccurate, or inaccessible. The analysis shows no grasp of the underlying data.\n\n\nUse of multivariate statistical analysis or explanatory / predictive methods (25%)\nExceptional selection of data / variables entirely appropriate for the chosen article topic. Masterful understanding of the nuances related to the careful pruning and selection of appropriate variables. Outstanding understanding of the methods employed and their interaction with the data to hand with masterful understanding of outputs produced\nExcellent selection of data / variables entirely appropriate for the chosen article topic. Highly competent understanding of the nuances related to the careful pruning and selection of appropriate variables. Highly competent understanding of the methods employed and their interaction with the data to hand.\nGood selection of data / variables appropriate for the chosen article topic. Competent understanding of the methods employed and their interaction with the data.\nAdequate selection of data / variables for the chosen article topic. Basic understanding of the methods employed and their interaction with the data. May get some of the nuances in the outputs, but may also ignore some key features in the data\nInadequate selection of data / variables for the chosen article topic. Little to no understanding of the methods employed or how they interact with the data.\nNegligible or irrelevant selection of data / variables. No grasp of the methods or their application to the data.\n\n\nOriginality, article narrative and communication (25%)\nHighly original topic selection, or of exceptional relevance to a contemporary debate in the society, the media or politics at a local, national or international level with broad interest. Article narrative shows flare or originality which draws the reader in and reveals something entirely new. Writing style is highly accessible - clear, concise and creative and the reader is left without query or misunderstanding.\nExcellent topic selection, of high relevance to a contemporary debate. The narrative is engaging and written with excellent clarity, flowing well from one section to the next. The work is of a very high standard. Writing style clear and concise with few wasted words.\nGood topic selection, of relevance to a contemporary debate. The narrative is clear and well-structured. The work shows some evidence of originality. The narrative is good and the message emerging from the analysis is conveyed well.\nAdequate topic selection, but may lack relevance or wider interest. The narrative is satisfactory but may lack clarity or logical flow  ideas appearing slightly disorganised. The reader can understand the piece but may have to work hard to derive meaning from it.\nInadequate topic selection  perhaps dated or totally irrelevant to the degree programme (i.e. not even a human topic). The narrative is lacking in clarity and is difficult to follow. Deriving meaning from the work is a challenge.\nThe work has no clear topic or narrative. The communication is confused, unclear, or inaccessible.\n\n\nConceptual understanding and Critical Reflection (25%)\nBoth the Article and Technical Appendix show exemplary understanding of the topic / wider issues associated with it and of the methods employed to interrogate the data. A clear understanding of any data / methodological shortcomings / issues / challenges is presented with a highly sophisticated degree of critical reflection in relation to the substantive topic and / or methods employed is demonstrated.\nArticle and Technical Appendix show excellent and highly competent conceptual understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a thorough understanding of the chosen example and recognises and reflects lucidly on any shortcomings and / or the wider significance of the findings in a way that is not contrived or formulaic but shows a sophisticated level of insight.\nArticle and Technical Appendix show good understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a sound understanding of the chosen example and recognises and reflects lucidly on any shortcomings and / or the wider significance of the findings in a way that is not contrived or formulaic but shows a sophisticated level of insight.\nArticle and Technical Appendix show basic understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a rudimentary understanding of the chosen example and recognises and may offer only some reflection on the shortcomings of the work or not at all / contrived at the bottom end.\nInadequate and insufficient conceptual understanding of key concepts and theories. The work demonstrates an invalid or lack of understanding of the concepts introduced. Any analysis attempted fails to support the observations made.\nNegligible or no conceptual understanding of key concepts and theories. The work demonstrates an irrelevant, inaccurate, confused, unclear, or inaccessible understanding of the concepts.\n\n\n\n\n\n\nThe purpose of this assessment is to test your understanding of the various methods introduced in this course and your ability to apply them appropriately to a topic of your choice. One of the differentiators at Masters level is the ability to think both creatively and critically while showing an awareness or knowledge of contemporary issues either in relation to your specific discipline of study or more widely. Being able to demonstrate how established techniques of research and enquiry can be used to create and interpret knowledge is at the core of Masters level thinking and this assessment piece. The ability to demonstrate self-direction (in choosing an appropriate topic for this assessment) and to think autonomously in designing your own article.\n\nMark Scheme – Explained\nLevel 7 Descriptors - https://www.qaa.ac.uk/docs/qaa/quality-code/the-frameworks-for-higher-education-qualifications-of-uk-degree-awarding-bodies-2024.pdf - p26\nMaster’s degree\nThe descriptor provided for this level of the Frameworks is for any master’s degree which should meet the descriptor in full. This qualification descriptor should also be used as a reference point for other qualifications at Level 7 on the FHEQ/SCQF Level 11 on the FQHEIS, including postgraduate certificates and postgraduate diplomas.\nMaster’s degrees are awarded to students who have demonstrated:\n•         a systematic understanding of knowledge, and a critical awareness of current problems and/or new insights, much of which is at, or informed by, the forefront of their academic discipline, field of study or area of professional practice\n•         a comprehensive understanding of techniques applicable to their own research or advanced scholarship\n•         originality in the application of knowledge, together with a practical understanding of how established techniques of research and enquiry are used to create and interpret knowledge in the discipline\n•         conceptual understanding that enables the student:\n•         to evaluate critically current research and advanced scholarship in the discipline\n•         to evaluate methodologies and develop critiques of them and, where appropriate, to propose new hypotheses.\nTypically, holders of the qualification will be able to:\n•         deal with complex issues - both systematically and creatively, make sound judgements in the absence of complete data, and communicate their conclusions clearly to specialist and non-specialist audiences\n•         demonstrate self-direction and originality in tackling and solving problems, and act autonomously in planning and implementing tasks at a professional or equivalent level\n•         continue to advance their knowledge and understanding, and to develop new skills to a high level. \nAnd holders will have:\n•         the qualities and transferable skills necessary for employment requiring:  \n•         the exercise of initiative and personal responsibility\n•         decision-making in complex and unpredictable situations\n•         the independent learning ability required for continuing professional development.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome",
+    "section": "",
+    "text": "The Quantitative Methods (QM) module is a compulsory element of CASA’s MSc/MRes USS programmes and is intended provide an introduction to quantitative methods for all students.\nAs data becomes central to decision-making across all sectors, the ability to move beyond simple description to robust and evidence-based analysis is essential for researchers and practitioners in geography and urban studies. Making sense of the complex patterns that define our world requires a firm understanding of the language of data. This module provides the essential grammar for that language and aims to equip students with the foundational quantitative skills needed to describe data, build models, and derive meaningful insights from numerical evidence.\nTo achieve this, the module is structured progressively across three core sections. The first section establishes the fundamental toolkit for quantitative analysts. Beginning with Exploratory Data Analysis, students will learn how to visualise, summarise, and critically interrogate datasets. This is followed by a rigorous grounding in the principles of statistical inference through hypothesis testing, and an introduction to the linear algebra that provides the mathematical architecture for many of the models used in modern data science.\nThe second section builds upon this foundation to explore the core of statistical modelling: understanding and quantifying relationships between variables. Students will progress from measuring correlations to building sophisticated regression models. The curriculum covers the workhorse of social science, the Generalised Linear Model (GLM), before advancing to Multilevel Models, a critical technique for handling the nested and hierarchical data that is common in geographical and social research.\nThe final section of the course introduces advanced techniques for uncovering hidden structures within complex, high-dimensional datasets. Students will learn methods for dimensionality reduction to simplify complexity without losing vital information, and clustering analysis to identify natural groupings and patterns in data.\nTherefore, this module guides students on a complete analytical journey, from foundational principles to the application of advanced modelling techniques. It serves as a vital prerequisite for more specialised analytical modules and is essential for students wishing to undertake quantitative geospatial research. Ultimately, this module will provide quantitative skills that are in high demand across public, private, and academic sectors."
+  },
+  {
+    "objectID": "index.html#acknowledgements",
+    "href": "index.html#acknowledgements",
+    "title": "Welcome",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\nWe really appreciate the support from various people:\n\nJon for setting up this wonderful CASA-themed quarto template.\nOllie and Andy for inspiring us to pursue a Quarto-based module website."
+  },
+  {
+    "objectID": "sessions/week1.html#introduction",
+    "href": "sessions/week1.html#introduction",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Introduction",
+    "text": "Introduction\nThis week will introduce data types and key metrics for describing and representing data.",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#learning-objectives",
+    "href": "sessions/week1.html#learning-objectives",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this week, you will be able to:\n\nUnderstand data types for quantitative research.\nDescribe and represent data using key metrics.\nVisualise data with boxplot.",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#lecture",
+    "href": "sessions/week1.html#lecture",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Lecture",
+    "text": "Lecture\nTo access the lecture notes: Week 1 lecture",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#practical",
+    "href": "sessions/week1.html#practical",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Practical",
+    "text": "Practical\n:::\n\n\n\n\n\n\nNote\n\n\nTo save a copy of notebook to your own GitHub Repo: follow the GitHub link, click on Raw and then Save File As... to save it to your own computer. Make sure to change the extension from .ipynb.txt (which will probably be the default) to .ipynbbefore adding the file to your GitHub repository.\n\n\n\nTo access the practical:\n\nPreview\nDownload",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#further-resources",
+    "href": "sessions/week1.html#further-resources",
+    "title": "Exploratory Data Analysis #1",
+    "section": "Further resources",
+    "text": "Further resources",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
     ]
   },
   {
