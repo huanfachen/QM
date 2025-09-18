@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <link href="..//img/favicon.ico" rel="icon">
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -14,7 +14,7 @@
   <meta name="generator" content="quarto-1.8.24">
 
   <meta name="author" content="Beatrice Taylor">
-  <title>Quantitative Methods – Exploratory Data Analysis #2</title>
+  <title>Quantitative Methods – Exploratory Data Analysis 2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -32,6 +32,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-708fdb05d86516b6f171cd9cf793ecac.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -125,7 +190,10 @@
       margin-right: 0; 
     }
   </style>
-<meta property="og:title" content="Exploratory Data Analysis #2 – Quantitative Methods">
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<meta property="og:title" content="Exploratory Data Analysis 2 – Quantitative Methods">
 <meta property="og:image" content="https://huanfachen.github.io/QM/sessions/img/logo/full_sm.png">
 <meta property="og:site_name" content="Foundations">
 <meta property="og:locale" content="en_GB">
@@ -140,45 +208,15 @@
 <br>
 <br>
 
-<h1 class="title">Exploratory Data Analysis #2</h1>
+<h1 class="title">Exploratory Data Analysis 2</h1>
 
 
 <p><span style="margin:0px; font-weight:700;" class="author">Beatrice Taylor</span> - beatrice.taylor@ucl.ac.uk </p>
 
-<p style="opacity: 0.8">12th December 2024</p>
+<p style="opacity: 0.8">8th October 2025</p>
 
 
 </section>
-<section id="key-information" class="title-slide slide level1 center">
-<h1>Key Information</h1>
-<table class="caption-top" style="width:81%;">
-<colgroup>
-<col style="width: 36%">
-<col style="width: 44%">
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Module Lead</strong></th>
-<th><strong>Contact</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Prof.&nbsp;Adam Dennett Dr.&nbsp;Huanfa Chen Dr.&nbsp;Beatrice Taylor</td>
-<td>a.dennett[at]ucl.ac.uk huanfa.chen[at]ucl.ac.uk. beatrice.taylor[at]ucl.ac.uk</td>
-</tr>
-<tr class="even">
-<td><strong>PGTAs</strong></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>, ,</td>
-<td>Slack</td>
-</tr>
-</tbody>
-</table>
-</section>
-
 <section>
 <section id="last-week" class="title-slide slide level1 center">
 <h1>Last week</h1>
@@ -186,7 +224,7 @@
 </section>
 <section id="overview-of-lecture-1" class="slide level2">
 <h2>Overview of lecture 1</h2>
-<p>Looked at data analysis. Different types of data.</p>
+<p>Need to fill this in.</p>
 </section></section>
 <section>
 <section id="this-week" class="title-slide slide level1 center">
@@ -195,9 +233,17 @@
 </section>
 <section id="first-things-first" class="slide level2">
 <h2>First things first</h2>
-<p>Exploratory data analysis is the first step of any data science project</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div style="text-align:center;">
+<p><img src="L3_images/scientific_method.png" alt="The scientific method" style="max-width:100%"></p>
+</div>
+</div><div class="column" style="width:40%;">
+<p><br></p>
+<p>Exploratory data analysis is the first step of any data science project.</p>
+</div></div>
 <aside class="notes">
-<p>link to scientific process and how we iterate over ideas and concepts</p>
+<p>link to scientific process and how we test and then iterate over ideas and concepts. Something we will talk about more next lecture.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -212,17 +258,20 @@
 </section>
 <section id="introducing-statistical-concepts" class="slide level2">
 <h2>Introducing statistical concepts</h2>
-<p>This lecture looking at statistical concepts.</p>
-<p>Data science is about using ideas from statistics to describe large datasets</p>
-<p>Here looking to describe numerical data – focus on probability distributions.</p>
+<ul>
+<li class="fragment">This lecture is focussed on statistical concepts</li>
+<li class="fragment">Data science is about using ideas from statistics to describe large datasets</li>
+<li class="fragment">Here looking to describe numerical data</li>
+<li class="fragment">Focus on probability distributions</li>
+</ul>
 </section>
 <section id="learning-objectives" class="slide level2">
 <h2>Learning Objectives</h2>
-<p>By the end of this lecture you should:</p>
+<p>By the end of this lecture you should be able to:</p>
 <ol type="1">
-<li>Evaluate whether a dataset is representative.</li>
-<li>Define the probability density function.</li>
-<li>Identify common probability distributions.</li>
+<li class="fragment">Describe the characteristic features of common probability distributions.</li>
+<li class="fragment">Calculate exponentials and logarithms.</li>
+<li class="fragment">Evaluate whether a dataset is representative.</li>
 </ol>
 </section></section>
 <section>
@@ -232,12 +281,20 @@
 </section>
 <section id="what-is-the-likelihood-of-events-occuring" class="slide level2">
 <h2>What is the likelihood of events occuring?</h2>
-<ul>
-<li class="fragment">What is the probability of someone in this lecture theatre being over 6ft?</li>
-<li class="fragment">Need to first understand the distribution of heights.</li>
-</ul>
+<p><strong>Question</strong></p>
+<p>What is the probability of someone at UCL being over 190cm?</p>
+<div class="fragment">
+<p><strong>How can we try to answer this?</strong></p>
+</div>
+<div class="fragment">
+<div class="fragment strike">
+<p>We could try and find someone on campus who is over 190cm.</p>
+</div>
+</div>
+<div class="fragment">
+<p>Better to try and understand the distribution of heights.</p>
 <aside class="notes">
-<p>This week thinking about the distribution of data.</p>
+<p>This week thinking about the distribution of data. How do we understand the spread of height data, how to we calculate important features of this data, how can we describe this data using mathematical equations?</p>
 <p>Next week, thinking about formulating and answering the research question.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -250,6 +307,7 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</div>
 </section></section>
 <section>
 <section id="random-sampling" class="title-slide slide level1 center">
@@ -258,9 +316,98 @@
 </section>
 <section id="the-dream-vs-reality" class="slide level2">
 <h2>The dream vs reality</h2>
-<p>Ideally, we would like all the relevant data – but in reality normally have a subset</p>
+<p>Ideally, we would like all the relevant data.</p>
+<div class="fragment">
+<p>… in reality we normally only have some.</p>
+<div style="text-align:center;">
+<p><img src="L2_images/stickfigures.gif" alt="Random Sampling" style="max-width:80%;"></p>
+</div>
 <aside class="notes">
-<p>It would be great if I knew the height of every adult in the UK, but unrealistic to collect – however maybe I could collect all adults at UCL.</p>
+<p>It would be great if I knew the height of everyone at UCL, but unrealistic to collect – however maybe I could collect all students in this lecture theatre.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="approximating" class="slide level2">
+<h2>Approximating</h2>
+<p>Hence, we sample a subset of the data.</p>
+<div class="fragment">
+<p>We need to choose our sample carefully. We want what happens in the sample to approximate what happens in the whole population.</p>
+</div>
+<div class="fragment">
+<p><strong>In practise</strong></p>
+<ul>
+<li class="fragment">different sampling approaches
+<ul>
+<li class="fragment">random sampling</li>
+<li class="fragment">systematic sampling</li>
+</ul></li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="is-the-data-representative" class="title-slide slide level1 center">
+<h1>Is the data representative?</h1>
+
+</section>
+<section id="bias" class="slide level2">
+<h2>Bias</h2>
+<p>It’s important to understand if your dataset truly representative or is it susceptible to bias?</p>
+<div style="text-align:center;">
+<p><img src="L2_images/stickfigures_biased.gif" alt="Random Sampling" style="max-width:80%;"></p>
+</div>
+</section>
+<section id="cognitive-bias" class="slide level2">
+<h2>Cognitive bias</h2>
+<p><span style="color:#49a0c4"><em>Systematic patterns in how we think about, and perceive, the world.</em></span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>We all have cognitive biases.</p>
+<p>These can impact our research:</p>
+<ul>
+<li class="fragment">data collection</li>
+<li class="fragment">data selection</li>
+<li class="fragment">data processing</li>
+<li class="fragment">modelling choices</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><br> <br></p>
+<div style="text-align:center;">
+<p><img src="L2_images/human_brain_2.png" alt="Human Brain" style="max-width:60%"></p>
+</div>
+</div></div>
+</section>
+<section id="why-is-this-important" class="slide level2">
+<h2>Why is this important?</h2>
+<p>If we’re not careful we can propagate bias to the research, and hence results.</p>
+<div class="fragment">
+<p>This can lead to incorrect conclusions.</p>
+</div>
+</section>
+<section id="types-of-bias" class="slide level2">
+<h2>Types of bias</h2>
+<ul>
+<li>Research bias
+<ul>
+<li>Cognitive bias</li>
+</ul></li>
+<li>Dataset bias
+<ul>
+<li>Historical bias</li>
+<li>Selection bias</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Already talked about the idea of cognitive bias. There are lots and lots of different types of biases - going to talk a little about different ways they can bias the dataset.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -273,105 +420,272 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="approximating" class="slide level2">
-<h2>Approximating</h2>
-<p>Expect what happens in the sample to approximate what happens in the whole population.</p>
-</section></section>
-<section>
-<section id="is-the-data-representative" class="title-slide slide level1 center">
-<h1>Is the data representative?</h1>
-
-</section>
-<section id="bias" class="slide level2">
-<h2>Bias</h2>
-<p>It’s important to understand if your dataset truly representative or is it susceptible to bias?</p>
-</section>
-<section id="cognitive-bias" class="slide level2">
-<h2>Cognitive bias</h2>
-<p><span style="color:#49a0c4"><em>Systematic patterns in how we think about, and perceive, the world.</em></span></p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>We all have cognitive biases.</p>
-<p>These can impact our research, in particular dataset collection, selection and processing.</p>
-</div><div class="column" style="width:50%;">
-<p><br> <br></p>
-<p><a href="https://www.ucl.ac.uk/bartlett/sites/bartlett/files/styles/large_laptop_16_9/public/about-cropped-off-white.png.webp?itok=rarZuf5j" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="https://www.ucl.ac.uk/bartlett/sites/bartlett/files/styles/large_laptop_16_9/public/about-cropped-off-white.png.webp?itok=rarZuf5j"></a></p>
-</div></div>
-</section>
-<section id="why-is-this-important" class="slide level2">
-<h2>Why is this important?</h2>
-<p>If we’re not careful we can propagate bias to the reserach, and hence results.</p>
-<p>This can lead to incorrect conclusions.</p>
-</section>
-<section id="types-of-bias" class="slide level2">
-<h2>Types of bias</h2>
-<p>Examples of dataset bias include historical bias and selection bias.</p>
-</section>
 <section id="historical-bias" class="slide level2">
 <h2>Historical bias</h2>
 <p><span style="color:#49a0c4"><em>Reflects existing, real world, inequalities</em></span></p>
 <p>Examples:</p>
 <ul>
-<li><a href="https://www.amnesty.org.uk/press-releases/uk-police-forces-supercharging-racism-crime-predicting-tech-new-report">Police profiling</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Hungry_judge_effect">Hungry judges</a></li>
+<li><a href="https://www.amnesty.org.uk/press-releases/uk-police-forces-supercharging-racism-crime-predicting-tech-new-report">Police profiling</a>
+<ul>
+<li>Automated tools to detect ‘criminals’.</li>
+<li>Trained on datasets which reflect current racist practises.</li>
+</ul></li>
+<li><a href="https://en.wikipedia.org/wiki/Hungry_judge_effect">Hungry judges</a>
+<ul>
+<li>Tools to help sentencing of ‘criminals’.</li>
+<li>Patterns in the dataset — judges are less lenient before lunch.</li>
+</ul></li>
 </ul>
+<aside class="notes">
+<p>Police profiling models - meant to make easy to spot criminals - but use exisitng crime data - which reflect racist prejudices in society - and the model learns to pick out people of certain ethnic backgrounds.</p>
+<p>Tools also used to help the sentnecing of criminals in courts of law - observe the hungry judges effect, where they sentnece differently based on how hungry they are - tend to be harsher just before lunch and more lenient after lunch.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="selection-bias" class="slide level2">
 <h2>Selection bias</h2>
 <p><span style="color:#49a0c4"><em>When the sample chosen doesn’t represent the whole population of interest</em></span></p>
-<p>This can be due to not having an adequately random sample.</p>
-<p>Example:</p>
+<p>Examples:</p>
 <ul>
-<li>The health of people in hospital is worse than the general population.</li>
-</ul>
-<p>Or self-selection bias, where the people who contribute to the data exhibit specific attributes.</p>
-<p>Example:</p>
+<li>Self selection <a href="https://en.wikipedia.org/wiki/Roy_model">Roy Model</a>
 <ul>
-<li>WEIRD study.</li>
+<li>Underlying characteristics of people who self select into certain groups.</li>
+</ul></li>
+<li><a href="https://oecs.mit.edu/pub/spow8trw/release/1">WEIRD people</a>
+<ul>
+<li>Commonly sampled in behavioural sciences.</li>
+<li>Reflects a very small proportion of global population.</li>
+</ul></li>
 </ul>
+<aside class="notes">
+<p>Roy model - example from economics - basically there’s not a random selection of people in a specific job - thye have chosen that job based on underlying unobserved characterisitcs. For example suppose I’m interested in wages of workers in different occupations - but they have self-selected into that occupation based on their unique skill set - so it’s a biased representation.</p>
+<p>WEIRD = western, educated, industrialised, rich, democratic</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="can-data-ever-be-truly-representative" class="slide level2">
 <h2>Can data ever be truly representative?</h2>
 <p>Probably not.</p>
-<p>##&nbsp;Failing that</p>
+<aside class="notes">
+<p>Even when we think we have really good data, someone has made the choice to collect this data. Why that data over other data? Does that data reflect their underlying cognitive biases?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="fragment">
+<p><strong>Failing that…</strong> .. we can acknowledge our biases!</p>
+<div style="text-align:center;">
+<img src="https://imgs.xkcd.com/comics/flawed_data.png" alt="XKCD - Flawed Data" style="width:800px">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Image credit: [xkcd](https://xkcd.com/2494/)</code></pre>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="descriptive-statistics" class="title-slide slide level1 center">
+<h1>Descriptive Statistics</h1>
+
+</section>
+<section id="what-to-declare" class="slide level2">
+<h2>What to declare</h2>
 <ul>
-<li>Acknowledge our biases!</li>
+<li>Sample size (n)</li>
+<li>Mean, median, mode</li>
+<li>Standard deviation</li>
+<li>Range</li>
 </ul>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<div class="columns">
+<div class="column">
+<p>Let’s look at a dataset of students height.</p>
+<p><br></p>
+<p>Easy to print the summary statistics in Python, using <code>pandas</code>:</p>
+<div id="39dab4bb" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a>height_df <span class="op">=</span> pd.read_csv(<span class="st">"L2_data/heights.csv"</span>)</span>
+<span id="cb2-4"><a></a>height_df.describe().<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column">
+<div id="3584b756" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Height_cm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>1000.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>161.19</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>9.79</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>128.59</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>154.52</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>161.25</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>167.48</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>199.53</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="same-same-but-different" class="slide level2">
+<h2>Same same but different</h2>
+<p>What about when the descriptive statistics don’t tell us enough?</p>
+<div style="text-align:center;">
+<p><img src="L2_images/anscombes_four.png" alt="Anscombes quartet" style="max-width:70%"></p>
+</div>
+<aside class="notes">
+<p>These all have mean x = 9, variance x = 11. mean y = 7.5, variance y =4.1</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="normal-distribution" class="title-slide slide level1 center">
 <h1>Normal Distribution</h1>
-<p>##&nbsp;Everywhere you look</p>
+<p>The most fundamental distribution</p>
+</section>
+<section id="everywhere-you-look" class="slide level2">
+<h2>Everywhere you look</h2>
+<div style="text-align:center;">
+<p><img src="L2_images/normal_distribution.png" alt="Normal distribution" style="max-width:90%"></p>
+</div>
+<aside class="notes">
 <ul>
-<li class="fragment">Human height</li>
-<li class="fragment">Happiness</li>
-<li class="fragment">Petal size</li>
+<li>Human height</li>
+<li>Happiness</li>
+<li>Petal size</li>
 </ul>
-<p>##&nbsp;The distribution we’re all familiar with</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="youve-seen-it-all-before" class="slide level2">
+<h2>You’ve seen it all before</h2>
 <ul>
 <li class="fragment">Symmetrical</li>
 <li class="fragment">Single peak</li>
 <li class="fragment">Smooth tails on both sides</li>
 </ul>
 </section>
-<section id="uniquely-described-by-two-equations" class="slide level2">
-<h2>Uniquely described by two equations</h2>
-<p>Mean:</p>
-<span class="math display">\[\begin{align}
-E[x]
-\end{align}\]</span>
-<p>Standard deviation:</p>
-<span class="math display">\[\begin{align}
-E[x]
-\end{align}\]</span>
+<section id="naturally-occurring" class="slide level2">
+<h2>Naturally occurring</h2>
+<div style="text-align:center;">
+<p><img src="L2_images/height_histogram.png" alt="Normal distribution" style="max-width:90%"></p>
+</div>
+</section>
+<section id="naturally-occurring-1" class="slide level2">
+<h2>Naturally occurring</h2>
+<div style="text-align:center;">
+<p><img src="L2_images/height_histogram_pdf.png" alt="Normal distribution" style="max-width:90%"></p>
+</div>
+</section>
+<section id="uniquely-described-by-two-variables" class="slide level2">
+<h2>Uniquely described by two variables…</h2>
+<div style="text-align:center;">
+<p><img src="L2_images/normal_distribution_annotated.png" alt="Normal distribution" style="max-width:90%"></p>
+</div>
 </section>
 <section id="and-a-probability-distribution-function" class="slide level2">
-<h2>and a probability distribution function</h2>
-<p><span style="color:#49a0c4"><em>Probability density function (PDF) describes the likelihood of different outcomes for a random variable</em></span></p>
-<p>The PDF of the normal distribution is:</p>
-<span class="math display">\[\begin{align}
-E[x]
-\end{align}\]</span>
+<h2>…and a probability distribution function</h2>
+<div style="text-align:center;">
+<p><img src="L2_images/normal_distribution_pdf.png" alt="Normal distribution with annotated probability density function" style="max-width:90%"></p>
+</div>
+<p><span style="color:#49a0c4"><em>The probability density function (PDF) describes the likelihood of different outcomes for a continuous random variable</em></span></p>
+<!-- The PDF of the normal distribution is: 
+```{=tex}
+\begin{align}
+\frac{1}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\end{align}
+``` -->
 </section>
 <section id="key-features" class="slide level2">
 <h2>Key features</h2>
@@ -383,36 +697,82 @@ E[x]
 </section>
 <section id="sampling-distributions" class="slide level2">
 <h2>Sampling distributions</h2>
-<p>Note importance of sampling distributions.</p>
-<p>In the case of the normal distribution: Std represented by σ vs std represented by σ/√n</p>
+<p><span style="color:#49a0c4">The distribution of the random variable when derived from a random sample of size <span class="math inline">\(n\)</span></span></p>
+<div class="fragment">
+<p>In the case of the normal distribution - standard deviation becomes:</p>
+<span class="math display">\[\begin{align}
+\frac{\sigma}{\sqrt{n}}
+\end{align}\]</span>
+</div>
 </section>
-<section id="example-distance-to-school" class="slide level2">
-<h2>Example: distance to school</h2>
+<section id="calculating-probabilities" class="slide level2">
+<h2>Calculating probabilities</h2>
+<p>Can use the PDF to evaluate the probability at a specific point.</p>
+<span class="math display">\[\begin{align}
+x \sim N(0,1)
+\end{align}\]</span>
+<div class="fragment">
+<span class="math display">\[\begin{align}
+p(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\end{align}\]</span>
+</div>
+<div class="fragment">
+<span class="math display">\[\begin{align}
+p(x=0.5) = \frac{1}{\sqrt{2 \pi \times 1^2}} e^{-\frac{(0.5-0)^2}{(2\times 1)^2}}
+\\
+= \frac{1}{\sqrt{2 \pi}} e^{-\frac{0.25}{4}} = 0.3747
+\end{align}\]</span>
+<!-- Generally want the probability that $x>p$ or $x<=p$. 
+
+Area under the curve. -->
+</div>
 </section>
 <section id="not-everything-is-normal" class="slide level2">
 <h2>Not everything is normal</h2>
 <p>Many real world datasets are <em>approximately</em> normally distributed.</p>
-<p>But not all, things might not have a characteristic size, or not continuous, or not symmetric</p>
+<div class="fragment">
+<p>But not all — might not have a characteristic size, or not continuous, or not symmetric.</p>
+</div>
 </section></section>
 <section>
 <section id="more-generally-what-is-a-probability-distribution" class="title-slide slide level1 center">
 <h1>More generally, what is a probability distribution?</h1>
 
 </section>
-<section id="continous-vs.-discrete" class="slide level2">
-<h2>Continous vs.&nbsp;Discrete</h2>
+<section id="continuous-vs.-discrete" class="slide level2">
+<h2>Continuous vs.&nbsp;Discrete</h2>
+<p><strong>Continuous data</strong> Measurable data which can take any value within a given range.</p>
+<p><span style="color:#abc766"><em>example</em>: height</span></p>
+<p><strong>Discrete data</strong> Measurable data which can take seperate, countable values.</p>
+<p><span style="color:#abc766"><em>example</em>: shoe size</span></p>
+<aside class="notes">
+<p>Suppose I have someone who is x cm tall, and someone who is y cm tall, I can find someone in between whose x.5cm tall.</p>
+<p>But shoe sizes are discrete (not the length of your foot).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="back-to-the-probability-density-function" class="slide level2">
-<h2>Back to the probability density function</h2>
-<p>Why it’s useful – see next week, allows us to evaluate the probability of events, and hence evaluate hypotheses</p>
-</section>
-<section id="sampling-distributions-1" class="slide level2">
-<h2>Sampling distributions</h2>
-<p>Specific for different probability distributions (/n)</p>
-</section>
-<section id="skewed-and-long-tails" class="slide level2">
-<h2>Skewed and long tails</h2>
-<p>In reality, few things are actually normal. <a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet">Anscombe’s quartet</a></p>
+<section id="back-to-the-probability-function" class="slide level2">
+<h2>Back to the probability function</h2>
+<span class="math display">\[\begin{align}
+p(x)
+\end{align}\]</span>
+<p>Having a function for the distribution allows us to evaluate the probability of events, and hence evaluate hypotheses.</p>
+<div class="fragment">
+<p>For discrete distributions we have the probability mass function.</p>
+</div>
+<div class="fragment">
+<p><strong>Sampling distributions</strong></p>
+<p>As for the normal distribution, in the general case we should be aware of the sampling distribution.</p>
+</div>
 </section></section>
 <section>
 <section id="binomial-distribution" class="title-slide slide level1 center">
@@ -421,10 +781,50 @@ E[x]
 </section>
 <section id="coin-toss" class="slide level2">
 <h2>Coin toss</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Discrete outcomes</strong></p>
+<p>Describes the frequency of successes in a test with 2 outcomes</p>
+<p><br></p>
 <ul>
-<li>If I flip a coin 10 times, how often can I expect to get at least 7 heads?</li>
-<li>Describes the frequency of successes in a test with 2 outcomes</li>
+<li class="fragment">I flip a coin 10 times</li>
+<li class="fragment">How often can I expect to get at least 7 heads?</li>
 </ul>
+</div><div class="column" style="width:50%;">
+<p><br> <br></p>
+<div style="text-align:center;">
+<p><img src="L2_images/coin_flip.jpg" alt="A hand flipping a coin." style="max-width:70%"></p>
+</div>
+</div></div>
+</section>
+<section id="probability-mass-function" class="slide level2">
+<h2>Probability mass function</h2>
+<span class="math display">\[\begin{align}
+P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
+\end{align}\]</span>
+<p>Where <span class="math inline">\(n\)</span> is the number of trials, and <span class="math inline">\(p\)</span> is the probability of success for each trial.</p>
+<p><br></p>
+<p><span style="color:#49a0c4"><em>The probability mass function (PMF) describes the likelihood of different outcomes for a discrete random variable</em></span></p>
+</section>
+<section id="example-1" class="slide level2">
+<h2>Example</h2>
+<ul>
+<li class="fragment">I flip a coin 10 times
+<ul>
+<li class="fragment"><strong><span class="math inline">\(n=10\)</span>, <span class="math inline">\(p=0.5\)</span></strong></li>
+</ul></li>
+<li class="fragment">How often can I expect to get at least 7 heads?
+<ul>
+<li class="fragment"><strong><span class="math inline">\(k=7\)</span></strong></li>
+</ul></li>
+</ul>
+<div class="fragment">
+<p>Evaluating the PMF, we get:</p>
+<span class="math display">\[\begin{align}
+P(X = 7) = \binom{10}{7} 0.5^7 (1-0.5)^{10-7}
+\\ = 0.1172
+\end{align}\]</span>
+</div>
 </section></section>
 <section>
 <section id="poisson-distribution" class="title-slide slide level1 center">
@@ -443,7 +843,7 @@ E[x]
 </ul>
 </div><div class="column" style="width:50%;">
 <p><br></p>
-<p><a href="L2_images/horse_kicks.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="L2_images/horse_kicks.jpeg"></a></p>
+<p><a href="L2_images/horse_kicks.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="L2_images/horse_kicks.jpeg"></a></p>
 </div></div>
 </section>
 <section id="measuring-rare-events" class="slide level2">
@@ -452,13 +852,33 @@ E[x]
 <li class="fragment">Imagine a situation where certain rare events (like arrival of mail) can occur in an <strong>independent</strong> fashion.</li>
 <li class="fragment">The Poisson distribution estimates how many such events are expected within a time interval</li>
 <li class="fragment">Fixed interval (e.g.&nbsp;one minute)</li>
-<li class="fragment">Fixed rate of events (λ) (e.g.&nbsp;4 cars per minute, λ = 4)</li>
+<li class="fragment">Fixed rate of events (<span class="math inline">\(\lambda\)</span>) (e.g.&nbsp;4 cars per minute, <span class="math inline">\(\lambda=4\)</span>)</li>
 <li class="fragment">Events occur independently.</li>
-<li class="fragment">Poisson Distribution gives the probability of k events.</li>
+<li class="fragment">Poisson Distribution gives the probability of <span class="math inline">\(k\)</span> events.</li>
 </ul>
 </section>
-<section id="probability-density-function" class="slide level2">
-<h2>Probability density function</h2>
+<section id="probability-mass-function-1" class="slide level2">
+<h2>Probability mass function</h2>
+<span class="math display">\[\begin{align}
+P(X = k) = \frac{\lambda^k e^{- \lambda}}{k!}
+\end{align}\]</span>
+<p>Where <span class="math inline">\(\lambda\)</span> is the expected number of events in a given interval.</p>
+</section>
+<section id="example-2" class="slide level2">
+<h2>Example</h2>
+<ul>
+<li class="fragment">Between 1883 and 1893 there were an average of 2 deaths from horse kicks a year.
+<ul>
+<li class="fragment"><strong><span class="math inline">\(\lambda=2\)</span></strong></li>
+</ul></li>
+<li class="fragment">What’s the probability of seeing 10 deaths from horse kicks in 1894?</li>
+</ul>
+<div class="fragment">
+<span class="math display">\[\begin{align}
+P(X = 10) = \frac{2^10 e^{-2}}{10!}
+\\ = 0.000038
+\end{align}\]</span>
+</div>
 </section></section>
 <section>
 <section id="exponentials-and-logarithms" class="title-slide slide level1 center">
@@ -468,32 +888,295 @@ E[x]
 <section id="exponentials" class="slide level2">
 <h2>Exponentials</h2>
 <p>If the Poisson measures the probability of x events within a time period, then the Exponential measures how long we are likely to wait between events.</p>
-</section>
-<section class="slide level2">
-
+<div class="fragment">
 <p><span style="color:#49a0c4"><em>The greatest shortcoming of the human race is our inability to understand the exponential function</em></span> – Albert Bartlett (physicist)</p>
+<aside class="notes">
+<p>He’s a bit dramatic</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
 </section>
-<section id="at-it-like-rabbits" class="slide level2">
-<h2>At it like rabbits</h2>
+<section id="a-game-of-chess" class="slide level2">
+<h2>A game of chess…</h2>
+<!-- <div style="text-align:center;">
+  <img src="L2_images/chessboard_rice.gif" alt="Exponential rice" style="max-width:60%;">
+</div> -->
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Rapid growth of rabbit populations</p>
+<ul>
+<li class="fragment">You’ve invented chess.</li>
+<li class="fragment">The emperor asks what you would like as thanks.</li>
+<li class="fragment">You ask for grains of rice.<br>
+</li>
+</ul>
 </div><div class="column" style="width:50%;">
-<p><br></p>
-<p><a href="L2_images/rabbits.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="L2_images/rabbits.jpeg"></a></p>
+<div style="text-align:center;">
+<img src="L2_images/Radha_Krishna_chess.jpg" alt="An illustration of Krishna and Radha playing Chaturanga." style="max-width:90%;">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Image credit: https://simple.wikipedia.org/wiki/Chaturanga</code></pre>
+</div>
+</div>
 </div></div>
+<aside class="notes">
+<p>Famous story, of the man who invented chess. Emperor was so grateful, he said what do you want in return The man asked for rice, such that on each square of the chess board, the number of grains of rice doubled. The Emperor thought this was a really small ask for such a great invention. He asked if he didn’t want a better gift. But the man insisted that what he wanted was rice.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="estimating-rabbit-populations" class="slide level2">
-<h2>Estimating rabbit populations</h2>
-<p>Allows us to answer questions like: “how many rabbits at t=10?”</p>
-<p>Answering questions like “Or when will the rabbit population=250?”</p>
-<p>This is easier said than done – the best way is to invert the equation – this requires</p>
+<section id="and-rice" class="slide level2">
+<h2>…and rice</h2>
+<div class="columns">
+<div class="column" style="width:80%;">
+<div style="text-align:center;">
+<p><img src="L2_images/chessboard_numbers.gif" alt="Exponential rice" style="max-width:75%;"></p>
+</div>
+</div><div class="column" style="width:20%;">
+<ul>
+<li class="fragment">which is more rice than there is on earth…</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>A bowl of rice is around 4,000 grains.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="writing-the-equation" class="slide level2">
+<h2>Writing the equation</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div style="text-align: center;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>x</th>
+<th>y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>32</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>64</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>128</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div><div class="column" style="width:50%;">
+<span class="math display">\[\begin{align}
+y = 2^x
+\end{align}\]</span>
+</div></div>
+<aside class="notes">
+<p>Here we have the base, 2, and the exponent x.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-does-this-look-like-on-a-graph" class="slide level2">
+<h2>What does this look like on a graph?</h2>
+<div style="text-align:center;">
+<p><img src="L2_images/discrete_exponential_chess.gif" alt="Exponential grains of rice." style="max-width:90%;"></p>
+</div>
+<!-- ## At it like rabbits 
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+::: {.incremental}
+- Each Sunday you go for a walk in your local park. 
+- At first you notice two rabbits.
+- The next time there's four. 
+- Then eight.
+- And you're wondering, 
+- How many rabbits will there be in a year? 
+:::
+
+:::
+
+::: {.column width="50%"}
+
+<br>
+
+![](L2_images/rabbits.jpeg)
+
+:::
+
+::::
+
+## Counting rabbits 
+
+<div style="text-align:center;">
+  <img src="L2_images/discrete_exponential.gif" alt="Exponential rabbit populations" style="max-width:90%;">
+</div>
+
+ -->
+</section>
+<section id="the-exponential-function" class="slide level2">
+<h2>The exponential function</h2>
+<p>The (natural) exponential function is:</p>
+<span class="math display">\[\begin{align}
+y=e^x
+\end{align}\]</span>
+<p><span class="math inline">\(e\)</span> here is eulers number - a mathematical constant.</p>
+<span class="math display">\[\begin{align}
+e \approx 2.718...
+\end{align}\]</span>
+<aside class="notes">
+<p>Its a mathematical constant simialr to pi - it’s just a fixed numebr which we have a name for. Like pi comes from geometry (circles etc), e comes from the limit of the equation of compound interest</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="when-i-can-feed-my-town" class="slide level2">
+<h2>When I can feed my town?</h2>
+<p>Allows us to answer questions like:</p>
+<ul>
+<li class="fragment">“how many grains of rice at t=10?”</li>
+<li class="fragment">“when will I have enough rice to feed my entire town?”</li>
+</ul>
+<p>This is easier said than done – the best way is to invert the equation.</p>
+</section>
+<section id="inverse-operations" class="slide level2">
+<h2>Inverse operations</h2>
+<p><span style="color:#49a0c4"><em>The mathematical operation that reverses.</em></span></p>
+<p>Subtract is the inverse of adding.</p>
+<span class="math display">\[\begin{align}
+2 + x=5 \implies 5-2=x
+\end{align}\]</span>
+<p>Divide is the inverse of multiplying.</p>
+<span class="math display">\[\begin{align}
+2 \times x =6 \implies 6 \div 2=x
+\end{align}\]</span>
 </section>
 <section id="logarithms" class="slide level2">
 <h2>Logarithms</h2>
-<ul>
-<li>It is an inverse operation. Multiply and divide are inverse operations of one another (they reverse the process)</li>
-</ul>
+<p>Taking the logarithm is the inverse of taking the exponential.</p>
+<div class="fragment">
+<span class="math display">\[\begin{align}
+2^3 = 8 \implies \log_2(8) =3
+\end{align}\]</span>
+</div>
+<div class="fragment">
+<p>More generally:</p>
+<span class="math display">\[\begin{align}
+a^x = b \implies \log_a(b) =x
+\end{align}\]</span>
+</div>
+<div class="fragment">
+<p>For the natural logarithm:</p>
+<span class="math display">\[\begin{align}
+e^x = b \implies \log_e(b) =ln(b) = x
+\end{align}\]</span>
+<!-- [*Note $ \log_e = \ln $*]{style="color:#49a0c4"} -->
+<aside class="notes">
+<p>Multiply and divide are inverse operations of one another (they reverse the process).</p>
+<p>Read the equation as log of 8 base 2 equals 3.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="natural-logarithm" class="slide level2">
+<h2>Natural logarithm</h2>
+<div style="text-align:center;">
+<p><img src="L2_images/natural_logarithm.png" alt="Natural logarithm" style="max-width:90%;"></p>
+</div>
+</section>
+<section id="log-rules" class="slide level2">
+<h2>Log rules</h2>
+<p>There are some general rules for how we apply logarithms:</p>
+<span class="math display">\[\begin{align}
+log_a(b \times c) &amp;= log_a(b) + log_a(c)
+\\ log_a(\frac{b}{c}) &amp;= log_a(b)-loc_b(c)
+\\ log_a(b^c) &amp;= c \times log_a(b)
+\\ log_a(1)&amp;=0
+\\ log_a(a)&amp;=1
+\end{align}\]</span>
+</section>
+<section id="transforming-data" class="slide level2">
+<h2>Transforming data</h2>
+<p>Some of the most important rules:</p>
+<span class="math display">\[\begin{align}
+log_a(a^x) = x
+\\ ln(e^x) = x
+\end{align}\]</span>
+<div class="fragment">
+<p>When we have exponential data we can take the logarithm of it - and hence simplify it.</p>
+</div>
 </section></section>
 <section id="overview" class="title-slide slide level1 center">
 <h1>Overview</h1>
@@ -503,14 +1186,14 @@ E[x]
 <li>Normal distribution</li>
 <li>Binomial distribution</li>
 <li>Poisson distribution</li>
-<li>Exponetials</li>
+<li>Exponentials</li>
 <li>Logarithms</li>
 </ul>
 </section>
 
 <section id="practical" class="title-slide slide level1 center">
 <h1>Practical</h1>
-<p>Practical will focus on plotting and generating sumamry statistics for data following a range of probability distributions.</p>
+<p>Practical will focus on plotting and generating summary statistics for data following a range of probability distributions.</p>
 <div class="fragment">
 <p>Have questions prepared!</p>
 

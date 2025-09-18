@@ -378,7 +378,18 @@
     "href": "sessions/week3.html#overview-of-lecture-2",
     "title": "Hypothesis Testing",
     "section": "Overview of lecture 2",
-    "text": "Overview of lecture 2\nLooked at data analysis.",
+    "text": "Overview of lecture 2\nContinued concepts from data analysis, in particular probability distributions.\n\nRepresentative data\nNormal distribution\nBinomial distribution\nPoisson distribution\nExponentials\nLogarithms",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#what-is-the-likelihood-of-events-occuring",
+    "href": "sessions/week3.html#what-is-the-likelihood-of-events-occuring",
+    "title": "Hypothesis Testing",
+    "section": "What is the likelihood of events occuring?",
+    "text": "What is the likelihood of events occuring?\nQuestion\n\nWhat is the probability of someone at UCL being over 190cm?\n\nHow can we try to answer this?\nTry to understand the distribution of heights.\n\nLast week we asked this question and we thought about the distribution of the data.\nThis week we look at how to pose and address the research question.",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -389,7 +400,7 @@
     "href": "sessions/week3.html#hypothesising",
     "title": "Hypothesis Testing",
     "section": "Hypothesising",
-    "text": "Hypothesising\nResearch science is about coming up with hypotheses and evaluating them.\n\nThis lecture thinking about posing and answering reserach questions.\nI have this great idea - considering the data is this idea plausibly true?",
+    "text": "Hypothesising\n\n\n\n\n\n\n\nResearch science is about coming up with hypotheses and evaluating them.\n\n\nThis lecture thinking about posing and answering reserach questions.\nI have this great idea - considering the data is this idea plausibly true?",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -400,7 +411,7 @@
     "href": "sessions/week3.html#learning-objectives",
     "title": "Hypothesis Testing",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of this lecture you should:\n\nEstablish a hypothesis.\nDefine the Type I and Type II errors. - Define the Type I and Type II errors.\nCalculate the p-value.",
+    "text": "Learning Objectives\nBy the end of this lecture you should be able to:\n\nEstablish a hypothesis for a given research project.\nDefine the Type I and Type II errors.\nCalculate the p-value.",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -411,18 +422,40 @@
     "href": "sessions/week3.html#how-do-we-know-what-to-believe",
     "title": "Hypothesis Testing",
     "section": "How do we know what to believe?",
-    "text": "How do we know what to believe?\n\n\nWhat we see in the news\n\nIs London less safe for cyclists than ten years ago?\nAre x days above 30 degrees in London indicative of a warming climate?\nIs London’s murder rate higher than New York?",
+    "text": "How do we know what to believe?\n\n\n\n\n\n\n\n\n\n\nIs cycling in London less safe since the introduction of Lime bikes?",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
     ]
   },
   {
-    "objectID": "sessions/week3.html#what-is-a-hypothesis",
-    "href": "sessions/week3.html#what-is-a-hypothesis",
+    "objectID": "sessions/week3.html#research-question-vs.-hypothesis",
+    "href": "sessions/week3.html#research-question-vs.-hypothesis",
     "title": "Hypothesis Testing",
-    "section": "What is a hypothesis?",
-    "text": "What is a hypothesis?\n\n\n\nYou have a coin.\nYou think it’s a fair coin.\nYou toss it 10 times.\nIt comes up heads 7 times.",
+    "section": "Research question vs. hypothesis",
+    "text": "Research question vs. hypothesis\nResearch question\nA research question focuses on a specific problem.\nHypothesis\nA statement that you will seek to confirm or disprove the research question.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#flip-a-coin",
+    "href": "sessions/week3.html#flip-a-coin",
+    "title": "Hypothesis Testing",
+    "section": "Flip a coin",
+    "text": "Flip a coin\n\n\n\nYou have a coin.\nYou think it’s a fair coin.\nYou toss it 10 times.\nIt comes up heads 7 times.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#the-hypothesis",
+    "href": "sessions/week3.html#the-hypothesis",
+    "title": "Hypothesis Testing",
+    "section": "The hypothesis",
+    "text": "The hypothesis\n\n\n\nYou have a coin.\nYou think it’s a fair coin.\nYou toss it 10 times.\nIt comes up heads 7 times.\n\n\n\nThe hypothesis is that it is a fair coin.",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -433,7 +466,7 @@
     "href": "sessions/week3.html#what-question-can-you-ask",
     "title": "Hypothesis Testing",
     "section": "What question can you ask?",
-    "text": "What question can you ask?\n\n\n\nYou have a coin.\nYou think it’s a fair coin.\nYou toss it 10 times.\nIt comes up heads 7 times.\n\n\n\nIs it a fair coin? NO!\nWhat’s the probability that it’s fair? NO!\nIf the coin is fair, how likely would it be to see 7 heads out of 10 flips? ALMOST!",
+    "text": "What question can you ask?\n\n\n\nYou have a coin.\nYou think it’s a fair coin.\nYou toss it 10 times.\nIt comes up heads 7 times.\n\n\n\nIs it a fair coin?\n\n\nWhat’s the probability that it’s fair?\n\n\nIf the coin is fair, how likely would it be to see 7 heads out of 10 flips?",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -455,7 +488,7 @@
     "href": "sessions/week3.html#step-1",
     "title": "Hypothesis Testing",
     "section": "Step 1",
-    "text": "Step 1\nDefine the question\nNull hypothesis – the status quo. The alternative hypothesis – need some evidence to verify.",
+    "text": "Step 1\nDefine the null and alternative hypothesis\n\n\\(H_0\\) - the null hypothesis\n\nthis is the “status quo”\n\n\n\n\\(H_1\\) - the alternative hypothesis\n\nyour hypothesis\nneeds some evidence to verify",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -466,7 +499,7 @@
     "href": "sessions/week3.html#step-2",
     "title": "Hypothesis Testing",
     "section": "Step 2",
-    "text": "Step 2\nSet you significance level\n\nDecide what “too unlikely” means BEFORE YOU DO THE TEST.\ne.g. 𝜶 = 0.05 (5% significance)\nThis means that if we see evidence that would have less than a 5% chance of occurring if the null hypothesis is true, then we reject the null hypothesis.",
+    "text": "Step 2\nSet your significance level \\(\\alpha\\)\nThe significance level is the threshold below which you reject the null hypothesis.\n\nDecide what “too unlikely” means before you do the test.\nCommon choice is 5% significance\n\n\\(𝜶 = 0.05\\)\nThis means that if we see evidence that would have less than a 5% chance of occurring under the null hypothesis, then we reject the null hypothesis.",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -477,7 +510,7 @@
     "href": "sessions/week3.html#step-3",
     "title": "Hypothesis Testing",
     "section": "Step 3",
-    "text": "Step 3\nIdentify the evidence\n\nExample: data collection – i.e urine sample for pregnancy test",
+    "text": "Step 3\nIdentify the evidence\n\n\nThis could mean collecting the data\nOr identifying a suitable dataset",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -488,7 +521,7 @@
     "href": "sessions/week3.html#step-4",
     "title": "Hypothesis Testing",
     "section": "Step 4",
-    "text": "Step 4\nCalculate the p-value\n\nThe p-value is the probability of seeing the evidence, or something even more extreme, if the null hypothesis is true.",
+    "text": "Step 4\nCalculate the p-value\nThe p-value is the probability of seeing the evidence, or something even more extreme, if the null hypothesis is true.\n\nCalculated according to the appropriate statistical test\nThe choice of test is determined by the research question and the data\n\n\nWe’ll come back to different types of statistical test later in the lecture",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -499,7 +532,7 @@
     "href": "sessions/week3.html#step-5",
     "title": "Hypothesis Testing",
     "section": "Step 5",
-    "text": "Step 5\nCompare p-value with hypothesis level\n\np-value &gt; 𝜶 - Evidence not that unlikely. Not enough evidence to reject H0.\np-value ⩽ 𝜶 - Evidence very unlikely. Reject H0 and accept H1.",
+    "text": "Step 5\nCompare p-value with significance level\n\np-value &gt; \\(\\alpha\\)\n\nEvidence not that unlikely.\nNot enough evidence to reject \\(H_0\\).\n\np-value \\(\\leq \\alpha\\)\n\nEvidence very unlikely.\nReject \\(H_0\\) and accept \\(H_1\\).",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -510,18 +543,7 @@
     "href": "sessions/week3.html#the-steps",
     "title": "Hypothesis Testing",
     "section": "The steps",
-    "text": "The steps\n\nDefine the question\nSet you significance level\nIdentify the evidence\nCalculate the p-value\nCompare p-value with hypothesis level",
-    "crumbs": [
-      "Part 1: Basics",
-      "3. Hypothesis Testing"
-    ]
-  },
-  {
-    "objectID": "sessions/week3.html#example",
-    "href": "sessions/week3.html#example",
-    "title": "Hypothesis Testing",
-    "section": "Example",
-    "text": "Example\nCyclists in London.",
+    "text": "The steps\n\nDefine the null and alternative hypothesis\nSet you significance level\nIdentify the evidence\nCalculate the p-value\nCompare p-value with hypothesis level",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -532,7 +554,7 @@
     "href": "sessions/week3.html#type-i-error",
     "title": "Hypothesis Testing",
     "section": "Type I error",
-    "text": "Type I error",
+    "text": "Type I error\nThe true null hypothesis is incorrectly rejected.\nThis is caused by a false positive. The null hypothesis is true, but you get a false positive leading to you rejecting the null hypothesis.",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -543,18 +565,29 @@
     "href": "sessions/week3.html#type-ii-error",
     "title": "Hypothesis Testing",
     "section": "Type II error",
-    "text": "Type II error",
+    "text": "Type II error\nThe false null hypothesis is incorrectly accepted.\nThis is caused by a false negative. The null hypothesis is false, but you get a false negative result, leading you to accepting the null hypothesis.",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
     ]
   },
   {
-    "objectID": "sessions/week3.html#example-1",
-    "href": "sessions/week3.html#example-1",
+    "objectID": "sessions/week3.html#example-mammograms",
+    "href": "sessions/week3.html#example-mammograms",
     "title": "Hypothesis Testing",
-    "section": "Example",
-    "text": "Example",
+    "section": "Example: Mammograms",
+    "text": "Example: Mammograms\n\n\n\nNHS offers breast cancer screening for all women between the ages of 50 and 70.\n\nThe idea is to screen all women in the popualtion at high risk of brast cancer - in the hope they pick up results better.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#example-screening-outcomes",
+    "href": "sessions/week3.html#example-screening-outcomes",
+    "title": "Hypothesis Testing",
+    "section": "Example: Screening outcomes",
+    "text": "Example: Screening outcomes\nFalse positive\nThe null hypothesis is that the patient doesn’t have cancer. \\(\\approx\\) 10% of tests return a false positive. The test says they do have cancer even when they don’t.\n\nFalse negative\nThe null hypothesis is that the patient doesn’t have cancer. \\(\\approx\\) 20% of tests return a false negative. The test says they don’t have cancer but they do.\n\nFalse positive is bad as you might pursue a healthcare treatment which is unecessary.\nFalse negative - in healthcare this is the worst outcome - as goes undiagnosed and hence untreated.",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -576,7 +609,7 @@
     "href": "sessions/week3.html#understanding-the-literature-and-the-context",
     "title": "Hypothesis Testing",
     "section": "Understanding the literature and the context",
-    "text": "Understanding the literature and the context\nHypothesis doesn’t come out of thin air",
+    "text": "Understanding the literature and the context\nThe hypothesis should not come out of thin air.\n\nWhat research have other people done?\n\n\nWhat is the cultural context?",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -587,7 +620,7 @@
     "href": "sessions/week3.html#asking-ethical-hypothesis-questions",
     "title": "Hypothesis Testing",
     "section": "Asking ethical hypothesis questions",
-    "text": "Asking ethical hypothesis questions\n\nnot making unethical assumptions in choosing the hypothesis.\nExample: correlation between ethnicity and crime\nUse contextual knowledge to consider correlation vs causation",
+    "text": "Asking ethical hypothesis questions\nIt’s important to not make unethical assumptions in choosing the hypothesis.\n\nExample\nPolice profiling - assumes a correlation between ethnicity and crime\n\nUse contextual knowledge\nIs this causation?\nOr correlation linked to other factors?",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -598,18 +631,18 @@
     "href": "sessions/week3.html#correlation-vs.-causation",
     "title": "Hypothesis Testing",
     "section": "Correlation vs. Causation",
-    "text": "Correlation vs. Causation\nLots of things can be correlated - but it doesn’t mean one event caused another.",
+    "text": "Correlation vs. Causation\nCorrelation: Two variables are linearly related, as one changes so does the other.\n\nCausation: One variable influences the other variable to occur.\n\n\nLots of things can be correlated BUT it doesn’t mean one event caused another.",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
     ]
   },
   {
-    "objectID": "sessions/week3.html#aliens-and-taxes",
-    "href": "sessions/week3.html#aliens-and-taxes",
+    "objectID": "sessions/week3.html#aliens-and-librarians",
+    "href": "sessions/week3.html#aliens-and-librarians",
     "title": "Hypothesis Testing",
-    "section": "Aliens and taxes",
-    "text": "Aliens and taxes\nExample from spurious correlations",
+    "section": "Aliens and librarians",
+    "text": "Aliens and librarians\n\n\n\nImage credit: [Spurious Correlations](https://www.tylervigen.com/spurious/correlation/19598_google-searches-for-report-ufo-sighting_correlates-with_the-number-of-librarians-in-hawaii)",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -620,7 +653,7 @@
     "href": "sessions/week3.html#correlation-is-not-causation",
     "title": "Hypothesis Testing",
     "section": "Correlation IS NOT causation",
-    "text": "Correlation IS NOT causation\nYou might not know whether events are correlated, or causing each other.\nThe point of the hypothesis test is to test your idea – but use your contextual understanding to come up with plausible (and ethical) initial questions",
+    "text": "Correlation IS NOT causation\nYou might not know whether events are correlated, or causing each other.\n\n BUT\n\n\n\nThe point of the hypothesis test is to test your idea – but use your contextual understanding to come up with plausible (and ethical) initial questions.",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -631,7 +664,51 @@
     "href": "sessions/week3.html#the-point-of-the-scientific-method",
     "title": "Hypothesis Testing",
     "section": "The point of the scientific method",
-    "text": "The point of the scientific method\nThe process of coming up with a question, testing, iterating.",
+    "text": "The point of the scientific method\n\n\n\n\n\n\nIt’s a process\n\nquestion\ntest\nevaluate\nREPEAT!",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#example---step-1",
+    "href": "sessions/week3.html#example---step-1",
+    "title": "Hypothesis Testing",
+    "section": "Example - step 1",
+    "text": "Example - step 1\nDefine the null and alternative hypothesis\n\n\\(H_0\\): The mean height of male and female students is the same.\n\\(H_1\\): The mean height of male and female students is different.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#example---step-2",
+    "href": "sessions/week3.html#example---step-2",
+    "title": "Hypothesis Testing",
+    "section": "Example - step 2",
+    "text": "Example - step 2\nSet your significance level\n\n\\(\\alpha = 0.05\\)",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#example---step-3",
+    "href": "sessions/week3.html#example---step-3",
+    "title": "Hypothesis Testing",
+    "section": "Example - step 3",
+    "text": "Example - step 3\nIdentify the evidence\n\n\nI’ve collected data from 198 students, as follows:\n\n\n\nGroup\nSample Size\nMean (cm)\nstd (cm)\n\n\n\n\nFemale students\n95\n170\n5\n\n\nMale students\n103\n180\n6",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#example---step-4",
+    "href": "sessions/week3.html#example---step-4",
+    "title": "Hypothesis Testing",
+    "section": "Example - step 4",
+    "text": "Example - step 4\nCalculate the p-value\nAha!\n\nWe need to know what statistical test to use!",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -642,29 +719,51 @@
     "href": "sessions/week3.html#parametric-vs.-non-parametric-tests",
     "title": "Hypothesis Testing",
     "section": "Parametric vs. Non-parametric tests",
-    "text": "Parametric vs. Non-parametric tests",
+    "text": "Parametric vs. Non-parametric tests\nParametric Tests\n\nEvaluate hypothesis for specific parameters\nTypically have assumptions about the distribution\n\ne.g. assumed normal distribution\n\nContinuous data\n\n\nNon-parametric Tests\n\nEvaluate hypothesis for entire population distribution\nTypcially less assumptions on the distribution\nContinuous or discrete data",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
     ]
   },
   {
-    "objectID": "sessions/week3.html#parametric-tests",
-    "href": "sessions/week3.html#parametric-tests",
+    "objectID": "sessions/week3.html#students-t-test",
+    "href": "sessions/week3.html#students-t-test",
     "title": "Hypothesis Testing",
-    "section": "Parametric Tests",
-    "text": "Parametric Tests\n\nEvaluate hypothesis for specific parameters\nTypically have assumptions about the distribution - e.g. assumed normal distribution",
+    "section": "Student’s T-test",
+    "text": "Student’s T-test\n\n\nStudent’s T-test is used to compare the mean of a dataset.\n\nparametric statistical test\nassumes the data is normally distributed\n\n\n\n\n\nThis is William Sealy Gosset - he was **not** a student.\nImage credit: https://en.wikipedia.org/wiki/William_Sealy_Gosset#/media/File:William_Sealy_Gosset.jpg\n\n\n\n\nWilliam Gosset was working for Guinness brewing company when he came up with the t-test - but his company wanted his to publish under a pseudonym - hence ‘student’",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
     ]
   },
   {
-    "objectID": "sessions/week3.html#non-parametric-tests",
-    "href": "sessions/week3.html#non-parametric-tests",
+    "objectID": "sessions/week3.html#students-t-test-one-sample",
+    "href": "sessions/week3.html#students-t-test-one-sample",
     "title": "Hypothesis Testing",
-    "section": "Non-parametric Tests",
-    "text": "Non-parametric Tests\n\nEvaluate hypotheis for entire population distirbution\nTypcially less assumptions on the ditribution",
+    "section": "Student’s T-test: one sample",
+    "text": "Student’s T-test: one sample\nTests whether the population mean is equal to a specific value or not\n\nThe test statistic is calculated as:\n\\[\\begin{align}\nt = \\frac{\\bar{x} - \\mu_{0}}{s / \\sqrt{n}}\n\\end{align}\\]\nwhere\n\n\\(\\bar{x}\\) is the sample mean\n\\(\\mu_{0}\\) is the hypothesised population mean\n\\(s\\) is the sample standard deviation\n\\(n\\) is the sample size",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#students-t-test-two-sample",
+    "href": "sessions/week3.html#students-t-test-two-sample",
+    "title": "Hypothesis Testing",
+    "section": "Student’s T-test: two sample",
+    "text": "Student’s T-test: two sample\nTests if the population means for two different groups are equal or not.\n\nThe test statistic is:\n\\[\\begin{align}\nt = \\frac{\\bar{x}_1 - \\bar{x}_2}{s_p \\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}}\n\\end{align}\\]\n\n\\(\\bar{x}_1, \\bar{x}_2\\) are the sample means of groups 1 and 2\n\\(n_1, n_2\\) are the sample sizes of groups 1 and 2\n\\(s_p\\) is the pooled standard deviation\n\n\n\n\\[\\begin{align}\ns_p = \\sqrt{\\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}}\n\\end{align}\\]\nwith \\(s_1, s_2\\) the sample standard deviations.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#students-t-test-paired",
+    "href": "sessions/week3.html#students-t-test-paired",
+    "title": "Hypothesis Testing",
+    "section": "Student’s T-test: paired",
+    "text": "Student’s T-test: paired\nTests if the difference between paired measurements for a population is zero or not - normally used with longitudinal data.\n\nThe test statistic is:\n\\[\\begin{align}\nt = \\frac{\\bar{d}}{s_d / \\sqrt{n}}\n\\end{align}\\]\nwhere\n\n\\(\\bar{d}\\) is the mean of the paired differences\n\\(s_d\\) is the standard deviation of the paired differences\n\\(n\\) is the number of pairs\n\n\nFor example used when I have data from different years, and want to figure out if there’s a difference across the years.\nYou need to be able to pair the data - i.e. the same things being observed at time point 1 and time point 2.",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -675,73 +774,172 @@
     "href": "sessions/week3.html#how-many-tails",
     "title": "Hypothesis Testing",
     "section": "How many tails",
-    "text": "How many tails\nTests can be one-tailed or two-tailed.",
+    "text": "How many tails\nTests can be one-tailed or two-tailed. Determined when you define the hypothesis.\nOne tailed: if you only care is the mean is significant in one direction Two tailed: if you care about the mean being different regardless of direction",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
     ]
   },
   {
-    "objectID": "sessions/week3.html#t-test",
-    "href": "sessions/week3.html#t-test",
+    "objectID": "sessions/week3.html#kolmogorov-smirnov",
+    "href": "sessions/week3.html#kolmogorov-smirnov",
     "title": "Hypothesis Testing",
-    "section": "T-test",
-    "text": "T-test\nAssumes the data is normally distributed.",
+    "section": "Kolmogorov-Smirnov",
+    "text": "Kolmogorov-Smirnov\n\nCompares two probability distributions\nCan be used to test whether an observed sample came from a given distribution\nOr to test whether two samples both came from the same distribution",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
     ]
   },
   {
-    "objectID": "sessions/week3.html#t-test-example",
-    "href": "sessions/week3.html#t-test-example",
+    "objectID": "sessions/week3.html#k-s-empirical-distribution-function",
+    "href": "sessions/week3.html#k-s-empirical-distribution-function",
     "title": "Hypothesis Testing",
-    "section": "T-test example",
-    "text": "T-test example\nWhat is the probability of someone age 15 being a student on CASA007?\nThe probability is very small so we reject.",
+    "section": "K-S: empirical distribution function",
+    "text": "K-S: empirical distribution function\nThe empirical distribution function (EDF) is:\n\\[\\begin{align}\nF_{n}(x) = \\frac{1}{n} \\sum_{i=1}^{n} 1_{(-\\infty ,x]}(X_{i})\n\\end{align}\\]\nwhere\n\n\\(n\\) is the number of observations\n\\(X_i\\) are the ordered sample values\n\\(1_{(-\\infty ,x]}(X_{i})\\) is an indicator function (1 if \\(X_i \\leq x\\), else 0)",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
     ]
   },
   {
-    "objectID": "sessions/week3.html#regression-t-tests",
-    "href": "sessions/week3.html#regression-t-tests",
+    "objectID": "sessions/week3.html#k-s-test-one-sample-test",
+    "href": "sessions/week3.html#k-s-test-one-sample-test",
     "title": "Hypothesis Testing",
-    "section": "Regression T-tests",
-    "text": "Regression T-tests\nIs the gradient non-zero?\nThis indicates a correlation between the two variables.\n…\nThis will be covered further in lecture X on linear regression.",
+    "section": "K-S test: one sample test",
+    "text": "K-S test: one sample test\nThe Kolmogorov–Smirnov test statistic is:\n\\[\\begin{align}\nD_n = \\sup_x \\, | F_n(x) - F(x) |\n\\end{align}\\]\nwhere\n\n\\(F_n(x)\\) is the empirical distribution function of the sample\n\\(F(x)\\) is the cumulative distribution function (CDF) of the reference distribution\n\n\n\nNote\n‘\\(sup\\)’ is the suprenum - think of it as the smallest upper bound.",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
     ]
   },
   {
-    "objectID": "sessions/week3.html#mean-comparison-t-test",
-    "href": "sessions/week3.html#mean-comparison-t-test",
+    "objectID": "sessions/week3.html#k-s-test-two-sample-test",
+    "href": "sessions/week3.html#k-s-test-two-sample-test",
     "title": "Hypothesis Testing",
-    "section": "Mean comparison t-test",
-    "text": "Mean comparison t-test\nCompares the mean of two distributions.",
+    "section": "K-S test: two sample test",
+    "text": "K-S test: two sample test\nFor the two-sample test:\n\\[\\begin{align}\nD_{n,m} = \\sup_x \\, | F_n(x) - G_m(x) |\n\\end{align}\\]\nwhere\n\n\\(F_n(x)\\) and \\(G_m(x)\\) are the EDFs of the two samples.",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
     ]
   },
   {
-    "objectID": "sessions/week3.html#kolmogorov-smirnov-test",
-    "href": "sessions/week3.html#kolmogorov-smirnov-test",
+    "objectID": "sessions/week3.html#k-s-test-decision-rule",
+    "href": "sessions/week3.html#k-s-test-decision-rule",
     "title": "Hypothesis Testing",
-    "section": "Kolmogorov-Smirnov test",
-    "text": "Kolmogorov-Smirnov test\n\nCompares two probability distributions\nCan be used to test whether an observed sameple came from a given distribution\nOr to test whether two samples both came from the same distribution",
+    "section": "K-S test: decision rule",
+    "text": "K-S test: decision rule\nThe hypotheses would be:\n\\(H_0\\): the distributions are the same \\(H_1\\): the distributions differ\nLarger values of the test statistic \\(D\\) is stronger evidence against \\(H_0\\).",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
     ]
   },
   {
-    "objectID": "sessions/week3.html#kernel-density-estimate",
-    "href": "sessions/week3.html#kernel-density-estimate",
+    "objectID": "sessions/week3.html#kernel-density-estimate-kde",
+    "href": "sessions/week3.html#kernel-density-estimate-kde",
     "title": "Hypothesis Testing",
-    "section": "Kernel density estimate",
-    "text": "Kernel density estimate\n\nUsed to generate a smooth PDF for a random variable dataset.\nThink of it as getting a smooth function to describe a histogram of data.\nThere are no assumptions about the prior distribution",
+    "section": "Kernel density estimate (KDE)",
+    "text": "Kernel density estimate (KDE)\n\nUsed to generate a smooth PDF for a random variable dataset.\nUseful for understanding the underlying distribution of a sample .\nThink of it as getting a smooth function to describe a histogram of data.\nThere are no assumptions about the prior distribution.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#kde-of-simulated-heights",
+    "href": "sessions/week3.html#kde-of-simulated-heights",
+    "title": "Hypothesis Testing",
+    "section": "KDE of simulated heights",
+    "text": "KDE of simulated heights\nIt’s easy to fit a KDE to data in Python:\n\nimport numpy as np\nimport pandas as pd \nfrom scipy.stats import gaussian_kde\n\n# Supposing you have some data \ndata = pd.read_csv('/path_to_data')\n\n# Kernel Density Estimation\nkde = gaussian_kde(data)\nx_vals = np.linspace(100, 200, 100)\ny_vals = kde(x_vals)",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#kde-of-simulated-heights-1",
+    "href": "sessions/week3.html#kde-of-simulated-heights-1",
+    "title": "Hypothesis Testing",
+    "section": "KDE of simulated heights",
+    "text": "KDE of simulated heights",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#kde-use-case",
+    "href": "sessions/week3.html#kde-use-case",
+    "title": "Hypothesis Testing",
+    "section": "KDE use case",
+    "text": "KDE use case\n\nfit the KDE to two samples\ncompare visually\ncarry out non-paremetric test - such as Kolmogorov-Smirnov",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#example---step-1-2-3",
+    "href": "sessions/week3.html#example---step-1-2-3",
+    "title": "Hypothesis Testing",
+    "section": "Example - step 1, 2, 3",
+    "text": "Example - step 1, 2, 3\nDefine the null and alternative hypothesis\n\\(H_0\\): The mean height of male and female students is the same.\n\\(H_1\\): The mean height of male and female students is different.\n\nSet your significance level\n\\(\\alpha = 0.05\\)\n\n\nIdentify the evidence\nGroup 1 – female students\n\\(\\bar{x}_1 = 170\\), \\(s_1 = 5\\), \\(n_1\\) = 95\nGroup 2 – male students\n\\(\\bar{x}_2 = 180\\), \\(s_2 = 6\\), \\(n_2\\) = 103",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#example---step-4-1",
+    "href": "sessions/week3.html#example---step-4-1",
+    "title": "Hypothesis Testing",
+    "section": "Example - step 4",
+    "text": "Example - step 4\nCalculate the p-value\n\nUse Student’s T-test: two sample\ndon’t care if students are taller or shorter - so use two-tailed test",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#example---step-4---calculation",
+    "href": "sessions/week3.html#example---step-4---calculation",
+    "title": "Hypothesis Testing",
+    "section": "Example - step 4 - calculation",
+    "text": "Example - step 4 - calculation\nSubstituting values:\n\\[\\begin{align}\ns_p &= \\sqrt{\\frac{(95-1)\\cdot 5^2 + (103-1)\\cdot 6^2}{95+103-2}} \\approx 5.55\n\\end{align}\\]\nNow compute \\(t\\):\n\\[\\begin{align}\nt &= \\frac{170 - 180}{5.55 \\cdot \\sqrt{\\tfrac{1}{95} + \\tfrac{1}{103}}} \\approx -12.7\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#example---step-5",
+    "href": "sessions/week3.html#example---step-5",
+    "title": "Hypothesis Testing",
+    "section": "Example - step 5",
+    "text": "Example - step 5\nCompare p-value with hypothesis level\nNow we need to compare the test statistic to the critical t-value.",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#example---step-5---calculation",
+    "href": "sessions/week3.html#example---step-5---calculation",
+    "title": "Hypothesis Testing",
+    "section": "Example - step 5 - calculation",
+    "text": "Example - step 5 - calculation\nFor Student’s T-Test we need degrees of freedom:\n\\[\\begin{align}\ndf = n_1 + n_2 - 2 = 95 + 103 - 2 = 196\n\\end{align}\\]\nThen use Python to calculate the two-tailed critical t-value at \\(\\alpha = 0.05\\).\n\nfrom scipy.stats import t\n\nalpha = 0.05\ndf = 196\n\n# two-tailed: split alpha\nt_crit = t.ppf(1 - alpha/2, df)\nprint(\"Critical t-value:\", t_crit.round(2))\n\nCritical t-value: 1.97",
+    "crumbs": [
+      "Part 1: Basics",
+      "3. Hypothesis Testing"
+    ]
+  },
+  {
+    "objectID": "sessions/week3.html#example---conclusion",
+    "href": "sessions/week3.html#example---conclusion",
+    "title": "Hypothesis Testing",
+    "section": "Example - conclusion",
+    "text": "Example - conclusion\nTest statistic: \\(t \\approx -12.7\\).\nCritical t-value at \\(\\alpha=0.05\\): \\(t_{crit} = 1.97\\)\n\n\nSince\n\\[\\begin{align}\nt= |-12.7| \\gg 1.97= t_crit\n\\end{align}\\]\nwe reject \\(H_0\\). Male and female students have significantly different heights.",
     "crumbs": [
       "Part 1: Basics",
       "3. Hypothesis Testing"
@@ -1067,6 +1265,36 @@
     ]
   },
   {
+    "objectID": "assessments/index.html",
+    "href": "assessments/index.html",
+    "title": "CASA0007 Assessment",
+    "section": "",
+    "text": "This Assessment is worth 100% of the grade for this course.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "assessments/index.html#assessment-aims",
+    "href": "assessments/index.html#assessment-aims",
+    "title": "CASA0007 Assessment",
+    "section": "Assessment Aims",
+    "text": "Assessment Aims\nThis assessment is designed to test your understanding of the quantitative methods introduced in this course, but also, crucially, your ability to really understand how, if used correctly and applied to appropriate data, these methods can help you tell a powerful story and be the underpinning evidence-base for a relevant local, national or international issue.\nUsing quantitative methods to contribute to public debates is vital if students, academics and universities are to demonstrate our value to the wider world. We don’t want you to just apply a method and regurgitate unintelligible coefficients. Quantitative methods can only have real value if they are used to support wider debates in ways that everyone should be able to understand.\nWe are not testing your coding abilities – you may use either of the main coding languages taught this term (R or Python). We are not testing your ability to write a standard piece of academic writing. But we are testing your ability to use quantitative methods appropriately and with a clear connection between the data, methods and outputs, to help others understand a particular issue through a data lens.\n\nPart 1 - Article\nYour task is to write a short 800-1000-word piece of ‘public-facing scholarly writing’ in the style of an article that that could appear in The Conversation or the Financial Times in their data section. This piece could relate to a local, national or international topic which could be either serious or frivolous but must employ appropriate quantitative methods learned in this course to derive novel insights from a particular dataset (or range of datasets) associated with a particular topic of your choosing. Data analysis and the use of quantitative methods should be central to your piece, but outputs must be appropriate for a general (non-academic) audience with your piece illuminated by appropriate visual outputs – maps, graphs or other data visualisations. Your piece should contain a range of graphical or tabular elements.\n\n\nPart 2 - Technical Appendix\nYour 800-1000-word article should be accompanied by a max 1000-word technical appendix detailing the analysis you have carried out behind the scenes to allow you to make the observations you have in your article. Here you might want to include additional exploratory visualisations, tabular outputs, interpretations of those outputs, equations etc. and you could also include any observations about the dataset or the validity / statistical significance of any models you employ. The purpose of the appendix is to reassure anyone who wants to delve deeper, that the observations you made in your main article are valid and reliable and your interpretations valid.\n\n\nTopic\nYour topic can be anything you like broadly related to human, urban or social issues, as long as you can find some suitable data to analyse. For inspiration on relevant topics, you might want to review some of the articles that John Burn-Murdoch has written for the Financial Times in recent years - https://www.ft.com/john-burn-murdoch (you can log-in via your UCL credentials) or some of the pieces in the Conversation - https://theconversation.com/.\nIf you are struggling for inspiration, you are welcome to explore an educational topic using DfE schools data used in class, but you are encouraged to be creative in your data choices (as you are being partially marked on your originality), and you should not repeat analyses carried out on variables in any of the practical sessions. The only topic we will not permit in this assessment is anything related to AirBnB as this is the focus of CASA0013.\n\n\nArticle Content\nYou will note that most of John Burn-Murdoch’s articles generally contain the sorts of analyses we would describe as exploratory. While your article should contain basic exploratory analysis in the form of visualisations, you should also use an appropriate method from the second half of the course (lectures 5-10) related to either more sophisticated exploratory analysis like multivariate statistical analysis (e.g. dimensionality reduction or cluster analysis) or some explanatory / predictive methods such as ANOVA, linear regression or some of the generalised linear models also introduced.\n\n\nStyle of Briefing\nYou should write in plain English and avoid the use of jargon or technical language. For tips on how to write in this style, The Conversation has produced a guide: https://socsci.web.ox.ac.uk/files/conversation-writing-public-why-and-how\n\n\nTypes of Data Permissible and Sources\nAnything you like, but you should choose carefully so that you are able to demonstrate the appropriate skills. There are many potential sources of data – these could be linked from FT or Conversation articles, or you could try sites like:\nhttps://data.gov/\nhttps://www.data.gov.uk/\nhttps://opendata.nhsbsa.net/\nhttps://tfl.gov.uk/info-for/open-data-users/  \nhttps://data.europa.eu/data/datasets?locale=en\nhttps://data.worldbank.org/\nhttps://data.london.gov.uk/\nYou can probably find many more!\n\n\nReferencing\nWe will not expect standard academic referencing in this piece, however, this doesn’t mean that you shouldn’t include references – you should. In this style of public facing scholarly writing, it is common to use hyperlinks and footnotes and you should make use of these to support your narrative.\n\n\nFormat of the Piece\nExamples – Here is just one example of the kind of article you might produce (minus the technical appendix), but read widely around the data journalism sites linked from publications like the Financial Times, New York Times, Guardian.\nhttps://theconversation.com/constituency-level-data-reveals-which-parties-are-most-threatened-by-reform-264422\n\n\nDeadline and Handing In\nThe Deadline for the assessment is *** January.\nYour report and technical appendix should be uploaded to Moodle as a single document - MS Word or PDF.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "assessments/index.html#mark-scheme",
+    "href": "assessments/index.html#mark-scheme",
+    "title": "CASA0007 Assessment",
+    "section": "Mark Scheme",
+    "text": "Mark Scheme\nThis is how we will mark your work - take note of the\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCriterion\n80-100%\n70-79% (A)\n60-69% (B)\n50-59% (C)\n40-49% (D)\n1-39% (E)\n\n\n\n\nExploratory Analysis (25%)\nOutstanding selection of exploratory statistics and/or sophisticated data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations in the data with absolute clarity. Graphics are labelled such that readers are in no doubt about what is being shown. Data may have been transformed, normalised or standardised in some way to reveal otherwise hidden patterns and justified impeccably.\nExcellent selection of exploratory statistics and/or sophisticated data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations in the data. Graphics are labelled such that readers are in no doubt about what is being shown. Data may have been transformed, normalised or standardised in some way to reveal otherwise hidden patterns and justified.\nGood selection of exploratory statistics and/or data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations. Graphics are labelled such that readers are able to interpret the plots with ease.\nAdequate selection of exploratory statistics and/or data visualisations which illuminate some of the underlying data, revealing some distributions / trends / relationships and associations. Graphics are labelled, but may lack clarity. Data may not be transformed, normalised or standardised in a way to reveal patterns.\nInadequate selection of statistics or visualisations. Graphics are poorly labelled or unclear, and do not illuminate the underlying data. Data transformations are incorrect or missing.\nNegligible use of statistics or visualisations. Any visualisations are irrelevant, inaccurate, or inaccessible. The analysis shows no grasp of the underlying data.\n\n\nUse of multivariate statistical analysis or explanatory / predictive methods (25%)\nExceptional selection of data / variables entirely appropriate for the chosen article topic. Masterful understanding of the nuances related to the careful pruning and selection of appropriate variables. Outstanding understanding of the methods employed and their interaction with the data to hand with masterful understanding of outputs produced\nExcellent selection of data / variables entirely appropriate for the chosen article topic. Highly competent understanding of the nuances related to the careful pruning and selection of appropriate variables. Highly competent understanding of the methods employed and their interaction with the data to hand.\nGood selection of data / variables appropriate for the chosen article topic. Competent understanding of the methods employed and their interaction with the data.\nAdequate selection of data / variables for the chosen article topic. Basic understanding of the methods employed and their interaction with the data. May get some of the nuances in the outputs, but may also ignore some key features in the data\nInadequate selection of data / variables for the chosen article topic. Little to no understanding of the methods employed or how they interact with the data.\nNegligible or irrelevant selection of data / variables. No grasp of the methods or their application to the data.\n\n\nOriginality, article narrative and communication (25%)\nHighly original topic selection, or of exceptional relevance to a contemporary debate in the society, the media or politics at a local, national or international level with broad interest. Article narrative shows flare or originality which draws the reader in and reveals something entirely new. Writing style is highly accessible - clear, concise and creative and the reader is left without query or misunderstanding.\nExcellent topic selection, of high relevance to a contemporary debate. The narrative is engaging and written with excellent clarity, flowing well from one section to the next. The work is of a very high standard. Writing style clear and concise with few wasted words.\nGood topic selection, of relevance to a contemporary debate. The narrative is clear and well-structured. The work shows some evidence of originality. The narrative is good and the message emerging from the analysis is conveyed well.\nAdequate topic selection, but may lack relevance or wider interest. The narrative is satisfactory but may lack clarity or logical flow  ideas appearing slightly disorganised. The reader can understand the piece but may have to work hard to derive meaning from it.\nInadequate topic selection  perhaps dated or totally irrelevant to the degree programme (i.e. not even a human topic). The narrative is lacking in clarity and is difficult to follow. Deriving meaning from the work is a challenge.\nThe work has no clear topic or narrative. The communication is confused, unclear, or inaccessible.\n\n\nConceptual understanding and Critical Reflection (25%)\nBoth the Article and Technical Appendix show exemplary understanding of the topic / wider issues associated with it and of the methods employed to interrogate the data. A clear understanding of any data / methodological shortcomings / issues / challenges is presented with a highly sophisticated degree of critical reflection in relation to the substantive topic and / or methods employed is demonstrated.\nArticle and Technical Appendix show excellent and highly competent conceptual understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a thorough understanding of the chosen example and recognises and reflects lucidly on any shortcomings and / or the wider significance of the findings in a way that is not contrived or formulaic but shows a sophisticated level of insight.\nArticle and Technical Appendix show good understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a sound understanding of the chosen example and recognises and reflects lucidly on any shortcomings and / or the wider significance of the findings in a way that is not contrived or formulaic but shows a sophisticated level of insight.\nArticle and Technical Appendix show basic understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a rudimentary understanding of the chosen example and recognises and may offer only some reflection on the shortcomings of the work or not at all / contrived at the bottom end.\nInadequate and insufficient conceptual understanding of key concepts and theories. The work demonstrates an invalid or lack of understanding of the concepts introduced. Any analysis attempted fails to support the observations made.\nNegligible or no conceptual understanding of key concepts and theories. The work demonstrates an irrelevant, inaccurate, confused, unclear, or inaccessible understanding of the concepts.\n\n\n\n\n\n\nThe purpose of this assessment is to test your understanding of the various methods introduced in this course and your ability to apply them appropriately to a topic of your choice. One of the differentiators at Masters level is the ability to think both creatively and critically while showing an awareness or knowledge of contemporary issues either in relation to your specific discipline of study or more widely. Being able to demonstrate how established techniques of research and enquiry can be used to create and interpret knowledge is at the core of Masters level thinking and this assessment piece. The ability to demonstrate self-direction (in choosing an appropriate topic for this assessment) and to think autonomously in designing your own article.\n\nMark Scheme – Explained\nLevel 7 Descriptors - https://www.qaa.ac.uk/docs/qaa/quality-code/the-frameworks-for-higher-education-qualifications-of-uk-degree-awarding-bodies-2024.pdf - p26\nMaster’s degree\nThe descriptor provided for this level of the Frameworks is for any master’s degree which should meet the descriptor in full. This qualification descriptor should also be used as a reference point for other qualifications at Level 7 on the FHEQ/SCQF Level 11 on the FQHEIS, including postgraduate certificates and postgraduate diplomas.\nMaster’s degrees are awarded to students who have demonstrated:\n•         a systematic understanding of knowledge, and a critical awareness of current problems and/or new insights, much of which is at, or informed by, the forefront of their academic discipline, field of study or area of professional practice\n•         a comprehensive understanding of techniques applicable to their own research or advanced scholarship\n•         originality in the application of knowledge, together with a practical understanding of how established techniques of research and enquiry are used to create and interpret knowledge in the discipline\n•         conceptual understanding that enables the student:\n•         to evaluate critically current research and advanced scholarship in the discipline\n•         to evaluate methodologies and develop critiques of them and, where appropriate, to propose new hypotheses.\nTypically, holders of the qualification will be able to:\n•         deal with complex issues - both systematically and creatively, make sound judgements in the absence of complete data, and communicate their conclusions clearly to specialist and non-specialist audiences\n•         demonstrate self-direction and originality in tackling and solving problems, and act autonomously in planning and implementing tasks at a professional or equivalent level\n•         continue to advance their knowledge and understanding, and to develop new skills to a high level. \nAnd holders will have:\n•         the qualities and transferable skills necessary for employment requiring:  \n•         the exercise of initiative and personal responsibility\n•         decision-making in complex and unpredictable situations\n•         the independent learning ability required for continuing professional development.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Welcome",
@@ -1083,9 +1311,9 @@
   {
     "objectID": "sessions/week2.html#overview-of-lecture-1",
     "href": "sessions/week2.html#overview-of-lecture-1",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Overview of lecture 1",
-    "text": "Overview of lecture 1\nLooked at data analysis. Different types of data.",
+    "text": "Overview of lecture 1\nNeed to fill this in.",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1094,9 +1322,9 @@
   {
     "objectID": "sessions/week2.html#first-things-first",
     "href": "sessions/week2.html#first-things-first",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "First things first",
-    "text": "First things first\nExploratory data analysis is the first step of any data science project\n\nlink to scientific process and how we iterate over ideas and concepts",
+    "text": "First things first\n\n\n\n\n\n\n\nExploratory data analysis is the first step of any data science project.\n\n\nlink to scientific process and how we test and then iterate over ideas and concepts. Something we will talk about more next lecture.",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1105,9 +1333,9 @@
   {
     "objectID": "sessions/week2.html#introducing-statistical-concepts",
     "href": "sessions/week2.html#introducing-statistical-concepts",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Introducing statistical concepts",
-    "text": "Introducing statistical concepts\nThis lecture looking at statistical concepts.\nData science is about using ideas from statistics to describe large datasets\nHere looking to describe numerical data – focus on probability distributions.",
+    "text": "Introducing statistical concepts\n\nThis lecture is focussed on statistical concepts\nData science is about using ideas from statistics to describe large datasets\nHere looking to describe numerical data\nFocus on probability distributions",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1116,9 +1344,9 @@
   {
     "objectID": "sessions/week2.html#learning-objectives",
     "href": "sessions/week2.html#learning-objectives",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of this lecture you should:\n\nEvaluate whether a dataset is representative.\nDefine the probability density function.\nIdentify common probability distributions.",
+    "text": "Learning Objectives\nBy the end of this lecture you should be able to:\n\nDescribe the characteristic features of common probability distributions.\nCalculate exponentials and logarithms.\nEvaluate whether a dataset is representative.",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1127,9 +1355,9 @@
   {
     "objectID": "sessions/week2.html#what-is-the-likelihood-of-events-occuring",
     "href": "sessions/week2.html#what-is-the-likelihood-of-events-occuring",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "What is the likelihood of events occuring?",
-    "text": "What is the likelihood of events occuring?\n\nWhat is the probability of someone in this lecture theatre being over 6ft?\nNeed to first understand the distribution of heights.\n\n\nThis week thinking about the distribution of data.\nNext week, thinking about formulating and answering the research question.",
+    "text": "What is the likelihood of events occuring?\nQuestion\nWhat is the probability of someone at UCL being over 190cm?\n\nHow can we try to answer this?\n\n\n\nWe could try and find someone on campus who is over 190cm.\n\n\n\nBetter to try and understand the distribution of heights.\n\nThis week thinking about the distribution of data. How do we understand the spread of height data, how to we calculate important features of this data, how can we describe this data using mathematical equations?\nNext week, thinking about formulating and answering the research question.",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1138,9 +1366,9 @@
   {
     "objectID": "sessions/week2.html#the-dream-vs-reality",
     "href": "sessions/week2.html#the-dream-vs-reality",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "The dream vs reality",
-    "text": "The dream vs reality\nIdeally, we would like all the relevant data – but in reality normally have a subset\n\nIt would be great if I knew the height of every adult in the UK, but unrealistic to collect – however maybe I could collect all adults at UCL.",
+    "text": "The dream vs reality\nIdeally, we would like all the relevant data.\n\n… in reality we normally only have some.\n\n\n\n\nIt would be great if I knew the height of everyone at UCL, but unrealistic to collect – however maybe I could collect all students in this lecture theatre.",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1149,9 +1377,9 @@
   {
     "objectID": "sessions/week2.html#approximating",
     "href": "sessions/week2.html#approximating",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Approximating",
-    "text": "Approximating\nExpect what happens in the sample to approximate what happens in the whole population.",
+    "text": "Approximating\nHence, we sample a subset of the data.\n\nWe need to choose our sample carefully. We want what happens in the sample to approximate what happens in the whole population.\n\n\nIn practise\n\ndifferent sampling approaches\n\nrandom sampling\nsystematic sampling",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1160,7 +1388,7 @@
   {
     "objectID": "sessions/week2.html#bias",
     "href": "sessions/week2.html#bias",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Bias",
     "text": "Bias\nIt’s important to understand if your dataset truly representative or is it susceptible to bias?",
     "crumbs": [
@@ -1171,9 +1399,9 @@
   {
     "objectID": "sessions/week2.html#cognitive-bias",
     "href": "sessions/week2.html#cognitive-bias",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Cognitive bias",
-    "text": "Cognitive bias\nSystematic patterns in how we think about, and perceive, the world.\n\n\nWe all have cognitive biases.\nThese can impact our research, in particular dataset collection, selection and processing.",
+    "text": "Cognitive bias\nSystematic patterns in how we think about, and perceive, the world.\n\n\nWe all have cognitive biases.\nThese can impact our research:\n\ndata collection\ndata selection\ndata processing\nmodelling choices",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1182,9 +1410,9 @@
   {
     "objectID": "sessions/week2.html#why-is-this-important",
     "href": "sessions/week2.html#why-is-this-important",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Why is this important?",
-    "text": "Why is this important?\nIf we’re not careful we can propagate bias to the reserach, and hence results.\nThis can lead to incorrect conclusions.",
+    "text": "Why is this important?\nIf we’re not careful we can propagate bias to the research, and hence results.\n\nThis can lead to incorrect conclusions.",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1193,9 +1421,9 @@
   {
     "objectID": "sessions/week2.html#types-of-bias",
     "href": "sessions/week2.html#types-of-bias",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Types of bias",
-    "text": "Types of bias\nExamples of dataset bias include historical bias and selection bias.",
+    "text": "Types of bias\n\nResearch bias\n\nCognitive bias\n\nDataset bias\n\nHistorical bias\nSelection bias\n\n\n\nAlready talked about the idea of cognitive bias. There are lots and lots of different types of biases - going to talk a little about different ways they can bias the dataset.",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1204,9 +1432,9 @@
   {
     "objectID": "sessions/week2.html#historical-bias",
     "href": "sessions/week2.html#historical-bias",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Historical bias",
-    "text": "Historical bias\nReflects existing, real world, inequalities\nExamples:\n\nPolice profiling\nHungry judges",
+    "text": "Historical bias\nReflects existing, real world, inequalities\nExamples:\n\nPolice profiling\n\nAutomated tools to detect ‘criminals’.\nTrained on datasets which reflect current racist practises.\n\nHungry judges\n\nTools to help sentencing of ‘criminals’.\nPatterns in the dataset — judges are less lenient before lunch.\n\n\n\nPolice profiling models - meant to make easy to spot criminals - but use exisitng crime data - which reflect racist prejudices in society - and the model learns to pick out people of certain ethnic backgrounds.\nTools also used to help the sentnecing of criminals in courts of law - observe the hungry judges effect, where they sentnece differently based on how hungry they are - tend to be harsher just before lunch and more lenient after lunch.",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1215,9 +1443,9 @@
   {
     "objectID": "sessions/week2.html#selection-bias",
     "href": "sessions/week2.html#selection-bias",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Selection bias",
-    "text": "Selection bias\nWhen the sample chosen doesn’t represent the whole population of interest\nThis can be due to not having an adequately random sample.\nExample:\n\nThe health of people in hospital is worse than the general population.\n\nOr self-selection bias, where the people who contribute to the data exhibit specific attributes.\nExample:\n\nWEIRD study.",
+    "text": "Selection bias\nWhen the sample chosen doesn’t represent the whole population of interest\nExamples:\n\nSelf selection Roy Model\n\nUnderlying characteristics of people who self select into certain groups.\n\nWEIRD people\n\nCommonly sampled in behavioural sciences.\nReflects a very small proportion of global population.\n\n\n\nRoy model - example from economics - basically there’s not a random selection of people in a specific job - thye have chosen that job based on underlying unobserved characterisitcs. For example suppose I’m interested in wages of workers in different occupations - but they have self-selected into that occupation based on their unique skill set - so it’s a biased representation.\nWEIRD = western, educated, industrialised, rich, democratic",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1226,20 +1454,97 @@
   {
     "objectID": "sessions/week2.html#can-data-ever-be-truly-representative",
     "href": "sessions/week2.html#can-data-ever-be-truly-representative",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Can data ever be truly representative?",
-    "text": "Can data ever be truly representative?\nProbably not.\n## Failing that\n\nAcknowledge our biases!",
+    "text": "Can data ever be truly representative?\nProbably not.\n\nEven when we think we have really good data, someone has made the choice to collect this data. Why that data over other data? Does that data reflect their underlying cognitive biases?\n\n\nFailing that… .. we can acknowledge our biases!\n\n\n\nImage credit: [xkcd](https://xkcd.com/2494/)",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
     ]
   },
   {
-    "objectID": "sessions/week2.html#uniquely-described-by-two-equations",
-    "href": "sessions/week2.html#uniquely-described-by-two-equations",
-    "title": "Exploratory Data Analysis #2",
-    "section": "Uniquely described by two equations",
-    "text": "Uniquely described by two equations\nMean:\n\\[\\begin{align}\nE[x]\n\\end{align}\\]\nStandard deviation:\n\\[\\begin{align}\nE[x]\n\\end{align}\\]",
+    "objectID": "sessions/week2.html#what-to-declare",
+    "href": "sessions/week2.html#what-to-declare",
+    "title": "Exploratory Data Analysis 2",
+    "section": "What to declare",
+    "text": "What to declare\n\nSample size (n)\nMean, median, mode\nStandard deviation\nRange",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#example",
+    "href": "sessions/week2.html#example",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Example",
+    "text": "Example\n\n\nLet’s look at a dataset of students height.\n\nEasy to print the summary statistics in Python, using pandas:\n\nimport pandas as pd \n\nheight_df = pd.read_csv(\"L2_data/heights.csv\")\nheight_df.describe().round(2)\n\n\n\n\n\n\n\n\n\n\n\nHeight_cm\n\n\n\n\ncount\n1000.00\n\n\nmean\n161.19\n\n\nstd\n9.79\n\n\nmin\n128.59\n\n\n25%\n154.52\n\n\n50%\n161.25\n\n\n75%\n167.48\n\n\nmax\n199.53",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#same-same-but-different",
+    "href": "sessions/week2.html#same-same-but-different",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Same same but different",
+    "text": "Same same but different\nWhat about when the descriptive statistics don’t tell us enough?\n\n\n\n\nThese all have mean x = 9, variance x = 11. mean y = 7.5, variance y =4.1",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#everywhere-you-look",
+    "href": "sessions/week2.html#everywhere-you-look",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Everywhere you look",
+    "text": "Everywhere you look\n\n\n\n\n\nHuman height\nHappiness\nPetal size",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#youve-seen-it-all-before",
+    "href": "sessions/week2.html#youve-seen-it-all-before",
+    "title": "Exploratory Data Analysis 2",
+    "section": "You’ve seen it all before",
+    "text": "You’ve seen it all before\n\nSymmetrical\nSingle peak\nSmooth tails on both sides",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#naturally-occurring",
+    "href": "sessions/week2.html#naturally-occurring",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Naturally occurring",
+    "text": "Naturally occurring",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#naturally-occurring-1",
+    "href": "sessions/week2.html#naturally-occurring-1",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Naturally occurring",
+    "text": "Naturally occurring",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#uniquely-described-by-two-variables",
+    "href": "sessions/week2.html#uniquely-described-by-two-variables",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Uniquely described by two variables…",
+    "text": "Uniquely described by two variables…",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1248,9 +1553,9 @@
   {
     "objectID": "sessions/week2.html#and-a-probability-distribution-function",
     "href": "sessions/week2.html#and-a-probability-distribution-function",
-    "title": "Exploratory Data Analysis #2",
-    "section": "and a probability distribution function",
-    "text": "and a probability distribution function\nProbability density function (PDF) describes the likelihood of different outcomes for a random variable\nThe PDF of the normal distribution is:\n\\[\\begin{align}\nE[x]\n\\end{align}\\]",
+    "title": "Exploratory Data Analysis 2",
+    "section": "…and a probability distribution function",
+    "text": "…and a probability distribution function\n\n\n\nThe probability density function (PDF) describes the likelihood of different outcomes for a continuous random variable",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1259,7 +1564,7 @@
   {
     "objectID": "sessions/week2.html#key-features",
     "href": "sessions/week2.html#key-features",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Key features",
     "text": "Key features\n\nCharacteristic size (all data points close to the mean): symmetric and single peak\nData is equally likely to be larger or smaller than average (symmetric): Smooth tails on both sides\nData is continuous (it is something you measure not something you count)",
     "crumbs": [
@@ -1270,20 +1575,20 @@
   {
     "objectID": "sessions/week2.html#sampling-distributions",
     "href": "sessions/week2.html#sampling-distributions",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Sampling distributions",
-    "text": "Sampling distributions\nNote importance of sampling distributions.\nIn the case of the normal distribution: Std represented by σ vs std represented by σ/√n",
+    "text": "Sampling distributions\nThe distribution of the random variable when derived from a random sample of size \\(n\\)\n\nIn the case of the normal distribution - standard deviation becomes:\n\\[\\begin{align}\n\\frac{\\sigma}{\\sqrt{n}}\n\\end{align}\\]",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
     ]
   },
   {
-    "objectID": "sessions/week2.html#example-distance-to-school",
-    "href": "sessions/week2.html#example-distance-to-school",
-    "title": "Exploratory Data Analysis #2",
-    "section": "Example: distance to school",
-    "text": "Example: distance to school",
+    "objectID": "sessions/week2.html#calculating-probabilities",
+    "href": "sessions/week2.html#calculating-probabilities",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Calculating probabilities",
+    "text": "Calculating probabilities\nCan use the PDF to evaluate the probability at a specific point.\n\\[\\begin{align}\nx \\sim N(0,1)\n\\end{align}\\]\n\n\\[\\begin{align}\np(x) = \\frac{1}{\\sqrt{2 \\pi \\sigma^2}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\n\\end{align}\\]\n\n\n\\[\\begin{align}\np(x=0.5) = \\frac{1}{\\sqrt{2 \\pi \\times 1^2}} e^{-\\frac{(0.5-0)^2}{(2\\times 1)^2}}\n\\\\\n= \\frac{1}{\\sqrt{2 \\pi}} e^{-\\frac{0.25}{4}} = 0.3747\n\\end{align}\\]",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1292,53 +1597,31 @@
   {
     "objectID": "sessions/week2.html#not-everything-is-normal",
     "href": "sessions/week2.html#not-everything-is-normal",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Not everything is normal",
-    "text": "Not everything is normal\nMany real world datasets are approximately normally distributed.\nBut not all, things might not have a characteristic size, or not continuous, or not symmetric",
+    "text": "Not everything is normal\nMany real world datasets are approximately normally distributed.\n\nBut not all — might not have a characteristic size, or not continuous, or not symmetric.",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
     ]
   },
   {
-    "objectID": "sessions/week2.html#continous-vs.-discrete",
-    "href": "sessions/week2.html#continous-vs.-discrete",
-    "title": "Exploratory Data Analysis #2",
-    "section": "Continous vs. Discrete",
-    "text": "Continous vs. Discrete",
+    "objectID": "sessions/week2.html#continuous-vs.-discrete",
+    "href": "sessions/week2.html#continuous-vs.-discrete",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Continuous vs. Discrete",
+    "text": "Continuous vs. Discrete\nContinuous data Measurable data which can take any value within a given range.\nexample: height\nDiscrete data Measurable data which can take seperate, countable values.\nexample: shoe size\n\nSuppose I have someone who is x cm tall, and someone who is y cm tall, I can find someone in between whose x.5cm tall.\nBut shoe sizes are discrete (not the length of your foot).",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
     ]
   },
   {
-    "objectID": "sessions/week2.html#back-to-the-probability-density-function",
-    "href": "sessions/week2.html#back-to-the-probability-density-function",
-    "title": "Exploratory Data Analysis #2",
-    "section": "Back to the probability density function",
-    "text": "Back to the probability density function\nWhy it’s useful – see next week, allows us to evaluate the probability of events, and hence evaluate hypotheses",
-    "crumbs": [
-      "Part 1: Basics",
-      "2. Explanatory Data Analysis #2"
-    ]
-  },
-  {
-    "objectID": "sessions/week2.html#sampling-distributions-1",
-    "href": "sessions/week2.html#sampling-distributions-1",
-    "title": "Exploratory Data Analysis #2",
-    "section": "Sampling distributions",
-    "text": "Sampling distributions\nSpecific for different probability distributions (/n)",
-    "crumbs": [
-      "Part 1: Basics",
-      "2. Explanatory Data Analysis #2"
-    ]
-  },
-  {
-    "objectID": "sessions/week2.html#skewed-and-long-tails",
-    "href": "sessions/week2.html#skewed-and-long-tails",
-    "title": "Exploratory Data Analysis #2",
-    "section": "Skewed and long tails",
-    "text": "Skewed and long tails\nIn reality, few things are actually normal. Anscombe’s quartet",
+    "objectID": "sessions/week2.html#back-to-the-probability-function",
+    "href": "sessions/week2.html#back-to-the-probability-function",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Back to the probability function",
+    "text": "Back to the probability function\n\\[\\begin{align}\np(x)\n\\end{align}\\]\nHaving a function for the distribution allows us to evaluate the probability of events, and hence evaluate hypotheses.\n\nFor discrete distributions we have the probability mass function.\n\n\nSampling distributions\nAs for the normal distribution, in the general case we should be aware of the sampling distribution.",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1347,9 +1630,31 @@
   {
     "objectID": "sessions/week2.html#coin-toss",
     "href": "sessions/week2.html#coin-toss",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Coin toss",
-    "text": "Coin toss\n\nIf I flip a coin 10 times, how often can I expect to get at least 7 heads?\nDescribes the frequency of successes in a test with 2 outcomes",
+    "text": "Coin toss\n\n\nDiscrete outcomes\nDescribes the frequency of successes in a test with 2 outcomes\n\n\nI flip a coin 10 times\nHow often can I expect to get at least 7 heads?",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#probability-mass-function",
+    "href": "sessions/week2.html#probability-mass-function",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Probability mass function",
+    "text": "Probability mass function\n\\[\\begin{align}\nP(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}\n\\end{align}\\]\nWhere \\(n\\) is the number of trials, and \\(p\\) is the probability of success for each trial.\n\nThe probability mass function (PMF) describes the likelihood of different outcomes for a discrete random variable",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#example-1",
+    "href": "sessions/week2.html#example-1",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Example",
+    "text": "Example\n\nI flip a coin 10 times\n\n\\(n=10\\), \\(p=0.5\\)\n\nHow often can I expect to get at least 7 heads?\n\n\\(k=7\\)\n\n\n\nEvaluating the PMF, we get:\n\\[\\begin{align}\nP(X = 7) = \\binom{10}{7} 0.5^7 (1-0.5)^{10-7}\n\\\\ = 0.1172\n\\end{align}\\]",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1358,7 +1663,7 @@
   {
     "objectID": "sessions/week2.html#death-by-horse-kicks",
     "href": "sessions/week2.html#death-by-horse-kicks",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Death by horse kicks",
     "text": "Death by horse kicks\n\n\n\nIt’s 1894.\nYou’re the statistician Ladislaus Bortkiewicz.\nAnd you’re wondering,\nHow many soldiers in the Prussian army have been killed by horse kicks?",
     "crumbs": [
@@ -1369,20 +1674,31 @@
   {
     "objectID": "sessions/week2.html#measuring-rare-events",
     "href": "sessions/week2.html#measuring-rare-events",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Measuring rare events",
-    "text": "Measuring rare events\n\nImagine a situation where certain rare events (like arrival of mail) can occur in an independent fashion.\nThe Poisson distribution estimates how many such events are expected within a time interval\nFixed interval (e.g. one minute)\nFixed rate of events (λ) (e.g. 4 cars per minute, λ = 4)\nEvents occur independently.\nPoisson Distribution gives the probability of k events.",
+    "text": "Measuring rare events\n\nImagine a situation where certain rare events (like arrival of mail) can occur in an independent fashion.\nThe Poisson distribution estimates how many such events are expected within a time interval\nFixed interval (e.g. one minute)\nFixed rate of events (\\(\\lambda\\)) (e.g. 4 cars per minute, \\(\\lambda=4\\))\nEvents occur independently.\nPoisson Distribution gives the probability of \\(k\\) events.",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
     ]
   },
   {
-    "objectID": "sessions/week2.html#probability-density-function",
-    "href": "sessions/week2.html#probability-density-function",
-    "title": "Exploratory Data Analysis #2",
-    "section": "Probability density function",
-    "text": "Probability density function",
+    "objectID": "sessions/week2.html#probability-mass-function-1",
+    "href": "sessions/week2.html#probability-mass-function-1",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Probability mass function",
+    "text": "Probability mass function\n\\[\\begin{align}\nP(X = k) = \\frac{\\lambda^k e^{- \\lambda}}{k!}\n\\end{align}\\]\nWhere \\(\\lambda\\) is the expected number of events in a given interval.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#example-2",
+    "href": "sessions/week2.html#example-2",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Example",
+    "text": "Example\n\nBetween 1883 and 1893 there were an average of 2 deaths from horse kicks a year.\n\n\\(\\lambda=2\\)\n\nWhat’s the probability of seeing 10 deaths from horse kicks in 1894?\n\n\n\\[\\begin{align}\nP(X = 10) = \\frac{2^10 e^{-2}}{10!}\n\\\\ = 0.000038\n\\end{align}\\]",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1391,31 +1707,86 @@
   {
     "objectID": "sessions/week2.html#exponentials",
     "href": "sessions/week2.html#exponentials",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Exponentials",
-    "text": "Exponentials\nIf the Poisson measures the probability of x events within a time period, then the Exponential measures how long we are likely to wait between events.",
+    "text": "Exponentials\nIf the Poisson measures the probability of x events within a time period, then the Exponential measures how long we are likely to wait between events.\n\nThe greatest shortcoming of the human race is our inability to understand the exponential function – Albert Bartlett (physicist)\n\nHe’s a bit dramatic",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
     ]
   },
   {
-    "objectID": "sessions/week2.html#at-it-like-rabbits",
-    "href": "sessions/week2.html#at-it-like-rabbits",
-    "title": "Exploratory Data Analysis #2",
-    "section": "At it like rabbits",
-    "text": "At it like rabbits\n\n\nRapid growth of rabbit populations",
+    "objectID": "sessions/week2.html#a-game-of-chess",
+    "href": "sessions/week2.html#a-game-of-chess",
+    "title": "Exploratory Data Analysis 2",
+    "section": "A game of chess…",
+    "text": "A game of chess…\n\n\n\n\nYou’ve invented chess.\nThe emperor asks what you would like as thanks.\nYou ask for grains of rice.\n\n\n\n\n\n\nImage credit: https://simple.wikipedia.org/wiki/Chaturanga\n\n\n\n\nFamous story, of the man who invented chess. Emperor was so grateful, he said what do you want in return The man asked for rice, such that on each square of the chess board, the number of grains of rice doubled. The Emperor thought this was a really small ask for such a great invention. He asked if he didn’t want a better gift. But the man insisted that what he wanted was rice.",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
     ]
   },
   {
-    "objectID": "sessions/week2.html#estimating-rabbit-populations",
-    "href": "sessions/week2.html#estimating-rabbit-populations",
-    "title": "Exploratory Data Analysis #2",
-    "section": "Estimating rabbit populations",
-    "text": "Estimating rabbit populations\nAllows us to answer questions like: “how many rabbits at t=10?”\nAnswering questions like “Or when will the rabbit population=250?”\nThis is easier said than done – the best way is to invert the equation – this requires",
+    "objectID": "sessions/week2.html#and-rice",
+    "href": "sessions/week2.html#and-rice",
+    "title": "Exploratory Data Analysis 2",
+    "section": "…and rice",
+    "text": "…and rice\n\n\n\n\n\n\n\nwhich is more rice than there is on earth…\n\n\n\nA bowl of rice is around 4,000 grains.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#writing-the-equation",
+    "href": "sessions/week2.html#writing-the-equation",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Writing the equation",
+    "text": "Writing the equation\n\n\n\n\n\n\nx\ny\n\n\n\n\n1\n2\n\n\n2\n4\n\n\n3\n8\n\n\n4\n16\n\n\n5\n32\n\n\n6\n64\n\n\n7\n128\n\n\n\n\n\n\\[\\begin{align}\ny = 2^x\n\\end{align}\\]\n\n\nHere we have the base, 2, and the exponent x.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#what-does-this-look-like-on-a-graph",
+    "href": "sessions/week2.html#what-does-this-look-like-on-a-graph",
+    "title": "Exploratory Data Analysis 2",
+    "section": "What does this look like on a graph?",
+    "text": "What does this look like on a graph?",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#the-exponential-function",
+    "href": "sessions/week2.html#the-exponential-function",
+    "title": "Exploratory Data Analysis 2",
+    "section": "The exponential function",
+    "text": "The exponential function\nThe (natural) exponential function is:\n\\[\\begin{align}\ny=e^x\n\\end{align}\\]\n\\(e\\) here is eulers number - a mathematical constant.\n\\[\\begin{align}\ne \\approx 2.718...\n\\end{align}\\]\n\nIts a mathematical constant simialr to pi - it’s just a fixed numebr which we have a name for. Like pi comes from geometry (circles etc), e comes from the limit of the equation of compound interest",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#when-i-can-feed-my-town",
+    "href": "sessions/week2.html#when-i-can-feed-my-town",
+    "title": "Exploratory Data Analysis 2",
+    "section": "When I can feed my town?",
+    "text": "When I can feed my town?\nAllows us to answer questions like:\n\n“how many grains of rice at t=10?”\n“when will I have enough rice to feed my entire town?”\n\nThis is easier said than done – the best way is to invert the equation.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#inverse-operations",
+    "href": "sessions/week2.html#inverse-operations",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Inverse operations",
+    "text": "Inverse operations\nThe mathematical operation that reverses.\nSubtract is the inverse of adding.\n\\[\\begin{align}\n2 + x=5 \\implies 5-2=x\n\\end{align}\\]\nDivide is the inverse of multiplying.\n\\[\\begin{align}\n2 \\times x =6 \\implies 6 \\div 2=x\n\\end{align}\\]",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
@@ -1424,31 +1795,86 @@
   {
     "objectID": "sessions/week2.html#logarithms",
     "href": "sessions/week2.html#logarithms",
-    "title": "Exploratory Data Analysis #2",
+    "title": "Exploratory Data Analysis 2",
     "section": "Logarithms",
-    "text": "Logarithms\n\nIt is an inverse operation. Multiply and divide are inverse operations of one another (they reverse the process)",
+    "text": "Logarithms\nTaking the logarithm is the inverse of taking the exponential.\n\n\\[\\begin{align}\n2^3 = 8 \\implies \\log_2(8) =3\n\\end{align}\\]\n\n\nMore generally:\n\\[\\begin{align}\na^x = b \\implies \\log_a(b) =x\n\\end{align}\\]\n\n\nFor the natural logarithm:\n\\[\\begin{align}\ne^x = b \\implies \\log_e(b) =ln(b) = x\n\\end{align}\\]\n\n\nMultiply and divide are inverse operations of one another (they reverse the process).\nRead the equation as log of 8 base 2 equals 3.",
     "crumbs": [
       "Part 1: Basics",
       "2. Explanatory Data Analysis #2"
     ]
   },
   {
-    "objectID": "sessions/week4.html#overview-of-lecture-2",
-    "href": "sessions/week4.html#overview-of-lecture-2",
+    "objectID": "sessions/week2.html#natural-logarithm",
+    "href": "sessions/week2.html#natural-logarithm",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Natural logarithm",
+    "text": "Natural logarithm",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#log-rules",
+    "href": "sessions/week2.html#log-rules",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Log rules",
+    "text": "Log rules\nThere are some general rules for how we apply logarithms:\n\\[\\begin{align}\nlog_a(b \\times c) &= log_a(b) + log_a(c)\n\\\\ log_a(\\frac{b}{c}) &= log_a(b)-loc_b(c)\n\\\\ log_a(b^c) &= c \\times log_a(b)\n\\\\ log_a(1)&=0\n\\\\ log_a(a)&=1\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week2.html#transforming-data",
+    "href": "sessions/week2.html#transforming-data",
+    "title": "Exploratory Data Analysis 2",
+    "section": "Transforming data",
+    "text": "Transforming data\nSome of the most important rules:\n\\[\\begin{align}\nlog_a(a^x) = x\n\\\\ ln(e^x) = x\n\\end{align}\\]\n\nWhen we have exponential data we can take the logarithm of it - and hence simplify it.",
+    "crumbs": [
+      "Part 1: Basics",
+      "2. Explanatory Data Analysis #2"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#overview-of-lecture-3",
+    "href": "sessions/week4.html#overview-of-lecture-3",
     "title": "Linear Algebra",
-    "section": "Overview of lecture 2",
-    "text": "Overview of lecture 2\nLooked at data analysis.",
+    "section": "Overview of lecture 3",
+    "text": "Overview of lecture 3\nLooked at hypothesis testing:\n\nWhat makes a good hypothesis\nHow to formally state a hypothesis\nTypes of statistical tests",
     "crumbs": [
       "Part 1: Basics",
       "4. Introduction to Linear Algebra"
     ]
   },
   {
-    "objectID": "sessions/week4.html#hypothesising",
-    "href": "sessions/week4.html#hypothesising",
+    "objectID": "sessions/week4.html#back-to-the-start",
+    "href": "sessions/week4.html#back-to-the-start",
     "title": "Linear Algebra",
-    "section": "Hypothesising",
-    "text": "Hypothesising\nResearch science is about coming up with hypotheses and evaluating them.\n\nThis lecture thinking about posing and answering reserach questions.\nI have this great idea - considering the data is this idea plausibly true?",
+    "section": "Back to the start",
+    "text": "Back to the start\nMaths underpins quantitative methods\n\nquantitative methods includes data analysis and machine learning\nfocused on algorithms and methodologies\nAND practical examples of how these can be applied",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#maths-underpins-it",
+    "href": "sessions/week4.html#maths-underpins-it",
+    "title": "Linear Algebra",
+    "section": "Maths underpins it",
+    "text": "Maths underpins it\n\n\n\n\n\nImage credit: [xkcd](https://xkcd.com/1838/)\n\n\n\n\nThis lecture covers some of the key concepts.\nThe goal is to facilitate deeper understanding of the methods.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#maths-doesnt-bite",
+    "href": "sessions/week4.html#maths-doesnt-bite",
+    "title": "Linear Algebra",
+    "section": "Maths doesn’t bite!",
+    "text": "Maths doesn’t bite!\n\n\n\n\nMaths can seem scary – but goal is to have a better understanding of key ideas.\nNot expecting students to be experts!",
     "crumbs": [
       "Part 1: Basics",
       "4. Introduction to Linear Algebra"
@@ -1459,7 +1885,480 @@
     "href": "sessions/week4.html#learning-objectives",
     "title": "Linear Algebra",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of this lecture you should:\n\nEstablish a hypothesis.\nDefine the Type I and Type II errors. - Define the Type I and Type II errors.\nCalculate the p-value.",
+    "text": "Learning Objectives\nBy the end of this lecture you should:\n\nDefine concept of linear maps.\nCompute linear algebra equations using vectors and matrices.\n\nDescribe how linear algebra relates to solving linear regression.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#what-does-it-mean",
+    "href": "sessions/week4.html#what-does-it-mean",
+    "title": "Linear Algebra",
+    "section": "What does it mean?",
+    "text": "What does it mean?\nThe goal is to understand equations like this:\n\\[\\begin{align}\ny = \\sum_{i=1}^n \\beta_i x_i\n\\end{align}\\]\n\nThis is a linear equation.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#but-what-does-it-mean",
+    "href": "sessions/week4.html#but-what-does-it-mean",
+    "title": "Linear Algebra",
+    "section": "But what does it mean???",
+    "text": "But what does it mean???\nEquations are often used in the methods sections of papers to describe the model.\n\n\n\nTaken from: Chiou, Jou, & Yang, (2015). Factors affecting public transportation usage rate: Geographically weighted regression. Transportation Research Part A: Policy and Practice.\n\n\n\nThis is an equation for a geographically weighted regression model.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#mathematical-models",
+    "href": "sessions/week4.html#mathematical-models",
+    "title": "Linear Algebra",
+    "section": "Mathematical models",
+    "text": "Mathematical models\n\nMathematical models help us to understand the data\nIn a regression setting the model describes a function that maps input to real-valued outputs\nWe can use mathematical models to validate our hypotheses/research questions\n\nHow does the number of bedrooms affect house price?\nWhat’s the relationship between time spent studying and student’s grades?\n\n\n\nThinking back to hypotheses from last week - mathematical models help us to evaluate our research question.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#machine-learning",
+    "href": "sessions/week4.html#machine-learning",
+    "title": "Linear Algebra",
+    "section": "Machine learning",
+    "text": "Machine learning\nA model which improves after data is taken into account.\n\nA specific type of mathematical model\nThe learning part is about automatically finding patterns\n\n\nLots of different definitions of machine learning - but this us a simple one.\nIn later weeks of the course we will look at machine learning concepts.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#mathematical-notation",
+    "href": "sessions/week4.html#mathematical-notation",
+    "title": "Linear Algebra",
+    "section": "Mathematical notation",
+    "text": "Mathematical notation\nGoing to be using some mathematical notation\n\nas this is what’s used in papers!\n\n\nIt’s just a formal way of writing maths.\n\nProvides a universal way of writing and understanding maths.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#cheat-sheet",
+    "href": "sessions/week4.html#cheat-sheet",
+    "title": "Linear Algebra",
+    "section": "Cheat sheet",
+    "text": "Cheat sheet\nMathematical notation cheat sheet: https://www.upyesp.org/posts/makrdown-vscode-math-notation/",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#letters-for-numbers",
+    "href": "sessions/week4.html#letters-for-numbers",
+    "title": "Linear Algebra",
+    "section": "Letters for numbers",
+    "text": "Letters for numbers\n\n\\(a, b, c\\) represent constants\n\n\\(x, y, z, \\dots\\) represent variables\n\n\\(f, g, h, \\dots\\) represent functions\n\n\\(i, j, \\dots\\) often used for indices (i.e. counting)\n\n\\(a_i\\) means the \\(i\\)-th element of a sequence",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#numbers-replaced-by-letters",
+    "href": "sessions/week4.html#numbers-replaced-by-letters",
+    "title": "Linear Algebra",
+    "section": "Numbers replaced by letters",
+    "text": "Numbers replaced by letters\n\n\nThe power to represent any number!",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#sums",
+    "href": "sessions/week4.html#sums",
+    "title": "Linear Algebra",
+    "section": "Sums",
+    "text": "Sums\nSummation notation is a compact way to write repeated addition.\n\\[\\begin{align}\n\\sum_{i=1}^n a_i = a_1 + a_2 + a_3 + \\dots + a_n\n\\end{align}\\]\n\nExample:\n\\[\\begin{align}\n\\sum_{i=1}^5 i = 1+2+3+4+5 = 15\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#product",
+    "href": "sessions/week4.html#product",
+    "title": "Linear Algebra",
+    "section": "Product",
+    "text": "Product\nProduct notation is a compact way to write repeated multiplication.\n\\[\\begin{align}\n\\prod_{i=1}^n a_i = a_1 \\cdot a_2 \\cdot a_3 \\cdot \\dots \\cdot a_n\n\\end{align}\\]\n\nExample:\n\\[\\begin{align}\n\\prod_{i=1}^4 i = 1 \\cdot 2 \\cdot 3 \\cdot 4 = 24\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#a-little-bit-of-epsilon",
+    "href": "sessions/week4.html#a-little-bit-of-epsilon",
+    "title": "Linear Algebra",
+    "section": "a little bit of epsilon",
+    "text": "a little bit of epsilon\n\\(\\epsilon\\) is used to mean a small, but arbitrary, number.\n\n\nExample:\n\\[\\begin{align}\ny = 2x + \\epsilon\n\\end{align}\\]\n\n\nThis means \\(y\\) is equal to \\(2\\) times \\(x\\) plus a small value. So if \\(x=3\\), then we would expect \\(y\\) to be close to \\(6\\), but not exactly \\(6\\).",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#what-is-a-function",
+    "href": "sessions/week4.html#what-is-a-function",
+    "title": "Linear Algebra",
+    "section": "What is a function?",
+    "text": "What is a function?\nA function is a mathematical operation which maps an input value to an output value.\n\nMathematical description of a function\n\\[\\begin{align}\nf(x) = y\n\\end{align}\\]\n\n\nMaps values from a domain \\(X\\) to a range \\(Y\\).\n\\[\\begin{align}\nf(x) = y \\text{ for } x \\in X, y \\in Y\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#domain-and-range",
+    "href": "sessions/week4.html#domain-and-range",
+    "title": "Linear Algebra",
+    "section": "Domain and range",
+    "text": "Domain and range\nDomain - the set of all possible input numbers for the function\nExample:\nIn \\(f(x)=y\\), \\(x\\) is the domain.\n\nRange: the set of all possible output numbers from the function\nExample:\nIn \\(f(x)=y\\), \\(y\\) is the range.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#number-systems",
+    "href": "sessions/week4.html#number-systems",
+    "title": "Linear Algebra",
+    "section": "Number systems",
+    "text": "Number systems\nIn the applied sciences the domain and range are typically \\(\\mathbb N\\) or \\(\\mathbb Z\\) or \\(\\mathbb R\\)\n\n\n\\(\\mathbb N\\)\n\nNatural numbers\n0,1,2,3,4,5,6…\n\n\\(\\mathbb Z\\)\n\nIntegers\n… -4, -3, -2, -1, 0, 1, 2, 3, 4, …\n\n\\(\\mathbb R\\)\n\nReal numbers",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#data-represented-algebraically",
+    "href": "sessions/week4.html#data-represented-algebraically",
+    "title": "Linear Algebra",
+    "section": "Data represented algebraically",
+    "text": "Data represented algebraically\nAlgebra is a way of expressing numbers in a generalised or abstract form.\nExample:\n\\[\\begin{align}\nx \\in \\mathbb N\n\\end{align}\\]\n\n\nThis is the data represented algebraically.\nTypically a vector of numbers \\(X^n\\)\n\n\\[\\begin{align}\nX^n = (x_1, x_2, x_3, ... , x_n)\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#example-1",
+    "href": "sessions/week4.html#example-1",
+    "title": "Linear Algebra",
+    "section": "Example 1",
+    "text": "Example 1\nProbability density function of normal distribution\n\\[\\begin{align}\nf(x) = \\frac{1}{\\sqrt{2 \\pi \\sigma^2}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}\n\\end{align}\\]\nwhere \\(x \\in \\mathbb N\\) and \\(f(x) \\in [ 0 , 1 ]\\).\n \n\nNote\n\\([0, 1]\\) is the set of real numbers between \\(0\\) and \\(1\\), inclusive of \\(0\\) and \\(1\\).\n\n\nLast lecture we were thinking about PDFs - these are a function. They map the input value, the ‘x’ to the output range which is a probability between 0 and 1.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#example-2",
+    "href": "sessions/week4.html#example-2",
+    "title": "Linear Algebra",
+    "section": "Example 2",
+    "text": "Example 2\nThe other function we’ve seen is a linear equation.\n\\[\\begin{align}\nf(x) = ax + b\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#linear-equation",
+    "href": "sessions/week4.html#linear-equation",
+    "title": "Linear Algebra",
+    "section": "Linear equation",
+    "text": "Linear equation\nA linear equation is a linear combination of variables.\nExamples include:\n\\[\\begin{align}\nf(x) = ax + b\n\\end{align}\\]\n\n\n“linea” is the latin word for line or string.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#straight-lines",
+    "href": "sessions/week4.html#straight-lines",
+    "title": "Linear Algebra",
+    "section": "Straight lines",
+    "text": "Straight lines\nGraphically linear equations are straight lines.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#linear-equations-1",
+    "href": "sessions/week4.html#linear-equations-1",
+    "title": "Linear Algebra",
+    "section": "Linear equation(s)",
+    "text": "Linear equation(s)\nWe can generalise to multiple equations.\n\nThey are:\n\nA system of multiple linear functions\nWhich can be represented by matrices\nThey can have 0, 1, or many solutions",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#example-1-1",
+    "href": "sessions/week4.html#example-1-1",
+    "title": "Linear Algebra",
+    "section": "Example 1",
+    "text": "Example 1\n\\[\\begin{align}\nx+y=10\n\\end{align}\\]\n\n\nWhat could \\(x\\) and \\(y\\) be?\nCould have \\(x=y=5\\)\nOr \\(x=2.5\\) and \\(y=7.5\\)\n\n\n\nThere are many solutions!!!\nMany solutions = under-specified\n\nUnder-specified but simple to solve!",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#example-2-1",
+    "href": "sessions/week4.html#example-2-1",
+    "title": "Linear Algebra",
+    "section": "Example 2",
+    "text": "Example 2\n\\[\\begin{align}\nx+y=10\n\\\\\n2x+y=15\n\\end{align}\\]\n\nIn school might have solved this using substitution.\n\nRearrange the first equation to get \\(y=10-x\\)\nSubstituting in we get \\(2x+(10-x)=15\\)\n\\(x+10=15\\) \\(\\implies\\) \\(x=5\\) \\(\\implies\\) \\(y=5\\)\n\n\n\nThere is exactly one solution!\n\nPerfectly specified and we can solve it without too much difficulty",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#example-3",
+    "href": "sessions/week4.html#example-3",
+    "title": "Linear Algebra",
+    "section": "Example 3",
+    "text": "Example 3\n\\[\\begin{align}\nx_1+x_2+x_3+x_4=10\n\\\\ x_1+4x_2+x_3+x_4=25\n\\\\ x_1+4x_2+43x_3+x_4=37\n\\\\ x_1+4x_2+7x_3+59x_4=1073\n\\end{align}\\]\n\nVery hard to solve!\n\nAn example (when things get more complicated)",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#matrix-notation",
+    "href": "sessions/week4.html#matrix-notation",
+    "title": "Linear Algebra",
+    "section": "Matrix notation",
+    "text": "Matrix notation\n\\[\\begin{align}\nx_1+x_2+x_3+x_4=10\n\\\\ x_1+4x_2+x_3+x_4=25\n\\\\ x_1+4x_2+43x_3+x_4=37\n\\\\ x_1+4x_2+7x_3+59x_4=1073\n\\end{align}\\]\n\nCan be written as:\n\\[\\begin{align}\n\\begin{bmatrix}1&1&1&1\\cr1&4&1&1\\cr1&4&43&1\\cr1&4&7&59\\end{bmatrix}\\begin{pmatrix}x_1\\cr x_2\\cr x_3\\cr x_4\\end{pmatrix} = \\begin{pmatrix}10\\cr 25\\cr 37\\cr 1073\\end{pmatrix}\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#generalised-matrix-form",
+    "href": "sessions/week4.html#generalised-matrix-form",
+    "title": "Linear Algebra",
+    "section": "Generalised matrix form",
+    "text": "Generalised matrix form\nThe generalised matrix form (for a 4x4 matrix is):\n\\[\\begin{align}\n\\begin{bmatrix}a_{1,1} & a_{1,2} & a_{1,3} & a_{1,4}\\cr a_{2,1} & a_{2,2} & a_{2,3} & a_{2,4}\\cr a_{3,1} & a_{3,2} & a_{3,3} & a_{3,4}\\cr a_{4,1} & a_{4,2} & a_{4,3} & a_{4,4}\\end{bmatrix}\\begin{pmatrix}x_1\\cr x_2\\cr x_3\\cr x_4\\end{pmatrix} = \\begin{pmatrix}y_1 \\cr y_2 \\cr y_3 \\cr y_4\\end{pmatrix}\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#along-the-corridor-down-the-stairs",
+    "href": "sessions/week4.html#along-the-corridor-down-the-stairs",
+    "title": "Linear Algebra",
+    "section": "Along the corridor, down the stairs",
+    "text": "Along the corridor, down the stairs\n\n\nMatrices are indexed by row (\\(m\\)) and by column (\\(n\\)).",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#example",
+    "href": "sessions/week4.html#example",
+    "title": "Linear Algebra",
+    "section": "Example",
+    "text": "Example\n\\(m=2\\), \\(n=2\\) matrix:\n\\[\\begin{align}\n\\begin{bmatrix}1&1\\cr1&4\\end{bmatrix}\n\\end{align}\\]\n\n\\(m=3\\), \\(n=2\\) matrix:\n\\[\\begin{align}\n\\begin{bmatrix}1&1&2\\cr1&4&7\\end{bmatrix}\n\\end{align}\\]\n\n\n\nNote\nWhen \\(m=n\\) we have a square matrix.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#matrix-addition",
+    "href": "sessions/week4.html#matrix-addition",
+    "title": "Linear Algebra",
+    "section": "Matrix addition",
+    "text": "Matrix addition\nWe denote matrices by capital letters: \\(A\\), \\(B\\), …\n\nMatrix addition is element-wise:\n\\[\\begin{align}\n(A+B)_{ij} = A_{ij} + B_{ij}\n\\end{align}\\]\n\n\nExample:\n\\[\\begin{align}\n\\begin{bmatrix}1&1\\cr1&4\\end{bmatrix} +\n\\begin{bmatrix}1&0\\cr2&6\\end{bmatrix} =\n\\begin{bmatrix}2&1\\cr3&10\\end{bmatrix}\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#matrix-multiplication",
+    "href": "sessions/week4.html#matrix-multiplication",
+    "title": "Linear Algebra",
+    "section": "Matrix multiplication",
+    "text": "Matrix multiplication\nMatrix multiplication is row by column.\n\\[\\begin{align}\n(AB){ij} = \\sum{k} A_{ik} B_{kj}\n\\end{align}\\]\n\nExample:\n\\[\\begin{align}\n\\begin{bmatrix}1 & 2\\cr 3 & 4\\end{bmatrix}\n\\begin{bmatrix}5 & 6\\cr 7 & 8\\end{bmatrix}\n=\n\\begin{bmatrix}\n1\\cdot 5 + 2\\cdot 7 & 1\\cdot 6 + 2\\cdot 8 \\cr\n3\\cdot 5 + 4\\cdot 7 & 3\\cdot 6 + 4\\cdot 8\n\\end{bmatrix}\n=\n\\begin{bmatrix}\n19 & 22 \\cr 43 & 50\n\\end{bmatrix}\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#identity-matrix",
+    "href": "sessions/week4.html#identity-matrix",
+    "title": "Linear Algebra",
+    "section": "Identity matrix",
+    "text": "Identity matrix\nThe identity matrix \\(I\\) acts like the number \\(1\\) in multiplication.\nFor any compatible matrix \\(A\\):\n\\[\\begin{align}\nAI = IA = A\n\\end{align}\\]\n\nExample:\n\\[\\begin{align}\nI = \\begin{bmatrix}\n1 & 0 & 0 \\cr\n0 & 1 & 0 \\cr\n0 & 0 & 1\n\\end{bmatrix}\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#determinant-of-a-matrix",
+    "href": "sessions/week4.html#determinant-of-a-matrix",
+    "title": "Linear Algebra",
+    "section": "Determinant of a matrix",
+    "text": "Determinant of a matrix\nThe determinant of a square matrix \\(A\\) is a scalar value that gives information about:\n\nWhether \\(A\\) is invertible\n\nHow \\(A\\) scales space (volume/area)\n\nOrientation (positive or negative)\n\nWe write this as \\(\\det(A)\\) or \\(|A|\\).",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#determinant-of-a-22-matrix",
+    "href": "sessions/week4.html#determinant-of-a-22-matrix",
+    "title": "Linear Algebra",
+    "section": "Determinant of a 2×2 matrix",
+    "text": "Determinant of a 2×2 matrix\nFor\n\\[\\begin{align}\nA = \\begin{bmatrix}\na & b \\cr\nc & d\n\\end{bmatrix}\n\\end{align}\\]\nthe determinant is:\n\\[\\begin{align}\n\\det(A) = ad - bc\n\\end{align}\\]\n\nExample:",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#inverse-matrix",
+    "href": "sessions/week4.html#inverse-matrix",
+    "title": "Linear Algebra",
+    "section": "Inverse matrix",
+    "text": "Inverse matrix\nThe inverse of a square matrix \\(A\\) is denoted \\(A^{-1}\\) and satisfies:\n\\[\\begin{align}\nAA^{-1} = A^{-1}A = I\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#inverse-matrix-2x2",
+    "href": "sessions/week4.html#inverse-matrix-2x2",
+    "title": "Linear Algebra",
+    "section": "Inverse matrix (2x2)",
+    "text": "Inverse matrix (2x2)\nFor a \\(2 \\times 2\\) matrix A:\n\\[\\begin{align}\nA = \\begin{bmatrix}\na & b \\cr\nc & d\n\\end{bmatrix}\n\\end{align}\\]\nif \\(\\det(A) \\neq 0\\), then the inverse is:\n\\[\\begin{align}\nA^{-1} = \\frac{1}{\\det(A)}\n\\begin{bmatrix}\nd & -b \\cr\n-c & a\n\\end{bmatrix},\n\\quad \\text{where } \\det(A) = ad - bc\n\\end{align}\\]\nIf \\(\\det(A) = 0\\), the matrix has no inverse.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#system-of-equations",
+    "href": "sessions/week4.html#system-of-equations",
+    "title": "Linear Algebra",
+    "section": "System of equations",
+    "text": "System of equations\nRecall that a system of linear equations can be written compactly as:\n\\[\\begin{align}\nAx = y\n\\end{align}\\]\nwhere: - \\(A\\) is the coefficient matrix - \\(x\\) is the vector of unknowns - \\(y\\) is the vector of constants",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#solving-the-system",
+    "href": "sessions/week4.html#solving-the-system",
+    "title": "Linear Algebra",
+    "section": "Solving the system",
+    "text": "Solving the system\nIf \\(A\\) is invertible (i.e. \\(\\det(A) \\neq 0\\)), we can solve for \\(x\\):\n\\[\\begin{align}\nAx &= y \\\\\nA^{-1}Ax &= A^{-1}y \\\\\nIx &= A^{-1}y \\\\\nx &= A^{-1}y\n\\end{align}\\]\n\nThus, the solution exists and is unique whenever \\(A\\) has an inverse.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#so-whats-does-it-mean",
+    "href": "sessions/week4.html#so-whats-does-it-mean",
+    "title": "Linear Algebra",
+    "section": "So whats does it mean?",
+    "text": "So whats does it mean?\n\n\n\nTaken from: Chiou, Jou, & Yang, (2015). Factors affecting public transportation usage rate: Geographically weighted regression. Transportation Research Part A: Policy and Practice.",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#take-another-look",
+    "href": "sessions/week4.html#take-another-look",
+    "title": "Linear Algebra",
+    "section": "Take another look",
+    "text": "Take another look\nLink to the paper…",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#writing-the-equation",
+    "href": "sessions/week4.html#writing-the-equation",
+    "title": "Linear Algebra",
+    "section": "Writing the equation",
+    "text": "Writing the equation\nEquation 1:\n\\[\\begin{align}\ny_i = \\beta_0(u_i, v_i) + \\sum_{k=1}^p \\beta_{ik}(u_i, v_i)x_{ik} + \\epsilon_i\n\\end{align}\\]\nEquation 2:\n\\[\\begin{align}\n\\hat{\\beta}(i) = [X^TW(i)X]^{-1}X^TW(i)Y\n\\end{align}\\]",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#translating-equation-1",
+    "href": "sessions/week4.html#translating-equation-1",
+    "title": "Linear Algebra",
+    "section": "Translating equation 1",
+    "text": "Translating equation 1\n\\[\\begin{align}\ny_i = \\beta_0(u_i, v_i) + \\sum_{k=1}^p \\beta_{ik}(u_i, v_i)x_{ik} + \\epsilon_i\n\\end{align}\\]\nwhere: - \\(y_i\\): the outcome (response) for observation \\(i\\) - \\(\\beta_0(u_i,v_i)\\): the intercept, which can vary with location \\((u_i,v_i)\\) - \\(\\sum_{k=1}^p \\beta_{ik}(u_i,v_i) x_{ik}\\): the weighted sum of predictors \\(x_{ik}\\), where each predictor has its own coefficient that may depend on \\((u_i,v_i)\\) - \\(\\epsilon_i\\): the error term for observation \\(i\\)\n\nTranslation:\n“The outcome \\(y_i\\) is explained by an intercept and a weighted combination of predictors, with coefficients that may change depending on the location \\((u_i,v_i)\\), plus some error.”",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#translating-equation-2",
+    "href": "sessions/week4.html#translating-equation-2",
+    "title": "Linear Algebra",
+    "section": "Translating equation 2",
+    "text": "Translating equation 2\n\\[\\begin{align}\n\\hat{\\beta}(i) = [X^TW(i)X]^{-1}X^TW(i)Y\n$\\hat{\\beta}(i)$: the estimated coefficients at location $i$\n\\end{align}\\]\nwhere: - \\(X\\): the matrix of predictor variables - \\(Y\\): the vector of observed outcomes - \\(W(i)\\): a weight matrix that depends on location \\(i\\) - \\(X^T\\): the transpose of \\(X\\) - \\([X^TW(i)X]^{-1}\\): the inverse of the weighted cross-product matrix\n\nTranslation:\n“The estimated coefficients \\(\\hat{\\beta}(i)\\) are obtained by solving a weighted least squares problem: take the predictors \\(X\\), weight them with \\(W(i)\\), and solve for the coefficients that best fit \\(Y\\).”",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#covered",
+    "href": "sessions/week4.html#covered",
+    "title": "Linear Algebra",
+    "section": "Covered",
+    "text": "Covered\nWe’ve covered:\n\nMathematical notation\nSums and Products\nFunctions\nMatrices\nAlgebraic representations",
+    "crumbs": [
+      "Part 1: Basics",
+      "4. Introduction to Linear Algebra"
+    ]
+  },
+  {
+    "objectID": "sessions/week4.html#key-takeaways",
+    "href": "sessions/week4.html#key-takeaways",
+    "title": "Linear Algebra",
+    "section": "Key takeaways",
+    "text": "Key takeaways\n\nCan use mathematical notation to write equations in a univeral language.\nLinear algebra helps us to solve systems of linear equations.\n\n\nIf in doubt:\n\n\nUse the maths cheat sheet!",
     "crumbs": [
       "Part 1: Basics",
       "4. Introduction to Linear Algebra"
