@@ -1265,6 +1265,20 @@
     ]
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome",
+    "section": "",
+    "text": "The Quantitative Methods (QM) module is a compulsory element of CASA’s MSc/MRes USS programmes and is intended provide an introduction to quantitative methods for all students.\nAs data becomes central to decision-making across all sectors, the ability to move beyond simple description to robust and evidence-based analysis is essential for researchers and practitioners in geography and urban studies. Making sense of the complex patterns that define our world requires a firm understanding of the language of data. This module provides the essential grammar for that language and aims to equip students with the foundational quantitative skills needed to describe data, build models, and derive meaningful insights from numerical evidence.\nTo achieve this, the module is structured progressively across three core sections. The first section establishes the fundamental toolkit for quantitative analysts. Beginning with Exploratory Data Analysis, students will learn how to visualise, summarise, and critically interrogate datasets. This is followed by a rigorous grounding in the principles of statistical inference through hypothesis testing, and an introduction to the linear algebra that provides the mathematical architecture for many of the models used in modern data science.\nThe second section builds upon this foundation to explore the core of statistical modelling: understanding and quantifying relationships between variables. Students will progress from measuring correlations to building sophisticated regression models. The curriculum covers the workhorse of social science, the Generalised Linear Model (GLM), before advancing to Multilevel Models, a critical technique for handling the nested and hierarchical data that is common in geographical and social research.\nThe final section of the course introduces advanced techniques for uncovering hidden structures within complex, high-dimensional datasets. Students will learn methods for dimensionality reduction to simplify complexity without losing vital information, and clustering analysis to identify natural groupings and patterns in data.\nTherefore, this module guides students on a complete analytical journey, from foundational principles to the application of advanced modelling techniques. It serves as a vital prerequisite for more specialised analytical modules and is essential for students wishing to undertake quantitative geospatial research. Ultimately, this module will provide quantitative skills that are in high demand across public, private, and academic sectors."
+  },
+  {
+    "objectID": "index.html#acknowledgements",
+    "href": "index.html#acknowledgements",
+    "title": "Welcome",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\nWe really appreciate the support from various people:\n\nJon for setting up this wonderful CASA-themed quarto template.\nOllie and Andy for inspiring us to pursue a Quarto-based module website."
+  },
+  {
     "objectID": "assessments/index.html",
     "href": "assessments/index.html",
     "title": "CASA0007 Assessment",
@@ -1295,18 +1309,134 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome",
+    "objectID": "sessions/index.html",
+    "href": "sessions/index.html",
+    "title": "Overview",
     "section": "",
-    "text": "The Quantitative Methods (QM) module is a compulsory element of CASA’s MSc/MRes USS programmes and is intended provide an introduction to quantitative methods for all students.\nAs data becomes central to decision-making across all sectors, the ability to move beyond simple description to robust and evidence-based analysis is essential for researchers and practitioners in geography and urban studies. Making sense of the complex patterns that define our world requires a firm understanding of the language of data. This module provides the essential grammar for that language and aims to equip students with the foundational quantitative skills needed to describe data, build models, and derive meaningful insights from numerical evidence.\nTo achieve this, the module is structured progressively across three core sections. The first section establishes the fundamental toolkit for quantitative analysts. Beginning with Exploratory Data Analysis, students will learn how to visualise, summarise, and critically interrogate datasets. This is followed by a rigorous grounding in the principles of statistical inference through hypothesis testing, and an introduction to the linear algebra that provides the mathematical architecture for many of the models used in modern data science.\nThe second section builds upon this foundation to explore the core of statistical modelling: understanding and quantifying relationships between variables. Students will progress from measuring correlations to building sophisticated regression models. The curriculum covers the workhorse of social science, the Generalised Linear Model (GLM), before advancing to Multilevel Models, a critical technique for handling the nested and hierarchical data that is common in geographical and social research.\nThe final section of the course introduces advanced techniques for uncovering hidden structures within complex, high-dimensional datasets. Students will learn methods for dimensionality reduction to simplify complexity without losing vital information, and clustering analysis to identify natural groupings and patterns in data.\nTherefore, this module guides students on a complete analytical journey, from foundational principles to the application of advanced modelling techniques. It serves as a vital prerequisite for more specialised analytical modules and is essential for students wishing to undertake quantitative geospatial research. Ultimately, this module will provide quantitative skills that are in high demand across public, private, and academic sectors."
+    "text": "70% attendance required for student visa holders.\nPlease Attend all lectures and workshops.\nContact module lead & bartlett.pg-casa@ucl.ac.uk, if you can’t attend.",
+    "crumbs": [
+      "Overview"
+    ]
   },
   {
-    "objectID": "index.html#acknowledgements",
-    "href": "index.html#acknowledgements",
-    "title": "Welcome",
-    "section": "Acknowledgements",
-    "text": "Acknowledgements\nWe really appreciate the support from various people:\n\nJon for setting up this wonderful CASA-themed quarto template.\nOllie and Andy for inspiring us to pursue a Quarto-based module website."
+    "objectID": "sessions/index.html#attendance-recording",
+    "href": "sessions/index.html#attendance-recording",
+    "title": "Overview",
+    "section": "",
+    "text": "70% attendance required for student visa holders.\nPlease Attend all lectures and workshops.\nContact module lead & bartlett.pg-casa@ucl.ac.uk, if you can’t attend.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#objectives",
+    "href": "sessions/index.html#objectives",
+    "title": "Overview",
+    "section": "Objectives",
+    "text": "Objectives\n\nUnderstand the structure and focus of the module.\nDevelop a method for tackling quantitative problems.\nFormulate a research question and structure quantitative writing.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#why-study-a-quantitative-methods-course",
+    "href": "sessions/index.html#why-study-a-quantitative-methods-course",
+    "title": "Overview",
+    "section": "Why study a Quantitative Methods course?",
+    "text": "Why study a Quantitative Methods course?\n\nCoding alone is not enough.\nUnderstanding models aids in correct tool selection and bug handling.\nGoogle/ChatGPT can make mistakes; detecting them is crucial.\nMathematics understanding is not always required.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#course-objectives",
+    "href": "sessions/index.html#course-objectives",
+    "title": "Overview",
+    "section": "Course Objectives",
+    "text": "Course Objectives\n\nUnderstand a broad range of quantitative techniques.\nApply these skills in research.\nFormulate a coherent quantitative argument.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#prerequisites",
+    "href": "sessions/index.html#prerequisites",
+    "title": "Overview",
+    "section": "Prerequisites",
+    "text": "Prerequisites\n\nNo prerequisite of university-level maths/statistics.\nNo prerequisite programming, but this module doesn’t teach programming.\nCASA0013 is strongly recommneded if you don’t know Python before.\nPython is required for practicals and assessments.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#course-structure",
+    "href": "sessions/index.html#course-structure",
+    "title": "Overview",
+    "section": "Course Structure",
+    "text": "Course Structure\n\nLectures: 10 weeks (Wednesdays 9:00–10:30), split into two sessions.\nTutorials: 10 weeks (Wednesdays 10:30–12:30).",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#platforms",
+    "href": "sessions/index.html#platforms",
+    "title": "Overview",
+    "section": "Platforms",
+    "text": "Platforms\n\nEmail for important notices and private questions.\nGithub & website for lecture notes and notebooks.\nMoodle for lectures recording and assessments.\nSlack for public questions.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#weekly-schedule",
+    "href": "sessions/index.html#weekly-schedule",
+    "title": "Overview",
+    "section": "Weekly Schedule",
+    "text": "Weekly Schedule\n\n\n\nSession\nTopic\nLecturer\n\n\n\n\n1\nIntroduction to data\nHuanfa\n\n\n2\nProbability and distribution\nBea\n\n\n3\nHypothesis testing\nBea\n\n\n4\nIntroduction to linear algebra\nBea\n\n\n5\nCorrelation and regression\nHuanfa\n\n\n6\nMultiple regression\nAdam\n\n\n7\nGeneralised linear model\nAdam\n\n\n8\nMultilevel regression\nAdam\n\n\n9\nDimensionality reduction\nHuanfa\n\n\n10\nClustering Analysis\nHuanfa",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#assessment-1",
+    "href": "sessions/index.html#assessment-1",
+    "title": "Overview",
+    "section": "Assessment",
+    "text": "Assessment\n\nWritten Investigation (summative): 100%\nWeekly quiz (formative)",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#ucl-assessment-policy",
+    "href": "sessions/index.html#ucl-assessment-policy",
+    "title": "Overview",
+    "section": "UCL Assessment Policy",
+    "text": "UCL Assessment Policy\n\nAll submissions via Moodle, not emails.\nLate penalties: Up to 48h (-10 points); up to 7 days (capped at 50); over 7 days (scores 0).\nDAP or Extenuating circumstances: to submit on Portico.\nRespect word count limits\nAvoid plagiarism and fake references",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#moodle-feedback",
+    "href": "sessions/index.html#moodle-feedback",
+    "title": "Overview",
+    "section": "Moodle Feedback",
+    "text": "Moodle Feedback\nPlease provide anonymous feedback on Moodle",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#github-feedback",
+    "href": "sessions/index.html#github-feedback",
+    "title": "Overview",
+    "section": "Github Feedback",
+    "text": "Github Feedback\nYou can also give feedback on Github issues.",
+    "crumbs": [
+      "Overview"
+    ]
   },
   {
     "objectID": "sessions/week2.html#overview-of-lecture-1",
