@@ -242,8 +242,8 @@
 <p><strong>How can we try to answer this?</strong></p>
 <p>Try to understand the distribution of heights.</p>
 <aside class="notes">
-<p>Last week we asked this question and we thought about the distribution of the data.</p>
-<p>This week we look at how to pose and address the research question.</p>
+<p>Last week we asked this question and we thought about the distribution of the data. How to describe the distirbution of the data mathematically.</p>
+<p>This week we look at how to properly ask the research question, and how to answer it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -273,8 +273,8 @@
 <p>Research science is about coming up with hypotheses and evaluating them.</p>
 </div></div>
 <aside class="notes">
-<p>This lecture thinking about posing and answering reserach questions.</p>
-<p>I have this great idea - considering the data is this idea plausibly true?</p>
+<p>This lecture thinking about posing and answering research questions.</p>
+<p>You come up with a greta idea - then need to think considering the data is this idea plausibly true?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -326,7 +326,7 @@
 <p><strong>Research question</strong></p>
 <p>A research question focuses on a specific problem.</p>
 <p><strong>Hypothesis</strong></p>
-<p>A statement that you will seek to confirm or disprove the research question.</p>
+<p>A formal statement that you will seek to confirm or disprove the research question.</p>
 </section>
 <section id="flip-a-coin" class="slide level2">
 <h2>Flip a coin</h2>
@@ -390,8 +390,21 @@ The hypothesis is that it is a fair coin.
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>Correct formulation:</strong></p>
-<p>If the coin is fair, how likely would it be to see 7 heads out of 10 flips <em>OR AN EVEN MORE EXTREME RESULT?</em></p>
+<p>If the coin is fair, how likely would it be to see 7 heads out of 10 flips <em>or an even more extreme result?</em></p>
 </div></div>
+<aside class="notes">
+<p>Interested in the probability of seeing the event or something even more extreme.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="establishing-and-evaluating-a-hypothesis" class="title-slide slide level1 center">
@@ -411,7 +424,7 @@ The hypothesis is that it is a fair coin.
 <p><span style="color:#49a0c4"><strong><span class="math inline">\(H_1\)</span></strong> - the alternative hypothesis</span></p>
 <ul>
 <li>your hypothesis</li>
-<li>needs some evidence to verify</li>
+<li>it requires some evidence (data) to verify</li>
 </ul>
 </div>
 </section>
@@ -423,10 +436,23 @@ The hypothesis is that it is a fair coin.
 <li class="fragment">Decide what “too unlikely” means <strong>before you do the test</strong>.</li>
 <li class="fragment">Common choice is 5% significance
 <ul>
-<li class="fragment"><span class="math inline">\(𝜶 = 0.05\)</span></li>
+<li class="fragment"><span class="math inline">\(\alpha = 0.05\)</span></li>
 <li class="fragment">This means that if we see evidence that would have less than a 5% chance of occurring under the null hypothesis, then we reject the null hypothesis.</li>
 </ul></li>
 </ul>
+<aside class="notes">
+<p>It’s important to decide on your significance level prior, as otherwise you might find an event which is significant at the 10% threshold and not at 5% - which could lead to bad scientific practise.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="step-3" class="slide level2">
 <h2>Step 3</h2>
@@ -438,8 +464,21 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 ``` -->
 <ul>
 <li class="fragment">This could mean collecting the data</li>
-<li class="fragment">Or identifying a suitable dataset</li>
+<li class="fragment">Or identifying a suitable exisiting dataset</li>
 </ul>
+<aside class="notes">
+<p>In quant methods this normally means finding an open public dataset to use.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="step-4" class="slide level2">
 <h2>Step 4</h2>
@@ -467,7 +506,7 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <h2>Step 5</h2>
 <p><strong>Compare p-value with significance level</strong></p>
 <ul>
-<li class="fragment">p-value &gt; <span class="math inline">\(\alpha\)</span>
+<li class="fragment">p-value <span class="math inline">\(&gt; \alpha\)</span>
 <ul>
 <li class="fragment">Evidence not that unlikely.</li>
 <li class="fragment">Not enough evidence to reject <span class="math inline">\(H_0\)</span>.</li>
@@ -492,7 +531,7 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <section>
 <section id="types-of-error" class="title-slide slide level1 center">
 <h1>Types of error</h1>
-
+<p>Where things can go wrong</p>
 </section>
 <section id="type-i-error" class="slide level2">
 <h2>Type I error</h2>
@@ -511,7 +550,7 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </div>
 <p>NHS offers breast cancer screening for all women between the ages of 50 and 70.</p>
 <aside class="notes">
-<p>The idea is to screen all women in the popualtion at high risk of brast cancer - in the hope they pick up results better.</p>
+<p>The idea is to screen all women in the popualtion at high risk of brast cancer - in the hope they pick up results better. Whilst the tests are good they’re not completely accurate.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -526,14 +565,15 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </section>
 <section id="example-screening-outcomes" class="slide level2">
 <h2>Example: Screening outcomes</h2>
-<p><span style="color:#abc766"><strong>False positive</strong></span></p>
-<p>The null hypothesis is that the patient doesn’t have cancer. <span class="math inline">\(\approx\)</span> 10% of tests return a false positive. The test says they do have cancer even when they don’t.</p>
+<p>The null hypothesis is that the patient doesn’t have cancer.</p>
 <div class="fragment">
-<p><span style="color:#abc766"><strong>False negative</strong></span></p>
-<p>The null hypothesis is that the patient doesn’t have cancer. <span class="math inline">\(\approx\)</span> 20% of tests return a false negative. The test says they don’t have cancer but they do.</p>
+<p><span style="color:#abc766"><strong>False positive</strong></span> <span class="math inline">\(\approx\)</span> 10% of tests return a false positive. The test says they do have cancer even when they don’t.</p>
+</div>
+<div class="fragment">
+<p><span style="color:#abc766"><strong>False negative</strong></span> <span class="math inline">\(\approx\)</span> 20% of tests return a false negative. The test says they don’t have cancer but they do.</p>
 <aside class="notes">
 <p>False positive is bad as you might pursue a healthcare treatment which is unecessary.</p>
-<p>False negative - in healthcare this is the worst outcome - as goes undiagnosed and hence untreated.</p>
+<p>False negative - in healthcare context this is the worst outcome - as goes undiagnosed and hence untreated.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -552,20 +592,34 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <div style="text-align:center;">
 <p><img src="L3_images/error_matrix.png" alt="Error matrix" style="max-width:80%"></p>
 </div>
+<aside class="notes">
+<p>Possible outcomes form a matrix.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="a-good-hypothesis-or-a-bad-hypothesis" class="title-slide slide level1 center">
 <h1>A good hypothesis or a bad hypothesis?</h1>
-<p>What makes a hypothesis good?</p>
+
 </section>
 <section id="understanding-the-literature-and-the-context" class="slide level2">
 <h2>Understanding the literature and the context</h2>
 <p>The hypothesis should not come out of thin air.</p>
 <div class="fragment">
-<p>What research have other people done?</p>
-</div>
-<div class="fragment">
-<p>What is the cultural context?</p>
+<ul>
+<li class="fragment">What do you know about the context?</li>
+<li class="fragment">What research have other people done?</li>
+<li class="fragment">What is the broader cultural context?</li>
+</ul>
 </div>
 </section>
 <section id="asking-ethical-hypothesis-questions" class="slide level2">
@@ -599,6 +653,19 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <pre><code>Image credit: [Spurious Correlations](https://www.tylervigen.com/spurious/correlation/19598_google-searches-for-report-ufo-sighting_correlates-with_the-number-of-librarians-in-hawaii)</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>It’s a dumb example but it’s quite easy to find nonsense correlations between random variables. Can genertae your own at the website spurious correlations.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="correlation-is-not-causation" class="slide level2">
 <h2>Correlation <strong>IS NOT</strong> causation</h2>
@@ -608,7 +675,7 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </div>
 <div class="fragment">
 <p><br></p>
-<p>The point of the hypothesis test is to test your idea – but use your contextual understanding to come up with plausible (and ethical) initial questions.</p>
+<p>The point of the hypothesis test is to test your idea – but you should use your contextual understanding to come up with plausible (and ethical) initial questions.</p>
 </div>
 </section>
 <section id="the-point-of-the-scientific-method" class="slide level2">
@@ -962,7 +1029,7 @@ D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
 <section id="kde-of-simulated-heights" class="slide level2">
 <h2>KDE of simulated heights</h2>
 <p>It’s easy to fit a KDE to data in Python:</p>
-<div id="5e6a5021" class="cell" data-execution_count="1">
+<div id="f115bd57" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb3-3"><a></a><span class="im">from</span> scipy.stats <span class="im">import</span> gaussian_kde</span>
@@ -1043,7 +1110,7 @@ t &amp;= \frac{170 - 180}{5.55 \cdot \sqrt{\tfrac{1}{95} + \tfrac{1}{103}}} \app
 df = n_1 + n_2 - 2 = 95 + 103 - 2 = 196
 \end{align}\]</span>
 <p>Then use Python to calculate the two-tailed critical t-value at <span class="math inline">\(\alpha = 0.05\)</span>.</p>
-<div id="3e87c8da" class="cell" data-execution_count="2">
+<div id="31b8fb48" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">from</span> scipy.stats <span class="im">import</span> t</span>
 <span id="cb4-2"><a></a></span>
 <span id="cb4-3"><a></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>

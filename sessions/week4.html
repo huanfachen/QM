@@ -197,7 +197,7 @@
 <p><img src="L4_images/maths_meme.jpg" alt="Woman confused by maths." style="max-width:90%"></p>
 </div>
 <aside class="notes">
-<p>Maths can seem scary – but goal is to have a better understanding of key ideas.</p>
+<p>Maths can seem scary – but goal is to have a better understanding of key ideas. Going to cover quite abit - so focus on the goal of being able to understand equations.</p>
 <p>Not expecting students to be experts!</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -279,14 +279,10 @@ y = \sum_{i=1}^n \beta_i x_i
 <ul>
 <li class="fragment">Mathematical models help us to understand the data</li>
 <li class="fragment">In a regression setting the model describes a function that maps input to real-valued outputs</li>
-<li class="fragment">We can use mathematical models to validate our hypotheses/research questions
-<ul>
-<li class="fragment">How does the number of bedrooms affect house price?</li>
-<li class="fragment">What’s the relationship between time spent studying and student’s grades?</li>
-</ul></li>
+<li class="fragment">We can use mathematical models to validate our hypotheses/research questions</li>
 </ul>
 <aside class="notes">
-<p>Thinking back to hypotheses from last week - mathematical models help us to evaluate our research question.</p>
+<p>Thinking back to hypotheses from last week - mathematical models help us to evaluate our research question. Lats week we looked at simple statistical tests - but might have a more sophisticated model of what’s happening.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -303,10 +299,12 @@ y = \sum_{i=1}^n \beta_i x_i
 <h2>Machine learning</h2>
 <p><span style="color:#49a0c4"><em>A model which improves after data is taken into account.</em></span></p>
 <ul>
-<li>A specific type of mathematical model</li>
+<li>Mayne of these concepts are also integral to machine learning</li>
+<li>Really just a specific type of mathematical model</li>
 <li>The learning part is about automatically finding patterns</li>
 </ul>
 <aside class="notes">
+<p>These ideas are also fundamental for machine learning.</p>
 <p>Lots of different definitions of machine learning - but this us a simple one.</p>
 <p>In later weeks of the course we will look at machine learning concepts.</p>
 <style type="text/css">
@@ -358,6 +356,7 @@ y = \sum_{i=1}^n \beta_i x_i
 </section>
 <section id="letters-for-numbers" class="slide level2">
 <h2>Letters for numbers</h2>
+<p>There are mathematical conventions for how we describe different things.</p>
 <ul>
 <li class="fragment"><span class="math inline">\(a, b, c\)</span> represent <strong>constants</strong><br>
 </li>
@@ -369,6 +368,7 @@ y = \sum_{i=1}^n \beta_i x_i
 </li>
 <li class="fragment"><span class="math inline">\(a_i\)</span> means the <span class="math inline">\(i\)</span>-th element of a sequence<br>
 </li>
+<li class="fragment"><span class="math inline">\(A, B, C\)</span> represent <strong>matrices</strong></li>
 </ul>
 </section>
 <section id="numbers-replaced-by-letters" class="slide level2">
@@ -381,6 +381,19 @@ y = \sum_{i=1}^n \beta_i x_i
 <p><img src="L4_images/keanu_xy.jpg" alt="Keanu likes random variables." style="max-width:90%"></p>
 </div>
 </div></div>
+<aside class="notes">
+<p>This is powerful as it allows is to represent abstract concepts - a universal x, rather than a specific number.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="sums" class="slide level2">
 <h2>Sums</h2>
@@ -820,6 +833,7 @@ d &amp; -b \cr
 \end{bmatrix},
 \quad \text{where } \det(A) = ad - bc
 \end{align}\]</span>
+<div class="fragment">
 <p>If <span class="math inline">\(\det(A) = 0\)</span>, the matrix has no inverse.</p>
 <!-- ## Example 
 
@@ -835,6 +849,7 @@ A^{-1} = \frac{1}{(1)(4)-(2)(3)}
 = \begin{bmatrix}-2 & 1 \cr 1.5 & -0.5\end{bmatrix}
 \end{align}
 ``` -->
+</div>
 </section>
 <section id="system-of-equations" class="slide level2">
 <h2>System of equations</h2>
@@ -886,16 +901,66 @@ y_i = \beta_0(u_i, v_i) + \sum_{k=1}^p \beta_{ik}(u_i, v_i)x_{ik} + \epsilon_i
 \hat{\beta}(i) = [X^TW(i)X]^{-1}X^TW(i)Y
 \end{align}\]</span>
 </section>
+<section id="equation-1" class="slide level2">
+<h2>Equation 1</h2>
+<span class="math display">\[\begin{align}
+y_i = \beta_0(u_i, v_i) + \sum_{k=1}^p \beta_{ik}(u_i, v_i)x_{ik} + \epsilon_i
+\end{align}\]</span>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(y_i\)</span>: the outcome (response) for observation <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(\beta_0(u_i,v_i)\)</span>: the intercept, which can vary with location <span class="math inline">\((u_i,v_i)\)</span></li>
+<li><span class="math inline">\(\sum_{k=1}^p \beta_{ik}(u_i,v_i) x_{ik}\)</span>: the weighted sum of predictors <span class="math inline">\(x_{ik}\)</span>, where each predictor has its own coefficient that may depend on <span class="math inline">\((u_i,v_i)\)</span></li>
+<li><span class="math inline">\(\epsilon_i\)</span>: the error term for observation <span class="math inline">\(i\)</span></li>
+</ul>
+<aside class="notes">
+<p>Read the equation out</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="translating-equation-1" class="slide level2">
 <h2>Translating equation 1</h2>
 <span class="math display">\[\begin{align}
 y_i = \beta_0(u_i, v_i) + \sum_{k=1}^p \beta_{ik}(u_i, v_i)x_{ik} + \epsilon_i
 \end{align}\]</span>
-<p>where: - <span class="math inline">\(y_i\)</span>: the outcome (response) for observation <span class="math inline">\(i\)</span> - <span class="math inline">\(\beta_0(u_i,v_i)\)</span>: the intercept, which can vary with location <span class="math inline">\((u_i,v_i)\)</span> - <span class="math inline">\(\sum_{k=1}^p \beta_{ik}(u_i,v_i) x_{ik}\)</span>: the weighted sum of predictors <span class="math inline">\(x_{ik}\)</span>, where each predictor has its own coefficient that may depend on <span class="math inline">\((u_i,v_i)\)</span> - <span class="math inline">\(\epsilon_i\)</span>: the error term for observation <span class="math inline">\(i\)</span></p>
-<div class="fragment">
-<p><em>Translation:</em></p>
-<p>“The outcome <span class="math inline">\(y_i\)</span> is explained by an intercept and a weighted combination of predictors, with coefficients that may change depending on the location <span class="math inline">\((u_i,v_i)\)</span>, plus some error.”</p>
-</div>
+<p><em>The outcome <span class="math inline">\(y_i\)</span> is explained by an intercept and a weighted combination of predictors, with coefficients that may change depending on the location <span class="math inline">\((u_i,v_i)\)</span>, plus some error.</em></p>
+</section>
+<section id="equation-2" class="slide level2">
+<h2>Equation 2</h2>
+<span class="math display">\[\begin{align}
+\hat{\beta}(i) = [X^TW(i)X]^{-1}X^TW(i)Y
+$\hat{\beta}(i)$: the estimated coefficients at location $i$
+\end{align}\]</span>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(X\)</span>: the matrix of predictor variables</li>
+<li><span class="math inline">\(Y\)</span>: the vector of observed outcomes</li>
+<li><span class="math inline">\(W(i)\)</span>: a weight matrix that depends on location <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(X^T\)</span>: the transpose of <span class="math inline">\(X\)</span></li>
+<li><span class="math inline">\([X^TW(i)X]^{-1}\)</span>: the inverse of the weighted cross-product matrix</li>
+</ul>
+<aside class="notes">
+<p>Read the equation out</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="translating-equation-2" class="slide level2">
 <h2>Translating equation 2</h2>
@@ -903,11 +968,7 @@ y_i = \beta_0(u_i, v_i) + \sum_{k=1}^p \beta_{ik}(u_i, v_i)x_{ik} + \epsilon_i
 \hat{\beta}(i) = [X^TW(i)X]^{-1}X^TW(i)Y
 $\hat{\beta}(i)$: the estimated coefficients at location $i$
 \end{align}\]</span>
-<p>where: - <span class="math inline">\(X\)</span>: the matrix of predictor variables - <span class="math inline">\(Y\)</span>: the vector of observed outcomes - <span class="math inline">\(W(i)\)</span>: a weight matrix that depends on location <span class="math inline">\(i\)</span> - <span class="math inline">\(X^T\)</span>: the transpose of <span class="math inline">\(X\)</span> - <span class="math inline">\([X^TW(i)X]^{-1}\)</span>: the inverse of the weighted cross-product matrix</p>
-<div class="fragment">
-<p><em>Translation:</em></p>
-<p>“The estimated coefficients <span class="math inline">\(\hat{\beta}(i)\)</span> are obtained by solving a weighted least squares problem: take the predictors <span class="math inline">\(X\)</span>, weight them with <span class="math inline">\(W(i)\)</span>, and solve for the coefficients that best fit <span class="math inline">\(Y\)</span>.”</p>
-</div>
+<p><em>The estimated coefficients <span class="math inline">\(\hat{\beta}(i)\)</span> are obtained by solving a weighted least squares problem: take the predictors <span class="math inline">\(X\)</span>, weight them with <span class="math inline">\(W(i)\)</span>, and solve for the coefficients that best fit <span class="math inline">\(Y\)</span>.</em></p>
 </section></section>
 <section>
 <section id="overview" class="title-slide slide level1 center">
