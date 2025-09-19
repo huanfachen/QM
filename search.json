@@ -946,6 +946,407 @@
     ]
   },
   {
+    "objectID": "sessions/week1_practical.html",
+    "href": "sessions/week1_practical.html",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "",
+    "text": "This week is focussed on ensuring that you’re able to run Jupyter notebooks locally (i.e. on your own computer) and are comfortable with the basics of Python: if you’ve already done Code Camp then this will be a refresher and you’ll have plenty of time to get to grips with Git and GitHub, which often presents significant practical challenges. You should find this notebook quite straightforward, but take any challenges as a sign that you need to keep practicing since subsequent weeks will build on these foundational concepts."
+  },
+  {
+    "objectID": "sessions/week1_practical.html#learning-outcomes",
+    "href": "sessions/week1_practical.html#learning-outcomes",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Learning Outcomes",
+    "text": "Learning Outcomes\n\nYou have familiarised yourself with how to add and synchronise new files in Git/GitHub.\nYou have refamiliarised yourself with Python operators and precedence.\nYou have refamiliarised yourself with Python logic and lists.\n\nThese are the foundations for subsequent weeks, so if you are still confused at the end of the practical please look at Code Camp and re-run this practical from scratch if need be!"
+  },
+  {
+    "objectID": "sessions/week1_practical.html#download-the-notebook",
+    "href": "sessions/week1_practical.html#download-the-notebook",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Download the Notebook",
+    "text": "Download the Notebook\nSo for this week, visit the Week 2 of FSDS page you’ll see that there is a ‘preview’ link and a a ‘download’ link in the Practical section. If you click the preview link you will be taken to the GitHub page for the notebook where it has been ‘rendered’ as a web page. But to make the notebook useable on your computer, you need to download the IPYNB file.\nSo now:\n\nClick on the Download link.\nThe file should download automatically, but if you see a page of raw code, select File then Save Page As....\nMake sure you know where to find the file (e.g. Downloads or Desktop).\nMove the file to your Git repository folder (e.g. ~/Documents/CASA/fsds/)\nCheck to see if your browser has added .txt to the file name:\n\nIf no, then you can move to adding the file.\nIf yes, then you can either fix the name in the Finder/Windows Explore, or you can do this in the Terminal using mv &lt;name_of_practical&gt;.ipynb.txt &lt;name_of_practical&gt;.ipynb (you can even do this in JupyterLab’s terminal if it’s already running)."
+  },
+  {
+    "objectID": "sessions/week1_practical.html#add-the-notebook-to-git",
+    "href": "sessions/week1_practical.html#add-the-notebook-to-git",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Add the Notebook to Git",
+    "text": "Add the Notebook to Git\n\nNow you can add it to Git and synchronise it with GitHub:\n\ngit add &lt;name_of_practical&gt;.ipynb\ngit commit -m \"Adding Practical 2\"\ngit push\n\n\nThe file should now be in your GitHub repository in its ‘original’ format (before you write or run any code)."
+  },
+  {
+    "objectID": "sessions/week1_practical.html#sec-available",
+    "href": "sessions/week1_practical.html#sec-available",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Switch to JupyterLab",
+    "text": "Switch to JupyterLab\nI am assuming that you are already running JupyterLab via Podman using the command that we saw in Week 1 and on the CASA Computing Platform. However, if you called podman run ... from the ‘wrong place’ then you might not be able to see the recently added practical in your work folder.\nIt that’s the case, then you will need to stop the container so please see the section below. You need to remember that the startup command is something like:\npodman run ... -v \"$(pwd):/home/jovyan/work\" ...\nThe -v (short for volume) tells Podman what part of your computer should be connected to place in container where we store the work (/home/jovyan/work). pwd is short for ‘print working directory’ and is the location where you ran the startup command! So we’re talking about the location on your computer when you access the work folder from Jupyter Lab:\n\nOn a Mac, if you just opened a new Terminal and run the Podman startup command then it will be your $HOME (also known as ~) directory (e.g. /Users/&lt;your username&gt;/) because that’s where new Terminal windows start by default.\nOn a Windows machine it may be your $HOME directory but we can’t promise.\n\nPerhaps a video will help clarify?\nNote: Docker and Podman are basically the same!"
+  },
+  {
+    "objectID": "sessions/week1_practical.html#is-the-container-running-sec-containers",
+    "href": "sessions/week1_practical.html#is-the-container-running-sec-containers",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Is the Container Running?",
+    "text": "Is the Container Running?\nPodman will happily keep a container running in the background even if you close every open window. So how do you know if the ?var:docker.name container is already running? There are two ways:\n\nOpen the Podman Desktop from the menu and make sure that you select the Containers tab. You should see something like this if the container is running and available:\n\n\n\n\nContainer running\n\n\n\nFrom the Terminal you should be able to run: podman ps. This will give you output something like this:\n\n\n\n\nContainer running from Terminal\n\n\nIf the ?var:docker.name container is not running then you’ll need to run the startup command (docker run...) covered in the last practical session. If it is running but in the wrong place, then you should stop it, use cd to navigate to the correct location, and then restart it.\n\nConnect to Jupyter Lab\nOnce you know the container is running you can connected to Jupyter Lab on localhost:8888 and should see something like this:\n\n\n\nScreenshot of JupyterLab\n\n\nYou’re connected!"
+  },
+  {
+    "objectID": "sessions/week1_practical.html#hello-world",
+    "href": "sessions/week1_practical.html#hello-world",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Hello World!",
+    "text": "Hello World!\nNearly every introduction to programming course starts with the famous ‘Hello World!’, so why do anything different?\nFrom within Jupyter Lab you should now able to create a new notebook:\n\nClick on the Python 3 tile in the Notebook section.\nYou should see a new tab open with a new notebook (title: Untitled.ipynb).\nIn the first cell type print('Hello World!').\nClick the Run button (▶) in the menu above the notebook.\nYou should see Python output Hello World! below the cell.\n\nAny time you want to run code you click on the right-triangle (▶); it’s in the area between the clipboard 📋 (for copying) and the ■ (for stopping running code).\nSo when you run:\nprint('Hello World!')\nHopefully, the following appeare directly below the code:\n\n\nHello World!\n\n\n\n\n\n\n\n\nTip\n\n\n\nYou can always click the ▶ icon above, but it will be much faster to get into the habit of type Ctrl+Enter instead when you have placed your cursor in a code cell. This is also how to turn a Markdown cell back into display text.\n\n\nYou can now close this notebook. Unless you created this notebook in the work folder, you will not be able to save it permanently. That’s fine."
+  },
+  {
+    "objectID": "sessions/week1_practical.html#starting-the-practical-notebook",
+    "href": "sessions/week1_practical.html#starting-the-practical-notebook",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Starting the Practical Notebook",
+    "text": "Starting the Practical Notebook\nNow from within Jupyter Lab you should start the Practical 2 notebook:\n\nStarting from the work folder, navigate to your repo folder where you saved this notebook (Practical-02-Foundations_1.ipynb).\nDouble-click the notebook file and the notebook should appear on the right-hand side. If all you see is reams of plain text then there is probably still a .txt extension on your notebook file that hasn’t been removed.\n\nNow you can run code directly in your browser, so let’s try it!"
+  },
+  {
+    "objectID": "sessions/week1_practical.html#variable-names",
+    "href": "sessions/week1_practical.html#variable-names",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Variable Names",
+    "text": "Variable Names\n\n\n\n\n\n\nNoteLook closer!\n\n\n\nPay attention to the colour of the code, while it might be subtle (a single character in a different colour), it is giving you clues as to where problems might be found because it means the Python ‘interpreter’ is reading what you wrote differently from how you probably meant it…\n\n\nSome of the lines of code below are valid Python, but others may have a problem that will cause Python to generate an error. Each error can be fixed by changing one character. See if you can work out which ones you need to fix before running the code:\n\nQuestionAnswer\n\n\nPi = 3.14159      # Valid Python\npi = 3.14159      # ??\n3pi = 3.14159*3   # ??\npi_2 = 3.14159**2 # ??\npi^2 = 3.14159**2 # ??\nmy radius = 5     # ??\nMy_Radius = 5     # ??\nclass = 5         # ??\n\n\nPi = 3.14159      # Valid Python\npi = 3.14159      # Valid Python\npi3 = 3.14159*3   # Invalid, variable starts with a number\npi_2 = 3.14159**2 # Valid Python\npi2 = 3.14159**2  # Invalid, 'hat' character in variable name\nmy_radius = 5     # Invalid, space in variable name\nMy_Radius = 5     # Valid Python\nmclass = 5        # Invalid, reserved word"
+  },
+  {
+    "objectID": "sessions/week1_practical.html#variable-types",
+    "href": "sessions/week1_practical.html#variable-types",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Variable Types",
+    "text": "Variable Types\nUsing only the values for x, y, and z, what operations allow you to print the following?\n6\n22\n22\n125\n0.4\n\nQuestionAnswer\n\n\nx = '2'\ny = 2\nz = 3\n\nprint( ?? ) # 6\nprint( ?? ) # 22\nprint( ?? ) # 22 (but a different way!)\nprint( ?? ) # 125\nprint( ?? ) # 0.4\n\n\nx = '2'\ny = 2\nz = 3\n\nprint(y * z)\nprint(x * y)\nprint(x + x)\nprint((y+z)**z)\nprint(y/(y+z))\n6\n22\n22\n125\n0.4"
+  },
+  {
+    "objectID": "sessions/week1_practical.html#assignment",
+    "href": "sessions/week1_practical.html#assignment",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Assignment",
+    "text": "Assignment\nBefore running the code, work out what the values of x, y and z will be after every line of code in the block has been executed.\n\nQuestionAnswer\n\n\nx = 12\ny = 10\n\nz = x + y # ??\nx = x + y # ??\ny = z + y # ??\n\nprint(x)\nprint(y)\nprint(z)\n\n\nx = 12\ny = 10\n\nz = x + y\nx = x + y\ny = z + y\n\nprint(x)\nprint(y)\nprint(z)\n22\n32\n22\n\n\n\nOnce you have worked out what you think x, y and z are, run the code to check your answers!\nMake sure you understand the results you find. Ask someone if you need help to understand."
+  },
+  {
+    "objectID": "sessions/week1_practical.html#operators-precedence",
+    "href": "sessions/week1_practical.html#operators-precedence",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Operators & Precedence",
+    "text": "Operators & Precedence\nBefore running the code, work out what the values of x, y and z will be after every line of code in the block has been executed. Feel free to use a calculator.\n\n\n\n\n\n\nTip\n\n\n\nThis question is about what operations (i.e. multiplication, division, powers, etc.) are done first based on the type of operation and the presence of parentheses… it’s the same as it would be for a maths problem!\n\n\n\nQuestionAnswer\n\n\nBy adding parentheses adjust the equations below to output the following:\n2.5\n2.25\n2.5\nprint(1 + 2 * 3 / 4)\nprint(1 + 2 * 3 / 4)\nprint(1 + 2 * 3 / 4)\n\n\nprint(1 + (2 * 3) / 4)\nprint((1 + 2) * (3 / 4))\nprint(1 + 2 * (3 / 4))\n2.5\n2.25\n2.5\n\n\n\nOnce you have calculated what you think x, y and z are, run the code to check."
+  },
+  {
+    "objectID": "sessions/week1_practical.html#test-your-operator-knowledge",
+    "href": "sessions/week1_practical.html#test-your-operator-knowledge",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Test Your Operator Knowledge",
+    "text": "Test Your Operator Knowledge\nNow let’s look at some of the stranger operators. Many of these can be very useful in more complex code but can seem a little pointless now.\nWork out what operator should replace the ? in each of the lines of code below to produce the output I’ve shown in the comments. I’ve mixed in ones you have seen above with ones that we’ve not seen before.\n\nQuestionAnswer\n\n\nx = 10\ny = 3\n\nprint( x ?? y ) # 1\nprint( x ?? y ) # 13\nprint( x ?? y ) # False\nprint( x ?? y ) # 1000\nprint( x ?? y ) # 7\nprint( x ?? y ) # 3\n\n\nx = 10\ny = 3\n\nprint( x % y ) # 1\nprint( x + y ) # 13\nprint( x == y ) # False\nprint( x ** y ) # 1000\nprint( x - y ) # 7\nprint( x // y ) # 3\n1\n13\nFalse\n1000\n7\n3"
+  },
+  {
+    "objectID": "sessions/week1_practical.html#applying-what-weve-learned",
+    "href": "sessions/week1_practical.html#applying-what-weve-learned",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Applying What We’ve Learned",
+    "text": "Applying What We’ve Learned\nNow we are going to take what we’ve learned and apply it in a more ‘abstract’ way: how do we translate some well-known mathematical formulae into code? In particular, I’m interested in the formula for the volume of a sphere (and this gives me a chance to show that Notebooks can show formulae as well!):\n\\[\nV = \\frac{4}{3}\\pi r^{3}\n\\]\n\nCalculate the Volume of a Sphere\nSo, given a sphere with a diameter of 12cm, calculate its volume:\n\n\n\n\n\n\nTip\n\n\n\nI would strongly advise you to Google: python constant pi and look for code that will save you having to write down the value of \\(\\pi\\).\n\n\n\nQuestionAnswer\n\n\nfrom math import ??\nv = ??\nprint(f\"{v:0.3f} cm3\")\n\n\nfrom math import pi\nv = (4/3) * pi * (12/2)**3\nprint(f\"{v:0.3f}\")\n904.779\n\n\n\nI get an answer of 904.779cm\\(^3\\).\n\n\nCalculate the Radius of a Sphere\nNow, given a sphere of volume 14,137cm\\(^3\\) calculate its radius as a whole number. The formula for this can be worked out as:\n\\[\\begin{align*}\n\\frac{3}{4}V &= \\pi r^{3} \\\\\n\\frac{3}{4}\\frac{V}{\\pi} &= r^{3} \\\\\n(\\frac{3}{4}\\frac{V}{\\pi})^{1/3} &= r\n\\end{align*}\\]\nIf you can’t remember how to rearrange formulae this would be a good skill to refresh!\n\n\n\n\n\n\nTip\n\n\n\nThere are three ways to get a “whole number” from a float:\n\nWhen you’re starting out, the easiest is to change the variable’s type\nThe next step up is to make use of Google to find out if there are ways of rounding to the nearest integer\nThe third step is to change what’s visible to the user without altering the actual number\n\n\n\nI get an answer of either 14 or 15… can you work out why?\n\nQuestionAnswer\n\n\nfrom math import pi\nv = 14137\nr = ??\nprint(??)\n\n\nfrom math import pi\nv = 14137\nr = ((3 * v) / (4 * pi))**(1/3)\nprint(\"1. \" + str(int(r)) + \" cm\")\nprint(\"2. \" + str(round(r)) + \" cm\")\nprint(\"3. \" + f\"{r:0.0f} cm\")\n1. 14 cm\n2. 15 cm\n3. 15 cm"
+  },
+  {
+    "objectID": "sessions/week1_practical.html#working-with-conditions",
+    "href": "sessions/week1_practical.html#working-with-conditions",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Working with Conditions",
+    "text": "Working with Conditions\nUse if, elif, and else so that you get the following output:\n\nWhen hours is 10 or more, then the code prints At least 10 hours worked!\nWhen hours is exactly 2, then the code prints Exactly 2 hours worked.\n\nWhen hours is 9 or less but not 2, then the code prints Less than 10 hours worked!\n\n\n\n\n\n\n\nTipHint\n\n\n\nYou will also need to think about the order in which these conditions are tested.\n\n\n\nQuestionAnswer\n\n\nhours = 2\n\nif hours ??:\n    print(\" \")\nelif hours ??:\n    print(\" \")\nelse:\n    print(\" \")\n\n\nhours=2\n\nif hours == 2:\n    print(\"Exactly 2 hours worked\")\nelif hours &lt; 10:\n    print(\"Less than 10 hours worked!\")\nelse:\n    print(\"At least 10 hours worked!\")\nExactly 2 hours worked"
+  },
+  {
+    "objectID": "sessions/week1_practical.html#flow-control",
+    "href": "sessions/week1_practical.html#flow-control",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Flow Control",
+    "text": "Flow Control\nUsing the flow chart shown in the image below as a model, write the code to make this condition work. You will need to complete the code such that it produces the following: 1. When a = 2 and b = 2 four lines of output will be written 2. When a = 1 and b = 2 one line of output will be written\n\n\nQuestionAnswer\n\n\na = 1\nb = 1\n\n# &lt;your code here&gt;\n??\n\n\na = 1\nb = 1\n\nx = a\n\nif x == b:\n    print(\"inside 1\")\n    print(\"inside 2\")\n    print(\"inside\")\n\nprint(\"after condition\")\ninside 1\ninside 2\ninside\nafter condition"
+  },
+  {
+    "objectID": "sessions/week1_practical.html#its-all-quite-logical",
+    "href": "sessions/week1_practical.html#its-all-quite-logical",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "It’s All Quite Logical…",
+    "text": "It’s All Quite Logical…\nBefore adding a value for x and running the code below, try to answer the following questions:\n\nQuestionAnswer\n\n\n\nWhat names are name(s) are printed when x = 5?\nWhat value(s) can x be when the names Joe and Aled are printed?\nWhat name(s) are printed when x = -1?\n\nIs there any value for which all three names will be printed?\n\nx = ??\n\nif x &gt; 0 and x &lt; 5:\n    print(\"Joe\")\n\nif x &gt; 0 or x &lt; 5:\n    print(\"Aled\")\n\nif not(x &gt; 0):\n    print(\"Sarah\")\n\n\n\nWhat names are name(s) are printed when x = 5? Answer: Aled\nWhat value(s) can x be when the names Joe and Aled are printed? Answer: \\(x \\in [1,4]\\)\nWhat name(s) are printed when x = -1? Answer: Aled and Sarah\nIs there any value for which all three names will be printed? No\n\nx = 0\n\nif x &gt; 0 and x &lt; 5:\n    print(\"Joe\")\n\nif x &gt; 0 or x &lt; 5:\n    print(\"Aled\")\n\nif not(x &gt; 0):\n    print(\"Sarah\")\nAled\nSarah"
+  },
+  {
+    "objectID": "sessions/week1_practical.html#logic-contd",
+    "href": "sessions/week1_practical.html#logic-contd",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Logic (Cont’d)",
+    "text": "Logic (Cont’d)\nStudy the flow chart below.\n\n\n\n\n\n\n\nTip\n\n\n\nThis will require you to combine logic with one of the operators that we saw earlier. Also note the new iterator that we’ve got here: range(&lt;start&gt;, &lt;stop&gt;) to create a range of numbers between two other numbers.\n\n\nIn the cell below, use the for loop already set up to as a starting point for implementing the flow chart shown above for values of x between 0 and 9.\n\nQuestionAnswer\n\n\nfor x in range(0,9):\n    #... do something...\n    ??\n\n\nfor x in range(0,9):\n    #... do something...\n    print(x, end=\": \")\n    if x%2==0:\n        print(\"x is even.\")\n    else:\n        print(\"x is odd\")\n0: x is even.\n1: x is odd\n2: x is even.\n3: x is odd\n4: x is even.\n5: x is odd\n6: x is even.\n7: x is odd\n8: x is even."
+  },
+  {
+    "objectID": "sessions/week1_practical.html#nested-conditionals",
+    "href": "sessions/week1_practical.html#nested-conditionals",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "‘Nested’ Conditionals",
+    "text": "‘Nested’ Conditionals\nConditional statements can be nested within one another. That is, Python evaluates the first, or ‘outer’, condition and can then evaluate secondary, or ‘inner’, conditions. The code below shows an example of this.\n\nQuestionAnswer\n\n\nx = 5\ny = 4\n\nif x != y:                                 #line 1\n    print(\"x is not equal to y\")\n    \n    if(x &gt; y):                             #line 4\n        print(\"x is greater than y\")\n    \n    else:                                  #line 7\n        print(\"x is less than y\")\n\nelse:\n    print(\"&lt;insert conclusion here&gt;\")\n\n\nx = 2\ny = 3\n\nif x != y:                                 #line 1\n    print(\"x is not equal to y\")\n\n    if(x &gt; y):                             #line 4\n        print(\"x is greater than y\")\n\n    else:                                  #line 7\n        print(\"x is less than y\")\n\nelse:\n    print(\"x is equal to y\")\nx is not equal to y\nx is less than y\n\n\n\nNote how the indentation makes it easier to work out which ‘level’ (outer or inner condition) the code is operating on. In the code above, lines 4 and 7 are at the same indentation meaning that both will be skipped if the initial condition (on line 1) is False.\nTo check you understand how the code above works:\n\nChange &lt;insert conclusion here&gt; to a string that explains the condition of x and y\nFor x = 2 and y = 3, type what line(s) will be output here: …\n\nGreat! You should now have a pretty good understanding of how conditional and logical operators work. This understanding will be handy in future as we work through other computational concepts."
+  },
+  {
+    "objectID": "sessions/week1_practical.html#whos-in-the-list",
+    "href": "sessions/week1_practical.html#whos-in-the-list",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Who’s in the List?",
+    "text": "Who’s in the List?\nHere we are looking to interact with lists in a straightforward way that will help you to understand accessing them using indexes and slices, and searching.\n\nQuestionAnswer\n\n\ncities = ['New York', 'London', 'Beijing', 'Tokyo', 'Delhi']\n\n# Print out London from cities:\nprint( ?? )\n\n# Print out Tokyo using *negative* indexing:\nprint( ?? )\n\n# Print out Beijing *and* Tokyo using a list slice\nprint( ?? )\n\n# Print out London to Delhi using a slice\nprint( ?? ) # You could also do cities[1:5] but this way is neater\n\n# Combine positive and negative indexing to print out London, Beijing and Tokyo using a list slice\nprint( ?? )\n\n# Print out the index for New York by searching for it (i.e. you can't just type 0)\nprint( ?? )\n\n\ncities = ['New York', 'London', 'Beijing', 'Tokyo', 'Delhi']\n\n# Print out London from cities:\nprint( cities[1] )\n\n# Print out Tokyo using *negative* indexing:\nprint( cities[-2] )\n\n# Print out Beijing and Tokyo using a list slice\nprint( cities[2:4] )\n\n# Print out London to Delhi using a slice\nprint( cities[1:] ) # You could also do cities[1:5] but this way is neater\n\n# Combine positive and negative indexing to print out London, Beijing and Tokyo using a list slice\nprint( cities[1:-1] )\n\n# Print out the position of New York in the list by searching for it (i.e. you can't just type 0)\nprint( cities.index('New York') )\nLondon\nTokyo\n['Beijing', 'Tokyo']\n['London', 'Beijing', 'Tokyo', 'Delhi']\n['London', 'Beijing', 'Tokyo']\n0"
+  },
+  {
+    "objectID": "sessions/week1_practical.html#manipulating-lists",
+    "href": "sessions/week1_practical.html#manipulating-lists",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Manipulating Lists",
+    "text": "Manipulating Lists\nLet’s break a few things…\n\nCreate an IndexError\n\nQuestionAnswer\n\n\n# Cause an 'IndexError: list index out of range' errr\n??\n\n\n```{python}\ncities[7]\n```\n\n\n\n\n\nCreate a ValueError\n\nQuestionAnswer\n\n\n# Cause a ValueError using the city of Toronto\n??\n\n\n```{python}\ncities.index('Toronto')\n```\n\n\n\n\n\nSort the List\nSort the list in place in reverse alphabetical order (i.e. z…a) and then print the sorted list\n\nQuestionAnswer\n\n\n??\nprint(cities)\nThe output from this should be: [‘Tokyo’, ‘New York’, ‘London’, ‘Delhi’, ‘Beijing’]\n\n\n# The approach does _not_ sort the original list,\n# it returns a copy of the list that is sorted:\nprint(sorted(cities, reverse=True)) # &lt;- what is printed is sorted\nprint(cities)                       # &lt;- but the list is not\n\n# This is the 'in place' option\ncities.sort(reverse=True)           # &lt;- list is now sorted\nprint(cities)\n['Tokyo', 'New York', 'London', 'Delhi', 'Beijing']\n['New York', 'London', 'Beijing', 'Tokyo', 'Delhi']\n['Tokyo', 'New York', 'London', 'Delhi', 'Beijing']"
+  },
+  {
+    "objectID": "sessions/week1_practical.html#addingremoving-values",
+    "href": "sessions/week1_practical.html#addingremoving-values",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "Adding/Removing Values",
+    "text": "Adding/Removing Values\n\nInserting into a List\nAdd the city of Toronto to the list after New York in the sorted list.\n\nQuestionAnswer\n\n\n# Just in case you make a mistake...\ncities = ['Tokyo', 'New York', 'London', 'Delhi', 'Beijing']\n\n??\nprint(cities)\n\n\n# Just in case you make a mistake...\ncities = ['Tokyo', 'New York', 'London', 'Delhi', 'Beijing']\n\ncities.insert(2,'Toronto')\nprint(cities)\n['Tokyo', 'New York', 'Toronto', 'London', 'Delhi', 'Beijing']\n\n\n\nThe output should be: [‘Tokyo’, ‘New York’, ‘Toronto’, ‘London’, ‘Delhi’, ‘Beijing’]\n\n\nRemoving from a List\nNow pop New York from the list without specifying its index (i.e. the number 1 should not appear in your code). Print out the value that you popped and the print out the cities list to check you’ve done the right thing…\n\nQuestionAnswer\n\n\n??\nprint(p)\nprint(cities)\n\n\np = cities.pop( cities.index('New York') )\nprint(p)\nprint(cities)\nNew York\n['Tokyo', 'Toronto', 'London', 'Delhi', 'Beijing']\n\n\n\nThe output should be:\n\nNew York\n[‘Tokyo’, ‘Toronto’, ‘London’, ‘Delhi’, ‘Beijing’]\n\n\n\nChecking Lists\nFinally, how can you check if the city of Moscow is in the list and let the user know if it is or is not?\n\nQuestionAnswer\n\n\nif ??\n    ??\nelse:\n    ??\n\n\nif 'Moscow' in cities:\n    print(\"Moscow is in the cities list.\")\nelse:\n    print(\"Moscow is not in the cities list.\")\nMoscow is not in the cities list."
+  },
+  {
+    "objectID": "sessions/week1_practical.html#youre-done",
+    "href": "sessions/week1_practical.html#youre-done",
+    "title": "Practical 2: Foundations (Part 1)",
+    "section": "You’re Done!",
+    "text": "You’re Done!\nThis is quite a lot to get through. If you’ve managed it in under 2 hours then congratulations! Either you must have paid a lot of attention when doing Code Camp, or you might want to check in with us as to whether you should really be doing this module…\n\nNo Wait, One More Thing…\nYou now want to add/commit/push your completed notebook to your GitHub reposistory. Using the Terminal you need to:\n\nNavigate to your repository (e.g.$HOME/Documents/CASA/&lt;your repository&gt;).\nCheck the status of your notebooks using git status (you should see that Practical-02-Foundations_1.ipynb has been modified).\nAdd the changes to Git using git add  Practical-02-Foundations_1.ipynb\nCommit this changed notebook with a message using git commit -m \"&lt;your message here...&gt;\"\nPush this change to GitHub using: git push\n\nYou should now be able to visit your repository on GitHub and see that your changes are now stored there as well!"
+  },
+  {
+    "objectID": "sessions/week1.html",
+    "href": "sessions/week1.html",
+    "title": "Week 1",
+    "section": "",
+    "text": "This week will introduce data types and key metrics for describing and representing data.",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#introduction",
+    "href": "sessions/week1.html#introduction",
+    "title": "Week 1",
+    "section": "",
+    "text": "This week will introduce data types and key metrics for describing and representing data.",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#learning-objectives",
+    "href": "sessions/week1.html#learning-objectives",
+    "title": "Week 1",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this week, you will be able to:\n\nUnderstand data types for quantitative research.\nDescribe and represent data using key metrics.\nVisualise data with boxplot.",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#lecture",
+    "href": "sessions/week1.html#lecture",
+    "title": "Week 1",
+    "section": "Lecture",
+    "text": "Lecture\nTo access the lecture notes: Week 1 lecture",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#practical",
+    "href": "sessions/week1.html#practical",
+    "title": "Week 1",
+    "section": "Practical",
+    "text": "Practical\n\n\n\n\n\n\nNote\n\n\n\nTo save a copy of notebook to your own GitHub Repo: follow the GitHub link, click on Raw and then Save File As... to save it to your own computer. Make sure to change the extension from .ipynb.txt (which will probably be the default) to .ipynbbefore adding the file to your GitHub repository.\n\n\nTo access the practical:\n\nPreview\nDownload",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#further-resources",
+    "href": "sessions/week1.html#further-resources",
+    "title": "Week 1",
+    "section": "Further resources",
+    "text": "Further resources",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome",
+    "section": "",
+    "text": "The Quantitative Methods (QM) module is a compulsory element of CASA’s MSc/MRes USS programmes and is intended provide an introduction to quantitative methods for all students.\nAs data becomes central to decision-making across all sectors, the ability to move beyond simple description to robust and evidence-based analysis is essential for researchers and practitioners in geography and urban studies. Making sense of the complex patterns that define our world requires a firm understanding of the language of data. This module provides the essential grammar for that language and aims to equip students with the foundational quantitative skills needed to describe data, build models, and derive meaningful insights from numerical evidence.\nTo achieve this, the module is structured progressively across three core sections. The first section establishes the fundamental toolkit for quantitative analysts. Beginning with Exploratory Data Analysis, students will learn how to visualise, summarise, and critically interrogate datasets. This is followed by a rigorous grounding in the principles of statistical inference through hypothesis testing, and an introduction to the linear algebra that provides the mathematical architecture for many of the models used in modern data science.\nThe second section builds upon this foundation to explore the core of statistical modelling: understanding and quantifying relationships between variables. Students will progress from measuring correlations to building sophisticated regression models. The curriculum covers the workhorse of social science, the Generalised Linear Model (GLM), before advancing to Multilevel Models, a critical technique for handling the nested and hierarchical data that is common in geographical and social research.\nThe final section of the course introduces advanced techniques for uncovering hidden structures within complex, high-dimensional datasets. Students will learn methods for dimensionality reduction to simplify complexity without losing vital information, and clustering analysis to identify natural groupings and patterns in data.\nTherefore, this module guides students on a complete analytical journey, from foundational principles to the application of advanced modelling techniques. It serves as a vital prerequisite for more specialised analytical modules and is essential for students wishing to undertake quantitative geospatial research. Ultimately, this module will provide quantitative skills that are in high demand across public, private, and academic sectors."
+  },
+  {
+    "objectID": "index.html#acknowledgements",
+    "href": "index.html#acknowledgements",
+    "title": "Welcome",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\nWe really appreciate the support from various people:\n\nJon for setting up this wonderful CASA-themed quarto template.\nOllie and Andy for inspiring us to pursue a Quarto-based module website."
+  },
+  {
+    "objectID": "assessments/index.html",
+    "href": "assessments/index.html",
+    "title": "CASA0007 Assessment",
+    "section": "",
+    "text": "This Assessment is worth 100% of the grade for this course.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "assessments/index.html#assessment-aims",
+    "href": "assessments/index.html#assessment-aims",
+    "title": "CASA0007 Assessment",
+    "section": "Assessment Aims",
+    "text": "Assessment Aims\nThis assessment is designed to test your understanding of the quantitative methods introduced in this course, but also, crucially, your ability to really understand how, if used correctly and applied to appropriate data, these methods can help you tell a powerful story and be the underpinning evidence-base for a relevant local, national or international issue.\nUsing quantitative methods to contribute to public debates is vital if students, academics and universities are to demonstrate our value to the wider world. We don’t want you to just apply a method and regurgitate unintelligible coefficients. Quantitative methods can only have real value if they are used to support wider debates in ways that everyone should be able to understand.\nWe are not testing your coding abilities – you may use either of the main coding languages taught this term (R or Python). We are not testing your ability to write a standard piece of academic writing. But we are testing your ability to use quantitative methods appropriately and with a clear connection between the data, methods and outputs, to help others understand a particular issue through a data lens.\n\nPart 1 - Article\nYour task is to write a short 800-1000-word piece of ‘public-facing scholarly writing’ in the style of an article that that could appear in The Conversation or the Financial Times in their data section. This piece could relate to a local, national or international topic which could be either serious or frivolous but must employ appropriate quantitative methods learned in this course to derive novel insights from a particular dataset (or range of datasets) associated with a particular topic of your choosing. Data analysis and the use of quantitative methods should be central to your piece, but outputs must be appropriate for a general (non-academic) audience with your piece illuminated by appropriate visual outputs – maps, graphs or other data visualisations. Your piece should contain a range of graphical or tabular elements.\n\n\nPart 2 - Technical Appendix\nYour 800-1000-word article should be accompanied by a max 1000-word technical appendix detailing the analysis you have carried out behind the scenes to allow you to make the observations you have in your article. Here you might want to include additional exploratory visualisations, tabular outputs, interpretations of those outputs, equations etc. and you could also include any observations about the dataset or the validity / statistical significance of any models you employ. The purpose of the appendix is to reassure anyone who wants to delve deeper, that the observations you made in your main article are valid and reliable and your interpretations valid.\n\n\nTopic\nYour topic can be anything you like broadly related to human, urban or social issues, as long as you can find some suitable data to analyse. For inspiration on relevant topics, you might want to review some of the articles that John Burn-Murdoch has written for the Financial Times in recent years - https://www.ft.com/john-burn-murdoch (you can log-in via your UCL credentials) or some of the pieces in the Conversation - https://theconversation.com/.\nIf you are struggling for inspiration, you are welcome to explore an educational topic using DfE schools data used in class, but you are encouraged to be creative in your data choices (as you are being partially marked on your originality), and you should not repeat analyses carried out on variables in any of the practical sessions. The only topic we will not permit in this assessment is anything related to AirBnB as this is the focus of CASA0013.\n\n\nArticle Content\nYou will note that most of John Burn-Murdoch’s articles generally contain the sorts of analyses we would describe as exploratory. While your article should contain basic exploratory analysis in the form of visualisations, you should also use an appropriate method from the second half of the course (lectures 5-10) related to either more sophisticated exploratory analysis like multivariate statistical analysis (e.g. dimensionality reduction or cluster analysis) or some explanatory / predictive methods such as ANOVA, linear regression or some of the generalised linear models also introduced.\n\n\nStyle of Briefing\nYou should write in plain English and avoid the use of jargon or technical language. For tips on how to write in this style, The Conversation has produced a guide: https://socsci.web.ox.ac.uk/files/conversation-writing-public-why-and-how\n\n\nTypes of Data Permissible and Sources\nAnything you like, but you should choose carefully so that you are able to demonstrate the appropriate skills. There are many potential sources of data – these could be linked from FT or Conversation articles, or you could try sites like:\nhttps://data.gov/\nhttps://www.data.gov.uk/\nhttps://opendata.nhsbsa.net/\nhttps://tfl.gov.uk/info-for/open-data-users/  \nhttps://data.europa.eu/data/datasets?locale=en\nhttps://data.worldbank.org/\nhttps://data.london.gov.uk/\nYou can probably find many more!\n\n\nReferencing\nWe will not expect standard academic referencing in this piece, however, this doesn’t mean that you shouldn’t include references – you should. In this style of public facing scholarly writing, it is common to use hyperlinks and footnotes and you should make use of these to support your narrative.\n\n\nFormat of the Piece\nExamples – Here is just one example of the kind of article you might produce (minus the technical appendix), but read widely around the data journalism sites linked from publications like the Financial Times, New York Times, Guardian.\nhttps://theconversation.com/constituency-level-data-reveals-which-parties-are-most-threatened-by-reform-264422\n\n\nDeadline and Handing In\nThe Deadline for the assessment is Tuesday, 13 January 2026 @ 10:00.\nYour report and technical appendix should be uploaded to Moodle as a single PDF document.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "assessments/index.html#mark-scheme",
+    "href": "assessments/index.html#mark-scheme",
+    "title": "CASA0007 Assessment",
+    "section": "Mark Scheme",
+    "text": "Mark Scheme\nThis is how we will mark your work - take note of them\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCriterion\n80-100%\n70-79% (A)\n60-69% (B)\n50-59% (C)\n40-49% (D)\n1-39% (E)\n\n\n\n\nExploratory Analysis (25%)\nOutstanding selection of exploratory statistics and/or sophisticated data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations in the data with absolute clarity. Graphics are labelled such that readers are in no doubt about what is being shown. Data may have been transformed, normalised or standardised in some way to reveal otherwise hidden patterns and justified impeccably.\nExcellent selection of exploratory statistics and/or sophisticated data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations in the data. Graphics are labelled such that readers are in no doubt about what is being shown. Data may have been transformed, normalised or standardised in some way to reveal otherwise hidden patterns and justified.\nGood selection of exploratory statistics and/or data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations. Graphics are labelled such that readers are able to interpret the plots with ease.\nAdequate selection of exploratory statistics and/or data visualisations which illuminate some of the underlying data, revealing some distributions / trends / relationships and associations. Graphics are labelled, but may lack clarity. Data may not be transformed, normalised or standardised in a way to reveal patterns.\nInadequate selection of statistics or visualisations. Graphics are poorly labelled or unclear, and do not illuminate the underlying data. Data transformations are incorrect or missing.\nNegligible use of statistics or visualisations. Any visualisations are irrelevant, inaccurate, or inaccessible. The analysis shows no grasp of the underlying data.\n\n\nUse of multivariate statistical analysis or explanatory / predictive methods (25%)\nExceptional selection of data / variables entirely appropriate for the chosen article topic. Masterful understanding of the nuances related to the careful pruning and selection of appropriate variables. Outstanding understanding of the methods employed and their interaction with the data to hand with masterful understanding of outputs produced\nExcellent selection of data / variables entirely appropriate for the chosen article topic. Highly competent understanding of the nuances related to the careful pruning and selection of appropriate variables. Highly competent understanding of the methods employed and their interaction with the data to hand.\nGood selection of data / variables appropriate for the chosen article topic. Competent understanding of the methods employed and their interaction with the data.\nAdequate selection of data / variables for the chosen article topic. Basic understanding of the methods employed and their interaction with the data. May get some of the nuances in the outputs, but may also ignore some key features in the data\nInadequate selection of data / variables for the chosen article topic. Little to no understanding of the methods employed or how they interact with the data.\nNegligible or irrelevant selection of data / variables. No grasp of the methods or their application to the data.\n\n\nOriginality, article narrative and communication (25%)\nHighly original topic selection, or of exceptional relevance to a contemporary debate in the society, the media or politics at a local, national or international level with broad interest. Article narrative shows flare or originality which draws the reader in and reveals something entirely new. Writing style is highly accessible - clear, concise and creative and the reader is left without query or misunderstanding.\nExcellent topic selection, of high relevance to a contemporary debate. The narrative is engaging and written with excellent clarity, flowing well from one section to the next. The work is of a very high standard. Writing style clear and concise with few wasted words.\nGood topic selection, of relevance to a contemporary debate. The narrative is clear and well-structured. The work shows some evidence of originality. The narrative is good and the message emerging from the analysis is conveyed well.\nAdequate topic selection, but may lack relevance or wider interest. The narrative is satisfactory but may lack clarity or logical flow  ideas appearing slightly disorganised. The reader can understand the piece but may have to work hard to derive meaning from it.\nInadequate topic selection  perhaps dated or totally irrelevant to the degree programme (i.e. not even a human topic). The narrative is lacking in clarity and is difficult to follow. Deriving meaning from the work is a challenge.\nThe work has no clear topic or narrative. The communication is confused, unclear, or inaccessible.\n\n\nConceptual understanding and Critical Reflection (25%)\nBoth the Article and Technical Appendix show exemplary understanding of the topic / wider issues associated with it and of the methods employed to interrogate the data. A clear understanding of any data / methodological shortcomings / issues / challenges is presented with a highly sophisticated degree of critical reflection in relation to the substantive topic and / or methods employed is demonstrated.\nArticle and Technical Appendix show excellent and highly competent conceptual understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a thorough understanding of the chosen example and recognises and reflects lucidly on any shortcomings and / or the wider significance of the findings in a way that is not contrived or formulaic but shows a sophisticated level of insight.\nArticle and Technical Appendix show good understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a sound understanding of the chosen example and recognises and reflects lucidly on any shortcomings and / or the wider significance of the findings in a way that is not contrived or formulaic but shows a sophisticated level of insight.\nArticle and Technical Appendix show basic understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a rudimentary understanding of the chosen example and recognises and may offer only some reflection on the shortcomings of the work or not at all / contrived at the bottom end.\nInadequate and insufficient conceptual understanding of key concepts and theories. The work demonstrates an invalid or lack of understanding of the concepts introduced. Any analysis attempted fails to support the observations made.\nNegligible or no conceptual understanding of key concepts and theories. The work demonstrates an irrelevant, inaccurate, confused, unclear, or inaccessible understanding of the concepts.\n\n\n\n\n\n\nThe purpose of this assessment is to test your understanding of the various methods introduced in this course and your ability to apply them appropriately to a topic of your choice. One of the differentiators at Masters level is the ability to think both creatively and critically while showing an awareness or knowledge of contemporary issues either in relation to your specific discipline of study or more widely. Being able to demonstrate how established techniques of research and enquiry can be used to create and interpret knowledge is at the core of Masters level thinking and this assessment piece. The ability to demonstrate self-direction (in choosing an appropriate topic for this assessment) and to think autonomously in designing your own article.\n\nMark Scheme – Explained\nLevel 7 Descriptors - https://www.qaa.ac.uk/docs/qaa/quality-code/the-frameworks-for-higher-education-qualifications-of-uk-degree-awarding-bodies-2024.pdf - p26\nMaster’s degree\nThe descriptor provided for this level of the Frameworks is for any master’s degree which should meet the descriptor in full. This qualification descriptor should also be used as a reference point for other qualifications at Level 7 on the FHEQ/SCQF Level 11 on the FQHEIS, including postgraduate certificates and postgraduate diplomas.\nMaster’s degrees are awarded to students who have demonstrated:\n•         a systematic understanding of knowledge, and a critical awareness of current problems and/or new insights, much of which is at, or informed by, the forefront of their academic discipline, field of study or area of professional practice\n•         a comprehensive understanding of techniques applicable to their own research or advanced scholarship\n•         originality in the application of knowledge, together with a practical understanding of how established techniques of research and enquiry are used to create and interpret knowledge in the discipline\n•         conceptual understanding that enables the student:\n•         to evaluate critically current research and advanced scholarship in the discipline\n•         to evaluate methodologies and develop critiques of them and, where appropriate, to propose new hypotheses.\nTypically, holders of the qualification will be able to:\n•         deal with complex issues - both systematically and creatively, make sound judgements in the absence of complete data, and communicate their conclusions clearly to specialist and non-specialist audiences\n•         demonstrate self-direction and originality in tackling and solving problems, and act autonomously in planning and implementing tasks at a professional or equivalent level\n•         continue to advance their knowledge and understanding, and to develop new skills to a high level. \nAnd holders will have:\n•         the qualities and transferable skills necessary for employment requiring:  \n•         the exercise of initiative and personal responsibility\n•         decision-making in complex and unpredictable situations\n•         the independent learning ability required for continuing professional development.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html",
+    "href": "sessions/index.html",
+    "title": "Overview",
+    "section": "",
+    "text": "70% attendance required for student visa holders.\nPlease Attend all lectures and workshops.\nContact module lead & bartlett.pg-casa@ucl.ac.uk, if you can’t attend.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#attendance-recording",
+    "href": "sessions/index.html#attendance-recording",
+    "title": "Overview",
+    "section": "",
+    "text": "70% attendance required for student visa holders.\nPlease Attend all lectures and workshops.\nContact module lead & bartlett.pg-casa@ucl.ac.uk, if you can’t attend.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#objectives",
+    "href": "sessions/index.html#objectives",
+    "title": "Overview",
+    "section": "Objectives",
+    "text": "Objectives\n\nUnderstand the structure and focus of the module.\nDevelop a method for tackling quantitative problems.\nFormulate a research question and structure quantitative writing.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#why-study-a-quantitative-methods-course",
+    "href": "sessions/index.html#why-study-a-quantitative-methods-course",
+    "title": "Overview",
+    "section": "Why study a Quantitative Methods course?",
+    "text": "Why study a Quantitative Methods course?\n\nCoding alone is not enough.\nUnderstanding models aids in correct tool selection and bug handling.\nGoogle/ChatGPT can make mistakes; detecting them is crucial.\nMathematics understanding is not always required.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#course-objectives",
+    "href": "sessions/index.html#course-objectives",
+    "title": "Overview",
+    "section": "Course Objectives",
+    "text": "Course Objectives\n\nUnderstand a broad range of quantitative techniques.\nApply these skills in research.\nFormulate a coherent quantitative argument.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#prerequisites",
+    "href": "sessions/index.html#prerequisites",
+    "title": "Overview",
+    "section": "Prerequisites",
+    "text": "Prerequisites\n\nNo prerequisite of university-level maths/statistics.\nNo prerequisite programming, but this module doesn’t teach programming.\nCASA0013 is strongly recommneded if you don’t know Python before.\nPython is required for practicals and assessments.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#course-structure",
+    "href": "sessions/index.html#course-structure",
+    "title": "Overview",
+    "section": "Course Structure",
+    "text": "Course Structure\n\nLectures: 10 weeks (Wednesdays 9:00–10:30), split into two sessions.\nTutorials: 10 weeks (Wednesdays 10:30–12:30).",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#platforms",
+    "href": "sessions/index.html#platforms",
+    "title": "Overview",
+    "section": "Platforms",
+    "text": "Platforms\n\nEmail for important notices and private questions.\nGithub & website for lecture notes and notebooks.\nMoodle for lectures recording and assessments.\nSlack for public questions.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#weekly-schedule",
+    "href": "sessions/index.html#weekly-schedule",
+    "title": "Overview",
+    "section": "Weekly Schedule",
+    "text": "Weekly Schedule\n\n\n\nSession\nTopic\nLecturer\n\n\n\n\n1\nIntroduction to data\nHuanfa\n\n\n2\nProbability and distribution\nBea\n\n\n3\nHypothesis testing\nBea\n\n\n4\nIntroduction to linear algebra\nBea\n\n\n5\nCorrelation and regression\nHuanfa\n\n\n6\nMultiple regression\nAdam\n\n\n7\nGeneralised linear model\nAdam\n\n\n8\nMultilevel regression\nAdam\n\n\n9\nDimensionality reduction\nHuanfa\n\n\n10\nClustering Analysis\nHuanfa",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#assessment-1",
+    "href": "sessions/index.html#assessment-1",
+    "title": "Overview",
+    "section": "Assessment",
+    "text": "Assessment\n\nWritten Investigation (summative): 100%\nWeekly quiz (formative)",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#ucl-assessment-policy",
+    "href": "sessions/index.html#ucl-assessment-policy",
+    "title": "Overview",
+    "section": "UCL Assessment Policy",
+    "text": "UCL Assessment Policy\n\nAll submissions via Moodle, not emails.\nLate penalties: Up to 48h (-10 points); up to 7 days (capped at 50); over 7 days (scores 0).\nDAP or Extenuating circumstances: to submit on Portico.\nRespect word count limits\nAvoid plagiarism and fake references",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#moodle-feedback",
+    "href": "sessions/index.html#moodle-feedback",
+    "title": "Overview",
+    "section": "Moodle Feedback",
+    "text": "Moodle Feedback\nPlease provide anonymous feedback on Moodle",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "sessions/index.html#github-feedback",
+    "href": "sessions/index.html#github-feedback",
+    "title": "Overview",
+    "section": "Github Feedback",
+    "text": "Github Feedback\nYou can also give feedback on Github issues.",
+    "crumbs": [
+      "Overview"
+    ]
+  },
+  {
     "objectID": "sessions/week1_lecture.html#understanding-and-describing-data",
     "href": "sessions/week1_lecture.html#understanding-and-describing-data",
     "title": "Exploratory Data Analysis #1",
@@ -1147,246 +1548,6 @@
     "title": "Exploratory Data Analysis #1",
     "section": "Summary: describing a dataset",
     "text": "Summary: describing a dataset\n\nKey metrics\nNull values and outliers (and handle them!)\nVisualising data"
-  },
-  {
-    "objectID": "sessions/index.html",
-    "href": "sessions/index.html",
-    "title": "Overview",
-    "section": "",
-    "text": "70% attendance required for student visa holders.\nPlease Attend all lectures and workshops.\nContact module lead & bartlett.pg-casa@ucl.ac.uk, if you can’t attend.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "sessions/index.html#attendance-recording",
-    "href": "sessions/index.html#attendance-recording",
-    "title": "Overview",
-    "section": "",
-    "text": "70% attendance required for student visa holders.\nPlease Attend all lectures and workshops.\nContact module lead & bartlett.pg-casa@ucl.ac.uk, if you can’t attend.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "sessions/index.html#objectives",
-    "href": "sessions/index.html#objectives",
-    "title": "Overview",
-    "section": "Objectives",
-    "text": "Objectives\n\nUnderstand the structure and focus of the module.\nDevelop a method for tackling quantitative problems.\nFormulate a research question and structure quantitative writing.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "sessions/index.html#why-study-a-quantitative-methods-course",
-    "href": "sessions/index.html#why-study-a-quantitative-methods-course",
-    "title": "Overview",
-    "section": "Why study a Quantitative Methods course?",
-    "text": "Why study a Quantitative Methods course?\n\nCoding alone is not enough.\nUnderstanding models aids in correct tool selection and bug handling.\nGoogle/ChatGPT can make mistakes; detecting them is crucial.\nMathematics understanding is not always required.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "sessions/index.html#course-objectives",
-    "href": "sessions/index.html#course-objectives",
-    "title": "Overview",
-    "section": "Course Objectives",
-    "text": "Course Objectives\n\nUnderstand a broad range of quantitative techniques.\nApply these skills in research.\nFormulate a coherent quantitative argument.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "sessions/index.html#prerequisites",
-    "href": "sessions/index.html#prerequisites",
-    "title": "Overview",
-    "section": "Prerequisites",
-    "text": "Prerequisites\n\nNo prerequisite of university-level maths/statistics.\nNo prerequisite programming, but this module doesn’t teach programming.\nCASA0013 is strongly recommneded if you don’t know Python before.\nPython is required for practicals and assessments.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "sessions/index.html#course-structure",
-    "href": "sessions/index.html#course-structure",
-    "title": "Overview",
-    "section": "Course Structure",
-    "text": "Course Structure\n\nLectures: 10 weeks (Wednesdays 9:00–10:30), split into two sessions.\nTutorials: 10 weeks (Wednesdays 10:30–12:30).",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "sessions/index.html#platforms",
-    "href": "sessions/index.html#platforms",
-    "title": "Overview",
-    "section": "Platforms",
-    "text": "Platforms\n\nEmail for important notices and private questions.\nGithub & website for lecture notes and notebooks.\nMoodle for lectures recording and assessments.\nSlack for public questions.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "sessions/index.html#weekly-schedule",
-    "href": "sessions/index.html#weekly-schedule",
-    "title": "Overview",
-    "section": "Weekly Schedule",
-    "text": "Weekly Schedule\n\n\n\nSession\nTopic\nLecturer\n\n\n\n\n1\nIntroduction to data\nHuanfa\n\n\n2\nProbability and distribution\nBea\n\n\n3\nHypothesis testing\nBea\n\n\n4\nIntroduction to linear algebra\nBea\n\n\n5\nCorrelation and regression\nHuanfa\n\n\n6\nMultiple regression\nAdam\n\n\n7\nGeneralised linear model\nAdam\n\n\n8\nMultilevel regression\nAdam\n\n\n9\nDimensionality reduction\nHuanfa\n\n\n10\nClustering Analysis\nHuanfa",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "sessions/index.html#assessment-1",
-    "href": "sessions/index.html#assessment-1",
-    "title": "Overview",
-    "section": "Assessment",
-    "text": "Assessment\n\nWritten Investigation (summative): 100%\nWeekly quiz (formative)",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "sessions/index.html#ucl-assessment-policy",
-    "href": "sessions/index.html#ucl-assessment-policy",
-    "title": "Overview",
-    "section": "UCL Assessment Policy",
-    "text": "UCL Assessment Policy\n\nAll submissions via Moodle, not emails.\nLate penalties: Up to 48h (-10 points); up to 7 days (capped at 50); over 7 days (scores 0).\nDAP or Extenuating circumstances: to submit on Portico.\nRespect word count limits\nAvoid plagiarism and fake references",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "sessions/index.html#moodle-feedback",
-    "href": "sessions/index.html#moodle-feedback",
-    "title": "Overview",
-    "section": "Moodle Feedback",
-    "text": "Moodle Feedback\nPlease provide anonymous feedback on Moodle",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "sessions/index.html#github-feedback",
-    "href": "sessions/index.html#github-feedback",
-    "title": "Overview",
-    "section": "Github Feedback",
-    "text": "Github Feedback\nYou can also give feedback on Github issues.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "assessments/index.html",
-    "href": "assessments/index.html",
-    "title": "CASA0007 Assessment",
-    "section": "",
-    "text": "This Assessment is worth 100% of the grade for this course.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "assessments/index.html#assessment-aims",
-    "href": "assessments/index.html#assessment-aims",
-    "title": "CASA0007 Assessment",
-    "section": "Assessment Aims",
-    "text": "Assessment Aims\nThis assessment is designed to test your understanding of the quantitative methods introduced in this course, but also, crucially, your ability to really understand how, if used correctly and applied to appropriate data, these methods can help you tell a powerful story and be the underpinning evidence-base for a relevant local, national or international issue.\nUsing quantitative methods to contribute to public debates is vital if students, academics and universities are to demonstrate our value to the wider world. We don’t want you to just apply a method and regurgitate unintelligible coefficients. Quantitative methods can only have real value if they are used to support wider debates in ways that everyone should be able to understand.\nWe are not testing your coding abilities – you may use either of the main coding languages taught this term (R or Python). We are not testing your ability to write a standard piece of academic writing. But we are testing your ability to use quantitative methods appropriately and with a clear connection between the data, methods and outputs, to help others understand a particular issue through a data lens.\n\nPart 1 - Article\nYour task is to write a short 800-1000-word piece of ‘public-facing scholarly writing’ in the style of an article that that could appear in The Conversation or the Financial Times in their data section. This piece could relate to a local, national or international topic which could be either serious or frivolous but must employ appropriate quantitative methods learned in this course to derive novel insights from a particular dataset (or range of datasets) associated with a particular topic of your choosing. Data analysis and the use of quantitative methods should be central to your piece, but outputs must be appropriate for a general (non-academic) audience with your piece illuminated by appropriate visual outputs – maps, graphs or other data visualisations. Your piece should contain a range of graphical or tabular elements.\n\n\nPart 2 - Technical Appendix\nYour 800-1000-word article should be accompanied by a max 1000-word technical appendix detailing the analysis you have carried out behind the scenes to allow you to make the observations you have in your article. Here you might want to include additional exploratory visualisations, tabular outputs, interpretations of those outputs, equations etc. and you could also include any observations about the dataset or the validity / statistical significance of any models you employ. The purpose of the appendix is to reassure anyone who wants to delve deeper, that the observations you made in your main article are valid and reliable and your interpretations valid.\n\n\nTopic\nYour topic can be anything you like broadly related to human, urban or social issues, as long as you can find some suitable data to analyse. For inspiration on relevant topics, you might want to review some of the articles that John Burn-Murdoch has written for the Financial Times in recent years - https://www.ft.com/john-burn-murdoch (you can log-in via your UCL credentials) or some of the pieces in the Conversation - https://theconversation.com/.\nIf you are struggling for inspiration, you are welcome to explore an educational topic using DfE schools data used in class, but you are encouraged to be creative in your data choices (as you are being partially marked on your originality), and you should not repeat analyses carried out on variables in any of the practical sessions. The only topic we will not permit in this assessment is anything related to AirBnB as this is the focus of CASA0013.\n\n\nArticle Content\nYou will note that most of John Burn-Murdoch’s articles generally contain the sorts of analyses we would describe as exploratory. While your article should contain basic exploratory analysis in the form of visualisations, you should also use an appropriate method from the second half of the course (lectures 5-10) related to either more sophisticated exploratory analysis like multivariate statistical analysis (e.g. dimensionality reduction or cluster analysis) or some explanatory / predictive methods such as ANOVA, linear regression or some of the generalised linear models also introduced.\n\n\nStyle of Briefing\nYou should write in plain English and avoid the use of jargon or technical language. For tips on how to write in this style, The Conversation has produced a guide: https://socsci.web.ox.ac.uk/files/conversation-writing-public-why-and-how\n\n\nTypes of Data Permissible and Sources\nAnything you like, but you should choose carefully so that you are able to demonstrate the appropriate skills. There are many potential sources of data – these could be linked from FT or Conversation articles, or you could try sites like:\nhttps://data.gov/\nhttps://www.data.gov.uk/\nhttps://opendata.nhsbsa.net/\nhttps://tfl.gov.uk/info-for/open-data-users/  \nhttps://data.europa.eu/data/datasets?locale=en\nhttps://data.worldbank.org/\nhttps://data.london.gov.uk/\nYou can probably find many more!\n\n\nReferencing\nWe will not expect standard academic referencing in this piece, however, this doesn’t mean that you shouldn’t include references – you should. In this style of public facing scholarly writing, it is common to use hyperlinks and footnotes and you should make use of these to support your narrative.\n\n\nFormat of the Piece\nExamples – Here is just one example of the kind of article you might produce (minus the technical appendix), but read widely around the data journalism sites linked from publications like the Financial Times, New York Times, Guardian.\nhttps://theconversation.com/constituency-level-data-reveals-which-parties-are-most-threatened-by-reform-264422\n\n\nDeadline and Handing In\nThe Deadline for the assessment is Tuesday, 13 January 2026 @ 10:00.\nYour report and technical appendix should be uploaded to Moodle as a single PDF document.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "assessments/index.html#mark-scheme",
-    "href": "assessments/index.html#mark-scheme",
-    "title": "CASA0007 Assessment",
-    "section": "Mark Scheme",
-    "text": "Mark Scheme\nThis is how we will mark your work - take note of them\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCriterion\n80-100%\n70-79% (A)\n60-69% (B)\n50-59% (C)\n40-49% (D)\n1-39% (E)\n\n\n\n\nExploratory Analysis (25%)\nOutstanding selection of exploratory statistics and/or sophisticated data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations in the data with absolute clarity. Graphics are labelled such that readers are in no doubt about what is being shown. Data may have been transformed, normalised or standardised in some way to reveal otherwise hidden patterns and justified impeccably.\nExcellent selection of exploratory statistics and/or sophisticated data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations in the data. Graphics are labelled such that readers are in no doubt about what is being shown. Data may have been transformed, normalised or standardised in some way to reveal otherwise hidden patterns and justified.\nGood selection of exploratory statistics and/or data visualisations which illuminate the underlying data, revealing distributions / trends / relationships and associations. Graphics are labelled such that readers are able to interpret the plots with ease.\nAdequate selection of exploratory statistics and/or data visualisations which illuminate some of the underlying data, revealing some distributions / trends / relationships and associations. Graphics are labelled, but may lack clarity. Data may not be transformed, normalised or standardised in a way to reveal patterns.\nInadequate selection of statistics or visualisations. Graphics are poorly labelled or unclear, and do not illuminate the underlying data. Data transformations are incorrect or missing.\nNegligible use of statistics or visualisations. Any visualisations are irrelevant, inaccurate, or inaccessible. The analysis shows no grasp of the underlying data.\n\n\nUse of multivariate statistical analysis or explanatory / predictive methods (25%)\nExceptional selection of data / variables entirely appropriate for the chosen article topic. Masterful understanding of the nuances related to the careful pruning and selection of appropriate variables. Outstanding understanding of the methods employed and their interaction with the data to hand with masterful understanding of outputs produced\nExcellent selection of data / variables entirely appropriate for the chosen article topic. Highly competent understanding of the nuances related to the careful pruning and selection of appropriate variables. Highly competent understanding of the methods employed and their interaction with the data to hand.\nGood selection of data / variables appropriate for the chosen article topic. Competent understanding of the methods employed and their interaction with the data.\nAdequate selection of data / variables for the chosen article topic. Basic understanding of the methods employed and their interaction with the data. May get some of the nuances in the outputs, but may also ignore some key features in the data\nInadequate selection of data / variables for the chosen article topic. Little to no understanding of the methods employed or how they interact with the data.\nNegligible or irrelevant selection of data / variables. No grasp of the methods or their application to the data.\n\n\nOriginality, article narrative and communication (25%)\nHighly original topic selection, or of exceptional relevance to a contemporary debate in the society, the media or politics at a local, national or international level with broad interest. Article narrative shows flare or originality which draws the reader in and reveals something entirely new. Writing style is highly accessible - clear, concise and creative and the reader is left without query or misunderstanding.\nExcellent topic selection, of high relevance to a contemporary debate. The narrative is engaging and written with excellent clarity, flowing well from one section to the next. The work is of a very high standard. Writing style clear and concise with few wasted words.\nGood topic selection, of relevance to a contemporary debate. The narrative is clear and well-structured. The work shows some evidence of originality. The narrative is good and the message emerging from the analysis is conveyed well.\nAdequate topic selection, but may lack relevance or wider interest. The narrative is satisfactory but may lack clarity or logical flow  ideas appearing slightly disorganised. The reader can understand the piece but may have to work hard to derive meaning from it.\nInadequate topic selection  perhaps dated or totally irrelevant to the degree programme (i.e. not even a human topic). The narrative is lacking in clarity and is difficult to follow. Deriving meaning from the work is a challenge.\nThe work has no clear topic or narrative. The communication is confused, unclear, or inaccessible.\n\n\nConceptual understanding and Critical Reflection (25%)\nBoth the Article and Technical Appendix show exemplary understanding of the topic / wider issues associated with it and of the methods employed to interrogate the data. A clear understanding of any data / methodological shortcomings / issues / challenges is presented with a highly sophisticated degree of critical reflection in relation to the substantive topic and / or methods employed is demonstrated.\nArticle and Technical Appendix show excellent and highly competent conceptual understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a thorough understanding of the chosen example and recognises and reflects lucidly on any shortcomings and / or the wider significance of the findings in a way that is not contrived or formulaic but shows a sophisticated level of insight.\nArticle and Technical Appendix show good understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a sound understanding of the chosen example and recognises and reflects lucidly on any shortcomings and / or the wider significance of the findings in a way that is not contrived or formulaic but shows a sophisticated level of insight.\nArticle and Technical Appendix show basic understanding of key concepts and theories related to both the topic and methods employed. The work demonstrates a rudimentary understanding of the chosen example and recognises and may offer only some reflection on the shortcomings of the work or not at all / contrived at the bottom end.\nInadequate and insufficient conceptual understanding of key concepts and theories. The work demonstrates an invalid or lack of understanding of the concepts introduced. Any analysis attempted fails to support the observations made.\nNegligible or no conceptual understanding of key concepts and theories. The work demonstrates an irrelevant, inaccurate, confused, unclear, or inaccessible understanding of the concepts.\n\n\n\n\n\n\nThe purpose of this assessment is to test your understanding of the various methods introduced in this course and your ability to apply them appropriately to a topic of your choice. One of the differentiators at Masters level is the ability to think both creatively and critically while showing an awareness or knowledge of contemporary issues either in relation to your specific discipline of study or more widely. Being able to demonstrate how established techniques of research and enquiry can be used to create and interpret knowledge is at the core of Masters level thinking and this assessment piece. The ability to demonstrate self-direction (in choosing an appropriate topic for this assessment) and to think autonomously in designing your own article.\n\nMark Scheme – Explained\nLevel 7 Descriptors - https://www.qaa.ac.uk/docs/qaa/quality-code/the-frameworks-for-higher-education-qualifications-of-uk-degree-awarding-bodies-2024.pdf - p26\nMaster’s degree\nThe descriptor provided for this level of the Frameworks is for any master’s degree which should meet the descriptor in full. This qualification descriptor should also be used as a reference point for other qualifications at Level 7 on the FHEQ/SCQF Level 11 on the FQHEIS, including postgraduate certificates and postgraduate diplomas.\nMaster’s degrees are awarded to students who have demonstrated:\n•         a systematic understanding of knowledge, and a critical awareness of current problems and/or new insights, much of which is at, or informed by, the forefront of their academic discipline, field of study or area of professional practice\n•         a comprehensive understanding of techniques applicable to their own research or advanced scholarship\n•         originality in the application of knowledge, together with a practical understanding of how established techniques of research and enquiry are used to create and interpret knowledge in the discipline\n•         conceptual understanding that enables the student:\n•         to evaluate critically current research and advanced scholarship in the discipline\n•         to evaluate methodologies and develop critiques of them and, where appropriate, to propose new hypotheses.\nTypically, holders of the qualification will be able to:\n•         deal with complex issues - both systematically and creatively, make sound judgements in the absence of complete data, and communicate their conclusions clearly to specialist and non-specialist audiences\n•         demonstrate self-direction and originality in tackling and solving problems, and act autonomously in planning and implementing tasks at a professional or equivalent level\n•         continue to advance their knowledge and understanding, and to develop new skills to a high level. \nAnd holders will have:\n•         the qualities and transferable skills necessary for employment requiring:  \n•         the exercise of initiative and personal responsibility\n•         decision-making in complex and unpredictable situations\n•         the independent learning ability required for continuing professional development.",
-    "crumbs": [
-      "Overview"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome",
-    "section": "",
-    "text": "The Quantitative Methods (QM) module is a compulsory element of CASA’s MSc/MRes USS programmes and is intended provide an introduction to quantitative methods for all students.\nAs data becomes central to decision-making across all sectors, the ability to move beyond simple description to robust and evidence-based analysis is essential for researchers and practitioners in geography and urban studies. Making sense of the complex patterns that define our world requires a firm understanding of the language of data. This module provides the essential grammar for that language and aims to equip students with the foundational quantitative skills needed to describe data, build models, and derive meaningful insights from numerical evidence.\nTo achieve this, the module is structured progressively across three core sections. The first section establishes the fundamental toolkit for quantitative analysts. Beginning with Exploratory Data Analysis, students will learn how to visualise, summarise, and critically interrogate datasets. This is followed by a rigorous grounding in the principles of statistical inference through hypothesis testing, and an introduction to the linear algebra that provides the mathematical architecture for many of the models used in modern data science.\nThe second section builds upon this foundation to explore the core of statistical modelling: understanding and quantifying relationships between variables. Students will progress from measuring correlations to building sophisticated regression models. The curriculum covers the workhorse of social science, the Generalised Linear Model (GLM), before advancing to Multilevel Models, a critical technique for handling the nested and hierarchical data that is common in geographical and social research.\nThe final section of the course introduces advanced techniques for uncovering hidden structures within complex, high-dimensional datasets. Students will learn methods for dimensionality reduction to simplify complexity without losing vital information, and clustering analysis to identify natural groupings and patterns in data.\nTherefore, this module guides students on a complete analytical journey, from foundational principles to the application of advanced modelling techniques. It serves as a vital prerequisite for more specialised analytical modules and is essential for students wishing to undertake quantitative geospatial research. Ultimately, this module will provide quantitative skills that are in high demand across public, private, and academic sectors."
-  },
-  {
-    "objectID": "index.html#acknowledgements",
-    "href": "index.html#acknowledgements",
-    "title": "Welcome",
-    "section": "Acknowledgements",
-    "text": "Acknowledgements\nWe really appreciate the support from various people:\n\nJon for setting up this wonderful CASA-themed quarto template.\nOllie and Andy for inspiring us to pursue a Quarto-based module website."
-  },
-  {
-    "objectID": "sessions/week1.html",
-    "href": "sessions/week1.html",
-    "title": "Week 1",
-    "section": "",
-    "text": "This week will introduce data types and key metrics for describing and representing data.",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
-  },
-  {
-    "objectID": "sessions/week1.html#introduction",
-    "href": "sessions/week1.html#introduction",
-    "title": "Week 1",
-    "section": "",
-    "text": "This week will introduce data types and key metrics for describing and representing data.",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
-  },
-  {
-    "objectID": "sessions/week1.html#learning-objectives",
-    "href": "sessions/week1.html#learning-objectives",
-    "title": "Week 1",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of this week, you will be able to:\n\nUnderstand data types for quantitative research.\nDescribe and represent data using key metrics.\nVisualise data with boxplot.",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
-  },
-  {
-    "objectID": "sessions/week1.html#lecture",
-    "href": "sessions/week1.html#lecture",
-    "title": "Week 1",
-    "section": "Lecture",
-    "text": "Lecture\nTo access the lecture notes: Week 1 lecture",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
-  },
-  {
-    "objectID": "sessions/week1.html#practical",
-    "href": "sessions/week1.html#practical",
-    "title": "Week 1",
-    "section": "Practical",
-    "text": "Practical\n:::\n\n\n\n\n\n\nNote\n\n\n\nTo save a copy of notebook to your own GitHub Repo: follow the GitHub link, click on Raw and then Save File As... to save it to your own computer. Make sure to change the extension from .ipynb.txt (which will probably be the default) to .ipynbbefore adding the file to your GitHub repository.\n\n\nTo access the practical:\n\nPreview\nDownload",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
-  },
-  {
-    "objectID": "sessions/week1.html#further-resources",
-    "href": "sessions/week1.html#further-resources",
-    "title": "Week 1",
-    "section": "Further resources",
-    "text": "Further resources",
-    "crumbs": [
-      "Part 1: Basics",
-      "1. Explanatory Data Analysis #1"
-    ]
   },
   {
     "objectID": "sessions/week2.html#overview-of-lecture-1",
