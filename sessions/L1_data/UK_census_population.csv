@@ -1,0 +1,375 @@
+"Usual resident population, 2011 and 2021",,,,,
+"England and Wales, England, Wales, regions of England and local authorities in England and Wales",,,,,
+Units: Number and percentage change,,,,,
+Source: Office for National Statistics – Census 2021 and 2011 Census,,,,,
+,,,,,
+Area code,Area name,Area type,Population 2011,Population 2021,Percentage change
+K04000001,England and Wales,National,"56,075,912","59,597,542",6.3
+E92000001,England,Country,"53,012,456","56,490,048",6.6
+W92000004,Wales,Country,"3,063,456","3,107,494",1.4
+E12000001,North East,Region,"2,596,886","2,647,013",1.9
+E12000002,North West,Region,"7,052,177","7,417,397",5.2
+E12000003,Yorkshire and The Humber,Region,"5,283,733","5,480,777",3.7
+E12000004,East Midlands,Region,"4,533,222","4,880,054",7.7
+E12000005,West Midlands,Region,"5,601,847","5,950,757",6.2
+E12000006,East of England,Region,"5,846,965","6,335,074",8.3
+E12000007,London,Region,"8,173,941","8,799,728",7.7
+E12000008,South East,Region,"8,634,750","9,278,065",7.5
+E12000009,South West,Region,"5,288,935","5,701,186",7.8
+E06000001,Hartlepool,Local Authority,"92,028","92,338",0.3
+E06000002,Middlesbrough,Local Authority,"138,412","143,924",4
+E06000003,Redcar and Cleveland,Local Authority,"135,177","136,531",1
+E06000004,Stockton-on-Tees,Local Authority,"191,610","196,595",2.6
+E06000005,Darlington,Local Authority,"105,564","107,799",2.1
+E06000006,Halton,Local Authority,"125,746","128,478",2.2
+E06000007,Warrington,Local Authority,"202,228","210,974",4.3
+E06000008,Blackburn with Darwen,Local Authority,"147,489","154,739",4.9
+E06000009,Blackpool,Local Authority,"142,065","141,036",-0.7
+E06000010,"Kingston upon Hull, City of",Local Authority,"256,406","267,014",4.1
+E06000011,East Riding of Yorkshire,Local Authority,"334,179","342,215",2.4
+E06000012,North East Lincolnshire,Local Authority,"159,616","156,966",-1.7
+E06000013,North Lincolnshire,Local Authority,"167,446","169,680",1.3
+E06000014,York,Local Authority,"198,051","202,821",2.4
+E06000015,Derby,Local Authority,"248,752","261,364",5.1
+E06000016,Leicester,Local Authority,"329,839","368,572",11.7
+E06000017,Rutland,Local Authority,"37,369","41,049",9.8
+E06000018,Nottingham,Local Authority,"305,680","323,632",5.9
+E06000019,"Herefordshire, County of",Local Authority,"183,477","187,034",1.9
+E06000020,Telford and Wrekin,Local Authority,"166,641","185,541",11.3
+E06000021,Stoke-on-Trent,Local Authority,"249,008","258,369",3.8
+E06000022,Bath and North East Somerset,Local Authority,"176,016","193,409",9.9
+E06000023,"Bristol, City of",Local Authority,"428,234","472,465",10.3
+E06000024,North Somerset,Local Authority,"202,566","216,728",7
+E06000025,South Gloucestershire,Local Authority,"262,767","290,424",10.5
+E06000026,Plymouth,Local Authority,"256,384","264,695",3.2
+E06000027,Torbay,Local Authority,"130,959","139,324",6.4
+E06000030,Swindon,Local Authority,"209,156","233,410",11.6
+E06000031,Peterborough,Local Authority,"183,631","215,673",17.4
+E06000032,Luton,Local Authority,"203,201","225,262",10.9
+E06000033,Southend-on-Sea,Local Authority,"173,658","180,686",4
+E06000034,Thurrock,Local Authority,"157,705","176,000",11.6
+E06000035,Medway,Local Authority,"263,925","279,773",6
+E06000036,Bracknell Forest,Local Authority,"113,205","124,607",10.1
+E06000037,West Berkshire,Local Authority,"153,822","161,447",5
+E06000038,Reading,Local Authority,"155,698","174,224",11.9
+E06000039,Slough,Local Authority,"140,205","158,500",13
+E06000040,Windsor and Maidenhead,Local Authority,"144,560","153,496",6.2
+E06000041,Wokingham,Local Authority,"154,380","177,502",15
+E06000042,Milton Keynes,Local Authority,"248,821","287,060",15.4
+E06000043,Brighton and Hove,Local Authority,"273,369","277,103",1.4
+E06000044,Portsmouth,Local Authority,"205,056","208,003",1.4
+E06000045,Southampton,Local Authority,"236,882","248,922",5.1
+E06000046,Isle of Wight,Local Authority,"138,265","140,459",1.6
+E06000047,County Durham,Local Authority,"513,242","522,068",1.7
+E06000049,Cheshire East,Local Authority,"370,127","398,772",7.7
+E06000050,Cheshire West and Chester,Local Authority,"329,608","357,150",8.4
+E06000051,Shropshire,Local Authority,"306,129","323,606",5.7
+E06000052,Cornwall,Local Authority,"532,273","570,305",7.1
+E06000053,Isles of Scilly,Local Authority,"2,203","2,054",-6.8
+E06000054,Wiltshire,Local Authority,"470,981","510,330",8.4
+E06000055,Bedford,Local Authority,"157,479","185,225",17.6
+E06000056,Central Bedfordshire,Local Authority,"254,381","294,252",15.7
+E06000057,Northumberland,Local Authority,"316,028","320,567",1.4
+E06000058,"Bournemouth, Christchurch and Poole",Local Authority,"378,888","400,196",5.6
+E06000059,Dorset,Local Authority,"365,153","379,579",4
+E06000060,Buckinghamshire,Local Authority,"505,283","553,078",9.5
+E06000061,North Northamptonshire,Local Authority,"316,851","359,522",13.5
+E06000062,West Northamptonshire,Local Authority,"375,101","425,725",13.5
+E07000008,Cambridge,Local Authority,"123,867","145,674",17.6
+E07000009,East Cambridgeshire,Local Authority,"83,818","87,762",4.7
+E07000010,Fenland,Local Authority,"95,262","102,462",7.6
+E07000011,Huntingdonshire,Local Authority,"169,508","180,833",6.7
+E07000012,South Cambridgeshire,Local Authority,"148,755","162,119",9
+E07000026,Allerdale,Local Authority,"96,422","96,155",-0.3
+E07000027,Barrow-in-Furness,Local Authority,"69,087","67,407",-2.4
+E07000028,Carlisle,Local Authority,"107,524","110,024",2.3
+E07000029,Copeland,Local Authority,"70,603","67,076",-5
+E07000030,Eden,Local Authority,"52,564","54,735",4.1
+E07000031,South Lakeland,Local Authority,"103,658","104,450",0.8
+E07000032,Amber Valley,Local Authority,"122,309","126,206",3.2
+E07000033,Bolsover,Local Authority,"75,866","80,273",5.8
+E07000034,Chesterfield,Local Authority,"103,788","103,569",-0.2
+E07000035,Derbyshire Dales,Local Authority,"71,116","71,540",0.6
+E07000036,Erewash,Local Authority,"112,081","112,906",0.7
+E07000037,High Peak,Local Authority,"90,892","90,932",0
+E07000038,North East Derbyshire,Local Authority,"99,023","102,001",3
+E07000039,South Derbyshire,Local Authority,"94,611","107,208",13.3
+E07000040,East Devon,Local Authority,"132,457","150,828",13.9
+E07000041,Exeter,Local Authority,"117,773","130,709",11
+E07000042,Mid Devon,Local Authority,"77,750","82,852",6.6
+E07000043,North Devon,Local Authority,"93,667","98,611",5.3
+E07000044,South Hams,Local Authority,"83,140","88,627",6.6
+E07000045,Teignbridge,Local Authority,"124,220","134,803",8.5
+E07000046,Torridge,Local Authority,"63,839","68,114",6.7
+E07000047,West Devon,Local Authority,"53,553","57,096",6.6
+E07000061,Eastbourne,Local Authority,"99,412","101,689",2.3
+E07000062,Hastings,Local Authority,"90,254","90,996",0.8
+E07000063,Lewes,Local Authority,"97,502","99,905",2.5
+E07000064,Rother,Local Authority,"90,588","93,110",2.8
+E07000065,Wealden,Local Authority,"148,915","160,151",7.5
+E07000066,Basildon,Local Authority,"174,497","187,571",7.5
+E07000067,Braintree,Local Authority,"147,084","155,268",5.6
+E07000068,Brentwood,Local Authority,"73,601","77,047",4.7
+E07000069,Castle Point,Local Authority,"88,011","89,587",1.8
+E07000070,Chelmsford,Local Authority,"168,310","181,523",7.9
+E07000071,Colchester,Local Authority,"173,074","192,715",11.3
+E07000072,Epping Forest,Local Authority,"124,659","134,980",8.3
+E07000073,Harlow,Local Authority,"81,944","93,328",13.9
+E07000074,Maldon,Local Authority,"61,629","66,208",7.4
+E07000075,Rochford,Local Authority,"83,287","85,661",2.9
+E07000076,Tendring,Local Authority,"138,048","148,292",7.4
+E07000077,Uttlesford,Local Authority,"79,443","91,341",15
+E07000078,Cheltenham,Local Authority,"115,732","118,836",2.7
+E07000079,Cotswold,Local Authority,"82,881","90,832",9.6
+E07000080,Forest of Dean,Local Authority,"81,961","87,004",6.2
+E07000081,Gloucester,Local Authority,"121,688","132,416",8.8
+E07000082,Stroud,Local Authority,"112,779","121,104",7.4
+E07000083,Tewkesbury,Local Authority,"81,943","94,884",15.8
+E07000084,Basingstoke and Deane,Local Authority,"167,799","185,154",10.3
+E07000085,East Hampshire,Local Authority,"115,608","125,746",8.8
+E07000086,Eastleigh,Local Authority,"125,199","136,443",9
+E07000087,Fareham,Local Authority,"111,581","114,513",2.6
+E07000088,Gosport,Local Authority,"82,622","81,952",-0.8
+E07000089,Hart,Local Authority,"91,033","99,408",9.2
+E07000090,Havant,Local Authority,"120,684","124,208",2.9
+E07000091,New Forest,Local Authority,"176,462","175,785",-0.4
+E07000092,Rushmoor,Local Authority,"93,807","99,754",6.3
+E07000093,Test Valley,Local Authority,"116,398","130,492",12.1
+E07000094,Winchester,Local Authority,"116,595","127,445",9.3
+E07000095,Broxbourne,Local Authority,"93,609","99,007",5.8
+E07000096,Dacorum,Local Authority,"144,847","155,081",7.1
+E07000098,Hertsmere,Local Authority,"100,031","107,827",7.8
+E07000099,North Hertfordshire,Local Authority,"127,114","133,210",4.8
+E07000102,Three Rivers,Local Authority,"87,317","93,771",7.4
+E07000103,Watford,Local Authority,"90,301","102,246",13.2
+E07000105,Ashford,Local Authority,"117,956","132,747",12.5
+E07000106,Canterbury,Local Authority,"151,145","157,429",4.2
+E07000107,Dartford,Local Authority,"97,365","116,753",19.9
+E07000108,Dover,Local Authority,"111,674","116,410",4.2
+E07000109,Gravesham,Local Authority,"101,720","106,900",5.1
+E07000110,Maidstone,Local Authority,"155,143","175,782",13.3
+E07000111,Sevenoaks,Local Authority,"114,893","120,514",4.9
+E07000112,Folkestone and Hythe,Local Authority,"107,969","109,758",1.7
+E07000113,Swale,Local Authority,"135,835","151,677",11.7
+E07000114,Thanet,Local Authority,"134,186","140,587",4.8
+E07000115,Tonbridge and Malling,Local Authority,"120,805","132,201",9.4
+E07000116,Tunbridge Wells,Local Authority,"115,049","115,311",0.2
+E07000117,Burnley,Local Authority,"87,059","94,646",8.7
+E07000118,Chorley,Local Authority,"107,155","117,732",9.9
+E07000119,Fylde,Local Authority,"75,757","81,375",7.4
+E07000120,Hyndburn,Local Authority,"80,734","82,234",1.9
+E07000121,Lancaster,Local Authority,"138,375","142,931",3.3
+E07000122,Pendle,Local Authority,"89,452","95,757",7
+E07000123,Preston,Local Authority,"140,202","147,835",5.4
+E07000124,Ribble Valley,Local Authority,"57,132","61,561",7.8
+E07000125,Rossendale,Local Authority,"67,982","70,871",4.2
+E07000126,South Ribble,Local Authority,"109,057","111,035",1.8
+E07000127,West Lancashire,Local Authority,"110,685","117,429",6.1
+E07000128,Wyre,Local Authority,"107,749","111,946",3.9
+E07000129,Blaby,Local Authority,"93,915","102,926",9.6
+E07000130,Charnwood,Local Authority,"166,100","183,971",10.8
+E07000131,Harborough,Local Authority,"85,382","97,625",14.3
+E07000132,Hinckley and Bosworth,Local Authority,"105,078","113,640",8.1
+E07000133,Melton,Local Authority,"50,376","51,752",2.7
+E07000134,North West Leicestershire,Local Authority,"93,468","104,705",12
+E07000135,Oadby and Wigston,Local Authority,"56,170","57,747",2.8
+E07000136,Boston,Local Authority,"64,637","70,502",9.1
+E07000137,East Lindsey,Local Authority,"136,401","142,296",4.3
+E07000138,Lincoln,Local Authority,"93,541","103,813",11
+E07000139,North Kesteven,Local Authority,"107,766","118,074",9.6
+E07000140,South Holland,Local Authority,"88,270","95,122",7.8
+E07000141,South Kesteven,Local Authority,"133,788","143,404",7.2
+E07000142,West Lindsey,Local Authority,"89,250","95,153",6.6
+E07000143,Breckland,Local Authority,"130,491","141,476",8.4
+E07000144,Broadland,Local Authority,"124,646","131,721",5.7
+E07000145,Great Yarmouth,Local Authority,"97,277","99,745",2.5
+E07000146,King's Lynn and West Norfolk,Local Authority,"147,451","154,325",4.7
+E07000147,North Norfolk,Local Authority,"101,499","102,979",1.5
+E07000148,Norwich,Local Authority,"132,512","143,922",8.6
+E07000149,South Norfolk,Local Authority,"124,012","141,947",14.5
+E07000163,Craven,Local Authority,"55,409","56,927",2.7
+E07000164,Hambleton,Local Authority,"89,140","90,690",1.7
+E07000165,Harrogate,Local Authority,"157,869","162,670",3
+E07000166,Richmondshire,Local Authority,"51,965","49,776",-4.2
+E07000167,Ryedale,Local Authority,"51,751","54,707",5.7
+E07000168,Scarborough,Local Authority,"108,793","108,735",-0.1
+E07000169,Selby,Local Authority,"83,449","91,988",10.2
+E07000170,Ashfield,Local Authority,"119,497","126,300",5.7
+E07000171,Bassetlaw,Local Authority,"112,863","117,804",4.4
+E07000172,Broxtowe,Local Authority,"109,487","110,940",1.3
+E07000173,Gedling,Local Authority,"113,543","117,263",3.3
+E07000174,Mansfield,Local Authority,"104,466","110,482",5.8
+E07000175,Newark and Sherwood,Local Authority,"114,817","122,956",7.1
+E07000176,Rushcliffe,Local Authority,"111,129","119,077",7.2
+E07000177,Cherwell,Local Authority,"141,868","161,016",13.5
+E07000178,Oxford,Local Authority,"151,906","162,041",6.7
+E07000179,South Oxfordshire,Local Authority,"134,257","149,085",11
+E07000180,Vale of White Horse,Local Authority,"120,988","138,913",14.8
+E07000181,West Oxfordshire,Local Authority,"104,779","114,237",9
+E07000187,Mendip,Local Authority,"109,279","116,089",6.2
+E07000188,Sedgemoor,Local Authority,"114,588","125,343",9.4
+E07000189,South Somerset,Local Authority,"161,243","172,671",7.1
+E07000192,Cannock Chase,Local Authority,"97,462","100,519",3.1
+E07000193,East Staffordshire,Local Authority,"113,583","124,019",9.2
+E07000194,Lichfield,Local Authority,"100,654","106,436",5.7
+E07000195,Newcastle-under-Lyme,Local Authority,"123,871","123,299",-0.5
+E07000196,South Staffordshire,Local Authority,"108,131","110,472",2.2
+E07000197,Stafford,Local Authority,"130,869","136,867",4.6
+E07000198,Staffordshire Moorlands,Local Authority,"97,106","95,845",-1.3
+E07000199,Tamworth,Local Authority,"76,813","78,647",2.4
+E07000200,Babergh,Local Authority,"87,740","92,338",5.2
+E07000202,Ipswich,Local Authority,"133,384","139,642",4.7
+E07000203,Mid Suffolk,Local Authority,"96,731","102,699",6.2
+E07000207,Elmbridge,Local Authority,"130,875","138,754",6
+E07000208,Epsom and Ewell,Local Authority,"75,102","80,938",7.8
+E07000209,Guildford,Local Authority,"137,183","143,649",4.7
+E07000210,Mole Valley,Local Authority,"85,375","87,386",2.4
+E07000211,Reigate and Banstead,Local Authority,"137,835","150,846",9.4
+E07000212,Runnymede,Local Authority,"80,510","88,079",9.4
+E07000213,Spelthorne,Local Authority,"95,598","102,956",7.7
+E07000214,Surrey Heath,Local Authority,"86,144","90,453",5
+E07000215,Tandridge,Local Authority,"82,998","87,874",5.9
+E07000216,Waverley,Local Authority,"121,572","128,229",5.5
+E07000217,Woking,Local Authority,"99,198","103,943",4.8
+E07000218,North Warwickshire,Local Authority,"62,014","65,035",4.9
+E07000219,Nuneaton and Bedworth,Local Authority,"125,252","134,197",7.1
+E07000220,Rugby,Local Authority,"100,075","114,363",14.3
+E07000221,Stratford-on-Avon,Local Authority,"120,485","134,725",11.8
+E07000222,Warwick,Local Authority,"137,648","148,452",7.8
+E07000223,Adur,Local Authority,"61,182","64,544",5.5
+E07000224,Arun,Local Authority,"149,518","164,889",10.3
+E07000225,Chichester,Local Authority,"113,794","124,068",9
+E07000226,Crawley,Local Authority,"106,597","118,493",11.2
+E07000227,Horsham,Local Authority,"131,301","146,778",11.8
+E07000228,Mid Sussex,Local Authority,"139,860","152,566",9.1
+E07000229,Worthing,Local Authority,"104,640","111,338",6.4
+E07000234,Bromsgrove,Local Authority,"93,637","99,183",5.9
+E07000235,Malvern Hills,Local Authority,"74,631","79,486",6.5
+E07000236,Redditch,Local Authority,"84,214","87,036",3.4
+E07000237,Worcester,Local Authority,"98,768","103,872",5.2
+E07000238,Wychavon,Local Authority,"116,944","132,492",13.3
+E07000239,Wyre Forest,Local Authority,"97,975","101,607",3.7
+E07000240,St Albans,Local Authority,"140,664","148,167",5.3
+E07000241,Welwyn Hatfield,Local Authority,"110,535","119,837",8.4
+E07000242,East Hertfordshire,Local Authority,"137,687","150,158",9.1
+E07000243,Stevenage,Local Authority,"83,957","89,495",6.6
+E07000244,East Suffolk,Local Authority,"239,552","246,058",2.7
+E07000245,West Suffolk,Local Authority,"170,756","179,948",5.4
+E07000246,Somerset West and Taunton,Local Authority,"144,862","157,445",8.7
+E08000001,Bolton,Local Authority,"276,786","295,963",6.9
+E08000002,Bury,Local Authority,"185,060","193,851",4.8
+E08000003,Manchester,Local Authority,"503,127","551,938",9.7
+E08000004,Oldham,Local Authority,"224,897","242,089",7.6
+E08000005,Rochdale,Local Authority,"211,699","223,773",5.7
+E08000006,Salford,Local Authority,"233,933","269,923",15.4
+E08000007,Stockport,Local Authority,"283,275","294,773",4.1
+E08000008,Tameside,Local Authority,"219,324","231,073",5.4
+E08000009,Trafford,Local Authority,"226,578","235,052",3.7
+E08000010,Wigan,Local Authority,"317,849","329,330",3.6
+E08000011,Knowsley,Local Authority,"145,893","154,517",5.9
+E08000012,Liverpool,Local Authority,"466,415","486,088",4.2
+E08000013,St. Helens,Local Authority,"175,308","183,248",4.5
+E08000014,Sefton,Local Authority,"273,790","279,233",2
+E08000015,Wirral,Local Authority,"319,783","320,199",0.1
+E08000016,Barnsley,Local Authority,"231,221","244,572",5.8
+E08000017,Doncaster,Local Authority,"302,402","308,106",1.9
+E08000018,Rotherham,Local Authority,"257,280","265,807",3.3
+E08000019,Sheffield,Local Authority,"552,698","556,521",0.7
+E08000021,Newcastle upon Tyne,Local Authority,"280,177","300,125",7.1
+E08000022,North Tyneside,Local Authority,"200,801","208,967",4.1
+E08000023,South Tyneside,Local Authority,"148,127","147,776",-0.2
+E08000024,Sunderland,Local Authority,"275,506","274,171",-0.5
+E08000025,Birmingham,Local Authority,"1,073,045","1,144,919",6.7
+E08000026,Coventry,Local Authority,"316,960","345,324",8.9
+E08000027,Dudley,Local Authority,"312,925","323,488",3.4
+E08000028,Sandwell,Local Authority,"308,063","341,832",11
+E08000029,Solihull,Local Authority,"206,674","216,240",4.6
+E08000030,Walsall,Local Authority,"269,323","284,124",5.5
+E08000031,Wolverhampton,Local Authority,"249,470","263,727",5.7
+E08000032,Bradford,Local Authority,"522,452","546,412",4.6
+E08000033,Calderdale,Local Authority,"203,826","206,631",1.4
+E08000034,Kirklees,Local Authority,"422,458","433,216",2.5
+E08000035,Leeds,Local Authority,"751,485","811,953",8
+E08000036,Wakefield,Local Authority,"325,837","353,370",8.4
+E08000037,Gateshead,Local Authority,"200,214","196,151",-2
+E09000001,City of London,Local Authority,"7,375","8,583",16.4
+E09000002,Barking and Dagenham,Local Authority,"185,911","218,869",17.7
+E09000003,Barnet,Local Authority,"356,386","389,344",9.2
+E09000004,Bexley,Local Authority,"231,997","246,472",6.2
+E09000005,Brent,Local Authority,"311,215","339,816",9.2
+E09000006,Bromley,Local Authority,"309,392","329,991",6.7
+E09000007,Camden,Local Authority,"220,338","210,136",-4.6
+E09000008,Croydon,Local Authority,"363,378","390,719",7.5
+E09000009,Ealing,Local Authority,"338,449","367,115",8.5
+E09000010,Enfield,Local Authority,"312,466","329,984",5.6
+E09000011,Greenwich,Local Authority,"254,557","289,068",13.6
+E09000012,Hackney,Local Authority,"246,270","259,146",5.2
+E09000013,Hammersmith and Fulham,Local Authority,"182,493","183,157",0.4
+E09000014,Haringey,Local Authority,"254,926","264,238",3.7
+E09000015,Harrow,Local Authority,"239,056","261,203",9.3
+E09000016,Havering,Local Authority,"237,232","262,052",10.5
+E09000017,Hillingdon,Local Authority,"273,936","305,909",11.7
+E09000018,Hounslow,Local Authority,"253,957","288,181",13.5
+E09000019,Islington,Local Authority,"206,125","216,589",5.1
+E09000020,Kensington and Chelsea,Local Authority,"158,649","143,375",-9.6
+E09000021,Kingston upon Thames,Local Authority,"160,060","168,063",5
+E09000022,Lambeth,Local Authority,"303,086","317,654",4.8
+E09000023,Lewisham,Local Authority,"275,885","300,553",8.9
+E09000024,Merton,Local Authority,"199,693","215,187",7.8
+E09000025,Newham,Local Authority,"307,984","351,036",14
+E09000026,Redbridge,Local Authority,"278,970","310,260",11.2
+E09000027,Richmond upon Thames,Local Authority,"186,990","195,278",4.4
+E09000028,Southwark,Local Authority,"288,283","307,637",6.7
+E09000029,Sutton,Local Authority,"190,146","209,639",10.3
+E09000030,Tower Hamlets,Local Authority,"254,096","310,306",22.1
+E09000031,Waltham Forest,Local Authority,"258,249","278,425",7.8
+E09000032,Wandsworth,Local Authority,"306,995","327,506",6.7
+E09000033,Westminster,Local Authority,"219,396","204,236",-6.9
+E10000003,Cambridgeshire,Local Authority,"621,210","678,849",9.3
+E10000006,Cumbria,Local Authority,"499,858","499,846",0
+E10000007,Derbyshire,Local Authority,"769,686","794,636",3.2
+E10000008,Devon,Local Authority,"746,399","811,640",8.7
+E10000011,East Sussex,Local Authority,"526,671","545,847",3.6
+E10000012,Essex,Local Authority,"1,393,587","1,503,521",7.9
+E10000013,Gloucestershire,Local Authority,"596,984","645,076",8.1
+E10000014,Hampshire,Local Authority,"1,317,788","1,400,899",6.3
+E10000015,Hertfordshire,Local Authority,"1,116,062","1,198,798",7.4
+E10000016,Kent,Local Authority,"1,463,740","1,576,069",7.7
+E10000017,Lancashire,Local Authority,"1,171,339","1,235,354",5.5
+E10000018,Leicestershire,Local Authority,"650,489","712,366",9.5
+E10000019,Lincolnshire,Local Authority,"713,653","768,364",7.7
+E10000020,Norfolk,Local Authority,"857,888","916,120",6.8
+E10000023,North Yorkshire,Local Authority,"598,376","615,491",2.9
+E10000024,Nottinghamshire,Local Authority,"785,802","824,822",5
+E10000025,Oxfordshire,Local Authority,"653,798","725,291",10.9
+E10000027,Somerset,Local Authority,"529,972","571,547",7.8
+E10000028,Staffordshire,Local Authority,"848,489","876,104",3.3
+E10000029,Suffolk,Local Authority,"728,163","760,688",4.5
+E10000030,Surrey,Local Authority,"1,132,390","1,203,108",6.2
+E10000031,Warwickshire,Local Authority,"545,474","596,773",9.4
+E10000032,West Sussex,Local Authority,"806,892","882,676",9.4
+E10000034,Worcestershire,Local Authority,"566,169","603,676",6.6
+W06000001,Isle of Anglesey,Local Authority,"69,751","68,878",-1.3
+W06000002,Gwynedd,Local Authority,"121,874","117,393",-3.7
+W06000003,Conwy,Local Authority,"115,228","114,741",-0.4
+W06000004,Denbighshire,Local Authority,"93,734","95,818",2.2
+W06000005,Flintshire,Local Authority,"152,506","154,962",1.6
+W06000006,Wrexham,Local Authority,"134,844","135,117",0.2
+W06000008,Ceredigion,Local Authority,"75,922","71,475",-5.9
+W06000009,Pembrokeshire,Local Authority,"122,439","123,360",0.8
+W06000010,Carmarthenshire,Local Authority,"183,777","187,897",2.2
+W06000011,Swansea,Local Authority,"239,023","238,490",-0.2
+W06000012,Neath Port Talbot,Local Authority,"139,812","142,289",1.8
+W06000013,Bridgend,Local Authority,"139,178","145,488",4.5
+W06000014,Vale of Glamorgan,Local Authority,"126,336","131,939",4.4
+W06000015,Cardiff,Local Authority,"346,090","362,310",4.7
+W06000016,Rhondda Cynon Taf,Local Authority,"234,410","237,651",1.4
+W06000018,Caerphilly,Local Authority,"178,806","175,952",-1.6
+W06000019,Blaenau Gwent,Local Authority,"69,814","66,904",-4.2
+W06000020,Torfaen,Local Authority,"91,075","92,276",1.3
+W06000021,Monmouthshire,Local Authority,"91,323","92,957",1.8
+W06000022,Newport,Local Authority,"145,736","159,587",9.5
+W06000023,Powys,Local Authority,"132,976","133,169",0.1
+W06000024,Merthyr Tydfil,Local Authority,"58,802","58,839",0.1
+,,,,,
+Note: the full dataset for all local authority areas can be downloaded from https://www.ons.gov.uk/visualisations/censusareachanges/datadownload.xlsx,,,,,
