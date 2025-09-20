@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <meta property="og:title" content="Practical 1: describing and representing data – Quantitative Methods">
 <meta property="og:description" content="Starting with the ‘Basics’">
-<meta property="og:image" content="https://huanfachen.github.io/QM/sessions/week1_practical_files/figure-html/cell-11-output-1.png">
+<meta property="og:image" content="https://huanfachen.github.io/QM/sessions/week1_practical_files/figure-html/cell-12-output-1.png">
 <meta property="og:site_name" content="Foundations">
 <meta property="og:locale" content="en_GB">
 <meta property="og:image:height" content="862">
@@ -195,11 +195,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li><hr class="dropdown-divider"></li>
         <li class="dropdown-header">Part 3: Dimension Reduction &amp; Clustering</li>
         <li>
-    <a class="dropdown-item" href="../sessions/week9.qmd">
+    <a class="dropdown-item" href="../sessions/week9.html">
  <span class="dropdown-text">9. Dimension Reduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../sessions/week10.qmd">
+    <a class="dropdown-item" href="../sessions/week10.html">
  <span class="dropdown-text">10. Clustering</span></a>
   </li>  
         <li>
@@ -349,7 +349,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We are going to describe the population of local authorities in the UK.</p>
 <p>The data is sourced from <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/articles/howyourareahaschangedin10yearscensus2021/2022-11-08">Office for National Statistics</a> and is donwloadable <a href="https://www.ons.gov.uk/visualisations/censusareachanges/data/mapdatadownload.csv">here</a>.</p>
 <p>We have saved a copy of this dataset to the Github repo, in case that the dataset is removed from the website.</p>
-<div id="66ea65f8" class="cell" data-execution_count="1">
+<div id="2a3715d3" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Read CSV file, skipping first 5 rows, using row 6 as header, and handling comma as thousands separator</span></span>
@@ -386,7 +386,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="describing-the-dataframe">Describing the dataframe</h2>
 <section id="which-columns-are-included" class="level3">
 <h3 class="anchored" data-anchor-id="which-columns-are-included">Which columns are included?</h3>
-<div id="0b3f18d1" class="cell" data-execution_count="2">
+<div id="99e68a42" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(df_pop.columns)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>['Area code',
@@ -398,7 +398,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>It is a pain to deal with whitespaces in a column, so good practice is to replace the whitespaces (eg tabs, multiple spaces) within column names with <em>underscore</em>.</p>
-<div id="5b1c8c79" class="cell" data-execution_count="3">
+<div id="f1413b62" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_pop.columns <span class="op">=</span> df_pop.columns.<span class="bu">str</span>.replace(<span class="vs">r'</span><span class="dv">\s</span><span class="op">+</span><span class="vs">'</span>, <span class="st">'_'</span>, regex<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(df_pop.columns)) <span class="co"># check again</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -408,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="how-many-rows-cols-are-included" class="level3">
 <h3 class="anchored" data-anchor-id="how-many-rows-cols-are-included">How many rows &amp; cols are included?</h3>
-<div id="bd981cfd" class="cell" data-execution_count="4">
+<div id="6d743626" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rows, cols <span class="op">=</span> df_pop.shape</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span>rows<span class="sc">}</span><span class="ss">, Columns: </span><span class="sc">{</span>cols<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -419,7 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="geography-matters" class="level3">
 <h3 class="anchored" data-anchor-id="geography-matters">Geography matters</h3>
 <p>This dataset contains multiple geographies of UK and different geographies are incomparable. We can check the <em>Area_type</em> column:</p>
-<div id="d76ef1a8" class="cell" data-execution_count="5">
+<div id="191ee299" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_pop.Area_type.value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Area_type
@@ -432,14 +432,14 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p>So there are 355 records of <em>Local Authority</em>， 9 records of <em>Region</em>, 2 of <em>Country</em>, and 1 of ‘National’. For an introduction to these terms, see <a href="https://www.ons.gov.uk/methodology/geography/ukgeographies/administrativegeography/england">this article on ONS</a>.</p>
 <p>We will focus on the local authorities, so we apply a filter:</p>
-<div id="73e3aa55" class="cell" data-execution_count="6">
+<div id="97e0eca7" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_pop_la <span class="op">=</span> df_pop[df_pop[<span class="st">'Area_type'</span>] <span class="op">==</span> <span class="st">'Local Authority'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="overview-of-the-columns" class="level3">
 <h3 class="anchored" data-anchor-id="overview-of-the-columns">Overview of the columns</h3>
 <p>There are two pandas functions that give overview of a dataframe. - <code>info()</code>: shows column data types, non‑null counts, and memory usage. - <code>describe()</code>: shows summary statistics for numeric data (count, mean, std, min, quartiles, max) - <code>describe(include='all')</code>: for both numeric data and non‑numeric data (count, unique, top value, frequency).</p>
-<div id="cd2f028e" class="cell" data-execution_count="7">
+<div id="867bb529" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_pop_la.info())</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_pop_la.describe())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -483,7 +483,7 @@ max       1.463740e+06     1.576069e+06          22.100000</code></pre>
 <p>What is the maximum population size in census 2021?</p>
 <pre class="{Python}"><code>print("Max population: ", df_pop_la['Population_2021'].max(skipna=True))</code></pre>
 <p>Which LAs have the maximum population size? <em>The code above is a bit complicated</em>.</p>
-<div id="34b478a6" class="cell" data-execution_count="8">
+<div id="8c87c184" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> have the maximum population of </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">", "</span>.join(df_pop_la.loc[df_pop_la[<span class="st">'Population_2021'</span>] <span class="op">==</span> df_pop_la[<span class="st">'Population_2021'</span>].<span class="bu">max</span>(skipna<span class="op">=</span><span class="va">True</span>), <span class="st">'Area_name'</span>]), </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    df_pop_la[<span class="st">'Population_2021'</span>].<span class="bu">max</span>(skipna<span class="op">=</span><span class="va">True</span>))</span>
@@ -495,7 +495,7 @@ max       1.463740e+06     1.576069e+06          22.100000</code></pre>
 <p>What it does: - Finds the max population while ignoring NaNs. - Selects all rows with that population. - Joins their Area_name values into a comma-separated string.</p>
 <p>Two new Python functions here: - <em>format()</em>: Inserts variables into a string by replacing {} placeholders in order with provided arguments. - <em>join()</em>: Combines the elements of an iterable into one string using the given separator before .join().</p>
 <p>Which LA has the minimum population?</p>
-<div id="6c25a639" class="cell" data-execution_count="9">
+<div id="e3fd2d60" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print("{} have the minimum population of {}".format(", ".join(df_pop_la.loc[df_pop_la['Population_2021'] == df_pop_la['Population_2021'].min(skipna=True), 'Area_name']), df_pop_la['Population_2021'].min(skipna=True)))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -503,25 +503,102 @@ max       1.463740e+06     1.576069e+06          22.100000</code></pre>
 <h3 class="anchored" data-anchor-id="na-value-and-outliers">NA value and outliers?</h3>
 <p>Are there NA values or outliers in this variable? From results of <code>info()</code>, there are no NA values.</p>
 <p>To detect outliers, we will implement the Tukey Fences method using pandas function, as pandas does not provide a built-in function for this method.</p>
-<pre class="{Python}"><code># Calculate Q1, Q3, and IQR
-Q1 = df_pop_la['Population_2021'].quantile(0.25)
-Q3 = df_pop_la['Population_2021'].quantile(0.75)
-IQR = Q3 - Q1
+<div id="19774139" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Q1, Q3, and IQR</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Q1 <span class="op">=</span> df_pop_la[<span class="st">'Population_2021'</span>].quantile(<span class="fl">0.25</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>Q3 <span class="op">=</span> df_pop_la[<span class="st">'Population_2021'</span>].quantile(<span class="fl">0.75</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>IQR <span class="op">=</span> Q3 <span class="op">-</span> Q1</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Tukey's fences</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>lower_bound <span class="op">=</span> Q1 <span class="op">-</span> <span class="fl">1.5</span> <span class="op">*</span> IQR</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>upper_bound <span class="op">=</span> Q3 <span class="op">+</span> <span class="fl">1.5</span> <span class="op">*</span> IQR</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Detect outliers</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>outliers <span class="op">=</span> df_pop_la[</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    (df_pop_la[<span class="st">'Population_2021'</span>] <span class="op">&lt;</span> lower_bound) <span class="op">|</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    (df_pop_la[<span class="st">'Population_2021'</span>] <span class="op">&gt;</span> upper_bound)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Lower bound:"</span>, lower_bound)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Upper bound:"</span>, upper_bound)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"How many outliers?"</span>, outliers.shape[<span class="dv">0</span>])</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Outliers:</span><span class="ch">\n</span><span class="st">"</span>, outliers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Lower bound: -130408.0
+Upper bound: 498868.0
+How many outliers? 33
+Outliers:
+      Area_code        Area_name        Area_type  Population_2011  \
+56   E06000047    County Durham  Local Authority         513242.0   
+60   E06000052         Cornwall  Local Authority         532273.0   
+62   E06000054        Wiltshire  Local Authority         470981.0   
+68   E06000060  Buckinghamshire  Local Authority         505283.0   
+254  E08000003       Manchester  Local Authority         503127.0   
+270  E08000019        Sheffield  Local Authority         552698.0   
+275  E08000025       Birmingham  Local Authority        1073045.0   
+282  E08000032         Bradford  Local Authority         522452.0   
+285  E08000035            Leeds  Local Authority         751485.0   
+321  E10000003   Cambridgeshire  Local Authority         621210.0   
+322  E10000006          Cumbria  Local Authority         499858.0   
+323  E10000007       Derbyshire  Local Authority         769686.0   
+324  E10000008            Devon  Local Authority         746399.0   
+325  E10000011      East Sussex  Local Authority         526671.0   
+326  E10000012            Essex  Local Authority        1393587.0   
+327  E10000013  Gloucestershire  Local Authority         596984.0   
+328  E10000014        Hampshire  Local Authority        1317788.0   
+329  E10000015    Hertfordshire  Local Authority        1116062.0   
+330  E10000016             Kent  Local Authority        1463740.0   
+331  E10000017       Lancashire  Local Authority        1171339.0   
+332  E10000018   Leicestershire  Local Authority         650489.0   
+333  E10000019     Lincolnshire  Local Authority         713653.0   
+334  E10000020          Norfolk  Local Authority         857888.0   
+335  E10000023  North Yorkshire  Local Authority         598376.0   
+336  E10000024  Nottinghamshire  Local Authority         785802.0   
+337  E10000025      Oxfordshire  Local Authority         653798.0   
+338  E10000027         Somerset  Local Authority         529972.0   
+339  E10000028    Staffordshire  Local Authority         848489.0   
+340  E10000029          Suffolk  Local Authority         728163.0   
+341  E10000030           Surrey  Local Authority        1132390.0   
+342  E10000031     Warwickshire  Local Authority         545474.0   
+343  E10000032      West Sussex  Local Authority         806892.0   
+344  E10000034   Worcestershire  Local Authority         566169.0   
 
-# Tukey's fences
-lower_bound = Q1 - 1.5 * IQR
-upper_bound = Q3 + 1.5 * IQR
-
-# Detect outliers
-outliers = df_pop_la[
-    (df_pop_la['Population_2021'] &lt; lower_bound) |
-    (df_pop_la['Population_2021'] &gt; upper_bound)
-]
-
-print("Lower bound:", lower_bound)
-print("Upper bound:", upper_bound)
-print("How many outliers?", outliers.shape[0])
-print("Outliers:\n", outliers)</code></pre>
+     Population_2021  Percentage_change  
+56          522068.0                1.7  
+60          570305.0                7.1  
+62          510330.0                8.4  
+68          553078.0                9.5  
+254         551938.0                9.7  
+270         556521.0                0.7  
+275        1144919.0                6.7  
+282         546412.0                4.6  
+285         811953.0                8.0  
+321         678849.0                9.3  
+322         499846.0                0.0  
+323         794636.0                3.2  
+324         811640.0                8.7  
+325         545847.0                3.6  
+326        1503521.0                7.9  
+327         645076.0                8.1  
+328        1400899.0                6.3  
+329        1198798.0                7.4  
+330        1576069.0                7.7  
+331        1235354.0                5.5  
+332         712366.0                9.5  
+333         768364.0                7.7  
+334         916120.0                6.8  
+335         615491.0                2.9  
+336         824822.0                5.0  
+337         725291.0               10.9  
+338         571547.0                7.8  
+339         876104.0                3.3  
+340         760688.0                4.5  
+341        1203108.0                6.2  
+342         596773.0                9.4  
+343         882676.0                9.4  
+344         603676.0                6.6  </code></pre>
+</div>
+</div>
 <p>There are 33 outliers in this dataset. Think about the three types of outliers that we discussed. Which type do these 33 outliers beloong to?</p>
 <ul>
 <li><strong>Error Outlier</strong></li>
@@ -532,19 +609,19 @@ print("Outliers:\n", outliers)</code></pre>
 <section id="boxplot" class="level3">
 <h3 class="anchored" data-anchor-id="boxplot">Boxplot</h3>
 <p>To create a boxplot of this variable:</p>
-<div id="46086b43" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create boxplot</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>df_pop_la[<span class="st">'Population_2021'</span>].plot(kind<span class="op">=</span><span class="st">'box'</span>, title<span class="op">=</span><span class="st">'LA Population 2021 Boxplot'</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Population'</span>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="27cab38e" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create boxplot</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>df_pop_la[<span class="st">'Population_2021'</span>].plot(kind<span class="op">=</span><span class="st">'box'</span>, title<span class="op">=</span><span class="st">'LA Population 2021 Boxplot'</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Population'</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="week1_practical_files/figure-html/cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="week1_practical_files/figure-html/cell-11-output-1.png" width="589" height="431" class="figure-img"></a></p>
+<p><a href="week1_practical_files/figure-html/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="week1_practical_files/figure-html/cell-12-output-1.png" width="589" height="431" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -562,16 +639,16 @@ print("Outliers:\n", outliers)</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Answer</a></li></ul>
 <div class="tab-content qna-question">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> have the largest population percentage change of </span><span class="sc">{}</span><span class="st">%"</span>.<span class="bu">format</span>(</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">", "</span>.join(df_pop_la.loc[??[<span class="st">'??'</span>] <span class="op">==</span> ??[<span class="st">'??'</span>].<span class="bu">max</span>(skipna<span class="op">=</span><span class="va">True</span>), <span class="st">'Area_name'</span>]), </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    df_pop_la[<span class="st">'Population_2021'</span>].??(skipna<span class="op">=</span><span class="va">True</span>))</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> have the largest population percentage change of </span><span class="sc">{}</span><span class="st">%"</span>.<span class="bu">format</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">", "</span>.join(df_pop_la.loc[??[<span class="st">'??'</span>] <span class="op">==</span> ??[<span class="st">'??'</span>].<span class="bu">max</span>(skipna<span class="op">=</span><span class="va">True</span>), <span class="st">'Area_name'</span>]), </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    df_pop_la[<span class="st">'Population_2021'</span>].??(skipna<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> have the largest population percentage change of </span><span class="sc">{}</span><span class="st">%"</span>.<span class="bu">format</span>(</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">", "</span>.join(df_pop_la.loc[df_pop_la[<span class="st">'Percentage_change'</span>] <span class="op">==</span> df_pop_la[<span class="st">'Percentage_change'</span>].<span class="bu">max</span>(skipna<span class="op">=</span><span class="va">True</span>), <span class="st">'Area_name'</span>]), </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    df_pop_la[<span class="st">'Percentage_change'</span>].<span class="bu">max</span>(skipna<span class="op">=</span><span class="va">True</span>))</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> have the largest population percentage change of </span><span class="sc">{}</span><span class="st">%"</span>.<span class="bu">format</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">", "</span>.join(df_pop_la.loc[df_pop_la[<span class="st">'Percentage_change'</span>] <span class="op">==</span> df_pop_la[<span class="st">'Percentage_change'</span>].<span class="bu">max</span>(skipna<span class="op">=</span><span class="va">True</span>), <span class="st">'Area_name'</span>]), </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    df_pop_la[<span class="st">'Percentage_change'</span>].<span class="bu">max</span>(skipna<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>Tower Hamlets have the largest population percentage change of 22.1%</code></pre>
 </div>
 </div>
@@ -583,16 +660,16 @@ print("Outliers:\n", outliers)</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Answer</a></li></ul>
 <div class="tab-content qna-question">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> have the smallest population percentage change of </span><span class="sc">{}</span><span class="st">%"</span>.<span class="bu">format</span>(</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">", "</span>.??(df_pop_la.loc[df_pop_la[??] <span class="op">==</span> ??[<span class="st">'Percentage_change'</span>].??(skipna<span class="op">=</span><span class="va">True</span>), <span class="st">'Area_name'</span>]), </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    df_pop_la[<span class="st">'Percentage_change'</span>].??(skipna<span class="op">=</span><span class="va">True</span>))</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> have the smallest population percentage change of </span><span class="sc">{}</span><span class="st">%"</span>.<span class="bu">format</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">", "</span>.??(df_pop_la.loc[df_pop_la[??] <span class="op">==</span> ??[<span class="st">'Percentage_change'</span>].??(skipna<span class="op">=</span><span class="va">True</span>), <span class="st">'Area_name'</span>]), </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    df_pop_la[<span class="st">'Percentage_change'</span>].??(skipna<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> have the smallest population percentage change of </span><span class="sc">{}</span><span class="st">%"</span>.<span class="bu">format</span>(</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">", "</span>.join(df_pop_la.loc[df_pop_la[<span class="st">'Percentage_change'</span>] <span class="op">==</span> df_pop_la[<span class="st">'Percentage_change'</span>].<span class="bu">min</span>(skipna<span class="op">=</span><span class="va">True</span>), <span class="st">'Area_name'</span>]), </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    df_pop_la[<span class="st">'Percentage_change'</span>].<span class="bu">min</span>(skipna<span class="op">=</span><span class="va">True</span>))</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="sc">{}</span><span class="st"> have the smallest population percentage change of </span><span class="sc">{}</span><span class="st">%"</span>.<span class="bu">format</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">", "</span>.join(df_pop_la.loc[df_pop_la[<span class="st">'Percentage_change'</span>] <span class="op">==</span> df_pop_la[<span class="st">'Percentage_change'</span>].<span class="bu">min</span>(skipna<span class="op">=</span><span class="va">True</span>), <span class="st">'Area_name'</span>]), </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    df_pop_la[<span class="st">'Percentage_change'</span>].<span class="bu">min</span>(skipna<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>Kensington and Chelsea have the smallest population percentage change of -9.6%</code></pre>
 </div>
 </div>
@@ -604,25 +681,25 @@ print("Outliers:\n", outliers)</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Answer</a></li></ul>
 <div class="tab-content qna-question">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create boxplot</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>df_pop_la[??].plot(kind<span class="op">=</span>??, title<span class="op">=</span><span class="st">'LA Population Percentage Change Boxplot'</span>)</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>plt.??(<span class="st">'Percentage change'</span>)</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create boxplot</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>df_pop_la[<span class="st">'Percentage_change'</span>].plot(kind<span class="op">=</span><span class="st">'box'</span>, title<span class="op">=</span><span class="st">'LA Population Percentage Change Boxplot'</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>df_pop_la[??].plot(kind<span class="op">=</span>??, title<span class="op">=</span><span class="st">'LA Population Percentage Change Boxplot'</span>)</span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Percentage change'</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>plt.??(<span class="st">'Percentage change'</span>)</span>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week1_practical_files/figure-html/cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="week1_practical_files/figure-html/cell-14-output-1.png" width="596" height="431"></a></p>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create boxplot</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>df_pop_la[<span class="st">'Percentage_change'</span>].plot(kind<span class="op">=</span><span class="st">'box'</span>, title<span class="op">=</span><span class="st">'LA Population Percentage Change Boxplot'</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Percentage change'</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>plt.grid(axis<span class="op">=</span><span class="st">'y'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="week1_practical_files/figure-html/cell-15-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="week1_practical_files/figure-html/cell-15-output-1.png" width="596" height="431"></a></p>
 </div>
 </div>
 </div>
