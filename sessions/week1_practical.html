@@ -313,11 +313,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The process for every week will be the same: download the notebook to your <code>QM</code> folder, switch over to <code>JupyterLab</code> (which will be running in Podman/Docker) and get to work. If you want to save the completed notebook to your Github repo, you can <code>add</code>, <code>commit</code>, and <code>push</code> the notebook in Git after you download it. When you’re done for the day, save your changes to the file (This is very important!), then <code>add</code>, <code>commit</code>, and <code>push</code> your work to save the completed notebook.</p>
 <section id="section" class="level3 callout-info">
 <h3 class="anchored" data-anchor-id="section"></h3>
-<p>Suggestions for a Better Learning Experience - <strong>Set your operating system and software language to English</strong><br>
-This will make it easier to follow tutorials, search for solutions online, and understand error messages.</p>
+<p>Suggestions for a Better Learning Experience:</p>
 <ul>
-<li><p><strong>Save all files to a cloud storage service</strong><br>
-Use platforms like Google Drive, OneDrive (2TB OneDrive space from UCL), Dropbox, or Git to ensure your work is backed up and can be restored easily when the laptop gets stolen or broken.</p></li>
+<li><p><strong>Set your operating system and software language to English</strong>: this will make it easier to follow tutorials, search for solutions online, and understand error messages.</p></li>
+<li><p><strong>Save all files to a cloud storage service</strong>: use platforms like Google Drive, OneDrive, Dropbox, or Git to ensure your work is backed up and can be restored easily when the laptop gets stolen or broken.</p></li>
 <li><p><strong>Avoid whitespace in file names and column names in datasets</strong></p></li>
 </ul>
 </section>
@@ -348,8 +347,10 @@ Use platforms like Google Drive, OneDrive (2TB OneDrive space from UCL), Dropbox
 </section>
 <section id="loading-data" class="level2">
 <h2 class="anchored" data-anchor-id="loading-data">Loading data</h2>
-<p>We are going to describe the population of local authorities in the UK. The data is sourced from <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/articles/howyourareahaschangedin10yearscensus2021/2022-11-08">Office for National Statistics</a> and is donwloadable <a href="https://www.ons.gov.uk/visualisations/censusareachanges/data/mapdatadownload.csv">here</a>. We have saved a copy of this dataset to the Github repo, in case that the dataset is removed from the website.</p>
-<div id="585f90d3" class="cell" data-execution_count="1">
+<p>We are going to describe the population of local authorities in the UK.</p>
+<p>The data is sourced from <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/articles/howyourareahaschangedin10yearscensus2021/2022-11-08">Office for National Statistics</a> and is donwloadable <a href="https://www.ons.gov.uk/visualisations/censusareachanges/data/mapdatadownload.csv">here</a>.</p>
+<p>We have saved a copy of this dataset to the Github repo, in case that the dataset is removed from the website.</p>
+<div id="cbfb6aed" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Read CSV file, skipping first 5 rows, using row 6 as header, and handling comma as thousands separator</span></span>
@@ -378,7 +379,7 @@ Use platforms like Google Drive, OneDrive (2TB OneDrive space from UCL), Dropbox
 </div>
 </div>
 <p>You might wonder why skipping the first 5 rows and setting <em>thousands=‘,’</em>. I learnt this after opening this csv file in a text editor and lots of trial-and-errors.</p>
-<p><a href="https://huanfachen.github.io/QM//sessions/L1_images/uk_pop_csv_screenshot.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://huanfachen.github.io/QM//sessions/L1_images/uk_pop_csv_screenshot.jpg" class="img-fluid" width="600"></a></p>
+<p><a href="https://huanfachen.github.io/QM/sessions/L1_images/uk_pop_csv_screenshot.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://huanfachen.github.io/QM/sessions/L1_images/uk_pop_csv_screenshot.jpg" class="img-fluid" width="600"></a></p>
 <!-- ![](L1_images/uk_pop_csv_screenshot.jpg){width=600} -->
 <p>Then, we printed the first few rows of this dataset using <em>df_pop.head()</em>.</p>
 </section>
@@ -386,7 +387,7 @@ Use platforms like Google Drive, OneDrive (2TB OneDrive space from UCL), Dropbox
 <h2 class="anchored" data-anchor-id="describing-the-dataframe">Describing the dataframe</h2>
 <section id="which-columns-are-included" class="level3">
 <h3 class="anchored" data-anchor-id="which-columns-are-included">Which columns are included?</h3>
-<div id="8550d375" class="cell" data-execution_count="2">
+<div id="2c18c884" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(df_pop.columns)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>['Area code',
@@ -398,7 +399,7 @@ Use platforms like Google Drive, OneDrive (2TB OneDrive space from UCL), Dropbox
 </div>
 </div>
 <p>It is a pain to deal with whitespaces in a column, so good practice is to replace the whitespaces (eg tabs, multiple spaces) within column names with <em>underscore</em>.</p>
-<div id="a89e4f9f" class="cell" data-execution_count="3">
+<div id="9b0cfc9c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_pop.columns <span class="op">=</span> df_pop.columns.<span class="bu">str</span>.replace(<span class="vs">r'</span><span class="dv">\s</span><span class="op">+</span><span class="vs">'</span>, <span class="st">'_'</span>, regex<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(df_pop.columns)) <span class="co"># check again</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -408,7 +409,7 @@ Use platforms like Google Drive, OneDrive (2TB OneDrive space from UCL), Dropbox
 </section>
 <section id="how-many-rows-cols-are-included" class="level3">
 <h3 class="anchored" data-anchor-id="how-many-rows-cols-are-included">How many rows &amp; cols are included?</h3>
-<div id="14e3ba72" class="cell" data-execution_count="4">
+<div id="0ee17562" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rows, cols <span class="op">=</span> df_pop.shape</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span>rows<span class="sc">}</span><span class="ss">, Columns: </span><span class="sc">{</span>cols<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -419,7 +420,7 @@ Use platforms like Google Drive, OneDrive (2TB OneDrive space from UCL), Dropbox
 <section id="geography-matters" class="level3">
 <h3 class="anchored" data-anchor-id="geography-matters">Geography matters</h3>
 <p>This dataset contains multiple geographies of UK and different geographies are incomparable. We can check the <em>Area_type</em> column:</p>
-<div id="706778db" class="cell" data-execution_count="5">
+<div id="8d1c84f2" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_pop.Area_type.value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Area_type
@@ -432,14 +433,14 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p>So there are 355 records of <em>Local Authority</em>， 9 records of <em>Region</em>, 2 of <em>Country</em>, and 1 of ‘National’. For an introduction to these terms, see <a href="https://www.ons.gov.uk/methodology/geography/ukgeographies/administrativegeography/england">this article on ONS</a>.</p>
 <p>We will focus on the local authorities, so we apply a filter:</p>
-<div id="bb9e18dd" class="cell" data-execution_count="6">
+<div id="3dcd7a45" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_pop_la <span class="op">=</span> df_pop[df_pop[<span class="st">'Area_type'</span>] <span class="op">==</span> <span class="st">'Local Authority'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="overview-of-the-columns" class="level3">
 <h3 class="anchored" data-anchor-id="overview-of-the-columns">Overview of the columns</h3>
 <p>There are two pandas functions that give overview of a dataframe. - <code>info()</code>: shows column data types, non‑null counts, and memory usage. - <code>describe()</code>: shows summary statistics for numeric data (count, mean, std, min, quartiles, max) - <code>describe(include='all')</code>: for both numeric data and non‑numeric data (count, unique, top value, frequency).</p>
-<div id="3d84c70b" class="cell" data-execution_count="7">
+<div id="a15acbca" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_pop_la.info())</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_pop_la.describe())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -483,13 +484,13 @@ max       1.463740e+06     1.576069e+06          22.100000</code></pre>
 <p>What is the maximum population size in census 2021?</p>
 <pre class="{Python}"><code>print("Max population: ", df_pop_la['Population_2021'].max(skipna=True))</code></pre>
 <p>Which LAs have the maximum population size? <em>The code above is a bit complicated</em>.</p>
-<div id="9d5eb498" class="cell" data-execution_count="8">
+<div id="c066b6bc" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print("{} have the maximum population of {}".format(", ".join(df_pop_la.loc[df_pop_la['Population_2021'] == df_pop_la['Population_2021'].max(skipna=True), 'Area_name']), df_pop_la['Population_2021'].max(skipna=True)))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>What it does: - Finds the max population while ignoring NaNs. - Selects all rows with that population. - Joins their Area_name values into a comma-separated string.</p>
 <p>Two new Python functions here: - <em>format()</em>: Inserts variables into a string by replacing {} placeholders in order with provided arguments. - <em>join()</em>: Combines the elements of an iterable into one string using the given separator before .join().</p>
 <p>Which LA has the minimum population?</p>
-<div id="ab216865" class="cell" data-execution_count="9">
+<div id="0631fc1a" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print("{} have the minimum population of {}".format(", ".join(df_pop_la.loc[df_pop_la['Population_2021'] == df_pop_la['Population_2021'].min(skipna=True), 'Area_name']), df_pop_la['Population_2021'].min(skipna=True)))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -521,7 +522,7 @@ print("Outliers:\n", outliers)</code></pre>
 <section id="boxplot" class="level3">
 <h3 class="anchored" data-anchor-id="boxplot">Boxplot</h3>
 <p>To create a boxplot of this variable:</p>
-<div id="6e64c326" class="cell" data-execution_count="10">
+<div id="6dc94b23" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create boxplot</span></span>
