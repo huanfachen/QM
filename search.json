@@ -1417,7 +1417,18 @@
     "href": "sessions/week1.html#lecture",
     "title": "Week 1",
     "section": "Lecture",
-    "text": "Lecture\nTo access the lecture notes: Week 1 lecture",
+    "text": "Lecture\nTo access the lecture notes: Lecture",
+    "crumbs": [
+      "Part 1: Basics",
+      "1. Explanatory Data Analysis #1"
+    ]
+  },
+  {
+    "objectID": "sessions/week1.html#quiz",
+    "href": "sessions/week1.html#quiz",
+    "title": "Week 1",
+    "section": "Quiz",
+    "text": "Quiz\nTo access the quiz on Moodle, please check Moodle page.",
     "crumbs": [
       "Part 1: Basics",
       "1. Explanatory Data Analysis #1"
