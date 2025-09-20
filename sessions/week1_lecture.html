@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<link href=".//img/favicon.ico" rel="icon">
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/tabby.min.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-236d90495073fb2ac8939117e3e83141.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="..//img/favicon.ico" rel="icon">
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-da61f9a05e9cefe097d79e8430a73dd4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.24">
 
-  <meta name="author" content="My name">
-  <title>A Website Title – A Title for my Slides</title>
+  <meta name="author" content="Huanfa Chen">
+  <title>Quantitative Methods – Exploratory Data Analysis #1</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -33,11 +33,11 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-6e21e22f74c95ec39a62ad42034103de.css">
-  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-708fdb05d86516b6f171cd9cf793ecac.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -125,65 +125,32 @@
       margin-right: 0; 
     }
   </style>
-<meta property="og:title" content="A Title for my Slides – A Website Title">
-<meta property="og:description" content="The subtitle for my talk which gives us more information: Discuss">
-<meta property="og:image" content="https://huanfachen.github.io/CASA0007_QM/img/logo/full_md.png">
-<meta property="og:site_name" content="An Open-Graph Name">
+<meta property="og:title" content="Exploratory Data Analysis #1 – Quantitative Methods">
+<meta property="og:description" content="Understanding and describing data">
+<meta property="og:image" content="https://huanfachen.github.io/QM/sessions/img/logo/full_sm.png">
+<meta property="og:site_name" content="Foundations">
 <meta property="og:locale" content="en_GB">
-<meta property="og:image:height" content="154">
-<meta property="og:image:width" content="116">
 </head>
 <body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
 
-<section id="title-slide" data-background-color="#4e3c56" data-background-image="./img/web/title-slide.png" data-background-opacity="0.08" data-background-size="stretch" style="height:100%" class="center">
+<section id="title-slide" data-background-color="#4e3c56" data-background-image="../img/web/title-slide.png" data-background-opacity="0.08" data-background-size="stretch" style="height:100%" class="center">
 
 <br>
 <br>
 
-<h1 class="title">A Title for my Slides</h1>
+<h1 class="title">Exploratory Data Analysis #1</h1>
 
-  <h3 style="opacity:0.8;" class="subtitle">The subtitle for my talk which gives us more information: Discuss</h3>
+  <h3 style="opacity:0.8;" class="subtitle">Understanding and describing data</h3>
 
-<p><span style="margin:0px; font-weight:700;" class="author">My name</span> - myemail@emails.com </p>
+<p><span style="margin:0px; font-weight:700;" class="author">Huanfa Chen</span> - huanfa.chen@ucl.ac.uk </p>
 
-<p style="opacity: 0.8">1st August 2024</p>
+<p style="opacity: 0.8">12 September 2025</p>
 
-<p style="opacity:0.8;">Any other information</p>
 
 </section>
-<section id="key-information" class="title-slide slide level1 center">
-<h1>Key Information</h1>
-<table class="caption-top" style="width:81%;">
-<colgroup>
-<col style="width: 36%">
-<col style="width: 44%">
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Module Lead</strong></th>
-<th><strong>Contact</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Dr.&nbsp;Huanfa Chen Prof.&nbsp;Adam Dennett Dr.&nbsp;Beatrice Taylor</td>
-<td>huanfa.chen[at]ucl.ac.uk. a.dennett[at]ucl.ac.uk beatrice.taylor[at]ucl.ac.uk</td>
-</tr>
-<tr class="even">
-<td><strong>PGTAs</strong></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>, ,</td>
-<td>Slack</td>
-</tr>
-</tbody>
-</table>
-</section>
-
 <section>
 <section id="this-week" class="title-slide slide level1 center">
 <h1>This week</h1>
@@ -672,26 +639,26 @@
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
-<p><img src="./img/logo/full.svg" class="slide-logo"></p>
+<p><img src="../img/logo/full.svg" class="slide-logo"></p>
 <div class="footer footer-default">
 <p>© CASA &nbsp; | &nbsp; <a href="https://www.ucl.ac.uk/bartlett/casa">ucl.ac.uk/bartlett/casa</a></p>
 </div>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -860,7 +827,7 @@
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -934,13 +901,14 @@
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
@@ -955,7 +923,7 @@
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/huanfachen\.github\.io\/CASA0007_QM\/");
+            var filterRegex = new RegExp("https:\/\/huanfachen\.github\.io\/QM\/");
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
