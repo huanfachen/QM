@@ -1029,7 +1029,7 @@ D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
 <section id="kde-of-simulated-heights" class="slide level2">
 <h2>KDE of simulated heights</h2>
 <p>It’s easy to fit a KDE to data in Python:</p>
-<div id="e061b490" class="cell" data-execution_count="1">
+<div id="da0964b7" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb3-3"><a></a><span class="im">from</span> scipy.stats <span class="im">import</span> gaussian_kde</span>
@@ -1110,7 +1110,7 @@ t &amp;= \frac{170 - 180}{5.55 \cdot \sqrt{\tfrac{1}{95} + \tfrac{1}{103}}} \app
 df = n_1 + n_2 - 2 = 95 + 103 - 2 = 196
 \end{align}\]</span>
 <p>Then use Python to calculate the two-tailed critical t-value at <span class="math inline">\(\alpha = 0.05\)</span>.</p>
-<div id="a57e264a" class="cell" data-execution_count="2">
+<div id="6263800e" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">from</span> scipy.stats <span class="im">import</span> t</span>
 <span id="cb4-2"><a></a></span>
 <span id="cb4-3"><a></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
