@@ -37,7 +37,18 @@
     "href": "sessions/week9.html#lecture",
     "title": "Week 9",
     "section": "Lecture",
-    "text": "Lecture\nTo access the lecture notes: Week 9 lecture",
+    "text": "Lecture\nTo access the lecture notes: Lecture",
+    "crumbs": [
+      "Part 3: Dimension Reduction & Clustering",
+      "9. Dimension Reduction"
+    ]
+  },
+  {
+    "objectID": "sessions/week9.html#quiz",
+    "href": "sessions/week9.html#quiz",
+    "title": "Week 9",
+    "section": "Quiz",
+    "text": "Quiz\nTo access the quiz on Moodle, please check Moodle page.",
     "crumbs": [
       "Part 3: Dimension Reduction & Clustering",
       "9. Dimension Reduction"
@@ -1682,7 +1693,18 @@
     "href": "sessions/week10.html#lecture",
     "title": "Week 10",
     "section": "Lecture",
-    "text": "Lecture\nTo access the lecture notes: Week 10 lecture",
+    "text": "Lecture\nTo access the lecture notes: Lecture",
+    "crumbs": [
+      "Part 3: Dimension Reduction & Clustering",
+      "10. Clustering"
+    ]
+  },
+  {
+    "objectID": "sessions/week10.html#quiz",
+    "href": "sessions/week10.html#quiz",
+    "title": "Week 10",
+    "section": "Quiz",
+    "text": "Quiz\nTo access the quiz on Moodle, please check Moodle page.",
     "crumbs": [
       "Part 3: Dimension Reduction & Clustering",
       "10. Clustering"
@@ -2390,7 +2412,18 @@
     "href": "sessions/week5.html#lecture",
     "title": "Week 5",
     "section": "Lecture",
-    "text": "Lecture\nTo access the lecture notes: Week 5 lecture",
+    "text": "Lecture\nTo access the lecture notes: Lecture",
+    "crumbs": [
+      "Part 2: Correlation and Regression",
+      "5. Measuring Relationship"
+    ]
+  },
+  {
+    "objectID": "sessions/week5.html#quiz",
+    "href": "sessions/week5.html#quiz",
+    "title": "Week 5",
+    "section": "Quiz",
+    "text": "Quiz\nTo access the quiz on Moodle, please check Moodle page.",
     "crumbs": [
       "Part 2: Correlation and Regression",
       "5. Measuring Relationship"
