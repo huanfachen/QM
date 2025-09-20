@@ -948,161 +948,70 @@
   {
     "objectID": "sessions/week1_practical.html",
     "href": "sessions/week1_practical.html",
-    "title": "Practical 2: Foundations (Part 1)",
+    "title": "Practical 1: describing and representing data",
     "section": "",
-    "text": "This week is focussed on ensuring that you’re able to run Jupyter notebooks locally (i.e. on your own computer) and are comfortable with the basics of Python: if you’ve already done Code Camp then this will be a refresher and you’ll have plenty of time to get to grips with Git and GitHub, which often presents significant practical challenges. You should find this notebook quite straightforward, but take any challenges as a sign that you need to keep practicing since subsequent weeks will build on these foundational concepts."
+    "text": "This week is focussed on ensuring that you’re able to access the teaching materials and to run Jupyter notebooks locally, as well as describing a dataset in Python."
   },
   {
     "objectID": "sessions/week1_practical.html#learning-outcomes",
     "href": "sessions/week1_practical.html#learning-outcomes",
-    "title": "Practical 2: Foundations (Part 1)",
+    "title": "Practical 1: describing and representing data",
     "section": "Learning Outcomes",
-    "text": "Learning Outcomes\n\nYou have familiarised yourself with how to add and synchronise new files in Git/GitHub.\nYou have refamiliarised yourself with Python operators and precedence.\nYou have refamiliarised yourself with Python logic and lists.\n\nThese are the foundations for subsequent weeks, so if you are still confused at the end of the practical please look at Code Camp and re-run this practical from scratch if need be!"
+    "text": "Learning Outcomes\n\nYou have familiarised yourself with how to access the lecture notes and Python notebook of this module.\nYou have familiarised yourself with running the Python notebooks locally.\nYou have familiarised yourself with describing a dataset in Python."
+  },
+  {
+    "objectID": "sessions/week1_practical.html#set-up-the-tools",
+    "href": "sessions/week1_practical.html#set-up-the-tools",
+    "title": "Practical 1: describing and representing data",
+    "section": "Set up the tools",
+    "text": "Set up the tools\nPlease follow the Setup page of CASA0013 to install and configure the computing platform, and this page to get started on using the container & JupyterLab."
   },
   {
     "objectID": "sessions/week1_practical.html#download-the-notebook",
     "href": "sessions/week1_practical.html#download-the-notebook",
-    "title": "Practical 2: Foundations (Part 1)",
+    "title": "Practical 1: describing and representing data",
     "section": "Download the Notebook",
-    "text": "Download the Notebook\nSo for this week, visit the Week 2 of FSDS page you’ll see that there is a ‘preview’ link and a a ‘download’ link in the Practical section. If you click the preview link you will be taken to the GitHub page for the notebook where it has been ‘rendered’ as a web page. But to make the notebook useable on your computer, you need to download the IPYNB file.\nSo now:\n\nClick on the Download link.\nThe file should download automatically, but if you see a page of raw code, select File then Save Page As....\nMake sure you know where to find the file (e.g. Downloads or Desktop).\nMove the file to your Git repository folder (e.g. ~/Documents/CASA/fsds/)\nCheck to see if your browser has added .txt to the file name:\n\nIf no, then you can move to adding the file.\nIf yes, then you can either fix the name in the Finder/Windows Explore, or you can do this in the Terminal using mv &lt;name_of_practical&gt;.ipynb.txt &lt;name_of_practical&gt;.ipynb (you can even do this in JupyterLab’s terminal if it’s already running)."
+    "text": "Download the Notebook\nSo for this week, visit the Week 1 of QM page, you’ll see that there is a ‘preview’ link and a a ‘download’ link. If you click the preview link you will be taken to the GitHub page for the notebook where it has been ‘rendered’ as a web page, which is not editable. To make the notebook useable on your computer, you need to download the IPYNB file.\nSo now:\n\nClick on the Download link.\nThe file should download automatically, but if you see a page of raw code, select File then Save Page As....\nMake sure you know where to find the file (e.g. Downloads or Desktop).\nMove the file to your Git repository folder (e.g. ~/Documents/CASA/QM/)\nCheck to see if your browser has added .txt to the file name:\n\nIf no, then you can move to adding the file.\nIf yes, then you can either fix the name in the Finder/Windows Explore, or you can do this in the Terminal using mv &lt;name_of_practical&gt;.ipynb.txt &lt;name_of_practical&gt;.ipynb (you can even do this in JupyterLab’s terminal if it’s already running)."
   },
   {
-    "objectID": "sessions/week1_practical.html#add-the-notebook-to-git",
-    "href": "sessions/week1_practical.html#add-the-notebook-to-git",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Add the Notebook to Git",
-    "text": "Add the Notebook to Git\n\nNow you can add it to Git and synchronise it with GitHub:\n\ngit add &lt;name_of_practical&gt;.ipynb\ngit commit -m \"Adding Practical 2\"\ngit push\n\n\nThe file should now be in your GitHub repository in its ‘original’ format (before you write or run any code)."
+    "objectID": "sessions/week1_practical.html#running-notebooks-on-jupyterlab",
+    "href": "sessions/week1_practical.html#running-notebooks-on-jupyterlab",
+    "title": "Practical 1: describing and representing data",
+    "section": "Running notebooks on JupyterLab",
+    "text": "Running notebooks on JupyterLab\nI am assuming that most of you are already running JupyterLab via Podman using the command.\nIf you are a bit confused with container, JupyterLab, terminal, or Git, please feel free to ask any questions."
   },
   {
-    "objectID": "sessions/week1_practical.html#sec-available",
-    "href": "sessions/week1_practical.html#sec-available",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Switch to JupyterLab",
-    "text": "Switch to JupyterLab\nI am assuming that you are already running JupyterLab via Podman using the command that we saw in Week 1 and on the CASA Computing Platform. However, if you called podman run ... from the ‘wrong place’ then you might not be able to see the recently added practical in your work folder.\nIt that’s the case, then you will need to stop the container so please see the section below. You need to remember that the startup command is something like:\npodman run ... -v \"$(pwd):/home/jovyan/work\" ...\nThe -v (short for volume) tells Podman what part of your computer should be connected to place in container where we store the work (/home/jovyan/work). pwd is short for ‘print working directory’ and is the location where you ran the startup command! So we’re talking about the location on your computer when you access the work folder from Jupyter Lab:\n\nOn a Mac, if you just opened a new Terminal and run the Podman startup command then it will be your $HOME (also known as ~) directory (e.g. /Users/&lt;your username&gt;/) because that’s where new Terminal windows start by default.\nOn a Windows machine it may be your $HOME directory but we can’t promise.\n\nPerhaps a video will help clarify?\nNote: Docker and Podman are basically the same!"
+    "objectID": "sessions/week1_practical.html#loading-data",
+    "href": "sessions/week1_practical.html#loading-data",
+    "title": "Practical 1: describing and representing data",
+    "section": "Loading data",
+    "text": "Loading data\nWe are going to describe the population of local authorities in the UK. The data is sourced from Office for National Statistics and is donwloadable here. We have saved a copy of this dataset to the Github repo, in case that the dataset is removed from the website.\nimport pandas as pd\n\n# Read CSV file, skipping first 5 rows, using row 6 as header, and handling comma as thousands separator\ndf_pop = pd.read_csv(\n    'L1_data/UK_census_population.csv',\n    skiprows=5,        # Skip first 5 rows. Wnhy?\n    thousands=',',     # Interpret commas as thousands separators\n    header=0           # After skipping, the first row becomes the header\n)\n\nprint(df_pop.head())\nYou might wonder why skipping the first 5 rows and setting thousands=‘,’. I learnt this after opening this csv file in a text editor and lots of trial-and-errors.  \nThen, we printed the first few rows of this dataset using df_pop.head()."
   },
   {
-    "objectID": "sessions/week1_practical.html#is-the-container-running-sec-containers",
-    "href": "sessions/week1_practical.html#is-the-container-running-sec-containers",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Is the Container Running?",
-    "text": "Is the Container Running?\nPodman will happily keep a container running in the background even if you close every open window. So how do you know if the ?var:docker.name container is already running? There are two ways:\n\nOpen the Podman Desktop from the menu and make sure that you select the Containers tab. You should see something like this if the container is running and available:\n\n\n\n\nContainer running\n\n\n\nFrom the Terminal you should be able to run: podman ps. This will give you output something like this:\n\n\n\n\nContainer running from Terminal\n\n\nIf the ?var:docker.name container is not running then you’ll need to run the startup command (docker run...) covered in the last practical session. If it is running but in the wrong place, then you should stop it, use cd to navigate to the correct location, and then restart it.\n\nConnect to Jupyter Lab\nOnce you know the container is running you can connected to Jupyter Lab on localhost:8888 and should see something like this:\n\n\n\nScreenshot of JupyterLab\n\n\nYou’re connected!"
+    "objectID": "sessions/week1_practical.html#describing-the-dataframe",
+    "href": "sessions/week1_practical.html#describing-the-dataframe",
+    "title": "Practical 1: describing and representing data",
+    "section": "Describing the dataframe",
+    "text": "Describing the dataframe\n\nWhich columns are included?\nlist(df_pop.columns)\nIt is a pain to deal with whitespaces in a column, so good practice is to replace the whitespaces (eg tabs, multiple spaces) within column names with underscore.\ndf_pop.columns = df_pop.columns.str.replace(r'\\s+', '_', regex=True)\nprint(list(df_pop.columns)) # check again\n\n\nHow many rows & cols are included?\nrows, cols = df_pop.shape\nprint(f\"Rows: {rows}, Columns: {cols}\")\n\n\nGeography matters\nThis dataset contains multiple geographies of UK and different geographies are incomparable. We can check the Area_type column:\nprint(df_pop.Area_type.value_counts())\nSo there are 355 records of Local Authority， 9 records of Region, 2 of Country, and 1 of ‘National’. For an introduction to these terms, see this article on ONS.\nWe will focus on the local authorities, so we apply a filter:\ndf_pop_la = df_pop[df_pop['Area_type'] == 'Local Authority']\n\n\nOverview of the columns\nThere are two pandas functions that give overview of a dataframe. - info(): shows column data types, non‑null counts, and memory usage. - describe(): shows summary statistics for numeric data (count, mean, std, min, quartiles, max) - describe(include='all'): for both numeric data and non‑numeric data (count, unique, top value, frequency).\nprint(df_pop_la.info())\nprint(df_pop_la.describe())"
   },
   {
-    "objectID": "sessions/week1_practical.html#hello-world",
-    "href": "sessions/week1_practical.html#hello-world",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Hello World!",
-    "text": "Hello World!\nNearly every introduction to programming course starts with the famous ‘Hello World!’, so why do anything different?\nFrom within Jupyter Lab you should now able to create a new notebook:\n\nClick on the Python 3 tile in the Notebook section.\nYou should see a new tab open with a new notebook (title: Untitled.ipynb).\nIn the first cell type print('Hello World!').\nClick the Run button (▶) in the menu above the notebook.\nYou should see Python output Hello World! below the cell.\n\nAny time you want to run code you click on the right-triangle (▶); it’s in the area between the clipboard 📋 (for copying) and the ■ (for stopping running code).\nSo when you run:\nprint('Hello World!')\nHopefully, the following appeare directly below the code:\n\n\nHello World!\n\n\n\n\n\n\n\n\nTip\n\n\n\nYou can always click the ▶ icon above, but it will be much faster to get into the habit of type Ctrl+Enter instead when you have placed your cursor in a code cell. This is also how to turn a Markdown cell back into display text.\n\n\nYou can now close this notebook. Unless you created this notebook in the work folder, you will not be able to save it permanently. That’s fine."
+    "objectID": "sessions/week1_practical.html#describing-census-2021-population",
+    "href": "sessions/week1_practical.html#describing-census-2021-population",
+    "title": "Practical 1: describing and representing data",
+    "section": "Describing census 2021 population",
+    "text": "Describing census 2021 population\nNow, we focus on describing the local authority population from census 2021. The first question is, what data type is this variable - nominal, ordinal, interval, or ratio？\n\n\nNote: The data type of a variable is different from how it’s stored in memory. For example, the Area_type variable can be encoded for convenience as 0 (“national”), 1 (“country”), and 2 (“local authority”). Although these are stored as numbers, Area_type is not truly numeric data — it’s an nominal variable.\n\nDoes it make sense to say ‘The population of LA AAA is twice of LA BBB’? Yes. So, this variable is of ratio type.\n\nmax and min\nWhat is the maximum population size in census 2021?\nprint(\"Max population: \", df_pop_la['Population_2021'].max(skipna=True))\nWhich LAs have the maximum population size? The code above is a bit complicated.\n\n# print(\"{} have the maximum population of {}\".format(\", \".join(df_pop_la.loc[df_pop_la['Population_2021'] == df_pop_la['Population_2021'].max(skipna=True), 'Area_name']), df_pop_la['Population_2021'].max(skipna=True)))\n\nWhat it does: - Finds the max population while ignoring NaNs. - Selects all rows with that population. - Joins their Area_name values into a comma-separated string.\nTwo new Python functions here: - format(): Inserts variables into a string by replacing {} placeholders in order with provided arguments. - join(): Combines the elements of an iterable into one string using the given separator before .join().\nWhich LA has the minimum population?\n\n# print(\"{} have the minimum population of {}\".format(\", \".join(df_pop_la.loc[df_pop_la['Population_2021'] == df_pop_la['Population_2021'].min(skipna=True), 'Area_name']), df_pop_la['Population_2021'].min(skipna=True)))\n\n\n\nNA value and outliers?\nAre there NA values or outliers in this variable? From results of info(), there are no NA values.\nTo detect outliers, we will implement the Tukey Fences method using pandas function, as pandas does not provide a built-in function for this method.\n# Calculate Q1, Q3, and IQR\nQ1 = df_pop_la['Population_2021'].quantile(0.25)\nQ3 = df_pop_la['Population_2021'].quantile(0.75)\nIQR = Q3 - Q1\n\n# Tukey's fences\nlower_bound = Q1 - 1.5 * IQR\nupper_bound = Q3 + 1.5 * IQR\n\n# Detect outliers\noutliers = df_pop_la[\n    (df_pop_la['Population_2021'] &lt; lower_bound) |\n    (df_pop_la['Population_2021'] &gt; upper_bound)\n]\n\nprint(\"Lower bound:\", lower_bound)\nprint(\"Upper bound:\", upper_bound)\nprint(\"How many outliers?\", outliers.shape[0])\nprint(\"Outliers:\\n\", outliers)\nThere are 33 outliers in this dataset.\n\n\nBoxplot\nTo create a boxplot of this variable:\n\nimport matplotlib.pyplot as plt\n\n# Create boxplot\n# df_pop_la['Population_2021'].plot(kind='box', title='LA Population 2021 Boxplot')\n\n# plt.ylabel('Population')\n# plt.grid(axis='y', linestyle='--', alpha=0.6)\n# plt.show()\n\nWhat do you observe from this boxplot?"
   },
   {
-    "objectID": "sessions/week1_practical.html#starting-the-practical-notebook",
-    "href": "sessions/week1_practical.html#starting-the-practical-notebook",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Starting the Practical Notebook",
-    "text": "Starting the Practical Notebook\nNow from within Jupyter Lab you should start the Practical 2 notebook:\n\nStarting from the work folder, navigate to your repo folder where you saved this notebook (Practical-02-Foundations_1.ipynb).\nDouble-click the notebook file and the notebook should appear on the right-hand side. If all you see is reams of plain text then there is probably still a .txt extension on your notebook file that hasn’t been removed.\n\nNow you can run code directly in your browser, so let’s try it!"
-  },
-  {
-    "objectID": "sessions/week1_practical.html#variable-names",
-    "href": "sessions/week1_practical.html#variable-names",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Variable Names",
-    "text": "Variable Names\n\n\n\n\n\n\nNoteLook closer!\n\n\n\nPay attention to the colour of the code, while it might be subtle (a single character in a different colour), it is giving you clues as to where problems might be found because it means the Python ‘interpreter’ is reading what you wrote differently from how you probably meant it…\n\n\nSome of the lines of code below are valid Python, but others may have a problem that will cause Python to generate an error. Each error can be fixed by changing one character. See if you can work out which ones you need to fix before running the code:\n\nQuestionAnswer\n\n\nPi = 3.14159      # Valid Python\npi = 3.14159      # ??\n3pi = 3.14159*3   # ??\npi_2 = 3.14159**2 # ??\npi^2 = 3.14159**2 # ??\nmy radius = 5     # ??\nMy_Radius = 5     # ??\nclass = 5         # ??\n\n\nPi = 3.14159      # Valid Python\npi = 3.14159      # Valid Python\npi3 = 3.14159*3   # Invalid, variable starts with a number\npi_2 = 3.14159**2 # Valid Python\npi2 = 3.14159**2  # Invalid, 'hat' character in variable name\nmy_radius = 5     # Invalid, space in variable name\nMy_Radius = 5     # Valid Python\nmclass = 5        # Invalid, reserved word"
-  },
-  {
-    "objectID": "sessions/week1_practical.html#variable-types",
-    "href": "sessions/week1_practical.html#variable-types",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Variable Types",
-    "text": "Variable Types\nUsing only the values for x, y, and z, what operations allow you to print the following?\n6\n22\n22\n125\n0.4\n\nQuestionAnswer\n\n\nx = '2'\ny = 2\nz = 3\n\nprint( ?? ) # 6\nprint( ?? ) # 22\nprint( ?? ) # 22 (but a different way!)\nprint( ?? ) # 125\nprint( ?? ) # 0.4\n\n\nx = '2'\ny = 2\nz = 3\n\nprint(y * z)\nprint(x * y)\nprint(x + x)\nprint((y+z)**z)\nprint(y/(y+z))\n6\n22\n22\n125\n0.4"
-  },
-  {
-    "objectID": "sessions/week1_practical.html#assignment",
-    "href": "sessions/week1_practical.html#assignment",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Assignment",
-    "text": "Assignment\nBefore running the code, work out what the values of x, y and z will be after every line of code in the block has been executed.\n\nQuestionAnswer\n\n\nx = 12\ny = 10\n\nz = x + y # ??\nx = x + y # ??\ny = z + y # ??\n\nprint(x)\nprint(y)\nprint(z)\n\n\nx = 12\ny = 10\n\nz = x + y\nx = x + y\ny = z + y\n\nprint(x)\nprint(y)\nprint(z)\n22\n32\n22\n\n\n\nOnce you have worked out what you think x, y and z are, run the code to check your answers!\nMake sure you understand the results you find. Ask someone if you need help to understand."
-  },
-  {
-    "objectID": "sessions/week1_practical.html#operators-precedence",
-    "href": "sessions/week1_practical.html#operators-precedence",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Operators & Precedence",
-    "text": "Operators & Precedence\nBefore running the code, work out what the values of x, y and z will be after every line of code in the block has been executed. Feel free to use a calculator.\n\n\n\n\n\n\nTip\n\n\n\nThis question is about what operations (i.e. multiplication, division, powers, etc.) are done first based on the type of operation and the presence of parentheses… it’s the same as it would be for a maths problem!\n\n\n\nQuestionAnswer\n\n\nBy adding parentheses adjust the equations below to output the following:\n2.5\n2.25\n2.5\nprint(1 + 2 * 3 / 4)\nprint(1 + 2 * 3 / 4)\nprint(1 + 2 * 3 / 4)\n\n\nprint(1 + (2 * 3) / 4)\nprint((1 + 2) * (3 / 4))\nprint(1 + 2 * (3 / 4))\n2.5\n2.25\n2.5\n\n\n\nOnce you have calculated what you think x, y and z are, run the code to check."
-  },
-  {
-    "objectID": "sessions/week1_practical.html#test-your-operator-knowledge",
-    "href": "sessions/week1_practical.html#test-your-operator-knowledge",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Test Your Operator Knowledge",
-    "text": "Test Your Operator Knowledge\nNow let’s look at some of the stranger operators. Many of these can be very useful in more complex code but can seem a little pointless now.\nWork out what operator should replace the ? in each of the lines of code below to produce the output I’ve shown in the comments. I’ve mixed in ones you have seen above with ones that we’ve not seen before.\n\nQuestionAnswer\n\n\nx = 10\ny = 3\n\nprint( x ?? y ) # 1\nprint( x ?? y ) # 13\nprint( x ?? y ) # False\nprint( x ?? y ) # 1000\nprint( x ?? y ) # 7\nprint( x ?? y ) # 3\n\n\nx = 10\ny = 3\n\nprint( x % y ) # 1\nprint( x + y ) # 13\nprint( x == y ) # False\nprint( x ** y ) # 1000\nprint( x - y ) # 7\nprint( x // y ) # 3\n1\n13\nFalse\n1000\n7\n3"
-  },
-  {
-    "objectID": "sessions/week1_practical.html#applying-what-weve-learned",
-    "href": "sessions/week1_practical.html#applying-what-weve-learned",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Applying What We’ve Learned",
-    "text": "Applying What We’ve Learned\nNow we are going to take what we’ve learned and apply it in a more ‘abstract’ way: how do we translate some well-known mathematical formulae into code? In particular, I’m interested in the formula for the volume of a sphere (and this gives me a chance to show that Notebooks can show formulae as well!):\n\\[\nV = \\frac{4}{3}\\pi r^{3}\n\\]\n\nCalculate the Volume of a Sphere\nSo, given a sphere with a diameter of 12cm, calculate its volume:\n\n\n\n\n\n\nTip\n\n\n\nI would strongly advise you to Google: python constant pi and look for code that will save you having to write down the value of \\(\\pi\\).\n\n\n\nQuestionAnswer\n\n\nfrom math import ??\nv = ??\nprint(f\"{v:0.3f} cm3\")\n\n\nfrom math import pi\nv = (4/3) * pi * (12/2)**3\nprint(f\"{v:0.3f}\")\n904.779\n\n\n\nI get an answer of 904.779cm\\(^3\\).\n\n\nCalculate the Radius of a Sphere\nNow, given a sphere of volume 14,137cm\\(^3\\) calculate its radius as a whole number. The formula for this can be worked out as:\n\\[\\begin{align*}\n\\frac{3}{4}V &= \\pi r^{3} \\\\\n\\frac{3}{4}\\frac{V}{\\pi} &= r^{3} \\\\\n(\\frac{3}{4}\\frac{V}{\\pi})^{1/3} &= r\n\\end{align*}\\]\nIf you can’t remember how to rearrange formulae this would be a good skill to refresh!\n\n\n\n\n\n\nTip\n\n\n\nThere are three ways to get a “whole number” from a float:\n\nWhen you’re starting out, the easiest is to change the variable’s type\nThe next step up is to make use of Google to find out if there are ways of rounding to the nearest integer\nThe third step is to change what’s visible to the user without altering the actual number\n\n\n\nI get an answer of either 14 or 15… can you work out why?\n\nQuestionAnswer\n\n\nfrom math import pi\nv = 14137\nr = ??\nprint(??)\n\n\nfrom math import pi\nv = 14137\nr = ((3 * v) / (4 * pi))**(1/3)\nprint(\"1. \" + str(int(r)) + \" cm\")\nprint(\"2. \" + str(round(r)) + \" cm\")\nprint(\"3. \" + f\"{r:0.0f} cm\")\n1. 14 cm\n2. 15 cm\n3. 15 cm"
-  },
-  {
-    "objectID": "sessions/week1_practical.html#working-with-conditions",
-    "href": "sessions/week1_practical.html#working-with-conditions",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Working with Conditions",
-    "text": "Working with Conditions\nUse if, elif, and else so that you get the following output:\n\nWhen hours is 10 or more, then the code prints At least 10 hours worked!\nWhen hours is exactly 2, then the code prints Exactly 2 hours worked.\n\nWhen hours is 9 or less but not 2, then the code prints Less than 10 hours worked!\n\n\n\n\n\n\n\nTipHint\n\n\n\nYou will also need to think about the order in which these conditions are tested.\n\n\n\nQuestionAnswer\n\n\nhours = 2\n\nif hours ??:\n    print(\" \")\nelif hours ??:\n    print(\" \")\nelse:\n    print(\" \")\n\n\nhours=2\n\nif hours == 2:\n    print(\"Exactly 2 hours worked\")\nelif hours &lt; 10:\n    print(\"Less than 10 hours worked!\")\nelse:\n    print(\"At least 10 hours worked!\")\nExactly 2 hours worked"
-  },
-  {
-    "objectID": "sessions/week1_practical.html#flow-control",
-    "href": "sessions/week1_practical.html#flow-control",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Flow Control",
-    "text": "Flow Control\nUsing the flow chart shown in the image below as a model, write the code to make this condition work. You will need to complete the code such that it produces the following: 1. When a = 2 and b = 2 four lines of output will be written 2. When a = 1 and b = 2 one line of output will be written\n\n\nQuestionAnswer\n\n\na = 1\nb = 1\n\n# &lt;your code here&gt;\n??\n\n\na = 1\nb = 1\n\nx = a\n\nif x == b:\n    print(\"inside 1\")\n    print(\"inside 2\")\n    print(\"inside\")\n\nprint(\"after condition\")\ninside 1\ninside 2\ninside\nafter condition"
-  },
-  {
-    "objectID": "sessions/week1_practical.html#its-all-quite-logical",
-    "href": "sessions/week1_practical.html#its-all-quite-logical",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "It’s All Quite Logical…",
-    "text": "It’s All Quite Logical…\nBefore adding a value for x and running the code below, try to answer the following questions:\n\nQuestionAnswer\n\n\n\nWhat names are name(s) are printed when x = 5?\nWhat value(s) can x be when the names Joe and Aled are printed?\nWhat name(s) are printed when x = -1?\n\nIs there any value for which all three names will be printed?\n\nx = ??\n\nif x &gt; 0 and x &lt; 5:\n    print(\"Joe\")\n\nif x &gt; 0 or x &lt; 5:\n    print(\"Aled\")\n\nif not(x &gt; 0):\n    print(\"Sarah\")\n\n\n\nWhat names are name(s) are printed when x = 5? Answer: Aled\nWhat value(s) can x be when the names Joe and Aled are printed? Answer: \\(x \\in [1,4]\\)\nWhat name(s) are printed when x = -1? Answer: Aled and Sarah\nIs there any value for which all three names will be printed? No\n\nx = 0\n\nif x &gt; 0 and x &lt; 5:\n    print(\"Joe\")\n\nif x &gt; 0 or x &lt; 5:\n    print(\"Aled\")\n\nif not(x &gt; 0):\n    print(\"Sarah\")\nAled\nSarah"
-  },
-  {
-    "objectID": "sessions/week1_practical.html#logic-contd",
-    "href": "sessions/week1_practical.html#logic-contd",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Logic (Cont’d)",
-    "text": "Logic (Cont’d)\nStudy the flow chart below.\n\n\n\n\n\n\n\nTip\n\n\n\nThis will require you to combine logic with one of the operators that we saw earlier. Also note the new iterator that we’ve got here: range(&lt;start&gt;, &lt;stop&gt;) to create a range of numbers between two other numbers.\n\n\nIn the cell below, use the for loop already set up to as a starting point for implementing the flow chart shown above for values of x between 0 and 9.\n\nQuestionAnswer\n\n\nfor x in range(0,9):\n    #... do something...\n    ??\n\n\nfor x in range(0,9):\n    #... do something...\n    print(x, end=\": \")\n    if x%2==0:\n        print(\"x is even.\")\n    else:\n        print(\"x is odd\")\n0: x is even.\n1: x is odd\n2: x is even.\n3: x is odd\n4: x is even.\n5: x is odd\n6: x is even.\n7: x is odd\n8: x is even."
-  },
-  {
-    "objectID": "sessions/week1_practical.html#nested-conditionals",
-    "href": "sessions/week1_practical.html#nested-conditionals",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "‘Nested’ Conditionals",
-    "text": "‘Nested’ Conditionals\nConditional statements can be nested within one another. That is, Python evaluates the first, or ‘outer’, condition and can then evaluate secondary, or ‘inner’, conditions. The code below shows an example of this.\n\nQuestionAnswer\n\n\nx = 5\ny = 4\n\nif x != y:                                 #line 1\n    print(\"x is not equal to y\")\n    \n    if(x &gt; y):                             #line 4\n        print(\"x is greater than y\")\n    \n    else:                                  #line 7\n        print(\"x is less than y\")\n\nelse:\n    print(\"&lt;insert conclusion here&gt;\")\n\n\nx = 2\ny = 3\n\nif x != y:                                 #line 1\n    print(\"x is not equal to y\")\n\n    if(x &gt; y):                             #line 4\n        print(\"x is greater than y\")\n\n    else:                                  #line 7\n        print(\"x is less than y\")\n\nelse:\n    print(\"x is equal to y\")\nx is not equal to y\nx is less than y\n\n\n\nNote how the indentation makes it easier to work out which ‘level’ (outer or inner condition) the code is operating on. In the code above, lines 4 and 7 are at the same indentation meaning that both will be skipped if the initial condition (on line 1) is False.\nTo check you understand how the code above works:\n\nChange &lt;insert conclusion here&gt; to a string that explains the condition of x and y\nFor x = 2 and y = 3, type what line(s) will be output here: …\n\nGreat! You should now have a pretty good understanding of how conditional and logical operators work. This understanding will be handy in future as we work through other computational concepts."
-  },
-  {
-    "objectID": "sessions/week1_practical.html#whos-in-the-list",
-    "href": "sessions/week1_practical.html#whos-in-the-list",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Who’s in the List?",
-    "text": "Who’s in the List?\nHere we are looking to interact with lists in a straightforward way that will help you to understand accessing them using indexes and slices, and searching.\n\nQuestionAnswer\n\n\ncities = ['New York', 'London', 'Beijing', 'Tokyo', 'Delhi']\n\n# Print out London from cities:\nprint( ?? )\n\n# Print out Tokyo using *negative* indexing:\nprint( ?? )\n\n# Print out Beijing *and* Tokyo using a list slice\nprint( ?? )\n\n# Print out London to Delhi using a slice\nprint( ?? ) # You could also do cities[1:5] but this way is neater\n\n# Combine positive and negative indexing to print out London, Beijing and Tokyo using a list slice\nprint( ?? )\n\n# Print out the index for New York by searching for it (i.e. you can't just type 0)\nprint( ?? )\n\n\ncities = ['New York', 'London', 'Beijing', 'Tokyo', 'Delhi']\n\n# Print out London from cities:\nprint( cities[1] )\n\n# Print out Tokyo using *negative* indexing:\nprint( cities[-2] )\n\n# Print out Beijing and Tokyo using a list slice\nprint( cities[2:4] )\n\n# Print out London to Delhi using a slice\nprint( cities[1:] ) # You could also do cities[1:5] but this way is neater\n\n# Combine positive and negative indexing to print out London, Beijing and Tokyo using a list slice\nprint( cities[1:-1] )\n\n# Print out the position of New York in the list by searching for it (i.e. you can't just type 0)\nprint( cities.index('New York') )\nLondon\nTokyo\n['Beijing', 'Tokyo']\n['London', 'Beijing', 'Tokyo', 'Delhi']\n['London', 'Beijing', 'Tokyo']\n0"
-  },
-  {
-    "objectID": "sessions/week1_practical.html#manipulating-lists",
-    "href": "sessions/week1_practical.html#manipulating-lists",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Manipulating Lists",
-    "text": "Manipulating Lists\nLet’s break a few things…\n\nCreate an IndexError\n\nQuestionAnswer\n\n\n# Cause an 'IndexError: list index out of range' errr\n??\n\n\n```{python}\ncities[7]\n```\n\n\n\n\n\nCreate a ValueError\n\nQuestionAnswer\n\n\n# Cause a ValueError using the city of Toronto\n??\n\n\n```{python}\ncities.index('Toronto')\n```\n\n\n\n\n\nSort the List\nSort the list in place in reverse alphabetical order (i.e. z…a) and then print the sorted list\n\nQuestionAnswer\n\n\n??\nprint(cities)\nThe output from this should be: [‘Tokyo’, ‘New York’, ‘London’, ‘Delhi’, ‘Beijing’]\n\n\n# The approach does _not_ sort the original list,\n# it returns a copy of the list that is sorted:\nprint(sorted(cities, reverse=True)) # &lt;- what is printed is sorted\nprint(cities)                       # &lt;- but the list is not\n\n# This is the 'in place' option\ncities.sort(reverse=True)           # &lt;- list is now sorted\nprint(cities)\n['Tokyo', 'New York', 'London', 'Delhi', 'Beijing']\n['New York', 'London', 'Beijing', 'Tokyo', 'Delhi']\n['Tokyo', 'New York', 'London', 'Delhi', 'Beijing']"
-  },
-  {
-    "objectID": "sessions/week1_practical.html#addingremoving-values",
-    "href": "sessions/week1_practical.html#addingremoving-values",
-    "title": "Practical 2: Foundations (Part 1)",
-    "section": "Adding/Removing Values",
-    "text": "Adding/Removing Values\n\nInserting into a List\nAdd the city of Toronto to the list after New York in the sorted list.\n\nQuestionAnswer\n\n\n# Just in case you make a mistake...\ncities = ['Tokyo', 'New York', 'London', 'Delhi', 'Beijing']\n\n??\nprint(cities)\n\n\n# Just in case you make a mistake...\ncities = ['Tokyo', 'New York', 'London', 'Delhi', 'Beijing']\n\ncities.insert(2,'Toronto')\nprint(cities)\n['Tokyo', 'New York', 'Toronto', 'London', 'Delhi', 'Beijing']\n\n\n\nThe output should be: [‘Tokyo’, ‘New York’, ‘Toronto’, ‘London’, ‘Delhi’, ‘Beijing’]\n\n\nRemoving from a List\nNow pop New York from the list without specifying its index (i.e. the number 1 should not appear in your code). Print out the value that you popped and the print out the cities list to check you’ve done the right thing…\n\nQuestionAnswer\n\n\n??\nprint(p)\nprint(cities)\n\n\np = cities.pop( cities.index('New York') )\nprint(p)\nprint(cities)\nNew York\n['Tokyo', 'Toronto', 'London', 'Delhi', 'Beijing']\n\n\n\nThe output should be:\n\nNew York\n[‘Tokyo’, ‘Toronto’, ‘London’, ‘Delhi’, ‘Beijing’]\n\n\n\nChecking Lists\nFinally, how can you check if the city of Moscow is in the list and let the user know if it is or is not?\n\nQuestionAnswer\n\n\nif ??\n    ??\nelse:\n    ??\n\n\nif 'Moscow' in cities:\n    print(\"Moscow is in the cities list.\")\nelse:\n    print(\"Moscow is not in the cities list.\")\nMoscow is not in the cities list."
+    "objectID": "sessions/week1_practical.html#exploring-percentage_change",
+    "href": "sessions/week1_practical.html#exploring-percentage_change",
+    "title": "Practical 1: describing and representing data",
+    "section": "Exploring Percentage_change",
+    "text": "Exploring Percentage_change\nNow, we turn to explore the variable Percentage_change, which represents the relative change from the 2011 census to 2021 census.\nTry completing the code below on your own. Practice makes perfect!\n\nChecking Lists\nFinally, how can you check if the city of Moscow is in the list and let the user know if it is or is not?\n\nQuestionAnswer\n\n\nif ??\n    ??\nelse:\n    ??\n\n\nif 'Moscow' in ['Moscow', 'Beijing']:\n    print(\"Moscow is in the cities list.\")\nelse:\n    print(\"Moscow is not in the cities list.\")\nMoscow is in the cities list."
   },
   {
     "objectID": "sessions/week1_practical.html#youre-done",
     "href": "sessions/week1_practical.html#youre-done",
-    "title": "Practical 2: Foundations (Part 1)",
+    "title": "Practical 1: describing and representing data",
     "section": "You’re Done!",
     "text": "You’re Done!\nThis is quite a lot to get through. If you’ve managed it in under 2 hours then congratulations! Either you must have paid a lot of attention when doing Code Camp, or you might want to check in with us as to whether you should really be doing this module…\n\nNo Wait, One More Thing…\nYou now want to add/commit/push your completed notebook to your GitHub reposistory. Using the Terminal you need to:\n\nNavigate to your repository (e.g.$HOME/Documents/CASA/&lt;your repository&gt;).\nCheck the status of your notebooks using git status (you should see that Practical-02-Foundations_1.ipynb has been modified).\nAdd the changes to Git using git add  Practical-02-Foundations_1.ipynb\nCommit this changed notebook with a message using git commit -m \"&lt;your message here...&gt;\"\nPush this change to GitHub using: git push\n\nYou should now be able to visit your repository on GitHub and see that your changes are now stored there as well!"
   },
@@ -1215,6 +1124,20 @@
     "crumbs": [
       "Overview"
     ]
+  },
+  {
+    "objectID": "help.html",
+    "href": "help.html",
+    "title": "Getting Help",
+    "section": "",
+    "text": "We all need help from time to time, and while we will always do our best to support you because we know that this module is hard for students who are new to quantitative modules or statistics, the best way to ‘get help’ will also always be taking steps to ‘help yourself’ first."
+  },
+  {
+    "objectID": "help.html#how-to-help-yourself",
+    "href": "help.html#how-to-help-yourself",
+    "title": "Getting Help",
+    "section": "How to Help Yourself",
+    "text": "How to Help Yourself\nHere are at least six things that you can do to ‘help yourself’:\n\nMake use of practical sessions–we can’t help you if we don’t know that you’re struggling. Please talk to the lecturer or TAs during the pratical sessions.\nUse the dedicated #casa0007_qm channel on Slack –this provides a much richer experience than the Moodle Forum and should be your primary means of requesting help outside of scheduled teaching hours.\nDo the readings–regardless of whether we ask you questions in class about them (or not), the readings are designed to support the module’s learning outcomes, so if you are struggling with a concept or an idea then please look to the week’s readings! You should also review the full bibliography while developing your thinking for the final project.\nUse Google or Stack Overflow–as you become a better programmer you’ll start to understand how to frame your question in ways that produce the right answer right away, but whether you’re a beginner or an expert Stack Overflow is your friend.\nSign up for online classes–there are lots of plausible online classes on LinkedIn course or Coursera. Please check the reviews before you take an online module."
   },
   {
     "objectID": "sessions/index.html",
