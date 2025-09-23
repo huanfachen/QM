@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Huanfa Chen">
-<meta name="dcterms.date" content="2025-09-23">
 
-<title>Week 9 – Quantitative Methods</title>
+<title>Practical 2: Recognising and plotting probability distributions – Quantitative Methods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,8 +65,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../sessions/week10.html" rel="next">
-<link href="../sessions/week8.qmd" rel="prev">
 <link href="..//img/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -50,6 +81,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-62c9cf19534799b1b7666b4a47d0c403.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-62c9cf19534799b1b7666b4a47d0c403.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-62c9cf19534799b1b7666b4a47d0c403.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,14 +113,14 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Week 9 – Quantitative Methods">
+<meta property="og:title" content="Practical 2: Recognising and plotting probability distributions – Quantitative Methods">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://huanfachen.github.io/QM/sessions/img/logo/full_sm.png">
 <meta property="og:site_name" content="Foundations">
 <meta property="og:locale" content="en_GB">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -198,178 +232,38 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-          <h1 class="quarto-secondary-nav-title">Week 9</h1>
-        </a>     
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="../index.html" class="sidebar-logo-link">
-      <img src="../img/logo/full_md.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
-      <img src="../img/logo/full_md.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
-      </a>
-      </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../sessions/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Overview</span></a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Part 1: Basics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../sessions/week1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1. Explanatory Data Analysis #1</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../sessions/week2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2. Explanatory Data Analysis #2</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../sessions/week3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3. Hypothesis Testing</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../sessions/week4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4. Introduction to Linear Algebra</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Part 2: Correlation and Regression</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../sessions/week5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">5. Measuring Relationship</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../sessions/week6.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">6. Introduction to Regression</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../sessions/week7.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">7. Generalised Linear Regression</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../sessions/week8.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">8. Multilevel Regression</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Part 3: Dimension Reduction &amp; Clustering</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../sessions/week9.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">9. Dimension Reduction</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../sessions/week10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">10. Clustering</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../references.qmd" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bibliography</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture">Lecture</a></li>
-  <li><a href="#quiz" id="toc-quiz" class="nav-link" data-scroll-target="#quiz">Quiz</a></li>
-  <li><a href="#practical" id="toc-practical" class="nav-link" data-scroll-target="#practical">Practical</a></li>
-  <li><a href="#further-resources" id="toc-further-resources" class="nav-link" data-scroll-target="#further-resources">Further resources</a></li>
+  <li><a href="#to-add-a-callout-note" id="toc-to-add-a-callout-note" class="nav-link active" data-scroll-target="#to-add-a-callout-note">To add a callout-note</a></li>
+  <li><a href="#to-add-python-code-without-running-them" id="toc-to-add-python-code-without-running-them" class="nav-link" data-scroll-target="#to-add-python-code-without-running-them">To add Python code without running them …</a></li>
+  <li><a href="#to-add-and-run-python-code" id="toc-to-add-and-run-python-code" class="nav-link" data-scroll-target="#to-add-and-run-python-code">To add and run Python code</a></li>
+  <li><a href="#to-add-a-photo---replace-the-path.-using-relative-path-is-also-okay." id="toc-to-add-a-photo---replace-the-path.-using-relative-path-is-also-okay." class="nav-link" data-scroll-target="#to-add-a-photo---replace-the-path.-using-relative-path-is-also-okay.">To add a photo - replace the path. Using relative path is also okay.</a></li>
+  <li><a href="#to-add-some-questions" id="toc-to-add-some-questions" class="nav-link" data-scroll-target="#to-add-some-questions">To add some “questions”</a></li>
+  <li><a href="#youre-done" id="toc-youre-done" class="nav-link" data-scroll-target="#youre-done">You’re Done!</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/huanfachen/CASA0007/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/huanfachen/CASA0007/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="week2_practical.ipynb" download="week2_practical.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Week 9</h1>
+<h1 class="title">Practical 2: Recognising and plotting probability distributions</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Huanfa Chen </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 23, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -379,29 +273,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>This week will introduce how to simplify complex datasets by reducing the number of variables while preserving important information.</p>
-</section>
-<section id="learning-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
-<p>By the end of this week, you will be able to:</p>
-<ol type="1">
-<li>Understand the principle of dimensionality reduction.</li>
-<li>Understand the method of principle component analysis.</li>
-<li>Visualise and describe the results of PCA.</li>
-</ol>
-</section>
-<section id="lecture" class="level2">
-<h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
-<p>To access the lecture notes: <a href="week9_lecture.qmd">Lecture</a></p>
-</section>
-<section id="quiz" class="level2">
-<h2 class="anchored" data-anchor-id="quiz">Quiz</h2>
-<p>To access the quiz on Moodle, please check <a href="https://moodle.ucl.ac.uk/course/view.php?id=53568">Moodle page</a>.</p>
-</section>
-<section id="practical" class="level2">
-<h2 class="anchored" data-anchor-id="practical">Practical</h2>
+<p>This week is focussed on using some common functions in Python to plot data and distributions.</p>
+<section id="to-add-a-callout-note" class="level2">
+<h2 class="anchored" data-anchor-id="to-add-a-callout-note">To add a callout-note</h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -412,17 +286,93 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>To save a copy of notebook to your own GitHub Repo: follow the GitHub link, click on <code>Raw</code> and then <code>Save File As...</code> to save it to your own computer. Make sure to change the extension from <code>.ipynb.txt</code> (which will probably be the default) to <code>.ipynb</code>before adding the file to <em>your</em> GitHub repository.</p>
+<p>Suggestions for a Better Learning Experience:</p>
+<ul>
+<li>XXX</li>
+</ul>
 </div>
 </div>
-<p>To access the practical:</p>
-<ol type="1">
-<li><a href="week9_practical.html">Preview</a></li>
-<li><a href="week9_practical.ipynb">Download</a></li>
-</ol>
 </section>
-<section id="further-resources" class="level2">
-<h2 class="anchored" data-anchor-id="further-resources">Further resources</h2>
+<section id="to-add-python-code-without-running-them" class="level2">
+<h2 class="anchored" data-anchor-id="to-add-python-code-without-running-them">To add Python code without running them …</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Read CSV file, skipping first 5 rows, using row 6 as header, and handling comma as thousands separator</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df_pop <span class="op">=</span> pd.read_csv(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'L1_data/UK_census_population.csv'</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    skiprows<span class="op">=</span><span class="dv">5</span>,        <span class="co"># Skip first 5 rows. Wnhy?</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    thousands<span class="op">=</span><span class="st">','</span>,     <span class="co"># Interpret commas as thousands separators</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    header<span class="op">=</span><span class="dv">0</span>           <span class="co"># After skipping, the first row becomes the header</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_pop.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="to-add-and-run-python-code" class="level2">
+<h2 class="anchored" data-anchor-id="to-add-and-run-python-code">To add and run Python code</h2>
+<div id="d28d8daa" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Read CSV file, skipping first 5 rows, using row 6 as header, and handling comma as thousands separator</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df_pop <span class="op">=</span> pd.read_csv(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'L1_data/UK_census_population.csv'</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    skiprows<span class="op">=</span><span class="dv">5</span>,        <span class="co"># Skip first 5 rows. Wnhy?</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    thousands<span class="op">=</span><span class="st">','</span>,     <span class="co"># Interpret commas as thousands separators</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    header<span class="op">=</span><span class="dv">0</span>           <span class="co"># After skipping, the first row becomes the header</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_pop.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Area code          Area name Area type  Population 2011  Population 2021  \
+0  K04000001  England and Wales  National       56075912.0       59597542.0   
+1  E92000001            England   Country       53012456.0       56490048.0   
+2  W92000004              Wales   Country        3063456.0        3107494.0   
+3  E12000001         North East    Region        2596886.0        2647013.0   
+4  E12000002         North West    Region        7052177.0        7417397.0   
+
+   Percentage change  
+0                6.3  
+1                6.6  
+2                1.4  
+3                1.9  
+4                5.2  </code></pre>
+</div>
+</div>
+</section>
+<section id="to-add-a-photo---replace-the-path.-using-relative-path-is-also-okay." class="level2">
+<h2 class="anchored" data-anchor-id="to-add-a-photo---replace-the-path.-using-relative-path-is-also-okay.">To add a photo - replace the path. Using relative path is also okay.</h2>
+<p><a href="https://huanfachen.github.io/QM/sessions/L1_images/uk_pop_csv_screenshot.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://huanfachen.github.io/QM/sessions/L1_images/uk_pop_csv_screenshot.jpg" class="img-fluid" width="600"></a></p>
+<!-- ![](L1_images/uk_pop_csv_screenshot.jpg){width=600} -->
+</section>
+<section id="to-add-some-questions" class="level2">
+<h2 class="anchored" data-anchor-id="to-add-some-questions">To add some “questions”</h2>
+<p>The qmd file will be rendered as two files in sessions folder, including a html and ipynb format. The html file will contain both <em>question</em> and <em>answer</em>, while the ipynb file will contain only the <em>question</em>.</p>
+<p>For the effect, please check <a href="https://huanfachen.github.io/QM/sessions/weekX_practical.html">HTML</a> and <a href="https://huanfachen.github.io/QM/sessions/weekX_practical.ipynb">ipynb</a>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Answer</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content qna-question">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ??</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ??</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    ??</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">'Moscow'</span> <span class="kw">in</span> [<span class="st">'Moscow'</span>, <span class="st">'Beijing'</span>]:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Moscow is in the cities list."</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Moscow is not in the cities list."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Moscow is in the cities list.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="youre-done" class="level2">
+<h2 class="anchored" data-anchor-id="youre-done">You’re Done!</h2>
+<p>Congratulations on completing the first QM practical session! If you are still working on it, take you time.</p>
+<p>Don’t worry about understanding every detail of the Python code — what matters most is knowing which functions to use for a specific task, like checking minimum and maximum values or generating boxplots, and knowing how to debug when it goes wrong. Remember, practice makes perfect.</p>
 
 
 </section>
@@ -828,18 +778,6 @@ Note
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../sessions/week8.qmd" class="pagination-link" aria-label="8. Multilevel Regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">8. Multilevel Regression</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../sessions/week10.html" class="pagination-link" aria-label="10. Clustering">
-        <span class="nav-page-text">10. Clustering</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -867,6 +805,38 @@ Note
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
