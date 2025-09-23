@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Huanfa Chen">
+<meta name="author" content="Adam Dennett">
 <meta name="dcterms.date" content="2025-09-23">
 
-<title>Overview – Quantitative Methods</title>
+<title>Week 6 – Quantitative Methods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +32,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../sessions/week1.html" rel="next">
+<link href="../sessions/week7.html" rel="next">
+<link href="../sessions/week5.html" rel="prev">
 <link href="..//img/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -49,6 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-62c9cf19534799b1b7666b4a47d0c403.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-62c9cf19534799b1b7666b4a47d0c403.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-62c9cf19534799b1b7666b4a47d0c403.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -78,12 +82,11 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Overview – Quantitative Methods">
-<meta property="og:image" content="https://huanfachen.github.io/QM/sessions/L1_images/moodle_feedback.png">
+<meta property="og:title" content="Week 6 – Quantitative Methods">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://huanfachen.github.io/QM/sessions/L6_images/soggybottom.webp">
 <meta property="og:site_name" content="Foundations">
 <meta property="og:locale" content="en_GB">
-<meta property="og:image:height" content="132">
-<meta property="og:image:width" content="840">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light">
@@ -204,7 +207,7 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-          <h1 class="quarto-secondary-nav-title">Overview</h1>
+          <h1 class="quarto-secondary-nav-title">Week 6</h1>
         </a>     
     </div>
   </nav>
@@ -223,7 +226,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../sessions/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../sessions/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
@@ -279,7 +282,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../sessions/week6.html" class="sidebar-item-text sidebar-link">
+  <a href="../sessions/week6.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">6. Introduction to Regression</span></a>
   </div>
 </li>
@@ -336,21 +339,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#attendance-recording" id="toc-attendance-recording" class="nav-link active" data-scroll-target="#attendance-recording">Attendance Recording</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#why-study-a-quantitative-methods-course" id="toc-why-study-a-quantitative-methods-course" class="nav-link" data-scroll-target="#why-study-a-quantitative-methods-course">Why study a Quantitative Methods course?</a></li>
-  <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link" data-scroll-target="#course-objectives">Course Objectives</a></li>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
-  <li><a href="#course-structure" id="toc-course-structure" class="nav-link" data-scroll-target="#course-structure">Course Structure</a></li>
-  <li><a href="#platforms" id="toc-platforms" class="nav-link" data-scroll-target="#platforms">Platforms</a></li>
-  <li><a href="#weekly-schedule" id="toc-weekly-schedule" class="nav-link" data-scroll-target="#weekly-schedule">Weekly Schedule</a></li>
-  <li><a href="#assessment" id="toc-assessment" class="nav-link" data-scroll-target="#assessment">Assessment</a>
-  <ul class="collapse">
-  <li><a href="#assessment-1" id="toc-assessment-1" class="nav-link" data-scroll-target="#assessment-1">Assessment</a></li>
-  <li><a href="#ucl-assessment-policy" id="toc-ucl-assessment-policy" class="nav-link" data-scroll-target="#ucl-assessment-policy">UCL Assessment Policy</a></li>
-  <li><a href="#moodle-feedback" id="toc-moodle-feedback" class="nav-link" data-scroll-target="#moodle-feedback">Moodle Feedback</a></li>
-  <li><a href="#github-feedback" id="toc-github-feedback" class="nav-link" data-scroll-target="#github-feedback">Github Feedback</a></li>
-  </ul></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture">Lecture</a></li>
+  <li><a href="#quiz" id="toc-quiz" class="nav-link" data-scroll-target="#quiz">Quiz</a></li>
+  <li><a href="#practical" id="toc-practical" class="nav-link" data-scroll-target="#practical">Practical</a></li>
+  <li><a href="#further-resources" id="toc-further-resources" class="nav-link" data-scroll-target="#further-resources">Further resources</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/huanfachen/CASA0007/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -359,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Overview</h1>
+<h1 class="title d-none d-lg-block">Week 6</h1>
 </div>
 
 
@@ -369,7 +363,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Huanfa Chen </p>
+             <p>Adam Dennett </p>
           </div>
   </div>
     
@@ -388,157 +382,55 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="attendance-recording" class="level2">
-<h2 class="anchored" data-anchor-id="attendance-recording">Attendance Recording</h2>
-<ul>
-<li>70% attendance required for student visa holders.</li>
-<li>Please Attend all lectures and workshops.</li>
-<li>Contact module lead &amp; bartlett.pg-casa@ucl.ac.uk, if you can’t attend.</li>
-</ul>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This week will introduce linear regression. The most useful and widely used model in all of statistics. Regression underpins more ‘advanced’ methods like machine learning, but for most situations, it is likely to be the only model you will require.</p>
+<p>Regression is also one of the most misused and misunderstood models in the spatial data scientist’s toolbox. Therefore, understanding the basics is absolutely fundamental. If you understand the basics, then you stand a better chance of understanding what more sophisticated methods bring to the table.</p>
+<p>Getting a regression model right is no more challenging than following a baking recipe - almost anyone can follow the instructions. However, like baking an amazing cake, skill, experience and understanding gained through hours of experimentation, failures, the odd amazing success and lots of perseverance are what make the difference between a great model and a soggy bottom!</p>
+<p><a href="L6_images/soggybottom.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="L6_images/soggybottom.webp" class="img-fluid"></a></p>
 </section>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>By the end of this week, you will be able to:</p>
 <ol type="1">
-<li>Understand the structure and focus of the module.</li>
-<li>Develop a method for tackling quantitative problems.</li>
-<li>Formulate a research question and structure quantitative writing.</li>
+<li>XXX</li>
+<li>XXX</li>
+<li>XXX</li>
 </ol>
 </section>
-<section id="why-study-a-quantitative-methods-course" class="level2">
-<h2 class="anchored" data-anchor-id="why-study-a-quantitative-methods-course">Why study a Quantitative Methods course?</h2>
-<ul>
-<li>Coding alone is not enough.</li>
-<li>Understanding models aids in correct tool selection and bug handling.</li>
-<li>Google/ChatGPT can make mistakes; detecting them is crucial.</li>
-<li>Mathematics understanding is not always required.</li>
-</ul>
+<section id="lecture" class="level2">
+<h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
+<p>To access the lecture notes: <a href="../sessions/week6_lecture.html">Lecture</a></p>
 </section>
-<section id="course-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="course-objectives">Course Objectives</h2>
+<section id="quiz" class="level2">
+<h2 class="anchored" data-anchor-id="quiz">Quiz</h2>
+<p>To access the quiz on Moodle, please check <a href="https://moodle.ucl.ac.uk/course/view.php?id=53568">Moodle page</a>.</p>
+</section>
+<section id="practical" class="level2">
+<h2 class="anchored" data-anchor-id="practical">Practical</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To save a copy of notebook to your own GitHub Repo: follow the GitHub link, click on <code>Raw</code> and then <code>Save File As...</code> to save it to your own computer. Make sure to change the extension from <code>.ipynb.txt</code> (which will probably be the default) to <code>.ipynb</code>before adding the file to <em>your</em> GitHub repository.</p>
+</div>
+</div>
+<p>To access the practical:</p>
 <ol type="1">
-<li>Understand a broad range of quantitative techniques.</li>
-<li>Apply these skills in research.</li>
-<li>Formulate a coherent quantitative argument.</li>
+<li><a href="week6_practical.html">Preview</a></li>
+<li><a href="week6_practical.ipynb">Download</a></li>
 </ol>
 </section>
-<section id="prerequisites" class="level2">
-<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<ul>
-<li>No prerequisite of university-level maths/statistics.</li>
-<li>No prerequisite programming, but this module doesn’t teach programming.</li>
-<li>CASA0013 is strongly recommneded if you don’t know Python before.</li>
-<li>Python is required for practicals and assessments.</li>
-</ul>
-</section>
-<section id="course-structure" class="level2">
-<h2 class="anchored" data-anchor-id="course-structure">Course Structure</h2>
-<ul>
-<li>Lectures: 10 weeks (Wednesdays 9:00–10:30), split into two sessions.</li>
-<li>Tutorials: 10 weeks (Wednesdays 10:30–12:30).</li>
-</ul>
-</section>
-<section id="platforms" class="level2">
-<h2 class="anchored" data-anchor-id="platforms">Platforms</h2>
-<ul>
-<li><strong>Email</strong> for important notices and private questions.</li>
-<li><strong>Github &amp; website</strong> for lecture notes and notebooks.</li>
-<li><strong>Moodle</strong> for lectures recording and assessments.</li>
-<li><strong>Slack</strong> for public questions.</li>
-</ul>
-</section>
-<section id="weekly-schedule" class="level2">
-<h2 class="anchored" data-anchor-id="weekly-schedule">Weekly Schedule</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Session</th>
-<th>Topic</th>
-<th>Lecturer</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>Introduction to data</td>
-<td>Huanfa</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>Probability and distribution</td>
-<td>Bea</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>Hypothesis testing</td>
-<td>Bea</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Introduction to linear algebra</td>
-<td>Bea</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Correlation and regression</td>
-<td>Huanfa</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>Multiple regression</td>
-<td>Adam</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td>Generalised linear model</td>
-<td>Adam</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td>Multilevel regression</td>
-<td>Adam</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td>Dimensionality reduction</td>
-<td>Huanfa</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>Clustering Analysis</td>
-<td>Huanfa</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="assessment" class="level1">
-<h1>Assessment</h1>
-<section id="assessment-1" class="level2">
-<h2 class="anchored" data-anchor-id="assessment-1">Assessment</h2>
-<ul>
-<li>Written Investigation (summative): 100%</li>
-<li>Weekly quiz (formative)</li>
-</ul>
-</section>
-<section id="ucl-assessment-policy" class="level2">
-<h2 class="anchored" data-anchor-id="ucl-assessment-policy">UCL Assessment Policy</h2>
-<ul>
-<li>All submissions via Moodle, not emails.</li>
-<li>Late penalties: Up to 48h (-10 points); up to 7 days (capped at 50); over 7 days (scores 0).</li>
-<li>DAP or Extenuating circumstances: to submit on Portico.</li>
-<li>Respect word count limits</li>
-<li>Avoid plagiarism and <strong>fake references</strong></li>
-</ul>
-</section>
-<section id="moodle-feedback" class="level2">
-<h2 class="anchored" data-anchor-id="moodle-feedback">Moodle Feedback</h2>
-<p>Please provide anonymous feedback on Moodle <img src="L1_images/moodle_feedback.png" class="img-fluid"></p>
-</section>
-<section id="github-feedback" class="level2">
-<h2 class="anchored" data-anchor-id="github-feedback">Github Feedback</h2>
-<p>You can also give feedback on <a href="https://github.com/huanfachen/qm/issues">Github issues</a>.</p>
+<section id="further-resources" class="level2">
+<h2 class="anchored" data-anchor-id="further-resources">Further resources</h2>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -944,10 +836,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../sessions/week5.html" class="pagination-link" aria-label="5. Measuring Relationship">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">5. Measuring Relationship</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../sessions/week1.html" class="pagination-link" aria-label="1. Explanatory Data Analysis #1">
-        <span class="nav-page-text">1. Explanatory Data Analysis #1</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../sessions/week7.html" class="pagination-link" aria-label="7. Generalised Linear Regression">
+        <span class="nav-page-text">7. Generalised Linear Regression</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -978,6 +873,38 @@ ul.task-list li input[type="checkbox"] {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
