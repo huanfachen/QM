@@ -688,51 +688,58 @@
   {
     "objectID": "sessions/week3_practical.html",
     "href": "sessions/week3_practical.html",
-    "title": "Practical XXX: XXX",
+    "title": "Practical 3: Establishing and testing the hypothesis",
     "section": "",
-    "text": "This week is focussed on XXX."
+    "text": "This week is focussed on defining research hypotheses, and using statistical tests to evaluate them. In particular we will use the Student’s T-test, and the KS distribution test."
   },
   {
     "objectID": "sessions/week3_practical.html#to-add-a-callout-note",
     "href": "sessions/week3_practical.html#to-add-a-callout-note",
-    "title": "Practical XXX: XXX",
+    "title": "Practical 3: Establishing and testing the hypothesis",
     "section": "To add a callout-note",
-    "text": "To add a callout-note\n\n\n\n\n\n\nNote\n\n\n\nSuggestions for a Better Learning Experience:\n\nXXX"
+    "text": "To add a callout-note\n\n\n\n\n\n\nNote\n\n\n\nThis practical follows on from practical 2, so if you haven’t done that yet I suggest going back and working through that first!"
   },
   {
-    "objectID": "sessions/week3_practical.html#to-add-python-code-without-running-them",
-    "href": "sessions/week3_practical.html#to-add-python-code-without-running-them",
-    "title": "Practical XXX: XXX",
-    "section": "To add Python code without running them …",
-    "text": "To add Python code without running them …\nimport pandas as pd\n\n# Read CSV file, skipping first 5 rows, using row 6 as header, and handling comma as thousands separator\ndf_pop = pd.read_csv(\n    'L1_data/UK_census_population.csv',\n    skiprows=5,        # Skip first 5 rows. Wnhy?\n    thousands=',',     # Interpret commas as thousands separators\n    header=0           # After skipping, the first row becomes the header\n)\n\nprint(df_pop.head())"
+    "objectID": "sessions/week3_practical.html#loading-the-data",
+    "href": "sessions/week3_practical.html#loading-the-data",
+    "title": "Practical 3: Establishing and testing the hypothesis",
+    "section": "Loading the data",
+    "text": "Loading the data\nWe are going to look at schools perfomance data in England once again.\nThe data is sourced from  and is downloadable here.\nWe have saved a copy of this dataset to the Github repo, in case that the dataset is removed from the website.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as sps\nimport numpy as np \n\n# Read CSV file, handling common missing value entries\nna_vals = [\"\", \"NA\", \"SUPP\", \"NP\", \"NE\", \"SP\", \"SN\", \"SUPPMAT\"]\ndf_ks4 = pd.read_csv(\n    'L2_data/england_ks4final.csv',\n    na_values = na_vals\n)\n\ninfo_cols = ['RECTYPE', 'LEA', 'SCHNAME', 'TOTPUPS', 'TOWN']\nebaccs_cols = ['EBACCAPS', 'EBACCAPS_LO', 'EBACCAPS_MID', 'EBACCAPS_HI']\n\ndf_ks4 = df_ks4[info_cols + ebaccs_cols]\n\ndf_ks4[['TOTPUPS']+ebaccs_cols] = df_ks4[['TOTPUPS']+ebaccs_cols].apply(pd.to_numeric, errors='coerce')\n\ndf_ks4 = df_ks4[df_ks4['RECTYPE'].isin([1, 2])].copy()\n\ndf_ks4.head()\n\n/tmp/ipykernel_12498/485655404.py:8: DtypeWarning: Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,147,148,149,150,151,152,177,178,179,180,181,182,183,186,187,188,189,190,191,192,194,195,196,198,199,200,202,203,204,206,207,208,210,211,212,214,215,216,218,219,220,222,223,224,230,233,234,235,236,237,238,239,242,243,244,245,246,247,248,251,252,253,254,255,256,257,266,267,268,269,270,271,272,281,282,283,284,285,286,287,296,297,298,299,300,301,302,311,312,313,314,315,316,317,335,336,337,340,341,342,345,346,347,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403,404,405,406,407,408,409,410) have mixed types. Specify dtype option on import or set low_memory=False.\n  df_ks4 = pd.read_csv(\n\n\n\n\n\n\n\n\n\nRECTYPE\nLEA\nSCHNAME\nTOTPUPS\nTOWN\nEBACCAPS\nEBACCAPS_LO\nEBACCAPS_MID\nEBACCAPS_HI\n\n\n\n\n0\n1\n201.0\nCity of London School\n1045.0\nLondon\n2.10\nNaN\nNaN\nNaN\n\n\n1\n1\n201.0\nCity of London School for Girls\n739.0\nLondon\n1.51\nNaN\nNaN\nNaN\n\n\n2\n1\n201.0\nDavid Game College\n365.0\nNaN\n0.56\nNaN\nNaN\nNaN\n\n\n4\n1\n202.0\nAcland Burghley School\n1163.0\nLondon\n4.62\n1.91\n3.81\n6.87\n\n\n5\n1\n202.0\nThe Camden School for Girls\n1047.0\nLondon\n6.25\nNaN\n5.40\n7.21\n\n\n\n\n\n\n\nLooking at the metadata (which you can see in ‘L2_data/ks4_meta.xlsx’) we can see the full meaning of each column header:\n\n‘RECTYPE’ = Record type (1=mainstream school; 2=special school; 4=local authority; 5=National (all schools); 7=National (maintained schools))\n‘LEA’ = Local authority\n‘SCHNAME’ = School name\n‘TOTPUPS’ = Number of pupils on roll (all ages)\n‘TOWN’ = School town\n‘EBACCAPS’ = Average EBacc APS score per pupil\n‘EBACCAPS_LO’ = Average EBacc APS score per pupil with low prior attainment\n‘EBACCAPS_MID’ = Average EBacc APS score per pupil with middle prior attainment\n‘EBACCAPS_HI’ = Average EBacc APS score per pupil with high prior attainment"
   },
   {
-    "objectID": "sessions/week3_practical.html#to-add-and-run-python-code",
-    "href": "sessions/week3_practical.html#to-add-and-run-python-code",
-    "title": "Practical XXX: XXX",
-    "section": "To add and run Python code",
-    "text": "To add and run Python code\n\nimport pandas as pd\n\n# Read CSV file, skipping first 5 rows, using row 6 as header, and handling comma as thousands separator\ndf_pop = pd.read_csv(\n    'L1_data/UK_census_population.csv',\n    skiprows=5,        # Skip first 5 rows. Wnhy?\n    thousands=',',     # Interpret commas as thousands separators\n    header=0           # After skipping, the first row becomes the header\n)\n\nprint(df_pop.head())\n\n   Area code          Area name Area type  Population 2011  Population 2021  \\\n0  K04000001  England and Wales  National       56075912.0       59597542.0   \n1  E92000001            England   Country       53012456.0       56490048.0   \n2  W92000004              Wales   Country        3063456.0        3107494.0   \n3  E12000001         North East    Region        2596886.0        2647013.0   \n4  E12000002         North West    Region        7052177.0        7417397.0   \n\n   Percentage change  \n0                6.3  \n1                6.6  \n2                1.4  \n3                1.9  \n4                5.2"
+    "objectID": "sessions/week3_practical.html#research-question",
+    "href": "sessions/week3_practical.html#research-question",
+    "title": "Practical 3: Establishing and testing the hypothesis",
+    "section": "Research question",
+    "text": "Research question\nThe department for education is worried about regional inequality in school grades. With this in mind they’ve come up with a research question they’d like to address.\nResearch question: Is average pupil attainment on the EBacc significantly different in London compared to the rest of England?\nTo do this we’re going to use the mean comparison test to compare the schools in London to those outside of London."
   },
   {
-    "objectID": "sessions/week3_practical.html#to-add-a-photo---replace-the-path.-using-relative-path-is-also-okay.",
-    "href": "sessions/week3_practical.html#to-add-a-photo---replace-the-path.-using-relative-path-is-also-okay.",
-    "title": "Practical XXX: XXX",
-    "section": "To add a photo - replace the path. Using relative path is also okay.",
-    "text": "To add a photo - replace the path. Using relative path is also okay."
+    "objectID": "sessions/week3_practical.html#preparing-the-data",
+    "href": "sessions/week3_practical.html#preparing-the-data",
+    "title": "Practical 3: Establishing and testing the hypothesis",
+    "section": "Preparing the data",
+    "text": "Preparing the data\n\nSplitting the groups\n\ndf_London = df_ks4[df_ks4['TOWN'] == 'London']\ndf_London = df_London[df_London['EBACCAPS'].notna()]\n\ndf_notLondon = df_ks4[df_ks4['TOWN'] != 'London']\ndf_notLondon = df_notLondon[df_notLondon['EBACCAPS'].notna()]\n\nAnd lets look at the summary statistics for each group.\n\ndf_London['EBACCAPS'].describe()\n\ncount    385.000000\nmean       3.788260\nstd        1.851894\nmin        0.000000\n25%        3.020000\n50%        4.290000\n75%        4.970000\nmax        8.700000\nName: EBACCAPS, dtype: float64\n\n\n\ndf_notLondon['EBACCAPS'].describe()\n\ncount    4246.000000\nmean        3.395921\nstd         1.659090\nmin         0.000000\n25%         2.820000\n50%         3.670000\n75%         4.380000\nmax         8.560000\nName: EBACCAPS, dtype: float64\n\n\nSo from looking at their summary statistics the two groups are different sizes. The two groups also have different means - but we want to test if these means are statistically significantly different."
   },
   {
-    "objectID": "sessions/week3_practical.html#to-add-some-questions",
-    "href": "sessions/week3_practical.html#to-add-some-questions",
-    "title": "Practical XXX: XXX",
-    "section": "To add some “questions”",
-    "text": "To add some “questions”\nThe qmd file will be rendered as two files in sessions folder, including a html and ipynb format. The html file will contain both question and answer, while the ipynb file will contain only the question.\nFor the effect, please check HTML and ipynb.\n\nQuestionAnswerAnswer\n\n\nif ??\n    ??\nelse:\n    ??\n\n\n\n\n\nif 'Moscow' in ['Moscow', 'Beijing']:\n    print(\"Moscow is in the cities list.\")\nelse:\n    print(\"Moscow is not in the cities list.\")\nMoscow is in the cities list."
+    "objectID": "sessions/week3_practical.html#the-hypothesis-test",
+    "href": "sessions/week3_practical.html#the-hypothesis-test",
+    "title": "Practical 3: Establishing and testing the hypothesis",
+    "section": "The hypothesis test",
+    "text": "The hypothesis test\nWe’re now going to work through the steps of the hypothesis test according to the five steps discussed in the lecture:\n\nDefine the null and alternative hypothesis\nSet you significance level\nIdentify the evidence\nCalculate the p-value\nCompare p-value with hypothesis level\n\n\nStep 1\nWhat is the null and alternative hypothesis?\n\nQuestionAnswer\n\n\nH_0 = '??'\nH_1 = '??'\n\nprint(f'The null hypothesis is {H_0}')\nprint(f'The alternative hypothesis is {H_1}')\n\n\nH_0 = 'Mean EBacc score in London = Mean EBacc score outside London'\nH_1 = 'Mean EBacc score in London &gt; Mean EBacc score outside London OR Mean EBacc score in London &lt; Mean EBacc score outside London'\n\nprint(f'The null hypothesis is {H_0}')\nprint(f'The alternative hypothesis is {H_1}')\nThe null hypothesis is Mean EBacc score in London = Mean EBacc score outside London\nThe alternative hypothesis is Mean EBacc score in London &gt; Mean EBacc score outside London OR Mean EBacc score in London &lt; Mean EBacc score outside London\n\n\n\n\n\nStep 2\n\n# Set the level of statistical significance \n\nalpha = 0.05\n\n\n\nStep 3\nWe already have the evidence - it’s our datasets df_London['EBACCAPS'] and df_notLondon['EBACCAPS'].\n\n\nStep 4\nWe can use a built in function from scipy.stats called ttest_ind to do step 4 for us. You can read more about this function here.\nFirst we need to check whether we can assume that the samples are drawn from populations with the same standard deviation or not. (Provided neither standard deviation is double the other, this should be ok).\n\nLondon_std = df_London['EBACCAPS'].mean()\nnotLondon_std = df_notLondon['EBACCAPS'].mean()\n\n# Calculate the ratio of standard deviations \nstd_ratio = London_std/notLondon_std\n\nprint(\"std ratio =\", std_ratio)\n\nif std_ratio &gt; 0.5 and std_ratio &lt; 2:\n    print(\"Can assume equal population standard deviations.\")\n    equal_stds = True\nelse:\n    print(\"Cannot assume equal population standard deviations.\")\n    equal_stds = False\n\nstd ratio = 1.115532395766086\nCan assume equal population standard deviations.\n\n\nThere are two outputs from the function scipy.stats.ttest_ind: the test statistic and the p value.\n\ntest_stat, p_value = sps.ttest_ind(df_London['EBACCAPS'], df_notLondon['EBACCAPS'], equal_var = equal_stds)\n\nprint(\"test statistic = \", test_stat)\nprint(\"p-value =\", p_value)\n\ntest statistic =  4.398340904538903\np-value = 1.1153058452679495e-05\n\n\n\n\nStep 5\nFor the final step we compare the p-value to the significance value in order to reach a decision.\n\nQuestionAnswer\n\n\nif p_value ?? ?? :\n    print(f\"Reject the null hypothesis ({H_0}). Accept the alternative hypothesis ({H_1}).\")\n    print(\"Conclude that samples are drawn from populations with different means.\")\nelif p_value ?? ?? :\n    print(f\"No significant evidence to reject the null hypothesis ({H_0}).\")\n    print(\"Assume samples are drawn from populations with the same mean.\")\n\n\nif p_value &lt; alpha:\n    print(f\"Reject the null hypothesis ({H_0}). Accept the alternative hypothesis ({H_1}).\")\n    print(\"Conclude that samples are drawn from populations with different means.\")\nelif p_value &gt;= alpha:\n    print(f\"No significant evidence to reject the null hypothesis ({H_0}).\")\n    print(\"Assume samples are drawn from populations with the same mean.\")\nReject the null hypothesis (Mean EBacc score in London = Mean EBacc score outside London). Accept the alternative hypothesis (Mean EBacc score in London &gt; Mean EBacc score outside London OR Mean EBacc score in London &lt; Mean EBacc score outside London).\nConclude that samples are drawn from populations with different means.\n\n\n\nHence we can conclude that the evidence supports there is a statistically significant differnece between the mean student attainment on the EBacc in London, versus outside of London."
+  },
+  {
+    "objectID": "sessions/week3_practical.html#a-more-complicated-research-question",
+    "href": "sessions/week3_practical.html#a-more-complicated-research-question",
+    "title": "Practical 3: Establishing and testing the hypothesis",
+    "section": "A more complicated research question",
+    "text": "A more complicated research question\nNow I’d also like to know: Are the distribution of EBacc scores in London drawn from a normal distribution?"
   },
   {
     "objectID": "sessions/week3_practical.html#youre-done",
     "href": "sessions/week3_practical.html#youre-done",
-    "title": "Practical XXX: XXX",
+    "title": "Practical 3: Establishing and testing the hypothesis",
     "section": "You’re Done!",
-    "text": "You’re Done!\nCongratulations on completing the first QM practical session! If you are still working on it, take you time.\nDon’t worry about understanding every detail of the Python code — what matters most is knowing which functions to use for a specific task, like checking minimum and maximum values or generating boxplots, and knowing how to debug when it goes wrong. Remember, practice makes perfect."
+    "text": "You’re Done!\nWell done you’ve completed this weeks practical on establishing and evaluating hypothesis questions. If you are still working on it, take your time. And if you have any questions just ask!"
   },
   {
     "objectID": "sessions/week3.html",
@@ -816,7 +823,7 @@
     "href": "sessions/week2_lecture.html#overview-of-lecture-1",
     "title": "Exploratory Data Analysis 2",
     "section": "Overview of lecture 1",
-    "text": "Overview of lecture 1\nNeed to fill this in."
+    "text": "Overview of lecture 1\n\nDifferent data types\nKey data metrics\n\nthe middle and the spread\n\nVisualising the data\nData outliers\n\n\n4 data types: nominal, ordinal, interval, ratio Numerical vs categorical\nKey data metrics - the middle: mean, median, mode and the spread: variance and standard deviation\ndifferent types of data outliers: caused by measurement error, or irregular pattern or influential outliers"
   },
   {
     "objectID": "sessions/week2_lecture.html#first-things-first",
@@ -1868,46 +1875,39 @@
     "text": "This week is focussed on using some common functions in Python to plot data and distributions."
   },
   {
-    "objectID": "sessions/week2_practical.html#to-add-a-callout-note",
-    "href": "sessions/week2_practical.html#to-add-a-callout-note",
+    "objectID": "sessions/week2_practical.html#learning-outcomes",
+    "href": "sessions/week2_practical.html#learning-outcomes",
     "title": "Practical 2: Recognising and plotting probability distributions",
-    "section": "To add a callout-note",
-    "text": "To add a callout-note\n\n\n\n\n\n\nNote\n\n\n\nSuggestions for a Better Learning Experience:\n\nXXX"
+    "section": "Learning Outcomes",
+    "text": "Learning Outcomes\n\nFamiliarise yourself with opening data files in Python.\nFamiliarise yourself with plotting histograms of data in Python."
   },
   {
-    "objectID": "sessions/week2_practical.html#to-add-python-code-without-running-them",
-    "href": "sessions/week2_practical.html#to-add-python-code-without-running-them",
+    "objectID": "sessions/week2_practical.html#loading-the-data",
+    "href": "sessions/week2_practical.html#loading-the-data",
     "title": "Practical 2: Recognising and plotting probability distributions",
-    "section": "To add Python code without running them …",
-    "text": "To add Python code without running them …\nimport pandas as pd\n\n# Read CSV file, skipping first 5 rows, using row 6 as header, and handling comma as thousands separator\ndf_pop = pd.read_csv(\n    'L1_data/UK_census_population.csv',\n    skiprows=5,        # Skip first 5 rows. Wnhy?\n    thousands=',',     # Interpret commas as thousands separators\n    header=0           # After skipping, the first row becomes the header\n)\n\nprint(df_pop.head())"
+    "section": "Loading the data",
+    "text": "Loading the data\nWe are going to look at schools perfomance data in England.\nThe data is sourced from  and is downloadable here.\nWe have saved a copy of this dataset to the Github repo, in case that the dataset is removed from the website.\n\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport numpy as np \n\n# Read CSV file, handling common missing value entries\nna_vals = [\"\", \"NA\", \"SUPP\", \"NP\", \"NE\", \"SP\", \"SN\", \"SUPPMAT\"]\ndf_ks4 = pd.read_csv(\n    'L2_data/england_ks4final.csv',\n    na_values = na_vals\n)\n\ninfo_cols = ['RECTYPE', 'LEA', 'SCHNAME', 'TOTPUPS']\nebaccs_cols = ['EBACCAPS', 'EBACCAPS_LO', 'EBACCAPS_MID', 'EBACCAPS_HI']\n\ndf_ks4 = df_ks4[info_cols + ebaccs_cols]\n\ndf_ks4[['TOTPUPS']+ebaccs_cols] = df_ks4[['TOTPUPS']+ebaccs_cols].apply(pd.to_numeric, errors='coerce')\n\ndf_ks4.head()\n\n/tmp/ipykernel_12395/1207205982.py:7: DtypeWarning: Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,147,148,149,150,151,152,177,178,179,180,181,182,183,186,187,188,189,190,191,192,194,195,196,198,199,200,202,203,204,206,207,208,210,211,212,214,215,216,218,219,220,222,223,224,230,233,234,235,236,237,238,239,242,243,244,245,246,247,248,251,252,253,254,255,256,257,266,267,268,269,270,271,272,281,282,283,284,285,286,287,296,297,298,299,300,301,302,311,312,313,314,315,316,317,335,336,337,340,341,342,345,346,347,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403,404,405,406,407,408,409,410) have mixed types. Specify dtype option on import or set low_memory=False.\n  df_ks4 = pd.read_csv(\n\n\n\n\n\n\n\n\n\nRECTYPE\nLEA\nSCHNAME\nTOTPUPS\nEBACCAPS\nEBACCAPS_LO\nEBACCAPS_MID\nEBACCAPS_HI\n\n\n\n\n0\n1\n201.0\nCity of London School\n1045.0\n2.10\nNaN\nNaN\nNaN\n\n\n1\n1\n201.0\nCity of London School for Girls\n739.0\n1.51\nNaN\nNaN\nNaN\n\n\n2\n1\n201.0\nDavid Game College\n365.0\n0.56\nNaN\nNaN\nNaN\n\n\n3\n4\n201.0\nNaN\n0.0\nNaN\nNaN\nNaN\nNaN\n\n\n4\n1\n202.0\nAcland Burghley School\n1163.0\n4.62\n1.91\n3.81\n6.87\n\n\n\n\n\n\n\nYou might be wondering why I’ve chosen the columns info_cols and ebaccs_cols.\nLooking at the metadata (which you can see in ‘L2_data/ks4_meta.xlsx’) we can see the full meaning of each column header:\n\n‘RECTYPE’ = Record type (1=mainstream school; 2=special school; 4=local authority; 5=National (all schools); 7=National (maintained schools))\n‘LEA’ = Local authority\n‘SCHNAME’ = School name\n‘TOTPUPS’ = Number of pupils on roll (all ages)\n‘EBACCAPS’ = Average EBacc APS score per pupil\n‘EBACCAPS_LO’ = Average EBacc APS score per pupil with low prior attainment\n‘EBACCAPS_MID’ = Average EBacc APS score per pupil with middle prior attainment\n‘EBACCAPS_HI’ = Average EBacc APS score per pupil with high prior attainment\n\nThe EBacc is a measure of students school grades calculated as an avergae score across a set number of subjects. It is used as a performance indicator of English schools. You can read more about it here."
   },
   {
-    "objectID": "sessions/week2_practical.html#to-add-and-run-python-code",
-    "href": "sessions/week2_practical.html#to-add-and-run-python-code",
+    "objectID": "sessions/week2_practical.html#describing-the-dataframe",
+    "href": "sessions/week2_practical.html#describing-the-dataframe",
     "title": "Practical 2: Recognising and plotting probability distributions",
-    "section": "To add and run Python code",
-    "text": "To add and run Python code\n\nimport pandas as pd\n\n# Read CSV file, skipping first 5 rows, using row 6 as header, and handling comma as thousands separator\ndf_pop = pd.read_csv(\n    'L1_data/UK_census_population.csv',\n    skiprows=5,        # Skip first 5 rows. Wnhy?\n    thousands=',',     # Interpret commas as thousands separators\n    header=0           # After skipping, the first row becomes the header\n)\n\nprint(df_pop.head())\n\n   Area code          Area name Area type  Population 2011  Population 2021  \\\n0  K04000001  England and Wales  National       56075912.0       59597542.0   \n1  E92000001            England   Country       53012456.0       56490048.0   \n2  W92000004              Wales   Country        3063456.0        3107494.0   \n3  E12000001         North East    Region        2596886.0        2647013.0   \n4  E12000002         North West    Region        7052177.0        7417397.0   \n\n   Percentage change  \n0                6.3  \n1                6.6  \n2                1.4  \n3                1.9  \n4                5.2"
+    "section": "Describing the dataframe",
+    "text": "Describing the dataframe\n\nCheck how much data is missing\n\n# print how much data is missing for each column\ndf_ks4.isna().mean() * 100 \n\nRECTYPE          0.000000\nLEA              0.034406\nSCHNAME          2.683640\nTOTPUPS          1.221400\nEBACCAPS        17.684500\nEBACCAPS_LO     38.775159\nEBACCAPS_MID    41.149148\nEBACCAPS_HI     42.490969\ndtype: float64\n\n\nIt seems suspiscious that the school names are missing for some of the entries - let’s check these.\n\n# return rows where SCHNAME is missing\ndf_ks4[df_ks4['SCHNAME'].isna()]\n\n\n\n\n\n\n\n\nRECTYPE\nLEA\nSCHNAME\nTOTPUPS\nEBACCAPS\nEBACCAPS_LO\nEBACCAPS_MID\nEBACCAPS_HI\n\n\n\n\n3\n4\n201.0\nNaN\n0.0\nNaN\nNaN\nNaN\nNaN\n\n\n24\n4\n202.0\nNaN\n10865.0\n4.36\n2.03\n4.19\n6.33\n\n\n55\n4\n203.0\nNaN\n18998.0\n4.13\n2.14\n4.21\n5.77\n\n\n88\n4\n204.0\nNaN\n15214.0\n4.72\n2.32\n4.64\n6.72\n\n\n112\n4\n205.0\nNaN\n9905.0\n5.12\n2.26\n4.93\n6.90\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n5748\n4\n941.0\nNaN\n31801.0\n3.96\n2.16\n4.04\n6.08\n\n\n5776\n4\n942.0\nNaN\n17442.0\n3.81\n2.08\n3.85\n5.54\n\n\n5810\n4\n943.0\nNaN\n14503.0\n3.97\n2.29\n3.81\n5.80\n\n\n5811\n5\nNaN\nNaN\n4129401.0\n3.88\nNaN\nNaN\nNaN\n\n\n5812\n7\nNaN\nNaN\n3688033.0\n4.05\n2.07\n4.05\n6.09\n\n\n\n\n156 rows × 8 columns\n\n\n\nSo, these are all record type 4, 5, or 7 - i.e. they’re not individual schools! Let’s limit the selection to only mainstream and special schools.\n\n# only keep rows where RECTYPE is 1 or 2 \ndf_ks4 = df_ks4[df_ks4['RECTYPE'].isin([1, 2])].copy()\n\nNow we can check the data dimensions.\n\nrows, cols = df_ks4.shape\nprint(f\"Rows: {rows}, Columns: {cols}\")\n\nRows: 5657, Columns: 8\n\n\n\n\nSummary statistics\nWe can use the describe function in pandas to easily get the summary statistics for a dataframe.\n\nnumerical_cols = ['TOTPUPS', 'EBACCAPS', 'EBACCAPS_LO', 'EBACCAPS_MID', 'EBACCAPS_HI']\n\ndf_ks4[numerical_cols].describe()\n\n\n\n\n\n\n\n\nTOTPUPS\nEBACCAPS\nEBACCAPS_LO\nEBACCAPS_MID\nEBACCAPS_HI\n\n\n\n\ncount\n5586.000000\n4631.000000\n3406.000000\n3268.000000\n3190.000000\n\n\nmean\n735.296097\n3.428538\n2.090628\n4.033562\n5.782893\n\n\nstd\n552.209689\n1.679245\n0.769925\n0.818922\n0.856998\n\n\nmin\n0.000000\n0.000000\n0.000000\n0.100000\n0.590000\n\n\n25%\n165.000000\n2.820000\n1.830000\n3.560000\n5.250000\n\n\n50%\n761.000000\n3.700000\n2.200000\n3.980000\n5.820000\n\n\n75%\n1149.000000\n4.440000\n2.520000\n4.470000\n6.350000\n\n\nmax\n3440.000000\n8.700000\n5.320000\n7.170000\n8.730000"
   },
   {
-    "objectID": "sessions/week2_practical.html#to-add-a-photo---replace-the-path.-using-relative-path-is-also-okay.",
-    "href": "sessions/week2_practical.html#to-add-a-photo---replace-the-path.-using-relative-path-is-also-okay.",
+    "objectID": "sessions/week2_practical.html#histograms",
+    "href": "sessions/week2_practical.html#histograms",
     "title": "Practical 2: Recognising and plotting probability distributions",
-    "section": "To add a photo - replace the path. Using relative path is also okay.",
-    "text": "To add a photo - replace the path. Using relative path is also okay."
-  },
-  {
-    "objectID": "sessions/week2_practical.html#to-add-some-questions",
-    "href": "sessions/week2_practical.html#to-add-some-questions",
-    "title": "Practical 2: Recognising and plotting probability distributions",
-    "section": "To add some “questions”",
-    "text": "To add some “questions”\nThe qmd file will be rendered as two files in sessions folder, including a html and ipynb format. The html file will contain both question and answer, while the ipynb file will contain only the question.\nFor the effect, please check HTML and ipynb.\n\nQuestionAnswerAnswer\n\n\nif ??\n    ??\nelse:\n    ??\n\n\n\n\n\nif 'Moscow' in ['Moscow', 'Beijing']:\n    print(\"Moscow is in the cities list.\")\nelse:\n    print(\"Moscow is not in the cities list.\")\nMoscow is in the cities list."
+    "section": "Histograms",
+    "text": "Histograms\nLet’s try plotting the Average EBacc APS score per pupil.\n\nn_bins = 10\nfig, ax = plt.subplots(figsize=(12, 8))\n\nax.hist(df_ks4['EBACCAPS'].dropna(), bins=n_bins, color='#abc766', edgecolor='black')\nax.set_title('EBacc distribution')\nax.set_xlabel('EBacc score')\nax.set_ylabel('Number of schools')  \nax.set_xlim(0,9) # the EBacc has a maximum score of 9\n\nplt.show()\n\n\n\n\n\n\n\n\nWhat do you observe from this boxplot? Because the bins are quite large it’s difficult to get a sense of the distribution - try changing this to get a better idea of the data spread.\n\nQuestionAnswer\n\n\nn_bins = ??\nfig, ax = plt.subplots(figsize=(12, 8))\n\nax.hist(df_ks4['EBACCAPS'].dropna(), bins=n_bins, color='#abc766', edgecolor='black')\nax.set_title('EBacc distribution')\nax.set_xlabel('EBacc score')\nax.set_ylabel('Number of schools')  \nax.set_xlim(0,9) # the EBacc has a maximum score of 9\n\nplt.show()\n\n\nn_bins = 30\nfig, ax = plt.subplots(figsize=(12, 8))\n\nax.hist(df_ks4['EBACCAPS'].dropna(), bins=n_bins, color='#abc766', edgecolor='black')\nax.set_title('EBacc distribution')\nax.set_xlabel('EBacc score')\nax.set_ylabel('Number of schools')  \nax.set_xlim(0,9) # the EBacc has a maximum score of 9\n\nplt.show()\n\n\n\n\n\nIs it normally distributed?\nLooking at the histogram does the data look normally distributed?\nRemember the key features of the normal distribution:\n\nData is continuous\n\nit is something you measure not something you count\n\nData is equally likely to be larger or smaller than average\n\nsymmetric\n\nCharacteristic size, all data points are close to the mean\n\nsingle peak\n\nThere is less data further away from the mean\n\nsmooth tails on both sides\n\n\nOne way to consider whether it is normally distributed is to overlay the normal distribution on top.\nWe can use the package scipy.stats which has functions for generating probability density functions for common distributions. You can see which common distributions here.\n\nimport scipy.stats as sps\n\n# first let's get the mean and stand deviation \nmu = df_ks4['EBACCAPS'].dropna().mean()\nstd = df_ks4['EBACCAPS'].dropna().std()\n\n## Create the plot \n\n# plot the histogram\nplt.figure(figsize=(12, 8))\nplt.hist(df_ks4['EBACCAPS'], bins=30, density=True, color='#abc766', edgecolor='black')\n\n# plot the Probability Density Function (PDF)\nxmin = 0 \nxmax = 9\nx = np.linspace(xmin, xmax, 100)\np = sps.norm.pdf(x, mu, std)\nplt.plot(x, p, 'k', linewidth=2, color=\"#e16fca\")\n\nplt.title(f\"Fit results: $\\mu$ = {mu:.2f},  $\\sigma$ = {std:.2f}\")\nplt.xlim(0, 9)\nplt.xlabel(\"EBacc score\")\nplt.ylabel(\"Density\")\n\nplt.show()\n\n/tmp/ipykernel_12395/2445938851.py:18: UserWarning: color is redundantly defined by the 'color' keyword argument and the fmt string \"k\" (-&gt; color=(0.0, 0.0, 0.0, 1)). The keyword argument will take precedence.\n  plt.plot(x, p, 'k', linewidth=2, color=\"#e16fca\")\n\n\n\n\n\n\n\n\n\nNote that this time we plot the histogram with density=True - this scales the histogram data."
   },
   {
     "objectID": "sessions/week2_practical.html#youre-done",
     "href": "sessions/week2_practical.html#youre-done",
     "title": "Practical 2: Recognising and plotting probability distributions",
     "section": "You’re Done!",
-    "text": "You’re Done!\nCongratulations on completing the first QM practical session! If you are still working on it, take you time.\nDon’t worry about understanding every detail of the Python code — what matters most is knowing which functions to use for a specific task, like checking minimum and maximum values or generating boxplots, and knowing how to debug when it goes wrong. Remember, practice makes perfect."
+    "text": "You’re Done!\nCongratulations on completing the first QM practical session! If you are still working on it, take your time.\nDon’t worry about understanding every detail of the Python code — what matters most is knowing which functions to use for a specific task, like checking minimum and maximum values or generating boxplots, and knowing how to debug when it goes wrong. Remember, practice makes perfect."
   },
   {
     "objectID": "sessions/week3_lecture.html#overview-of-lecture-2",

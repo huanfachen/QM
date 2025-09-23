@@ -224,7 +224,30 @@
 </section>
 <section id="overview-of-lecture-1" class="slide level2">
 <h2>Overview of lecture 1</h2>
-<p>Need to fill this in.</p>
+<ul>
+<li>Different data types</li>
+<li>Key data metrics
+<ul>
+<li>the middle and the spread</li>
+</ul></li>
+<li>Visualising the data</li>
+<li>Data outliers</li>
+</ul>
+<aside class="notes">
+<p>4 data types: nominal, ordinal, interval, ratio Numerical vs categorical</p>
+<p>Key data metrics - the middle: mean, median, mode and the spread: variance and standard deviation</p>
+<p>different types of data outliers: caused by measurement error, or irregular pattern or influential outliers</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="this-week" class="title-slide slide level1 center">
@@ -592,14 +615,14 @@
 <p>Let’s look at a dataset of students height.</p>
 <p><br></p>
 <p>Easy to print the summary statistics in Python, using <code>pandas</code>:</p>
-<div id="4de84430" class="cell" data-execution_count="1">
+<div id="0907acfa" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb2-2"><a></a></span>
 <span id="cb2-3"><a></a>height_df <span class="op">=</span> pd.read_csv(<span class="st">"L2_data/heights.csv"</span>)</span>
 <span id="cb2-4"><a></a>height_df.describe().<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column">
-<div id="e2a9d119" class="cell" data-execution_count="2">
+<div id="b1484709" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <style scoped="">
@@ -667,7 +690,7 @@
 <section id="example-2" class="slide level2">
 <h2>Example 2</h2>
 <p>Sometimes we need more information.</p>
-<div id="365809f1" class="cell" data-execution_count="3">
+<div id="d380b3d5" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb3-2"><a></a></span>
 <span id="cb3-3"><a></a><span class="co"># read data</span></span>
