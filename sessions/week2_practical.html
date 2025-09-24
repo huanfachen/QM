@@ -303,7 +303,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We are going to look at schools perfomance data in England.</p>
 <p>The data is sourced from <a href=""></a> and is downloadable <a href="">here</a>.</p>
 <p>We have saved a copy of this dataset to the Github repo, in case that the dataset is removed from the website.</p>
-<div id="10938876" class="cell" data-execution_count="1">
+<div id="00c6309b" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
@@ -324,7 +324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>df_ks4.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_12481/1207205982.py:7: DtypeWarning: Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,147,148,149,150,151,152,177,178,179,180,181,182,183,186,187,188,189,190,191,192,194,195,196,198,199,200,202,203,204,206,207,208,210,211,212,214,215,216,218,219,220,222,223,224,230,233,234,235,236,237,238,239,242,243,244,245,246,247,248,251,252,253,254,255,256,257,266,267,268,269,270,271,272,281,282,283,284,285,286,287,296,297,298,299,300,301,302,311,312,313,314,315,316,317,335,336,337,340,341,342,345,346,347,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403,404,405,406,407,408,409,410) have mixed types. Specify dtype option on import or set low_memory=False.
+<pre><code>/tmp/ipykernel_12485/1207205982.py:7: DtypeWarning: Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,147,148,149,150,151,152,177,178,179,180,181,182,183,186,187,188,189,190,191,192,194,195,196,198,199,200,202,203,204,206,207,208,210,211,212,214,215,216,218,219,220,222,223,224,230,233,234,235,236,237,238,239,242,243,244,245,246,247,248,251,252,253,254,255,256,257,266,267,268,269,270,271,272,281,282,283,284,285,286,287,296,297,298,299,300,301,302,311,312,313,314,315,316,317,335,336,337,340,341,342,345,346,347,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403,404,405,406,407,408,409,410) have mixed types. Specify dtype option on import or set low_memory=False.
   df_ks4 = pd.read_csv(</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="1">
@@ -425,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="describing-the-dataframe">Describing the dataframe</h2>
 <section id="check-how-much-data-is-missing" class="level3">
 <h3 class="anchored" data-anchor-id="check-how-much-data-is-missing">Check how much data is missing</h3>
-<div id="95f88501" class="cell" data-execution_count="2">
+<div id="3a1c56ff" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;print how much data is missing for each column</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_ks4.isna().mean() <span class="op">*</span> <span class="dv">100</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -441,7 +441,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>It seems suspiscious that the school names are missing for some of the entries - let’s check these.</p>
-<div id="cbbc561d" class="cell" data-execution_count="3">
+<div id="8a1b09e0" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># return rows where SCHNAME is missing</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_ks4[df_ks4[<span class="st">'SCHNAME'</span>].isna()]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -592,12 +592,12 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>So, these are all record type 4, 5, or 7 - i.e.&nbsp;they’re not individual schools! Let’s limit the selection to only mainstream and special schools.</p>
-<div id="21f4b843" class="cell" data-execution_count="4">
+<div id="70069929" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># only keep rows where RECTYPE is 1 or 2 </span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_ks4 <span class="op">=</span> df_ks4[df_ks4[<span class="st">'RECTYPE'</span>].isin([<span class="dv">1</span>, <span class="dv">2</span>])].copy()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now we can check the data dimensions.</p>
-<div id="a5edea91" class="cell" data-execution_count="5">
+<div id="c6d66b15" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rows, cols <span class="op">=</span> df_ks4.shape</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span>rows<span class="sc">}</span><span class="ss">, Columns: </span><span class="sc">{</span>cols<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -608,7 +608,7 @@ dtype: float64</code></pre>
 <section id="summary-statistics" class="level3">
 <h3 class="anchored" data-anchor-id="summary-statistics">Summary statistics</h3>
 <p>We can use the <code>describe</code> function in pandas to easily get the summary statistics for a dataframe.</p>
-<div id="03d945b4" class="cell" data-execution_count="6">
+<div id="dc05e599" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>numerical_cols <span class="op">=</span> [<span class="st">'TOTPUPS'</span>, <span class="st">'EBACCAPS'</span>, <span class="st">'EBACCAPS_LO'</span>, <span class="st">'EBACCAPS_MID'</span>, <span class="st">'EBACCAPS_HI'</span>]</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df_ks4[numerical_cols].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -703,7 +703,7 @@ dtype: float64</code></pre>
 <section id="histograms" class="level2">
 <h2 class="anchored" data-anchor-id="histograms">Histograms</h2>
 <p>Let’s try plotting the Average EBacc APS score per pupil.</p>
-<div id="dfedce7a" class="cell" data-execution_count="7">
+<div id="75c65be5" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>n_bins <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -777,7 +777,7 @@ dtype: float64</code></pre>
 </ul>
 <p>One way to consider whether it is normally distributed is to overlay the normal distribution on top.</p>
 <p>We can use the package <code>scipy.stats</code> which has functions for generating probability density functions for common distributions. You can see which common distributions <a href="https://docs.scipy.org/doc/scipy/reference/stats.html">here</a>.</p>
-<div id="cf1a1277" class="cell" data-execution_count="9">
+<div id="b63a81f7" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> sps</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># first let's get the mean and stand deviation </span></span>
@@ -804,7 +804,7 @@ dtype: float64</code></pre>
 <span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_12481/2445938851.py:18: UserWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "k" (-&gt; color=(0.0, 0.0, 0.0, 1)). The keyword argument will take precedence.
+<pre><code>/tmp/ipykernel_12485/2445938851.py:18: UserWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "k" (-&gt; color=(0.0, 0.0, 0.0, 1)). The keyword argument will take precedence.
   plt.plot(x, p, 'k', linewidth=2, color="#e16fca")</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -820,7 +820,7 @@ dtype: float64</code></pre>
 </section>
 <section id="youre-done" class="level2">
 <h2 class="anchored" data-anchor-id="youre-done">You’re Done!</h2>
-<p>Congratulations on completing the first QM practical session! If you are still working on it, take your time.</p>
+<p>Congratulations on completing the second QM practical session! If you are still working on it, take your time.</p>
 <p>Don’t worry about understanding every detail of the Python code — what matters most is knowing which functions to use for a specific task, like checking minimum and maximum values or generating boxplots, and knowing how to debug when it goes wrong. Remember, practice makes perfect.</p>
 
 
