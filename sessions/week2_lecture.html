@@ -217,13 +217,9 @@
 
 
 </section>
-<section>
-<section id="last-week" class="title-slide slide level1 center">
-<h1>Last week</h1>
-
-</section>
-<section id="overview-of-lecture-1" class="slide level2">
-<h2>Overview of lecture 1</h2>
+<section id="last-week" class="slide level2">
+<h2>Last week</h2>
+<p><strong>Overview of lecture 1</strong></p>
 <ul>
 <li>Different data types</li>
 <li>Key data metrics
@@ -248,25 +244,41 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section></section>
+</section>
 <section>
 <section id="this-week" class="title-slide slide level1 center">
 <h1>This week</h1>
 
 </section>
-<section id="first-things-first" class="slide level2">
-<h2>First things first</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
+<section id="the-scientific-method" class="slide level2">
+<h2>The scientific method</h2>
 <div style="text-align:center;">
-<p><img src="L3_images/scientific_method.png" alt="The scientific method" style="max-width:100%"></p>
+<p><img src="L3_images/scientific_method.png" alt="The scientific method" style="max-width:80%"></p>
 </div>
-</div><div class="column" style="width:40%;">
-<p><br></p>
-<p>Exploratory data analysis is the first step of any data science project.</p>
-</div></div>
 <aside class="notes">
-<p>link to scientific process and how we test and then iterate over ideas and concepts. Something we will talk about more next lecture.</p>
+<p>A specific research model - quite formal - been around from the 19th century. Typifies how scientific research is done in the classical sciences like biology. Link to scientific process and how we test and then iterate over ideas and concepts. Something we will talk about more next lecture.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exploratory-data-analysis" class="slide level2">
+<h2>Exploratory data analysis</h2>
+<p>When we’re working with large datasets, exploratory data analysis is the first step in the scientific method.</p>
+<ul>
+<li class="fragment">How to understand the dataset</li>
+<li class="fragment">What do the variables represent</li>
+<li class="fragment">What statistical techniques should be used</li>
+</ul>
+<aside class="notes">
+<p>More modern approach approach devloped by matehmatician John Turkey in the 1970s. ‘Father of data science’. rather than being driven by more classical statistical analyses (something we’ll look at next week) - the idea was to have a more flexible approach.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -282,10 +294,9 @@
 <section id="introducing-statistical-concepts" class="slide level2">
 <h2>Introducing statistical concepts</h2>
 <ul>
-<li class="fragment">This lecture is focussed on statistical concepts</li>
 <li class="fragment">Data science is about using ideas from statistics to describe large datasets</li>
-<li class="fragment">Here looking to describe numerical data</li>
-<li class="fragment">Focus on probability distributions</li>
+<li class="fragment">Focus on numerical data</li>
+<li class="fragment">Using probability distributions to characterise them</li>
 </ul>
 <aside class="notes">
 <p>In large datasets its not practical to describe every data point - instead interested in the overall pattern. Moreover maybe that general pattern is more interetsing</p>
@@ -310,17 +321,13 @@
 <li class="fragment">Evaluate whether a dataset is representative.</li>
 </ol>
 </section></section>
-<section>
 <section id="motivation" class="title-slide slide level1 center">
 <h1>Motivation</h1>
-
-</section>
-<section id="what-is-the-likelihood-of-events-occuring" class="slide level2">
-<h2>What is the likelihood of events occuring?</h2>
-<p><strong>Question</strong></p>
+<p><strong>How do we understand how likely events are to occur?</strong></p>
+<p><em>Question</em></p>
 <p>What is the probability of someone at UCL being over 190cm?</p>
 <div class="fragment">
-<p><strong>How can we try to answer this?</strong></p>
+<p><em>How can we try to answer this?</em></p>
 </div>
 <div class="fragment">
 <div class="fragment strike">
@@ -328,7 +335,7 @@
 </div>
 </div>
 <div class="fragment">
-<p>Better to try and understand the distribution of heights.</p>
+<p>Better idea is to try and understand the distribution of heights.</p>
 <aside class="notes">
 <p>This week thinking about the distribution of data. How do we understand the spread of height data, how to we calculate important features of this data, how can we describe this data using mathematical equations?</p>
 <p>Next week, thinking about formulating and answering the research question.</p>
@@ -344,11 +351,12 @@
           display:block!important;
       }</style></aside>
 </div>
-</section></section>
-<section>
-<section id="random-sampling" class="title-slide slide level1 center">
-<h1>Random Sampling</h1>
+</section>
 
+<section>
+<section id="representative-data" class="title-slide slide level1 center">
+<h1>Representative data</h1>
+<p><strong>Before we try to describe the data, it’s important to know where the data came from.</strong></p>
 </section>
 <section id="the-dream-vs-reality" class="slide level2">
 <h2>The dream vs reality</h2>
@@ -375,18 +383,12 @@
 </section>
 <section id="approximating" class="slide level2">
 <h2>Approximating</h2>
-<p>Hence, we sample a subset of the data.</p>
+<p>Hence, we sample a subset of the data. We need to choose our sample carefully - we want what happens in the sample to approximate what happens in the whole population.</p>
 <div class="fragment">
-<p>We need to choose our sample carefully. We want what happens in the sample to approximate what happens in the whole population.</p>
-</div>
-<div class="fragment">
-<p><strong>In practise</strong></p>
-<ul>
-<li class="fragment">different sampling approaches
+<p><strong>In practise</strong> we might try different sampling approaches such as:</p>
 <ul>
 <li class="fragment">random sampling</li>
 <li class="fragment">systematic sampling</li>
-</ul></li>
 </ul>
 <aside class="notes">
 <p>I might assign everyone a number and then choose 100 random numbers and measure them. Or I might choose a specific subset, for exampel just everyone in this lecture theatre.</p>
@@ -402,11 +404,6 @@
           display:block!important;
       }</style></aside>
 </div>
-</section></section>
-<section>
-<section id="is-the-data-representative" class="title-slide slide level1 center">
-<h1>Is the data representative?</h1>
-
 </section>
 <section id="bias" class="slide level2">
 <h2>Bias</h2>
@@ -433,8 +430,7 @@
 <p><span style="color:#49a0c4"><em>Systematic patterns in how we think about, and perceive, the world.</em></span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>We all have cognitive biases.</p>
-<p>These can impact our research:</p>
+<p>Our cognitive biases can impact:</p>
 <ul>
 <li class="fragment">data collection</li>
 <li class="fragment">data selection</li>
@@ -442,13 +438,13 @@
 <li class="fragment">modelling choices</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<p><br> <br></p>
+<p><br></p>
 <div style="text-align:center;">
 <p><img src="L2_images/human_brain_2.png" alt="Human Brain" style="max-width:60%"></p>
 </div>
 </div></div>
 <aside class="notes">
-<p>Example of cognitive bias - confirmation bias, whereby I favour information that agrees with my existing beliefs. I’m writing a report on the spatial impact of a new railway line. Suppose I hate the idea of a new railway line, and then I see some data, fact a: 60% of residents living near the railline don’t want it due to noise. fact b: 75% of residents in the UK do want the railway line. i might only include fact a in my report as it confirms my existing beliefs.</p>
+<p>We all have our own cognitive biases - shaped around our values and our backgrounds. Example of cognitive bias - confirmation bias, whereby I favour information that agrees with my existing beliefs. I’m writing a report on the spatial impact of a new railway line. Suppose I hate the idea of a new railway line, and then I see some data, fact a: 60% of residents living near the railline don’t want it due to noise. fact b: 75% of residents in the UK do want the railway line. i might only include fact a in my report as it confirms my existing beliefs.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -481,12 +477,13 @@
       }</style></aside>
 </div>
 </section>
-<section id="types-of-bias" class="slide level2">
-<h2>Types of bias</h2>
+<section id="dataset-bias" class="slide level2">
+<h2>Dataset bias</h2>
 <ul>
-<li><p>Research bias Cognitive bias is a specific type of research bias.</p></li>
-<li><p>Dataset bias Particularly important when thinking about analysing large datasets, as there could be non-obvious patterns reflecting biases.</p></li>
+<li>Particularly important when thinking about analysing large datasets as there could be non-obvious patterns reflecting biases.</li>
+<li>More important in the era of large AI models</li>
 </ul>
+<div class="fragment">
 <p>Types of dataset bias include: - Historical bias - Selection bias</p>
 <aside class="notes">
 <p>Already talked about the idea of cognitive bias. There are lots and lots of different types of biases - going to talk a little about different ways they can bias the dataset.</p>
@@ -502,6 +499,7 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</div>
 </section>
 <section id="historical-bias" class="slide level2">
 <h2>Historical bias</h2>
@@ -513,15 +511,17 @@
 <li>Automated tools to detect ‘criminals’.</li>
 <li>Trained on datasets which reflect current racist practises.</li>
 </ul></li>
+</ul>
+<aside class="notes">
+<p>Police profiling models - meant to make easy to spot criminals - but use exisitng crime data - which reflect racist prejudices in society - and the model learns to pick out people of certain ethnic backgrounds.</p>
+<p>Tools also used to help the sentnecing of criminals in courts of law - observe the hungry judges effect, where they sentnece differently based on how hungry they are - tend to be harsher just before lunch and more lenient after lunch.</p>
+<ul>
 <li><a href="https://en.wikipedia.org/wiki/Hungry_judge_effect">Hungry judges</a>
 <ul>
 <li>Tools to help sentencing of ‘criminals’.</li>
 <li>Patterns in the dataset — judges are less lenient before lunch.</li>
 </ul></li>
 </ul>
-<aside class="notes">
-<p>Police profiling models - meant to make easy to spot criminals - but use exisitng crime data - which reflect racist prejudices in society - and the model learns to pick out people of certain ethnic backgrounds.</p>
-<p>Tools also used to help the sentnecing of criminals in courts of law - observe the hungry judges effect, where they sentnece differently based on how hungry they are - tend to be harsher just before lunch and more lenient after lunch.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -592,8 +592,8 @@
 </div>
 </section></section>
 <section>
-<section id="descriptive-statistics" class="title-slide slide level1 center">
-<h1>Descriptive Statistics</h1>
+<section id="exploring-the-data---descriptive-statistics" class="title-slide slide level1 center">
+<h1>Exploring the data - descriptive statistics</h1>
 
 </section>
 <section id="what-to-declare" class="slide level2">
@@ -615,14 +615,14 @@
 <p>Let’s look at a dataset of students height.</p>
 <p><br></p>
 <p>Easy to print the summary statistics in Python, using <code>pandas</code>:</p>
-<div id="d699d79e" class="cell" data-execution_count="1">
+<div id="1e3b8933" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb2-2"><a></a></span>
 <span id="cb2-3"><a></a>height_df <span class="op">=</span> pd.read_csv(<span class="st">"L2_data/heights.csv"</span>)</span>
 <span id="cb2-4"><a></a>height_df.describe().<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column">
-<div id="d5ebc6a2" class="cell" data-execution_count="2">
+<div id="e7ce277a" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <style scoped="">
@@ -690,7 +690,7 @@
 <section id="example-2" class="slide level2">
 <h2>Example 2</h2>
 <p>Sometimes we need more information.</p>
-<div id="4ba6a2b6" class="cell" data-execution_count="3">
+<div id="912162d4" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb3-2"><a></a></span>
 <span id="cb3-3"><a></a><span class="co"># read data</span></span>
@@ -885,8 +885,8 @@
 <h1>Normal Distribution</h1>
 <p>The most fundamental distribution</p>
 </section>
-<section id="everywhere-you-look" class="slide level2">
-<h2>Everywhere you look</h2>
+<section class="slide level2">
+
 <div style="text-align:center;">
 <p><img src="L2_images/normal_distribution.png" alt="Normal distribution" style="max-width:90%"></p>
 </div>
@@ -910,22 +910,36 @@
           display:block!important;
       }</style></aside>
 </section>
-<section id="youve-seen-it-all-before" class="slide level2">
-<h2>You’ve seen it all before</h2>
+<section id="key-features" class="slide level2">
+<h2>Key features</h2>
+<p><strong>You’ve seen it all before</strong></p>
 <ul>
-<li class="fragment">Symmetrical</li>
-<li class="fragment">Single peak</li>
-<li class="fragment">Smooth tails on both sides</li>
+<li class="fragment">Data is continuous
+<ul>
+<li class="fragment">it is something you measure not something you count</li>
+</ul></li>
+<li class="fragment">Data is equally likely to be larger or smaller than average
+<ul>
+<li class="fragment">symmetric</li>
+</ul></li>
+<li class="fragment">Characteristic size, all data points are close to the mean
+<ul>
+<li class="fragment">single peak</li>
+</ul></li>
+<li class="fragment">There is less data further away from the mean
+<ul>
+<li class="fragment">smooth tails on both sides</li>
+</ul></li>
 </ul>
 </section>
-<section id="naturally-occurring" class="slide level2">
-<h2>Naturally occurring</h2>
+<section class="slide level2">
+
 <div style="text-align:center;">
 <p><img src="L2_images/height_histogram.png" alt="Normal distribution" style="max-width:90%"></p>
 </div>
 </section>
-<section id="naturally-occurring-1" class="slide level2">
-<h2>Naturally occurring</h2>
+<section class="slide level2">
+
 <div style="text-align:center;">
 <p><img src="L2_images/height_histogram_pdf.png" alt="Normal distribution" style="max-width:90%"></p>
 </div>
@@ -949,35 +963,28 @@
 \end{align}
 ``` -->
 </section>
-<section id="key-features" class="slide level2">
-<h2>Key features</h2>
-<ul>
-<li class="fragment">Data is continuous
-<ul>
-<li class="fragment">it is something you measure not something you count</li>
-</ul></li>
-<li class="fragment">Data is equally likely to be larger or smaller than average
-<ul>
-<li class="fragment">symmetric</li>
-</ul></li>
-<li class="fragment">Characteristic size, all data points are close to the mean
-<ul>
-<li class="fragment">single peak</li>
-</ul></li>
-<li class="fragment">There is less data further away from the mean
-<ul>
-<li class="fragment">smooth tails on both sides</li>
-</ul></li>
-</ul>
-</section>
 <section id="sampling-distributions" class="slide level2">
 <h2>Sampling distributions</h2>
 <p><span style="color:#49a0c4">The distribution of the random variable when derived from a random sample of size <span class="math inline">\(n\)</span></span></p>
 <div class="fragment">
-<p>In the case of the normal distribution - standard deviation becomes:</p>
+<p>In the case of the normal distribution the standard deviation becomes:</p>
 <span class="math display">\[\begin{align}
 \frac{\sigma}{\sqrt{n}}
 \end{align}\]</span>
+<aside class="notes">
+<p>Need to account for the fact that we don’t have all the data.</p>
+<p>As the sample size increases the sampling distribution becomes more and more centralised.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="calculating-probabilities" class="slide level2">
