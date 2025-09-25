@@ -78,9 +78,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c65962dbb5d575cbb06919ca07087d11.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-62c9cf19534799b1b7666b4a47d0c403.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-62c9cf19534799b1b7666b4a47d0c403.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-62c9cf19534799b1b7666b4a47d0c403.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-5457fb42737ce7af87b82faab80c0026.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-5457fb42737ce7af87b82faab80c0026.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-5457fb42737ce7af87b82faab80c0026.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -115,9 +118,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <meta property="og:title" content="Practical 3: Establishing and testing the hypothesis – Quantitative Methods">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://huanfachen.github.io/QM/sessions/img/logo/full_sm.png">
+<meta property="og:image" content="https://huanfachen.github.io/QM/sessions/week3_practical_files/figure-html/cell-12-output-1.png">
 <meta property="og:site_name" content="Foundations">
 <meta property="og:locale" content="en_GB">
+<meta property="og:image:height" content="898">
+<meta property="og:image:width" content="1194">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -258,6 +263,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#step-5" id="toc-step-5" class="nav-link" data-scroll-target="#step-5">Step 5</a></li>
   </ul></li>
   <li><a href="#a-more-complicated-research-question" id="toc-a-more-complicated-research-question" class="nav-link" data-scroll-target="#a-more-complicated-research-question">A more complicated research question</a></li>
+  <li><a href="#preparing-the-data-1" id="toc-preparing-the-data-1" class="nav-link" data-scroll-target="#preparing-the-data-1">Preparing the data</a>
+  <ul class="collapse">
+  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics">Summary statistics</a></li>
+  <li><a href="#plotting-the-data" id="toc-plotting-the-data" class="nav-link" data-scroll-target="#plotting-the-data">Plotting the data</a></li>
+  <li><a href="#step-1-1" id="toc-step-1-1" class="nav-link" data-scroll-target="#step-1-1">Step 1</a></li>
+  <li><a href="#step-2-1" id="toc-step-2-1" class="nav-link" data-scroll-target="#step-2-1">Step 2</a></li>
+  <li><a href="#step-3-1" id="toc-step-3-1" class="nav-link" data-scroll-target="#step-3-1">Step 3</a></li>
+  <li><a href="#step-4-note-got-to-here" id="toc-step-4-note-got-to-here" class="nav-link" data-scroll-target="#step-4-note-got-to-here">Step 4 NOTE: got to here</a></li>
+  <li><a href="#step-5-1" id="toc-step-5-1" class="nav-link" data-scroll-target="#step-5-1">Step 5</a></li>
+  </ul></li>
+  <li><a href="#extension" id="toc-extension" class="nav-link" data-scroll-target="#extension">Extension</a></li>
   <li><a href="#youre-done" id="toc-youre-done" class="nav-link" data-scroll-target="#youre-done">You’re Done!</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/huanfachen/CASA0007/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="week3_practical.ipynb" download="week3_practical.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
@@ -306,7 +322,7 @@ Note
 <p>We are going to look at schools perfomance data in England once again.</p>
 <p>The data is sourced from <a href=""></a> and is downloadable <a href="">here</a>.</p>
 <p>We have saved a copy of this dataset to the Github repo, in case that the dataset is removed from the website.</p>
-<div id="8de662be" class="cell" data-execution_count="1">
+<div id="36ad16dd" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> sps</span>
@@ -320,18 +336,28 @@ Note
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>info_cols <span class="op">=</span> [<span class="st">'RECTYPE'</span>, <span class="st">'LEA'</span>, <span class="st">'SCHNAME'</span>, <span class="st">'TOTPUPS'</span>, <span class="st">'TOWN'</span>]</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ebaccs_cols <span class="op">=</span> [<span class="st">'EBACCAPS'</span>, <span class="st">'EBACCAPS_LO'</span>, <span class="st">'EBACCAPS_MID'</span>, <span class="st">'EBACCAPS_HI'</span>]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ebaccs_cols <span class="op">=</span> [<span class="st">'EBACCAPS'</span>, <span class="st">'EBACCAPS_GIRLS'</span>, <span class="st">'EBACCAPS_BOYS'</span>]</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>df_ks4 <span class="op">=</span> df_ks4[info_cols <span class="op">+</span> ebaccs_cols]</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df_ks4[info_cols <span class="op">+</span> ebaccs_cols]</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>df_ks4[[<span class="st">'TOTPUPS'</span>]<span class="op">+</span>ebaccs_cols] <span class="op">=</span> df_ks4[[<span class="st">'TOTPUPS'</span>]<span class="op">+</span>ebaccs_cols].<span class="bu">apply</span>(pd.to_numeric, errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'TOTPUPS'</span>]<span class="op">+</span>ebaccs_cols] <span class="op">=</span> df[[<span class="st">'TOTPUPS'</span>]<span class="op">+</span>ebaccs_cols].<span class="bu">apply</span>(pd.to_numeric, errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>df_ks4 <span class="op">=</span> df_ks4[df_ks4[<span class="st">'RECTYPE'</span>].isin([<span class="dv">1</span>, <span class="dv">2</span>])].copy()</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'RECTYPE'</span>].isin([<span class="dv">1</span>, <span class="dv">2</span>])].copy()</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>df_ks4.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_12588/485655404.py:8: DtypeWarning: Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,147,148,149,150,151,152,177,178,179,180,181,182,183,186,187,188,189,190,191,192,194,195,196,198,199,200,202,203,204,206,207,208,210,211,212,214,215,216,218,219,220,222,223,224,230,233,234,235,236,237,238,239,242,243,244,245,246,247,248,251,252,253,254,255,256,257,266,267,268,269,270,271,272,281,282,283,284,285,286,287,296,297,298,299,300,301,302,311,312,313,314,315,316,317,335,336,337,340,341,342,345,346,347,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403,404,405,406,407,408,409,410) have mixed types. Specify dtype option on import or set low_memory=False.
-  df_ks4 = pd.read_csv(</code></pre>
+<pre><code>/tmp/ipykernel_12503/907340926.py:8: DtypeWarning:
+
+Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,147,148,149,150,151,152,177,178,179,180,181,182,183,186,187,188,189,190,191,192,194,195,196,198,199,200,202,203,204,206,207,208,210,211,212,214,215,216,218,219,220,222,223,224,230,233,234,235,236,237,238,239,242,243,244,245,246,247,248,251,252,253,254,255,256,257,266,267,268,269,270,271,272,281,282,283,284,285,286,287,296,297,298,299,300,301,302,311,312,313,314,315,316,317,335,336,337,340,341,342,345,346,347,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403,404,405,406,407,408,409,410) have mixed types. Specify dtype option on import or set low_memory=False.
+
+/tmp/ipykernel_12503/907340926.py:18: SettingWithCopyWarning:
+
+
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div>
@@ -347,9 +373,8 @@ Note
 <th data-quarto-table-cell-role="th">TOTPUPS</th>
 <th data-quarto-table-cell-role="th">TOWN</th>
 <th data-quarto-table-cell-role="th">EBACCAPS</th>
-<th data-quarto-table-cell-role="th">EBACCAPS_LO</th>
-<th data-quarto-table-cell-role="th">EBACCAPS_MID</th>
-<th data-quarto-table-cell-role="th">EBACCAPS_HI</th>
+<th data-quarto-table-cell-role="th">EBACCAPS_GIRLS</th>
+<th data-quarto-table-cell-role="th">EBACCAPS_BOYS</th>
 </tr>
 </thead>
 <tbody>
@@ -362,8 +387,7 @@ Note
 <td>London</td>
 <td>2.10</td>
 <td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>2.10</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
@@ -373,8 +397,7 @@ Note
 <td>739.0</td>
 <td>London</td>
 <td>1.51</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>1.51</td>
 <td>NaN</td>
 </tr>
 <tr class="odd">
@@ -385,9 +408,8 @@ Note
 <td>365.0</td>
 <td>NaN</td>
 <td>0.56</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>0.46</td>
+<td>0.60</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">4</th>
@@ -397,9 +419,8 @@ Note
 <td>1163.0</td>
 <td>London</td>
 <td>4.62</td>
-<td>1.91</td>
-<td>3.81</td>
-<td>6.87</td>
+<td>4.05</td>
+<td>4.82</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">5</th>
@@ -409,9 +430,8 @@ Note
 <td>1047.0</td>
 <td>London</td>
 <td>6.25</td>
+<td>6.25</td>
 <td>NaN</td>
-<td>5.40</td>
-<td>7.21</td>
 </tr>
 </tbody>
 </table>
@@ -427,9 +447,8 @@ Note
 <li>‘TOTPUPS’ = Number of pupils on roll (all ages)</li>
 <li>‘TOWN’ = School town</li>
 <li>‘EBACCAPS’ = Average EBacc APS score per pupil</li>
-<li>‘EBACCAPS_LO’ = Average EBacc APS score per pupil with low prior attainment</li>
-<li>‘EBACCAPS_MID’ = Average EBacc APS score per pupil with middle prior attainment</li>
-<li>‘EBACCAPS_HI’ = Average EBacc APS score per pupil with high prior attainment</li>
+<li>‘EBACCAPS_GIRLS’ = Average EBacc APS score per girl</li>
+<li>‘EBACCAPS_BOYS’ = Average EBacc APS score per boy</li>
 </ul>
 </section>
 <section id="research-question" class="level2">
@@ -442,15 +461,15 @@ Note
 <h2 class="anchored" data-anchor-id="preparing-the-data">Preparing the data</h2>
 <section id="splitting-the-groups" class="level3">
 <h3 class="anchored" data-anchor-id="splitting-the-groups">Splitting the groups</h3>
-<div id="02f41d2b" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_London <span class="op">=</span> df_ks4[df_ks4[<span class="st">'TOWN'</span>] <span class="op">==</span> <span class="st">'London'</span>]</span>
+<div id="7968b16b" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_London <span class="op">=</span> df[df[<span class="st">'TOWN'</span>] <span class="op">==</span> <span class="st">'London'</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_London <span class="op">=</span> df_London[df_London[<span class="st">'EBACCAPS'</span>].notna()]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df_notLondon <span class="op">=</span> df_ks4[df_ks4[<span class="st">'TOWN'</span>] <span class="op">!=</span> <span class="st">'London'</span>]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df_notLondon <span class="op">=</span> df[df[<span class="st">'TOWN'</span>] <span class="op">!=</span> <span class="st">'London'</span>]</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df_notLondon <span class="op">=</span> df_notLondon[df_notLondon[<span class="st">'EBACCAPS'</span>].notna()]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>And lets look at the summary statistics for each group.</p>
-<div id="2e4bcdf9" class="cell" data-execution_count="3">
+<div id="a2d2b42d" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_London[<span class="st">'EBACCAPS'</span>].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>count    385.000000
@@ -464,7 +483,7 @@ max        8.700000
 Name: EBACCAPS, dtype: float64</code></pre>
 </div>
 </div>
-<div id="3442e03a" class="cell" data-execution_count="4">
+<div id="0e8b862d" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_notLondon[<span class="st">'EBACCAPS'</span>].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>count    4246.000000
@@ -518,7 +537,7 @@ The alternative hypothesis is Mean EBacc score in London &gt; Mean EBacc score o
 </section>
 <section id="step-2" class="level3">
 <h3 class="anchored" data-anchor-id="step-2">Step 2</h3>
-<div id="a2dad193" class="cell" data-execution_count="6">
+<div id="b6b93b11" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the level of statistical significance </span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -532,7 +551,7 @@ The alternative hypothesis is Mean EBacc score in London &gt; Mean EBacc score o
 <h3 class="anchored" data-anchor-id="step-4">Step 4</h3>
 <p>We can use a built in function from <code>scipy.stats</code> called <code>ttest_ind</code> to do step 4 for us. You can read more about this function <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html">here</a>.</p>
 <p>First we need to check whether we can assume that the samples are drawn from populations with the same standard deviation or not. (Provided neither standard deviation is double the other, this should be ok).</p>
-<div id="7907f548" class="cell" data-execution_count="7">
+<div id="919c0051" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>London_std <span class="op">=</span> df_London[<span class="st">'EBACCAPS'</span>].mean()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>notLondon_std <span class="op">=</span> df_notLondon[<span class="st">'EBACCAPS'</span>].mean()</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -553,7 +572,7 @@ Can assume equal population standard deviations.</code></pre>
 </div>
 </div>
 <p>There are two outputs from the function <code>scipy.stats.ttest_ind</code>: the <strong>test statistic</strong> and the <strong>p value</strong>.</p>
-<div id="78a0c52d" class="cell" data-execution_count="8">
+<div id="3fbde48e" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>test_stat, p_value <span class="op">=</span> sps.ttest_ind(df_London[<span class="st">'EBACCAPS'</span>], df_notLondon[<span class="st">'EBACCAPS'</span>], equal_var <span class="op">=</span> equal_stds)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"test statistic = "</span>, test_stat)</span>
@@ -595,7 +614,273 @@ Conclude that samples are drawn from populations with different means.</code></p
 </section>
 <section id="a-more-complicated-research-question" class="level2">
 <h2 class="anchored" data-anchor-id="a-more-complicated-research-question">A more complicated research question</h2>
-<p>Now I’d also like to know: Are the distribution of EBacc scores in London drawn from a normal distribution?</p>
+<p>Now I’d like to know, are the EBacc scores for boys and girls in England distributed simiarly?</p>
+<p>In the dataset we have the average EBacc score for each school split by gender. To address whether these two samples come from the same distribution we’re going to use the Kolmogorov-Smirnov two sample test.</p>
+</section>
+<section id="preparing-the-data-1" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-the-data-1">Preparing the data</h2>
+<section id="summary-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="summary-statistics">Summary statistics</h3>
+<p>Let’s start by looking at the summary statistics.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content qna-question">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df[[??]].??</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'EBACCAPS_GIRLS'</span>, <span class="st">'EBACCAPS_BOYS'</span>]].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">EBACCAPS_GIRLS</th>
+<th data-quarto-table-cell-role="th">EBACCAPS_BOYS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>3851.000000</td>
+<td>3801.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>3.820223</td>
+<td>3.492636</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>1.409632</td>
+<td>1.395525</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>3.290000</td>
+<td>2.980000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>3.950000</td>
+<td>3.630000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>4.610000</td>
+<td>4.250000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>8.700000</td>
+<td>8.560000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">EBACCAPS_GIRLS</th>
+<th data-quarto-table-cell-role="th">EBACCAPS_BOYS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>3851.000000</td>
+<td>3801.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>3.820223</td>
+<td>3.492636</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>1.409632</td>
+<td>1.395525</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>3.290000</td>
+<td>2.980000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>3.950000</td>
+<td>3.630000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>4.610000</td>
+<td>4.250000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>8.700000</td>
+<td>8.560000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="plotting-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="plotting-the-data">Plotting the data</h3>
+<p>Let’s also visually inspect the data.</p>
+<div id="cf88490d" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plt.hist(df[<span class="st">'EBACCAPS_GIRLS'</span>], bins<span class="op">=</span><span class="dv">20</span>, color<span class="op">=</span><span class="st">'#abc766'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">'Girls'</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>plt.hist(df[<span class="st">'EBACCAPS_BOYS'</span>], bins<span class="op">=</span><span class="dv">20</span>, color<span class="op">=</span><span class="st">'#4e3c56'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">'Boys'</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>,<span class="dv">9</span>) <span class="co"># the EBacc has a maximum score of 9</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'EBacc Score'</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Number of Schools'</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribution of EBacc Scores'</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week3_practical_files/figure-html/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="week3_practical_files/figure-html/cell-12-output-1.png" width="597" height="449" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From visually looking at the plot we can see that the two distributions look quite similar - but let’s formally test that. As before, we’re going to follow the five steps of hypothesis testing.</p>
+</section>
+<section id="step-1-1" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-1">Step 1</h3>
+<p>What is the null and alternative hypothesis?</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content qna-question">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>H_0 <span class="op">=</span> <span class="st">'??'</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>H_1 <span class="op">=</span> <span class="st">'??'</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'The null hypothesis is </span><span class="sc">{</span>H_0<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'The alternative hypothesis is </span><span class="sc">{</span>H_1<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>H_0 <span class="op">=</span> <span class="st">'Mean EBacc score for Girls is drawn from the same distribution as the mean EBacc score for Boys.'</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>H_1 <span class="op">=</span> <span class="st">'Mean EBacc score for Girls is drawn from a different distirbution to the mean EBacc score for Boys.'</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'The null hypothesis is </span><span class="sc">{</span>H_0<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'The alternative hypothesis is </span><span class="sc">{</span>H_1<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>The null hypothesis is Mean EBacc score for Girls is drawn from the same distribution as the mean EBacc score for Boys.
+The alternative hypothesis is Mean EBacc score for Girls is drawn from a different distirbution to the mean EBacc score for Boys.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-1" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-1">Step 2</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content qna-question">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the level of statistical significance </span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> ??</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the level of statistical significance </span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-1" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-1">Step 3</h3>
+<p>We already have the evidence - it’s our datasets <code>df['EBACCAPS_GIRLS']</code> and <code>df['EBACCAPS_BOYS']</code>.</p>
+</section>
+<section id="step-4-note-got-to-here" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-note-got-to-here">Step 4 NOTE: got to here</h3>
+<p>We can use a built in function from <code>scipy.stats</code> called <code>ks_2samp</code> to do step 4 for us. You can read more about this function <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html">here</a>.</p>
+<p>There are two outputs from the function <code>scipy.stats.ks_2samp</code>: the <strong>test statistic</strong> and the <strong>p value</strong>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content qna-question">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ks_stat, ks_p_value <span class="op">=</span> ?? </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"KS test statistic = "</span>, ks_stat)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"KS p-value ="</span>, ks_p_value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ks_stat, ks_p_value <span class="op">=</span> sps.ks_2samp(df[<span class="st">'EBACCAPS_GIRLS'</span>].notna(), df[<span class="st">'EBACCAPS_BOYS'</span>].notna()) </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"KS test statistic = "</span>, ks_stat)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"KS p-value ="</span>, ks_p_value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>KS test statistic =  0.0088386070355312
+KS p-value = 0.9799658737017607</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="step-5-1" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-1">Step 5</h3>
+<p>For the final step we compare the p-value to the significance value in order to reach a decision.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content qna-question">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ??</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(??)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> ?? </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(??)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ks_p_value <span class="op">&lt;</span> alpha:</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Reject the null hypothesis that the samples are drawn from the same distribution."</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Conclude that samples are drawn from populations with different distributions."</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>: </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Fail to reject the null hypothesis that the samples are drawn from the same distribution."</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Assume that samples are drawn from populations with the same distribution."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Fail to reject the null hypothesis that the samples are drawn from the same distribution.
+Assume that samples are drawn from populations with the same distribution.</code></pre>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="extension" class="level2">
+<h2 class="anchored" data-anchor-id="extension">Extension</h2>
+<p>If you’ve finished working through the examples in the tutorial then have a go at coming up with your own research question and hypothesis.</p>
+<p>A good place to start would be by looking at the data in <code>df_ks4</code> - theres a lot of numerical information here - are there two variables you could compare?</p>
+<div id="40c4a834" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df_ks4.hist(bins<span class="op">=</span><span class="dv">50</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">15</span>))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week3_practical_files/figure-html/cell-17-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="week3_practical_files/figure-html/cell-17-output-1.png" width="2085" height="1430" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="youre-done" class="level2">
 <h2 class="anchored" data-anchor-id="youre-done">You’re Done!</h2>
@@ -1032,6 +1317,38 @@ Conclude that samples are drawn from populations with different means.</code></p
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
