@@ -318,7 +318,7 @@ Note
 <p>We are going to look at schools perfomance data in England once again.</p>
 <p>The data is sourced from <a href=""></a> and is downloadable <a href="">here</a>.</p>
 <p>We have saved a copy of this dataset to the Github repo, in case that the dataset is removed from the website.</p>
-<div id="30a4b38b" class="cell" data-execution_count="1">
+<div id="71e3aad5" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> sps</span>
@@ -342,11 +342,11 @@ Note
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_12539/907340926.py:8: DtypeWarning:
+<pre><code>/tmp/ipykernel_12528/907340926.py:8: DtypeWarning:
 
 Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,147,148,149,150,151,152,177,178,179,180,181,182,183,186,187,188,189,190,191,192,194,195,196,198,199,200,202,203,204,206,207,208,210,211,212,214,215,216,218,219,220,222,223,224,230,233,234,235,236,237,238,239,242,243,244,245,246,247,248,251,252,253,254,255,256,257,266,267,268,269,270,271,272,281,282,283,284,285,286,287,296,297,298,299,300,301,302,311,312,313,314,315,316,317,335,336,337,340,341,342,345,346,347,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403,404,405,406,407,408,409,410) have mixed types. Specify dtype option on import or set low_memory=False.
 
-/tmp/ipykernel_12539/907340926.py:18: SettingWithCopyWarning:
+/tmp/ipykernel_12528/907340926.py:18: SettingWithCopyWarning:
 
 
 A value is trying to be set on a copy of a slice from a DataFrame.
@@ -458,7 +458,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <section id="splitting-the-groups" class="level3">
 <h3 class="anchored" data-anchor-id="splitting-the-groups">Splitting the groups</h3>
 <p>For simplicity let’s create two dataframes for the two different areas.</p>
-<div id="c70a420a" class="cell" data-execution_count="2">
+<div id="1d92b0b8" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_London <span class="op">=</span> df[df[<span class="st">'TOWN'</span>] <span class="op">==</span> <span class="st">'London'</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_London <span class="op">=</span> df_London[df_London[<span class="st">'EBACCAPS'</span>].notna()]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -466,7 +466,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df_notLondon <span class="op">=</span> df_notLondon[df_notLondon[<span class="st">'EBACCAPS'</span>].notna()]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>And look at the summary statistics for each group.</p>
-<div id="797d399c" class="cell" data-execution_count="3">
+<div id="0d0c29cc" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_London[<span class="st">'EBACCAPS'</span>].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>count    385.000000
@@ -480,7 +480,7 @@ max        8.700000
 Name: EBACCAPS, dtype: float64</code></pre>
 </div>
 </div>
-<div id="df52bf44" class="cell" data-execution_count="4">
+<div id="49ed5cd0" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_notLondon[<span class="st">'EBACCAPS'</span>].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>count    4246.000000
@@ -535,7 +535,7 @@ The alternative hypothesis is Mean EBacc score in London &gt; Mean EBacc score o
 <section id="step-2" class="level3">
 <h3 class="anchored" data-anchor-id="step-2">Step 2</h3>
 <p>Set the significance level.</p>
-<div id="9d6a7f1c" class="cell" data-execution_count="6">
+<div id="7047da81" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the level of statistical significance </span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -551,7 +551,7 @@ The alternative hypothesis is Mean EBacc score in London &gt; Mean EBacc score o
 <p>Calculate the p-value.</p>
 <p>We can use a built in function from <code>scipy.stats</code> called <code>ttest_ind</code> to do step 4 for us. You can read more about this function <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html">here</a>.</p>
 <p>First we need to check whether we can assume that the samples are drawn from populations with the same standard deviation or not. (Provided neither standard deviation is double the other, this should be ok).</p>
-<div id="a70392ad" class="cell" data-execution_count="7">
+<div id="420c0d19" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>London_std <span class="op">=</span> df_London[<span class="st">'EBACCAPS'</span>].mean()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>notLondon_std <span class="op">=</span> df_notLondon[<span class="st">'EBACCAPS'</span>].mean()</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -572,7 +572,7 @@ Can assume equal population standard deviations.</code></pre>
 </div>
 </div>
 <p>There are two outputs from the function <code>scipy.stats.ttest_ind</code>: the <strong>test statistic</strong> and the <strong>p value</strong>.</p>
-<div id="694da2d2" class="cell" data-execution_count="8">
+<div id="a2bb2e82" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>test_stat, p_value <span class="op">=</span> sps.ttest_ind(df_London[<span class="st">'EBACCAPS'</span>], df_notLondon[<span class="st">'EBACCAPS'</span>], equal_var <span class="op">=</span> equal_stds)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"test statistic = "</span>, test_stat)</span>
@@ -749,7 +749,7 @@ Conclude that samples are drawn from populations with different means.</code></p
 <section id="plotting-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="plotting-the-data">Plotting the data</h3>
 <p>Let’s also visually inspect the data.</p>
-<div id="ac3c72fe" class="cell" data-execution_count="11">
+<div id="dfe3a7a9" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plt.hist(df[<span class="st">'EBACCAPS_GIRLS'</span>], bins<span class="op">=</span><span class="dv">20</span>, color<span class="op">=</span><span class="st">'#abc766'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">'Girls'</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>plt.hist(df[<span class="st">'EBACCAPS_BOYS'</span>], bins<span class="op">=</span><span class="dv">20</span>, color<span class="op">=</span><span class="st">'#4e3c56'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">'Boys'</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>,<span class="dv">9</span>) <span class="co"># the EBacc has a maximum score of 9</span></span>
@@ -874,7 +874,7 @@ Assume that samples are drawn from populations with the same distribution.</code
 <h2 class="anchored" data-anchor-id="extension">Extension</h2>
 <p>If you’ve finished working through the examples in the tutorial then have a go at coming up with your own research question and hypothesis.</p>
 <p>A good place to start would be by looking at the data in <code>df_ks4</code> - theres a lot of numerical information here - are there two variables you could compare?</p>
-<div id="e3bee55e" class="cell" data-execution_count="16">
+<div id="55b84b74" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df_ks4.hist(bins<span class="op">=</span><span class="dv">50</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">15</span>))</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
