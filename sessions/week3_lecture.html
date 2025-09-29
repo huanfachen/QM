@@ -216,14 +216,10 @@
 
 
 </section>
-<section>
 <section id="last-week" class="title-slide slide level1 center">
 <h1>Last week</h1>
-
-</section>
-<section id="overview-of-lecture-2" class="slide level2">
-<h2>Overview of lecture 2</h2>
-<p>Continued concepts from data analysis, in particular probability distributions.</p>
+<p><strong>Overview of lecture 2</strong></p>
+<p>Continued concepts from exploratory data analysis, in particular probability distributions.</p>
 <ul>
 <li>Representative data</li>
 <li>Normal distribution</li>
@@ -233,14 +229,20 @@
 <li>Logarithms</li>
 </ul>
 </section>
-<section id="what-is-the-likelihood-of-events-occuring" class="slide level2">
-<h2>What is the likelihood of events occuring?</h2>
-<p>NOTE: add a picture here</p>
-<p><strong>Question</strong></p>
+
+<section>
+<section id="this-week" class="title-slide slide level1 center">
+<h1>This week</h1>
+
+</section>
+<section id="motivation" class="slide level2">
+<h2>Motivation</h2>
+<p><strong>How do we understand how likely events are to occur?</strong></p>
+<p><em>Question</em></p>
 <div class="fragment highlight-red">
 <p>What is the probability of someone at UCL being over 190cm?</p>
 </div>
-<p><strong>How can we try to answer this?</strong></p>
+<p><em>Answer</em></p>
 <p>Try to understand the distribution of heights.</p>
 <aside class="notes">
 <p>Last week we asked this question and we thought about the distribution of the data. How to describe the distribution of the data mathematically.</p>
@@ -256,28 +258,17 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section></section>
-<section>
-<section id="this-week" class="title-slide slide level1 center">
-<h1>This week</h1>
-
 </section>
-<section id="hypothesising" class="slide level2">
-<h2>Hypothesising</h2>
-<div class="columns">
-<div class="column" style="width:60%;">
+<section id="the-scientific-method" class="slide level2">
+<h2>The scientific method</h2>
 <div style="text-align:center;">
-<p><img src="L3_images/scientific_method.png" alt="The scientific method" style="max-width:100%"></p>
+<p><img src="L3_images/scientific_method.png" alt="The scientific method" style="max-width:60%"></p>
 </div>
-</div><div class="column" style="width:40%;">
-<p><br></p>
-<p>Research science is about coming up with hypotheses and evaluating them.</p>
-<p>It’s iterative - as we find out new information we update our method and processes accordingly. (Gelman et al.&nbsp;2020. Bayesian Workflow)</p>
-</div></div>
 <aside class="notes">
 <p>This lecture thinking about posing and answering research questions.</p>
-<p>You come up with a great idea - then need to think considering the data is this idea plausibly true?</p>
-<p>Link to the idea of a Bayesian workflow - Gelman.</p>
+<p>Last week we looked at exploratory data analysis - now the formal process of coming up with and evaluating questions - very much part of the scientific method.</p>
+<p>Research science is about coming up with hypotheses and evaluating them.</p>
+<p>It’s iterative - as we find out new information we update our method and processes accordingly. (Gelman et al.&nbsp;2020. Bayesian Workflow)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -298,20 +289,16 @@
 <li class="fragment">Define the Type I and Type II errors.</li>
 <li class="fragment">Evaluate a hypothesis using appropriate statistical tests.</li>
 </ol>
-</section></section>
-<section>
-<section id="motivations" class="title-slide slide level1 center">
-<h1>Motivations</h1>
+<!-- # Motivations
 
-</section>
-<section id="how-do-we-know-what-to-believe" class="slide level2">
-<h2>How do we know what to believe?</h2>
-<p>NOTE: change this to focus on the idea of using statistics to validate claims - i.e.&nbsp;what we see in the media or on the news.</p>
-<ul>
-<li>Crime rates across cities</li>
-<li>Spatial patterns of school achievement</li>
-<li>Inequalities in access to transport</li>
-</ul>
+## How do we know what to believe?
+
+NOTE: change this to focus on the idea of using statistics to validate claims - i.e. what we see in the media or on the news. 
+
+- Crime rates across cities 
+- Spatial patterns of school achievement 
+- Inequalities in access to transport 
+
 <!-- <div style="text-align:center;">
   <img src="L3_images/lime_bike_leg.png"
        alt="Screenshot from the Telegraph online of an article about a rise in Lime Bike accidents."
@@ -337,32 +324,20 @@
 <aside class="notes">
 <p>We see stories in the news, how do we know what to believe and what not to believe? This is where having an understanding of statistical tests can help us - we can evaluate claims to try and figure out which are/ aren’t statistically significant.</p>
 <p>Statisitical tests are frequently used in science to figure out if our findings are important or not - essentially a way to formally define a threshold of what is an interesting result vs, what isn’t an interesting result.</p>
-<p>A clearly defined, and reporducible way to evaluate findings.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section>
+<p>A clearly defined, and reporducible way to evaluate findings. ::: –&gt;</p>
 <section id="how-do-you-come-up-with-a-hypothesis" class="title-slide slide level1 center">
 <h1>How do you come up with a hypothesis?</h1>
 
 </section>
 <section id="research-question-vs.-hypothesis" class="slide level2">
 <h2>Research question vs.&nbsp;hypothesis</h2>
-<p><strong>Research question</strong></p>
+<p><span style="color:#49a0c4"><strong>Research question</strong></span></p>
 <p>A research <em>question</em> focuses on a specific problem.</p>
-<p><strong>Hypothesis</strong></p>
+<div class="fragment">
+<p><span style="color:#49a0c4"><strong>Hypothesis</strong></span></p>
 <p>A formal <em>statement</em> that you will seek to prove or disprove.</p>
 <aside class="notes">
-<p>The hypothesis is something you can explicitly test, and come to a judgement about it’s truth value.</p>
+<p>The hypothesis is a statement you can explicitly test. It can either be true or false - and hence using evidence you can come to a judgement about it’s truth value.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -374,6 +349,7 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</div>
 </section>
 <section id="flip-a-coin" class="slide level2">
 <h2>Flip a coin</h2>
@@ -386,10 +362,25 @@
 <li class="fragment">It comes up heads 7 times.</li>
 </ul>
 </div></div>
+<div class="fragment">
+<p>What do you think is the hypothesis here?</p>
+<aside class="notes">
+<p>WHich of these is something you can test?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
 </section>
 <section id="the-hypothesis" class="slide level2">
 <h2>The hypothesis</h2>
-<p>NOTE: add poll here - what do students think the hypothesis is?</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -404,8 +395,8 @@ The hypothesis is that it is a fair coin.
 </div>
 </div></div>
 </section>
-<section id="what-question-can-you-ask" class="slide level2">
-<h2>What question can you ask?</h2>
+<section id="what-research-question-can-you-ask" class="slide level2">
+<h2>What research question can you ask?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -426,8 +417,8 @@ The hypothesis is that it is a fair coin.
 </div>
 </div></div>
 </section>
-<section id="what-question-should-you-ask" class="slide level2">
-<h2>What question should you ask?</h2>
+<section id="what-research-question-should-you-ask" class="slide level2">
+<h2>What research question should you ask?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -453,11 +444,11 @@ The hypothesis is that it is a fair coin.
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section></section>
-<section>
+</section>
+
 <section id="establishing-and-evaluating-a-hypothesis" class="title-slide slide level1 center">
 <h1>Establishing and evaluating a Hypothesis</h1>
-<p>In <strong>five</strong> simple steps.</p>
+<p>In <span style="color:#49a0c4">five</span> simple steps.</p>
 </section>
 <section id="step-1" class="slide level2">
 <h2>Step 1</h2>
@@ -466,14 +457,30 @@ The hypothesis is that it is a fair coin.
 <p><span style="color:#49a0c4"><strong><span class="math inline">\(H_0\)</span></strong> - the null hypothesis</span></p>
 <ul>
 <li>this is the “status quo”</li>
+<li>it is assumed to be true</li>
 </ul>
 </div>
 <div class="fragment">
 <p><span style="color:#49a0c4"><strong><span class="math inline">\(H_1\)</span></strong> - the alternative hypothesis</span></p>
 <ul>
 <li>your hypothesis</li>
-<li>it requires some evidence (data) to verify</li>
+<li>it requires some evidence (i.e.&nbsp;data) to verify</li>
+<li>it directly contradicts the null hypothesis</li>
 </ul>
+<aside class="notes">
+<p>Be careful in how the two are defined. H_1 needs to contradict H_0.</p>
+<p>For example if my H_0 was everyone likes chocolate. H_1 couldn’t be some people prefer biscuits - since in this situation both H_0 and H_1 can be true at the same time. H_1 would have to be that not everyone likes chocolate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="step-2" class="slide level2">
@@ -481,7 +488,7 @@ The hypothesis is that it is a fair coin.
 <p><strong>Set your significance level <span class="math inline">\(\alpha\)</span></strong></p>
 <p><span style="color:#49a0c4"><em>The significance level is the threshold below which you reject the null hypothesis.</em></span></p>
 <ul>
-<li class="fragment">Decide what “too unlikely” means <strong>before you do the test</strong>.</li>
+<li class="fragment">Decide what “too unlikely” means</li>
 <li class="fragment">Common choice is 5% significance
 <ul>
 <li class="fragment"><span class="math inline">\(\alpha = 0.05\)</span></li>
@@ -492,7 +499,12 @@ The hypothesis is that it is a fair coin.
 <section id="warning" class="slide level2">
 <h2><span style="color:#FF0000">WARNING</span></h2>
 <p>Decide what “too unlikely” means <strong>before you do the test</strong></p>
-<p>NOTE: add the banned symbol here</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div style="text-align:center;">
+<p><img src="L3_images/warning_sign.png" alt="Don't be an idiot." style="max-width:90%"></p>
+</div>
+</div><div class="column" style="width:40%;">
 <ul>
 <li>otherwise considered ‘HARKing’
 <ul>
@@ -504,8 +516,10 @@ The hypothesis is that it is a fair coin.
 <li><strong>K</strong>nown</li>
 </ul></li>
 </ul>
+</div></div>
 <aside class="notes">
 <p>It’s important to decide on your significance level prior, as otherwise you might find an event which is significant at the 10% threshold and not at 5% - which could lead to bad scientific practise.</p>
+<p>There’s a balance - often don’t know what will be interesting - so you do some exploratory data analysis. But you shouldn’t be fishing around for stuff - needs to be grounded in theory and literature.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -532,6 +546,7 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </ul>
 <aside class="notes">
 <p>In quant methods this normally means finding an open public dataset to use.</p>
+<p>The evidence needs to be suitable to answer the question - think about biased/representtaive dtaa from last week. Soemthign they will be assessed on in the assessment.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -592,8 +607,8 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <li class="fragment">Calculate the p-value</li>
 <li class="fragment">Compare p-value with hypothesis level</li>
 </ol>
-</section></section>
-<section>
+</section>
+
 <section id="types-of-error" class="title-slide slide level1 center">
 <h1>Types of error</h1>
 <p>… where things can go wrong.</p>
@@ -603,14 +618,20 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <p><span style="color:#49a0c4"><em>The true null hypothesis is incorrectly rejected.</em></span></p>
 <p>The null hypothesis is true, but you get a false positive leading to you rejecting the null hypothesis.</p>
 <p>This is also called a <strong>false positive</strong>.</p>
+<div class="fragment">
+<p><br></p>
 <p><em>Example:</em> In court a defendant is found guilty despite being innocent.</p>
+</div>
 </section>
 <section id="type-ii-error" class="slide level2">
 <h2>Type II error</h2>
 <p><span style="color:#49a0c4"><em>The false null hypothesis is incorrectly accepted.</em></span></p>
 <p>The null hypothesis is false, but you get a false negative result, leading you to accepting the null hypothesis.</p>
 <p>This is also called a <strong>false negative</strong>.</p>
+<div class="fragment">
+<p><br></p>
 <p><em>Example:</em> In court a defendant is found innocent despite being guilty.</p>
+</div>
 </section>
 <section id="example-mammograms" class="slide level2">
 <h2>Example: Mammograms</h2>
@@ -635,8 +656,11 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </section>
 <section id="example-screening-outcomes" class="slide level2">
 <h2>Example: Screening outcomes</h2>
-<p><span class="math inline">\(H_0:\)</span> The individual doesn’t have breast cancer. <span class="math inline">\(H_1:\)</span> The individual does have breast cancer.</p>
-<div class="fragment">
+<p><span class="math inline">\(H_0:\)</span> The individual doesn’t have breast cancer.</p>
+<p><span class="math inline">\(H_1:\)</span> The individual does have breast cancer.</p>
+</section>
+<section id="example-evaluating-the-evidence" class="slide level2">
+<h2>Example: Evaluating the evidence</h2>
 <p>From <a href="https://digital.nhs.uk/data-and-information/publications/statistical/breast-screening-programme/england---2020-21/qualitystatement3">NHS digital</a>.</p>
 <p><span style="color:#abc766">False positive</span></p>
 <ul>
@@ -664,7 +688,6 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</div>
 </section>
 <section id="matrix-of-errors" class="slide level2">
 <h2>Matrix of errors</h2>
@@ -686,8 +709,8 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section></section>
-<section>
+</section>
+
 <section id="a-good-hypothesis-or-a-bad-hypothesis" class="title-slide slide level1 center">
 <h1>A good hypothesis or a bad hypothesis?</h1>
 
@@ -768,6 +791,19 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <div class="fragment">
 <p><br></p>
 <p>The point of the hypothesis test is to test your idea – but you should use your contextual understanding to come up with plausible (and ethical) initial questions.</p>
+<aside class="notes">
+<p>Will return to looking at the correlation between variables in week 5.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="the-point-of-the-scientific-method" class="slide level2">
@@ -810,8 +846,8 @@ Dataset: heights of students
 **Calculate the p-value**
 
 Aha! -->
-</section></section>
-<section>
+</section>
+
 <section id="example-students-height" class="title-slide slide level1 center">
 <h1>Example: students height</h1>
 <p><span style="color:#49a0c4"><em>Research question</em></span><br>
@@ -900,25 +936,27 @@ $\bar{x}_2 = 180$, $s_2 = 6$, $n_2 = 103$ -->
 <div class="fragment">
 <p>We need to know what statistical test to use!</p>
 </div>
-</section></section>
-<section>
+</section>
+
 <section id="statistical-tests" class="title-slide slide level1 center">
 <h1>Statistical tests</h1>
 
 </section>
 <section id="parametric-vs.-non-parametric-tests" class="slide level2">
 <h2>Parametric vs.&nbsp;Non-parametric tests</h2>
-<p><strong>Parametric Tests</strong></p>
+<p><strong>Parametric tests</strong></p>
 <ul>
 <li>Evaluate hypothesis for specific parameters</li>
-<li>Typically have assumptions about the distribution
+<li>Assumptions about the distribution
 <ul>
-<li>e.g.&nbsp;assumed normal distribution</li>
+<li>assumed normal distribution</li>
+<li>independent and unbiased samples</li>
+<li>equal/comparable variances</li>
 </ul></li>
 <li>Continuous data</li>
 </ul>
 <div class="fragment">
-<p><strong>Non-parametric Tests</strong></p>
+<p><strong>Non-parametric tests</strong></p>
 <ul>
 <li>Evaluate hypothesis for entire population distribution</li>
 <li>Typcially less assumptions on the distribution</li>
@@ -929,8 +967,8 @@ $\bar{x}_2 = 180$, $s_2 = 6$, $n_2 = 103$ -->
 <section id="deciding-on-a-test" class="slide level2">
 <h2>Deciding on a test</h2>
 <p>NOTE: want a table here that guides you on how to choose an appropriate statistical test</p>
-</section></section>
-<section>
+</section>
+
 <section id="parametric-tests" class="title-slide slide level1 center">
 <h1>Parametric tests</h1>
 
@@ -970,7 +1008,6 @@ Image credit: https://en.wikipedia.org/wiki/William_Sealy_Gosset#/media/File:Wil
 <section id="students-t-test-one-sample" class="slide level2">
 <h2>Student’s T-test: one sample</h2>
 <p><span style="color:#49a0c4"><em>Tests whether the population mean is equal to a specific value or not</em></span></p>
-<p>NOTE: want a diagram showing this.</p>
 <div class="fragment">
 <p>The test statistic is calculated as:</p>
 <span class="math display">\[\begin{align}
@@ -988,7 +1025,7 @@ t = \frac{\bar{x} - \mu_{0}}{s / \sqrt{n}}
 <section id="students-t-test-two-sample" class="slide level2">
 <h2>Student’s T-test: two sample</h2>
 <p><span style="color:#49a0c4"><em>Tests if the population means for two different groups are equal or not.</em></span></p>
-<p>NOTE: want a diagram showing this. . . .</p>
+<div class="fragment">
 <p>The test statistic is:</p>
 <span class="math display">\[\begin{align}
 t = \frac{\bar{x}_1 - \bar{x}_2}{s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
@@ -998,6 +1035,7 @@ t = \frac{\bar{x}_1 - \bar{x}_2}{s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
 <li><span class="math inline">\(n_1, n_2\)</span> are the sample sizes of groups 1 and 2</li>
 <li><span class="math inline">\(s_p\)</span> is the pooled standard deviation</li>
 </ul>
+</div>
 <div class="fragment">
 <span class="math display">\[\begin{align}
 s_p = \sqrt{\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}}
@@ -1008,7 +1046,6 @@ s_p = \sqrt{\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}}
 <section id="students-t-test-paired" class="slide level2">
 <h2>Student’s T-test: paired</h2>
 <p><span style="color:#49a0c4"><em>Tests if the difference between paired measurements for a population is zero or not - normally used with longitudinal data.</em></span></p>
-<p>NOTE: want a diagram showing this.</p>
 <div class="fragment">
 <p>The test statistic is:</p>
 <span class="math display">\[\begin{align}
@@ -1037,7 +1074,7 @@ t = \frac{\bar{d}}{s_d / \sqrt{n}}
 </div>
 </section>
 <section id="how-many-tails" class="slide level2">
-<h2>How many tails</h2>
+<h2>How many tails?</h2>
 <p>Tests can be one-tailed or two-tailed - which you want is determined when you define the hypothesis.</p>
 <p><em>One tailed:</em> if you only care is the mean is significant in one direction <em>Two tailed:</em> if you care about the mean being different regardless of direction</p>
 <div style="text-align:center;">
@@ -1052,8 +1089,8 @@ This indicates a correlation between the two variables.
 ...
 
 This will be covered further in lecture X on linear regression.  -->
-</section></section>
-<section>
+</section>
+
 <section id="non-parametric-tests" class="title-slide slide level1 center">
 <h1>Non-parametric tests</h1>
 
@@ -1140,7 +1177,7 @@ D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
 <section id="kde-of-simulated-heights" class="slide level2">
 <h2>KDE of simulated heights</h2>
 <p>It’s easy to fit a KDE to data in Python:</p>
-<div id="b3641e17" class="cell" data-execution_count="1">
+<div id="48f36f87" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb3-3"><a></a><span class="im">from</span> scipy.stats <span class="im">import</span> gaussian_kde</span>
@@ -1168,8 +1205,8 @@ D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
 <li class="fragment">compare visually</li>
 <li class="fragment">carry out non-paremetric test - such as Kolmogorov-Smirnov</li>
 </ul>
-</section></section>
-<section>
+</section>
+
 <section id="example-students-height-1" class="title-slide slide level1 center">
 <h1>Example: students height</h1>
 
@@ -1224,7 +1261,7 @@ t &amp;= \frac{170 - 180}{5.55 \cdot \sqrt{\tfrac{1}{95} + \tfrac{1}{103}}} \app
 df = n_1 + n_2 - 2 = 95 + 103 - 2 = 196
 \end{align}\]</span>
 <p>Then use Python to calculate the two-tailed critical t-value at <span class="math inline">\(\alpha = 0.05\)</span>.</p>
-<div id="994bc2fb" class="cell" data-execution_count="2">
+<div id="1bc37423" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">from</span> scipy.stats <span class="im">import</span> t</span>
 <span id="cb4-2"><a></a></span>
 <span id="cb4-3"><a></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
@@ -1250,7 +1287,8 @@ t= |-12.7| \gg 1.97= t_crit
 \end{align}\]</span>
 <p>we reject <span class="math inline">\(H_0\)</span>. Male and female students have significantly different heights.</p>
 </div>
-</section></section>
+</section>
+
 <section id="overview" class="title-slide slide level1 center">
 <h1>Overview</h1>
 <p>We’ve covered:</p>
@@ -1270,6 +1308,19 @@ t= |-12.7| \gg 1.97= t_crit
 
 </div>
 </section>
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="../img/logo/full.svg" class="slide-logo"></p>

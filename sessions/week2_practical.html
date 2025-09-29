@@ -117,8 +117,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <meta property="og:title" content="Practical 2: Recognising and plotting probability distributions – Quantitative Methods">
-<meta property="og:description" content="">
-<meta property="og:image" content="https://huanfachen.github.io/QM/sessions/week2_practical_files/figure-html/cell-8-output-1.png">
+<meta property="og:description" content="Exploring student attainment in schools">
+<meta property="og:image" content="https://huanfachen.github.io/QM/sessions/week2_practical_files/figure-html/cell-12-output-1.png">
 <meta property="og:site_name" content="Foundations">
 <meta property="og:locale" content="en_GB">
 <meta property="og:image:height" content="1342">
@@ -248,17 +248,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link active" data-scroll-target="#learning-outcomes">Learning Outcomes</a></li>
-  <li><a href="#starting-the-practical" id="toc-starting-the-practical" class="nav-link" data-scroll-target="#starting-the-practical">Starting the Practical</a>
-  <ul class="collapse">
+  <li><a href="#starting-the-practical" id="toc-starting-the-practical" class="nav-link" data-scroll-target="#starting-the-practical">Starting the Practical</a></li>
   <li><a href="#loading-the-data" id="toc-loading-the-data" class="nav-link" data-scroll-target="#loading-the-data">Loading the data</a></li>
   <li><a href="#describing-the-dataframe" id="toc-describing-the-dataframe" class="nav-link" data-scroll-target="#describing-the-dataframe">Describing the dataframe</a>
   <ul class="collapse">
-  <li><a href="#check-how-much-data-is-missing" id="toc-check-how-much-data-is-missing" class="nav-link" data-scroll-target="#check-how-much-data-is-missing">Check how much data is missing</a></li>
+  <li><a href="#checking-the-data-type" id="toc-checking-the-data-type" class="nav-link" data-scroll-target="#checking-the-data-type">Checking the data type</a></li>
+  <li><a href="#check-how-much-data-is-missing" id="toc-check-how-much-data-is-missing" class="nav-link" data-scroll-target="#check-how-much-data-is-missing">Check how much data is missing</a>
+  <ul class="collapse">
   <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics">Summary statistics</a></li>
   </ul></li>
   <li><a href="#histograms" id="toc-histograms" class="nav-link" data-scroll-target="#histograms">Histograms</a>
   <ul class="collapse">
   <li><a href="#is-it-normally-distributed" id="toc-is-it-normally-distributed" class="nav-link" data-scroll-target="#is-it-normally-distributed">Is it normally distributed?</a></li>
+  <li><a href="#q-q-plot" id="toc-q-q-plot" class="nav-link" data-scroll-target="#q-q-plot">Q-Q plot</a></li>
+  </ul></li>
+  <li><a href="#whats-causing-the-skew" id="toc-whats-causing-the-skew" class="nav-link" data-scroll-target="#whats-causing-the-skew">What’s causing the skew?</a></li>
+  <li><a href="#another-check-for-normality" id="toc-another-check-for-normality" class="nav-link" data-scroll-target="#another-check-for-normality">Another check for normality</a>
+  <ul class="collapse">
+  <li><a href="#q-q-plot-for-mainstream-schools" id="toc-q-q-plot-for-mainstream-schools" class="nav-link" data-scroll-target="#q-q-plot-for-mainstream-schools">Q-Q plot for mainstream schools</a></li>
+  </ul></li>
+  <li><a href="#q-q-plot-for-special-schools" id="toc-q-q-plot-for-special-schools" class="nav-link" data-scroll-target="#q-q-plot-for-special-schools">Q-Q plot for special schools</a></li>
+  <li><a href="#extension" id="toc-extension" class="nav-link" data-scroll-target="#extension">Extension</a>
+  <ul class="collapse">
+  <li><a href="#ebacc-by-prior-attainment" id="toc-ebacc-by-prior-attainment" class="nav-link" data-scroll-target="#ebacc-by-prior-attainment">EBacc by prior attainment</a></li>
+  <li><a href="#ebacc-by-school-size" id="toc-ebacc-by-school-size" class="nav-link" data-scroll-target="#ebacc-by-school-size">EBacc by school size</a></li>
   </ul></li>
   <li><a href="#youre-done" id="toc-youre-done" class="nav-link" data-scroll-target="#youre-done">You’re Done!</a></li>
   </ul></li>
@@ -271,6 +284,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Practical 2: Recognising and plotting probability distributions</h1>
+<p class="subtitle lead">Exploring student attainment in schools</p>
 </div>
 
 
@@ -288,22 +302,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This week is focussed on using some common functions in Python to plot data and distributions.</p>
-<section id="learning-outcomes" class="level2">
-<h2 class="anchored" data-anchor-id="learning-outcomes">Learning Outcomes</h2>
+<section id="learning-outcomes" class="level1">
+<h1>Learning Outcomes</h1>
 <ul>
-<li>Familiarise yourself with opening data files in Python.</li>
-<li>Familiarise yourself with plotting histograms of data in Python.</li>
+<li>Familiarise yourself with opening datasets and formatting them in Python.</li>
+<li>Practise plotting histograms of data in Python.</li>
+<li>Explore different data distributions.</li>
 </ul>
 </section>
 <section id="starting-the-practical" class="level1">
 <h1>Starting the Practical</h1>
-<p>As per last week, the process for every week will be the same: download the notebook to your <code>QM</code> folder, switch over to <code>JupyterLab</code> (which will be running in Podman/Docker) and get to work. If you want to save the completed notebook to your Github repo, you can <code>add</code>, <code>commit</code>, and <code>push</code> the notebook in Git after you download it. When you’re done for the day, save your changes to the file (This is very important!), then <code>add</code>, <code>commit</code>, and <code>push</code> your work to save the completed notebook.</p>
-<section id="loading-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="loading-the-data">Loading the data</h2>
-<p>We are going to look at schools perfomance data in England.</p>
+<p>As per last week: download the notebook to your <code>QM</code> folder, switch over to <code>JupyterLab</code> (which will be running in Podman/Docker) and get to work. If you want to save the completed notebook to your Github repo, you can <code>add</code>, <code>commit</code>, and <code>push</code> the notebook in Git after you download it. When you’re done for the day, save your changes to the file (This is very important!), then <code>add</code>, <code>commit</code>, and <code>push</code> your work to save the completed notebook.</p>
+</section>
+<section id="loading-the-data" class="level1">
+<h1>Loading the data</h1>
+<p>We are going to look at schools performance data in England.</p>
 <p>The data is sourced from <a href=""></a> and is downloadable <a href="">here</a>.</p>
 <p>We have saved a copy of this dataset to the Github repo, in case that the dataset is removed from the website.</p>
-<div id="31b62301" class="cell" data-execution_count="1">
+<div id="acc5631a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
@@ -318,13 +334,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>info_cols <span class="op">=</span> [<span class="st">'RECTYPE'</span>, <span class="st">'LEA'</span>, <span class="st">'SCHNAME'</span>, <span class="st">'TOTPUPS'</span>]</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>ebaccs_cols <span class="op">=</span> [<span class="st">'EBACCAPS'</span>, <span class="st">'EBACCAPS_LO'</span>, <span class="st">'EBACCAPS_MID'</span>, <span class="st">'EBACCAPS_HI'</span>]</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>df_ks4 <span class="op">=</span> df_ks4[info_cols <span class="op">+</span> ebaccs_cols]</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df_ks4[info_cols <span class="op">+</span> ebaccs_cols]</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>df_ks4[[<span class="st">'TOTPUPS'</span>]<span class="op">+</span>ebaccs_cols] <span class="op">=</span> df_ks4[[<span class="st">'TOTPUPS'</span>]<span class="op">+</span>ebaccs_cols].<span class="bu">apply</span>(pd.to_numeric, errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>df_ks4.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_12425/1207205982.py:7: DtypeWarning:
+<pre><code>/tmp/ipykernel_12425/958679002.py:7: DtypeWarning:
 
 Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,147,148,149,150,151,152,177,178,179,180,181,182,183,186,187,188,189,190,191,192,194,195,196,198,199,200,202,203,204,206,207,208,210,211,212,214,215,216,218,219,220,222,223,224,230,233,234,235,236,237,238,239,242,243,244,245,246,247,248,251,252,253,254,255,256,257,266,267,268,269,270,271,272,281,282,283,284,285,286,287,296,297,298,299,300,301,302,311,312,313,314,315,316,317,335,336,337,340,341,342,345,346,347,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403,404,405,406,407,408,409,410) have mixed types. Specify dtype option on import or set low_memory=False.
 </code></pre>
@@ -353,7 +367,7 @@ Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,14
 <td>1</td>
 <td>201.0</td>
 <td>City of London School</td>
-<td>1045.0</td>
+<td>1045</td>
 <td>2.10</td>
 <td>NaN</td>
 <td>NaN</td>
@@ -364,7 +378,7 @@ Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,14
 <td>1</td>
 <td>201.0</td>
 <td>City of London School for Girls</td>
-<td>739.0</td>
+<td>739</td>
 <td>1.51</td>
 <td>NaN</td>
 <td>NaN</td>
@@ -375,7 +389,7 @@ Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,14
 <td>1</td>
 <td>201.0</td>
 <td>David Game College</td>
-<td>365.0</td>
+<td>365</td>
 <td>0.56</td>
 <td>NaN</td>
 <td>NaN</td>
@@ -386,7 +400,7 @@ Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,14
 <td>4</td>
 <td>201.0</td>
 <td>NaN</td>
-<td>0.0</td>
+<td>0</td>
 <td>NaN</td>
 <td>NaN</td>
 <td>NaN</td>
@@ -397,7 +411,7 @@ Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,14
 <td>1</td>
 <td>202.0</td>
 <td>Acland Burghley School</td>
-<td>1163.0</td>
+<td>1163</td>
 <td>4.62</td>
 <td>1.91</td>
 <td>3.81</td>
@@ -409,28 +423,186 @@ Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,14
 </div>
 </div>
 </div>
-<p>You might be wondering why I’ve chosen the columns <code>info_cols</code> and <code>ebaccs_cols</code>.</p>
+<p>You might be wondering why I’ve chosen the columns <code>info_cols</code> and <code>ebaccs_cols</code>. In open source datasets the column headers might be obscure, or difficult to decipher - but typically metadata will be provided that explains the meaning.</p>
 <p>Looking at the metadata (which you can see in ‘L2_data/ks4_meta.xlsx’) we can see the full meaning of each column header:</p>
-<ul>
-<li>‘RECTYPE’ = Record type (1=mainstream school; 2=special school; 4=local authority; 5=National (all schools); 7=National (maintained schools))</li>
-<li>‘LEA’ = Local authority</li>
-<li>‘SCHNAME’ = School name</li>
-<li>‘TOTPUPS’ = Number of pupils on roll (all ages)</li>
-<li>‘EBACCAPS’ = Average EBacc APS score per pupil</li>
-<li>‘EBACCAPS_LO’ = Average EBacc APS score per pupil with low prior attainment</li>
-<li>‘EBACCAPS_MID’ = Average EBacc APS score per pupil with middle prior attainment</li>
-<li>‘EBACCAPS_HI’ = Average EBacc APS score per pupil with high prior attainment</li>
-</ul>
-<p>The EBacc is a measure of students school grades calculated as an avergae score across a set number of subjects. It is used as a performance indicator of English schools. You can read more about it <a href="https://en.wikipedia.org/wiki/English_Baccalaureate#:~:text=Added%20together%2C%20this%20gives%20a,for%20girls%202018%20was%204.33.">here</a>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 84%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable name</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RECTYPE</td>
+<td>Record type (1=mainstream school; 2=special school; 4=local authority; 5=National (all schools); 7=National (maintained schools))</td>
+</tr>
+<tr class="even">
+<td>LEA</td>
+<td>Local authority</td>
+</tr>
+<tr class="odd">
+<td>SCHNAME</td>
+<td>School name</td>
+</tr>
+<tr class="even">
+<td>TOTPUPS</td>
+<td>Number of pupils on roll (all ages)</td>
+</tr>
+<tr class="odd">
+<td>EBACCAPS</td>
+<td>Average EBacc APS score per pupil</td>
+</tr>
+<tr class="even">
+<td>EBACCAPS_LO</td>
+<td>Average EBacc APS score per pupil with low prior attainment</td>
+</tr>
+<tr class="odd">
+<td>EBACCAPS_MID</td>
+<td>Average EBacc APS score per pupil with middle prior attainment</td>
+</tr>
+<tr class="even">
+<td>EBACCAPS_HI</td>
+<td>Average EBacc APS score per pupil with high prior attainment</td>
+</tr>
+</tbody>
+</table>
+<!-- - 'RECTYPE' = Record type (1=mainstream school; 2=special school; 4=local authority; 5=National (all schools); 7=National (maintained schools))
+- 'LEA' = Local authority 
+- 'SCHNAME' = School name 
+- 'TOTPUPS' = Number of pupils on roll (all ages)
+- 'EBACCAPS' = Average EBacc APS score per pupil
+- 'EBACCAPS_LO' = Average EBacc APS score per pupil with low prior attainment
+- 'EBACCAPS_MID' = Average EBacc APS score per pupil with middle prior attainment
+- 'EBACCAPS_HI' = Average EBacc APS score per pupil with high prior attainment -->
+<p>EBacc stands for English Baccalaureate. It is a measure of students school grades calculated as an average score across a set number of subjects. It is used by the government as a performance indicator of English schools. You can read more about it <a href="https://en.wikipedia.org/wiki/English_Baccalaureate#:~:text=Added%20together%2C%20this%20gives%20a,for%20girls%202018%20was%204.33.">here</a>.</p>
+<p>The EBacc has a minimum score of 0, which indicates very poor performance, and a maximum score of 9, which indicates very high performance.</p>
 </section>
-<section id="describing-the-dataframe" class="level2">
-<h2 class="anchored" data-anchor-id="describing-the-dataframe">Describing the dataframe</h2>
-<section id="check-how-much-data-is-missing" class="level3">
-<h3 class="anchored" data-anchor-id="check-how-much-data-is-missing">Check how much data is missing</h3>
-<div id="934637bb" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;print how much data is missing for each column</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_ks4.isna().mean() <span class="op">*</span> <span class="dv">100</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<section id="describing-the-dataframe" class="level1">
+<h1>Describing the dataframe</h1>
+<p>The <code>pandas</code> library has lots of useful built in functions for analysing dataframes. Let’s start by seeing how much data we have.</p>
+<div id="d3455370" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rows, cols <span class="op">=</span> df.shape</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span>rows<span class="sc">}</span><span class="ss">, Columns: </span><span class="sc">{</span>cols<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 5813, Columns: 8</code></pre>
+</div>
+</div>
+<p>The function <code>.shape</code> returns the number of rows and columns.</p>
+<section id="checking-the-data-type" class="level2">
+<h2 class="anchored" data-anchor-id="checking-the-data-type">Checking the data type</h2>
+<p>Let’s check the data type of each of the columns - based on the metadata I am expecting:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 77%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable name</th>
+<th>Meaning</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RECTYPE</td>
+<td>Record type (1=mainstream school; 2=special school; 4=local authority; 5=National (all schools); 7=National (maintained schools))</td>
+<td>int</td>
+</tr>
+<tr class="even">
+<td>LEA</td>
+<td>Local authority</td>
+<td>int</td>
+</tr>
+<tr class="odd">
+<td>SCHNAME</td>
+<td>School name</td>
+<td>string</td>
+</tr>
+<tr class="even">
+<td>TOTPUPS</td>
+<td>Number of pupils on roll (all ages)</td>
+<td>int</td>
+</tr>
+<tr class="odd">
+<td>EBACCAPS</td>
+<td>Average EBacc APS score per pupil</td>
+<td>float</td>
+</tr>
+<tr class="even">
+<td>EBACCAPS_LO</td>
+<td>Average EBacc APS score per pupil with low prior attainment</td>
+<td>float</td>
+</tr>
+<tr class="odd">
+<td>EBACCAPS_MID</td>
+<td>Average EBacc APS score per pupil with middle prior attainment</td>
+<td>float</td>
+</tr>
+<tr class="even">
+<td>EBACCAPS_HI</td>
+<td>Average EBacc APS score per pupil with high prior attainment</td>
+<td>float</td>
+</tr>
+</tbody>
+</table>
+<div id="e5a0b8ae" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>RECTYPE           int64
+LEA             float64
+SCHNAME          object
+TOTPUPS          object
+EBACCAPS        float64
+EBACCAPS_LO     float64
+EBACCAPS_MID    float64
+EBACCAPS_HI     float64
+dtype: object</code></pre>
+</div>
+</div>
+<p>OK, so we can see that not all the data types are quite as expected. Let’s reformat them to make it easier later.</p>
+<div id="aa79773b" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'TOTPUPS'</span>]<span class="op">+</span>ebaccs_cols] <span class="op">=</span> df[[<span class="st">'TOTPUPS'</span>]<span class="op">+</span>ebaccs_cols].<span class="bu">apply</span>(pd.to_numeric, errors<span class="op">=</span><span class="st">'coerce'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_12425/2080033850.py:1: SettingWithCopyWarning:
+
+
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+</code></pre>
+</div>
+</div>
+<p>And we can check again:</p>
+<div id="992aaf82" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>RECTYPE           int64
+LEA             float64
+SCHNAME          object
+TOTPUPS         float64
+EBACCAPS        float64
+EBACCAPS_LO     float64
+EBACCAPS_MID    float64
+EBACCAPS_HI     float64
+dtype: object</code></pre>
+</div>
+</div>
+</section>
+<section id="check-how-much-data-is-missing" class="level2">
+<h2 class="anchored" data-anchor-id="check-how-much-data-is-missing">Check how much data is missing</h2>
+<p>Let’s check how much data is missing for each column in the dataframe - this will help us understand the completeness of the data.</p>
+<div id="653e7383" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;print how much data is missing for each column</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df.isna().mean() <span class="op">*</span> <span class="dv">100</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>RECTYPE          0.000000
 LEA              0.034406
 SCHNAME          2.683640
@@ -442,11 +614,11 @@ EBACCAPS_HI     42.490969
 dtype: float64</code></pre>
 </div>
 </div>
-<p>It seems suspiscious that the school names are missing for some of the entries - let’s check these.</p>
-<div id="a11c746b" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># return rows where SCHNAME is missing</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_ks4[df_ks4[<span class="st">'SCHNAME'</span>].isna()]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<p>It seems suspicious that the school names are missing for some of the entries - let’s check these.</p>
+<div id="3b6086c3" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># return rows where SCHNAME is missing</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'SCHNAME'</span>].isna()]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
 
@@ -593,28 +765,27 @@ dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p>So, these are all record type 4, 5, or 7 - i.e.&nbsp;they’re not individual schools! Let’s limit the selection to only mainstream and special schools.</p>
-<div id="52f409e4" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># only keep rows where RECTYPE is 1 or 2 </span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_ks4 <span class="op">=</span> df_ks4[df_ks4[<span class="st">'RECTYPE'</span>].isin([<span class="dv">1</span>, <span class="dv">2</span>])].copy()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>So, these are all record type 4, 5, or 7. Looking back at the metadata I see that record types 4, 5 and 7 refer to aggregated data - i.e.&nbsp;they’re not individual schools! Let’s limit the selection to only individual schools, that is 1-mainstream schools and 2-special schools.</p>
+<div id="06a3610b" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># only keep rows where RECTYPE is 1 or 2 </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'RECTYPE'</span>].isin([<span class="dv">1</span>, <span class="dv">2</span>])].copy()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Now we can check the data dimensions.</p>
-<div id="7dad9968" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rows, cols <span class="op">=</span> df_ks4.shape</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span>rows<span class="sc">}</span><span class="ss">, Columns: </span><span class="sc">{</span>cols<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now we can check the data dimensions again.</p>
+<div id="de5fcf0c" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>rows, cols <span class="op">=</span> df.shape</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span>rows<span class="sc">}</span><span class="ss">, Columns: </span><span class="sc">{</span>cols<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 5657, Columns: 8</code></pre>
 </div>
 </div>
-</section>
 <section id="summary-statistics" class="level3">
 <h3 class="anchored" data-anchor-id="summary-statistics">Summary statistics</h3>
 <p>We can use the <code>describe</code> function in pandas to easily get the summary statistics for a dataframe.</p>
-<div id="578f9d88" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>numerical_cols <span class="op">=</span> [<span class="st">'TOTPUPS'</span>, <span class="st">'EBACCAPS'</span>, <span class="st">'EBACCAPS_LO'</span>, <span class="st">'EBACCAPS_MID'</span>, <span class="st">'EBACCAPS_HI'</span>]</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df_ks4[numerical_cols].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div id="c81a8450" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>numerical_cols <span class="op">=</span> [<span class="st">'TOTPUPS'</span>, <span class="st">'EBACCAPS'</span>, <span class="st">'EBACCAPS_LO'</span>, <span class="st">'EBACCAPS_MID'</span>, <span class="st">'EBACCAPS_HI'</span>]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>df[numerical_cols].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
 
@@ -705,21 +876,21 @@ dtype: float64</code></pre>
 <section id="histograms" class="level2">
 <h2 class="anchored" data-anchor-id="histograms">Histograms</h2>
 <p>Let’s try plotting the Average EBacc APS score per pupil.</p>
-<div id="d752148f" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>n_bins <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>ax.hist(df_ks4[<span class="st">'EBACCAPS'</span>].dropna(), bins<span class="op">=</span>n_bins, color<span class="op">=</span><span class="st">'#abc766'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'EBacc distribution'</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'EBacc score'</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Number of schools'</span>)  </span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>,<span class="dv">9</span>) <span class="co"># the EBacc has a maximum score of 9</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="29f66c0a" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>n_bins <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>ax.hist(df[<span class="st">'EBACCAPS'</span>].dropna(), bins<span class="op">=</span>n_bins, color<span class="op">=</span><span class="st">'#abc766'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'EBacc distribution'</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'EBacc score'</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Number of schools'</span>)  </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>,<span class="dv">9</span>) <span class="co"># the EBacc has a maximum score of 9</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="week2_practical_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="week2_practical_files/figure-html/cell-8-output-1.png" width="978" height="671" class="figure-img"></a></p>
+<p><a href="week2_practical_files/figure-html/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="week2_practical_files/figure-html/cell-12-output-1.png" width="978" height="671" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -729,29 +900,29 @@ dtype: float64</code></pre>
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Answer</a></li></ul>
 <div class="tab-content qna-question">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>n_bins <span class="op">=</span> ??</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>ax.hist(df_ks4[<span class="st">'EBACCAPS'</span>].dropna(), bins<span class="op">=</span>n_bins, color<span class="op">=</span><span class="st">'#abc766'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'EBacc distribution'</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'EBacc score'</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Number of schools'</span>)  </span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>,<span class="dv">9</span>) <span class="co"># the EBacc has a maximum score of 9</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>n_bins <span class="op">=</span> ??</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>ax.hist(df[<span class="st">'EBACCAPS'</span>].dropna(), bins<span class="op">=</span>n_bins, color<span class="op">=</span><span class="st">'#abc766'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'EBacc distribution'</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'EBacc score'</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Number of schools'</span>)  </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>,<span class="dv">9</span>) <span class="co"># the EBacc has a maximum score of 9</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>n_bins <span class="op">=</span> <span class="dv">30</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ax.hist(df_ks4[<span class="st">'EBACCAPS'</span>].dropna(), bins<span class="op">=</span>n_bins, color<span class="op">=</span><span class="st">'#abc766'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'EBacc distribution'</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'EBacc score'</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Number of schools'</span>)  </span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>,<span class="dv">9</span>) <span class="co"># the EBacc has a maximum score of 9</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week2_practical_files/figure-html/cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="week2_practical_files/figure-html/cell-9-output-1.png" width="969" height="671"></a></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>n_bins <span class="op">=</span> <span class="dv">40</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>ax.hist(df[<span class="st">'EBACCAPS'</span>].dropna(), bins<span class="op">=</span>n_bins, color<span class="op">=</span><span class="st">'#abc766'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'EBacc distribution'</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'EBacc score'</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Number of schools'</span>)  </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>,<span class="dv">9</span>) <span class="co"># the EBacc has a maximum score of 9</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="week2_practical_files/figure-html/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="week2_practical_files/figure-html/cell-13-output-1.png" width="969" height="671"></a></p>
 </div>
 </div>
 </div>
@@ -779,34 +950,34 @@ dtype: float64</code></pre>
 </ul>
 <p>One way to consider whether it is normally distributed is to overlay the normal distribution on top.</p>
 <p>We can use the package <code>scipy.stats</code> which has functions for generating probability density functions for common distributions. You can see which common distributions <a href="https://docs.scipy.org/doc/scipy/reference/stats.html">here</a>.</p>
-<div id="c1315154" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> sps</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># first let's get the mean and stand deviation </span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> df_ks4[<span class="st">'EBACCAPS'</span>].dropna().mean()</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>std <span class="op">=</span> df_ks4[<span class="st">'EBACCAPS'</span>].dropna().std()</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">## Create the plot </span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the histogram</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>plt.hist(df_ks4[<span class="st">'EBACCAPS'</span>], bins<span class="op">=</span><span class="dv">30</span>, density<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">'#abc766'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the Probability Density Function (PDF)</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>xmin <span class="op">=</span> <span class="dv">0</span> </span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>xmax <span class="op">=</span> <span class="dv">9</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(xmin, xmax, <span class="dv">100</span>)</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> sps.norm.pdf(x, mu, std)</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p, <span class="st">'k'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"#e16fca"</span>)</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"Fit results: $</span><span class="er">\</span><span class="ss">mu$ = </span><span class="sc">{</span>mu<span class="sc">:.2f}</span><span class="ss">,  $</span><span class="er">\</span><span class="ss">sigma$ = </span><span class="sc">{</span>std<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="dv">9</span>)</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"EBacc score"</span>)</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Density"</span>)</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="2eb4e1aa" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> sps</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># first let's get the mean and stand deviation </span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> df[<span class="st">'EBACCAPS'</span>].dropna().mean()</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>std <span class="op">=</span> df[<span class="st">'EBACCAPS'</span>].dropna().std()</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">## Create the plot </span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the histogram</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>plt.hist(df[<span class="st">'EBACCAPS'</span>], bins<span class="op">=</span><span class="dv">40</span>, density<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">'#abc766'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the Probability Density Function (PDF)</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>xmin <span class="op">=</span> <span class="dv">0</span> </span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>xmax <span class="op">=</span> <span class="dv">9</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(xmin, xmax, <span class="dv">100</span>)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> sps.norm.pdf(x, mu, std)</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>plt.plot(x, p, <span class="st">'k'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"#e16fca"</span>)</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"Fit results: $</span><span class="er">\</span><span class="ss">mu$ = </span><span class="sc">{</span>mu<span class="sc">:.2f}</span><span class="ss">,  $</span><span class="er">\</span><span class="ss">sigma$ = </span><span class="sc">{</span>std<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="dv">0</span>, <span class="dv">9</span>)</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"EBacc score"</span>)</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Density"</span>)</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_12425/2445938851.py:18: UserWarning:
+<pre><code>/tmp/ipykernel_12425/3509817750.py:18: UserWarning:
 
 color is redundantly defined by the 'color' keyword argument and the fmt string "k" (-&gt; color=(0.0, 0.0, 0.0, 1)). The keyword argument will take precedence.
 </code></pre>
@@ -814,12 +985,275 @@ color is redundantly defined by the 'color' keyword argument and the fmt string 
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="week2_practical_files/figure-html/cell-10-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="week2_practical_files/figure-html/cell-10-output-2.png" width="974" height="672" class="figure-img"></a></p>
+<p><a href="week2_practical_files/figure-html/cell-14-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="week2_practical_files/figure-html/cell-14-output-2.png" width="974" height="672" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Note that this time we plot the histogram with <code>density=True</code> - this scales the histogram data.</p>
+<p>Another way to think about whether soemthing is normally distirbuted is to look at the Q-Q plot.</p>
+</section>
+<section id="q-q-plot" class="level3">
+<h3 class="anchored" data-anchor-id="q-q-plot">Q-Q plot</h3>
+<p>A Q-Q plot is used to see if a dataset follows a ceratin distirbution, by comparing the quartiles of the two. You can read a bit more about Q-Q plots <a href="https://www.datacamp.com/tutorial/qq-plot">here</a>.</p>
+<p>Q-Q plots are a good way to check if a dataset follows a normal distribution.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content qna-question">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Thinking about the characteristics of a normal distribution, what would you expect the Q-Q plot of a normally distributed dataset to look like?</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>If the data is normally distributed, the points in the Q-Q plot will lie close to a straight diagonal line. This happens because the quantiles of the sample match the quantiles of the theoretical normal distribution.</p>
+</div>
+</div>
+</div>
+<p>The results of the Q-Q plot can help us to understand the dataset:</p>
+<ul>
+<li>For perfectly normal data: <em>points fall almost exactly on the diagonal line</em></li>
+<li>Heavy tails (more extreme values than normal): <em>points curve away at the end</em></li>
+<li>Light tails (fewer extreme values than normal): <em>points bend inward at the ends</em></li>
+<li>Skewed data: <em>points systematically deviate above or below the line</em></li>
+</ul>
+<p>We can plot the Q-Q plot in Python:</p>
+<div id="9ecc57e0" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop missing values</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> df[<span class="st">'EBACCAPS'</span>].dropna().values</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">len</span>(data)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort the sample data</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>sample_quantiles <span class="op">=</span> np.sort(data)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute plotting positions (probabilities)</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> (np.arange(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>) <span class="op">-</span> <span class="fl">0.5</span>) <span class="op">/</span> n</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute theoretical quantiles from standard normal</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>theoretical_quantiles <span class="op">=</span> sps.norm.ppf(p)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>plt.scatter(theoretical_quantiles, sample_quantiles, alpha<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'#abc766'</span>)</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>plt.plot(theoretical_quantiles, theoretical_quantiles, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)  <span class="co"># reference line</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Q-Q plot for EBacc scores"</span>)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Theoretical quantiles (Normal)"</span>)</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Sample quantiles"</span>)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week2_practical_files/figure-html/cell-15-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="week2_practical_files/figure-html/cell-15-output-1.png" width="587" height="449" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ok, so in case it wasn’t clear from the previous plot we can see that the data definitely isn’t normal.</p>
+</section>
+</section>
+<section id="whats-causing-the-skew" class="level2">
+<h2 class="anchored" data-anchor-id="whats-causing-the-skew">What’s causing the skew?</h2>
+<p>If you remember above this dataset includes schools of two different types, we have mainstream schools and special schools. ‘special schools’ refers to schools which cater to students with special educational needs. let’s see whta happens when we split our historgram according to the type of school.</p>
+<div id="ff745f34" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram of # plot histogram of EBACCAPS by RECTYPE</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>n_bins <span class="op">=</span> {<span class="dv">1</span>:<span class="dv">40</span>, <span class="dv">2</span>:<span class="dv">20</span>}</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rectype, color, label <span class="kw">in</span> <span class="bu">zip</span>([<span class="dv">1</span>, <span class="dv">2</span>], [<span class="st">'#abc766'</span>, <span class="st">'#66c2ab'</span>], [<span class="st">'Mainstream'</span>, <span class="st">'Special'</span>]):</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    ax.hist(df_ks4.loc[df_ks4[<span class="st">'RECTYPE'</span>] <span class="op">==</span> rectype, <span class="st">'EBACCAPS'</span>].dropna(), bins<span class="op">=</span>n_bins[rectype], alpha<span class="op">=</span><span class="fl">0.7</span>, color<span class="op">=</span>color, edgecolor<span class="op">=</span><span class="st">'black'</span>, label<span class="op">=</span>label)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'EBacc distribution by school type'</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'EBacc score'</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Number of schools'</span>)  </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>,<span class="dv">9</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week2_practical_files/figure-html/cell-16-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="week2_practical_files/figure-html/cell-16-output-1.png" width="969" height="671" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that I’ve played with the number of total bins for each group so that the histograms look nice.</p>
+<p>Looking now at the histogram it becomes clear that the skewness of the data is caused by the different school types.</p>
+</section>
+<section id="another-check-for-normality" class="level2">
+<h2 class="anchored" data-anchor-id="another-check-for-normality">Another check for normality</h2>
+<p>Let’s try again to see if the data is normal - this time splitting the dataset according to the school type.</p>
+<p>We can start by splitting the dataset according to the school type.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content qna-question">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mainstream school</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> df[??]</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># special schools </span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df[??]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mainstream school</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> df[df[<span class="st">'RECTYPE'</span>] <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># special schools </span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> df[df[<span class="st">'RECTYPE'</span>] <span class="op">==</span> <span class="dv">2</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<section id="q-q-plot-for-mainstream-schools" class="level3">
+<h3 class="anchored" data-anchor-id="q-q-plot-for-mainstream-schools">Q-Q plot for mainstream schools</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content qna-question">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop missing values</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> df1[<span class="st">'EBACCAPS'</span>].dropna().values</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">len</span>(data)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort the sample data</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>sample_quantiles <span class="op">=</span> ??</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute plotting positions (probabilities)</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> ??</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute theoretical quantiles from standard normal</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>theoretical_quantiles <span class="op">=</span> ??</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>plt.scatter(theoretical_quantiles, sample_quantiles, alpha<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'#abc766'</span>)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>plt.plot(theoretical_quantiles, theoretical_quantiles, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)  <span class="co"># reference line</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Mainstream schools: Q-Q plot for EBacc scores"</span>)</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Theoretical quantiles (Normal)"</span>)</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Sample quantiles"</span>)</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop missing values</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> df1[<span class="st">'EBACCAPS'</span>].dropna().values</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">len</span>(data)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort the sample data</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>sample_quantiles <span class="op">=</span> np.sort(data)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute plotting positions (probabilities)</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> (np.arange(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>) <span class="op">-</span> <span class="fl">0.5</span>) <span class="op">/</span> n</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute theoretical quantiles from standard normal</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>theoretical_quantiles <span class="op">=</span> sps.norm.ppf(p)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>plt.scatter(theoretical_quantiles, sample_quantiles, alpha<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'#abc766'</span>)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>plt.plot(theoretical_quantiles, theoretical_quantiles, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)  <span class="co"># reference line</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Mainstream schools: Q-Q plot for EBacc scores"</span>)</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Theoretical quantiles (Normal)"</span>)</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Sample quantiles"</span>)</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="week2_practical_files/figure-html/cell-18-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="week2_practical_files/figure-html/cell-18-output-1.png" width="589" height="449"></a></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="q-q-plot-for-special-schools" class="level2">
+<h2 class="anchored" data-anchor-id="q-q-plot-for-special-schools">Q-Q plot for special schools</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content qna-question">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop missing values</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> df2[<span class="st">'EBACCAPS'</span>].dropna().values</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">len</span>(data)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort the sample data</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>sample_quantiles <span class="op">=</span> ??</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute plotting positions (probabilities)</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> ??</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute theoretical quantiles from standard normal</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>theoretical_quantiles <span class="op">=</span> ??</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>plt.scatter(theoretical_quantiles, sample_quantiles, alpha<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'#abc766'</span>)</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>plt.plot(theoretical_quantiles, theoretical_quantiles, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)  <span class="co"># reference line</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Special schools: Q-Q plot for EBacc scores"</span>)</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Theoretical quantiles (Normal)"</span>)</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Sample quantiles"</span>)</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop missing values</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> df2[<span class="st">'EBACCAPS'</span>].dropna().values</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">len</span>(data)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort the sample data</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>sample_quantiles <span class="op">=</span> np.sort(data)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute plotting positions (probabilities)</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> (np.arange(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>) <span class="op">-</span> <span class="fl">0.5</span>) <span class="op">/</span> n</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute theoretical quantiles from standard normal</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>theoretical_quantiles <span class="op">=</span> sps.norm.ppf(p)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>plt.scatter(theoretical_quantiles, sample_quantiles, alpha<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'#abc766'</span>)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>plt.plot(theoretical_quantiles, theoretical_quantiles, color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)  <span class="co"># reference line</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Special schools: Q-Q plot for EBacc scores"</span>)</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Theoretical quantiles (Normal)"</span>)</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Sample quantiles"</span>)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="week2_practical_files/figure-html/cell-19-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="week2_practical_files/figure-html/cell-19-output-1.png" width="587" height="449"></a></p>
+</div>
+</div>
+</div>
+<p>Looking at the resultant Q-Q plots what can we say about the data? We see that the mainstream schools is a skewed dataset, whilst the special schools dataset has a heavy tail.</p>
+</section>
+<section id="extension" class="level2">
+<h2 class="anchored" data-anchor-id="extension">Extension</h2>
+<section id="ebacc-by-prior-attainment" class="level3">
+<h3 class="anchored" data-anchor-id="ebacc-by-prior-attainment">EBacc by prior attainment</h3>
+<p>If you’ve finished looking at the histogram plots of the EBacc data, try plotting the histograms of the columns ‘EBACCAPS_LO’, ‘EBACCAPS_MID’, ‘EBACCAPS_HI’. What can you say about these data distributions? Does plotting the Q-Q plots help?</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">Question</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">Answer</a></li></ul>
+<div class="tab-content qna-question">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>n_bins <span class="op">=</span> ??</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">18</span>))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>plot_names <span class="op">=</span> [<span class="st">'EBacc low prior'</span>, <span class="st">'EBacc mid prior'</span>, <span class="st">'EBacc high prior'</span>]</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, col <span class="kw">in</span> ??:</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    ax[i].hist(df[col].dropna(), bins<span class="op">=</span>n_bins, color<span class="op">=</span><span class="st">'#abc766'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    ax[i].set_title(plot_names[i])</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    ax[i].set_xlabel(<span class="st">'EBacc score'</span>)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    ax[i].set_ylabel(<span class="st">'Number of schools'</span>)  </span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    ax[i].set_xlim(<span class="dv">0</span>,<span class="dv">9</span>) <span class="co"># the EBacc has a maximum score of 9</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>n_bins <span class="op">=</span> <span class="dv">40</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">3</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">18</span>))</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>plot_names <span class="op">=</span> [<span class="st">'EBacc low prior'</span>, <span class="st">'EBacc mid prior'</span>, <span class="st">'EBacc high prior'</span>]</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, col <span class="kw">in</span> <span class="bu">enumerate</span>([<span class="st">'EBACCAPS_LO'</span>, <span class="st">'EBACCAPS_MID'</span>, <span class="st">'EBACCAPS_HI'</span>]):</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    ax[i].hist(df[col].dropna(), bins<span class="op">=</span>n_bins, color<span class="op">=</span><span class="st">'#abc766'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    ax[i].set_title(plot_names[i])</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    ax[i].set_xlabel(<span class="st">'EBacc score'</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    ax[i].set_ylabel(<span class="st">'Number of schools'</span>)  </span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    ax[i].set_xlim(<span class="dv">0</span>,<span class="dv">9</span>) <span class="co"># the EBacc has a maximum score of 9</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="week2_practical_files/figure-html/cell-20-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="week2_practical_files/figure-html/cell-20-output-1.png" width="969" height="1410"></a></p>
+</div>
+</div>
+</div>
+</section>
+<section id="ebacc-by-school-size" class="level3">
+<h3 class="anchored" data-anchor-id="ebacc-by-school-size">EBacc by school size</h3>
+<p>Try plotting the EBacc scores against the total number of pupils (‘TOTPUPS’) - what can you say about this distribution?</p>
 </section>
 </section>
 <section id="youre-done" class="level2">

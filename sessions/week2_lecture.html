@@ -253,7 +253,7 @@
 <section id="the-scientific-method" class="slide level2">
 <h2>The scientific method</h2>
 <div style="text-align:center;">
-<p><img src="L3_images/scientific_method.png" alt="The scientific method" style="max-width:80%"></p>
+<p><img src="L3_images/scientific_method.png" alt="The scientific method" style="max-width:60%"></p>
 </div>
 <aside class="notes">
 <p>A specific research model - quite formal - been around from the 19th century. Typifies how scientific research is done in the classical sciences like biology. Link to scientific process and how we test and then iterate over ideas and concepts. Something we will talk about more next lecture.</p>
@@ -278,7 +278,7 @@
 <li class="fragment">What statistical techniques should be used</li>
 </ul>
 <aside class="notes">
-<p>More modern approach approach devloped by matehmatician John Turkey in the 1970s. ‘Father of data science’. rather than being driven by more classical statistical analyses (something we’ll look at next week) - the idea was to have a more flexible approach.</p>
+<p>More modern approach approach devloped by computer scientist John Turkey in the 1970s - whilst at Princeton. ‘Father of data science’. rather than being driven by more classical statistical analyses (something we’ll look at next week) - the idea was to have a more flexible approach.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -313,7 +313,7 @@
       }</style></aside>
 </section>
 <section id="learning-objectives" class="slide level2">
-<h2>Learning Objectives</h2>
+<h2>Learning objectives</h2>
 <p>By the end of this lecture you should be able to:</p>
 <ol type="1">
 <li class="fragment">Describe the characteristic features of common probability distributions.</li>
@@ -488,6 +488,9 @@
 <aside class="notes">
 <p>Already talked about the idea of cognitive bias. There are lots and lots of different types of biases - going to talk a little about different ways they can bias the dataset.</p>
 <p>Dataset bias has become a more prevalent topic of concern on the era of large AI models. These models are really good at learnign patterns which aren’t obvious to the human eye - but the pattern might reflect a bias. For example generative AI models learn that scientists are white men, even though if I asked you you’d tell me anyone can be a scientist.</p>
+<ul>
+<li><a href="https://daniellakens.blogspot.com/2017/07/impossibly-hungry-judges.html">Hungry judges</a></li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -515,13 +518,6 @@
 <aside class="notes">
 <p>Police profiling models - meant to make easy to spot criminals - but use exisitng crime data - which reflect racist prejudices in society - and the model learns to pick out people of certain ethnic backgrounds.</p>
 <p>Tools also used to help the sentnecing of criminals in courts of law - observe the hungry judges effect, where they sentnece differently based on how hungry they are - tend to be harsher just before lunch and more lenient after lunch.</p>
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/Hungry_judge_effect">Hungry judges</a>
-<ul>
-<li>Tools to help sentencing of ‘criminals’.</li>
-<li>Patterns in the dataset — judges are less lenient before lunch.</li>
-</ul></li>
-</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -615,14 +611,14 @@
 <p>Let’s look at a dataset of students height.</p>
 <p><br></p>
 <p>Easy to print the summary statistics in Python, using <code>pandas</code>:</p>
-<div id="9dd7ddd0" class="cell" data-execution_count="1">
+<div id="4faa1cbe" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb2-2"><a></a></span>
 <span id="cb2-3"><a></a>height_df <span class="op">=</span> pd.read_csv(<span class="st">"L2_data/heights.csv"</span>)</span>
 <span id="cb2-4"><a></a>height_df.describe().<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column">
-<div id="890a8064" class="cell" data-execution_count="2">
+<div id="8dc45961" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <style scoped="">
@@ -690,7 +686,7 @@
 <section id="example-2" class="slide level2">
 <h2>Example 2</h2>
 <p>Sometimes we need more information.</p>
-<div id="a93d2ef6" class="cell" data-execution_count="3">
+<div id="d74bf485" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb3-2"><a></a></span>
 <span id="cb3-3"><a></a><span class="co"># read data</span></span>
@@ -882,7 +878,7 @@
 </section></section>
 <section>
 <section id="normal-distribution" class="title-slide slide level1 center">
-<h1>Normal Distribution</h1>
+<h1>Normal distribution</h1>
 <p>The most fundamental distribution</p>
 </section>
 <section class="slide level2">
@@ -891,6 +887,7 @@
 <p><img src="L2_images/normal_distribution.png" alt="Normal distribution" style="max-width:90%"></p>
 </div>
 <aside class="notes">
+<p>Also known as Gaussian distribution after Gauss. The shape is known as the bell curve.</p>
 <ul>
 <li>Human height</li>
 <li>Petal size (specifically length of iris petals)</li>
@@ -963,6 +960,14 @@
 \end{align}
 ``` -->
 </section>
+<section id="the-distribution-of-the-random-variable" class="slide level2">
+<h2>The distribution of the random variable</h2>
+<p><span style="color:#49a0c4"><em>A random variable is a way to map the outcome of a random process to a probability.</em></span></p>
+<p>In mathematical notation, a random variable <span class="math inline">\(X\)</span> is approximately normally distributed about a mean of <span class="math inline">\(\mu\)</span> with a standard deviation of <span class="math inline">\(\sigma\)</span>:</p>
+<span class="math display">\[\begin{align}
+X \sim N(\mu,\sigma)
+\end{align}\]</span>
+</section>
 <section id="sampling-distributions" class="slide level2">
 <h2>Sampling distributions</h2>
 <p><span style="color:#49a0c4">The distribution of the random variable when derived from a random sample of size <span class="math inline">\(n\)</span></span></p>
@@ -971,9 +976,14 @@
 <span class="math display">\[\begin{align}
 \frac{\sigma}{\sqrt{n}}
 \end{align}\]</span>
+<p>In practise as the sample size increases the sampling distribution becomes more and more centralised.</p>
+<ul>
+<li>i.e.&nbsp;with more data we have more certainty about the distribution.</li>
+</ul>
 <aside class="notes">
-<p>Need to account for the fact that we don’t have all the data.</p>
-<p>As the sample size increases the sampling distribution becomes more and more centralised.</p>
+<p>Typically we think of the distribution as describing the entirety of the relevant popualtion - i.e.&nbsp;every relevant example. Link to sampling - normally only have a subset of the data.</p>
+<p>Need to account for the fact that we don’t have all the data. So our statistic will vary a bit according to what sample of the data we’re looking at.</p>
+<p>In practise - as the sample size increases the sampling distribution of the normal distribution becomes more and more centralised. I.e. we have more certainty about the distribution.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -991,7 +1001,7 @@
 <h2>Calculating probabilities</h2>
 <p>Can use the PDF to evaluate the probability at a specific point.</p>
 <span class="math display">\[\begin{align}
-x \sim N(0,1)
+X \sim N(0,1)
 \end{align}\]</span>
 <div class="fragment">
 <span class="math display">\[\begin{align}
@@ -1013,7 +1023,12 @@ Area under the curve. -->
 <h2>Not everything is normal</h2>
 <p>Many real world datasets are <em>approximately</em> normally distributed.</p>
 <div class="fragment">
-<p>But not all — might not have a characteristic size, or not continuous, or not symmetric.</p>
+<p>But not all</p>
+<ul>
+<li>not continuous</li>
+<li>no characteristic size</li>
+<li>not symmetric</li>
+</ul>
 </div>
 </section></section>
 <section>
@@ -1217,7 +1232,7 @@ P(X = 10) = \frac{2^10 e^{-2}}{10!}
 </section>
 <section id="exponentials" class="slide level2">
 <h2>Exponentials</h2>
-<p>If the Poisson measures the probability of x events within a time period, then the Exponential measures how long we are likely to wait between events.</p>
+<p>If the Poisson measures the probability of <span class="math inline">\(x\)</span> events within a time period, then the exponential measures how long we are likely to wait between events.</p>
 <div class="fragment">
 <p><span style="color:#49a0c4"><em>The greatest shortcoming of the human race is our inability to understand the exponential function</em></span> – Albert Bartlett (physicist)</p>
 <aside class="notes">
@@ -1243,11 +1258,11 @@ P(X = 10) = \frac{2^10 e^{-2}}{10!}
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li class="fragment">You’ve invented chess.</li>
-<li class="fragment">The emperor is really grateful - and asks what gift you would like in thanks.</li>
-<li class="fragment">You ask for grains of rice.<br>
+<li class="fragment">A scholar has invented chess</li>
+<li class="fragment">The emperor is really grateful - and asks what gift the scholar would like in thanks</li>
+<li class="fragment">The scholar asks for grains of rice<br>
 </li>
-<li class="fragment">Specifically, rice to fill the chessboard, such that the number of grains double on each square.</li>
+<li class="fragment">Specifically, rice to fill the chessboard, such that the number of grains double on each square</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div style="text-align:center;">
@@ -1387,10 +1402,13 @@ Here we have base 2, and the exponent x.
 <span class="math display">\[\begin{align}
 y=e^x
 \end{align}\]</span>
+<div style="background-color:#2e6260; color:white; padding:8px; border-radius:5px; margin-top:10px;">
+<p><em>Note</em></p>
 <p><span class="math inline">\(e\)</span> here is eulers number - a mathematical constant.</p>
 <span class="math display">\[\begin{align}
 e \approx 2.718...
 \end{align}\]</span>
+</div>
 <aside class="notes">
 <p>Its a mathematical constant similar to pi - it’s just a fixed number which we have a name for. Like pi comes from geometry (circles etc), e comes from the limit of the equation of compound interest.</p>
 <style type="text/css">
@@ -1405,12 +1423,62 @@ e \approx 2.718...
           display:block!important;
       }</style></aside>
 </section>
-<section id="when-i-can-feed-my-town" class="slide level2">
-<h2>When I can feed my town?</h2>
-<p>Allows us to answer questions like:</p>
+<section id="the-exponential-distribution" class="slide level2">
+<h2>The exponential distribution</h2>
+<div style="text-align:center;">
+<p><img src="L2_images/exponential_distribution.png" alt="Exponential function" style="max-width:90%;"></p>
+</div>
+<aside class="notes">
+<p>We’ve talked about the exp function - but now want to talk about the exp distribution.</p>
+<p>This is a continous probability distribution.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="probability-density-function" class="slide level2">
+<h2>Probability density function</h2>
+<p>The PDF of the exponential distribution is:</p>
+<span class="math display">\[\begin{align}
+f(x, \lambda) = \lambda e^{-\lambda x}
+\end{align}\]</span>
+<p>where <span class="math inline">\(\lambda\)</span> is the rate parameter. As in the poisson distribution <span class="math inline">\(\lambda\)</span> is the fixed rates of events for a predetermined time interval.</p>
+<div style="background-color:#2e6260; color:white; padding:8px; border-radius:5px; margin-top:10px;">
+<p><em>Note</em></p>
+This is sometimes referred to as the <em>negative exponential distribution</em> - as it’s a negative exponent.
+</div>
+</section>
+<section id="time-between-events" class="slide level2">
+<h2>Time between events</h2>
+<p>Traditionally used to model time between rare events.</p>
 <ul>
-<li class="fragment">“how many grains of rice at t=10?”</li>
-<li class="fragment">“when will I have enough rice to feed my entire town?”</li>
+<li>time between volcanic eruptions</li>
+<li>time between customers entering a shop</li>
+<li>time of radioactive decay</li>
+</ul>
+</section>
+<section id="important-questions" class="slide level2">
+<h2>Important questions</h2>
+<p>The exponential allows us to answer questions like:</p>
+<ul>
+<li class="fragment">What’s the probability that it will be ten years until the next volcanic eruption?
+<ul>
+<li class="fragment"><span class="math inline">\(\lambda=1\)</span></li>
+<li class="fragment"><span class="math inline">\(p(10) = 1 \times e^{-1 \times 10}\)</span></li>
+</ul></li>
+<li class="fragment">When will the probability of volcanic eruptions be equal to <span class="math inline">\(p=0.5\)</span>?
+<ul>
+<li class="fragment"><span class="math inline">\(\lambda=1\)</span></li>
+<li class="fragment"><span class="math inline">\(0.5 = p(x) = 1 \times e^{-1 \times x}\)</span></li>
+<li class="fragment">what is <span class="math inline">\(x\)</span>?</li>
+</ul></li>
 </ul>
 <div class="fragment">
 <p>This is easier said than done – the best way is to invert the equation.</p>
