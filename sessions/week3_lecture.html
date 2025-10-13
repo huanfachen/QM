@@ -269,6 +269,9 @@
 <p>Last week we looked at exploratory data analysis - now the formal process of coming up with and evaluating questions - very much part of the scientific method.</p>
 <p>Research science is about coming up with hypotheses and evaluating them.</p>
 <p>It’s iterative - as we find out new information we update our method and processes accordingly. (Gelman et al.&nbsp;2020. Bayesian Workflow)</p>
+<p>We see stories in the news, how do we know what to believe and what not to believe? This is where having an understanding of statistical tests can help us - we can evaluate claims to try and figure out which are/ aren’t statistically significant.</p>
+<p>Statisitical tests are frequently used in science to figure out if our findings are important or not - essentially a way to formally define a threshold of what is an interesting result vs, what isn’t an interesting result.</p>
+<p>A clearly defined, and reporducible way to evaluate findings.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -289,42 +292,8 @@
 <li class="fragment">Define the Type I and Type II errors.</li>
 <li class="fragment">Evaluate a hypothesis using appropriate statistical tests.</li>
 </ol>
-<!-- # Motivations
-
-## How do we know what to believe?
-
-NOTE: change this to focus on the idea of using statistics to validate claims - i.e. what we see in the media or on the news. 
-
-- Crime rates across cities 
-- Spatial patterns of school achievement 
-- Inequalities in access to transport 
-
-<!-- <div style="text-align:center;">
-  <img src="L3_images/lime_bike_leg.png"
-       alt="Screenshot from the Telegraph online of an article about a rise in Lime Bike accidents."
-       style="max-width:70%" class="fragment">
-</div>
-
-<div style="text-align:center;">
-  <img src="L3_images/lime_bike_clapham.png"
-       alt="Screenshot from the Guardian of an article about dangerous biking in Clapham."
-       style="max-width:70%; margin-top:-70%;" class="fragment">
-</div>
-
-<div style="text-align:center;">
-  <img src="L3_images/lime_bike_shoreditch.png"
-       alt="Screenshot from the Standard about Lime bike accidents in Shoreditch."
-       style="max-width:70%; margin-top:-70%;" class="fragment">
-</div>
-
-<div class="fragment"
-     style="text-align:center; margin-top:-60%; background:#4e3c56; color:white; padding:1em; border-radius:10px;">
-  <strong>Is cycling in London less safe since the introduction of Lime bikes?</strong>
-</div> -->
-<aside class="notes">
-<p>We see stories in the news, how do we know what to believe and what not to believe? This is where having an understanding of statistical tests can help us - we can evaluate claims to try and figure out which are/ aren’t statistically significant.</p>
-<p>Statisitical tests are frequently used in science to figure out if our findings are important or not - essentially a way to formally define a threshold of what is an interesting result vs, what isn’t an interesting result.</p>
-<p>A clearly defined, and reporducible way to evaluate findings. ::: –&gt;</p>
+</section></section>
+<section>
 <section id="how-do-you-come-up-with-a-hypothesis" class="title-slide slide level1 center">
 <h1>How do you come up with a hypothesis?</h1>
 
@@ -444,8 +413,8 @@ The hypothesis is that it is a fair coin.
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-
+</section></section>
+<section>
 <section id="establishing-and-evaluating-a-hypothesis" class="title-slide slide level1 center">
 <h1>Establishing and evaluating a Hypothesis</h1>
 <p>In <span style="color:#49a0c4">five</span> simple steps.</p>
@@ -607,8 +576,8 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <li class="fragment">Calculate the p-value</li>
 <li class="fragment">Compare p-value with hypothesis level</li>
 </ol>
-</section>
-
+</section></section>
+<section>
 <section id="types-of-error" class="title-slide slide level1 center">
 <h1>Types of error</h1>
 <p>… where things can go wrong.</p>
@@ -709,8 +678,8 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-
+</section></section>
+<section>
 <section id="a-good-hypothesis-or-a-bad-hypothesis" class="title-slide slide level1 center">
 <h1>A good hypothesis or a bad hypothesis?</h1>
 
@@ -846,8 +815,8 @@ Dataset: heights of students
 **Calculate the p-value**
 
 Aha! -->
-</section>
-
+</section></section>
+<section>
 <section id="example-students-height" class="title-slide slide level1 center">
 <h1>Example: students height</h1>
 <p><span style="color:#49a0c4"><em>Research question</em></span><br>
@@ -936,8 +905,8 @@ $\bar{x}_2 = 180$, $s_2 = 6$, $n_2 = 103$ -->
 <div class="fragment">
 <p>We need to know what statistical test to use!</p>
 </div>
-</section>
-
+</section></section>
+<section>
 <section id="statistical-tests" class="title-slide slide level1 center">
 <h1>Statistical tests</h1>
 
@@ -967,8 +936,8 @@ $\bar{x}_2 = 180$, $s_2 = 6$, $n_2 = 103$ -->
 <section id="deciding-on-a-test" class="slide level2">
 <h2>Deciding on a test</h2>
 <p>NOTE: want a table here that guides you on how to choose an appropriate statistical test</p>
-</section>
-
+</section></section>
+<section>
 <section id="parametric-tests" class="title-slide slide level1 center">
 <h1>Parametric tests</h1>
 
@@ -1089,8 +1058,8 @@ This indicates a correlation between the two variables.
 ...
 
 This will be covered further in lecture X on linear regression.  -->
-</section>
-
+</section></section>
+<section>
 <section id="non-parametric-tests" class="title-slide slide level1 center">
 <h1>Non-parametric tests</h1>
 
@@ -1177,7 +1146,7 @@ D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
 <section id="kde-of-simulated-heights" class="slide level2">
 <h2>KDE of simulated heights</h2>
 <p>It’s easy to fit a KDE to data in Python:</p>
-<div id="35b2c130" class="cell" data-execution_count="1">
+<div id="ad2106c2" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb3-3"><a></a><span class="im">from</span> scipy.stats <span class="im">import</span> gaussian_kde</span>
@@ -1205,8 +1174,8 @@ D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
 <li class="fragment">compare visually</li>
 <li class="fragment">carry out non-paremetric test - such as Kolmogorov-Smirnov</li>
 </ul>
-</section>
-
+</section></section>
+<section>
 <section id="example-students-height-1" class="title-slide slide level1 center">
 <h1>Example: students height</h1>
 
@@ -1261,7 +1230,7 @@ t &amp;= \frac{170 - 180}{5.55 \cdot \sqrt{\tfrac{1}{95} + \tfrac{1}{103}}} \app
 df = n_1 + n_2 - 2 = 95 + 103 - 2 = 196
 \end{align}\]</span>
 <p>Then use Python to calculate the two-tailed critical t-value at <span class="math inline">\(\alpha = 0.05\)</span>.</p>
-<div id="9dec6a7d" class="cell" data-execution_count="2">
+<div id="96437644" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">from</span> scipy.stats <span class="im">import</span> t</span>
 <span id="cb4-2"><a></a></span>
 <span id="cb4-3"><a></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
@@ -1287,8 +1256,7 @@ t= |-12.7| \gg 1.97= t_crit
 \end{align}\]</span>
 <p>we reject <span class="math inline">\(H_0\)</span>. Male and female students have significantly different heights.</p>
 </div>
-</section>
-
+</section></section>
 <section id="overview" class="title-slide slide level1 center">
 <h1>Overview</h1>
 <p>We’ve covered:</p>
@@ -1308,19 +1276,6 @@ t= |-12.7| \gg 1.97= t_crit
 
 </div>
 </section>
-
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="../img/logo/full.svg" class="slide-logo"></p>

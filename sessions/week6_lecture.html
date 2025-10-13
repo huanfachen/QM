@@ -7,11 +7,14 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-95f147d06fdb9f8ce149f95e323965f4.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-95f147d06fdb9f8ce149f95e323965f4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.25">
 
-  <meta name="author" content="XXX">
-  <title>Quantitative Methods – XXX</title>
+  <meta name="author" content="Adam Dennett">
+  <title>Quantitative Methods – Prof D’s Regression Sessions - Vol 1</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -30,7 +33,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-708fdb05d86516b6f171cd9cf793ecac.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-3d9a2287676b2fea48eb10fd22aaf47d.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -122,8 +125,29 @@
       margin-right: 0; 
     }
   </style>
-<meta property="og:title" content="XXX – Quantitative Methods">
-<meta property="og:description" content="XXX">
+  <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+  <script src="../site_libs/core-js-2.5.3/shim.min.js"></script>
+  <script src="../site_libs/react-18.2.0/react.min.js"></script>
+  <script src="../site_libs/react-18.2.0/react-dom.min.js"></script>
+  <script src="../site_libs/reactwidget-2.0.0/react-tools.js"></script>
+  <link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+  <script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+  <link href="../site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+  <script src="../site_libs/reactable-binding-0.4.4/reactable.js"></script>
+  <script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <link href="../site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+  <script src="../site_libs/leaflet-1.3.1/leaflet.js"></script>
+  <link href="../site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+  <script src="../site_libs/proj4-2.6.2/proj4.min.js"></script>
+  <script src="../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+  <link href="../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+  <script src="../site_libs/leaflet-binding-2.2.3/leaflet.js"></script>
+  <script src="../site_libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+  <script src="../site_libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script>
+<meta property="og:title" content="Prof D’s Regression Sessions - Vol 1 – Quantitative Methods">
+<meta property="og:description" content="Time to go deep!">
 <meta property="og:image" content="https://huanfachen.github.io/QM/sessions/img/logo/full_sm.png">
 <meta property="og:site_name" content="Foundations">
 <meta property="og:locale" content="en_GB">
@@ -133,77 +157,1211 @@
     <div class="slides">
 
 
-<section id="title-slide" data-background-color="#4e3c56" data-background-image="../img/web/title-slide.png" data-background-opacity="0.08" data-background-size="stretch" style="height:100%" class="center">
+<section id="title-slide" data-background-color="#4e3c56" data-background-image="L6_images/regression.png" data-background-opacity="0.08" data-background-size="stretch" style="height:100%" class="center">
 
 <br>
 <br>
 
-<h1 class="title">XXX</h1>
+<h1 class="title">Prof D’s Regression Sessions - Vol 1</h1>
 
-  <h3 style="opacity:0.8;" class="subtitle">XXX</h3>
+  <h3 style="opacity:0.8;" class="subtitle">Time to go deep!</h3>
 
-<p><span style="margin:0px; font-weight:700;" class="author">XXX</span> - XXX </p>
+<p><span style="margin:0px; font-weight:700;" class="author">Adam Dennett</span> - a.dennett@ucl.ac.uk </p>
 
-<p style="opacity: 0.8">12 September 2025</p>
+<p style="opacity: 0.8">1st August 2024</p>
 
+<p style="opacity:0.8;">CASA0007 Quantitative Methods</p>
 
+</section>
+<section id="this-weeks-session---foundations" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>This week’s Session - Foundations</h2>
+<div class="cell">
+<style type="text/css">
+/* This sits here, because it allows us to use images from within the L6_images/ folder. Otherwise, the file structure gets a lot more involved! */
+.reveal::after {
+  background-image: url('L6_images/light-background.png');
+}
+</style>
+</div>
+<p>Motivation:</p>
+<ul>
+<li>Over the years I’ve marked too many dissertations and examined too many PhDs where people still get the basics of regression wrong - this is my attempt to help fix this once and for all!</li>
+<li>I’ve been using this method for 20 years and I <strong><em>still</em></strong> get things wrong and I’m <strong><em>still</em></strong> learning new things about it!</li>
+<li>Once you get the basics, it is perhaps <em>THE</em> most useful tool in your statistical toolbox</li>
+<li>Forget about machine learning and pointlessly complicated models - a simple regression model is your statistical Swiss Army Knife!</li>
+</ul>
+</section>
+<section id="this-weeks-session---foundations-1" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>This week’s Session - Foundations</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>A Recipe for Success:
+<ul>
+<li>understanding your ingredients (data)</li>
+<li>understanding the basic method (rules) - sample size, heteroscedascity, variance, degrees of freedom</li>
+<li>baking your first cake (model)</li>
+<li>judging your efforts (interpreting the outputs)</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><a href="https://gu-witness.s3.amazonaws.com/media/31ab0d58-3f7a-44d0-842e-adfcf80f1d8c-mediumoriginalaspectdouble.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="https://gu-witness.s3.amazonaws.com/media/31ab0d58-3f7a-44d0-842e-adfcf80f1d8c-mediumoriginalaspectdouble.jpg"></a></p>
+</div></div>
+</section>
+<section id="this-weeks-session---foundations-2" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>This week’s Session - Foundations</h2>
+<ul>
+<li>Applied Regression in the real world
+<ul>
+<li>Any model is just a simplified version of reality</li>
+<li>A good model can offer you insights into the real world situation you are studying and can underpin good real world decisions</li>
+<li>a good model interpreted badly can lead to poor policy decisions</li>
+<li>a bad model, even if interpreted correctly, will probably also lead to poor policy decisions</li>
+</ul></li>
+<li>So we need to get both the modelling and the interpretation correct!</li>
+</ul>
 </section>
 <section>
-<section id="this-week" class="title-slide slide level1 center">
-<h1>This week</h1>
+<section id="our-real-world-case-study---what-are-the-factors-affecting-school-level-educational-attainment-in-brighton-and-hove-england" class="title-slide slide level1 center" data-background-image="https://adamdennett.github.io/BH_Schools_Consultation/attainment_extra_files/figure-html/unnamed-chunk-10-1.png" data-background="#2e6260" data-background-opacity="0.1">
+<h1>Our Real World Case Study - What are the Factors Affecting School-Level Educational Attainment in Brighton and Hove, England?</h1>
 
 </section>
-<section id="understanding-and-describing-data" class="slide level2">
-<h2>Understanding and describing data</h2>
+<section id="secondary-schools-and-attainment---gcses" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Secondary Schools and Attainment - GCSEs</h2>
 <ul>
-<li><p>Quantitative research is the process of collecting and analysing <strong>numerical data</strong> to describe, model, and predict variables of interest.</p></li>
-<li><p>Garbage in, garbage out.</p></li>
+<li>Secondary Schools mainly teach children between the ages of 11-16 in England and Wales (some 11-18, some 13-18)</li>
+<li>The examinations most children take at the end of Year 11 (age 16) are called GCSEs (General Certificate of Secondary Education)</li>
+<li>The GCSEs are graded from 9 (highest) to 1 (lowest), with a grade of 4 considered a “standard pass” and a grade of 5 considered a “strong pass”</li>
 </ul>
-<aside class="notes">
-<p>This lecture focuses on understanding and describing data.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
-<section id="learning-objectives" class="slide level2">
-<h2>Learning Objectives</h2>
-<p>By the end of this lecture you should:</p>
-<ol type="1">
-<li>Understand basic data types;</li>
-<li>Consider how to summarise and represent data.</li>
-</ol>
+<section id="secondary-schools-and-attainment---attainment-8" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Secondary Schools and Attainment - Attainment 8</h2>
+<ul>
+<li>Attainment 8 is a measure that sums the grades for each pupil across 8 GCSEs (the standard number taken).
+<ul>
+<li>Maths is always counted twice and English often counted twice where both language and literature are taken.</li>
+<li>Thus a maximum Attainment 8 score of 90 can be achieved</li>
+<li>40 = Standard Pass, 50 = Strong Pass</li>
+</ul></li>
+<li>The Attainment 8 scores for all year 11 students can be averaged for each school giving a school-level average Attainment 8 Score</li>
+<li>Attainment 8 is a raw score and doesn’t account for important variations in the cohorts of students each school admits or the types of school, so direct comparison between schools without accounting for these factors is risky</li>
+</ul>
+</section>
+<section id="secondary-schools-and-attainment---progress-8" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Secondary Schools and Attainment - Progress 8</h2>
+<ul>
+<li>Progress 8 is an alternative attainment score which looks at the progress a student makes between arriving at a school in year 7 or 9 and leaving at age 16</li>
+<li>It compares their levels of attainment at entry and exit with the progress made by similar students nationally</li>
+<li>Progress 8 is a ‘value-added’ ratio. A score of zero means students, on average, made expected progress, while a positive score means they made more progress than expected, and a negative score means they made less</li>
+</ul>
+</section>
+<section id="secondary-schools-attainment-and-urban-policy" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Secondary Schools, Attainment and Urban Policy</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>School performance and pupil attainment can be a big urban policy issue - particularly where variations in access and perceived quality occur</li>
+<li>These variations feed into broader socio-economic issues in cities</li>
+<li>In the UK, schools are the responsibility of local government</li>
+<li>Understanding the drivers behind pupil attainment and school performance vital for effective resource allocation and good local policy</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><a href="L6_images/BHCC_Engagement_PPT.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="L6_images/BHCC_Engagement_PPT.png"></a></p>
+</div></div>
+<div class="footer">
+
+</div>
+</section>
+<section id="secondary-schools-attainment-and-urban-policy-1" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Secondary Schools, Attainment and Urban Policy</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>In 2024, Brighton and Hove Council convinced pupil attainment mainly driven by <strong><em>Disadvantage Attainment Gap</em></strong> - socio-economically disadvantaged students perform worse than their more affluent peers</li>
+<li>Work of Professor Stephen Gorard, University of Durham, suggests mixing of disadvantage improves attainment</li>
+<li><strong>Solution</strong>: create more socially mixed schools through a new controversial admissions policy</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><a href="L6_images/gorard_conversation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="L6_images/gorard_conversation.png"></a></p>
+</div></div>
+<div class="footer">
+<p>The Conversation: <a href="https://theconversation.com/poorer-pupils-do-worse-at-school-heres-how-to-reduce-the-attainment-gap-205535" class="uri">https://theconversation.com/poorer-pupils-do-worse-at-school-heres-how-to-reduce-the-attainment-gap-205535</a></p>
+</div>
+</section>
+<section id="reserarch-questions" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Reserarch Question(s)</h2>
+<ul>
+<li>What are the factors that affect school-level educational attainment in Brighton and Hove?</li>
+<li>To what extent is attainment driven by social mixing?</li>
+<li>Are there any other factors that are relevant?</li>
+<li>What are the implications of this for local policy?</li>
+<li>Can regression help us and, if it can, how can we go about carefully building a regression model to help us answer these questions?</li>
+</ul>
 </section></section>
-<section id="overview" class="title-slide slide level1 center">
-<h1>Overview</h1>
-<p>We’ve covered:</p>
-<ul>
-<li>Data types: levels of measurements; quantitative &amp; qualitative</li>
-<li>Key metrics</li>
-<li>Null values and outliers</li>
-<li>Visualising data</li>
-</ul>
-</section>
-
-<section id="practical" class="title-slide slide level1 center">
-<h1>Practical</h1>
-<p>Practical will focus on setting up Python environment and describing a dataset.</p>
-<ul>
-<li>Have questions prepared!</li>
-</ul>
-
+<section>
+<section id="a-reliable-regression-modelling-recipe" class="title-slide slide level1 center" data-background-image="https://adamdennett.github.io/BH_Schools_Consultation/attainment_extra_files/figure-html/unnamed-chunk-10-1.png" data-background="#2e6260" data-background-opacity="0.1">
+<h1>A Reliable Regression Modelling Recipe</h1>
 
 </section>
+<section id="step-1---ingredients" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 1 - Ingredients</h2>
+<ul>
+<li>The <strong>Exploratory Data Analysis</strong> phase is the most important part of any modelling exercise (<strong>see Weeks 1 &amp; 2 of this course</strong>)</li>
+<li>Failure to get to know your data properly means you might mis-specify your model by:
+<ul>
+<li>using the wrong explanatory variables or omitting some key ones</li>
+<li>misunderstanding your data types - e.g.&nbsp;counts vs continuous</li>
+<li>misunderstanding the relationships between your variables (linear vs logarithmic)</li>
+<li>not accounting for important spatial or temporal patterns (autocorrelation) that might mean your observations are not independent</li>
+</ul></li>
+</ul>
+</section>
+<section id="step-1a---ingredients-gathering-and-preparation" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 1a - Ingredients (gathering and preparation)</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>The data is collected by the Department for Education (DfE) - a full annual census of each school’s</li>
+<li>Hundreds of variables collected relating to:
+<ul>
+<li>attainment and progress</li>
+<li>pupil characteristics</li>
+<li>school characteristics</li>
+</ul></li>
+<li>Some data / variables (ingredients) will be more useful than others</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><a href="L6_images/gov_school_data.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="L6_images/gov_school_data.png"></a></p>
+</div></div>
+<div class="footer">
+<p>DfE Data: <a href="https://www.compare-school-performance.service.gov.uk/compare-schools" class="uri">https://www.compare-school-performance.service.gov.uk/compare-schools</a></p>
+</div>
+</section>
+<section id="step-1a---ingredients-gathering-and-preparation-1" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 1a - Ingredients (gathering and preparation)</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="reactable html-widget html-fill-item" id="htmlwidget-e65382967c805d04ac23" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e65382967c805d04ac23">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"URN":["114606","136164","114611","114580","114607","139409","114581","114608","137063","114579"],"SCHNAME.x":["Blatchington Mill School","Brighton Aldridge Community Academy","Cardinal Newman Catholic School","Dorothy Stringer School","Hove Park School and Sixth Form Centre","King's School","Longhill High School","Patcham High School","Portslade Aldridge Community Academy","Varndean School"],"TOWN.x":["Hove","Brighton","Hove","Brighton","Hove","Hove","Brighton","Brighton","Brighton","Brighton"],"TOTPUPS":[1621,838,2497,1640,1123,789,875,1118,953,1498],"ATT8SCR":[49.7,36.2,51.8,53.8,46.8,54.3,35.8,47.9,44.8,54.5],"OFSTEDRATING":["Good","Requires improvement","Good","Good","Good","Good","Requires improvement","Good","Good","Good"],"MINORGROUP":["Maintained school","Academy","Maintained school","Maintained school","Maintained school","Academy","Maintained school","Maintained school","Academy","Maintained school"],"PTFSM6CLA1A":[15,45,18,18,29,16,29,19,26,20]},"columns":[{"id":"URN","name":"URN","type":"character"},{"id":"SCHNAME.x","name":"SCHNAME.x","type":"character"},{"id":"TOWN.x","name":"TOWN.x","type":"character"},{"id":"TOTPUPS","name":"TOTPUPS","type":"numeric"},{"id":"ATT8SCR","name":"ATT8SCR","type":"numeric"},{"id":"OFSTEDRATING","name":"OFSTEDRATING","type":"character"},{"id":"MINORGROUP","name":"MINORGROUP","type":"character"},{"id":"PTFSM6CLA1A","name":"PTFSM6CLA1A","type":"numeric"}],"theme":{"color":"#0F0C11","borderColor":"#F6F5F6","stripedColor":"#DBD8DD80","highlightColor":"#E9E7EA","style":{"fontFamily":"Arial, Segoe UI, Helvetica, Arial, sans-serif","fontSize":"11pt"},"headerStyle":{"whiteSpace":"prewrap","wordWrap":"normal","fontFamily":"Hanken Grotesk, Segoe UI, Helvetica, Arial, sans-serif","fontSize":"11pt","borderColor":"#4e3c56","color":"#4e3c56","align":"center","&:hover[aria-sort]":{"borderTop":"1px solid #4E3C5680"},"&[aria-sort='ascending'], &[aria-sort='descending']":{"borderTop":"1px solid #4e3c56"},"borderColor.1":"#F6F5F6"},"footerStyle":{"fontFamily":"Arial, Segoe UI, Helvetica, Arial, sans-serif","fontWeight":"bold","color":"#2E2433"}},"dataKey":"843643a640f92be35923fd0ef8a54303"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="step-1b---ingredients-familiarisation" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 1b - Ingredients (familiarisation)</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-0ec37b82d2dfef5a5401" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-0ec37b82d2dfef5a5401">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[50.84518344583651,50.85776883135672,50.83698199315116,50.84894849281406,50.84086697666147,50.85412339104608,50.819005224367,50.86229470041378,50.85064352003758,50.85029640803767],[-0.1813063610382805,-0.09418517296942071,-0.1578359732902718,-0.1434141420854121,-0.1795993000302818,-0.1917564985986432,-0.06729832445034298,-0.1439782682261224,-0.2257738380582976,-0.1371381276530292],[7.89695550351288,4.229508196721311,12,7.985948477751757,5.56440281030445,4,4.402810304449648,5.540983606557377,4.768149882903981,7.320843091334895],null,null,{"interactive":true,"className":"","stroke":false,"color":["#F5DC72","#3F6D61","#4E3C56","#F8DD73","#91B066","#2E6260","#4B7562","#90AF66","#628764","#DFD66F"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#F5DC72","#3F6D61","#4E3C56","#F8DD73","#91B066","#2E6260","#4B7562","#90AF66","#628764","#DFD66F"],"fillOpacity":0.8},null,null,["<strong>Blatchington Mill School<\/strong><br>Pupils: 1621","<strong>Brighton Aldridge Community Academy<\/strong><br>Pupils: 838","<strong>Cardinal Newman Catholic School<\/strong><br>Pupils: 2497","<strong>Dorothy Stringer School<\/strong><br>Pupils: 1640","<strong>Hove Park School and Sixth Form Centre<\/strong><br>Pupils: 1123","<strong>King's School<\/strong><br>Pupils: 789","<strong>Longhill High School<\/strong><br>Pupils: 875","<strong>Patcham High School<\/strong><br>Pupils: 1118","<strong>Portslade Aldridge Community Academy<\/strong><br>Pupils: 953","<strong>Varndean School<\/strong><br>Pupils: 1498"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#2E6260 , #326460 0.644028103044497%, #6F9265 12.3536299765808%, #A7C366 24.0632318501171%, #CDD16C 35.7728337236534%, #F1DB72 47.4824355971897%, #F4B697 59.192037470726%, #E883BE 70.9016393442623%, #B260A5 82.6112412177986%, #6D486F 94.3208430913349%, #4E3C56 "],"labels":["800","1,000","1,200","1,400","1,600","1,800","2,000","2,200","2,400"],"na_color":null,"na_label":"NA","opacity":0.7,"position":"bottomright","type":"numeric","title":"Total Pupils","extra":{"p_1":0.006440281030444965,"p_n":0.9432084309133489},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[50.819005224367,50.86229470041378],"lng":[-0.2257738380582976,-0.06729832445034298]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<ul>
+<li>Visualisation is perhaps the most important part of the EDA phase</li>
+<li>Always map and graph your data so that you can spot potential issues before they ruin your model!</li>
+</ul>
+</section>
+<section id="step-1b---ingredients-familiarisation-1" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 1b - Ingredients (familiarisation)</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/attainment-8-histogram-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="week6_lecture_files/figure-revealjs/attainment-8-histogram-1.png" class="quarto-figure quarto-figure-center" width="768"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Hmmm? Are there any problems that could be indicated here?</li>
+</ul>
+</section>
+<section id="step-1b---ingredients-familiarisation-2" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 1b - Ingredients (familiarisation)</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/attainment-8-boxplot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="week6_lecture_files/figure-revealjs/attainment-8-boxplot-1.png" class="quarto-figure quarto-figure-center" width="768"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Notice anything now?</li>
+<li>What could/should we do about it? Any suggestions?</li>
+</ul>
+</section>
+<section id="step-1c---ingredients-selection" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 1c - Ingredients (selection)</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-1c---ingredients-selection-1" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 1c - Ingredients (selection)</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/attainment-8-histogram2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="week6_lecture_files/figure-revealjs/attainment-8-histogram2-1.png" class="quarto-figure quarto-figure-center" width="768"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-1c---ingredients-selection-2" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 1c - Ingredients (selection)</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/attainment-8-histogram3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="week6_lecture_files/figure-revealjs/attainment-8-histogram3-1.png" class="quarto-figure quarto-figure-center" width="768"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-1c---ingredients-selection-3" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 1c - Ingredients (selection)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>The process of exploring and interrogating your data should take much longer than the modelling at the end</li>
+<li>The process is iterative - you might well be exploring your data and the theory <strong><em>at the same time</em></strong> to help you explore, filter, select and prepare for the modelling phase</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A["&lt;img src='L6_images/Data.png'&gt;"] --&gt; B[&lt;img src='L6_images/Book.png'&gt;]
+    B[&lt;img src='L6_images/Book.png'&gt;] --&gt; A["&lt;img src='L6_images/Data.png'&gt;"]
+    
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="step-1c---ingredients-selection-4" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 1c - Ingredients (selection)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Understanding your ‘system’ is vital</li>
+<li>What is “in” and what is “out”?</li>
+<li>How do you know?
+<ul>
+<li>Experience (e.g.&nbsp;I used to be a school teacher so aware of differences in types of school)</li>
+<li>Research! If you are unfamiliar with the system, do your research</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><a href="https://uclpress.co.uk/book/being-interdisciplinary/"><img data-src="L6_images/being_interdisciplinary.jpg" style="width:50.0%"></a></p>
+</div></div>
+</section>
+<section id="step-1c---ingredients-selection-5" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 1c - Ingredients (selection)</h2>
+<ul>
+<li>The role of theory and wider research on your system is vital in helping you select your variables for investigation</li>
+<li><strong>DO NOT JUST THROW EVERYTHING INTO YOUR MODEL JUST BECAUSE YOU HAVE SOME VARIABLES</strong>
+<ul>
+<li>This is a common mistake</li>
+<li>It can also lead to spurious interpretation where correlation and causation are not the same thing</li>
+</ul></li>
+<li>Carrying out a thorough literature review will also give you context for interpreting your model results later on in the process</li>
+<li><strong>ALWAYS CARRY OUT A THOROUGH LITERATURE REVIEW TO HELP GUIDE YOUR DATA / VARIABLE SELECTION</strong></li>
+</ul>
+</section>
+<section id="step-1c---ingredients-selection-6" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 1c - Ingredients (selection)</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Brighton and Hove City Council relied heavily on the work of Gorard in building its policy</li>
+<li>Paper links social mixing to improved attainment for disadvantaged pupils</li>
+<li>Includes variables such as:
+<ul>
+<li>school type (e.g.&nbsp;academy, maintained)</li>
+<li>pupil characteristics (e.g.&nbsp;free school meals (FSM) eligibility, special educational needs, ethnicity)</li>
+<li>school characteristics (e.g.&nbsp;size, location)</li>
+</ul></li>
+<li>Thus all might be worth investigating</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><a href="L6_images/gorard_disad_paper.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="L6_images/gorard_disad_paper.png"></a></p>
+</div></div>
+<div class="footer">
+<p><a href="https://journals.sagepub.com/doi/full/10.1177/2158244018825171" class="uri">https://journals.sagepub.com/doi/full/10.1177/2158244018825171</a></p>
+</div>
+</section>
+<section id="step-1c---ingredients-selection-7" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 1c - Ingredients (selection)</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>However, wider reading also suggests that factors such as attendance (which Gordard does not include in his paper as a variable) may also play a big role in the attainment of disadvantaged pupils</li>
+<li>Work by Claymore suggests that a large proportion of the gap in attainment between disadvantaged pupils and more affluent peers can be explained by:
+<ul>
+<li>the differences in absence rates</li>
+<li>exclusion</li>
+<li>rates of moving between schools</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><a href="L6_images/nfer.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="L6_images/nfer.png"></a></p>
+</div></div>
+<div class="footer">
+<p><a href="https://www.nfer.ac.uk/publications/being-present-the-power-of-attendance-and-stability-for-disadvantaged-pupils/" class="uri">https://www.nfer.ac.uk/publications/being-present-the-power-of-attendance-and-stability-for-disadvantaged-pupils/</a></p>
+</div>
+</section>
+<section id="step-2---method" class="slide level2" data-transition="convex-in none-out" data-transition-speed="fast">
+<h2>Step 2 - Method</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    I{Choosing a &lt;br/&gt;statistical test} --&gt;
+    A[How Many Variables?] --&gt;
+    C(2?) &amp; G(More than 2?)
+    C --&gt;|Categorical?| D(Chi Squared &lt;br/&gt;or Similar e.g. T-test)
+    C --&gt;|Scale or Ratio?| E(Pearson Correlation &lt;br/&gt;or Spearman's Rank)
+    C --&gt;|Both?| F(Ask Google)
+    G --&gt; H(REGRESSION - everything else, &lt;br/&gt;get in the bin)
+    
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<!-- ## Step 2 - Method {transition="convex-in none-out" transition-speed="fast"} -->
+<!-- -   ***Based on our raw ingredients, which methods might allow us to try and answer our research question(s)?*** -->
+<!-- -   ***Dependent variable(s)*** (what we are trying to explain / predict): Attainment 8 / Progress 8 **-\>** continuous / Ratio scales -->
+<!-- -   ***Independent variables*** - explanatory / predictor variables of varying data types to explain variation in the dependent variable -->
+<!-- -   As such ***Linear Regression*** is the most appropriate statistical test to employ -->
+<!-- ## Step 2 - Method {transition="convex-in none-out" transition-speed="fast"} -->
+<!-- -   Good regression models are built slowly and iteratively -->
+<!-- -   My preference is to start simply (2 variables) and build complexity (more variables, variations on the method) slowly -->
+<!-- -   As with complicated baking recipes, it's important to pay attention to each element of the regression recipe and get each part right -->
+</section>
+<section id="linear-regression---its-just-a-scatter-plot" class="slide level2">
+<h2>Linear Regression - It’s just a scatter plot!</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>A regression model is nothing more than a description of a scatter plot</strong></li>
+<li>Dependent variable = <span class="math inline">\(Y\)</span>-axis</li>
+<li>Independent variable = <span class="math inline">\(X\)</span>-axis</li>
+</ul>
+</section>
+<section id="linear-regression---line-of-best-fit" class="slide level2">
+<h2>Linear Regression - Line of Best-fit</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The linear regression model is the straight line of best-fit</li>
+<li>A linear model function <code>lm()</code> (in <code>R</code>) uses a method called <strong><em>Ordinary Least Squares (OLS)</em></strong> to find the line of best-fit.</li>
+<li>The best line minimises the squared (so that negatives and positives don’t cancel) vertical distances between the line and the points - hence OLS</li>
+</ul>
+</section>
+<section id="linear-regression---residuals-error" class="slide level2">
+<h2>Linear Regression - Residuals / Error</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The vertical distances between the points and the line of best fit are called the <strong>residuals</strong> - sometimes also referred to as the <strong>errors</strong> or <span class="math inline">\(\epsilon\)</span></li>
+<li>The closer the points are to the line, the better the fit of the model</li>
+</ul>
+</section>
+<section id="linear-regression---r-squared" class="slide level2">
+<h2>Linear Regression - R-Squared</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-12-1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The fit of the model is represented by the <strong><em>coefficient of determination</em></strong> or <span class="math inline">\(R^2\)</span> value (0-1), which is calculated from the residuals</li>
+<li>It describes how much of the variation in <span class="math inline">\(Y\)</span> (Attainment 8 score) is explained by the variation in <span class="math inline">\(X\)</span> (% Disadvantaged Students) - here 69%</li>
+<li>The closer to 1 (100%), the better the fit of the model</li>
+</ul>
+</section>
+<section id="linear-regression---r-squared-1" class="slide level2">
+<h2>Linear Regression - R-Squared</h2>
+<p><a href="L6_images/Correlation_examples2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="L6_images/Correlation_examples2.png"></a></p>
+<ul>
+<li>It’s easy to visually estimate your <span class="math inline">\(R^2\)</span> value from looking at how well correlated the points are. <em>NB as squared, always +</em></li>
+</ul>
+<div class="footer">
+<p>Source: <a href="https://work.thaslwanter.at/Stats/html/statsRelation.html" class="uri">https://work.thaslwanter.at/Stats/html/statsRelation.html</a></p>
+</div>
+</section>
+<section id="linear-regression---slope-and-intercept" class="slide level2">
+<h2>Linear Regression - Slope and Intercept</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The regression line itself can be described by an equation with two parameters / coefficients:
+<ul>
+<li>The <strong>intercept</strong> - <span class="math inline">\(\beta_0\)</span> - which is the value of <span class="math inline">\(Y\)</span> when <span class="math inline">\(X = 0\)</span></li>
+<li>The <strong>slope</strong> - <span class="math inline">\(\beta_1\)</span> - which the change in the value of <span class="math inline">\(Y\)</span> for a 1 unit change in <span class="math inline">\(X\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="linear-regression---slope-and-intercept-1" class="slide level2">
+<h2>Linear Regression - Slope and Intercept</h2>
+<ul>
+<li>Another way of thinking of your <strong>intercept</strong> is as your <em>model baseline</em>.
+<ul>
+<li>In our case: baseline attainment, controlling for disadvantage.</li>
+</ul></li>
+<li>Higher or lower intercept values for different local authorities relate to higher or lower baseline attainment.</li>
+<li>Another way of thinking about your <strong>slope</strong> is the level of influence your <span class="math inline">\(X\)</span> variable might be having on your <span class="math inline">\(Y\)</span> variable
+<ul>
+<li>Higher value = Steeper Slope = More influence</li>
+<li>Lower value = more horizontal slope = Less influence</li>
+</ul></li>
+</ul>
+</section>
+<section id="linear-regression---model-estimates" class="slide level2">
+<h2>Linear Regression - Model Estimates</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display">\[Y = \beta_0 + \beta_1X_1 + \epsilon\]</span> <span class="math display">\[\hat{Y} = 62.35 + (-0.63 \times X) + \epsilon\]</span> <span style="color:#e16fca"><span class="math display">\[40.3 = 62.35 + (-0.63 \times 35) + 0\]</span></span></p>
+</section>
+<section id="linear-regression---the-statistical-model" class="slide level2">
+<h2>Linear Regression - The Statistical Model</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Scatter plots are an excellent intuitive way to understand the relationship between two continuous variables</li>
+<li>But algorithms are required to generate the various plot statistics and other useful info</li>
+<li>Lots of different statistical software packages will do this</li>
+<li>Doesn’t matter which you use, they all do pretty much the same thing under the hood</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="L6_images/Python-logo-notext.svg.png" style="width:20.0%"> <img data-src="L6_images/R_logo.svg.png" style="width:20.0%"> <img data-src="L6_images/Stata_logo_med_blue.png" style="width:20.0%"> <img data-src="L6_images/spss-1-logo-png-transparent.png" style="width:20.0%"> <img data-src="L6_images/statsmodels-logo-v2-horizontal.svg" style="width:20.0%"> <img data-src="L6_images/tidy_models.png" style="width:20.0%"></p>
+</div></div>
+</section>
+<section id="linear-regression---the-statistical-model-1" class="slide level2">
+<h2>Linear Regression - The Statistical Model</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ATT8SCR ~ PTFSM6CLA1A, data = btn_sub)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-8.300 -2.165  1.400  2.567  4.738 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  62.3457     3.7367  16.685 1.68e-07 ***
+PTFSM6CLA1A  -0.6292     0.1492  -4.217  0.00293 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4.087 on 8 degrees of freedom
+Multiple R-squared:  0.6897,    Adjusted R-squared:  0.651 
+F-statistic: 17.78 on 1 and 8 DF,  p-value: 0.002927</code></pre>
+</div>
+</div>
+<ul>
+<li>Example output from R</li>
+</ul>
+</section>
+<section id="linear-regression---running-the-model" class="slide level2">
+<h2>Linear Regression - Running the Model</h2>
+<p><a href="L6_images/the_Call.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="L6_images/the_Call.png"></a></p>
+<ul>
+<li>This is the code representation of the model equation we saw earlier:
+<ul>
+<li><code>lm()</code> is the function that fits a linear model</li>
+<li><code>ATT8SCR</code> (Attainment 8 Score) is the dependent variable <span class="math inline">\(Y\)</span></li>
+<li><code>~</code> means “is modelled by”</li>
+<li><code>PTFSM6CLA1A</code> (% Disadvantaged Students) is the independent variable <span class="math inline">\(X\)</span></li>
+<li><code>data = bnt_sub</code> is the dataset we are using which contains the variables</li>
+</ul></li>
+</ul>
+</section>
+<section id="linear-regression---residuals-and-error" class="slide level2">
+<h2>Linear Regression - Residuals and Error</h2>
+<p><img data-src="L6_images/the_resids.png"> <img data-src="L6_images/the_error.png"></p>
+<ul>
+<li>The residual errors range from -8.3 (Longhill) to + 4.7 (Varndean)</li>
+<li>The residual standard error of 4.087 = predictions for School’s Attainment 8 score are off by about 4.1 points</li>
+<li>Residual Standard Error (RSE) and <span class="math inline">\(R^2\)</span> are inversely related - A smaller RSE and larger <span class="math inline">\(R^2\)</span> both mean a more precise model</li>
+<li>The F-Statistic is a ratio of the amount of variance in <span class="math inline">\(Y\)</span> explained by the model to that not. x17.7 more - statistically significant &lt;0.005</li>
+</ul>
+</section>
+<section id="linear-regression---degrees-of-freedom" class="slide level2">
+<h2>Linear Regression - Degrees of Freedom</h2>
+<p><a href="L6_images/the_error.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="L6_images/the_error.png"></a></p>
+<ul>
+<li>DF are the <strong><em>Degrees of Freedom</em></strong> in the model. DF <strong><em>very</em></strong> important for understanding how reliable your <span class="math inline">\(R^2\)</span> value might be
+<ul>
+<li>The first number (1) relates to the number of variables</li>
+<li>The second number (8) relates to the number of observations (cases) in the dataset, minus the number of parameters</li>
+<li>In our example we have 10 observations and 2 parameters (intercept and slope) so <span class="math inline">\(10 - 2 = 8\)</span> degrees of freedom</li>
+</ul></li>
+</ul>
+</section>
+<section id="linear-regression---degrees-of-freedom-1" class="slide level2">
+<h2>Linear Regression - Degrees of Freedom</h2>
+<ul>
+<li><strong>General rule</strong>: <strong><em>more degrees of freedom = more reliable model</em></strong></li>
+<li>A model with many parameters vs observations will bend to fit those observations and not be a good generalisation - this is called <strong><em>overfitting</em></strong></li>
+<li>A model with little freedom might <em>appear</em> to have a high <span class="math inline">\(R^2\)</span>
+<ul>
+<li>but it is likely to perform poorly on new, unseen data</li>
+<li>it has captured the characteristics of your specific dataset rather than an underlying truth</li>
+</ul></li>
+<li><strong>General Rule</strong>: <strong><em>the more observations in your dataset the better!</em></strong></li>
+<li><strong>High</strong> <span class="math inline">\(R^2\)</span> with low DF = <span class="emoji" data-emoji="poop">💩</span></li>
+</ul>
+</section>
+<section id="linear-regression---degrees-of-freedom-2" class="slide level2">
+<h2>Linear Regression - Degrees of Freedom</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-16-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>2 observations - 2 parameters = 0 degrees of freedom</li>
+</ul>
+</section>
+<section id="linear-regression---degrees-of-freedom-3" class="slide level2">
+<h2>Linear Regression - Degrees of Freedom</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-17-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>3 observations - 2 parameters = 1 degree of freedom</li>
+</ul>
+</section>
+<section id="linear-regression---degrees-of-freedom-4" class="slide level2">
+<h2>Linear Regression - Degrees of Freedom</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-18-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>4 observations - 2 parameters = 2 degrees of freedom</li>
+</ul>
+</section>
+<section id="linear-regression---degrees-of-freedom-5" class="slide level2">
+<h2>Linear Regression - Degrees of Freedom</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-19-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>5 observations - 2 parameters = 3 degrees of freedom</li>
+</ul>
+</section>
+<section id="linear-regression---degrees-of-freedom-6" class="slide level2">
+<h2>Linear Regression - Degrees of Freedom</h2>
+<ul>
+<li><strong>How many Degrees of Freedom are required for a reliable model?</strong></li>
+<li>No single, universally agreed-upon number - aim to maintain a healthy ratio of observations to the number of parameters</li>
+<li>A common rule of thumb is the 10:1 ratio - <strong>10 observations for every 1 parameter</strong> - although this is a rough guide. If in doubt, even up to 20:1 to be safe</li>
+<li>In our example, we have 10 observations and 2 parameters = 5:1 ratio = <strong><em>so a potentially unreliable model - proceed with extreme caution!</em></strong></li>
+</ul>
+</section>
+<section id="linear-regression---variance" class="slide level2">
+<h2>Linear Regression - Variance</h2>
+<ul>
+<li>Degress of Freedom are also used to calculate the <strong><em>variance</em></strong> of the model</li>
+<li>If you ran the same model on different samples of the same population - e.g instead of Brighton, you ran this model on schools in Leeds or Bristol or Liverpool - you would get different values for your coefficients each time</li>
+<li>How similar these are to each other and more importantly the the whole population (all schools in England and Wales) is the <strong><em>variance</em></strong> - you want to minimise the variance in your coefficients if you want to generalise your model to the wider population</li>
+<li><strong>We will return to the idea of variance in the practical</strong></li>
+</ul>
+</section>
+<section id="linear-regression---coefficients-1" class="slide level2">
+<h2>Linear Regression - Coefficients 1</h2>
+<p><a href="L6_images/the_coefs.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="L6_images/the_coefs.png"></a></p>
+<ul>
+<li>The Estimates (<span class="math inline">\(\beta\)</span>)
+<ul>
+<li><strong>Intercept</strong> <span class="math inline">\(\beta_0\)</span> - estimated Attainment 8 value when % Disadvantaged Children in a school is <strong>zero</strong></li>
+<li>PTFSM6CLA1A (<strong>slope</strong> <span class="math inline">\(\beta_1\)</span>) - effect of a one-unit change in the % Disadvantaged Children on Attainment 8 - therefore linked to the units of the independent variable and not directly comparable across different variables if measured on different scales</li>
+</ul></li>
+</ul>
+</section>
+<section id="linear-regression---coefficients-2" class="slide level2">
+<h2>Linear Regression - Coefficients 2</h2>
+<p><a href="L6_images/the_coefs.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="L6_images/the_coefs.png"></a></p>
+<ul>
+<li>The Standard Error (SE) - measure of the uncertainty or precision of the estimate (coefficient) - how much it might vary
+<ul>
+<li><strong>Large SE relative to the Estimate = estimate unreliable / uncertain</strong></li>
+<li>SE of 0.15 for the estimate of -0.63 for PTFSM6CLA1A means the change in the value of Attainment 8 for a 1% change in disadvantaged students could vary between -0.48 and -0.78</li>
+</ul></li>
+</ul>
+</section>
+<section id="linear-regression---coefficients-3" class="slide level2">
+<h2>Linear Regression - Coefficients 3</h2>
+<p><a href="L6_images/the_coefs.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="L6_images/the_coefs.png"></a></p>
+<ul>
+<li>The t-value - ratio of the <span class="math inline">\(\frac{Estimate}{SE}\)</span>
+<ul>
+<li>a large standard error will make the t-value small (close to zero)</li>
+<li><strong><em>t-values can be thought of as a standardised coefficient</em></strong> - very useful for comparing the relative importance of different predictors in the model</li>
+<li>The <strong>larger the t-value, the more important the predictor</strong> is in explaining the variation in the dependent variable - more important the variable</li>
+</ul></li>
+</ul>
+</section>
+<section id="linear-regression---coefficients-4" class="slide level2">
+<h2>Linear Regression - Coefficients 4</h2>
+<p><a href="L6_images/the_coefs.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="L6_images/the_coefs.png"></a></p>
+<ul>
+<li>The <span class="math inline">\(P\)</span>-value - <span class="math inline">\(P\)</span>-robability of observing a t-value as extreme as the one calculated if there were <strong><em>no relationship</em></strong> between the independent and the dependent variable</li>
+<li>A small <span class="math inline">\(P\)</span>-value (typically <span class="math inline">\(p\)</span> &lt; 0.05) indicates &lt;5% chance that <span class="math inline">\(X\)</span> is not really explaining variation in <span class="math inline">\(Y\)</span></li>
+<li>The Signif. codes (like *** and **) are just a quick visual guide to this p-value, showing you at a glance which variables are significant.</li>
+<li>Any parameter with 1, 2 or 3* is “statistically significant” at 5% or better</li>
+</ul>
+</section>
+<section id="linear-regression---coefficients-4-1" class="slide level2">
+<h2>Linear Regression - Coefficients 4</h2>
+<p><a href="L6_images/the_coefs.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="L6_images/the_coefs.png"></a></p>
+<ul>
+<li>The <span class="math inline">\(P\)</span>-values relate to the <strong><em>null hypotheses</em></strong> that:
+<ul>
+<li>The true value of the intercept (baseline attainment) is <strong>zero</strong> when the independent variable (% disadvantage) is <strong>zero</strong>.</li>
+<li><span class="math inline">\(P\)</span> &lt;0.001 = &lt;0.1% <span class="math inline">\(P\)</span>-robability that 62.3 occurred by random chance</li>
+</ul></li>
+<li><strong>Note</strong> - It doesn’t tell us that when % Disadvantaged is zero, 62.3 will be a <em>correct</em> Attainment 8 score, just that real value is unlikely to be zero</li>
+</ul>
+</section>
+<section id="linear-regression---coefficients-4-2" class="slide level2">
+<h2>Linear Regression - Coefficients 4</h2>
+<p><a href="L6_images/the_coefs.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="L6_images/the_coefs.png"></a></p>
+<ul>
+<li>The <span class="math inline">\(P\)</span>-values relate to the <strong><em>null hypotheses</em></strong> that:
+<ul>
+<li>The true value of the PTFSM6CLA1A slope (relationship between % Disadvantaged and Attainment 8) is zero. <span class="math inline">\(P\)</span>- &lt; 0.01 = &lt;1% <span class="math inline">\(P\)</span>-robability that the relationship observed is by chance. Relationship is likely to be real.</li>
+</ul></li>
+</ul>
+</section>
+<section id="linear-regression---summary-so-far" class="slide level2">
+<h2>Linear Regression - Summary so far</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-20-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-20-1.png" class="quarto-figure quarto-figure-center" style="width:40.0%;height:50.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ol type="1">
+<li><p>Variation in % disadvantaged students in schools in Brighton appears to explain about 65-68% of the variation in Attainment 8 at the school level</p></li>
+<li><p>The % disadvantaged students is a statistically significant predictor and the relationship appears to be linear</p></li>
+<li><p>A 1% reduction in the number of disadvantaged students in a school appears to be associated with a 0.62 point increase in Attainment 8, and vice versa. <strong>So the council was right? Well, not quite…</strong></p></li>
+</ol>
+</section>
+<section id="linear-regression---summary-so-far-1" class="slide level2">
+<h2>Linear Regression - Summary so far</h2>
+<ol start="4" type="1">
+<li>The degrees of freedom in the model are small, so model likely to be <strong>over-fitted</strong> and unreliable for generalisation</li>
+</ol>
+<ul>
+<li>Small numbers of observations (schools in the city) mean that the model is highly sensitive to changes in the data</li>
+<li>It’s also unclear whether there are any other factors that might be correlated with disadvantaged students that might also be influencing Attainment 8 scores and <strong><em>confounding (return to this later)</em></strong> the apparent relationship we observe</li>
+<li><strong><em>What are the practical consequences of overfitting?</em></strong></li>
+</ul>
+</section>
+<section id="linear-regression---overfitting-outliers-and-high-leverage-points" class="slide level2">
+<h2>Linear Regression - Overfitting, Outliers and High Leverage Points</h2>
+<ul>
+<li>When we overfit, the model can be overly influenced by <strong><em>outliers</em></strong> (large residuals) and changes in key <strong><em>leverage points</em></strong> (points that are far from the mean of the independent variable)</li>
+<li>What happens to our model if:
+<ul>
+<li>a school improvement plan brings the outlier (Longhill) closer to attainment at Hove Park?</li>
+<li>Council makes Varndean increase its disadvantaged intake to 30%?</li>
+<li>And BACA improves its Attainment 8 to the city average following a huge cash injection from its academy trust?</li>
+</ul></li>
+</ul>
+</section>
+<section id="linear-regression---overfitting-outliers-and-high-leverage-points-1" class="slide level2">
+<h2>Linear Regression - Overfitting, Outliers and High Leverage Points</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-21-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-21-1.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Plausible changes to three schools have almost completely removed relationship between % Disadvantaged Students &amp; Attainment 8</li>
+<li>Overfitting -&gt; parameters highly sensitive to minor changes to a few key data points</li>
+<li>The <strong><em>closer the best-fit line gets to horizontal</em></strong>, the closer we get to <strong>NO RELATIONSHIP</strong> between the independent and dependent variables</li>
+</ul>
+</section>
+<section id="linear-regression---overfitting-outliers-and-high-leverage-points-2" class="slide level2">
+<h2>Linear Regression - Overfitting, Outliers and High Leverage Points</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ATT8SCR ~ PTFSM6CLA1A, data = btn_edit)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.4563 -2.4489 -0.5964  2.4240  6.0536 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  54.5204     3.2593  16.728 1.65e-07 ***
+PTFSM6CLA1A  -0.2025     0.1252  -1.617    0.145    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.476 on 8 degrees of freedom
+Multiple R-squared:  0.2462,    Adjusted R-squared:  0.152 
+F-statistic: 2.614 on 1 and 8 DF,  p-value: 0.1446</code></pre>
+</div>
+</div>
+<ul>
+<li>Overall <span class="math inline">\(P\)</span>-value of model now <strong>statistically insignificant</strong> &gt;0.1</li>
+<li>% Disadvantage in Schools now <strong>statistically insignificant</strong></li>
+</ul>
+</section>
+<section id="linear-regression---more-degrees-of-freedom" class="slide level2">
+<h2>Linear Regression - More Degrees of Freedom</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-23-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-33"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-23-1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Now we have a model that includes all schools in England and Wales</li>
+<li>Negative association present - appears to confirm Gorard’s observation</li>
+<li>R-Squared is reasonable - 34% of the variation explained</li>
+</ul>
+</section>
+<section id="linear-regression---more-degrees-of-freedom-1" class="slide level2">
+<h2>Linear Regression - More Degrees of Freedom</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ATT8SCR ~ PTFSM6CLA1A, data = england_filtered)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-36.268  -4.894  -1.345   3.662  33.140 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 56.955578   0.280566  203.00   &lt;2e-16 ***
+PTFSM6CLA1A -0.377548   0.009251  -40.81   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7.59 on 3248 degrees of freedom
+  (101 observations deleted due to missingness)
+Multiple R-squared:  0.339, Adjusted R-squared:  0.3388 
+F-statistic:  1665 on 1 and 3248 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li>We now have 3248 degrees of freedom</li>
+<li>Intercept and % Disadvantaged Students both highly significant</li>
+<li>Life is good? <strong><em>Wrong… Houston, we have some more problems!!</em></strong></li>
+</ul>
+</section>
+<section id="linear-regression---other-regression-assumptions" class="slide level2">
+<h2>Linear Regression - Other Regression Assumptions</h2>
+<ul>
+<li>I forgot to mention - there are another set of rules to follow to ensure our linear regression is reliable:
+<ul>
+<li><strong>Linearity</strong>: The relationship between the independent and dependent variables is linear</li>
+<li><strong>Homoscedasticity</strong>: Constant variance of residuals across all levels of the independent variable</li>
+<li><strong>Normality of residuals</strong>: Residuals are normally distributed</li>
+<li><strong>No multicollinearity</strong>: Independent variables are not highly correlated</li>
+<li><strong>Independence of residuals</strong>: Errors are not related to each other with each other</li>
+</ul></li>
+</ul>
+</section>
+<section id="linear-regression---linearity" class="slide level2">
+<h2>Linear Regression - Linearity?</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-25-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-34"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-25-1.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Linearity - Does your line go through all the points nicely?</li>
+<li>Hmmmm - suggestion of non-linearity with big up-tick at the low end of disadvantage</li>
+</ul>
+</section>
+<section id="linear-regression---linearity-1" class="slide level2">
+<h2>Linear Regression - Linearity?</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-26-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-35"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-26-1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Ploting the residuals against the fitted values is one check for linearity</li>
+<li>The residuals should be randomly scattered around zero - if they are not, it suggests a non-linear relationship</li>
+<li>The reference line should be horizontal at zero</li>
+</ul>
+</section>
+<section id="linear-regression---homoscedasticity-constant-variance" class="slide level2">
+<h2>Linear Regression - Homoscedasticity (Constant variance)?</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-27-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-36"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-27-1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Issues here too: the residuals are not randomly scattered around zero</li>
+<li>They are instead displaying <strong><em>heteroscdasticity</em></strong> (different variance)</li>
+</ul>
+</section>
+<section id="linear-regression---normality-of-residuals" class="slide level2">
+<h2>Linear Regression - Normality of Residuals?</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-28-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-37"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-28-1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>This is known as a <strong>Q-Q plot</strong> (Quantile-Quantile plot)</li>
+<li>A number of points not on the line - suggesting the residuals are not normally distributed</li>
+<li>Many points off line could mean untrustworthy p-values</li>
+</ul>
+</section>
+<section id="linear-regression---outliers" class="slide level2">
+<h2>Linear Regression - Outliers?</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-29-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-38"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-29-1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>At least we don’t have any problems with outliers!</li>
+</ul>
+</section>
+<section id="linear-regression---diagnostics" class="slide level2">
+<h2>Linear Regression - Diagnostics</h2>
+<ul>
+<li><strong>Linearity</strong>: <span class="emoji" data-emoji="sob">😭</span></li>
+<li><strong>Homoscedasticity</strong>: <span class="emoji" data-emoji="sob">😭</span></li>
+<li><strong>Normality of residuals</strong>: <span class="emoji" data-emoji="sob">😭</span></li>
+<li><strong>No multicollinearity</strong>: <span class="emoji" data-emoji="clock1130">🕦</span></li>
+<li><strong>Independence of residuals</strong>: <span class="emoji" data-emoji="clock1130">🕦</span></li>
+<li>Presently our model violates most of the key assumptions that underpin linear regression models. What this means is that in its current form, the relationship between % Disadvantaged Students and Attainment 8 described by the model is not reliable</li>
+</ul>
+</section>
+<section id="linear-regression---non-linearity" class="slide level2">
+<h2>Linear Regression - Non-Linearity</h2>
+<p><span class="math display">\[log(Y) = \beta_0 + \beta_1log(X_1) + \epsilon\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-30-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-39"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-30-1.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The log(<span class="math inline">\(Y\)</span>) log(<span class="math inline">\(X\)</span>) model is a standard transformation of these variables that can help to linearise relationships</li>
+<li>Sometimes referred to as an <strong>elasticity</strong> model - a % (rather than constant) change in <span class="math inline">\(X\)</span> leads to a % (not constant) change in <span class="math inline">\(Y\)</span></li>
+</ul>
+</section>
+<section id="linear-regression---the-log-log-transformation" class="slide level2">
+<h2>Linear Regression - the log-log transformation</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/attainment-8-histogram4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-40"><img data-src="week6_lecture_files/figure-revealjs/attainment-8-histogram4-1.png" class="quarto-figure quarto-figure-center" width="768"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="linear-regression---the-log-log-transformation-1" class="slide level2">
+<h2>Linear Regression - the log-log transformation</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-31-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-41"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="linear-regression---the-log-log-transformation-2" class="slide level2">
+<h2>Linear Regression - the log-log transformation</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(ATT8SCR) ~ log(PTFSM6CLA1A), data = england_filtered)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.20789 -0.08730 -0.00789  0.08197  0.56024 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       4.475612   0.012893  347.14   &lt;2e-16 ***
+log(PTFSM6CLA1A) -0.207443   0.004054  -51.18   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1438 on 3246 degrees of freedom
+Multiple R-squared:  0.4465,    Adjusted R-squared:  0.4464 
+F-statistic:  2619 on 1 and 3246 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li>Everything now looks highly statistically significant</li>
+<li><span class="math inline">\(R^2\)</span> is much better than before - 45%</li>
+</ul>
+</section>
+<section id="linear-regression---the-log-log-transformation-3" class="slide level2">
+<h2>Linear Regression - the log-log transformation</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-33-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-42"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-33-1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The residuals are now randomly scattered around zero - suggesting a linear relationship</li>
+</ul>
+</section>
+<section id="linear-regression---the-log-log-transformation-4" class="slide level2">
+<h2>Linear Regression - the log-log transformation</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-34-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-43"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-34-1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The residuals are now normally distributed - the Q-Q plot shows most points on the line</li>
+</ul>
+</section>
+<section id="linear-regression---the-log-log-transformation-5" class="slide level2">
+<h2>Linear Regression - the log-log transformation</h2>
+<ul>
+<li>Interpreting the log-log (elasticity) relationship:
+<ul>
+<li>Where the relationship is <strong><em>negative</em></strong>, a small absolute change in the independent variable at the <strong><em>lower</em></strong> end has a <strong><em>bigger</em></strong> impact than the same small absolute change at the higher end</li>
+<li>On our original plot: the effect of levels of disadvantage on attainment is much <strong><em>stronger at very low levels of disadvantage</em></strong> and <strong><em>weakens as the level of disadvantage increases</em></strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="linear-regression---level-log-model" class="slide level2">
+<h2>Linear Regression - Level-log model</h2>
+<p><span class="math display">\[Y = \beta_0 + \beta_1log(X_1) + \epsilon\]</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-35-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-44"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-35-1.png" class="quarto-figure quarto-figure-center" style="width:40.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Other options are to use a <strong><em>level-log</em></strong> model, where the dependent variable is not transformed but the independent variable is log-transformed.</li>
+<li>Use when the effect of the independent variable has diminishing returns - e.g.&nbsp;a change from <span class="math inline">\(log(2.7%)\)</span> or <span class="math inline">\(exp(1)\)</span> to <span class="math inline">\(log(7.3%)\)</span> <span class="math inline">\(exp(2)\)</span> disadvantaged students has same effect as a change from <span class="math inline">\(log(20%)\)</span> <span class="math inline">\(exp(3)\)</span> to <span class="math inline">\(log(54.5%)\)</span> <span class="math inline">\(exp(4)\)</span></li>
+</ul>
+</section>
+<section id="linear-regression---level-log-model-1" class="slide level2">
+<h2>Linear Regression - Level-log model</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ATT8SCR ~ log(PTFSM6CLA1A), data = england_filtered)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-43.631  -4.377  -0.919   3.504  34.071 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       79.0199     0.6080  129.97   &lt;2e-16 ***
+log(PTFSM6CLA1A) -10.3070     0.1911  -53.92   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6.78 on 3246 degrees of freedom
+Multiple R-squared:  0.4725,    Adjusted R-squared:  0.4723 
+F-statistic:  2908 on 1 and 3246 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="linear-regression---level-log-model-2" class="slide level2">
+<h2>Linear Regression - Level-log model</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-37-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-45"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-37-1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="linear-regression---level-log-model-3" class="slide level2">
+<h2>Linear Regression - Level-log model</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="week6_lecture_files/figure-revealjs/unnamed-chunk-38-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-46"><img data-src="week6_lecture_files/figure-revealjs/unnamed-chunk-38-1.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="linear-regression---to-log-or-not-to-log" class="slide level2">
+<h2>Linear Regression - to log or not to log?</h2>
+<ul>
+<li>The log-log model appears a better fit than the level-log model, however both are better than the basic linear model</li>
+<li>How to proceed will depend a little on whether we want to extend our model with other explanatory variables and the relationship they have with attainment</li>
+<li>Log-log - use when the relationship is believed to be multiplicative and the effects are best understood in terms of percentage changes.
+<ul>
+<li>This model is also excellent at addressing issues with heteroscedasticity and skewed variables</li>
+</ul></li>
+<li>Level-log - use when the effect of the independent variable has diminishing returns</li>
+</ul>
+</section>
+<section id="conclusions" class="slide level2">
+<h2>Conclusions</h2>
+<ul>
+<li>Regression Basics - DONE!</li>
+<li>Won’t summarise here, but please go over the slides again in your own time</li>
+<li>Now is your chance to put everything I have just said into practice in your own very similar analysis in the practical</li>
+<li>Practical is long - you won’t complete in this session, but spend time going through it at home</li>
+<li>Make sure you complete the practical and understand all of this before next week’s Regression Sessions Vol. 2 as it will build on and extend this session</li>
+</ul>
+</section>
+<section id="extension-activities" class="slide level2">
+<h2>Extension Activities</h2>
+<h4 id="extension-1---data-visualisation">Extension 1 - Data Visualisation</h4>
+
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
-<p><img src="../img/logo/full.svg" class="slide-logo"></p>
+<p><img src="../L6_images/CASA_logo.svg" class="slide-logo"></p>
 <div class="footer footer-default">
 <p>© CASA &nbsp; | &nbsp; <a href="https://www.ucl.ac.uk/bartlett/casa">ucl.ac.uk/bartlett/casa</a></p>
 </div>
@@ -258,7 +1416,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -417,6 +1575,44 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
@@ -585,6 +1781,38 @@
         }
       });
       </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>

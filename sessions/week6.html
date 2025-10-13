@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Adam Dennett">
-<meta name="dcterms.date" content="2025-10-09">
+<meta name="dcterms.date" content="2025-10-13">
 
-<title>Week 6 – Quantitative Methods</title>
+<title>Week 6 - Prof D’s Regression Sessions Vol 1 – Quantitative Methods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,9 +82,9 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Week 6 – Quantitative Methods">
+<meta property="og:title" content="Week 6 - Prof D’s Regression Sessions Vol 1 – Quantitative Methods">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://huanfachen.github.io/QM/sessions/L6_images/soggybottom.webp">
+<meta property="og:image" content="https://huanfachen.github.io/QM/sessions/L6_images/regression2.PNG">
 <meta property="og:site_name" content="Foundations">
 <meta property="og:locale" content="en_GB">
 </head>
@@ -207,7 +207,7 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-          <h1 class="quarto-secondary-nav-title">Week 6</h1>
+          <h1 class="quarto-secondary-nav-title">Week 6 - Prof D’s Regression Sessions Vol 1</h1>
         </a>     
     </div>
   </nav>
@@ -353,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Week 6</h1>
+<h1 class="title d-none d-lg-block">Week 6 - Prof D’s Regression Sessions Vol 1</h1>
 </div>
 
 
@@ -370,7 +370,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 9, 2025</p>
+      <p class="date">October 13, 2025</p>
     </div>
   </div>
   
@@ -382,20 +382,23 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p><a href="L6_images/regression2.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="L6_images/regression2.PNG" class="img-fluid"></a></p>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>This week will introduce linear regression. The most useful and widely used model in all of statistics. Regression underpins more ‘advanced’ methods like machine learning, but for most situations, it is likely to be the only model you will require.</p>
-<p>Regression is also one of the most misused and misunderstood models in the spatial data scientist’s toolbox. Therefore, understanding the basics is absolutely fundamental. If you understand the basics, then you stand a better chance of understanding what more sophisticated methods bring to the table.</p>
-<p>Getting a regression model right is no more challenging than following a baking recipe - almost anyone can follow the instructions. However, like baking an amazing cake, skill, experience and understanding gained through hours of experimentation, failures, the odd amazing success and lots of perseverance are what make the difference between a great model and a soggy bottom!</p>
-<p><a href="L6_images/soggybottom.webp" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="L6_images/soggybottom.webp" class="img-fluid"></a></p>
+<p>This week will introduce <strong>Linear Regression</strong>. The most useful and widely used model in all of statistics. Regression underpins more ‘advanced’ methods like machine learning, but for most situations, it is likely to be the <em>only</em> model you will require.</p>
+<p>Because of its popularity, regression is also one of the most widely misused models in the spatial data scientist’s toolbox. Therefore, understanding the basics is absolutely fundamental. If you understand the basics, then you stand a better chance of understanding what the more sophisticated methods related to standard linear regression bring to the table.</p>
+<p>Like baking a cake, getting a regression model right is theoretically no more challenging than following a baking recipe - almost anyone can follow the instructions. However, like baking an amazing cake, skill, experience and understanding gained through hours of experimentation, failures, the odd amazing success and lots of perseverance are what make the difference between a great model and a soggy bottom!</p>
+<p><a href="https://www.youtube.com/watch?v=F8yx453Lgh4"><img src="L6_images/soggybottom.webp" class="img-fluid" style="width:40.0%"></a></p>
 </section>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
-<p>By the end of this week, you will be able to:</p>
+<p>By the end of this week, you will:</p>
 <ol type="1">
-<li>XXX</li>
-<li>XXX</li>
-<li>XXX</li>
+<li>Understand what basic bivariate regression model is and how it might be used to explore / describe the relationship between two continuous variables</li>
+<li>Understand the absolutely fundamental importance of visualising your data and your model first</li>
+<li>Be able to interpret the various outputs from a statistical regression model - knowing what each means and how not to rely just on things like p-values and R-Squared to determine how good your model is</li>
+<li>Appreciate how the coefficients in a model will likely vary depending on your study population and how representative it is of the wider population you are making inferences about. In doing this, you will understand why ‘degrees of freedom’ are important</li>
+<li>Be ready to go beyond the basics and take your regression modelling further in next week’s Regression Session.</li>
 </ol>
 </section>
 <section id="lecture" class="level2">
@@ -423,14 +426,24 @@ Note
 </div>
 <p>To access the practical:</p>
 <ol type="1">
-<li><a href="week6_practical.html">Preview</a></li>
-<li><a href="week6_practical.ipynb">Download</a></li>
+<li><a href="week6_practical.html">Main Practical Page</a></li>
+<li><a href="week6_practical.ipynb">If Quarto has rendered this properly, you might be able to download a notebook here</a></li>
 </ol>
 </section>
 <section id="further-resources" class="level2">
 <h2 class="anchored" data-anchor-id="further-resources">Further resources</h2>
+<section id="applied-regression-example" class="level4">
+<h4 class="anchored" data-anchor-id="applied-regression-example">Applied Regression Example</h4>
+<p>Early in 2025, I produced a very rapid piece of regression analysis to contribute to the debate around Brighton and Hove City Council’s proposed changes to the secondary school admission process. This was put together very quickly and as such it’s not perfect. However, it did help shift the public debate in the city and is one example of how regression analysis can be used in a piece of ‘public-facing scholarly writing’ - you can read it here: https://adamdennett.github.io/BH_Schools_Consultation/absence.html</p>
+<p>A follow-one piece (that I am in the process of revising as the methodology is potentially a bit sketchy) can be viewed here - https://adamdennett.github.io/BH_Schools_Consultation/attainment_extra.html</p>
+</section>
+<section id="further-reading" class="level4">
+<h4 class="anchored" data-anchor-id="further-reading">Further Reading</h4>
+<p>Field, Andy P. 2026. Discovering Statistics Using R and RStudio. London: SAGE Publications. - Andy Field is always my go-to - https://profandyfield.com/discoverse/dsur/</p>
+<p>You might want to try the Tidyverse and Tidy Models - https://www.tidymodels.org/</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
