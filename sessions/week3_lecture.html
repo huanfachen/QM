@@ -261,14 +261,18 @@
 </section>
 <section id="the-scientific-method" class="slide level2">
 <h2>The scientific method</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
 <div style="text-align:center;">
-<p><img src="L3_images/scientific_method.png" alt="The scientific method" style="max-width:60%"></p>
+<p><img src="L3_images/scientific_method.png" alt="The scientific method" style="max-width:100%"></p>
 </div>
+</div><div class="column" style="width:40%;">
+<p>Statistical tests: - formal way to define a threshold of what is an interesting result - and hence evaluate the hypothesis</p>
+</div></div>
 <aside class="notes">
 <p>Last week we looked at exploratory data analysis - now the formal process of coming up with and evaluating questions - very much part of the scientific method.</p>
-<p>This lecture thinking about posing and answering research questions. Research science is all about coming up with hypotheses and evaluating them!</p>
+<p>Why is this important?</p>
 <p>We see stories in the news, how do we know what to believe and what not to believe? This is where having an understanding of statistical tests can help us - we can evaluate claims to try and figure out which are/ aren’t statistically significant.</p>
-<p>Statisitical tests are frequently used in science to figure out if our findings are important or not - essentially a way to formally define a threshold of what is an interesting result vs, what isn’t an interesting result.</p>
 <p>A clearly defined, and reproducible way to evaluate findings.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -301,6 +305,7 @@
 <p><span style="color:#49a0c4"><strong>Research question</strong></span></p>
 <p>A research <em>question</em> focuses on a specific problem.</p>
 <div class="fragment">
+<p><br></p>
 <p><span style="color:#49a0c4"><strong>Hypothesis</strong></span></p>
 <p>A formal <em>statement</em> that you will seek to prove or disprove.</p>
 <aside class="notes">
@@ -332,7 +337,8 @@
 <div class="fragment">
 <p>What do you think is the hypothesis here?</p>
 <aside class="notes">
-<p>WHich of these is something you can test?</p>
+<p>Ask the class.</p>
+<p>Hint: which of these is something you can actually test?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -361,9 +367,40 @@
 The hypothesis is that it is a fair coin.
 </div>
 </div></div>
+<aside class="notes">
+<p>Question for the class - whats the evidence?</p>
+<p>The 10 coin flips and the observation of 7 heads is the evidence</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="what-research-question-can-you-ask" class="slide level2">
-<h2>What research question can you ask?</h2>
+<section id="the-evidence" class="slide level2">
+<h2>The evidence</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>You have a coin.</li>
+<li>You think it’s a fair coin.</li>
+<li><span style="color:#49a0c4">You toss it 10 times.</span></li>
+<li><span style="color:#49a0c4">It comes up heads 7 times.</span></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<br>
+<div style="background-color:#2e6260; color:white; padding:8px; border-radius:5px; margin-top:10px;">
+The observations are the evidence.
+</div>
+</div></div>
+</section>
+<section id="what-question-can-you-ask" class="slide level2">
+<h2>What question can you ask?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -383,9 +420,22 @@ The hypothesis is that it is a fair coin.
 <p>If the coin is fair, how likely would it be to see 7 heads out of 10 flips?</p>
 </div>
 </div></div>
+<aside class="notes">
+<p>All these questions are difficult to evaluate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="what-research-question-should-you-ask" class="slide level2">
-<h2>What research question should you ask?</h2>
+<section id="what-question-should-you-ask" class="slide level2">
+<h2>What question should you ask?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
@@ -414,7 +464,7 @@ The hypothesis is that it is a fair coin.
 </section></section>
 <section>
 <section id="establishing-and-evaluating-a-hypothesis" class="title-slide slide level1 center">
-<h1>Establishing and evaluating a Hypothesis</h1>
+<h1>Establishing and evaluating a hypothesis</h1>
 <p>In <span style="color:#49a0c4">five</span> simple steps.</p>
 </section>
 <section id="step-1" class="slide level2">
@@ -469,7 +519,7 @@ The hypothesis is that it is a fair coin.
 <div class="columns">
 <div class="column" style="width:60%;">
 <div style="text-align:center;">
-<p><img src="L3_images/warning_sign.png" alt="Don't be an idiot." style="max-width:90%"></p>
+<p><img src="L3_images/warning_sign.jpg" alt="Don't be an idiot." style="max-width:90%"></p>
 </div>
 </div><div class="column" style="width:40%;">
 <ul>
@@ -526,7 +576,8 @@ The hypothesis is that it is a fair coin.
 </section>
 <section id="step-4" class="slide level2">
 <h2>Step 4</h2>
-<p><strong>Calculate the p-value</strong> <span style="color:#49a0c4"><em>The p-value is the probability of seeing the evidence, or something even more extreme, if the null hypothesis is true.</em></span></p>
+<p><strong>Calculate the p-value</strong></p>
+<p><span style="color:#49a0c4"><em>The p-value is the probability of seeing the evidence, or something even more extreme, if the null hypothesis is true.</em></span></p>
 <ul>
 <li class="fragment">Calculated according to the appropriate statistical test</li>
 <li class="fragment">The choice of test is determined by the research question and the data</li>
@@ -620,30 +671,44 @@ The hypothesis is that it is a fair coin.
 </section>
 <section id="example-screening-outcomes" class="slide level2">
 <h2>Example: Screening outcomes</h2>
+<p>The hypothesis:</p>
 <p><span class="math inline">\(H_0:\)</span> The individual doesn’t have breast cancer.</p>
 <p><span class="math inline">\(H_1:\)</span> The individual does have breast cancer.</p>
 </section>
 <section id="example-evaluating-the-evidence" class="slide level2">
 <h2>Example: Evaluating the evidence</h2>
 <p>From <a href="https://digital.nhs.uk/data-and-information/publications/statistical/breast-screening-programme/england---2020-21/qualitystatement3">NHS digital</a>.</p>
-<p><span style="color:#abc766">False positive</span></p>
+<p><span style="color:#abc766">Type I error: false positive</span></p>
 <ul>
-<li>In 2020-2021, <span class="math inline">\(4.0%\)</span> of those screened had an abnormal results and were referred for assessment.</li>
-<li>Of these, <span class="math inline">\(77.1%\)</span> were found to not have breast cancer at follow up assessment.</li>
-<li>Leading to a <strong>false positive rate of <span class="math inline">\(3.1%\)</span>.</strong></li>
+<li>In 2020-2021, 4.0% of those screened had an abnormal results and were referred for assessment.</li>
+<li>Of these, 77.1% were found to not have breast cancer at follow up assessment.</li>
+<li>Leading to a <strong>false positive rate of 3.1%.</strong></li>
 </ul>
+<aside class="notes">
+<p>This false positive rate is calculated as 4% times 77.1%</p>
+<p>False positive is bad as you might pursue a healthcare treatment which is actually unecessary for the patient.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="example-evaluating-the-evidence-1" class="slide level2">
 <h2>Example: Evaluating the evidence</h2>
 <p>From <a href="https://digital.nhs.uk/data-and-information/publications/statistical/breast-screening-programme/england---2020-21/qualitystatement3">NHS digital</a>.</p>
-<p><span style="color:#abc766">False negative</span></p>
+<p><span style="color:#abc766">Type II error: false negative</span></p>
 <ul>
 <li>Those who had a negative screening but did in fact have breast cancer.</li>
 <li>Harder to calculate the false negative rate, as they might be diagnosed with breast cancer at any later point in time.</li>
-<li>Studies suggest the false negative rate could be as high as <span class="math inline">\(20%\)</span>.</li>
+<li>Studies suggest the false negative rate could be as high as 20%.</li>
 </ul>
 <aside class="notes">
-<p>False positive is bad as you might pursue a healthcare treatment which is unecessary.</p>
 <p>False negative - in healthcare context this is the worst outcome - as goes undiagnosed and hence untreated.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -665,7 +730,7 @@ The hypothesis is that it is a fair coin.
 <aside class="notes">
 <p>Possible outcomes form a matrix. Have two good outcomes, and two bad outcomes which we want to look out for (these are the Type I and Type II errors).</p>
 <p>This is something to bear in mind when we look at evaluating our hypotheses. How good is our data, so how reliable is our outcome?</p>
-<p>Often this language is used when evaluating the outcomes of an ML classification model. Where we report the quality of a model in terms of its rate of false positives and false negatives.</p>
+<p>Often this language is used when evaluating the outcomes of an ML classification model. Where we report the quality of a supervised model in terms of its rate of false positives and false negatives.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -699,12 +764,25 @@ The hypothesis is that it is a fair coin.
 <p>It’s important to not make unethical assumptions in choosing the hypothesis.</p>
 <div class="fragment">
 <p><strong>Example</strong></p>
-<p><a href="https://www.amnesty.org.uk/press-releases/uk-police-forces-supercharging-racism-crime-predicting-tech-new-report">Police profiling</a> - assumes a correlation between ethnicity and crime</p>
+<p><a href="https://www.amnesty.org.uk/press-releases/uk-police-forces-supercharging-racism-crime-predicting-tech-new-report">Police profiling</a> - assumes a correlation between appearance and crime</p>
 <ul>
 <li>Use contextual knowledge</li>
 <li>Is this causation?</li>
 <li>Or correlation linked to other factors?</li>
 </ul>
+<aside class="notes">
+<p>There is an assumption that theres a link between how someone looks and what crime they are likley to commit - leading to potentially racist police profiling - as assuming a link between ethnicity and likelihood to commit a crime.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="correlation-vs.-causation" class="slide level2">
@@ -754,15 +832,18 @@ The hypothesis is that it is a fair coin.
 </section>
 <section id="correlation-is-not-causation" class="slide level2">
 <h2>Correlation <strong>IS NOT</strong> causation</h2>
-<p>You might not know whether events are correlated, or causing each other.</p>
+<p>You might not know whether events are correlated, or causing each other</p>
 <div class="fragment">
-<p><br> <strong>BUT</strong></p>
+<p><br></p>
+<p><strong>BUT</strong></p>
 </div>
 <div class="fragment">
 <p><br></p>
-<p>The point of the hypothesis test is to test your idea – but you should use your contextual understanding to come up with plausible (and ethical) initial questions.</p>
+<p>you should use your contextual understanding to come up with plausible (and ethical) initial questions.</p>
 <aside class="notes">
-<p>Will return to looking at the correlation between variables in week 5.</p>
+<p>Sometimes it’s hard to figure out if two variables are correlated or causational. There can be all sorts of complexities - like confounding factors, which can be hard to spot. The point is to do your best to come up with plausible and ethical intial questions.</p>
+<p>And then the point of hypothesis testing is figuring out whether the evidence you have is siginificant enough to support you hypothesis.</p>
+<p>Will return to looking at the mathematical correlation between variables in week 5.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -792,30 +873,20 @@ The hypothesis is that it is a fair coin.
 <li class="fragment"><strong><em>REPEAT!</em></strong></li>
 </ul>
 </div></div>
-<!-- # Example: Height of students 
-What is the probability of someone at UCL being over 6ft?
-
-## Example - step 1
-**Define the null and alternative hypothesis**
-
-H0: Probability of injury has not changed. 
-
-H1: Probability of injury has changed. 
-
-## Example - step 2
-**Set your significance level**
-
-𝜶 = 0.05 
-
-## Example - step 3
-**Identify the evidence**
-
-Dataset: heights of students 
-
-## Example - step 4
-**Calculate the p-value**
-
-Aha! -->
+<aside class="notes">
+<p>Returning to the idea of the scientific method is that it’s iterative.</p>
+<p>Maybe we initially made the wrong assumptions but we can repeat, and update our ideas.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="example-students-height" class="title-slide slide level1 center">
@@ -824,28 +895,19 @@ Aha! -->
 Are male and female students similar heights?</p>
 <p><span style="color:#49a0c4"><em>Research hypothesis</em></span><br>
 Male and female students are different heights on average.</p>
-<!-- ## Example - context 
-
-:::: {.columns}
-
-::: {.column width="60%"}
-
-<div style="text-align: center;">
-![](L3_images/timmy_bike.jpg){width="700"}
-</div>
-
-:::
-
-::: {.column width="40%"}
-
-::: {.incremental}
-- UK gov reports cycling fatalities per year 
-- Lime bikes introduced to the UK in 2021 
-:::
-
-:::
-
-:::: -->
+<aside class="notes">
+<p>Going to look at applying the five steps of hypothesis testing to a specific example.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="example---step-1" class="slide level2">
 <h2>Example - step 1</h2>
@@ -902,7 +964,9 @@ $\bar{x}_2 = 180$, $s_2 = 6$, $n_2 = 103$ -->
 <section id="example---step-4" class="slide level2">
 <h2>Example - step 4</h2>
 <p><strong>Calculate the p-value</strong></p>
+<div class="fragment">
 <p>Aha!</p>
+</div>
 <div class="fragment">
 <p>How do we do this? We need to know what statistical test to use!</p>
 </div>
@@ -910,7 +974,7 @@ $\bar{x}_2 = 180$, $s_2 = 6$, $n_2 = 103$ -->
 <section>
 <section id="statistical-tests" class="title-slide slide level1 center">
 <h1>Statistical tests</h1>
-
+<p>Numerically testing whether the data supports the hypothesis.</p>
 </section>
 <section id="parametric-vs.-non-parametric-tests" class="slide level2">
 <h2>Parametric vs.&nbsp;Non-parametric tests</h2>
@@ -927,15 +991,50 @@ $\bar{x}_2 = 180$, $s_2 = 6$, $n_2 = 103$ -->
 <div class="fragment">
 <p><strong>Non-parametric tests</strong></p>
 <ul>
-<li>Typcially less assumptions on the distribution</li>
+<li>Typically less assumptions on the distribution</li>
 <li>Continuous or discrete data</li>
 </ul>
+<aside class="notes">
+<p>Two main categories of test.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="deciding-on-a-test" class="slide level2">
 <h2>Deciding on a test</h2>
-<p>Sometimes it can be hard to figure out which statistical test to use.</p>
-<p>We’re going to cover common tests useful in data analysis. But you might find this <a href="https://www.brookes.ac.uk/getmedia/bede726d-771d-461f-900b-a3526fc7e199/stats-flow-chart.pdf">flowchart</a> or this <a href="https://stats.oarc.ucla.edu/other/mult-pkg/whatstat/">table</a> helpful for understanding how different tests can be applied.</p>
+<ul>
+<li>It can be hard to figure out what test to use.</li>
+<li>Going to cover some common tests</li>
+<li>Might also find these useful:
+<ul>
+<li><a href="https://www.brookes.ac.uk/getmedia/bede726d-771d-461f-900b-a3526fc7e199/stats-flow-chart.pdf">flowchart</a></li>
+<li><a href="https://stats.oarc.ucla.edu/other/mult-pkg/whatstat/">table</a></li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Sometimes its clear what test to use, but sometimes it’s not. All sorts of obscure statistical tests from different disciplines.</p>
+<p>Focusing on a few tests which might be useful for the types of data we’re likely to come across.</p>
+<p>Additional resources for identifying tests - typically based on flowchart of whether assumptions are met or not.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="parametric-tests" class="title-slide slide level1 center">
@@ -976,9 +1075,32 @@ Image credit: https://en.wikipedia.org/wiki/William_Sealy_Gosset#/media/File:Wil
 </section>
 <section id="students-t-test-steps" class="slide level2">
 <h2>Student’s T-test: steps</h2>
-<p>Calculate: :::{incremental} - test statistic (called the t value) - <span style="color:#49a0c4"><em>The test statistic is a number that summarises the data so as to determine whether to reject the null hypothesis.</em></span> - degrees of freedom - <span style="color:#49a0c4"><em>The number of degrees of freedom is the number of values in the final calculation that are free to vary.</em></span> :::</p>
+<p>Calculate:</p>
+<ul>
+<li class="fragment">test statistic (called the t value)
+<ul>
+<li class="fragment"><span style="color:#49a0c4"><em>The test statistic is a number that summarises the data so as to determine whether to reject the null hypothesis.</em></span></li>
+</ul></li>
+<li class="fragment">degrees of freedom
+<ul>
+<li class="fragment"><span style="color:#49a0c4"><em>The number of degrees of freedom is the number of values in the final calculation that are free to vary.</em></span></li>
+</ul></li>
+</ul>
 <div class="fragment">
 <p>Which we use to identify the p value - typically using a ‘look up table’.</p>
+<aside class="notes">
+<p>Use the test statistic and the degrees of freedom to get the p-value. Might remember look up tables from maths at school - instead we’ll be using python.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="students-t-test-types" class="slide level2">
@@ -989,6 +1111,19 @@ Image credit: https://en.wikipedia.org/wiki/William_Sealy_Gosset#/media/File:Wil
 <pre><code>Image credit: https://www.geeksforgeeks.org/data-science/t-test/</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>3 main types of test depending on what we’re interested in.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="students-t-test-one-sample" class="slide level2">
 <h2>Student’s T-test: one sample</h2>
@@ -1092,15 +1227,19 @@ t = \frac{\bar{d}}{s_d / \sqrt{n}}
 </div>
 <p><em>One tailed:</em> if you only care is the mean is significant in one direction</p>
 <p><em>Two tailed:</em> if you care about the mean being different regardless of direction</p>
-<!-- ## Regression T-tests
-
-Is the gradient non-zero?
-
-This indicates a correlation between the two variables. 
-
-...
-
-This will be covered further in lecture X on linear regression.  -->
+<aside class="notes">
+<p>Soemthing else to consider - this becomes relevant when we look up the p-value</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="non-parametric-tests" class="title-slide slide level1 center">
@@ -1137,6 +1276,7 @@ This will be covered further in lecture X on linear regression.  -->
 </section>
 <section id="k-s-test-one-sample-test" class="slide level2">
 <h2>K-S test: one sample test</h2>
+<p><span style="color:#49a0c4"><em>Tests if a sample dataset came from a known distribution.</em></span></p>
 <p>The Kolmogorov–Smirnov test statistic is:</p>
 <span class="math display">\[\begin{align}
 D_n = \sup_x \, | F_n(x) - F(x) |
@@ -1151,6 +1291,20 @@ D_n = \sup_x \, | F_n(x) - F(x) |
 <p><em>Note</em></p>
 ‘<span class="math inline">\(sup\)</span>’ is the suprenum - think of it as the smallest upper bound.
 </div>
+<aside class="notes">
+<p>‘sup’ is a maths - don’t need to know what it means - just intuitively its measuirng the smallest upper bound on the difference between the two distirbutions.</p>
+<p>Thinking back to last week we might use the K-S test to determine if a dataset is drawn from a noraml distirbution by comapring to the normal cumulative distribution function.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="k-s-empirical-distribution-function" class="slide level2">
@@ -1168,6 +1322,7 @@ F_{n}(x) = \frac{1}{n} \sum_{i=1}^{n} 1_{(-\infty ,x]}(X_{i})
 </section>
 <section id="k-s-test-two-sample-test" class="slide level2">
 <h2>K-S test: two sample test</h2>
+<p><span style="color:#49a0c4"><em>Tests if the underlying distributions of two sample datasets are the same.</em></span></p>
 <p>For the two-sample test:</p>
 <span class="math display">\[\begin{align}
 D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
@@ -1186,6 +1341,19 @@ D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
 </ul>
 <div class="fragment">
 <p>Larger values of the test statistic <span class="math inline">\(D\)</span> is stronger evidence against <span class="math inline">\(H_0\)</span>.</p>
+<aside class="notes">
+<p>How do we use the K-S test is practise?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="kernel-density-estimate-kde" class="slide level2">
@@ -1213,7 +1381,7 @@ D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
 <section id="kde-of-simulated-heights" class="slide level2">
 <h2>KDE of simulated heights</h2>
 <p>It’s easy to fit a KDE to data in Python:</p>
-<div id="0e03a64d" class="cell" data-execution_count="1">
+<div id="a7c3d1b8" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb4-3"><a></a><span class="im">from</span> scipy.stats <span class="im">import</span> gaussian_kde</span>
@@ -1238,8 +1406,21 @@ D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
 <ul>
 <li class="fragment">fit the KDE to two sample datasets</li>
 <li class="fragment">compare visually</li>
-<li class="fragment">carry out non-parametric test - such as Kolmogorov-Smirnov</li>
+<li class="fragment">carry out a non-parametric test - such as Kolmogorov-Smirnov</li>
 </ul>
+<aside class="notes">
+<p>How might we use a KDE in practise?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="example-students-height-1" class="title-slide slide level1 center">
@@ -1261,19 +1442,32 @@ D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
 <span class="math inline">\(\bar{x}_1 = 170\)</span>, <span class="math inline">\(s_1 = 5\)</span>, <span class="math inline">\(n_1\)</span> = 95</p>
 <p>Group 2 – male students<br>
 <span class="math inline">\(\bar{x}_2 = 180\)</span>, <span class="math inline">\(s_2 = 6\)</span>, <span class="math inline">\(n_2\)</span> = 103</p>
+<aside class="notes">
+<p>Any questions about the steps up to this point?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="example---step-4-1" class="slide level2">
 <h2>Example - step 4</h2>
 <p><strong>Calculate the p-value</strong></p>
 <ul>
-<li>Use Student’s T-test: two sample
+<li class="fragment">Use Student’s T-test: two sample
 <ul>
-<li>don’t care if students are taller or shorter - so use two-tailed test</li>
+<li class="fragment">Don’t care if students are taller or shorter - so use two-tailed test</li>
+<li class="fragment">Calculate the t value</li>
+<li class="fragment">Calculate the degrees of freedom</li>
+<li class="fragment">Get the p value</li>
 </ul></li>
-<li>Calculate the t value</li>
-<li>Calculate the degress of freedom</li>
-<li>Get the p value</li>
 </ul>
 </section>
 <section id="example---step-4---calculate-the-t-value" class="slide level2">
@@ -1311,7 +1505,7 @@ df = n_1 + n_2 - 2 = 95 + 103 - 2 = 196
 <section id="example---step-4---calculate-the-p-value" class="slide level2">
 <h2>Example - step 4 - calculate the p value</h2>
 <p>Traditionally this uses look up tables - we’re going to use Python.</p>
-<div id="9ab2fc61" class="cell" data-execution_count="2">
+<div id="ca97783b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb5-2"><a></a></span>
 <span id="cb5-3"><a></a>t_val <span class="op">=</span> <span class="op">-</span><span class="fl">12.7</span></span>
@@ -1320,9 +1514,9 @@ df = n_1 + n_2 - 2 = 95 + 103 - 2 = 196
 <span id="cb5-6"><a></a><span class="co"># Two-tailed p-value</span></span>
 <span id="cb5-7"><a></a>p_value_two_tailed <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> stats.t.cdf(<span class="bu">abs</span>(t_val), df))</span>
 <span id="cb5-8"><a></a></span>
-<span id="cb5-9"><a></a><span class="bu">print</span>(<span class="st">"Two-tailed p-value:"</span>, p_value_two_tailed.<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-9"><a></a><span class="bu">print</span>(<span class="st">"Two-tailed p-value:"</span>, p_value_two_tailed)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Two-tailed p-value: 0.0</code></pre>
+<pre><code>Two-tailed p-value: 2.0151302848603336e-10</code></pre>
 </div>
 </div>
 </section>
@@ -1334,13 +1528,16 @@ df = n_1 + n_2 - 2 = 95 + 103 - 2 = 196
 <h2>Example - step 5</h2>
 <p><strong>Compare p-value with hypothesis level</strong></p>
 <p>Now we need to compare the p-value to our siginificance level.</p>
-<p>p-value = <span class="math inline">\(2.8x10^{-10} &lt; 0.05\)</span> = alpha</p>
+<p>p-value = <span class="math inline">\(2.0151302848603336e-10 &lt; 0.05\)</span> = alpha</p>
 <div class="fragment">
 <p>…we reject <span class="math inline">\(H_0\)</span>!</p>
 </div>
 <div class="fragment">
 <p>And conclude that male and female students have significantly different heights.</p>
 </div>
+</section>
+<section id="questions" class="slide level2">
+<h2>Questions?</h2>
 </section></section>
 <section id="overview" class="title-slide slide level1 center">
 <h1>Overview</h1>
