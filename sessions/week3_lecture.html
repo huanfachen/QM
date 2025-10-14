@@ -265,13 +265,11 @@
 <p><img src="L3_images/scientific_method.png" alt="The scientific method" style="max-width:60%"></p>
 </div>
 <aside class="notes">
-<p>This lecture thinking about posing and answering research questions.</p>
 <p>Last week we looked at exploratory data analysis - now the formal process of coming up with and evaluating questions - very much part of the scientific method.</p>
-<p>Research science is about coming up with hypotheses and evaluating them.</p>
-<p>It’s iterative - as we find out new information we update our method and processes accordingly. (Gelman et al.&nbsp;2020. Bayesian Workflow)</p>
+<p>This lecture thinking about posing and answering research questions. Research science is all about coming up with hypotheses and evaluating them!</p>
 <p>We see stories in the news, how do we know what to believe and what not to believe? This is where having an understanding of statistical tests can help us - we can evaluate claims to try and figure out which are/ aren’t statistically significant.</p>
 <p>Statisitical tests are frequently used in science to figure out if our findings are important or not - essentially a way to formally define a threshold of what is an interesting result vs, what isn’t an interesting result.</p>
-<p>A clearly defined, and reporducible way to evaluate findings.</p>
+<p>A clearly defined, and reproducible way to evaluate findings.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -437,7 +435,7 @@ The hypothesis is that it is a fair coin.
 <li>it directly contradicts the null hypothesis</li>
 </ul>
 <aside class="notes">
-<p>Be careful in how the two are defined. H_1 needs to contradict H_0.</p>
+<p>Be careful in how the two are defined. Logically H_1 needs to directly contradict H_0.</p>
 <p>For example if my H_0 was everyone likes chocolate. H_1 couldn’t be some people prefer biscuits - since in this situation both H_0 and H_1 can be true at the same time. H_1 would have to be that not everyone likes chocolate.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -488,7 +486,7 @@ The hypothesis is that it is a fair coin.
 </div></div>
 <aside class="notes">
 <p>It’s important to decide on your significance level prior, as otherwise you might find an event which is significant at the 10% threshold and not at 5% - which could lead to bad scientific practise.</p>
-<p>There’s a balance - often don’t know what will be interesting - so you do some exploratory data analysis. But you shouldn’t be fishing around for stuff - needs to be grounded in theory and literature.</p>
+<p>There’s a balance - often we don’t know what will be interesting - so you do some exploratory data analysis. But you shouldn’t be fishing around for stuff - needs to be grounded in theory and literature.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -504,18 +502,16 @@ The hypothesis is that it is a fair coin.
 <section id="step-3" class="slide level2">
 <h2>Step 3</h2>
 <p><strong>Identify the evidence</strong></p>
-<!-- ```{=tex}
-\begin{align}
-f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
-\end{align}
-``` -->
 <ul>
 <li class="fragment">This could mean collecting the data</li>
-<li class="fragment">Or identifying a suitable exisiting dataset</li>
+<li class="fragment">Or identifying a suitable existing dataset
+<ul>
+<li class="fragment">Crucial that it’s <em>suitable</em> - think about biased/ unrepresentative data</li>
+</ul></li>
 </ul>
 <aside class="notes">
 <p>In quant methods this normally means finding an open public dataset to use.</p>
-<p>The evidence needs to be suitable to answer the question - think about biased/representtaive dtaa from last week. Soemthign they will be assessed on in the assessment.</p>
+<p>The evidence needs to be suitable to answer the question - think about biased/representative data from last week. Something they will be assessed on in the assessment.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -530,8 +526,7 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 </section>
 <section id="step-4" class="slide level2">
 <h2>Step 4</h2>
-<p><strong>Calculate the p-value</strong></p>
-<p><span style="color:#49a0c4"><em>The p-value is the probability of seeing the evidence, or something even more extreme, if the null hypothesis is true.</em></span></p>
+<p><strong>Calculate the p-value</strong> <span style="color:#49a0c4"><em>The p-value is the probability of seeing the evidence, or something even more extreme, if the null hypothesis is true.</em></span></p>
 <ul>
 <li class="fragment">Calculated according to the appropriate statistical test</li>
 <li class="fragment">The choice of test is determined by the research question and the data</li>
@@ -637,6 +632,10 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <li>Of these, <span class="math inline">\(77.1%\)</span> were found to not have breast cancer at follow up assessment.</li>
 <li>Leading to a <strong>false positive rate of <span class="math inline">\(3.1%\)</span>.</strong></li>
 </ul>
+</section>
+<section id="example-evaluating-the-evidence-1" class="slide level2">
+<h2>Example: Evaluating the evidence</h2>
+<p>From <a href="https://digital.nhs.uk/data-and-information/publications/statistical/breast-screening-programme/england---2020-21/qualitystatement3">NHS digital</a>.</p>
 <p><span style="color:#abc766">False negative</span></p>
 <ul>
 <li>Those who had a negative screening but did in fact have breast cancer.</li>
@@ -713,7 +712,9 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <p><span style="color:#49a0c4"><strong>Correlation:</strong> <em>Two variables are statistically related, as one changes so does the other.</em></span></p>
 <p><span style="color:#49a0c4"><strong>Causation:</strong> <em>One variable influences the other variable to occur.</em></span></p>
 <div class="fragment">
-<p>Causation implies correlation. <strong>BUT</strong> correlation <strong>does not</strong> imply causation!!!</p>
+<p><br></p>
+<p>Causation implies correlation.</p>
+<p><strong>BUT</strong> correlation <strong>does not</strong> imply causation!</p>
 <aside class="notes">
 <p>Lots of things can be correlated <strong>BUT</strong> it doesn’t mean one event caused another.</p>
 <style type="text/css">
@@ -903,7 +904,7 @@ $\bar{x}_2 = 180$, $s_2 = 6$, $n_2 = 103$ -->
 <p><strong>Calculate the p-value</strong></p>
 <p>Aha!</p>
 <div class="fragment">
-<p>We need to know what statistical test to use!</p>
+<p>How do we do this? We need to know what statistical test to use!</p>
 </div>
 </section></section>
 <section>
@@ -915,19 +916,17 @@ $\bar{x}_2 = 180$, $s_2 = 6$, $n_2 = 103$ -->
 <h2>Parametric vs.&nbsp;Non-parametric tests</h2>
 <p><strong>Parametric tests</strong></p>
 <ul>
-<li>Evaluate hypothesis for specific parameters</li>
-<li>Assumptions about the distribution
+<li>Assumptions about the distribution:
 <ul>
-<li>assumed normal distribution</li>
-<li>independent and unbiased samples</li>
-<li>equal/comparable variances</li>
-</ul></li>
+<li>Normal distribution</li>
+<li>Independent and unbiased samples</li>
+<li>Equal/comparable variances</li>
 <li>Continuous data</li>
+</ul></li>
 </ul>
 <div class="fragment">
 <p><strong>Non-parametric tests</strong></p>
 <ul>
-<li>Evaluate hypothesis for entire population distribution</li>
 <li>Typcially less assumptions on the distribution</li>
 <li>Continuous or discrete data</li>
 </ul>
@@ -935,7 +934,8 @@ $\bar{x}_2 = 180$, $s_2 = 6$, $n_2 = 103$ -->
 </section>
 <section id="deciding-on-a-test" class="slide level2">
 <h2>Deciding on a test</h2>
-<p>NOTE: want a table here that guides you on how to choose an appropriate statistical test</p>
+<p>Sometimes it can be hard to figure out which statistical test to use.</p>
+<p>We’re going to cover common tests useful in data analysis. But you might find this <a href="https://www.brookes.ac.uk/getmedia/bede726d-771d-461f-900b-a3526fc7e199/stats-flow-chart.pdf">flowchart</a> or this <a href="https://stats.oarc.ucla.edu/other/mult-pkg/whatstat/">table</a> helpful for understanding how different tests can be applied.</p>
 </section></section>
 <section>
 <section id="parametric-tests" class="title-slide slide level1 center">
@@ -953,7 +953,7 @@ $\bar{x}_2 = 180$, $s_2 = 6$, $n_2 = 103$ -->
 </ul>
 </div><div class="column" style="width:50%;">
 <div style="text-align:center;">
-<img src="L3_images/William_Sealy_Gosset.jpg" alt="A photograph of William Sealy Gosset" style="max-width:80%;">
+<img src="L3_images/William_Sealy_Gosset.jpg" alt="A photograph of William Sealy Gosset" style="max-width:70%;">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
 <pre><code>This is William Sealy Gosset - he was **not** a student.
 Image credit: https://en.wikipedia.org/wiki/William_Sealy_Gosset#/media/File:William_Sealy_Gosset.jpg</code></pre>
@@ -974,6 +974,22 @@ Image credit: https://en.wikipedia.org/wiki/William_Sealy_Gosset#/media/File:Wil
           display:block!important;
       }</style></aside>
 </section>
+<section id="students-t-test-steps" class="slide level2">
+<h2>Student’s T-test: steps</h2>
+<p>Calculate: :::{incremental} - test statistic (called the t value) - <span style="color:#49a0c4"><em>The test statistic is a number that summarises the data so as to determine whether to reject the null hypothesis.</em></span> - degrees of freedom - <span style="color:#49a0c4"><em>The number of degrees of freedom is the number of values in the final calculation that are free to vary.</em></span> :::</p>
+<div class="fragment">
+<p>Which we use to identify the p value - typically using a ‘look up table’.</p>
+</div>
+</section>
+<section id="students-t-test-types" class="slide level2">
+<h2>Student’s T-test: types</h2>
+<div style="text-align:center;">
+<img src="L3_images/t_tets_types.webp" alt="Types of T-tests" style="max-width:80%;">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Image credit: https://www.geeksforgeeks.org/data-science/t-test/</code></pre>
+</div>
+</div>
+</section>
 <section id="students-t-test-one-sample" class="slide level2">
 <h2>Student’s T-test: one sample</h2>
 <p><span style="color:#49a0c4"><em>Tests whether the population mean is equal to a specific value or not</em></span></p>
@@ -990,6 +1006,23 @@ t = \frac{\bar{x} - \mu_{0}}{s / \sqrt{n}}
 <li><span class="math inline">\(n\)</span> is the sample size</li>
 </ul>
 </div>
+</section>
+<section id="students-t-test-one-sample-degrees-of-freedom" class="slide level2">
+<h2>Student’s T-test: one sample, degrees of freedom</h2>
+<p><span style="color:#49a0c4"><em>The number of degrees of freedom is the number of values in the final calculation that are free to vary.</em></span></p>
+<span class="math display">\[\begin{align}
+df = n-1
+\end{align}\]</span>
+<!-- ## Student's T-test: degrees of freedom 
+
+
+In Student's T-Test with one sample the degrees of freedom are: 
+
+```{=tex}
+\begin{align}
+df = n -1
+\end{align}
+``` -->
 </section>
 <section id="students-t-test-two-sample" class="slide level2">
 <h2>Student’s T-test: two sample</h2>
@@ -1012,6 +1045,14 @@ s_p = \sqrt{\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}}
 <p>with <span class="math inline">\(s_1, s_2\)</span> the sample standard deviations.</p>
 </div>
 </section>
+<section id="students-t-test-two-sample-degrees-of-freedom" class="slide level2">
+<h2>Student’s T-test: two sample, degrees of freedom</h2>
+<p><span style="color:#49a0c4"><em>The number of degrees of freedom is the number of values in the final calculation that are free to vary.</em></span></p>
+<p>In the two-sample Student’s T-test the degrees of freedom are:</p>
+<span class="math display">\[\begin{align}
+df = n_1 + n_2 - 2
+\end{align}\]</span>
+</section>
 <section id="students-t-test-paired" class="slide level2">
 <h2>Student’s T-test: paired</h2>
 <p><span style="color:#49a0c4"><em>Tests if the difference between paired measurements for a population is zero or not - normally used with longitudinal data.</em></span></p>
@@ -1025,6 +1066,7 @@ t = \frac{\bar{d}}{s_d / \sqrt{n}}
 <li><span class="math inline">\(\bar{d}\)</span> is the mean of the paired differences</li>
 <li><span class="math inline">\(s_d\)</span> is the standard deviation of the paired differences</li>
 <li><span class="math inline">\(n\)</span> is the number of pairs</li>
+<li>the number of degress of freedom is <span class="math inline">\(n-1\)</span></li>
 </ul>
 <aside class="notes">
 <p>For example used when I have data from different years, and want to figure out if there’s a difference across the years.</p>
@@ -1045,10 +1087,11 @@ t = \frac{\bar{d}}{s_d / \sqrt{n}}
 <section id="how-many-tails" class="slide level2">
 <h2>How many tails?</h2>
 <p>Tests can be one-tailed or two-tailed - which you want is determined when you define the hypothesis.</p>
-<p><em>One tailed:</em> if you only care is the mean is significant in one direction <em>Two tailed:</em> if you care about the mean being different regardless of direction</p>
 <div style="text-align:center;">
 <p><img src="L3_images/one_vs_two_tailed.png" alt="Normal distribution with one vs two tails." style="max-width:100%"></p>
 </div>
+<p><em>One tailed:</em> if you only care is the mean is significant in one direction</p>
+<p><em>Two tailed:</em> if you care about the mean being different regardless of direction</p>
 <!-- ## Regression T-tests
 
 Is the gradient non-zero?
@@ -1066,12 +1109,18 @@ This will be covered further in lecture X on linear regression.  -->
 </section>
 <section id="kolmogorov-smirnov" class="slide level2">
 <h2>Kolmogorov-Smirnov</h2>
-<p>NOTE: want a diagram showing this.</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div style="text-align:center;">
+<p><img src="L3_images/overlayed_histograms.png" alt="Histograms of two different datasets." style="max-width:100%"></p>
+</div>
+</div><div class="column" style="width:40%;">
 <ul>
 <li class="fragment">Compares two probability distributions</li>
 <li class="fragment">Can be used to test whether an observed sample came from a given distribution</li>
 <li class="fragment">Or to test whether two samples both came from the same distribution</li>
 </ul>
+</div></div>
 <aside class="notes">
 <p>Named after two Russian soviet mathematicians working in the mid 20th century</p>
 <style type="text/css">
@@ -1131,33 +1180,51 @@ D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
 <section id="k-s-test-decision-rule" class="slide level2">
 <h2>K-S test: decision rule</h2>
 <p>The hypotheses would be:</p>
-<p><span class="math inline">\(H_0\)</span>: the distributions are the same <span class="math inline">\(H_1\)</span>: the distributions differ</p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: the distributions are the same</li>
+<li><span class="math inline">\(H_1\)</span>: the distributions differ</li>
+</ul>
+<div class="fragment">
 <p>Larger values of the test statistic <span class="math inline">\(D\)</span> is stronger evidence against <span class="math inline">\(H_0\)</span>.</p>
+</div>
 </section>
 <section id="kernel-density-estimate-kde" class="slide level2">
 <h2>Kernel density estimate (KDE)</h2>
 <ul>
-<li class="fragment">Used to generate a smooth PDF for a random variable dataset.</li>
-<li class="fragment">Useful for understanding the underlying distribution of a sample .</li>
-<li class="fragment">Think of it as getting a smooth function to describe a histogram of data.</li>
-<li class="fragment">There are no assumptions about the prior distribution.</li>
+<li class="fragment">Used to generate a smooth probability density function for a random variable dataset</li>
+<li class="fragment">Useful for understanding the underlying distribution of a sample</li>
+<li class="fragment">Think of it as getting a smooth function to describe a histogram of data</li>
+<li class="fragment">There are no assumptions about the prior distribution</li>
 </ul>
+<aside class="notes">
+<p>Remember from last week - the probability density function (PDF) describes the likelihood of different outcomes for a continuous random variable</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="kde-of-simulated-heights" class="slide level2">
 <h2>KDE of simulated heights</h2>
 <p>It’s easy to fit a KDE to data in Python:</p>
-<div id="31f0530b" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
-<span id="cb3-3"><a></a><span class="im">from</span> scipy.stats <span class="im">import</span> gaussian_kde</span>
-<span id="cb3-4"><a></a></span>
-<span id="cb3-5"><a></a><span class="co"># Supposing you have some data </span></span>
-<span id="cb3-6"><a></a>data <span class="op">=</span> pd.read_csv(<span class="st">'/path_to_data'</span>)</span>
-<span id="cb3-7"><a></a></span>
-<span id="cb3-8"><a></a><span class="co"># Kernel Density Estimation</span></span>
-<span id="cb3-9"><a></a>kde <span class="op">=</span> gaussian_kde(data)</span>
-<span id="cb3-10"><a></a>x_vals <span class="op">=</span> np.linspace(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">100</span>)</span>
-<span id="cb3-11"><a></a>y_vals <span class="op">=</span> kde(x_vals)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="ddd6fbec" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
+<span id="cb4-3"><a></a><span class="im">from</span> scipy.stats <span class="im">import</span> gaussian_kde</span>
+<span id="cb4-4"><a></a></span>
+<span id="cb4-5"><a></a><span class="co"># Supposing you have some data </span></span>
+<span id="cb4-6"><a></a>data <span class="op">=</span> pd.read_csv(<span class="st">'/path_to_data'</span>)</span>
+<span id="cb4-7"><a></a></span>
+<span id="cb4-8"><a></a><span class="co"># Kernel Density Estimation</span></span>
+<span id="cb4-9"><a></a>kde <span class="op">=</span> gaussian_kde(data)</span>
+<span id="cb4-10"><a></a>x_vals <span class="op">=</span> np.linspace(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">100</span>)</span>
+<span id="cb4-11"><a></a>y_vals <span class="op">=</span> kde(x_vals)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="kde-of-simulated-heights-1" class="slide level2">
@@ -1168,11 +1235,10 @@ D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
 </section>
 <section id="kde-use-case" class="slide level2">
 <h2>KDE use case</h2>
-<p>NOTE: want a diagram to show this.</p>
 <ul>
-<li class="fragment">fit the KDE to two samples</li>
+<li class="fragment">fit the KDE to two sample datasets</li>
 <li class="fragment">compare visually</li>
-<li class="fragment">carry out non-paremetric test - such as Kolmogorov-Smirnov</li>
+<li class="fragment">carry out non-parametric test - such as Kolmogorov-Smirnov</li>
 </ul>
 </section></section>
 <section>
@@ -1201,60 +1267,79 @@ D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
 <h2>Example - step 4</h2>
 <p><strong>Calculate the p-value</strong></p>
 <ul>
-<li>Use Student’s T-test: two sample</li>
+<li>Use Student’s T-test: two sample
+<ul>
 <li>don’t care if students are taller or shorter - so use two-tailed test</li>
+</ul></li>
+<li>Calculate the t value</li>
+<li>Calculate the degress of freedom</li>
+<li>Get the p value</li>
 </ul>
 </section>
-<section id="example---step-4---calculation" class="slide level2">
-<h2>Example - step 4 - calculation</h2>
-<p>NOTE: want to add how to calculate this in Python</p>
+<section id="example---step-4---calculate-the-t-value" class="slide level2">
+<h2>Example - step 4 - calculate the t value</h2>
 <p>Substituting values:</p>
 <span class="math display">\[\begin{align}
 s_p &amp;= \sqrt{\frac{(95-1)\cdot 5^2 + (103-1)\cdot 6^2}{95+103-2}} \approx 5.55
 \end{align}\]</span>
-<p>Now compute <span class="math inline">\(t\)</span>:</p>
+<p>Now compute <span class="math inline">\(t-value\)</span>:</p>
 <span class="math display">\[\begin{align}
 t &amp;= \frac{170 - 180}{5.55 \cdot \sqrt{\tfrac{1}{95} + \tfrac{1}{103}}} \approx -12.7
 \end{align}\]</span>
+<aside class="notes">
+<p>Don’t need to know the formulas because in practise we’ll be using Python functions to do the calculations for us.</p>
+<p>Using the right python function is something we’ll cover in todays tutorial.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="example---step-5" class="slide level2">
-<h2>Example - step 5</h2>
-<p><strong>Compare p-value with hypothesis level</strong></p>
-<p>Now we need to compare the test statistic to the critical t-value.</p>
-</section>
-<section id="example---step-5---calculation" class="slide level2">
-<h2>Example - step 5 - calculation</h2>
-<p>NOTE: need to add a description of degrees of freedom</p>
+<section id="example---step-4---calculate-the-degrees-of-freedom" class="slide level2">
+<h2>Example - step 4 - calculate the degrees of freedom</h2>
 <p>For Student’s T-Test we need degrees of freedom:</p>
 <span class="math display">\[\begin{align}
 df = n_1 + n_2 - 2 = 95 + 103 - 2 = 196
 \end{align}\]</span>
-<p>Then use Python to calculate the two-tailed critical t-value at <span class="math inline">\(\alpha = 0.05\)</span>.</p>
-<div id="ab005658" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">from</span> scipy.stats <span class="im">import</span> t</span>
-<span id="cb4-2"><a></a></span>
-<span id="cb4-3"><a></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
-<span id="cb4-4"><a></a>df <span class="op">=</span> <span class="dv">196</span></span>
-<span id="cb4-5"><a></a></span>
-<span id="cb4-6"><a></a><span class="co"># two-tailed: split alpha</span></span>
-<span id="cb4-7"><a></a>t_crit <span class="op">=</span> t.ppf(<span class="dv">1</span> <span class="op">-</span> alpha<span class="op">/</span><span class="dv">2</span>, df)</span>
-<span id="cb4-8"><a></a><span class="bu">print</span>(<span class="st">"Critical t-value:"</span>, t_crit.<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="example---step-4---calculate-the-p-value" class="slide level2">
+<h2>Example - step 4 - calculate the p value</h2>
+<p>Traditionally this uses look up tables - we’re going to use Python.</p>
+<div id="fda518b2" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb5-2"><a></a></span>
+<span id="cb5-3"><a></a>t_val <span class="op">=</span> <span class="op">-</span><span class="fl">12.7</span></span>
+<span id="cb5-4"><a></a>df <span class="op">=</span> <span class="dv">18</span></span>
+<span id="cb5-5"><a></a></span>
+<span id="cb5-6"><a></a><span class="co"># Two-tailed p-value</span></span>
+<span id="cb5-7"><a></a>p_value_two_tailed <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> stats.t.cdf(<span class="bu">abs</span>(t_val), df))</span>
+<span id="cb5-8"><a></a></span>
+<span id="cb5-9"><a></a><span class="bu">print</span>(<span class="st">"Two-tailed p-value:"</span>, p_value_two_tailed.<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Critical t-value: 1.97</code></pre>
+<pre><code>Two-tailed p-value: 0.0</code></pre>
 </div>
 </div>
 </section>
-<section id="example---conclusion" class="slide level2">
-<h2>Example - conclusion</h2>
-<p>Test statistic: <span class="math inline">\(t \approx -12.7\)</span>.</p>
-<p>Critical t-value at <span class="math inline">\(\alpha=0.05\)</span>: <span class="math inline">\(t_{crit} = 1.97\)</span></p>
+<section id="example---step-4---simplified" class="slide level2">
+<h2>Example - step 4 - <em>simplified</em></h2>
+<p>We can do all the previous calulations in one step using the `scipy’ library - we’ll practise this in the tutorial.</p>
+</section>
+<section id="example---step-5" class="slide level2">
+<h2>Example - step 5</h2>
+<p><strong>Compare p-value with hypothesis level</strong></p>
+<p>Now we need to compare the p-value to our siginificance level.</p>
+<p>p-value = <span class="math inline">\(2.8x10^{-10} &lt; 0.05\)</span> = alpha</p>
 <div class="fragment">
-<p><br></p>
-<p>Since</p>
-<span class="math display">\[\begin{align}
-t= |-12.7| \gg 1.97= t_crit
-\end{align}\]</span>
-<p>we reject <span class="math inline">\(H_0\)</span>. Male and female students have significantly different heights.</p>
+<p>…we reject <span class="math inline">\(H_0\)</span>!</p>
+</div>
+<div class="fragment">
+<p>And conclude that male and female students have significantly different heights.</p>
 </div>
 </section></section>
 <section id="overview" class="title-slide slide level1 center">
