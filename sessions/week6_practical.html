@@ -628,13 +628,9 @@ Note
 <li>You will probably find yourself iteratively plotting, filtering, plotting again, switching variables, plotting again, over and over again until you are happy with the data you have. This is all part of the Exploratory Data Analysis Process and vital before applying any other methods to your data!</li>
 <li>If you recall from the lecture, the histogram of attainment 8 in the whole of England dataset looked a bit odd:</li>
 </ul>
-<div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
-</ul>
-<div class="tab-content qna-question">
-<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div data-__quarto_custom="true" data-__quarto_custom_type="Tabset" data-__quarto_custom_context="Block" data-__quarto_custom_id="33">
+<div data-__quarto_custom_scaffold="true">
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -689,15 +685,19 @@ Note
 <span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
 <span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.show()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="week6_practical_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="960"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="week6_practical_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="960"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="week6_practical_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+</div>
+<div data-__quarto_custom_scaffold="true">
+<img src="L6_images/python-logo-only.png" class="img-fluid" width="30">
+</div>
+<div data-__quarto_custom_scaffold="true">
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">median_value</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">england_school_2022_23</span><span class="op">$</span><span class="va">ATT8SCR</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">mean_value</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">england_school_2022_23</span><span class="op">$</span><span class="va">ATT8SCR</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">sd_value</span>   <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">england_school_2022_23</span><span class="op">$</span><span class="va">ATT8SCR</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -722,14 +722,16 @@ Note
 <span>    y <span class="op">=</span> <span class="st">"Density"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-8-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="week6_practical_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-8-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="week6_practical_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-8-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="week6_practical_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 </div>
+</div>
+<div data-__quarto_custom_scaffold="true">
+<img src="L6_images/Rlogo.png" width="41" height="30">
 </div>
 </div>
 <ul>
@@ -737,11 +739,11 @@ Note
 </ul>
 <div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
 </ul>
 <div class="tab-content qna-question">
-<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -779,15 +781,15 @@ Note
 <span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
 <span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="week6_practical_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="1152"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="week6_practical_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="1152"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="week6_practical_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="1152"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="week6_practical_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="1152"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">england_school_2022_23</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ATT8SCR</span>, y <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"#EDD971"</span>, alpha <span class="op">=</span> <span class="fl">0.3</span>, outlier.shape <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span>    </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="va">MINORGROUP</span><span class="op">)</span>, height <span class="op">=</span> <span class="fl">0.2</span>, alpha <span class="op">=</span> <span class="fl">0.3</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -804,10 +806,10 @@ Note
 <span>    legend.key.size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">10</span>, <span class="st">"mm"</span><span class="op">)</span>,   <span class="co"># increase dot space</span></span>
 <span>    legend.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>  <span class="co"># optional: larger legend labels</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span><span class="op">(</span>override.aes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-10-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="week6_practical_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid" width="672"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-10-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="week6_practical_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-10-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="week6_practical_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-10-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="week6_practical_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -861,11 +863,11 @@ Note
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
 </ul>
 <div class="tab-content qna-question">
-<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">## check all of your variable names first as R and python will call them something different</span></span>
@@ -883,7 +885,7 @@ Note
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    ][[<span class="st">"URN"</span>, <span class="st">"SCHNAME_x"</span>, <span class="st">"LEA"</span>, <span class="st">"TOWN_x"</span>, <span class="st">"TOTPUPS"</span>, <span class="st">"ATT8SCR"</span>, <span class="st">"OFSTEDRATING"</span>, <span class="st">"MINORGROUP"</span>, <span class="st">"PTFSM6CLA1A"</span>]]</span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Filter data</span></span>
 <span><span class="va">england_filtered</span> <span class="op">&lt;-</span> <span class="va">england_school_2022_23</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">MINORGROUP</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Special school"</span>, <span class="st">"Independent school"</span>, <span class="st">"College"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -1010,11 +1012,11 @@ Note
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
 </ul>
 <div class="tab-content qna-question">
-<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1041,15 +1043,15 @@ Note
 <span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Call the function once</span></span>
 <span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>make_plot()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-18-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="week6_practical_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="960"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-18-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="week6_practical_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="960"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-18-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="week6_practical_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="960"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-18-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="week6_practical_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span></span>
@@ -1069,10 +1071,10 @@ Note
 <span>    y <span class="op">=</span> <span class="st">"Attainment 8 Score (ATT8SCR)"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-19-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="week6_practical_files/figure-html/unnamed-chunk-19-3.png" class="img-fluid" width="672"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-19-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="week6_practical_files/figure-html/unnamed-chunk-19-3.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-19-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="week6_practical_files/figure-html/unnamed-chunk-19-3.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-19-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="week6_practical_files/figure-html/unnamed-chunk-19-3.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -1086,11 +1088,11 @@ Note
 </ul>
 <div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
 </ul>
 <div class="tab-content qna-question">
-<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.cm <span class="im">as</span> cm</span>
@@ -1131,15 +1133,15 @@ Note
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"static_school_map_with_basemap.png"</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span>
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-21-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="week6_practical_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="960"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-21-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="week6_practical_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="960"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-21-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="week6_practical_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="960"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-21-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="week6_practical_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/leaflet/">leaflet</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
@@ -1188,8 +1190,8 @@ Note
 <span>    opacity <span class="op">=</span> <span class="fl">0.8</span></span>
 <span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-fc0e5701074d0276b8ff" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-fc0e5701074d0276b8ff">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[53.83394634055382,53.84093983092549,53.85034857386938,53.85712277299099,53.82017744375353,53.90039841956449,53.75656004662164,53.74558690458779,53.8387499079027,53.76566481366035,53.74785512138476,53.76006383630605,53.80288115128293,53.81070125174928,53.79721268666177,53.79235390646338,53.79514273396459,53.78344398433403,53.78683288703903,53.8713904925365,53.84229861871142,53.81544011630753,53.83589750626852,53.81758602453261,53.81551080341188,53.85370943046657,53.81414331569527,53.74218241498903,53.79386270979967,53.91268570640318,53.73733196122085,53.7988428504004,53.85674672875195,53.7306067899343,53.79097463962646,53.88125617657391,53.79654340248619,53.80000595654007,53.78823862185425,53.92960845400619,53.72987776155618],[-1.608423239084215,-1.524073025507307,-1.551662338143588,-1.68346318744024,-1.476550927178206,-1.36196893706364,-1.382153401796083,-1.620192354862328,-1.560250705548742,-1.537818960574211,-1.532085267275583,-1.558933938220971,-1.520950890789299,-1.687351169609469,-1.484791994789932,-1.656702836658199,-1.607676318817181,-1.61998739256515,-1.391088902611243,-1.717483226940705,-1.640838474112415,-1.434796568204613,-1.595108904930247,-1.558573543807087,-1.461906770359417,-1.544329442771105,-1.654444227262337,-1.606865522760626,-1.52688289356914,-1.693852141772329,-1.459842998496006,-1.662904935937967,-1.607800074111826,-1.500854894689133,-1.53533993921077,-1.727867413822788,-1.461329674570659,-1.514485461178211,-1.534398738002605,-1.380713206258969,-1.585532609441064],[13.08621667612025,13.49914917753829,12.61769710720363,12.17300056721497,5.820192853091322,10.72773681225184,11.07714123652864,10.02098695405559,7.193987521270562,9.504821327283041,3.231423709585933,10.02098695405559,6.749290981281906,8.575723199092455,6.923993193420307,8.790130459444129,6.94781622234827,11.74418604651163,15,10.9977311401021,12.32387975042541,4.978445830969938,11.53771979580261,7.233692569483835,8.115144639818491,1,11.0850822461713,11.2597844583097,7.40045377197958,12.95121951219512,7.932501418037436,10.53715258082813,8.186613726602381,12.99092456040839,10.24333522404991,9.663641520136132,10.30686330119115,3.699943278502552,3.287010777084515,5.502552467385138,14.57912648893931],null,null,{"interactive":true,"className":"","stroke":false,"color":["#FED597","#C13B75","#FCECAD","#D5446D","#4A1079","#FEC98C","#D8456C","#FA7D5E","#FECF92","#CD4071","#808080","#F1605D","#000004","#E04C67","#782281","#BC3978","#140E36","#FB8560","#FC8961","#FE9D6C","#FCF4B6","#491078","#B1357B","#53137D","#681C81","#A9337D","#7F2482","#FCFDBF","#F66D5C","#FEC287","#FC8D63","#E44F64","#B5367A","#DA476A","#F56B5C","#FCEDAF","#EA5661","#808080","#AF357B","#F4695C","#F4695C"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#FED597","#C13B75","#FCECAD","#D5446D","#4A1079","#FEC98C","#D8456C","#FA7D5E","#FECF92","#CD4071","#808080","#F1605D","#000004","#E04C67","#782281","#BC3978","#140E36","#FB8560","#FC8961","#FE9D6C","#FCF4B6","#491078","#B1357B","#53137D","#681C81","#A9337D","#7F2482","#FCFDBF","#F66D5C","#FEC287","#FC8D63","#E44F64","#B5367A","#DA476A","#F56B5C","#FCEDAF","#EA5661","#808080","#AF357B","#F4695C","#F4695C"],"fillOpacity":0.8},null,null,["<strong>Abbey Grange Church of England Academy<\/strong><br>Pupils: 1659","<strong>Allerton Grange School<\/strong><br>Pupils: 1711","<strong>Allerton High School<\/strong><br>Pupils: 1600","<strong>Benton Park School<\/strong><br>Pupils: 1544","<strong>Bishop Young Church of England Academy<\/strong><br>Pupils: 744","<strong>Boston Spa Academy<\/strong><br>Pupils: 1362","<strong>Brigshaw High School<\/strong><br>Pupils: 1406","<strong>Bruntcliffe Academy<\/strong><br>Pupils: 1273","<strong>Cardinal Heenan Catholic High School<\/strong><br>Pupils: 917","<strong>Cockburn John Charles Academy<\/strong><br>Pupils: 1208","<strong>Cockburn Laurence Calvert Academy<\/strong><br>Pupils: 418","<strong>Cockburn School<\/strong><br>Pupils: 1273","<strong>Co-op Academy Leeds<\/strong><br>Pupils: 861","<strong>Co-op Academy Priesthorpe<\/strong><br>Pupils: 1091","<strong>Corpus Christi Catholic College, A Voluntary Academy<\/strong><br>Pupils: 883","<strong>Crawshaw Academy<\/strong><br>Pupils: 1118","<strong>Dixons Unity Academy<\/strong><br>Pupils: 886","<strong>The Farnley Academy<\/strong><br>Pupils: 1490","<strong>Garforth Academy<\/strong><br>Pupils: 1900","<strong>Guiseley School<\/strong><br>Pupils: 1396","<strong>Horsforth School<\/strong><br>Pupils: 1563","<strong>John Smeaton Academy<\/strong><br>Pupils: 638","<strong>Lawnswood School<\/strong><br>Pupils: 1464","<strong>Leeds City Academy<\/strong><br>Pupils: 922","<strong>Leeds East Academy<\/strong><br>Pupils: 1033","<strong>Leeds Jewish Free School<\/strong><br>Pupils: 137","<strong>Leeds West Academy<\/strong><br>Pupils: 1407","<strong>The Morley Academy<\/strong><br>Pupils: 1429","<strong>Mount St Mary's Catholic High School<\/strong><br>Pupils: 943","<strong>Otley Prince Henry's Grammar School Specialist Language College<\/strong><br>Pupils: 1642","<strong>Oulton Academy<\/strong><br>Pupils: 1010","<strong>Pudsey Grammar School<\/strong><br>Pupils: 1338","<strong>Ralph Thoresby School<\/strong><br>Pupils: 1042","<strong>Rodillian Academy<\/strong><br>Pupils: 1647","<strong>The Ruth Gorse Academy<\/strong><br>Pupils: 1301","<strong>St. Mary's Menston, a Catholic Voluntary Academy<\/strong><br>Pupils: 1228","<strong>Temple Moor High School<\/strong><br>Pupils: 1309","<strong>Trinity Academy Leeds<\/strong><br>Pupils: 477","<strong>University Technical College Leeds<\/strong><br>Pupils: 425","<strong>Wetherby High School<\/strong><br>Pupils: 704","<strong>Woodkirk Academy<\/strong><br>Pupils: 1847"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#000004 , #0C0925 6.93069306930693%, #4A1079 23.4323432343234%, #8C2981 39.9339933993399%, #D0416F 56.4356435643564%, #FA7D5E 72.9372937293729%, #FECC8F 89.4389438943894%, #FCFDBF "],"labels":["30","35","40","45","50","55"],"na_color":"#808080","na_label":"NA","opacity":0.8,"position":"bottomright","type":"numeric","title":"ATT8SCR","extra":{"p_1":0.06930693069306934,"p_n":0.8943894389438943},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[53.72987776155618,53.92960845400619],"lng":[-1.727867413822788,-1.36196893706364]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-c39b7b82753f1fec87f9" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-c39b7b82753f1fec87f9">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[53.83394634055382,53.84093983092549,53.85034857386938,53.85712277299099,53.82017744375353,53.90039841956449,53.75656004662164,53.74558690458779,53.8387499079027,53.76566481366035,53.74785512138476,53.76006383630605,53.80288115128293,53.81070125174928,53.79721268666177,53.79235390646338,53.79514273396459,53.78344398433403,53.78683288703903,53.8713904925365,53.84229861871142,53.81544011630753,53.83589750626852,53.81758602453261,53.81551080341188,53.85370943046657,53.81414331569527,53.74218241498903,53.79386270979967,53.91268570640318,53.73733196122085,53.7988428504004,53.85674672875195,53.7306067899343,53.79097463962646,53.88125617657391,53.79654340248619,53.80000595654007,53.78823862185425,53.92960845400619,53.72987776155618],[-1.608423239084215,-1.524073025507307,-1.551662338143588,-1.68346318744024,-1.476550927178206,-1.36196893706364,-1.382153401796083,-1.620192354862328,-1.560250705548742,-1.537818960574211,-1.532085267275583,-1.558933938220971,-1.520950890789299,-1.687351169609469,-1.484791994789932,-1.656702836658199,-1.607676318817181,-1.61998739256515,-1.391088902611243,-1.717483226940705,-1.640838474112415,-1.434796568204613,-1.595108904930247,-1.558573543807087,-1.461906770359417,-1.544329442771105,-1.654444227262337,-1.606865522760626,-1.52688289356914,-1.693852141772329,-1.459842998496006,-1.662904935937967,-1.607800074111826,-1.500854894689133,-1.53533993921077,-1.727867413822788,-1.461329674570659,-1.514485461178211,-1.534398738002605,-1.380713206258969,-1.585532609441064],[13.08621667612025,13.49914917753829,12.61769710720363,12.17300056721497,5.820192853091322,10.72773681225184,11.07714123652864,10.02098695405559,7.193987521270562,9.504821327283041,3.231423709585933,10.02098695405559,6.749290981281906,8.575723199092455,6.923993193420307,8.790130459444129,6.94781622234827,11.74418604651163,15,10.9977311401021,12.32387975042541,4.978445830969938,11.53771979580261,7.233692569483835,8.115144639818491,1,11.0850822461713,11.2597844583097,7.40045377197958,12.95121951219512,7.932501418037436,10.53715258082813,8.186613726602381,12.99092456040839,10.24333522404991,9.663641520136132,10.30686330119115,3.699943278502552,3.287010777084515,5.502552467385138,14.57912648893931],null,null,{"interactive":true,"className":"","stroke":false,"color":["#FED597","#C13B75","#FCECAD","#D5446D","#4A1079","#FEC98C","#D8456C","#FA7D5E","#FECF92","#CD4071","#808080","#F1605D","#000004","#E04C67","#782281","#BC3978","#140E36","#FB8560","#FC8961","#FE9D6C","#FCF4B6","#491078","#B1357B","#53137D","#681C81","#A9337D","#7F2482","#FCFDBF","#F66D5C","#FEC287","#FC8D63","#E44F64","#B5367A","#DA476A","#F56B5C","#FCEDAF","#EA5661","#808080","#AF357B","#F4695C","#F4695C"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#FED597","#C13B75","#FCECAD","#D5446D","#4A1079","#FEC98C","#D8456C","#FA7D5E","#FECF92","#CD4071","#808080","#F1605D","#000004","#E04C67","#782281","#BC3978","#140E36","#FB8560","#FC8961","#FE9D6C","#FCF4B6","#491078","#B1357B","#53137D","#681C81","#A9337D","#7F2482","#FCFDBF","#F66D5C","#FEC287","#FC8D63","#E44F64","#B5367A","#DA476A","#F56B5C","#FCEDAF","#EA5661","#808080","#AF357B","#F4695C","#F4695C"],"fillOpacity":0.8},null,null,["<strong>Abbey Grange Church of England Academy<\/strong><br>Pupils: 1659","<strong>Allerton Grange School<\/strong><br>Pupils: 1711","<strong>Allerton High School<\/strong><br>Pupils: 1600","<strong>Benton Park School<\/strong><br>Pupils: 1544","<strong>Bishop Young Church of England Academy<\/strong><br>Pupils: 744","<strong>Boston Spa Academy<\/strong><br>Pupils: 1362","<strong>Brigshaw High School<\/strong><br>Pupils: 1406","<strong>Bruntcliffe Academy<\/strong><br>Pupils: 1273","<strong>Cardinal Heenan Catholic High School<\/strong><br>Pupils: 917","<strong>Cockburn John Charles Academy<\/strong><br>Pupils: 1208","<strong>Cockburn Laurence Calvert Academy<\/strong><br>Pupils: 418","<strong>Cockburn School<\/strong><br>Pupils: 1273","<strong>Co-op Academy Leeds<\/strong><br>Pupils: 861","<strong>Co-op Academy Priesthorpe<\/strong><br>Pupils: 1091","<strong>Corpus Christi Catholic College, A Voluntary Academy<\/strong><br>Pupils: 883","<strong>Crawshaw Academy<\/strong><br>Pupils: 1118","<strong>Dixons Unity Academy<\/strong><br>Pupils: 886","<strong>The Farnley Academy<\/strong><br>Pupils: 1490","<strong>Garforth Academy<\/strong><br>Pupils: 1900","<strong>Guiseley School<\/strong><br>Pupils: 1396","<strong>Horsforth School<\/strong><br>Pupils: 1563","<strong>John Smeaton Academy<\/strong><br>Pupils: 638","<strong>Lawnswood School<\/strong><br>Pupils: 1464","<strong>Leeds City Academy<\/strong><br>Pupils: 922","<strong>Leeds East Academy<\/strong><br>Pupils: 1033","<strong>Leeds Jewish Free School<\/strong><br>Pupils: 137","<strong>Leeds West Academy<\/strong><br>Pupils: 1407","<strong>The Morley Academy<\/strong><br>Pupils: 1429","<strong>Mount St Mary's Catholic High School<\/strong><br>Pupils: 943","<strong>Otley Prince Henry's Grammar School Specialist Language College<\/strong><br>Pupils: 1642","<strong>Oulton Academy<\/strong><br>Pupils: 1010","<strong>Pudsey Grammar School<\/strong><br>Pupils: 1338","<strong>Ralph Thoresby School<\/strong><br>Pupils: 1042","<strong>Rodillian Academy<\/strong><br>Pupils: 1647","<strong>The Ruth Gorse Academy<\/strong><br>Pupils: 1301","<strong>St. Mary's Menston, a Catholic Voluntary Academy<\/strong><br>Pupils: 1228","<strong>Temple Moor High School<\/strong><br>Pupils: 1309","<strong>Trinity Academy Leeds<\/strong><br>Pupils: 477","<strong>University Technical College Leeds<\/strong><br>Pupils: 425","<strong>Wetherby High School<\/strong><br>Pupils: 704","<strong>Woodkirk Academy<\/strong><br>Pupils: 1847"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#000004 , #0C0925 6.93069306930693%, #4A1079 23.4323432343234%, #8C2981 39.9339933993399%, #D0416F 56.4356435643564%, #FA7D5E 72.9372937293729%, #FECC8F 89.4389438943894%, #FCFDBF "],"labels":["30","35","40","45","50","55"],"na_color":"#808080","na_label":"NA","opacity":0.8,"position":"bottomright","type":"numeric","title":"ATT8SCR","extra":{"p_1":0.06930693069306934,"p_n":0.8943894389438943},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[53.72987776155618,53.92960845400619],"lng":[-1.727867413822788,-1.36196893706364]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -1215,11 +1217,11 @@ Note
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
 </ul>
 <div class="tab-content qna-question">
-<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1251,17 +1253,17 @@ Note
 <span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Label axes</span></span>
 <span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>g.set_axis_labels(<span class="st">"log10(PTFSM6CLA1A)"</span>, <span class="st">"log10(ATT8SCR)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>&lt;seaborn.axisgrid.JointGrid object at 0x7f32c70e8c40&gt;</code></pre>
+<pre><code>&lt;seaborn.axisgrid.JointGrid object at 0x7f28570af1c0&gt;</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-23-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="week6_practical_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-23-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="week6_practical_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-23-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="week6_practical_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-23-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="week6_practical_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jtlandis/ggside">ggside</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
@@ -1270,10 +1272,10 @@ Note
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggside/man/geom_xsidedensity.html">geom_xsidedensity</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">density</span><span class="op">)</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">1</span>, position <span class="op">=</span> <span class="st">"stack"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggside/man/geom_xsidedensity.html">geom_ysidedensity</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes_eval.html">after_stat</a></span><span class="op">(</span><span class="va">density</span><span class="op">)</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.5</span>, size <span class="op">=</span> <span class="fl">1</span>, position <span class="op">=</span> <span class="st">"stack"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>ggside.panel.scale.x <span class="op">=</span> <span class="fl">0.4</span>,ggside.panel.scale.y <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-24-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="week6_practical_files/figure-html/unnamed-chunk-24-3.png" class="img-fluid" width="672"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-24-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="week6_practical_files/figure-html/unnamed-chunk-24-3.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-24-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="week6_practical_files/figure-html/unnamed-chunk-24-3.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-24-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="week6_practical_files/figure-html/unnamed-chunk-24-3.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -1282,11 +1284,11 @@ Note
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
 </ul>
 <div class="tab-content qna-question">
-<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1316,15 +1318,15 @@ Note
 <pre><code>Text(0, 0.5, 'Frequency')</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-25-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img src="week6_practical_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="1344"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-25-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="week6_practical_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="1344"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-25-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img src="week6_practical_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="1344"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-25-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="week6_practical_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="1344"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span></span>
@@ -1338,10 +1340,10 @@ Note
 <span>    x <span class="op">=</span> <span class="st">"PTFSM6CLA1A"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Frequency"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-26-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img src="week6_practical_files/figure-html/unnamed-chunk-26-3.png" class="img-fluid" width="672"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-26-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img src="week6_practical_files/figure-html/unnamed-chunk-26-3.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-26-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img src="week6_practical_files/figure-html/unnamed-chunk-26-3.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-26-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img src="week6_practical_files/figure-html/unnamed-chunk-26-3.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -1355,10 +1357,10 @@ Note
 <span>    x <span class="op">=</span> <span class="st">"ATT8SCR"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Frequency"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-26-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img src="week6_practical_files/figure-html/unnamed-chunk-26-4.png" class="img-fluid" width="672"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-26-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img src="week6_practical_files/figure-html/unnamed-chunk-26-4.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-26-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img src="week6_practical_files/figure-html/unnamed-chunk-26-4.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-26-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img src="week6_practical_files/figure-html/unnamed-chunk-26-4.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -1395,7 +1397,7 @@ Note
 <span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-27-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img src="week6_practical_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-27-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img src="week6_practical_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -1416,7 +1418,7 @@ Note
 <span>  <span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-28-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img src="week6_practical_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-28-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img src="week6_practical_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -1446,11 +1448,11 @@ Tip
 <section id="running-the-model-for-the-first-london-local-authority" class="level4"><h4 class="anchored" data-anchor-id="running-the-model-for-the-first-london-local-authority">Running the Model for the first (London) local authority</h4>
 <div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
 </ul>
 <div class="tab-content qna-question">
-<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
+<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1476,7 +1478,7 @@ Dep. Variable:            log_ATT8SCR   R-squared:                       0.576
 Model:                            OLS   Adj. R-squared:                  0.523
 Method:                 Least Squares   F-statistic:                     10.88
 Date:                Tue, 14 Oct 2025   Prob (F-statistic):             0.0109
-Time:                        12:16:21   Log-Likelihood:                 9.4809
+Time:                        14:29:01   Log-Likelihood:                 9.4809
 No. Observations:                  10   AIC:                            -14.96
 Df Residuals:                       8   BIC:                            -14.36
 Df Model:                           1                                         
@@ -1496,7 +1498,7 @@ Kurtosis:                       1.533   Cond. No.                         84.4
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
 </div>
-<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
+<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Fit linear model and get predicted values</span></span>
 <span><span class="va">camden_model1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">ATT8SCR</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">PTFSM6CLA1A</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">camden_sub</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">camden_model1</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1524,11 +1526,11 @@ F-statistic: 10.88 on 1 and 8 DF,  p-value: 0.01088</code></pre>
 </section><section id="running-the-model-for-the-second-local-authority" class="level4"><h4 class="anchored" data-anchor-id="running-the-model-for-the-second-local-authority">Running the Model for the second local authority</h4>
 <div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
 </ul>
 <div class="tab-content qna-question">
-<div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
+<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1556,7 +1558,7 @@ Dep. Variable:            log_ATT8SCR   R-squared:                       0.491
 Model:                            OLS   Adj. R-squared:                  0.477
 Method:                 Least Squares   F-statistic:                     35.71
 Date:                Tue, 14 Oct 2025   Prob (F-statistic):           6.77e-07
-Time:                        12:16:22   Log-Likelihood:                 26.542
+Time:                        14:29:02   Log-Likelihood:                 26.542
 No. Observations:                  39   AIC:                            -49.08
 Df Residuals:                      37   BIC:                            -45.76
 Df Model:                           1                                         
@@ -1576,7 +1578,7 @@ Kurtosis:                       2.508   Cond. No.                         22.2
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
 </div>
-<div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
+<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Fit linear model and get predicted values</span></span>
 <span><span class="va">leeds_model1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">ATT8SCR</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">PTFSM6CLA1A</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">leeds_sub</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">leeds_model1</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1605,11 +1607,11 @@ F-statistic: 35.71 on 1 and 37 DF,  p-value: 6.767e-07</code></pre>
 </section><section id="running-the-model-for-all-schools-in-england" class="level4"><h4 class="anchored" data-anchor-id="running-the-model-for-all-schools-in-england">Running the Model for all Schools in England</h4>
 <div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
 </ul>
 <div class="tab-content qna-question">
-<div id="tabset-12-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-12-1-tab">
+<div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1637,7 +1639,7 @@ Dep. Variable:            log_ATT8SCR   R-squared:                       0.468
 Model:                            OLS   Adj. R-squared:                  0.468
 Method:                 Least Squares   F-statistic:                     2611.
 Date:                Tue, 14 Oct 2025   Prob (F-statistic):               0.00
-Time:                        12:16:22   Log-Likelihood:                 1668.0
+Time:                        14:29:02   Log-Likelihood:                 1668.0
 No. Observations:                2968   AIC:                            -3332.
 Df Residuals:                    2966   BIC:                            -3320.
 Df Model:                           1                                         
@@ -1657,7 +1659,7 @@ Kurtosis:                       4.151   Cond. No.                         17.5
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
 </div>
-<div id="tabset-12-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-12-2-tab">
+<div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Fit linear model and get predicted values</span></span>
 <span><span class="va">england_filtered_clean</span> <span class="op">&lt;-</span> <span class="va">england_filtered</span><span class="op">[</span></span>
 <span>  <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">england_filtered</span><span class="op">$</span><span class="va">ATT8SCR</span><span class="op">)</span> <span class="op">&amp;</span> </span>
@@ -1707,32 +1709,32 @@ Note
 </section><section id="linearity" class="level3"><h3 class="anchored" data-anchor-id="linearity">Linearity</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
 </ul>
 <div class="tab-content qna-question">
-<div id="tabset-13-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-13-1-tab">
+<div id="tabset-12-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-12-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>cls <span class="op">=</span> LinearRegDiagnostic(england_model1)</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>cls.residual_plot()<span class="op">;</span></span>
 <span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-36-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img src="week6_practical_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-36-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img src="week6_practical_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-36-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img src="week6_practical_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-36-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img src="week6_practical_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="tabset-13-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-13-2-tab">
+<div id="tabset-12-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-12-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/performance/">performance</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">england_model1</span>, </span>
 <span>            check <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"linearity"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-37-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img src="week6_practical_files/figure-html/unnamed-chunk-37-3.png" class="img-fluid" width="672"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-37-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img src="week6_practical_files/figure-html/unnamed-chunk-37-3.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-37-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img src="week6_practical_files/figure-html/unnamed-chunk-37-3.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-37-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img src="week6_practical_files/figure-html/unnamed-chunk-37-3.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -1742,28 +1744,28 @@ Note
 </section><section id="homoscedasticity-constant-variance" class="level3"><h3 class="anchored" data-anchor-id="homoscedasticity-constant-variance">Homoscedasticity (Constant variance)?</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
 </ul>
 <div class="tab-content qna-question">
-<div id="tabset-14-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-14-1-tab">
+<div id="tabset-13-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-13-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>cls.scale_location_plot()<span class="op">;</span></span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-38-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img src="week6_practical_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-38-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img src="week6_practical_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-38-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32"><img src="week6_practical_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-38-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img src="week6_practical_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="tabset-14-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-14-2-tab">
+<div id="tabset-13-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-13-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">england_model1</span>, </span>
 <span>            check <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"homogeneity"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-39-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-33"><img src="week6_practical_files/figure-html/unnamed-chunk-39-3.png" class="img-fluid" width="672"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-39-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img src="week6_practical_files/figure-html/unnamed-chunk-39-3.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-39-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-34"><img src="week6_practical_files/figure-html/unnamed-chunk-39-3.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-39-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32"><img src="week6_practical_files/figure-html/unnamed-chunk-39-3.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -1773,29 +1775,29 @@ Note
 </section><section id="normality-of-residuals" class="level3"><h3 class="anchored" data-anchor-id="normality-of-residuals">Normality of Residuals</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-15-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-1" role="tab" aria-controls="tabset-15-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-15-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-2" role="tab" aria-controls="tabset-15-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
 </ul>
 <div class="tab-content qna-question">
-<div id="tabset-15-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-15-1-tab">
+<div id="tabset-14-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-14-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>cls.qq_plot()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>&lt;Axes: title={'center': 'Normal Q-Q'}, xlabel='Theoretical Quantiles', ylabel='Standardized Residuals'&gt;</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-40-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-35"><img src="week6_practical_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-40-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-33"><img src="week6_practical_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-40-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-36"><img src="week6_practical_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-40-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-34"><img src="week6_practical_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="tabset-15-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-15-2-tab">
+<div id="tabset-14-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-14-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">england_model1</span>, </span>
 <span>            check <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"qq"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-41-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-37"><img src="week6_practical_files/figure-html/unnamed-chunk-41-3.png" class="img-fluid" width="672"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-41-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-35"><img src="week6_practical_files/figure-html/unnamed-chunk-41-3.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-41-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-38"><img src="week6_practical_files/figure-html/unnamed-chunk-41-3.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-41-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-36"><img src="week6_practical_files/figure-html/unnamed-chunk-41-3.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -1805,29 +1807,29 @@ Note
 </section><section id="influence-of-outliers" class="level3"><h3 class="anchored" data-anchor-id="influence-of-outliers">Influence of Outliers</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-16-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-1" role="tab" aria-controls="tabset-16-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-16-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-2" role="tab" aria-controls="tabset-16-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-15-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-1" role="tab" aria-controls="tabset-15-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-15-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-2" role="tab" aria-controls="tabset-15-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
 </ul>
 <div class="tab-content qna-question">
-<div id="tabset-16-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-16-1-tab">
+<div id="tabset-15-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-15-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>cls.leverage_plot(high_leverage_threshold<span class="op">=</span><span class="va">True</span>, cooks_threshold<span class="op">=</span><span class="st">"dof"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>&lt;Axes: title={'center': 'Residuals vs Leverage'}, xlabel='Leverage', ylabel='Standardized Residuals'&gt;</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-42-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-39"><img src="week6_practical_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-42-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-37"><img src="week6_practical_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-42-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-40"><img src="week6_practical_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-42-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-38"><img src="week6_practical_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="tabset-16-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-16-2-tab">
+<div id="tabset-15-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-15-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">england_model1</span>, </span>
 <span>            check <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"outliers"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><a href="week6_practical_files/figure-html/unnamed-chunk-43-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-41"><img src="week6_practical_files/figure-html/unnamed-chunk-43-3.png" class="img-fluid" width="672"></a></p>
+<p><a href="week6_practical_files/figure-html/unnamed-chunk-43-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-39"><img src="week6_practical_files/figure-html/unnamed-chunk-43-3.png" class="img-fluid" width="672"></a></p>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-43-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-42"><img src="week6_practical_files/figure-html/unnamed-chunk-43-3.png" class="img-fluid figure-img" width="672"></a></p>
+<figure class="figure"><p><a href="week6_practical_files/figure-html/unnamed-chunk-43-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-40"><img src="week6_practical_files/figure-html/unnamed-chunk-43-3.png" class="img-fluid figure-img" width="672"></a></p>
 </figure>
 </div>
 </div>
@@ -1850,11 +1852,11 @@ Note
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset qna-question">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-17-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-1" role="tab" aria-controls="tabset-17-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-17-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-2" role="tab" aria-controls="tabset-17-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-16-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-1" role="tab" aria-controls="tabset-16-1" aria-selected="true" href=""><img src="L6_images/python-logo-only.png" class="img-fluid" width="30"></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-16-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-2" role="tab" aria-controls="tabset-16-2" aria-selected="false" href=""><img src="L6_images/Rlogo.png" width="41" height="30"></a></li>
 </ul>
 <div class="tab-content qna-question">
-<div id="tabset-17-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-17-1-tab">
+<div id="tabset-16-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-16-1-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.iolib.summary2 <span class="im">import</span> summary_col </span>
@@ -1886,7 +1888,7 @@ N               10           39          2968
 Standard errors in parentheses.
 * p&lt;.1, ** p&lt;.05, ***p&lt;.01</code></pre>
 </div>
-<div id="tabset-17-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-17-2-tab">
+<div id="tabset-16-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-16-2-tab">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jtools.jacob-long.com">jtools</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://jtools.jacob-long.com/reference/export_summs.html">export_summs</a></span><span class="op">(</span><span class="va">camden_model1</span>, <span class="va">leeds_model1</span>, <span class="va">england_model1</span>, error_format <span class="op">=</span> <span class="st">""</span>, error_pos <span class="op">=</span> <span class="st">"same"</span>, model.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Camden Model"</span>, <span class="st">"Leeds Model"</span>, <span class="st">"England Model"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
