@@ -7,15 +7,16 @@ title: "Week 4"
 
 ## Introduction
 
-This week will introduce some concepts from mathematics to help with understanding equations and modelling data.
+This week will introduce some concepts from mathematics to help with understanding more advanced quantitative methods. We're going to look at different types of functions including linear equations, and how to read and understand mathematical notation. 
+
+Below I've linked to resources which might be helpful if you want to brush up on some mathematics. 
 
 ## Learning Objectives
 
 By the end of this week, you will be able to:
 
-1. Define concept of linear maps. 
+1. Define concept of linear equations. 
 2. Compute linear algebra equations using vectors and matrices.  
-3. Describe how linear algebra relates to solving linear regression. 
 
 ## Lecture 
 
@@ -27,15 +28,21 @@ To access the quiz on Moodle, please check [Moodle page](https://moodle.ucl.ac.u
 
 ## Practical
 
+To access the practical:
+
+1. [Preview](week4_practical.html)
+2. [Download](week4_practical.ipynb)
+
 :::{.callout-note}
 
 To save a copy of notebook to your own GitHub Repo: follow the GitHub link, click on `Raw` and then `Save File As...` to save it to your own computer. Make sure to change the extension from `.ipynb.txt` (which will probably be the default) to `.ipynb`before adding the file to *your* GitHub repository.
 
 :::
 
-To access the practical:
-
-1. [Preview](week4_practical.html)
-2. [Download](week4_practical.ipynb)
-
 ## Further resources
+
+There are lot's of introductory courses to linear algebra online, which might be helpful if you're new to this type of maths. Note: if you work through the whole course you'll end up covering more detail than we'll cover in the lecture!
+- This linear algebra course from 3Blue1Brown covers some of the key ideas behind matrices: [https://www.3blue1brown.com/topics/linear-algebra](https://www.3blue1brown.com/topics/linear-algebra)
+- Alternatively there's this Khan Academy course: [https://www.khanacademy.org/math/linear-algebra](https://www.khanacademy.org/math/linear-algebra)
+
+If you're already familiar with linear algebra and you want to know more about how it relates to machine learning then you might find this book interesting - in particular [Chapter 2](https://mml-book.github.io/book/mml-book.pdf): Mathematics for Machine Learning - Marc Peter Deisenroth, A. Aldo Faisal, Cheng Soon Ong. 

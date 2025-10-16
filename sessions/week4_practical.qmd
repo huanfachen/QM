@@ -36,9 +36,10 @@ For **each handlebar** they need 8 units of aluminium, 4 units of rubber and 4 u
 For **each brake** they need 1 unit of aluminium, 1 unit of rubber and 1 unit of paint. 
 For **each wheel** they need 10 units of aluminium, 23 units of rubber, and 5 units of paint. 
 
-![]({{< var module.web >}}/sessions/L4_images/bike_factory.jpg){width="600"} 
+![]({{< var module.web >}}/L4_images/bike_factory.jpg){width="600"} 
 
 The factory is having problems with the supply of raw materials. On a given day they have: 
+
 - $b_1=400$ units of aluminium,  
 - $b_2=750$ units of rubber,  
 - $b_3=200$ units of paint.  
@@ -71,9 +72,13 @@ Given the contraints of raw materials we can have:
 
 $$
 8x_1 + x_2 + 10x_3 = b_1 = 400
-\\ 
+$$
+
+$$
 4x_1 + x_2 + 23x_3 = b_2 = 750
-\\ 
+$$
+
+$$
 4x_1 + x_2 + 5x_3 = b_3 = 200
 $$
 
@@ -126,7 +131,6 @@ Let's start by importing the libraries we need in Python.
 
 ```{python}
 import numpy as np
-import plotly.graph_objects as go
 ```
 
 We can write this same information in Python by creating variables. 
@@ -243,9 +247,11 @@ print(np.round(x, 2))
 
 In 2-dimensions and 3-dimensions we can visualise the solution to our set of equations. For two equations the solution will be the point where the two lines intersect. In three dimensiosn the solution is the intersection of the three planes described by the equation. 
 
-We can plot our equations in 3D space to see this. We we-write the equations as 
+We can plot our equations in 3D space to see this. 
 
 ```{python}
+import plotly.graph_objects as go
+
 # Define grid for x1 (handlebars) and x2 (brakes)
 x1 = np.linspace(0, 30, 50)
 x2 = np.linspace(0, 30, 50)
@@ -278,29 +284,73 @@ zaxis_title="Wheels"
 fig.show()
 ```
 
-And now we can plot the intersecting planes. 
-
 
 ## Conclusions 
 
-Here we solved a set of linear equations using algebra. Solving sets of liunear equations is closely related to regression, a topic we will learn about in week 6. 
+Here we solved a set of linear equations using algebra. Solving sets of linear equations is closely related to regression, a topic we will learn about in week 6. 
 
 ## Extension 
 
-If you have time you can explore implementing an ordinary least squares regression. 
+If you have time you can explore implementing an [ordinary least squares regression](https://www.geeksforgeeks.org/data-science/ordinary-least-squares-ols-using-statsmodels/). 
 
 We have data from the factory - every day for a year they recorded how many handlebars, brakes and wheels they made and the corresponding amount of each resource used. We can load the data as:
 
 ```{python}
 import pandas as pd 
 
-df = pd.read_csv('L4_data/factory_data.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/huanfachen/QM/refs/heads/main/sessions/L4_data/factory_data.csv')
 
 df.head()
 ```
 
+Choose one dependent variable (`x1_handlebars', `x2_brakes' or `x3_wheels'), and solve for production levels given the observed resource usage. 
 
-You might want to use `statsmodels` OLS package which you can read about [here](https://www.statsmodels.org/dev/generated/statsmodels.regression.linear_model.OLS.html). 
+*Hint:* You might want to use `statsmodels` OLS package which you can read about [here](https://www.statsmodels.org/dev/generated/statsmodels.regression.linear_model.OLS.html). 
+
+::: qna
+#### Question
+
+``` python
+import statsmodels.api as sm
+
+# define independent variables (resources used)
+X = ??
+
+# add constant term for intercept
+X = sm.add_constant(X)
+
+# define dependent variable (e.g. production of handlebars)
+y = ??
+
+# fit OLS regression model
+model = sm.OLS(y, X).fit()
+
+# print model summary
+print(model.summary())
+```
+
+#### Answer
+
+```{python}
+import statsmodels.api as sm
+
+# define independent variables (resources used)
+X = df[["aluminium_used", "rubber_used", "paint_used"]]
+
+# add constant term for intercept
+X = sm.add_constant(X)
+
+# define dependent variable (e.g. production of handlebars)
+y = df["x1_handlebars"]
+
+# fit OLS regression model
+model = sm.OLS(y, X).fit()
+
+# print model summary
+print(model.summary())
+```
+:::
+
 
 ## You're Done!
 
