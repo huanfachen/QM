@@ -142,24 +142,20 @@
 
 <p><span style="margin:0px; font-weight:700;" class="author">Beatrice Taylor</span> - beatrice.taylor@ucl.ac.uk </p>
 
-<p style="opacity: 0.8">8th October 2025</p>
+<p style="opacity: 0.8">22nd October 2025</p>
 
 
 </section>
-<section>
-<section id="last-week" class="title-slide slide level1 center">
-<h1>Last week</h1>
-
-</section>
-<section id="overview-of-lecture-3" class="slide level2">
-<h2>Overview of lecture 3</h2>
-<p>Looked at hypothesis testing:</p>
+<section id="last-week" class="slide level2">
+<h2>Last week</h2>
+<p><strong>Lecture 3 - hypothesis testing</strong></p>
+<p>Looked at:</p>
 <ul>
-<li>What makes a good hypothesis</li>
-<li>How to formally state a hypothesis</li>
-<li>Types of statistical tests</li>
+<li class="fragment">What makes a good hypothesis</li>
+<li class="fragment">How to formally state a hypothesis</li>
+<li class="fragment">Types of statistical tests</li>
 </ul>
-</section></section>
+</section>
 <section>
 <section id="this-week" class="title-slide slide level1 center">
 <h1>This week</h1>
@@ -173,6 +169,20 @@
 <li class="fragment">focused on algorithms and methodologies</li>
 <li class="fragment"><strong>AND</strong> practical examples of how these can be applied</li>
 </ul>
+<aside class="notes">
+<p>This week focussing on the maths. Not going to be directly examined on the maths - this isn’t a maths course.</p>
+<p>Rather the idea is to help with the basics which will facilitate understanding of subsequent weeks.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="maths-underpins-it" class="slide level2">
 <h2>Maths underpins it</h2>
@@ -186,8 +196,8 @@
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>This lecture covers some of the key concepts.</li>
-<li>The goal is to facilitate deeper understanding of the methods.</li>
+<li>This lecture covers some of the key concepts</li>
+<li>The goal is to facilitate deeper understanding of the methods</li>
 </ul>
 </div></div>
 </section>
@@ -213,12 +223,11 @@
 </section>
 <section id="learning-objectives" class="slide level2">
 <h2>Learning Objectives</h2>
-<p>By the end of this lecture you should:</p>
+<p>By the end of this lecture you should be able to:</p>
 <ol type="1">
-<li>Define concept of linear maps.</li>
-<li>Compute linear algebra equations using vectors and matrices.<br>
+<li class="fragment">Define concept of linear equations.</li>
+<li class="fragment">Compute linear algebra equations using vectors and matrices.<br>
 </li>
-<li>Describe how linear algebra relates to solving linear regression.</li>
 </ol>
 </section></section>
 <section>
@@ -233,7 +242,7 @@
 y = \sum_{i=1}^n \beta_i x_i
 \end{align}\]</span>
 <aside class="notes">
-<p>This is a linear equation.</p>
+<p>This is a standard linear equation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -283,6 +292,7 @@ y = \sum_{i=1}^n \beta_i x_i
 </ul>
 <aside class="notes">
 <p>Thinking back to hypotheses from last week - mathematical models help us to evaluate our research question. Lats week we looked at simple statistical tests - but might have a more sophisticated model of what’s happening.</p>
+<p>Example is a regression model (which we’ll look at after reading week) - this is a mathematical model</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -298,15 +308,25 @@ y = \sum_{i=1}^n \beta_i x_i
 <section id="machine-learning" class="slide level2">
 <h2>Machine learning</h2>
 <p><span style="color:#49a0c4"><em>A model which improves after data is taken into account.</em></span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
-<li>Mayne of these concepts are also integral to machine learning</li>
+<li>Many of these concepts are also integral to machine learning</li>
 <li>Really just a specific type of mathematical model</li>
 <li>The learning part is about automatically finding patterns</li>
 </ul>
+</div><div class="column" style="width:50%;">
+<div style="text-align:center;">
+<img src="L4_images/creepy_robot.jpg" alt="Sinister robot." style="max-width:90%">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Embodied AI in the form of the creepy Ameca. </code></pre>
+</div>
+</div>
+</div></div>
 <aside class="notes">
 <p>These ideas are also fundamental for machine learning.</p>
-<p>Lots of different definitions of machine learning - but this us a simple one.</p>
-<p>In later weeks of the course we will look at machine learning concepts.</p>
+<p>Lots of different definitions of machine learning - but this us a simple one - machine learning is a sub discipline of AI.</p>
+<p>In later weeks of the course we will look at machine learning concepts, such as clustering.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -358,18 +378,32 @@ y = \sum_{i=1}^n \beta_i x_i
 <h2>Letters for numbers</h2>
 <p>There are mathematical conventions for how we describe different things.</p>
 <ul>
-<li class="fragment"><span class="math inline">\(a, b, c\)</span> represent <strong>constants</strong><br>
+<li class="fragment"><span class="math inline">\(a, b, c\)</span> represent <strong>constants/coefficients</strong><br>
 </li>
 <li class="fragment"><span class="math inline">\(x, y, z, \dots\)</span> represent <strong>variables</strong><br>
 </li>
 <li class="fragment"><span class="math inline">\(f, g, h, \dots\)</span> represent <strong>functions</strong><br>
 </li>
-<li class="fragment"><span class="math inline">\(i, j, \dots\)</span> often used for <strong>indices</strong> (i.e.&nbsp;counting)<br>
-</li>
+<li class="fragment"><span class="math inline">\(i, j, \dots\)</span> often used for <strong>indices</strong> (i.e.&nbsp;counting)
+<ul>
 <li class="fragment"><span class="math inline">\(a_i\)</span> means the <span class="math inline">\(i\)</span>-th element of a sequence<br>
 </li>
-<li class="fragment"><span class="math inline">\(A, B, C\)</span> represent <strong>matrices</strong></li>
+</ul></li>
+<li class="fragment"><span class="math inline">\(A, B, C, \dots\)</span> represent <strong>matrices</strong></li>
 </ul>
+<aside class="notes">
+<p>Write up on board f(x)=ax_1 + bx_2 + c Explain the menaing of this equation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="numbers-replaced-by-letters" class="slide level2">
 <h2>Numbers replaced by letters</h2>
@@ -378,7 +412,10 @@ y = \sum_{i=1}^n \beta_i x_i
 <p>The power to represent any number!</p>
 </div><div class="column" style="width:60%;">
 <div style="text-align:center;">
-<p><img src="L4_images/keanu_xy.jpg" alt="Keanu likes random variables." style="max-width:90%"></p>
+<img src="L4_images/keanu_xy.jpg" alt="Keanu likes algebra." style="max-width:90%">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Keanu likes algebra. </code></pre>
+</div>
 </div>
 </div></div>
 <aside class="notes">
@@ -433,6 +470,19 @@ y = 2x + \epsilon
 </div>
 <div class="fragment">
 <p>This means <span class="math inline">\(y\)</span> is equal to <span class="math inline">\(2\)</span> times <span class="math inline">\(x\)</span> plus a small value. So if <span class="math inline">\(x=3\)</span>, then we would expect <span class="math inline">\(y\)</span> to be close to <span class="math inline">\(6\)</span>, but not exactly <span class="math inline">\(6\)</span>.</p>
+<aside class="notes">
+<p>Could talk about it here in terms of the limit of a sequence, 1, 1.5, 1.25, 1.125, 1.0125, … the limit is 1, but it never reaches 1, the values will always be 1 + epsilon.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -454,6 +504,19 @@ f(x) = y
 <span class="math display">\[\begin{align}
 f(x) = y \text{ for } x \in X, y \in Y
 \end{align}\]</span>
+<aside class="notes">
+<p>explain the ‘in’ notation if not already.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="domain-and-range" class="slide level2">
@@ -465,6 +528,26 @@ f(x) = y \text{ for } x \in X, y \in Y
 <p><span style="color:#49a0c4"><em><strong>Range</strong>: the set of all possible output numbers from the function</em></span></p>
 <p><em>Example:</em></p>
 <p>In <span class="math inline">\(f(x)=y\)</span>, <span class="math inline">\(y\)</span> is the range.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div style="text-align:center;">
+<p><img src="L4_images/log_function.png" alt="Natural logarithm" style="max-width:90%"></p>
+</div>
+<p><em>Question:</em> what is the domain of <span class="math inline">\(ln(x)\)</span>?</p>
+</section>
+<section class="slide level2">
+
+<div style="text-align:center;">
+<p><img src="L4_images/log_function_domain.png" alt="Domain of the natural logarithm" style="max-width:90%"></p>
+</div>
+<p><em>Question:</em> what is the range of <span class="math inline">\(ln(x)\)</span>?</p>
+</section>
+<section class="slide level2">
+
+<div style="text-align:center;">
+<p><img src="L4_images/log_function_domain_range.png" alt="Range of the natural logarithm" style="max-width:90%"></p>
 </div>
 </section>
 <section id="number-systems" class="slide level2">
@@ -487,6 +570,19 @@ f(x) = y \text{ for } x \in X, y \in Y
 <li class="fragment"><strong>Real numbers</strong></li>
 </ul></li>
 </ul>
+<aside class="notes">
+<p>The natural number are the counting numbers. The integers are the natural number extended into negative values. Then have rational numbers - which is anything that can be represented by a fraction. Finally the real numbers - think of as all numbers - so includes those which can’t be repesented by fractions, e.g.&nbsp;pi.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="data-represented-algebraically" class="slide level2">
@@ -499,7 +595,7 @@ x \in \mathbb N
 <div class="fragment">
 <ul>
 <li>This is the data represented algebraically.</li>
-<li>Typically a vector of numbers <span class="math inline">\(X^n\)</span></li>
+<li>A vector of numbers <span class="math inline">\(X^n\)</span></li>
 </ul>
 <span class="math display">\[\begin{align}
 X^n = (x_1, x_2, x_3, ... , x_n)
@@ -519,7 +615,7 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <span class="math inline">\([0, 1]\)</span> is the set of real numbers between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, inclusive of <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>.
 </div>
 <aside class="notes">
-<p>Last lecture we were thinking about PDFs - these are a function. They map the input value, the ‘x’ to the output range which is a probability between 0 and 1.</p>
+<p>In week 2 we were thinking about PDFs - these are a function. They map the input value, the ‘x’ to the output range which is a probability between 0 and 1.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -538,7 +634,27 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 <span class="math display">\[\begin{align}
 f(x) = ax + b
 \end{align}\]</span>
+<aside class="notes">
+<p>Going to spend the rest of the lecture looking at linear algebra - i.e.&nbsp;algebra related to linear equations.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
+<section id="break" class="title-slide slide level1 center">
+<h1>Break</h1>
+<div style="text-align:center;">
+<p><img src="L4_images/kermit_relaxing.webp" alt="Kermit takes time to relax before learning linear algebra." style="max-width:75%"></p>
+</div>
+</section>
+
 <section>
 <section id="linear-equations" class="title-slide slide level1 center">
 <h1>Linear equations</h1>
@@ -590,9 +706,14 @@ x+y=10
 </div>
 <div class="fragment">
 <p>There are many solutions!!!</p>
-<p>Many solutions = under-specified</p>
+<p><br></p>
+<div style="background-color:#2e6260; color:white; padding:8px; border-radius:5px; margin-top:10px;">
+<p><em>Many solutions = under-specified</em></p>
+<p>Under-specified means there isn’t enough information to find a unique solution.</p>
+</div>
 <aside class="notes">
 <p>Under-specified but simple to solve!</p>
+<p>Under-specified means I don’t have enough information to find a unique solution.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -690,8 +811,8 @@ x_1+x_2+x_3+x_4=10
 \begin{bmatrix}a_{1,1} &amp; a_{1,2} &amp; a_{1,3} &amp; a_{1,4}\cr a_{2,1} &amp; a_{2,2} &amp; a_{2,3} &amp; a_{2,4}\cr a_{3,1} &amp; a_{3,2} &amp; a_{3,3} &amp; a_{3,4}\cr a_{4,1} &amp; a_{4,2} &amp; a_{4,3} &amp; a_{4,4}\end{bmatrix}\begin{pmatrix}x_1\cr x_2\cr x_3\cr x_4\end{pmatrix} = \begin{pmatrix}y_1 \cr y_2 \cr y_3 \cr y_4\end{pmatrix}
 \end{align}\]</span>
 </section>
-<section id="along-the-corridor-down-the-stairs" class="slide level2">
-<h2>Along the corridor, down the stairs</h2>
+<section id="down-the-stairs-along-the-corridor" class="slide level2">
+<h2>Down the stairs, along the corridor</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
 <p>Matrices are indexed by row (<span class="math inline">\(m\)</span>) and by column (<span class="math inline">\(n\)</span>).</p>
@@ -742,8 +863,9 @@ When <span class="math inline">\(m=n\)</span> we have a square matrix.
 <h2>Matrix multiplication</h2>
 <p>Matrix multiplication is row by column.</p>
 <span class="math display">\[\begin{align}
-(AB){ij} = \sum{k} A_{ik} B_{kj}
+(AB)_{ij} = \sum_{k} A_{ik} B_{kj}
 \end{align}\]</span>
+<p>Where <span class="math inline">\(k\)</span> is the dimension of the matrix.</p>
 <div class="fragment">
 <p><em>Example:</em></p>
 <span class="math display">\[\begin{align}
@@ -760,6 +882,67 @@ When <span class="math inline">\(m=n\)</span> we have a square matrix.
 \end{bmatrix}
 \end{align}\]</span>
 </div>
+</section>
+<section id="matrix-multiplication-rule" class="slide level2">
+<h2>Matrix multiplication rule</h2>
+<p>The dimensions of the matrices need to match in order to multiple them.</p>
+<p>Generally I can multiply <span class="math inline">\(A\)</span> by <span class="math inline">\(B\)</span> if <span class="math inline">\(A\)</span> has the same number of columns as <span class="math inline">\(B\)</span> has rows.</p>
+<div class="fragment">
+<p>If:</p>
+<span class="math display">\[\begin{align}
+dim(A)=m \times n
+\\
+dim(B)=n \times l
+\end{align}\]</span>
+<p>Then:</p>
+<span class="math display">\[\begin{align}
+dim(AB)=m \times l
+\end{align}\]</span>
+<aside class="notes">
+<p>Write this out on the board - collapsing the middle dimensions</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="transpose-of-a-matrix" class="slide level2">
+<h2>Transpose of a matrix</h2>
+<p>When you take the transpose of matrix you flip it through it’s diagonal.</p>
+<p>For</p>
+<span class="math display">\[\begin{align}
+A = \begin{bmatrix}
+a &amp; b \cr
+c &amp; d
+\end{bmatrix}
+\end{align}\]</span>
+<p>then,</p>
+<span class="math display">\[\begin{align}
+A^T = \begin{bmatrix}
+a &amp; c \cr
+b &amp; d
+\end{bmatrix}
+\end{align}\]</span>
+<aside class="notes">
+<p>Could do example for a non-square matrix on the board.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="identity-matrix" class="slide level2">
 <h2>Identity matrix</h2>
@@ -806,6 +989,15 @@ c &amp; d
 \end{align}\]</span>
 <div class="fragment">
 <p><em>Example:</em></p>
+<span class="math display">\[\begin{align}
+det(
+\begin{bmatrix}
+1 &amp; 2 \cr
+3 &amp; 4
+\end{bmatrix}
+)
+= 1 \times 4 - 2 \times 3 = -2
+\end{align}\]</span>
 </div>
 </section>
 <section id="inverse-matrix" class="slide level2">
@@ -834,6 +1026,7 @@ d &amp; -b \cr
 \quad \text{where } \det(A) = ad - bc
 \end{align}\]</span>
 <div class="fragment">
+<p><br></p>
 <p>If <span class="math inline">\(\det(A) = 0\)</span>, the matrix has no inverse.</p>
 <!-- ## Example 
 
@@ -857,7 +1050,11 @@ A^{-1} = \frac{1}{(1)(4)-(2)(3)}
 <span class="math display">\[\begin{align}
 Ax = y
 \end{align}\]</span>
-<p>where: - <span class="math inline">\(A\)</span> is the coefficient matrix - <span class="math inline">\(x\)</span> is the vector of unknowns - <span class="math inline">\(y\)</span> is the vector of constants</p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(A\)</span> is the coefficient matrix</li>
+<li><span class="math inline">\(x, y\)</span> are variables in vector form</li>
+</ul>
 </section>
 <section id="solving-the-system" class="slide level2">
 <h2>Solving the system</h2>
@@ -870,25 +1067,68 @@ x &amp;= A^{-1}y
 \end{align}\]</span>
 <div class="fragment">
 <p>Thus, the solution exists and is unique whenever <span class="math inline">\(A\)</span> has an inverse.</p>
+<aside class="notes">
+<p>The exciting bit - we can bring all the ideas we’ve seen together in order to solve the equation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
 <section id="maths-to-english" class="title-slide slide level1 center">
 <h1>Maths to English</h1>
-
+<p>Using what we’ve learnt to interpret equations</p>
+<aside class="notes">
+<p>How can we translate it? Going to look at an equation and use what we’ve done to try and understand it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="so-whats-does-it-mean" class="slide level2">
-<h2>So whats does it mean?</h2>
+<section id="so-what-does-it-mean" class="slide level2">
+<h2>So what does it mean?</h2>
 <div style="text-align:center;">
 <img src="L4_images/GWR_equation.png" alt="Geographically weighted regression equation." style="width:900px">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
 <pre><code>Taken from: Chiou, Jou, &amp; Yang, (2015). Factors affecting public transportation usage rate: Geographically weighted regression. Transportation Research Part A: Policy and Practice.</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>I’ve chosen quite an arbitrary paper - which includes an equation for geographically weigthed regression. Using and solving regression is going to be covered after reading week.</p>
+<p>But today we’re going to look at ‘reading the maths’.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="take-another-look" class="slide level2">
 <h2>Take another look</h2>
-<p>Link to the paper…</p>
+<p>Chiou, Jou, &amp; Yang, (2015). Factors affecting public transportation usage rate: Geographically weighted regression. Transportation Research Part A: Policy and Practice.</p>
+<div style="text-align:center;">
+<p><img src="L4_images/GWR_QR_code.png" alt="QR code for paper. " style="max-width:35%"></p>
+</div>
 </section>
 <section id="writing-the-equation" class="slide level2">
 <h2>Writing the equation</h2>
@@ -900,6 +1140,24 @@ y_i = \beta_0(u_i, v_i) + \sum_{k=1}^p \beta_{ik}(u_i, v_i)x_{ik} + \epsilon_i
 <span class="math display">\[\begin{align}
 \hat{\beta}(i) = [X^TW(i)X]^{-1}X^TW(i)Y
 \end{align}\]</span>
+<div class="fragment">
+<p><em>Question:</em> What do you think these equations mean?</p>
+<aside class="notes">
+<p>Write out a simplified version on the board - and ask students what they think the equations might mean.</p>
+<p>Equation 1: linear equation</p>
+<p>Equation 2: tells us how to estimate beta - its a product of matrices</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
 </section>
 <section id="equation-1" class="slide level2">
 <h2>Equation 1</h2>
@@ -908,13 +1166,15 @@ y_i = \beta_0(u_i, v_i) + \sum_{k=1}^p \beta_{ik}(u_i, v_i)x_{ik} + \epsilon_i
 \end{align}\]</span>
 <p>where:</p>
 <ul>
-<li><span class="math inline">\(y_i\)</span>: the outcome (response) for observation <span class="math inline">\(i\)</span></li>
-<li><span class="math inline">\(\beta_0(u_i,v_i)\)</span>: the intercept, which can vary with location <span class="math inline">\((u_i,v_i)\)</span></li>
-<li><span class="math inline">\(\sum_{k=1}^p \beta_{ik}(u_i,v_i) x_{ik}\)</span>: the weighted sum of predictors <span class="math inline">\(x_{ik}\)</span>, where each predictor has its own coefficient that may depend on <span class="math inline">\((u_i,v_i)\)</span></li>
-<li><span class="math inline">\(\epsilon_i\)</span>: the error term for observation <span class="math inline">\(i\)</span></li>
+<li class="fragment"><span class="math inline">\(y_i\)</span> is the outcome (response) for observation <span class="math inline">\(i\)</span></li>
+<li class="fragment"><span class="math inline">\(u_i,v_i\)</span> is the location</li>
+<li class="fragment"><span class="math inline">\(\beta_0(u_i,v_i)\)</span> is the intercept, which can vary with location <span class="math inline">\((u_i,v_i)\)</span></li>
+<li class="fragment"><span class="math inline">\(\beta_{ik}(u_i,v_i)\)</span> are coefficients depending on <span class="math inline">\((u_i,v_i)\)</span></li>
+<li class="fragment"><span class="math inline">\(\sum_{k=1}^p \beta_{ik}(u_i,v_i) x_{ik}\)</span> is the weighted sum of predictor variables <span class="math inline">\(x_{ik}\)</span>, where each predictor has its own coefficient that may depend on <span class="math inline">\((u_i,v_i)\)</span></li>
+<li class="fragment"><span class="math inline">\(\epsilon_i\)</span> the error term for observation <span class="math inline">\(i\)</span></li>
 </ul>
 <aside class="notes">
-<p>Read the equation out</p>
+<p>Read the equation out - and then break down each part of the equation</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -932,21 +1192,22 @@ y_i = \beta_0(u_i, v_i) + \sum_{k=1}^p \beta_{ik}(u_i, v_i)x_{ik} + \epsilon_i
 <span class="math display">\[\begin{align}
 y_i = \beta_0(u_i, v_i) + \sum_{k=1}^p \beta_{ik}(u_i, v_i)x_{ik} + \epsilon_i
 \end{align}\]</span>
-<p><em>The outcome <span class="math inline">\(y_i\)</span> is explained by an intercept and a weighted combination of predictors, with coefficients that may change depending on the location <span class="math inline">\((u_i,v_i)\)</span>, plus some error.</em></p>
+<p><br></p>
+<p><strong>In plain english:</strong></p>
+<p>The outcome <span class="math inline">\(y_i\)</span> is explained by an intercept and a weighted combination of predictors, with coefficients that may change depending on the location <span class="math inline">\((u_i,v_i)\)</span>, plus some error.</p>
 </section>
 <section id="equation-2" class="slide level2">
 <h2>Equation 2</h2>
 <span class="math display">\[\begin{align}
 \hat{\beta}(i) = [X^TW(i)X]^{-1}X^TW(i)Y
-$\hat{\beta}(i)$: the estimated coefficients at location $i$
 \end{align}\]</span>
 <p>where:</p>
 <ul>
-<li><span class="math inline">\(X\)</span>: the matrix of predictor variables</li>
-<li><span class="math inline">\(Y\)</span>: the vector of observed outcomes</li>
-<li><span class="math inline">\(W(i)\)</span>: a weight matrix that depends on location <span class="math inline">\(i\)</span></li>
-<li><span class="math inline">\(X^T\)</span>: the transpose of <span class="math inline">\(X\)</span></li>
-<li><span class="math inline">\([X^TW(i)X]^{-1}\)</span>: the inverse of the weighted cross-product matrix</li>
+<li class="fragment"><span class="math inline">\(X\)</span>: the matrix of predictor variables</li>
+<li class="fragment"><span class="math inline">\(Y\)</span>: the vector of observed outcomes</li>
+<li class="fragment"><span class="math inline">\(W(i)\)</span>: a weight matrix that depends on location <span class="math inline">\(i\)</span> - it is weighted so that observations nearer to <span class="math inline">\(i\)</span> have greated weight</li>
+<li class="fragment"><span class="math inline">\(X^T\)</span>: the transpose of <span class="math inline">\(X\)</span></li>
+<li class="fragment"><span class="math inline">\([X^TW(i)X]^{-1}\)</span>: the inverse of the weighted cross-product matrix</li>
 </ul>
 <aside class="notes">
 <p>Read the equation out</p>
@@ -966,9 +1227,10 @@ $\hat{\beta}(i)$: the estimated coefficients at location $i$
 <h2>Translating equation 2</h2>
 <span class="math display">\[\begin{align}
 \hat{\beta}(i) = [X^TW(i)X]^{-1}X^TW(i)Y
-$\hat{\beta}(i)$: the estimated coefficients at location $i$
 \end{align}\]</span>
-<p><em>The estimated coefficients <span class="math inline">\(\hat{\beta}(i)\)</span> are obtained by solving a weighted least squares problem: take the predictors <span class="math inline">\(X\)</span>, weight them with <span class="math inline">\(W(i)\)</span>, and solve for the coefficients that best fit <span class="math inline">\(Y\)</span>.</em></p>
+<p><br></p>
+<p><strong>In plain english:</strong></p>
+<p>We estimate the coefficients <span class="math inline">\(\hat{\beta}(i)\)</span> by solving a weighted least squares problem: take the predictors <span class="math inline">\(X\)</span>, weight them with <span class="math inline">\(W(i)\)</span>, and solve for the coefficients that best fit <span class="math inline">\(Y\)</span>.</p>
 </section></section>
 <section>
 <section id="overview" class="title-slide slide level1 center">
@@ -977,6 +1239,15 @@ $\hat{\beta}(i)$: the estimated coefficients at location $i$
 </section>
 <section id="covered" class="slide level2">
 <h2>Covered</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div style="text-align:center;">
+<img src="L4_images/cat_math.jpeg" alt="Huh" style="max-width:100%">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+
+</div>
+</div>
+</div><div class="column" style="width:50%;">
 <p>We’ve covered:</p>
 <ul>
 <li>Mathematical notation</li>
@@ -985,6 +1256,7 @@ $\hat{\beta}(i)$: the estimated coefficients at location $i$
 <li>Matrices</li>
 <li>Algebraic representations</li>
 </ul>
+</div></div>
 </section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways</h2>
