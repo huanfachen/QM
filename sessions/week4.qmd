@@ -42,6 +42,7 @@ To save a copy of notebook to your own GitHub Repo: follow the GitHub link, clic
 ## Further resources
 
 There are lot's of introductory courses to linear algebra online, which might be helpful if you're new to this type of maths. Note: if you work through the whole course you'll end up covering more detail than we'll cover in the lecture!
+
 - This linear algebra course from 3Blue1Brown covers some of the key ideas behind matrices: [https://www.3blue1brown.com/topics/linear-algebra](https://www.3blue1brown.com/topics/linear-algebra)
 - Alternatively there's this Khan Academy course: [https://www.khanacademy.org/math/linear-algebra](https://www.khanacademy.org/math/linear-algebra)
 

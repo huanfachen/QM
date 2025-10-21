@@ -423,7 +423,7 @@ f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 \end{align}
 ```
 
-where $x \in \mathbb N$ and $f(x) \in [ 0 , 1 ]$. 
+where $x \in \mathbb R$ and $f(x) \in [ 0 , 1 ]$. 
 
 <br>
 <br>
@@ -643,7 +643,7 @@ $m=2$, $n=2$ matrix:
 
 . . .
 
-$m=3$, $n=2$ matrix: 
+$m=2$, $n=3$ matrix: 
 
 ```{=tex}
 \begin{align}
