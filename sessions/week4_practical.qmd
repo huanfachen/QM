@@ -116,7 +116,7 @@ $$
 $x$ is the vector of the number of each part, i.e. the variables in our equation:
 
 $$
-x = \begin{pmatrix}x\\y\\z\end{pmatrix}
+x = \begin{pmatrix}x_1\\x_2\\x_3\end{pmatrix}
 $$
 
 and $b$ is the resource constraint: 
@@ -230,6 +230,8 @@ x = np.dot(M_inv, b)
 print(np.round(x,2))
 ```
 
+We have: $$x_1=11$$, $$x_2=0$$. and $$x_3=30$$. 
+
 So we see that the optimal use of resources is to make 11 handlebrars, 0 brakes and 30 wheels. Potentially some terrifying brake-less bikes!  
 
 ### Let's solve it again!
@@ -284,6 +286,7 @@ zaxis_title="Wheels"
 fig.show()
 ```
 
+*Note:* be careful here that you don't reassign variables!!
 
 ## Conclusions 
 
@@ -303,7 +306,9 @@ df = pd.read_csv('https://raw.githubusercontent.com/huanfachen/QM/refs/heads/mai
 df.head()
 ```
 
-Choose one dependent variable (`x1_handlebars', `x2_brakes' or `x3_wheels'), and solve for production levels given the observed resource usage. 
+Choose one dependent variable ("aluminium_used", "rubber_used" or "paint_used"), and using the values for the number of items produced try to estimate the coefficients (the intercept and gradient). 
+
+Essentially we are considering just one of our linear equations, and trying to find our coefficient values i.e. $M$. 
 
 *Hint:* You might want to use `statsmodels` OLS package which you can read about [here](https://www.statsmodels.org/dev/generated/statsmodels.regression.linear_model.OLS.html). 
 
@@ -313,7 +318,7 @@ Choose one dependent variable (`x1_handlebars', `x2_brakes' or `x3_wheels'), and
 ``` python
 import statsmodels.api as sm
 
-# define independent variables (resources used)
+# define independent variables (productionacheived)
 X = ??
 
 # add constant term for intercept
@@ -334,14 +339,14 @@ print(model.summary())
 ```{python}
 import statsmodels.api as sm
 
-# define independent variables (resources used)
-X = df[["aluminium_used", "rubber_used", "paint_used"]]
+# define independent variables (production acheived)
+X = df[["x1_handlebars",	"x2_brakes",	"x3_wheels"]]
 
 # add constant term for intercept
 X = sm.add_constant(X)
 
 # define dependent variable (e.g. production of handlebars)
-y = df["x1_handlebars"]
+y = df["aluminium_used"]
 
 # fit OLS regression model
 model = sm.OLS(y, X).fit()
