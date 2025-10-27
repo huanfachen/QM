@@ -1,0 +1,259 @@
+---
+title: 'Practical 5: Measuring relationships'
+subtitle: ""
+format:
+  html: default
+  ipynb: default
+filters:
+  - qna
+  - quarto
+---
+
+This week is focused on measuring the relationship between two variables using Pearson/Spearman correlation coefficients.
+
+In the practical, we're going to explore the correlation between different variables in the school dataset.
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from scipy.stats import pearsonr, spearmanr
+pd.set_option('display.max_columns', None)
+```
+
+## Dataset
+
+We're going to use a piece of filtered school data that is kindly provided by Adam. In W6, Adam will describe the source and processing of this dataset in details. For now, we just use this dataset as is.
+
+```{python}
+# read in the dataset from Github
+df_school = pd.read_csv("https://raw.githubusercontent.com/huanfachen/QM/refs/heads/main/sessions/L6_data/Performancetables_130242/2022-2023/england_filtered.csv")
+```
+
+Check the shape and columns of this data frame.
+```{python}
+print(f"df_school has {df_school.shape[0]} rows and {df_school.shape[1]} columns.")
+print("First 5 rows:\n")
+print(df_school.head(5))
+```
+
+The columns are described as below:
+1. **URN**: Unique Reference Number identifying a school.  
+2. **SCHNAME.x**: School name as recorded in the official register.  
+3. **LEA**: Local Education Authority (code).  
+4. **LANAME**: Name of the Local Authority.  
+5. **TOWN.x**: Town in which the school is located.  
+6. **gor_name**: Government Office Region name.  
+7. **TOTPUPS**: Total number of pupils on roll.  
+8. **ATT8SCR**: Average Attainment 8 score for all pupils.  
+9. **ATT8SCRENG**: Average Attainment 8 score for English subject grouping.  
+10. **ATT8SCRMAT**: Average Attainment 8 score for Maths subject grouping.  
+11. **ATT8SCR_FSM6CLA1A**: Average Attainment 8 score for pupils eligible for Free School Meals in the last 6 years and/or Children Looked After.  
+12. **ATT8SCR_NFSM6CLA1A**: Average Attainment 8 score for pupils not eligible for Free School Meals in the last 6 years and not Children Looked After.  
+13. **ATT8SCR_BOYS**: Average Attainment 8 score for male pupils.  
+14. **ATT8SCR_GIRLS**: Average Attainment 8 score for female pupils.  
+15. **P8MEA**: Progress 8 measure for all pupils.  
+16. **P8MEA_FSM6CLA1A**: Progress 8 measure for disadvantaged pupils (FSM6 and/or CLA1A).  
+17. **P8MEA_NFSM6CLA1A**: Progress 8 measure for non-disadvantaged pupils.  
+18. **PTFSM6CLA1A**: Percentage of pupils eligible for FSM6 and/or CLA1A.  
+19. **PTNOTFSM6CLA1A**: Percentage of pupils not eligible for FSM6 and/or CLA1A.  
+20. **PNUMEAL**: Percentage of pupils eligible for free school meals at census date.  
+21. **PNUMENGFL**: Percentage of pupils whose first language is known or believed to be other than English.  
+22. **PTPRIORLO**: Percentage of pupils with low prior attainment from Key Stage 2.  
+23. **PTPRIORHI**: Percentage of pupils with high prior attainment from Key Stage 2.  
+24. **NORB**: Number of boys on roll.  
+25. **NORG**: Number of girls on roll.  
+26. **PNUMFSMEVER**: Percentage of pupils who have ever been eligible for free school meals.  
+27. **PERCTOT**: Percentage total absence (context depends on related measure, often attendance or exclusions).  
+28. **PPERSABS10**: Percentage of pupils who are persistently absent (overall absence rate 10% or more).  
+29. **SCHOOLTYPE.x**: Official classification of the school type (e.g., Academy, Community, Voluntary Aided).  
+30. **RELCHAR**: Religious character of the school (e.g., Church of England, Roman Catholic, None).  
+31. **ADMPOL.y**: Admission policy type (e.g., non-selective, selective).  
+32. **ADMPOL_PT**: Percentage breakdown related to admission policy (context-specific).  
+33. **gender_name**: Gender intake of the school (Mixed, Boys, Girls).  
+34. **OFSTEDRATING**: Latest Ofsted inspection overall effectiveness grade.  
+35. **MINORGROUP**: Ethnic minority group classification for aggregation purposes.  
+36. **easting**: Ordnance Survey Easting coordinate of school location.  
+37. **northing**: Ordnance Survey Northing coordinate of school location.  
+
+To demonstrate, we will focus on 6 columns of this dataset.
+1. **LANAME**: local authority name
+2. **SCHNAME.x**: school name
+3. **ATT8SCR**: Average Attainment 8 score per pupil (0-100)
+4. **PERCTOT**: Percentage of total absence
+5. **PTFSM6CLA1A**: Percentage of pupils eligible for FSM6 and/or CLA1A (i.e. disadvantaged)
+6. **PNUMEAL**: Percentage of pupils eligible for free school meals at census date.
+
+```{python}
+# Extract the selected columns
+df_school_reduced = df_school[['LANAME', 'SCHNAME.x', 'ATT8SCR', 'PERCTOT', 'PTFSM6CLA1A', 'PNUMEAL']]
+
+# Display the first few rows
+print(df_school_reduced.head())
+```
+
+## First question: is overall absence related to average attainment 8 score?
+
+We will start with investigating the relationship between percentage of overall absence and attainment 8 score. The very first step is to make a scatterplot:
+
+```{python}
+# Scatterplot between PERCTOT and ATT8SCR
+plt.scatter(df_school_reduced['PERCTOT'], df_school_reduced['ATT8SCR'], alpha=0.7, edgecolor='k')
+
+# Axis labels
+plt.xlabel('Pct of total absence (%)')
+plt.ylabel('Average Attainment 8 score per pupil')
+
+# Title
+plt.title('Scatterplot of Total Absence vs. Attainment 8 Score')
+
+# Optional: grid
+plt.grid(True, linestyle='--', alpha=0.5)
+
+plt.show()
+```
+
+The plot shows a decreasing trend: the higher total absence, the lower average attainment. 
+
+The records with PERCTOT greater than 25% look like outliers, which are printed as below:
+```{python}
+# Filter rows where PERCTOT > 25
+filtered_rows = df_school_reduced[df_school_reduced['PERCTOT'] > 25]
+
+print("Schools with %total_absence > 25:")
+print(filtered_rows)
+```
+
+For now, we are keeping these records because there is no evidence to confirm they are outliers 
+
+As both variables are continous, we can use **Pearson correlation** to measure if they follow a linear relationship. we'll use the **pearsonr** function the scipy.stats package, as this fucntion calculates the correlation coefficient and p values in one line.
+
+```{python}
+from scipy.stats import pearsonr
+
+# Calculate Pearson correlation
+corr_coef, p_value = pearsonr(df_school_reduced['PERCTOT'], df_school_reduced['ATT8SCR'])
+
+print("Pearson correlation coefficient:", corr_coef)
+print("Two-tailed p-value:", p_value)
+```
+
+Wait. We got an ERROR - ```ValueError: array must not contain infs or NaNs```. Remember that we discussed *NA* or *NaN* values in W1.
+
+Unfortunately, the *pearsonr* function doesn't handle NaNs internally. We would have to handle NaNs before computing.
+
+The logic would be:
+1. Retain the rows with no NaN in *PERCTOT* and *ATT8SCR*:  ```~np.isnan(df_school_reduced['PERCTOT']) & ~np.isnan(df_school_reduced['ATT8SCR'])``` returns a list of **mask**, which is *True* when no NaN values are in *PERCTOT* and *ATT8SCR*.
+2. Calculate the Pearson correlation between *PERCTOT* and *ATT8SCR* in these rows.
+
+```{python}
+# Drop rows with NaNs in either column
+mask = ~np.isnan(df_school_reduced['PERCTOT']) & ~np.isnan(df_school_reduced['ATT8SCR'])
+
+print(f"#all records: {df_school_reduced.shape[0]}")
+print(f"#records with no NaN in both PERCTOT and ATT8SCR: {len(mask[mask==True])}")
+
+x = df_school_reduced.loc[mask, 'PERCTOT']
+y = df_school_reduced.loc[mask, 'ATT8SCR']
+
+corr_coef, p_value = pearsonr(x, y)
+
+print(f"Pearson correlation coefficient:{corr_coef:.2f}")
+print(f"Two-tailed p-value:{p_value:.2f}")
+```
+
+The results look good. 
+
+- A Pearson correlation of ```-0.72``` indicates that *PERCTOT* and *ATT8SCR* are negatively correlated, which is aligned with our hypothesis.
+- A very small p value (*0.00* meaning it is smaller than 0.01) indicates that their correlation is statistically significant at the level of 0.05.
+
+## Second attempt: using Spearman correlation
+
+Can we apply Spearman correlation to these two variables? Definitely - Spearman correlation is applicable to continuous variables.
+
+Following a similar procedure:
+
+```{python}
+# Drop rows with NaNs in either column
+mask = ~np.isnan(df_school_reduced['PERCTOT']) & ~np.isnan(df_school_reduced['ATT8SCR'])
+
+print(f"#all records: {df_school_reduced.shape[0]}")
+print(f"#records with no NaN in both PERCTOT and ATT8SCR: {len(mask[mask==True])}")
+
+x = df_school_reduced.loc[mask, 'PERCTOT']
+y = df_school_reduced.loc[mask, 'ATT8SCR']
+
+corr_coef, p_value = spearmanr(x, y)
+
+print(f"Spearman correlation coefficient:{corr_coef:.2f}")
+print(f"Two-tailed p-value:{p_value:.2f}")
+```
+
+The results are quite similar to Pearson correlation:
+- Spearman correlation coefficient of -0.77 indicates a negative correlation between these two variables.
+- The p value is smaller than 0.01, indicating statistical significance.
+
+## Calculating Pearson correlation for all pairs of variables
+
+The df_school_reduced dataframe contains four continous variables, and there are 6 possible pairs of variables.
+
+Is it possible to compute and visualise the correlation of all pairs in one line? 
+
+The solution is to create and plot a correlation matrix, using *pandas*.
+
+```{python}
+import matplotlib.pyplot as plt
+
+# Calculate the correlation matrix
+correlation_matrix = df_school_reduced.corr(numeric_only=True)
+
+# Plot the correlation matrix
+plt.figure(figsize=(8, 6))
+plt.matshow(correlation_matrix, cmap='coolwarm', fignum=False)  # fignum=False prevents new fig creation
+plt.colorbar()
+plt.title('Correlation Matrix', pad=20)
+
+# Add axis tick labels
+plt.xticks(range(len(correlation_matrix.columns)), correlation_matrix.columns, rotation=90)
+plt.yticks(range(len(correlation_matrix.columns)), correlation_matrix.columns)
+
+plt.tight_layout()
+plt.show()
+```
+
+The plot shows pairwise correlation between the four continous variables, as the norminal variabels of *LNAME* and *SCHNAME.x* are excluded by the setting of ```numeric_only=True``` in corr().
+
+This matrix or heatmap is symmetric, since the Pearson correlation is symmetric between the two variables.
+
+The red colour on the diagonal line indicates correlation=1, which is perfect positive correlation.
+
+So, what does this matrix tell us about the variables' correlation?
+- *Attainment 8 score* negatively correlates with *% overall absence*, *% disadvantaged pupils*, and *% pupils receiving free school meals*.
+- *% overall absence* positively correlates with *% disadvantaged pupils* and negatively correlates with *% pupils receiving free school meals*. The latter correlation, although somewhat surprising, is aligned with studies showing that the implementation of universal free school meals was associated with potentially increased attendace (see [link](https://pmc.ncbi.nlm.nih.gov/articles/PMC11316229/#:~:text=In%20this%20systematic%20review%20of,other%20student%20and%20school%20outcomes)).
+- *% disadvantaged pupils* is positively associated with *% pupils receiving free school meals*.
+
+Interestingly, in the code above, we didn't deal with the NaN values. The reason is that, using ```DataFrame.corr()```, Pearson, Kendall, and Spearman correlation are currently computed using pairwise complete observations. In other words, this function deals with incomplete observations internally.
+
+A limitation of the code above is that it doesn't calculate the p-value for each correlation. To calculate both correlation coefficients and p values in a batch, we can use a new package called **pingouin**.
+
+If you want to try out the code below, you would need to install pingouin using ```pip install pingouin``` on a terminal or ```!pip install pingouin``` in a Python notebook.
+
+```{python}
+# !pip install pingouin
+import pingouin as pg
+
+# Calculate correlation matrix with p-values
+corr_results = pg.pairwise_corr(df_school_reduced, columns=df_school_reduced.select_dtypes(float).columns, method='pearson')
+
+print(corr_results)
+```
+
+## You're Done!
+
+Congratulations on completing the correlation practical. You've also learnt how to debug when an error occurs.
+
+When you use Python (or R), it is common that a task can be completed by different packages. For example, *Pearson correlation* can be calculated using *scipy*, *pandas*, or *pingouin*. Choose the right tool for your purpose, and ensure you understand the underlying principles and limitations before using a package. 
+
+It takes time to learn - remember practice makes perfect! 
+
+If you have time, please think about applying the correlation to other variables in the school data, or your own datasets.
