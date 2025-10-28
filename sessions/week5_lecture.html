@@ -229,6 +229,14 @@
 <h1>This week</h1>
 
 </section>
+<section id="objectives" class="slide level2">
+<h2>Objectives</h2>
+<ul>
+<li>Understand and calcualte Pearson and Spearman correlation between two variables.</li>
+<li>Understand the difference between Pearson and Spearman correlation.</li>
+<li>Understand ANOVA.</li>
+</ul>
+</section>
 <section id="classification-of-statistical-analysis" class="slide level2">
 <h2>Classification of statistical analysis</h2>
 <ul>
@@ -315,7 +323,7 @@
 <h2>Example</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<div id="390613c6" class="cell" data-fig-height="6" data-fig-width="6" data-execution_count="1">
+<div id="8be4ee21" class="cell" data-fig-height="6" data-fig-width="6" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -541,7 +549,7 @@ Image credit: https://commons.wikimedia.org/wiki/File:Karl_Pearson,_1912.jpg</co
 </section>
 <section id="hypothesis-testing-and-p-values-of-pearson-correlation" class="slide level2">
 <h2>Hypothesis testing and p-values of Pearson correlation</h2>
-<div id="762f0a11" class="cell" data-code-block-style="pycon" data-execution_count="3">
+<div id="4a248d03" class="cell" data-code-block-style="pycon" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb3-3"><a></a>res <span class="op">=</span> stats.spearmanr([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">7</span>])</span>
@@ -733,7 +741,7 @@ Question: does cor = 0 mean <span style="color:blue">no relationship</span> betw
 <li>Spearman correlation doesn’t tell if or how much the relationship is linear</li>
 <li>Spearman &amp; Pearson correlation on the same data are incomparable, as they tell different things.</li>
 </ul>
-<div id="6d3c1617" class="cell" data-fig-height="6" data-fig-width="6" data-execution_count="5">
+<div id="3c983439" class="cell" data-fig-height="6" data-fig-width="6" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 960x480 with 0 Axes&gt;</code></pre>
 </div>
@@ -845,18 +853,154 @@ Question: does cor = 0 mean <span style="color:blue">no relationship</span> betw
 </ul>
 </section></section>
 <section>
-<section id="kendall-rank-correlation-kendalls-tau" class="title-slide slide level1 center">
-<h1>Kendall rank correlation (Kendall’s <span class="math inline">\(\tau\)</span>)</h1>
+<section id="anova-analysis-of-variance" class="title-slide slide level1 center">
+<h1>ANOVA (Analysis of Variance)</h1>
 
 </section>
-<section id="definition-1" class="slide level2">
-<h2>Definition</h2>
+<section id="motivation-1" class="slide level2">
+<h2>Motivation</h2>
+<ul>
+<li class="fragment">Pearson/Spearman correlation applies for ordinal/interval/ratio variables.</li>
+<li class="fragment">What if we want to understand the relationship between a <em>nominal</em> variable and a <em>continuous</em> one?</li>
+<li class="fragment">For example - in school data, we have average attainment of boys and girls per school. are <em>gender</em> and <em>attainment</em> correlated?</li>
+<li class="fragment">Let’s rephrase this question as: is there a significant difference on attainment between boys and girls? (<em>Does this sound familiar</em>)</li>
+</ul>
+</section>
+<section id="motivation-continued---back-to-w3-hypothesis-testing" class="slide level2">
+<h2>Motivation continued - back to W3 <em>Hypothesis Testing</em></h2>
+<ul>
+<li>Student’s T-test: types</li>
+</ul>
+<div style="text-align:center;">
+<img src="L3_images/t_tets_types.webp" alt="Types of T-tests" style="max-width:80%;">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Image credit: https://www.geeksforgeeks.org/data-science/t-test/</code></pre>
+</div>
+</div>
+<ul>
+<li><em>Are gender and attainment are correlated</em> can be answered by paired samples t-test.</li>
+</ul>
+</section>
+<section id="motivated-continued---what-if-there-are-three-or-more-groups" class="slide level2">
+<h2>Motivated continued - what if there are three or more groups?</h2>
+<ul>
+<li class="fragment">Is there significant difference in school-average attainment across London councils of Camden, Westminster, and Islington?</li>
+<li class="fragment">ANOVA (ANalysis Of Variance): used to determine if <em>multiple groups</em> are statistically significantly <em>different</em>.</li>
+</ul>
+</section>
+<section id="theory-behind-anova" class="slide level2">
+<h2>Theory behind ANOVA</h2>
+<div class="block" height="50%">
+<ul>
+<li class="fragment">Step 1: break down total variance of values into two parts. Total-variance = within-group-variance + between-group-variance</li>
+<li class="fragment">Step 2：<span class="math inline">\(F\)</span> = between-group-variance / within-group-variance</li>
+<li class="fragment">Step 3: calculate the probability of <span class="math inline">\(F\)</span> greater than or equal to computed <span class="math inline">\(F\)</span>. The F follows a F-distribution and <span class="math inline">\(E[F]=1\)</span>, if there is no significant difference between groups</li>
+</ul>
+</div>
+<div class="block" height="50%">
+<div style="text-align:center;">
+<img src="L5_images/datanovia.com" alt="Types of T-tests" style="max-width:80%;">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Image credit: datanovia.com</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="anova-is-flexible" class="slide level2">
+<h2>ANOVA is flexible</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 35%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th><strong>One-Way ANOVA</strong></th>
+<th><strong>Two-Way ANOVA</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Purpose</strong></td>
+<td>Compare means of three or more groups based on <strong>one factor</strong></td>
+<td>Compare means based on <strong>two factors</strong> and their interaction</td>
+</tr>
+<tr class="even">
+<td><strong>Example</strong></td>
+<td>Do school attainments vary across LA (Camden/Islington/Westminster)?</td>
+<td>Do school attainments vary across LA (Camden/Islington/Westminster) and gender (male/female)?</td>
+</tr>
+<tr class="odd">
+<td><strong>Interactions</strong></td>
+<td>Not considered</td>
+<td>Can assess main effects and interaction between factors</td>
+</tr>
+<tr class="even">
+<td><strong>Assumptions</strong></td>
+<td>Normality, no outliers, homogeneity of variances, independence</td>
+<td>Same as one-way plus assumptions for interaction effects</td>
+</tr>
+<tr class="odd">
+<td><strong>Output</strong></td>
+<td>F-statistic, p-value for group differences</td>
+<td>F-statistics and p-values for each factor and interaction effects</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="anova-has-many-assumptions" class="slide level2">
+<h2>ANOVA has (many) assumptions</h2>
+<ul>
+<li class="fragment"><strong>Independence of observations</strong>: each subject belongs to only 1 group; every observation is independent of others</li>
+<li class="fragment"><strong>No significant outliers exist</strong></li>
+<li class="fragment"><strong>Normality</strong>: The data are approximately normally distributed</li>
+<li class="fragment"><strong>Homogeneity of variances</strong>: variance of the outcome variable should be similar in all groups</li>
+<li class="fragment"><em>These assumptions need to be tested before conducting ANOVA</em></li>
+</ul>
+</section>
+<section id="assumptions-and-testing" class="slide level2">
+<h2>Assumptions and Testing</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 69%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Assumption</th>
+<th>Testing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Independence of observations</strong></td>
+<td>Design-based check, randomization review</td>
+</tr>
+<tr class="even">
+<td><strong>No significant outliers</strong></td>
+<td>Boxplots/Z-scores; be cautious when removing outliers</td>
+</tr>
+<tr class="odd">
+<td><strong>Normality</strong></td>
+<td>Shapiro–Wilk test; Q–Q plots</td>
+</tr>
+<tr class="even">
+<td><strong>Homogeneity of variances</strong></td>
+<td>Levene test, Welch test</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways</h2>
 <ul>
-<li>Can use Pearson/Spearman/Kendall correlation to measure the relationship between two variables.</li>
-<li>Choose the correlation metric based on the dataset and interpret them correctly.</li>
+<li>Can use Pearson/Spearman correlation to measure the relationship between two variables.</li>
+<li>Choose Pearson or Spearman correlation metric based on the dataset and interpret them correctly.</li>
+<li>To measure difference between two groups, use (paired) t-test</li>
+<li>To measure difference between multiple groups, use one-way ANOVA</li>
+<li>To measure difference across two variables, use two-way ANOVA</li>
 </ul>
 </section>
 <section id="practical" class="slide level2">
