@@ -528,15 +528,6 @@ print(f"Spearman C = **<span style='color:red'>{spearman_corr_updated:.4f}</span
 </div>
 :::
 
-## ANOVA is flexible
-| Feature | **One-Way ANOVA**  | **Two-Way ANOVA**|
-|------------------|--------------------|------------------|
-| **Purpose**      | Compare means of three or more groups based on **one factor**    | Compare means based on **two factors** and their interaction     |
-| **Example**      | Do school attainments vary across LA (Camden/Islington/Westminster)?    | Do school attainments vary across LA (Camden/Islington/Westminster) and gender (male/female)?     |
-| **Interactions** | Not considered   | Can assess main effects and interaction between factors |
-| **Assumptions**  | Normality, no outliers, homogeneity of variances, independence   | Same as one-way plus assumptions for interaction effects          |
-| **Output**   | F-statistic, p-value for group differences    | F-statistics and p-values for each factor and interaction effects |
-
 ## ANOVA has (many) assumptions
 ::: {.incremental}
 - **Independence of observations**: each subject belongs to only 1 group; every observation is independent of others
@@ -555,6 +546,13 @@ print(f"Spearman C = **<span style='color:red'>{spearman_corr_updated:.4f}</span
 | **Normality**                 | Shapiro–Wilk test; Q–Q plots          |
 | **Homogeneity of variances**           | Levene test, Welch test|
 
+## ANOVA is flexible
+| Feature | **One-Way ANOVA**  | **Two-Way ANOVA**|
+|------------------|--------------------|------------------|
+| **Purpose**      | Compare means of three or more groups based on **one factor**    | Compare means based on **two factors** and their interaction     |
+| **Example**      | Do school attainments vary across LA (Camden/Islington/Westminster)?    | Do school attainments vary across LA (Camden/Islington/Westminster) & gender (male/female)?     |
+| **Assumptions**  | Normality, no outliers, homogeneity of variances, independence   | Same as one-way plus assumptions for interaction effects          |
+| **Output**   | F-statistic, p-value for group differences    | F-statistics and p-values for each factor and interaction effects |
 
 ## Key takeaways 
 
