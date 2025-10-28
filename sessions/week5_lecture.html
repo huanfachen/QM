@@ -323,7 +323,7 @@
 <h2>Example</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<div id="1aa95e2c" class="cell" data-fig-height="6" data-fig-width="6" data-execution_count="1">
+<div id="e2684838" class="cell" data-fig-height="6" data-fig-width="6" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -549,7 +549,7 @@ Image credit: https://commons.wikimedia.org/wiki/File:Karl_Pearson,_1912.jpg</co
 </section>
 <section id="hypothesis-testing-and-p-values-of-pearson-correlation" class="slide level2">
 <h2>Hypothesis testing and p-values of Pearson correlation</h2>
-<div id="e52870b6" class="cell" data-code-block-style="pycon" data-execution_count="3">
+<div id="015fd24d" class="cell" data-code-block-style="pycon" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb3-3"><a></a>res <span class="op">=</span> stats.spearmanr([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">7</span>])</span>
@@ -741,7 +741,7 @@ Question: does cor = 0 mean <span style="color:blue">no relationship</span> betw
 <li>Spearman correlation doesn’t tell if or how much the relationship is linear</li>
 <li>Spearman &amp; Pearson correlation on the same data are incomparable, as they tell different things.</li>
 </ul>
-<div id="1d7e9d63" class="cell" data-fig-height="6" data-fig-width="6" data-execution_count="5">
+<div id="6579c7dd" class="cell" data-fig-height="6" data-fig-width="6" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 960x480 with 0 Axes&gt;</code></pre>
 </div>
@@ -868,9 +868,6 @@ Question: does cor = 0 mean <span style="color:blue">no relationship</span> betw
 </section>
 <section id="motivation-continued---back-to-w3-hypothesis-testing" class="slide level2">
 <h2>Motivation continued - back to W3 <em>Hypothesis Testing</em></h2>
-<ul>
-<li>Student’s T-test: types</li>
-</ul>
 <div style="text-align:center;">
 <img src="L3_images/t_tets_types.webp" alt="Types of T-tests" style="max-width:80%;">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
@@ -899,56 +896,12 @@ Question: does cor = 0 mean <span style="color:blue">no relationship</span> betw
 </div>
 <div class="block" height="50%">
 <div style="text-align:center;">
-<img src="L5_images/datanovia.com" alt="Types of T-tests" style="max-width:80%;">
+<img src="L5_images/datanovia.com" alt="ANOVA" style="max-width:80%;">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
 <pre><code>Image credit: datanovia.com</code></pre>
 </div>
 </div>
 </div>
-</section>
-<section id="anova-is-flexible" class="slide level2">
-<h2>ANOVA is flexible</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 32%">
-<col style="width: 35%">
-<col style="width: 32%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Feature</th>
-<th><strong>One-Way ANOVA</strong></th>
-<th><strong>Two-Way ANOVA</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Purpose</strong></td>
-<td>Compare means of three or more groups based on <strong>one factor</strong></td>
-<td>Compare means based on <strong>two factors</strong> and their interaction</td>
-</tr>
-<tr class="even">
-<td><strong>Example</strong></td>
-<td>Do school attainments vary across LA (Camden/Islington/Westminster)?</td>
-<td>Do school attainments vary across LA (Camden/Islington/Westminster) and gender (male/female)?</td>
-</tr>
-<tr class="odd">
-<td><strong>Interactions</strong></td>
-<td>Not considered</td>
-<td>Can assess main effects and interaction between factors</td>
-</tr>
-<tr class="even">
-<td><strong>Assumptions</strong></td>
-<td>Normality, no outliers, homogeneity of variances, independence</td>
-<td>Same as one-way plus assumptions for interaction effects</td>
-</tr>
-<tr class="odd">
-<td><strong>Output</strong></td>
-<td>F-statistic, p-value for group differences</td>
-<td>F-statistics and p-values for each factor and interaction effects</td>
-</tr>
-</tbody>
-</table>
 </section>
 <section id="anova-has-many-assumptions" class="slide level2">
 <h2>ANOVA has (many) assumptions</h2>
@@ -993,6 +946,45 @@ Question: does cor = 0 mean <span style="color:blue">no relationship</span> betw
 </tbody>
 </table>
 </section>
+<section id="anova-is-flexible" class="slide level2">
+<h2>ANOVA is flexible</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 35%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th><strong>One-Way ANOVA</strong></th>
+<th><strong>Two-Way ANOVA</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Purpose</strong></td>
+<td>Compare means of three or more groups based on <strong>one factor</strong></td>
+<td>Compare means based on <strong>two factors</strong> and their interaction</td>
+</tr>
+<tr class="even">
+<td><strong>Example</strong></td>
+<td>Do school attainments vary across LA (Camden/Islington/Westminster)?</td>
+<td>Do school attainments vary across LA (Camden/Islington/Westminster) &amp; gender (male/female)?</td>
+</tr>
+<tr class="odd">
+<td><strong>Assumptions</strong></td>
+<td>Normality, no outliers, homogeneity of variances, independence</td>
+<td>Same as one-way plus assumptions for interaction effects</td>
+</tr>
+<tr class="even">
+<td><strong>Output</strong></td>
+<td>F-statistic, p-value for group differences</td>
+<td>F-statistics and p-values for each factor and interaction effects</td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways</h2>
 <ul>
@@ -1005,9 +997,8 @@ Question: does cor = 0 mean <span style="color:blue">no relationship</span> betw
 </section>
 <section id="practical" class="slide level2">
 <h2>Practical</h2>
-<h3 class="incremental" id="section"></h3>
-<p>The practical will focus on calculating and interpreting correlation metrics.<br>
-Have you questions prepared! ###</p>
+<p>-The practical will focus on calculating and interpreting correlation metrics.<br>
+- Have you questions prepared!</p>
 
 
 </section></section>
