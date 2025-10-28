@@ -558,9 +558,9 @@ print(f"Spearman C = **<span style='color:red'>{spearman_corr_updated:.4f}</span
 
 - Can use Pearson/Spearman correlation to measure the relationship between two variables.
 - Choose Pearson or Spearman correlation metric based on the dataset and interpret them correctly.
-- To measure difference between two groups, use (paired) t-test
-- To measure difference between multiple groups, use one-way ANOVA
-- To measure difference across two variables, use two-way ANOVA
+- To measure difference [between two groups]{style="color:blue"}, use [(paired) samples t-test]{style="color:red"}
+- To measure difference between [multiple groups]{style="color:blue"}, use [one-way ANOVA]{style="color:red"}
+- To measure difference [across two factors], use [two-way ANOVA]{style="color:red"}
 
 ## Practical 
 - The practical will focus on calculating and interpreting correlation metrics.  
