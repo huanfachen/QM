@@ -11,6 +11,7 @@ project:
     - "img/logo"
     - "bib/"
     - "sessions/L1_images"
+    - "sessions/L5_images"
 
 execute:
   freeze: auto
