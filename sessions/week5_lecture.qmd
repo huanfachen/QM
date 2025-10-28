@@ -563,8 +563,6 @@ print(f"Spearman C = **<span style='color:red'>{spearman_corr_updated:.4f}</span
 - To measure difference across two variables, use two-way ANOVA
 
 ## Practical 
-### {.incremental}
-The practical will focus on calculating and interpreting correlation metrics.  
-Have you questions prepared!
-### 
+-The practical will focus on calculating and interpreting correlation metrics.  
+- Have you questions prepared! 
 
