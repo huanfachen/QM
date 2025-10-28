@@ -14,10 +14,19 @@ This week is focused on measuring the relationship between two variables using P
 In the practical, we're going to explore the correlation between different variables in the school dataset.
 
 ```{python}
-import matplotlib.pyplot as plt
+
 import numpy as np
 import pandas as pd
+
+from scipy import stats
 from scipy.stats import pearsonr, spearmanr
+
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 pd.set_option('display.max_columns', None)
 ```
 
@@ -37,7 +46,7 @@ print("First 5 rows:\n")
 print(df_school.head(5))
 ```
 
-The columns are described as below:
+The columns are described as below:  
 1. **URN**: Unique Reference Number identifying a school.  
 2. **SCHNAME.x**: School name as recorded in the official register.  
 3. **LEA**: Local Education Authority (code).  
@@ -57,14 +66,14 @@ The columns are described as below:
 17. **P8MEA_NFSM6CLA1A**: Progress 8 measure for non-disadvantaged pupils.  
 18. **PTFSM6CLA1A**: Percentage of pupils eligible for FSM6 and/or CLA1A.  
 19. **PTNOTFSM6CLA1A**: Percentage of pupils not eligible for FSM6 and/or CLA1A.  
-20. **PNUMEAL**: Percentage of pupils eligible for free school meals at census date.  
-21. **PNUMENGFL**: Percentage of pupils whose first language is known or believed to be other than English.  
+20. **PNUMEAL**: Percentage of pupils whose first language is known or believed to be other than English.  
+21. **PNUMENGFL**: Percentage of pupils whose first language is English.  
 22. **PTPRIORLO**: Percentage of pupils with low prior attainment from Key Stage 2.  
 23. **PTPRIORHI**: Percentage of pupils with high prior attainment from Key Stage 2.  
 24. **NORB**: Number of boys on roll.  
 25. **NORG**: Number of girls on roll.  
-26. **PNUMFSMEVER**: Percentage of pupils who have ever been eligible for free school meals.  
-27. **PERCTOT**: Percentage total absence (context depends on related measure, often attendance or exclusions).  
+26. **PNUMFSMEVER**: Percentage of pupils who have been eligible for free school meals in the past six years (FSM6 measure).  
+27. **PERCTOT**: Percentage of total pupil absence (authorised and unauthorised combined).  
 28. **PPERSABS10**: Percentage of pupils who are persistently absent (overall absence rate 10% or more).  
 29. **SCHOOLTYPE.x**: Official classification of the school type (e.g., Academy, Community, Voluntary Aided).  
 30. **RELCHAR**: Religious character of the school (e.g., Church of England, Roman Catholic, None).  
@@ -81,8 +90,8 @@ To demonstrate, we will focus on 6 columns of this dataset.
 2. **SCHNAME.x**: school name
 3. **ATT8SCR**: Average Attainment 8 score per pupil (0-100)
 4. **PERCTOT**: Percentage of total absence
-5. **PTFSM6CLA1A**: Percentage of pupils eligible for FSM6 and/or CLA1A (i.e. disadvantaged)
-6. **PNUMEAL**: Percentage of pupils eligible for free school meals at census date.
+5. **PTFSM6CLA1A**: Percentage of pupils eligible for FSM6 (free school meals at any point in the last six years) and/or CLA1A (proxy for socio-economic disadvantage). CLA1A stands for *Children Looked After (for at least one day)*, which identifies pupils who have been in the care of a local authority.
+6. **PNUMEAL**: Percentage of pupils whose first language is known or believed to be other than English.  
 
 ```{python}
 # Extract the selected columns
@@ -129,8 +138,6 @@ For now, we are keeping these records because there is no evidence to confirm th
 As both variables are continous, we can use **Pearson correlation** to measure if they follow a linear relationship. we'll use the **pearsonr** function the scipy.stats package, as this fucntion calculates the correlation coefficient and p values in one line.
 
 ```{python}
-from scipy.stats import pearsonr
-
 # Calculate Pearson correlation
 corr_coef, p_value = pearsonr(df_school_reduced['PERCTOT'], df_school_reduced['ATT8SCR'])
 
@@ -138,7 +145,7 @@ print("Pearson correlation coefficient:", corr_coef)
 print("Two-tailed p-value:", p_value)
 ```
 
-Wait. We got an ERROR - ```ValueError: array must not contain infs or NaNs```. Remember that we discussed *NA* or *NaN* values in W1.
+Wait. We got an ERROR - ```ValueError: array must not contain infs or NaNs```. Remember that we discussed *NA* or *NaN* values in W1. *You might want to remove the above code cell from the notebook, since it doesn't run.*
 
 Unfortunately, the *pearsonr* function doesn't handle NaNs internally. We would have to handle NaNs before computing.
 
@@ -228,9 +235,9 @@ This matrix or heatmap is symmetric, since the Pearson correlation is symmetric 
 The red colour on the diagonal line indicates correlation=1, which is perfect positive correlation.
 
 So, what does this matrix tell us about the variables' correlation?
-- *Attainment 8 score* negatively correlates with *% overall absence*, *% disadvantaged pupils*, and *% pupils receiving free school meals*.
-- *% overall absence* positively correlates with *% disadvantaged pupils* and negatively correlates with *% pupils receiving free school meals*. The latter correlation, although somewhat surprising, is aligned with studies showing that the implementation of universal free school meals was associated with potentially increased attendace (see [link](https://pmc.ncbi.nlm.nih.gov/articles/PMC11316229/#:~:text=In%20this%20systematic%20review%20of,other%20student%20and%20school%20outcomes)).
-- *% disadvantaged pupils* is positively associated with *% pupils receiving free school meals*.
+- *Attainment 8 score* negatively correlates with *% overall absence*, *% disadvantaged pupils*, and *% pupils where English not first language*.
+- *% overall absence* positively correlates with *% disadvantaged pupils* and negatively correlates with *% pupils where English not first language*. The latter correlation seems to contradict the results of a study that reports primary school pupils who use EAL are more likely to be persistently absent for 10% or more of lessons than pupils who speak English as their first language (see [link](https://www.bell-foundation.org.uk/app/uploads/2024/07/Addressing-School-Absences-Among-EAL-Pupils_briefing.pdf)). This needs to be confirmed by more investigation.
+- *% disadvantaged pupils* is positively associated with *% pupils where English not first language*.
 
 Interestingly, in the code above, we didn't deal with the NaN values. The reason is that, using ```DataFrame.corr()```, Pearson, Kendall, and Spearman correlation are currently computed using pairwise complete observations. In other words, this function deals with incomplete observations internally.
 
@@ -248,9 +255,122 @@ corr_results = pg.pairwise_corr(df_school_reduced, columns=df_school_reduced.sel
 print(corr_results)
 ```
 
+## Moving to ANOVA - testing difference in LADs
+
+```{python}
+# Filter dataframe
+df_filtered = df_school_reduced[df_school_reduced['LANAME'].isin(['Camden', 'Westminster', 'Islington'])]
+
+# KDE plot for each group
+plt.figure(figsize=(8, 6))
+sns.kdeplot(data=df_filtered[df_filtered['LANAME'] == 'Camden']['ATT8SCR'], label='Camden', fill=True)
+sns.kdeplot(data=df_filtered[df_filtered['LANAME'] == 'Westminster']['ATT8SCR'], label='Westminster', fill=True)
+sns.kdeplot(data=df_filtered[df_filtered['LANAME'] == 'Islington']['ATT8SCR'], label='Islington', fill=True)
+plt.title('KDE Plot of ATT8SCR by LANAME')
+plt.xlabel('ATT8SCR')
+plt.ylabel('Density')
+plt.legend()
+plt.show()
+```
+
+The KDE plots of ATT8SCR for Camden, Westminster, and Islington overlap considerably, which indicates similar score distributions. 
+
+We will use ANOVA to formally test if they are different.
+
+```{python}
+
+# ---------------------
+# Fit ANOVA model
+# ---------------------
+model = ols('ATT8SCR ~ C(LANAME)', data=df_filtered).fit()
+anova_table = sm.stats.anova_lm(model, typ=2)
+print("ANOVA Table:\n", anova_table, "\n")
+
+# ---------------------
+# Assumption Tests
+# ---------------------
+# Normality test – Shapiro-Wilk
+shapiro_test = stats.shapiro(model.resid)
+print("Shapiro-Wilk test for normality:")
+print(f"Statistic={shapiro_test.statistic:.4f}, p-value={shapiro_test.pvalue:.4f}")
+if shapiro_test.pvalue > 0.05:
+    print("Residuals appear normally distributed.\n")
+else:
+    print("Residuals may not be normally distributed.\n")
+
+# Homogeneity of variances – Levene's test
+levene_test = stats.levene(
+    df_filtered[df_filtered['LANAME'] == 'Camden']['ATT8SCR'],
+    df_filtered[df_filtered['LANAME'] == 'Westminster']['ATT8SCR'],
+    df_filtered[df_filtered['LANAME'] == 'Islington']['ATT8SCR']
+)
+print("Levene’s test for homogeneity of variances:")
+print(f"Statistic={levene_test.statistic:.4f}, p-value={levene_test.pvalue:.4f}")
+if levene_test.pvalue > 0.05:
+    print("Variances appear homogeneous.\n")
+else:
+    print("Variances may not be homogeneous.\n")
+
+
+# Visualization
+# QQ plot of residuals
+plt.figure(figsize=(6, 6))
+sm.qqplot(model.resid, line='45', fit=True)
+plt.title('QQ Plot of Residuals')
+plt.show()
+```
+
+- The ANOVA tests **C(LANAME)**, which represent the difference in mean ATT8SCR scores between the three local authorities (Camden, Westminster, Islington).
+- The F statistic = 3.26 is the ratio of variance between the group means to the variance within the groups.
+- Degrees of Freedom
+  - Between groups: df = 2 (because there are 3 groups: df = k−1).
+  - Within groups (residual): df = 26 (total sample size minus (k-1) = 28 - 2).
+- p-value: PR(>F) = 0.0546 means that under the null hypothesis (no difference in means), there is a 5.46% probability of obtaining an F statistic as large as or larger than 3.26. If we use a standard alpha level of 0.05, this p-value is on the margin. 
+- The Shapiro-Wilk test indicates that the residuals are normally distributed.
+- The Levene test indicates the variances within each group are homogeneous.
+- The QQ plot of residuals shows that the residuals follow a normal distribution and there are no obvious outliers.
+
+To visualise the distribution of F-statistic and the p-value, we can use the following plot:
+
+```{python}
+# Extract F statistic, p-value, and degrees of freedom from ANOVA table
+F_stat = anova_table['F'][0]
+p_value = anova_table['PR(>F)'][0]
+df_between = anova_table['df'][0]  # numerator degrees of freedom
+df_within = anova_table['df'][1]   # denominator degrees of freedom
+
+# Create range for F distribution
+x = np.linspace(0, max(6, F_stat + 2), 500)  # ensure range includes F_stat with padding
+y = stats.f.pdf(x, df_between, df_within)
+
+# Create the plot
+plt.figure(figsize=(8, 6))
+plt.plot(x, y, 'k-', label=f'F-distribution (df={int(df_between)}, {int(df_within)})')
+
+# Set y-axis minimum to 0.0
+plt.ylim(bottom=0.0)
+
+# Shade the area corresponding to the p-value (upper tail)
+x_fill = np.linspace(F_stat, x.max(), 200)
+y_fill = stats.f.pdf(x_fill, df_between, df_within)
+plt.fill_between(x_fill, y_fill, color='red', alpha=0.4, label=f'p-value = {p_value:.4f}')
+
+# Mark the F statistic
+plt.axvline(F_stat, color='blue', linestyle='--', linewidth=2,
+            label=f'F statistic = {F_stat:.2f}')
+
+# Labels and title
+plt.title('F Distribution with Computed F Statistic and p-value Region')
+plt.xlabel('F value')
+plt.ylabel('Density')
+plt.legend()
+plt.grid(alpha=0.3)
+plt.show()
+```
+
 ## You're Done!
 
-Congratulations on completing the correlation practical. You've also learnt how to debug when an error occurs.
+Congratulations on completing the practical on correlation and ANOVA. You've also learnt how to debug when an error occurs.
 
 When you use Python (or R), it is common that a task can be completed by different packages. For example, *Pearson correlation* can be calculated using *scipy*, *pandas*, or *pingouin*. Choose the right tool for your purpose, and ensure you understand the underlying principles and limitations before using a package. 
 
