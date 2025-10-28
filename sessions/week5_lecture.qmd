@@ -492,7 +492,6 @@ print(f"Spearman C = **<span style='color:red'>{spearman_corr_updated:.4f}</span
 :::
 
 ## Motivation continued - back to W3 *Hypothesis Testing*
-- Student's T-test: types 
 
 <div style="text-align:center;">
   <img src="L3_images/t_tets_types.webp" alt="Types of T-tests" style="max-width:80%;">
@@ -522,7 +521,7 @@ print(f"Spearman C = **<span style='color:red'>{spearman_corr_updated:.4f}</span
 
 ::: {.block height="50%"}
 <div style="text-align:center;">
-  <img src="L5_images/datanovia.com" alt="Types of T-tests" style="max-width:80%;">
+  <img src="L5_images/datanovia.com" alt="ANOVA" style="max-width:80%;">
   <div style="font-size:0.8em; color: #555; margin-top:4px;">
     Image credit: datanovia.com
   </div>
