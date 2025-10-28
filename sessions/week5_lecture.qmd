@@ -514,14 +514,14 @@ print(f"Spearman C = **<span style='color:red'>{spearman_corr_updated:.4f}</span
 ::: {.block height="50%"}
 ::: {.incremental}
 - Step 1: break down total variance of values into two parts. Total-variance = within-group-variance + between-group-variance
-- Step 2：$F$ = between-group-variance / within-group-variance
-- Step 3: calculate the probability of $F$ greater than or equal to computed $F$. The F follows a F-distribution and $E[F]=1$, if there is no significant difference between groups
+- Step 2：$F$ = between-group variance / within-group variance
+- Step 3: calculate the probability of $F$ greater than or equal to computed $F$. Under Null Hypothesis (there is no significant difference between groups), $F$ follows a F-distribution and $E[F]=1$.
 :::
 :::
 
 ::: {.block height="50%"}
 <div style="text-align:center;">
-  <img src="L5_images/datanovia.com" alt="ANOVA" style="max-width:80%;">
+  <img src="L5_images/one-way-anova-basics-01.png" alt="ANOVA" style="max-width:80%;">
   <div style="font-size:0.8em; color: #555; margin-top:4px;">
     Image credit: datanovia.com
   </div>
@@ -563,6 +563,6 @@ print(f"Spearman C = **<span style='color:red'>{spearman_corr_updated:.4f}</span
 - To measure difference across two variables, use two-way ANOVA
 
 ## Practical 
--The practical will focus on calculating and interpreting correlation metrics.  
+- The practical will focus on calculating and interpreting correlation metrics.  
 - Have you questions prepared! 
 
