@@ -46,7 +46,7 @@ print("First 5 rows:\n")
 print(df_school.head(5))
 ```
 
-The columns are described as below:  
+The metadata of this data is available [here](https://github.com/huanfachen/QM/blob/main/sessions/L6_data/Performancetables_130249/2022-2023/census_meta.csv). For convenience, the columns are described as below:  
 1. **URN**: Unique Reference Number identifying a school.  
 2. **SCHNAME.x**: School name as recorded in the official register.  
 3. **LEA**: Local Education Authority (code).  
