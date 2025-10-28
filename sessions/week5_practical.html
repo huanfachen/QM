@@ -248,6 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#first-question-is-overall-absence-related-to-average-attainment-8-score" id="toc-first-question-is-overall-absence-related-to-average-attainment-8-score" class="nav-link" data-scroll-target="#first-question-is-overall-absence-related-to-average-attainment-8-score">First question: is overall absence related to average attainment 8 score?</a></li>
   <li><a href="#second-attempt-using-spearman-correlation" id="toc-second-attempt-using-spearman-correlation" class="nav-link" data-scroll-target="#second-attempt-using-spearman-correlation">Second attempt: using Spearman correlation</a></li>
   <li><a href="#calculating-pearson-correlation-for-all-pairs-of-variables" id="toc-calculating-pearson-correlation-for-all-pairs-of-variables" class="nav-link" data-scroll-target="#calculating-pearson-correlation-for-all-pairs-of-variables">Calculating Pearson correlation for all pairs of variables</a></li>
+  <li><a href="#moving-to-anova---testing-difference-in-lads" id="toc-moving-to-anova---testing-difference-in-lads" class="nav-link" data-scroll-target="#moving-to-anova---testing-difference-in-lads">Moving to ANOVA - testing difference in LADs</a></li>
   <li><a href="#youre-done" id="toc-youre-done" class="nav-link" data-scroll-target="#youre-done">You’re Done!</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/huanfachen/QM/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="week5_practical.ipynb" download="week5_practical.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
@@ -276,22 +277,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>This week is focused on measuring the relationship between two variables using Pearson/Spearman correlation coefficients.</p>
 <p>In the practical, we’re going to explore the correlation between different variables in the school dataset.</p>
-<div id="cb725832" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> pearsonr, spearmanr</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.max_columns'</span>, <span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="2ca16cdd" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> pearsonr, spearmanr</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.formula.api <span class="im">import</span> ols</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>pd.set_option(<span class="st">'display.max_columns'</span>, <span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
 <p>We’re going to use a piece of filtered school data that is kindly provided by Adam. In W6, Adam will describe the source and processing of this dataset in details. For now, we just use this dataset as is.</p>
-<div id="24a4af52" class="cell" data-execution_count="2">
+<div id="26d7974d" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the dataset from Github</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_school <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/huanfachen/QM/refs/heads/main/sessions/L6_data/Performancetables_130242/2022-2023/england_filtered.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Check the shape and columns of this data frame.</p>
-<div id="f1737c9b" class="cell" data-execution_count="3">
+<div id="6036af24" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"df_school has </span><span class="sc">{</span>df_school<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> rows and </span><span class="sc">{</span>df_school<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> columns."</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"First 5 rows:</span><span class="ch">\n</span><span class="st">"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_school.head(<span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -349,7 +358,8 @@ First 5 rows:
 4       Girls         Good  Maintained school  528379.0  186191.0  </code></pre>
 </div>
 </div>
-<p>The columns are described as below: 1. <strong>URN</strong>: Unique Reference Number identifying a school.<br>
+<p>The columns are described as below:<br>
+1. <strong>URN</strong>: Unique Reference Number identifying a school.<br>
 2. <strong>SCHNAME.x</strong>: School name as recorded in the official register.<br>
 3. <strong>LEA</strong>: Local Education Authority (code).<br>
 4. <strong>LANAME</strong>: Name of the Local Authority.<br>
@@ -368,14 +378,14 @@ First 5 rows:
 17. <strong>P8MEA_NFSM6CLA1A</strong>: Progress 8 measure for non-disadvantaged pupils.<br>
 18. <strong>PTFSM6CLA1A</strong>: Percentage of pupils eligible for FSM6 and/or CLA1A.<br>
 19. <strong>PTNOTFSM6CLA1A</strong>: Percentage of pupils not eligible for FSM6 and/or CLA1A.<br>
-20. <strong>PNUMEAL</strong>: Percentage of pupils eligible for free school meals at census date.<br>
-21. <strong>PNUMENGFL</strong>: Percentage of pupils whose first language is known or believed to be other than English.<br>
+20. <strong>PNUMEAL</strong>: Percentage of pupils whose first language is known or believed to be other than English.<br>
+21. <strong>PNUMENGFL</strong>: Percentage of pupils whose first language is English.<br>
 22. <strong>PTPRIORLO</strong>: Percentage of pupils with low prior attainment from Key Stage 2.<br>
 23. <strong>PTPRIORHI</strong>: Percentage of pupils with high prior attainment from Key Stage 2.<br>
 24. <strong>NORB</strong>: Number of boys on roll.<br>
 25. <strong>NORG</strong>: Number of girls on roll.<br>
-26. <strong>PNUMFSMEVER</strong>: Percentage of pupils who have ever been eligible for free school meals.<br>
-27. <strong>PERCTOT</strong>: Percentage total absence (context depends on related measure, often attendance or exclusions).<br>
+26. <strong>PNUMFSMEVER</strong>: Percentage of pupils who have been eligible for free school meals in the past six years (FSM6 measure).<br>
+27. <strong>PERCTOT</strong>: Percentage of total pupil absence (authorised and unauthorised combined).<br>
 28. <strong>PPERSABS10</strong>: Percentage of pupils who are persistently absent (overall absence rate 10% or more).<br>
 29. <strong>SCHOOLTYPE.x</strong>: Official classification of the school type (e.g., Academy, Community, Voluntary Aided).<br>
 30. <strong>RELCHAR</strong>: Religious character of the school (e.g., Church of England, Roman Catholic, None).<br>
@@ -386,8 +396,8 @@ First 5 rows:
 35. <strong>MINORGROUP</strong>: Ethnic minority group classification for aggregation purposes.<br>
 36. <strong>easting</strong>: Ordnance Survey Easting coordinate of school location.<br>
 37. <strong>northing</strong>: Ordnance Survey Northing coordinate of school location.</p>
-<p>To demonstrate, we will focus on 6 columns of this dataset. 1. <strong>LANAME</strong>: local authority name 2. <strong>SCHNAME.x</strong>: school name 3. <strong>ATT8SCR</strong>: Average Attainment 8 score per pupil (0-100) 4. <strong>PERCTOT</strong>: Percentage of total absence 5. <strong>PTFSM6CLA1A</strong>: Percentage of pupils eligible for FSM6 and/or CLA1A (i.e.&nbsp;disadvantaged) 6. <strong>PNUMEAL</strong>: Percentage of pupils eligible for free school meals at census date.</p>
-<div id="32bb3107" class="cell" data-execution_count="4">
+<p>To demonstrate, we will focus on 6 columns of this dataset. 1. <strong>LANAME</strong>: local authority name 2. <strong>SCHNAME.x</strong>: school name 3. <strong>ATT8SCR</strong>: Average Attainment 8 score per pupil (0-100) 4. <strong>PERCTOT</strong>: Percentage of total absence 5. <strong>PTFSM6CLA1A</strong>: Percentage of pupils eligible for FSM6 (free school meals at any point in the last six years) and/or CLA1A (proxy for socio-economic disadvantage). CLA1A stands for <em>Children Looked After (for at least one day)</em>, which identifies pupils who have been in the care of a local authority. 6. <strong>PNUMEAL</strong>: Percentage of pupils whose first language is known or believed to be other than English.</p>
+<div id="52ae8c86" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the selected columns</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_school_reduced <span class="op">=</span> df_school[[<span class="st">'LANAME'</span>, <span class="st">'SCHNAME.x'</span>, <span class="st">'ATT8SCR'</span>, <span class="st">'PERCTOT'</span>, <span class="st">'PTFSM6CLA1A'</span>, <span class="st">'PNUMEAL'</span>]]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -413,7 +423,7 @@ First 5 rows:
 <section id="first-question-is-overall-absence-related-to-average-attainment-8-score" class="level2">
 <h2 class="anchored" data-anchor-id="first-question-is-overall-absence-related-to-average-attainment-8-score">First question: is overall absence related to average attainment 8 score?</h2>
 <p>We will start with investigating the relationship between percentage of overall absence and attainment 8 score. The very first step is to make a scatterplot:</p>
-<div id="aec0f159" class="cell" data-execution_count="5">
+<div id="97b2801e" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot between PERCTOT and ATT8SCR</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(df_school_reduced[<span class="st">'PERCTOT'</span>], df_school_reduced[<span class="st">'ATT8SCR'</span>], alpha<span class="op">=</span><span class="fl">0.7</span>, edgecolor<span class="op">=</span><span class="st">'k'</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -438,7 +448,7 @@ First 5 rows:
 </div>
 <p>The plot shows a decreasing trend: the higher total absence, the lower average attainment.</p>
 <p>The records with PERCTOT greater than 25% look like outliers, which are printed as below:</p>
-<div id="a2464541" class="cell" data-execution_count="6">
+<div id="1775cb36" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter rows where PERCTOT &gt; 25</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>filtered_rows <span class="op">=</span> df_school_reduced[df_school_reduced[<span class="st">'PERCTOT'</span>] <span class="op">&gt;</span> <span class="dv">25</span>]</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -459,23 +469,21 @@ First 5 rows:
 </div>
 <p>For now, we are keeping these records because there is no evidence to confirm they are outliers</p>
 <p>As both variables are continous, we can use <strong>Pearson correlation</strong> to measure if they follow a linear relationship. we’ll use the <strong>pearsonr</strong> function the scipy.stats package, as this fucntion calculates the correlation coefficient and p values in one line.</p>
-<div id="2f2d05b0" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> pearsonr</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Pearson correlation</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>corr_coef, p_value <span class="op">=</span> pearsonr(df_school_reduced[<span class="st">'PERCTOT'</span>], df_school_reduced[<span class="st">'ATT8SCR'</span>])</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Pearson correlation coefficient:"</span>, corr_coef)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Two-tailed p-value:"</span>, p_value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c400a461" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Pearson correlation</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>corr_coef, p_value <span class="op">=</span> pearsonr(df_school_reduced[<span class="st">'PERCTOT'</span>], df_school_reduced[<span class="st">'ATT8SCR'</span>])</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Pearson correlation coefficient:"</span>, corr_coef)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Two-tailed p-value:"</span>, p_value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Pearson correlation coefficient: nan
 Two-tailed p-value: nan</code></pre>
 </div>
 </div>
-<p>Wait. We got an ERROR - <code>ValueError: array must not contain infs or NaNs</code>. Remember that we discussed <em>NA</em> or <em>NaN</em> values in W1.</p>
+<p>Wait. We got an ERROR - <code>ValueError: array must not contain infs or NaNs</code>. Remember that we discussed <em>NA</em> or <em>NaN</em> values in W1. <em>You might want to remove the above code cell from the notebook, since it doesn’t run.</em></p>
 <p>Unfortunately, the <em>pearsonr</em> function doesn’t handle NaNs internally. We would have to handle NaNs before computing.</p>
 <p>The logic would be: 1. Retain the rows with no NaN in <em>PERCTOT</em> and <em>ATT8SCR</em>: <code>~np.isnan(df_school_reduced['PERCTOT']) &amp; ~np.isnan(df_school_reduced['ATT8SCR'])</code> returns a list of <strong>mask</strong>, which is <em>True</em> when no NaN values are in <em>PERCTOT</em> and <em>ATT8SCR</em>. 2. Calculate the Pearson correlation between <em>PERCTOT</em> and <em>ATT8SCR</em> in these rows.</p>
-<div id="43531be1" class="cell" data-execution_count="8">
+<div id="1ded9acf" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows with NaNs in either column</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> <span class="op">~</span>np.isnan(df_school_reduced[<span class="st">'PERCTOT'</span>]) <span class="op">&amp;</span> <span class="op">~</span>np.isnan(df_school_reduced[<span class="st">'ATT8SCR'</span>])</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -506,7 +514,7 @@ Two-tailed p-value:0.00</code></pre>
 <h2 class="anchored" data-anchor-id="second-attempt-using-spearman-correlation">Second attempt: using Spearman correlation</h2>
 <p>Can we apply Spearman correlation to these two variables? Definitely - Spearman correlation is applicable to continuous variables.</p>
 <p>Following a similar procedure:</p>
-<div id="4aef11e2" class="cell" data-execution_count="9">
+<div id="072d82a1" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows with NaNs in either column</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> <span class="op">~</span>np.isnan(df_school_reduced[<span class="st">'PERCTOT'</span>]) <span class="op">&amp;</span> <span class="op">~</span>np.isnan(df_school_reduced[<span class="st">'ATT8SCR'</span>])</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -534,7 +542,7 @@ Two-tailed p-value:0.00</code></pre>
 <p>The df_school_reduced dataframe contains four continous variables, and there are 6 possible pairs of variables.</p>
 <p>Is it possible to compute and visualise the correlation of all pairs in one line?</p>
 <p>The solution is to create and plot a correlation matrix, using <em>pandas</em>.</p>
-<div id="ae76875f" class="cell" data-execution_count="10">
+<div id="859fe7be" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation matrix</span></span>
@@ -563,11 +571,11 @@ Two-tailed p-value:0.00</code></pre>
 <p>The plot shows pairwise correlation between the four continous variables, as the norminal variabels of <em>LNAME</em> and <em>SCHNAME.x</em> are excluded by the setting of <code>numeric_only=True</code> in corr().</p>
 <p>This matrix or heatmap is symmetric, since the Pearson correlation is symmetric between the two variables.</p>
 <p>The red colour on the diagonal line indicates correlation=1, which is perfect positive correlation.</p>
-<p>So, what does this matrix tell us about the variables’ correlation? - <em>Attainment 8 score</em> negatively correlates with <em>% overall absence</em>, <em>% disadvantaged pupils</em>, and <em>% pupils receiving free school meals</em>. - <em>% overall absence</em> positively correlates with <em>% disadvantaged pupils</em> and negatively correlates with <em>% pupils receiving free school meals</em>. The latter correlation, although somewhat surprising, is aligned with studies showing that the implementation of universal free school meals was associated with potentially increased attendace (see <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11316229/#:~:text=In%20this%20systematic%20review%20of,other%20student%20and%20school%20outcomes">link</a>). - <em>% disadvantaged pupils</em> is positively associated with <em>% pupils receiving free school meals</em>.</p>
+<p>So, what does this matrix tell us about the variables’ correlation? - <em>Attainment 8 score</em> negatively correlates with <em>% overall absence</em>, <em>% disadvantaged pupils</em>, and <em>% pupils where English not first language</em>. - <em>% overall absence</em> positively correlates with <em>% disadvantaged pupils</em> and negatively correlates with <em>% pupils where English not first language</em>. The latter correlation seems to contradict the results of a study that reports primary school pupils who use EAL are more likely to be persistently absent for 10% or more of lessons than pupils who speak English as their first language (see <a href="https://www.bell-foundation.org.uk/app/uploads/2024/07/Addressing-School-Absences-Among-EAL-Pupils_briefing.pdf">link</a>). This needs to be confirmed by more investigation. - <em>% disadvantaged pupils</em> is positively associated with <em>% pupils where English not first language</em>.</p>
 <p>Interestingly, in the code above, we didn’t deal with the NaN values. The reason is that, using <code>DataFrame.corr()</code>, Pearson, Kendall, and Spearman correlation are currently computed using pairwise complete observations. In other words, this function deals with incomplete observations internally.</p>
 <p>A limitation of the code above is that it doesn’t calculate the p-value for each correlation. To calculate both correlation coefficients and p values in a batch, we can use a new package called <strong>pingouin</strong>.</p>
 <p>If you want to try out the code below, you would need to install pingouin using <code>pip install pingouin</code> on a terminal or <code>!pip install pingouin</code> in a Python notebook.</p>
-<div id="fa70a0a7" class="cell" data-execution_count="11">
+<div id="aaf554eb" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># !pip install pingouin</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pingouin <span class="im">as</span> pg</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -594,9 +602,176 @@ Two-tailed p-value:0.00</code></pre>
 </div>
 </div>
 </section>
+<section id="moving-to-anova---testing-difference-in-lads" class="level2">
+<h2 class="anchored" data-anchor-id="moving-to-anova---testing-difference-in-lads">Moving to ANOVA - testing difference in LADs</h2>
+<div id="01bacb35" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter dataframe</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="op">=</span> df_school_reduced[df_school_reduced[<span class="st">'LANAME'</span>].isin([<span class="st">'Camden'</span>, <span class="st">'Westminster'</span>, <span class="st">'Islington'</span>])]</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># KDE plot for each group</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(data<span class="op">=</span>df_filtered[df_filtered[<span class="st">'LANAME'</span>] <span class="op">==</span> <span class="st">'Camden'</span>][<span class="st">'ATT8SCR'</span>], label<span class="op">=</span><span class="st">'Camden'</span>, fill<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(data<span class="op">=</span>df_filtered[df_filtered[<span class="st">'LANAME'</span>] <span class="op">==</span> <span class="st">'Westminster'</span>][<span class="st">'ATT8SCR'</span>], label<span class="op">=</span><span class="st">'Westminster'</span>, fill<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(data<span class="op">=</span>df_filtered[df_filtered[<span class="st">'LANAME'</span>] <span class="op">==</span> <span class="st">'Islington'</span>][<span class="st">'ATT8SCR'</span>], label<span class="op">=</span><span class="st">'Islington'</span>, fill<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'KDE Plot of ATT8SCR by LANAME'</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'ATT8SCR'</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Density'</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week5_practical_files/figure-html/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="week5_practical_files/figure-html/cell-13-output-1.png" width="672" height="523" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The KDE plots of ATT8SCR for Camden, Westminster, and Islington overlap considerably, which indicates similar score distributions.</p>
+<p>We will use ANOVA to formally test if they are different.</p>
+<div id="d17426bf" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ANOVA model</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ols(<span class="st">'ATT8SCR ~ C(LANAME)'</span>, data<span class="op">=</span>df_filtered).fit()</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>anova_table <span class="op">=</span> sm.stats.anova_lm(model, typ<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ANOVA Table:</span><span class="ch">\n</span><span class="st">"</span>, anova_table, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Assumption Tests</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Normality test – Shapiro-Wilk</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>shapiro_test <span class="op">=</span> stats.shapiro(model.resid)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Shapiro-Wilk test for normality:"</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Statistic=</span><span class="sc">{</span>shapiro_test<span class="sc">.</span>statistic<span class="sc">:.4f}</span><span class="ss">, p-value=</span><span class="sc">{</span>shapiro_test<span class="sc">.</span>pvalue<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> shapiro_test.pvalue <span class="op">&gt;</span> <span class="fl">0.05</span>:</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Residuals appear normally distributed.</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Residuals may not be normally distributed.</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Homogeneity of variances – Levene's test</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>levene_test <span class="op">=</span> stats.levene(</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    df_filtered[df_filtered[<span class="st">'LANAME'</span>] <span class="op">==</span> <span class="st">'Camden'</span>][<span class="st">'ATT8SCR'</span>],</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    df_filtered[df_filtered[<span class="st">'LANAME'</span>] <span class="op">==</span> <span class="st">'Westminster'</span>][<span class="st">'ATT8SCR'</span>],</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    df_filtered[df_filtered[<span class="st">'LANAME'</span>] <span class="op">==</span> <span class="st">'Islington'</span>][<span class="st">'ATT8SCR'</span>]</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Levene’s test for homogeneity of variances:"</span>)</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Statistic=</span><span class="sc">{</span>levene_test<span class="sc">.</span>statistic<span class="sc">:.4f}</span><span class="ss">, p-value=</span><span class="sc">{</span>levene_test<span class="sc">.</span>pvalue<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> levene_test.pvalue <span class="op">&gt;</span> <span class="fl">0.05</span>:</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Variances appear homogeneous.</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Variances may not be homogeneous.</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="co"># QQ plot of residuals</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>sm.qqplot(model.resid, line<span class="op">=</span><span class="st">'45'</span>, fit<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'QQ Plot of Residuals'</span>)</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ANOVA Table:
+                 sum_sq    df         F    PR(&gt;F)
+C(LANAME)   335.630586   2.0  3.258313  0.054611
+Residual   1339.097000  26.0       NaN       NaN 
+
+Shapiro-Wilk test for normality:
+Statistic=0.9513, p-value=0.1976
+Residuals appear normally distributed.
+
+Levene’s test for homogeneity of variances:
+Statistic=0.6877, p-value=0.5117
+Variances appear homogeneous.
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 576x576 with 0 Axes&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week5_practical_files/figure-html/cell-14-output-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="week5_practical_files/figure-html/cell-14-output-3.png" width="587" height="449" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The ANOVA tests <strong>C(LANAME)</strong>, which represent the difference in mean ATT8SCR scores between the three local authorities (Camden, Westminster, Islington).</li>
+<li>The F statistic = 3.26 is the ratio of variance between the group means to the variance within the groups.</li>
+<li>Degrees of Freedom
+<ul>
+<li>Between groups: df = 2 (because there are 3 groups: df = k−1).</li>
+<li>Within groups (residual): df = 26 (total sample size minus (k-1) = 28 - 2).</li>
+</ul></li>
+<li>p-value: PR(&gt;F) = 0.0546 means that under the null hypothesis (no difference in means), there is a 5.46% probability of obtaining an F statistic as large as or larger than 3.26. If we use a standard alpha level of 0.05, this p-value is on the margin.</li>
+<li>The Shapiro-Wilk test indicates that the residuals are normally distributed.</li>
+<li>The Levene test indicates the variances within each group are homogeneous.</li>
+<li>The QQ plot of residuals shows that the residuals follow a normal distribution and there are no obvious outliers.</li>
+</ul>
+<p>To visualise the distribution of F-statistic and the p-value, we can use the following plot:</p>
+<div id="80cbbbc8" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract F statistic, p-value, and degrees of freedom from ANOVA table</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>F_stat <span class="op">=</span> anova_table[<span class="st">'F'</span>][<span class="dv">0</span>]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>p_value <span class="op">=</span> anova_table[<span class="st">'PR(&gt;F)'</span>][<span class="dv">0</span>]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>df_between <span class="op">=</span> anova_table[<span class="st">'df'</span>][<span class="dv">0</span>]  <span class="co"># numerator degrees of freedom</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>df_within <span class="op">=</span> anova_table[<span class="st">'df'</span>][<span class="dv">1</span>]   <span class="co"># denominator degrees of freedom</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create range for F distribution</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="bu">max</span>(<span class="dv">6</span>, F_stat <span class="op">+</span> <span class="dv">2</span>), <span class="dv">500</span>)  <span class="co"># ensure range includes F_stat with padding</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> stats.f.pdf(x, df_between, df_within)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">'k-'</span>, label<span class="op">=</span><span class="ss">f'F-distribution (df=</span><span class="sc">{</span><span class="bu">int</span>(df_between)<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span><span class="bu">int</span>(df_within)<span class="sc">}</span><span class="ss">)'</span>)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Set y-axis minimum to 0.0</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>plt.ylim(bottom<span class="op">=</span><span class="fl">0.0</span>)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Shade the area corresponding to the p-value (upper tail)</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>x_fill <span class="op">=</span> np.linspace(F_stat, x.<span class="bu">max</span>(), <span class="dv">200</span>)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>y_fill <span class="op">=</span> stats.f.pdf(x_fill, df_between, df_within)</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>plt.fill_between(x_fill, y_fill, color<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="fl">0.4</span>, label<span class="op">=</span><span class="ss">f'p-value = </span><span class="sc">{</span>p_value<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Mark the F statistic</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>plt.axvline(F_stat, color<span class="op">=</span><span class="st">'blue'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>            label<span class="op">=</span><span class="ss">f'F statistic = </span><span class="sc">{</span>F_stat<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and title</span></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'F Distribution with Computed F Statistic and p-value Region'</span>)</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'F value'</span>)</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Density'</span>)</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>plt.grid(alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_23552/1743805570.py:2: FutureWarning:
+
+Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+
+/tmp/ipykernel_23552/1743805570.py:3: FutureWarning:
+
+Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+
+/tmp/ipykernel_23552/1743805570.py:4: FutureWarning:
+
+Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+
+/tmp/ipykernel_23552/1743805570.py:5: FutureWarning:
+
+Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week5_practical_files/figure-html/cell-15-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="week5_practical_files/figure-html/cell-15-output-2.png" width="663" height="523" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="youre-done" class="level2">
 <h2 class="anchored" data-anchor-id="youre-done">You’re Done!</h2>
-<p>Congratulations on completing the correlation practical. You’ve also learnt how to debug when an error occurs.</p>
+<p>Congratulations on completing the practical on correlation and ANOVA. You’ve also learnt how to debug when an error occurs.</p>
 <p>When you use Python (or R), it is common that a task can be completed by different packages. For example, <em>Pearson correlation</em> can be calculated using <em>scipy</em>, <em>pandas</em>, or <em>pingouin</em>. Choose the right tool for your purpose, and ensure you understand the underlying principles and limitations before using a package.</p>
 <p>It takes time to learn - remember practice makes perfect!</p>
 <p>If you have time, please think about applying the correlation to other variables in the school data, or your own datasets.</p>
