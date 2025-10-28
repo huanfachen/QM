@@ -20,6 +20,12 @@ Looked at:
 
 # This week 
 
+## Objectives
+
+- Understand and calcualte Pearson and Spearman correlation between two variables.
+- Understand the difference between Pearson and Spearman correlation.
+- Understand ANOVA.
+
 ## Classification of statistical analysis
 
 ::: {.incremental}
@@ -476,14 +482,88 @@ print(f"Spearman C = **<span style='color:red'>{spearman_corr_updated:.4f}</span
 - Spearman correlation requires *sorting* on X and Y, which is not very efficient on big data
 :::
 
-# Kendall rank correlation (Kendall's $\tau$)
-## Definition
+# ANOVA (Analysis of Variance)
+## Motivation
+::: {.incremental}
+- Pearson/Spearman correlation applies for ordinal/interval/ratio variables.
+- What if we want to understand the relationship between a *nominal* variable and a *continuous* one?
+- For example - in school data, we have average attainment of boys and girls per school. are *gender* and *attainment* correlated?
+- Let's rephrase this question as: is there a significant difference on attainment between boys and girls? (*Does this sound familiar*)
+:::
+
+## Motivation continued - back to W3 *Hypothesis Testing*
+- Student's T-test: types 
+
+<div style="text-align:center;">
+  <img src="L3_images/t_tets_types.webp" alt="Types of T-tests" style="max-width:80%;">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+    Image credit: https://www.geeksforgeeks.org/data-science/t-test/
+    
+  </div>
+</div>
+
+- *Are gender and attainment are correlated* can be answered by paired samples t-test.
+
+## Motivated continued - what if there are three or more groups?
+::: {.incremental}
+- Is there significant difference in school-average attainment across London councils of Camden, Westminster, and Islington?
+- ANOVA (ANalysis Of Variance): used to determine if *multiple groups* are statistically significantly *different*.
+:::
+
+## Theory behind ANOVA
+
+::: {.block height="50%"}
+::: {.incremental}
+- Step 1: break down total variance of values into two parts. Total-variance = within-group-variance + between-group-variance
+- Step 2：$F$ = between-group-variance / within-group-variance
+- Step 3: calculate the probability of $F$ greater than or equal to computed $F$. The F follows a F-distribution and $E[F]=1$, if there is no significant difference between groups
+:::
+:::
+
+::: {.block height="50%"}
+<div style="text-align:center;">
+  <img src="L5_images/datanovia.com" alt="Types of T-tests" style="max-width:80%;">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+    Image credit: datanovia.com
+  </div>
+</div>
+:::
+
+## ANOVA is flexible
+| Feature | **One-Way ANOVA**  | **Two-Way ANOVA**|
+|------------------|--------------------|------------------|
+| **Purpose**      | Compare means of three or more groups based on **one factor**    | Compare means based on **two factors** and their interaction     |
+| **Example**      | Do school attainments vary across LA (Camden/Islington/Westminster)?    | Do school attainments vary across LA (Camden/Islington/Westminster) and gender (male/female)?     |
+| **Interactions** | Not considered   | Can assess main effects and interaction between factors |
+| **Assumptions**  | Normality, no outliers, homogeneity of variances, independence   | Same as one-way plus assumptions for interaction effects          |
+| **Output**   | F-statistic, p-value for group differences    | F-statistics and p-values for each factor and interaction effects |
+
+## ANOVA has (many) assumptions
+::: {.incremental}
+- **Independence of observations**: each subject belongs to only 1 group; every observation is independent of others
+- **No significant outliers exist**
+- **Normality**: The data are approximately normally distributed
+- **Homogeneity of variances**: variance of the outcome variable should be similar in all groups
+- *These assumptions need to be tested before conducting ANOVA*
+:::
+
+## Assumptions and Testing
+
+| Assumption       | Testing  |
+|------------------|-----------------------------------------|
+| **Independence of observations**  | Design-based check, randomization review |
+| **No significant outliers**      | Boxplots/Z-scores; be cautious when removing outliers            |
+| **Normality**                 | Shapiro–Wilk test; Q–Q plots          |
+| **Homogeneity of variances**           | Levene test, Welch test|
 
 
 ## Key takeaways 
 
-- Can use Pearson/Spearman/Kendall correlation to measure the relationship between two variables.
-- Choose the correlation metric based on the dataset and interpret them correctly.
+- Can use Pearson/Spearman correlation to measure the relationship between two variables.
+- Choose Pearson or Spearman correlation metric based on the dataset and interpret them correctly.
+- To measure difference between two groups, use (paired) t-test
+- To measure difference between multiple groups, use one-way ANOVA
+- To measure difference across two variables, use two-way ANOVA
 
 ## Practical 
 ### {.incremental}
