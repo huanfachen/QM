@@ -521,8 +521,8 @@ print(f"Spearman C = **<span style='color:red'>{spearman_corr_updated:.4f}</span
 
 ::: {.block height="50%"}
 ::: {.incremental}
-- Step 1: break down total variance of values into two parts. Total-variance = within-group-variance + between-group-variance
-- Step 2：$F = \frac{text{between-group variance}}{text{within-group variance}}$
+- Step 1: break down total variance of values into two parts. Total-variance = between-group-variance + within-group-variance
+- Step 2：$F = \frac{\text{between-group variance}}{\text{within-group variance}}$
 - Step 3: calculate the probability of $F$ greater than or equal to computed $F$. Under Null Hypothesis (there is no significant difference between groups), $F$ follows a F-distribution and $E[F]=1$.
 :::
 :::
