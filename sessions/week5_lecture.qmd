@@ -346,7 +346,7 @@ Question: does cor = 0 mean [no relationship]{style="color:blue"} between X and 
 
 ::: {.incremental}
 - Pearson correlation doesn't work for nominal or ordinal data
-- ... as we can't compute the mean or difference on nominal/ordinal data.
+- ... as we can't compute the mean or difference of nominal/ordinal data.
 :::
 
 # Spearman correlation (Spearman's Rho)
@@ -491,7 +491,7 @@ print(f"Spearman C = **<span style='color:red'>{spearman_corr_updated:.4f}</span
 - Pearson/Spearman correlation applies for ordinal/interval/ratio variables.
 - What if we want to understand the relationship between a *nominal* variable and a *continuous* one?
 - For example - in school data, we have average attainment of boys and girls per school. are *gender* and *attainment* correlated?
-- Let's rephrase this question as: is there a significant difference on attainment between boys and girls? (*Does this sound familiar*)
+- Let's rephrase this question as: is there a significant difference in attainment between boys and girls? (*Does this sound familiar*)
 :::
 
 ## Back to W3 *Hypothesis Testing*
