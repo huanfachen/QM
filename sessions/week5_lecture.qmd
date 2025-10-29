@@ -22,7 +22,7 @@ Looked at:
 
 ## Objectives
 
-- Understand and calcualte Pearson and Spearman correlation between two variables.
+- Understand and calculate Pearson and Spearman correlation between two variables.
 - Understand the difference between Pearson and Spearman correlation.
 - Understand ANOVA.
 
@@ -63,7 +63,7 @@ Let's take *variance* as an exmaple
 |-------------------------|-------------------------|
 | Does it exist for all inputs?          | <span class="fragment">Yes</span>|
 | Meaning of sign (+/-)           | <span class="fragment">Non-negative; 0 means all values are identical</span>|
-| Range           | <span class="fragment">[0, ∞)</span>|
+| Range           | <span class="fragment">[0, $\infty$)</span>|
 | Is it normalised (i.e. in [-1,1] or [0,1])           | <span class="fragment">No</span>|
 | Is it symmetric, if it involves multiple inputs?           | <span class="fragment">N/A</span>|
 
@@ -173,7 +173,7 @@ print(f"\nCovariance\n = ({values_str}) / {n} \n= {covariance:.2f}")
 |-------------------------|-------------------------|
 | Does it exist for all inputs?          | <span class="fragment">Yes</span>|
 | Meaning of sign (+/-)           | <span class="fragment">Positive: x, y change in the same direction</span>|
-| Range           | <span class="fragment">[-∞, ∞)</span>|
+| Range           | <span class="fragment">(-$\infty$, $\infty$)</span>|
 | Is it normalised (i.e. in [-1,1] or [0,1])           | <span class="fragment">No</span>|
 | Is it symmetric, if it involves multiple inputs?           | <span class="fragment">Yes, cov(x,y)=cov(y,x)</span>|
 
@@ -278,7 +278,7 @@ $$
 |-------------------------|-------------------------|
 | Does it exist for all inputs?          | <span class="fragment">Not when variance of x or y equals 0</span>|
 | Meaning of sign (+/-)           | <span class="fragment">Positive: x, y change in the same direction</span>|
-| Range           | <span class="fragment">[-1, 1)</span>|
+| Range           | <span class="fragment">[-1, 1]</span>|
 | Is it normalised (i.e. in [-1,1] or [0,1])           | <span class="fragment">Yes</span>|
 | Is it symmetric, if it involves multiple inputs?           | <span class="fragment">Yes, Cor(x,y)=Cor(y,x)</span>|
 

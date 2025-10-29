@@ -324,7 +324,7 @@ plt.show()
 - The F statistic = 3.26 is the ratio of variance between the group means to the variance within the groups.
 - Degrees of Freedom
   - Between groups: df = 2 (because there are 3 groups: df = k−1).
-  - Within groups (residual): df = 26 (total sample size minus (k-1) = 28 - 2).
+  - Within groups (residual): df = 26 (total sample size minus k = 29 - 3).
 - p-value: PR(>F) = 0.0546 means that under the null hypothesis (no difference in means), there is a 5.46% probability of obtaining an F statistic as large as or larger than 3.26. If we use a standard alpha level of 0.05, this p-value is on the margin. 
 - The Shapiro-Wilk test indicates that the residuals are normally distributed.
 - The Levene test indicates the variances within each group are homogeneous.
