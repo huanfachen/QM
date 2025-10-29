@@ -368,6 +368,35 @@ plt.grid(alpha=0.3)
 plt.show()
 ```
 
+We can also use *pingouin* to conduct ANOVA between *LANAME* and *ATT8SCR*. The grammar is much more concise than *statsmodels*.
+
+```{python}
+# One-way ANOVA using Pingouin
+anova_results = pg.anova(dv='ATT8SCR', between='LANAME', data=df_filtered, detailed=True)
+
+print(anova_results.round(2))
+
+```
+
+The results are aligned with ANOVA using *statsmodels*.
+
+Column meanings:
+
+- **Source**: Factor being tested ("LANAME") or residual.
+- **SS**: Sum of squares. The SS of LANMAE (335.63) represents the between-group variation, while SS of Within (1339.10) represents the within-group variation.
+- **DF**: Degrees of freedom.
+- **MS**: Mean squares.
+- **F**: F-statistic, calculated as:
+$
+\[
+F(2, 26) = \frac{\frac{\text{SS}_{\text{between}}}{\text{df}_{\text{between}}}}{\frac{\text{SS}_{\text{within}}}{\text{df}_{\text{within}}}}
+= \frac{\frac{335.63}{2}}{\frac{1339.10}{26}}
+= \frac{167.815}{51.503846} \approx 3.26
+\]
+$
+- **p-unc**: Uncorrected p-value.
+- **np2**: Partial eta-squared (effect size).
+
 ## You're Done!
 
 Congratulations on completing the practical on correlation and ANOVA. You've also learnt how to debug when an error occurs.

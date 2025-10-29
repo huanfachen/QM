@@ -213,6 +213,9 @@ $$
 
 ## Quiz: what is the *unit* of Covariance and Correlation?
 - *unit* of values is very important in quantitative analysis.
+$$
+\mathrm{Cov}(x, y) = \frac{1}{n} \sum_{i=1}^{n} \left( x_i - \bar{x} \right) \left( y_i - \bar{y} \right)
+$$
 - You are investigating the relationship between outdoor temperature (in unit of $^\circ\text{C}$) and fire service call rates (in unit of $\text{minute}^{-1}$). What is the unit of the covariance?
 - *A.* $^\circ\text{C} \cdot \text{minute}^{-1}$
 - *B.* unitless
@@ -491,17 +494,22 @@ print(f"Spearman C = **<span style='color:red'>{spearman_corr_updated:.4f}</span
 - Let's rephrase this question as: is there a significant difference on attainment between boys and girls? (*Does this sound familiar*)
 :::
 
-## Motivation continued - back to W3 *Hypothesis Testing*
+## Back to W3 *Hypothesis Testing*
 
 <div style="text-align:center;">
-  <img src="L3_images/t_tets_types.webp" alt="Types of T-tests" style="max-width:80%;">
+  <img src="L3_images/t_tets_types.webp" alt="Types of T-tests" style="max-width:70%;">
   <div style="font-size:0.8em; color: #555; margin-top:4px;">
     Image credit: https://www.geeksforgeeks.org/data-science/t-test/
     
   </div>
 </div>
 
-- *Are gender and attainment are correlated* can be answered by paired samples t-test.
+## Are gender and attainment correlated?
+
+::: {.incremental}
+- We can use *Independent samples t-test* for this task, when average attainments of boys and girls are not paired. For example, we've average attainments of boys from 10 schools and of girls from 8 schools.
+- Alternatvely, We can use *Paired samples t-test*, if the average attainments of boys and girls are paired by schools (i.e. data from the same schools for both groups).
+:::
 
 ## Motivated continued - what if there are three or more groups?
 ::: {.incremental}
@@ -514,7 +522,7 @@ print(f"Spearman C = **<span style='color:red'>{spearman_corr_updated:.4f}</span
 ::: {.block height="50%"}
 ::: {.incremental}
 - Step 1: break down total variance of values into two parts. Total-variance = within-group-variance + between-group-variance
-- Step 2：$F$ = between-group variance / within-group variance
+- Step 2：$F = \frac{text{between-group variance}}{text{within-group variance}}$
 - Step 3: calculate the probability of $F$ greater than or equal to computed $F$. Under Null Hypothesis (there is no significant difference between groups), $F$ follows a F-distribution and $E[F]=1$.
 :::
 :::
