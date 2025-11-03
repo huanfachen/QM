@@ -690,10 +690,13 @@ print(density_p8mea)
 -   Low ICC = density plots all overlapping on-top of each other
 
 ## The Null Model - Syntax
+`y ~ fixed_effect_x + (random_effect_slope_term_x | random_effect_group_g)`
 
--   Using Paul Johnson's excellent guide for syntax, the null model in R follows this format: `y ~ 1 + (1 | g)`
--   In the null model, the first `1` just tells the model to use a fixed global intercept
--   Grouping factors (random effects) are denoted to the *right* of the vertical bar or pipe symbol `|` inside the brackets. To the *left* we have the sub-model. 
+
+## The Null Model - Syntax
+-   Using Paul Johnson's excellent guide for syntax, the null model in R follows this format:`y ~ 1 + (1 | g)`
+-   In the null model, the fixed effects appear outside of the brackets. Here the first `1` outside of the brackets just tells the model to use a fixed global intercept
+-   The random effects are in the brackets `(...|...)`  are denoted to the *right* of the vertical bar or pipe symbol `|` inside the brackets. To the *left* we have the sub-model. 
 -   The full model in R would like like:
 $$\text{lme_model1} <- \text{lmer}(\text{P8MEA} \sim 1 + (1|\text{OFSTEDRATING}), \text{data} = \dots)$$
 <https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/>
@@ -730,6 +733,7 @@ ggplot(ranef_df, aes(x = OFSTEDRATING, y = `(Intercept)`)) +
   geom_point(size = 3) +
   geom_hline(yintercept = fixef(lme1)[1], linetype = "dashed", color = "red") +
   labs(title = "Varying Intercepts by OFSTED Rating",
+       subtitle = "Model: P8MEA ~ 1 + (1 | OFSTEDRATING)",
        x = "OFSTED Rating",
        y = "Intercept") +
   theme_minimal()
@@ -773,8 +777,143 @@ pred_df <- do.call(rbind, lapply(1:nrow(ranef_df), function(i) {
 ggplot(pred_df, aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING)) +
   geom_line(size = 1.2) +
   labs(title = "Predicted P8MEA vs Population by OFSTED Rating",
+       subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING)",
        x = "PTFSM6CLA1A (Population Measure)",
        y = "Predicted P8MEA") +
   theme_minimal()
+```
+
+```{r}
+lme3 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A|OFSTEDRATING), data = england_filtered_clean)
+summary(lme3)
+```
+
+
+```{r}
+library(lme4)
+library(ggplot2)
+
+
+# 1. Load Libraries (Assuming they are already loaded)
+# library(lme4)
+# library(ggplot2)
+
+# 2. Fit the New Model with Random Slopes and Intercepts
+lme3 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A | OFSTEDRATING), data = england_filtered_clean)
+
+# 3. Get Fixed Effects and Random Effects
+fixed_intercept <- fixef(lme3)[1] # Fixed overall intercept
+fixed_slope <- fixef(lme3)[2]     # Fixed overall slope for PTFSM6CLA1A
+
+# Extract Random Effects for both Intercept and Slope
+ranef_df <- as.data.frame(ranef(lme3)$OFSTEDRATING)
+ranef_df$OFSTEDRATING <- rownames(ranef(lme3)$OFSTEDRATING)
+
+# Rename columns for clarity
+colnames(ranef_df) <- c("RandomIntercept", "RandomSlope", "OFSTEDRATING")
+
+# 4. Create Prediction Grid
+# Use the same range for the predictor as before
+pop_range <- seq(min(england_filtered_clean$PTFSM6CLA1A),
+                 max(england_filtered_clean$PTFSM6CLA1A), length.out = 100)
+
+pred_df_lme3 <- do.call(rbind, lapply(1:nrow(ranef_df), function(i) {
+  
+  # Calculate the group-specific intercept and slope:
+  # Group Intercept = Fixed Intercept + Random Intercept for the Group
+  group_intercept <- fixed_intercept + ranef_df$RandomIntercept[i]
+  
+  # Group Slope = Fixed Slope + Random Slope for the Group
+  group_slope <- fixed_slope + ranef_df$RandomSlope[i]
+  
+  # Calculate predicted P8MEA for this group
+  data.frame(
+    PTFSM6CLA1A = pop_range,
+    P8MEA = group_intercept + group_slope * pop_range,
+    OFSTEDRATING = ranef_df$OFSTEDRATING[i]
+  )
+}))
+
+# 5. Plot the Results
+ggplot(pred_df_lme3, aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING)) +
+  geom_line(size = 1.2) +
+  labs(title = "Predicted P8MEA vs Population by OFSTED Rating (Random Slopes)",
+       subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A | OFSTEDRATING)",
+       x = "PTFSM6CLA1A (Population Measure)",
+       y = "Predicted P8MEA") +
+  theme_minimal()
+```
+
+
+```{r}
+## 1. Fit the New Model with Uncorrelated Random Slopes and Intercepts
+lme4 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A || OFSTEDRATING), data = england_filtered_clean)
+summary(lme4)
+```
+
+
+```{r}
+library(lme4)
+library(ggplot2)
+
+
+## 1. Fit the New Model with Uncorrelated Random Slopes and Intercepts
+lme4 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A || OFSTEDRATING), data = england_filtered_clean)
+
+# 2. Get Fixed Effects and Random Effects
+fixed_intercept <- fixef(lme4)[1] # Fixed overall intercept
+fixed_slope <- fixef(lme4)[2]     # Fixed overall slope for PTFSM6CLA1A
+
+# Extract Random Effects for both Intercept and Slope
+# Note: ranef() returns the random effects in the same order as the fixed effects
+ranef_df_lme4 <- as.data.frame(ranef(lme4)$OFSTEDRATING)
+
+# Since the structure is (PTFSM6CLA1A || OFSTEDRATING), lme4 separates the two terms
+# The columns are named based on the formula structure for uncorrelated terms
+colnames(ranef_df_lme4) <- c("RandomIntercept", "RandomSlope") 
+ranef_df_lme4$OFSTEDRATING <- rownames(ranef_df_lme4)
+
+# 3. Create Prediction Grid
+pop_range <- seq(min(england_filtered_clean$PTFSM6CLA1A),
+                 max(england_filtered_clean$PTFSM6CLA1A), length.out = 100)
+
+pred_df_lme4 <- do.call(rbind, lapply(1:nrow(ranef_df_lme4), function(i) {
+  
+  # Calculate the group-specific intercept and slope:
+  # Group Intercept = Fixed Intercept + Random Intercept for the Group
+  group_intercept <- fixed_intercept + ranef_df_lme4$RandomIntercept[i]
+  
+  # Group Slope = Fixed Slope + Random Slope for the Group
+  group_slope <- fixed_slope + ranef_df_lme4$RandomSlope[i]
+  
+  # Calculate predicted P8MEA for this group
+  data.frame(
+    PTFSM6CLA1A = pop_range,
+    P8MEA = group_intercept + group_slope * pop_range,
+    OFSTEDRATING = ranef_df_lme4$OFSTEDRATING[i]
+  )
+}))
+
+# 4. Plot the Results
+ggplot(pred_df_lme4, aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING)) +
+  geom_line(size = 1.2) +
+  labs(title = "Predicted P8MEA by OFSTED Rating (Uncorrelated Random Slopes)",
+       subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A || OFSTEDRATING)",
+       x = "PTFSM6CLA1A (Population Measure)",
+       y = "Predicted P8MEA") +
+  theme_minimal()
+```
+
+
+```{r}
+lme5 <- lmer(P8MEA ~ 1 + (1|gor_name/LANAME), data = england_filtered_clean)
+summary(lme5)
+
+```
+
+
+```{r}
+lme6 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME), data = england_filtered_clean)
+summary(lme6)
 ```
 
