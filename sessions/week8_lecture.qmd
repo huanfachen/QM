@@ -917,3 +917,16 @@ lme6 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME), data = england_filtered_
 summary(lme6)
 ```
 
+```{r}
+lme7 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME) + (1|OFSTEDRATING), data = england_filtered_clean)
+summary(lme7)
+```
+
+
+$$\texttt{lmer(P8MEA \sim PTFSM6CLA1A + (1 \mid gor\_name/LANAME) + (1 \mid OFSTEDRATING), data = england\_filtered\_clean)}$$
+~kitchen sink model!!
+
+```{r}
+lme8 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME) + (1|OFSTEDRATING), data = england_filtered_clean)
+summary(lme7)
+```
