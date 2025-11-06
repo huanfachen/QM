@@ -334,10 +334,10 @@ To visualise the distribution of F-statistic and the p-value, we can use the fol
 
 ```{python}
 # Extract F statistic, p-value, and degrees of freedom from ANOVA table
-F_stat = anova_table.loc['F'][0]
-p_value = anova_table.loc['PR(>F)'][0]
-df_between = anova_table.loc['df'][0]  # numerator degrees of freedom
-df_within = anova_table.loc['df'][1]   # denominator degrees of freedom
+F_stat = anova_table['F'].iloc[0]
+p_value = anova_table['PR(>F)'].iloc[0]
+df_between = anova_table['df'].iloc[0]  # numerator degrees of freedom
+df_within = anova_table['df'].iloc[1]   # denominator degrees of freedom
 
 # Create range for F distribution
 x = np.linspace(0, max(6, F_stat + 2), 500)  # ensure range includes F_stat with padding
