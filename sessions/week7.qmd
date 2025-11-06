@@ -1,25 +1,32 @@
 ---
 format: html
 date: last-modified
-author: "XXX"
-title: "Week XXX"
+author: "Adam Dennett"
+title: "Week 7 - Prof D's Regression Sessions Vol 2"
 ---
+
+![](L6_images/regression2.PNG)
 
 ## Introduction
 
-This week will introduce XXX.
+This week will build on last week's introduction to Linear Regression, extending the model into deep space and beyond. Sorry, that's the Progression Sessions Vol 2 (this week's recommended listening on the practical pages!). No, we won't quite get that far, but we will be extending our regression model into multiple (near-space) dimensions to really start to unpick what might be influencing our attainment variables in English Schools.
+
+In a multiple linear regression model, additional independent/explanatory variables are added to try and explain the unexplained variance that may remain in a bivariate regression model. In theory these dimensions are infinite, however in practice care needs to be taken to strike the correct balance between explanatory power and interpretability with it unlikely that you could select a large number of independent variables without running into issues of multicollinearity (more of which in the lecture).
 
 ## Learning Objectives
 
-By the end of this week, you will be able to:
+By the end of this week, you will:
 
-1. XXX
-2. XXX
-3. XXX
+1.   Extend your understanding of linear regression by learning how we might incorporate additional continuous and categorical independent variables
+2.   Understand why multicollinearity is an issue and how to avoid it
+3.   Understand how the spatial or temporal autocorrelation of residuals might indicate issues in your model
+4.   Understand how to incorporate and interpret dummy (categorial) independent variables in your model
+5.   Understand what confounding is and how you can use confounding to better understand the influence of variables in your model
+6.   Understand how it is possible to interact some of the variables in your model to see how the effects of one variable change in the presence of another, or whether there is indeed no statistically significant interaction
 
 ## Lecture 
 
-To access the lecture notes: [Lecture](weekXXX_lecture.qmd)
+To access the lecture notes: [Lecture](week7_lecture.html)
 
 ## Quiz
 
@@ -35,7 +42,7 @@ To save a copy of notebook to your own GitHub Repo: follow the GitHub link, clic
 
 To access the practical:
 
-1. [Preview](weekX_practical.html)
-2. [Download](weekX_practical.ipynb)
+1. [Main Practical Page](week7_practical.html)
+2. [Download](week7_practical.ipynb)
 
 ## Further resources

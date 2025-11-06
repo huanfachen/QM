@@ -5,6 +5,9 @@ cloud-config.yml
 /_site/
 /_freeze/
 /docs/
+/venv/
+
+
 
 # renv-setup.R
 

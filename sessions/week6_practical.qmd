@@ -2,7 +2,9 @@
 title: "Prof D's Regression Sessions - Vol 1"
 subtitle: "AKA - Applied Linear Regression - Basics"
 format:
-  html: default
+  html:
+    code-fold: true
+    code-tools: true
   ipynb: default
 filters:
   - qna
@@ -44,11 +46,15 @@ here()
 
 library(reticulate)
 
+#virtualenv_list()
+#virtualenv_root()
+#use_virtualenv(virtualenv = NULL, required = NULL)
+
 #reticulate::virtualenv_remove("r-reticulate")
 # point reticulate to the right python installation - ideally the one reticulate installed. 
 #reticulate::use_python("C:/Users/Adam/AppData/Local/R/cache/R/reticulate/uv/cache/archive-v0/EiTNi4omakhlev5ckz2WP/Scripts/python.exe", required = TRUE)
 #use_condaenv("qmEnv", conda = "C:/Users/adam_/anaconda3/Scripts/conda.exe", required = TRUE)
-#use_python("C:/Users/adam_/anaconda3/envs/qmEnv/python.exe", required = TRUE)
+#reticulate::use_python("C:/Users/adam_/anaconda3/envs/qmEnv/python.exe", required = TRUE)
 #py_run_string("import pyproj; print(pyproj.CRS.from_epsg(27700))")
 
 #virtualenv_create("r-reticulate", python = "C:/Users/Adam/AppData/Local/R/cache/R/reticulate/uv/cache/archive-v0/EiTNi4omakhlev5ckz2WP/Scripts/python.exe")
@@ -88,6 +94,15 @@ Over the next 3 weeks we are going **DEEP** into linear regression. The QM Regre
 This week's practical is focused on understanding the most basic form of regression analysis, but in an applied context discovering what these models help you understand about your data in great detail. You will essentially re-create some of the analysis you saw in the lecture, but for slightly different variables and for different places.
 
 Most of what you will be doing in this practical won't actually be modelling - although this will come at the end - but you will be getting to know your data so that your final models make sense. This is how it should be!! Going back to our bake-off analogy, the modelling is really just the final bake after hours of preparation.
+
+## Aims
+
+By the end of this week's regression session you should:
+
+-   Be able to use R or Python to process data in order to carry out a scientific investigation
+-   Feel comfortable in plotting and visualising that processed data to assess relationships between x and y variables
+-   Understand how to use built-in statistical software functions in R and Python to run specify and a basic regression model and produce statistical outputs from those models
+-   Interpret those model outputs critically in order to evaluate the strenght and direction of the relationships you are observing. 
 
 ::: callout-note
 Below you will find code-blocks that will allow you to run your analysis in either R or Python. It's up to you which you decide to use - you might even want to try both to compare (Of course, R will be better)!
@@ -556,9 +571,31 @@ The Code Below already has the syntax to allow you to filter your dataset and dr
 It also contains the start of some code to allow you to select a smaller set of variables from the 700-odd in the main file.
 
 1.  Adapt this Python or R code so that it contains these variables plus the additional variables listed below (see the note about how you may need to adjust the names depending on whether using Python or R). - You should end up with 34 in total
-2.  Once you have created this filtered and reduced file called `england_filtered` use this code below as the template for creating two new data subsets:
+2.  Once you have created this filtered and reduced file called `england_filtered`, write it out as a csv (e.g. england_filtered.csv) and save to your local working directory - we will use it again in future practicals
+3.  Now you have your `england_filtered` file, use this code below as the template for creating two new data subsets:
     a.  london_borough_sub
     b.  england_lad_sub These two new files should create a subset which has filtered on the name or code of a London borough and another local authority in England
+    
+::: {.multicode}
+#### ![](L6_images/python-logo-only.png){width="30"}
+```{python}
+#| eval: false
+#| include: true
+import pandas as pd
+# Assuming england_filtered is a pandas DataFrame
+england_filtered.to_csv("england_filtered.csv", index=False)
+
+```
+
+#### ![](L6_images/Rlogo.png){width="41" height="30"}
+```{r}
+#| eval: false
+#| include: true
+library(tidyverse)
+write_csv(england_filtered, "england_filtered.csv")
+```
+
+:::
 
 ::: callout-note
 If you are unsure of the names of the local authorities in England, use the `la_and_region_codes_meta.csv` file in your metadata folder to help you. You might want to name your "sub" files according to the names of the local authorities you choose.
@@ -608,7 +645,7 @@ england_filtered = (
         ~england_school_2022_23["MINORGROUP"].isin(excluded_groups) &
         (england_school_2022_23["phaseofeducation_name_"] == "Secondary") &
         (england_school_2022_23["establishmentstatus_name_"] == "Open")
-    ][["URN", "SCHNAME_x", "LEA", "LANAME", "TOWN_x", "gor_name_", "TOTPUPS", "ATT8SCR", "ATT8SCRENG", "ATT8SCRMAT", "ATT8SCR_FSM6CLA1A", "ATT8SCR_NFSM6CLA1A", "ATT8SCR_BOYS", "ATT8SCR_GIRLS", "P8MEA", "P8MEA_FSM6CLA1A", "P8MEA_NFSM6CLA1A", "PTFSM6CLA1A", "PTNOTFSM6CLA1A", "PNUMEAL", "PNUMENGFL", "PTPRIORLO", "PTPRIORHI", "NORB", "NORG", "PNUMFSMEVER", "PERCTOT", "PPERSABS10", "SCHOOLTYPE_x", "RELCHAR", "ADMPOL_y", "gender_name_", "OFSTEDRATING", "MINORGROUP", "easting", "northing"]]
+    ][["URN", "SCHNAME_x", "LEA", "LANAME", "TOWN_x", "gor_name_", "TOTPUPS", "ATT8SCR", "ATT8SCRENG", "ATT8SCRMAT", "ATT8SCR_FSM6CLA1A", "ATT8SCR_NFSM6CLA1A", "ATT8SCR_BOYS", "ATT8SCR_GIRLS", "P8MEA", "P8MEA_FSM6CLA1A", "P8MEA_NFSM6CLA1A", "PTFSM6CLA1A", "PTNOTFSM6CLA1A", "PNUMEAL", "PNUMENGFL", "PTPRIORLO", "PTPRIORHI", "NORB", "NORG", "PNUMFSMEVER", "PERCTOT", "PPERSABS10", "SCHOOLTYPE_x", "RELCHAR", "ADMPOL_y", "ADMPOL_PT", "gender_name_", "OFSTEDRATING", "MINORGROUP", "easting", "northing"]]
 )
 ```
 
@@ -617,8 +654,7 @@ england_filtered = (
 ```{r}
 # Filter data
 england_filtered <- england_school_2022_23 %>%
-  filter(!MINORGROUP %in% c("Special school", "Independent school", "College", NA)) %>% 
-  filter(phase_of_education_name == "Secondary") %>% 
+  filter(!MINORGROUP %in% c("Special school", "Independent school", "College", NA)) %>%   filter(phase_of_education_name == "Secondary") %>% 
   filter(establishment_status_name == "Open") %>% 
   select(URN, SCHNAME.x, TOWN.x, TOTPUPS, ATT8SCR, OFSTEDRATING, MINORGROUP, PTFSM6CLA1A)
 ```
@@ -627,10 +663,11 @@ england_filtered <- england_school_2022_23 %>%
 #| include: false
 # Filter data
 england_filtered <- england_school_2022_23 %>%
-  filter(!MINORGROUP %in% c("Special school", "Independent school", "College", NA)) %>% 
-  filter(phase_of_education_name == "Secondary") %>% 
+  filter(!MINORGROUP %in% c("Special school", "Independent school", "College", NA)) %>%   filter(phase_of_education_name == "Secondary") %>% 
   filter(establishment_status_name == "Open") %>% 
-  select(URN, SCHNAME.x, LEA, LANAME, TOWN.x,gor_name, TOTPUPS, ATT8SCR, ATT8SCRENG, ATT8SCRMAT,ATT8SCRMAT,ATT8SCR_FSM6CLA1A,ATT8SCR_FSM6CLA1A,ATT8SCR_NFSM6CLA1A,ATT8SCR_BOYS,ATT8SCR_GIRLS,P8MEA,P8MEA_FSM6CLA1A,P8MEA_NFSM6CLA1A,PTFSM6CLA1A,PTNOTFSM6CLA1A,PNUMEAL,PNUMENGFL,PTPRIORLO,PTPRIORHI,NORB,NORG,PNUMFSMEVER,PERCTOT,PPERSABS10,SCHOOLTYPE.x,RELCHAR,ADMPOL.y,gender_name,OFSTEDRATING, MINORGROUP, easting, northing)
+  select(URN, SCHNAME.x, LEA, LANAME, TOWN.x,gor_name, TOTPUPS, ATT8SCR, ATT8SCRENG, ATT8SCRMAT,ATT8SCRMAT,ATT8SCR_FSM6CLA1A,ATT8SCR_FSM6CLA1A,ATT8SCR_NFSM6CLA1A,ATT8SCR_BOYS,ATT8SCR_GIRLS,P8MEA,P8MEA_FSM6CLA1A,P8MEA_NFSM6CLA1A,PTFSM6CLA1A,PTNOTFSM6CLA1A,PNUMEAL,PNUMENGFL,PTPRIORLO,PTPRIORHI,NORB,NORG,PNUMFSMEVER,PERCTOT,PPERSABS10,SCHOOLTYPE.x,RELCHAR,ADMPOL.y,ADMPOL_PT,gender_name,OFSTEDRATING, MINORGROUP, easting, northing)
+
+#write_csv(england_filtered, "england_filtered.csv")
 ```
 :::
 
@@ -662,8 +699,9 @@ Other variables to include in your reduced dataset:
 23. School Type e.g. Voluntary Aided school - **SCHOOLTYPE**
 24. Religious character - **RELCHAR**
 25. Admissions Policy - **ADMPOL**
-26. Government Office Region Name - **gor_name**
-27. Mixed of Single Sex - **gender_name**
+26. Admissions Policy new definition from 2019 - **ADMPOL_PT**
+27. Government Office Region Name - **gor_name**
+28. Mixed or Single Sex - **gender_name**
 :::
 
 ::: callout-note

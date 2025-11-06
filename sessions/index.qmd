@@ -45,8 +45,8 @@ title: "Overview"
 | 3       | Hypothesis testing             | Bea      |
 | 4       | Introduction to linear algebra | Bea      |
 | 5       | Correlation and regression     | Huanfa   |
-| 6       | Multiple regression            | Adam     |
-| 7       | Generalised linear model       | Adam     |
+| 6       | Intro to Regression            | Adam     |
+| 7       | Multiple Regression            | Adam     |
 | 8       | Multilevel regression          | Adam     |
 | 9       | Dimensionality reduction       | Huanfa   |
 | 10      | Clustering Analysis            | Huanfa   |

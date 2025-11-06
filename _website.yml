@@ -62,7 +62,7 @@ website:
             href: sessions/week5.qmd
           - text: "6. Introduction to Regression"
             href: sessions/week6.qmd
-          - text: "7. Generalised Linear Regression" 
+          - text: "7. Multiple Regression" 
             href: sessions/week7.qmd
           - text: "8. Multilevel Regression" 
             href: sessions/week8.qmd 

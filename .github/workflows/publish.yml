@@ -12,7 +12,7 @@ jobs:
       contents: write
 
     env:
-      GITHUB_PAT: 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
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Check out repository
@@ -69,7 +69,7 @@ jobs:
           cache: 'pip'
       
       - name: Set RETICULATE_PYTHON environment variable
-        run: echo "RETICULATE_PYTHON=/opt/hostedtoolcache/Python/3.10.18/x64/bin/python" >> $GITHUB_ENV
+        run: echo "RETICULATE_PYTHON=${{ env.pythonLocation }}/bin/python" >> $GITHUB_ENV
 
       - name: Install Python dependencies
         run: |

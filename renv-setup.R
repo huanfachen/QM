@@ -1,7 +1,7 @@
 # renv-setup.R
 
 # Explicitly set Python path for reticulate
-Sys.setenv(RETICULATE_PYTHON = "/opt/hostedtoolcache/Python/3.10.18/x64/bin/python")
+#Sys.setenv(RETICULATE_PYTHON = "/opt/hostedtoolcache/Python/3.10.18/x64/bin/python")
 
 # Ensure remotes is available
 if (!requireNamespace("remotes", quietly = TRUE)) {

@@ -725,16 +725,6 @@ btn_sub <- england_filtered %>%
   filter(LEA == 846) %>% 
   select(URN, SCHNAME.x, LEA, ATT8SCR, PTFSM6CLA1A)
 
-#| warning: FALSE
-#| out-width: "60%"
-#| fig-align: "center"
-
-## get LEA Code from here: https://get-information-schools.service.gov.uk/Guidance/LaNameCodes
-
-# Filter data
-btn_sub <- england_filtered %>%
-  filter(LEA == 846) %>% 
-  select(URN, SCHNAME.x, LEA, ATT8SCR, PTFSM6CLA1A)
 
 # Define custom color palette
 custom_colors <- c(
@@ -748,11 +738,6 @@ school_colors <- setNames(
   school_levels
 )
 
-
-# Filter data
-btn_sub <- england_filtered %>%
-  filter(LEA == 846) %>%
-  select(URN, SCHNAME.x, LEA, ATT8SCR, PTFSM6CLA1A)
 
 # Fit linear model and get predicted values
 lm_fit <- lm(ATT8SCR ~ PTFSM6CLA1A, data = btn_sub)
