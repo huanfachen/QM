@@ -1378,6 +1378,8 @@ sjPlot::plot_model(lme9, type = "re", sort.est = TRUE, group.terms = "gor_name")
 sjPlot::plot_model(lme9, type = "re", sort.est = TRUE, group.terms = "LANAME:gor_name")
 ```
 
+## Caterpillars
+
 ```{r}
 library(lattice)
 re_list <- ranef(lme9, condVar = TRUE)  # includes conditional variances
