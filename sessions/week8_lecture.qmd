@@ -670,6 +670,10 @@ $$\text{ICC} = \frac{\text{Between-Group Variance}}{\text{Total Variance}} = \fr
 ## The ICC
 
 ```{r}
+#| message: false
+#| warning: false
+#| align: center
+#| out-width: 80%
 ## ## 2. Density Plot Visualization (Comparing the Two Variance Components) ## ##
 # This plot visually shows how much the groups overlap (small overlap means high ICC).
 density_p8mea <- ggplot(england_filtered_clean, aes(x = P8MEA, fill = OFSTEDRATING, color = OFSTEDRATING)) +
@@ -689,21 +693,32 @@ print(density_p8mea)
 -   High ICC = distinct, non-overlapping humps
 -   Low ICC = density plots all overlapping on-top of each other
 
-## The Null Model - Syntax
-`y ~ fixed_effect_x + (random_effect_slope_term_x | random_effect_group_g)`
+## Linear Mixed Effects Model - General Syntax
+
+`y ~ fixed_effect_x1 + (random_effect_slope_term_x1 | random_effect_group_g1)`
+
+`y ~ fixed_effect_x1 + fixed_effect_x2 + fixed_effect_xn + (random_effect_slope_term_x1 | random_effect_group_g1) + (random_effect_slope_term_x2 | random_effect_group_g2) (random_effect_slope_term_xn | random_effect_group_gn)`
 
 
 ## The Null Model - Syntax
--   Using Paul Johnson's excellent guide for syntax, the null model in R follows this format:`y ~ 1 + (1 | g)`
--   In the null model, the fixed effects appear outside of the brackets. Here the first `1` outside of the brackets just tells the model to use a fixed global intercept
--   The random effects are in the brackets `(...|...)`  are denoted to the *right* of the vertical bar or pipe symbol `|` inside the brackets. To the *left* we have the sub-model. 
--   The full model in R would like like:
+-   Using Paul Johnson's excellent guide for syntax, the null model in R follows this format: `y ~ 1 + (1 | g)`
+-   Here the fixed effects appear outside of the brackets. The first `1` outside of the brackets just tells the model to use a fixed global intercept
+-   The random effects are inside the brackets `(...|...)`
+    -    To the *left* of the pipe symbol `|` we have a `1` as all slopes are the same in the null model
+    -    To the *right* of the vertical bar or pipe symbol `|` we have the grouping variable `g`. 
+-   The full model in R would like like: 
+
 $$\text{lme_model1} <- \text{lmer}(\text{P8MEA} \sim 1 + (1|\text{OFSTEDRATING}), \text{data} = \dots)$$
+
 <https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/>
 
 ## Running The Null Model
 
 ```{r}
+#| message: false
+#| warning: false
+#| align: center
+#| out-width: 80%
 library(lme4)
 library(performance)
 
@@ -718,6 +733,10 @@ icc(lme1, by_group = T)
 ```
 
 ```{r}
+#| message: false
+#| warning: false
+#| align: center
+#| out-width: 80%
 library(lme4)
 library(ggplot2)
 
@@ -923,8 +942,8 @@ summary(lme7)
 ```
 
 
-$$\texttt{lmer(P8MEA \sim PTFSM6CLA1A + (1 \mid gor\_name/LANAME) + (1 \mid OFSTEDRATING), data = england\_filtered\_clean)}$$
-~kitchen sink model!!
+$$\texttt{lmer(P8MEA ~ PTFSM6CLA1A + (1 | gor_name/LANAME) + (1 | OFSTEDRATING), data = england\_filtered\_clean)}$$
+#kitchen sink model!!
 
 ```{r}
 
@@ -932,6 +951,86 @@ $$\texttt{lmer(P8MEA \sim PTFSM6CLA1A + (1 \mid gor\_name/LANAME) + (1 \mid OFST
 lme8 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME) + (1|OFSTEDRATING), data = england_filtered_clean)
 summary(lme7)
 ```
+
+```{r}
+
+# drop some rows with 0s in
+england_filtered_clean <- england_filtered_clean %>%
+  filter(PTFSM6CLA1A > 0, PERCTOT > 0, PNUMEAL > 0)
+
+# Quick checks of non-finite values after logs
+with(england_filtered_clean, table(is.finite(log(ATT8SCR)), useNA = "ifany"))
+with(england_filtered_clean, table(is.finite(log(PTFSM6CLA1A)), useNA = "ifany"))
+with(england_filtered_clean, table(is.finite(log(PERCTOT)), useNA = "ifany"))
+with(england_filtered_clean, table(is.finite(log(PNUMEAL)), useNA = "ifany"))
+
+# Show a few offending rows (if any)
+bad_idx <- with(england_filtered_clean, 
+  !is.finite(log(ATT8SCR)) |
+  !is.finite(log(PTFSM6CLA1A)) |
+  !is.finite(log(PERCTOT)) |
+  !is.finite(log(PNUMEAL))
+)
+which(bad_idx)[1:20]
+england_filtered_clean[bad_idx, c("ATT8SCR","PTFSM6CLA1A","PERCTOT","PNUMEAL")][1:10, ]
+
+str(england_filtered_clean$OFSTEDRATING)
+str(england_filtered_clean$gor_name)
+str(england_filtered_clean$LANAME)
+str(england_filtered_clean$ADMPOL_PT)
+
+# Convert to factor if needed and drop unused levels
+england_filtered_clean$OFSTEDRATING <- droplevels(as.factor(england_filtered_clean$OFSTEDRATING))
+england_filtered_clean$gor_name      <- droplevels(as.factor(england_filtered_clean$gor_name))
+england_filtered_clean$LANAME        <- droplevels(as.factor(england_filtered_clean$LANAME))
+england_filtered_clean$ADMPOL_PT     <- droplevels(as.factor(england_filtered_clean$ADMPOL_PT))
+
+# Quick NA check on grouping variables
+sapply(england_filtered_clean[c("OFSTEDRATING","gor_name","LANAME")], function(x) sum(is.na(x)))
+
+# Keep rows where all logs will be finite
+finite_idx <- with(england_filtered_clean,
+  is.finite(log(ATT8SCR)) &
+  is.finite(log(PTFSM6CLA1A)) &
+  is.finite(log(PERCTOT)) &
+  is.finite(log(PNUMEAL))
+)
+
+sum(!finite_idx)  # rows to be dropped
+
+eng_clean_log <- droplevels(england_filtered_clean[finite_idx, ])
+```
+
+```{r}
+eng_clean_log <- transform(
+  england_filtered_clean,
+  log_ATT8SCR      = log(ATT8SCR),
+  log_PTFSM6CLA1A  = log(PTFSM6CLA1A),
+  log_PERCTOT      = log(PERCTOT),
+  log_PNUMEAL      = log1p(PNUMEAL)   # handles zeros safely for a count
+)
+
+# Drop any rows where the truly-positive logs are not finite
+eng_clean_log <- subset(eng_clean_log,
+                        is.finite(log_ATT8SCR) &
+                        is.finite(log_PTFSM6CLA1A) &
+                        is.finite(log_PERCTOT) &
+                        is.finite(log_PNUMEAL))
+
+
+lme9 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1 | OFSTEDRATING) + (1 | gor_name/LANAME), data = eng_clean_log, na.action = na.exclude, REML = TRUE)
+summary(lme9)
+
+mm <- model.matrix(~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT, data = eng_clean_log)
+
+stopifnot(all(is.finite(mm)))
+stopifnot(all(is.finite(model.response(model.frame(log(ATT8SCR) ~ 1, data = eng_clean_log)))))
+
+table(eng_clean_log$OFSTEDRATING)
+table(eng_clean_log$gor_name)
+with(eng_clean_log, table(gor_name, LANAME))[1:5, 1:5]  # spot check
+```
+
 
 
 ```{r}
@@ -942,12 +1041,12 @@ lme9 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTP
 summary(lme9)
 
 # Convert fitted values back to original scale
-england_filtered_clean <- england_filtered_clean %>%
-  mutate(
-    fitted_lme9 = exp(lme9),
-    highlight = LANAME == "Brighton and Hove",
-    label = if_else(highlight, SCHNAME.x, NA_character_)
-  )
+#england_filtered_clean <- england_filtered_clean %>%
+#  mutate(
+#    fitted_lme9 = exp(lme9),
+#    highlight = LANAME == "Brighton and Hove",
+#    label = if_else(highlight, SCHNAME.x, NA_character_)
+#  )
 ```
 
 ```{r}
@@ -1028,4 +1127,100 @@ pseudo_R_squared <- cor(observed_log_ATT8SCR_aligned,
 print(paste("Pseudo R-squared (Conditional):", round(pseudo_R_squared, 4)))
 ```
 
+```{r}
+# If you haven't yet, fit the LMM (REML=TRUE equivalent to your lme9)
+# lme9 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
+#               PTPRIORLO + ADMPOL_PT + (1|OFSTEDRATING) + (1|gor_name/LANAME),
+#             data = england_filtered_clean, na.action = na.exclude, REML = TRUE)
+
+# MuMIn’s Nakagawa & Schielzeth R2 (marginal = fixed only; conditional = fixed + random)
+r2_mumin <- MuMIn::r.squaredGLMM(lme9)
+r2_mumin
+
+# Alternative via performance (should match closely)
+r2_perf <- performance::r2_nakagawa(lme9)
+r2_perf
+```
+
+```{r}
+# Refit your LMM by ML for fair AIC/BIC comparisons across LMMs
+lme9_ml <- update(lme9, REML = FALSE)
+
+# Refit OLS if needed (lm is fine as-is for logLik/AIC)
+england_model7 <- lm(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + OFSTEDRATING + gor_name + PTPRIORLO + ADMPOL_PT, data = england_filtered_clean, na.action = na.exclude)
+
+# Compare AIC/BIC
+AIC(england_model7, lme9_ml)
+BIC(england_model7, lme9_ml)
+
+# You can also compare nested LMMs via LRT (example below in step 4).
+```
+
+```{r}
+# Caterpillar plots by grouping factor
+sjPlot::plot_model(lme9, type = "re", sort.est = TRUE)
+# You can specify groups:
+sjPlot::plot_model(lme9, type = "re", sort.est = TRUE, group.terms = "OFSTEDRATING")
+sjPlot::plot_model(lme9, type = "re", sort.est = TRUE, group.terms = "gor_name")
+sjPlot::plot_model(lme9, type = "re", sort.est = TRUE, group.terms = "LANAME:gor_name")
+```
+
+
+
+```{r}
+library(lattice)
+re_list <- ranef(lme9, condVar = TRUE)  # includes conditional variances
+# Dotplots for each grouping level
+dotplot(re_list, scales = list(y = list(cex = 0.6)))
+```
+
+```{r}
+# Tidy random effects (BLUPs) with SEs
+re_tidy <- broom.mixed::tidy(lme9, effects = "ran_vals", conf.int = TRUE)
+head(re_tidy)
+# Example: filter LA-level intercepts
+re_la <- subset(re_tidy, grepl("^LANAME:gor_name", group))
+
+```
+
+```{r}
+# Start from ML-fitted baseline (random intercepts)
+base_ml <- lme9_ml
+
+# Add random slope for PTPRIORLO by LA within region
+# Note: nesting as in your model: (1 + PTPRIORLO | gor_name:LANAME)
+rslope_la_ml <- lmer(
+  log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
+    PTPRIORLO + ADMPOL_PT +
+    (1 | OFSTEDRATING) + (1 | gor_name/LANAME) +
+    (0 + PTPRIORLO | gor_name:LANAME),  # use 0+ to avoid correlation if convergence issues
+  data = england_filtered_clean, na.action = na.exclude, REML = FALSE
+)
+
+# Alternatively try a correlated slope:
+# (1 + PTPRIORLO | gor_name:LANAME)
+
+# LRT for nested models (base vs slope model)
+anova(base_ml, rslope_la_ml)
+
+# Try random slope by OFSTEDRATING instead:
+rslope_ofsted_ml <- lmer(
+  log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
+    PTPRIORLO + ADMPOL_PT +
+    (1 + PTPRIORLO | OFSTEDRATING) + (1 | gor_name/LANAME),
+  data = england_filtered_clean, na.action = na.exclude, REML = FALSE
+)
+anova(base_ml, rslope_ofsted_ml)
+```
+```{r}
+lme_interact_ofsted <- lmer(
+  log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
+    PTPRIORLO * OFSTEDRATING + ADMPOL_PT +
+    (1 | OFSTEDRATING) + (1 | gor_name/LANAME),
+  data = england_filtered_clean, na.action = na.exclude, REML = FALSE
+)
+
+summary(lme_interact_ofsted)
+anova(lme9_ml, lme_interact_ofsted)  # test added interaction (ML)
+```
 
