@@ -927,6 +927,105 @@ $$\texttt{lmer(P8MEA \sim PTFSM6CLA1A + (1 \mid gor\_name/LANAME) + (1 \mid OFST
 ~kitchen sink model!!
 
 ```{r}
+
+
 lme8 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME) + (1|OFSTEDRATING), data = england_filtered_clean)
 summary(lme7)
 ```
+
+
+```{r}
+england_filtered_clean <- england_filtered_clean %>%
+  filter(PTFSM6CLA1A > 0, PERCTOT > 0, PNUMEAL > 0)
+
+lme9 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1|OFSTEDRATING) + (1|gor_name/LANAME), data = england_filtered_clean, na.action = na.exclude)
+summary(lme9)
+
+# Convert fitted values back to original scale
+england_filtered_clean <- england_filtered_clean %>%
+  mutate(
+    fitted_lme9 = exp(lme9),
+    highlight = LANAME == "Brighton and Hove",
+    label = if_else(highlight, SCHNAME.x, NA_character_)
+  )
+```
+
+```{r}
+#| message: false
+#| warning: false
+library(tidyverse)
+library(ggrepel)
+
+#Get fitted values with NA for excluded rows
+fitted_vals <- fitted(lme9)
+
+# Add fitted values to the dataframe
+england_filtered_clean$lme9 <- fitted_vals
+
+
+# Convert fitted values back to original scale
+# Convert fitted values back to original scale
+england_filtered_clean <- england_filtered_clean %>%
+  mutate(
+    fitted_lme9 = exp(lme9),
+    highlight = LANAME == "Brighton and Hove",
+    label = if_else(highlight, SCHNAME.x, NA_character_)
+  )
+
+# Scatter plot with layered points and full-model fit line
+ggplot(england_filtered_clean, aes(x = fitted_lme9, y = ATT8SCR)) +
+  # All schools in grey
+  geom_point(color = "grey80", alpha = 0.5, size = 2) +
+
+  # Brighton and Hove schools in orange
+  geom_point(data = filter(england_filtered_clean, highlight),
+             aes(x = fitted_lme9, y = ATT8SCR),
+             color = "darkorange", size = 2.5) +
+
+  # Labels for Brighton and Hove schools
+  geom_text_repel(data = filter(england_filtered_clean, highlight),
+                  aes(label = label),
+                  size = 3, max.overlaps = 20) +
+
+  # Line of best fit for all schools
+  geom_smooth(method = "lm", se = TRUE, color = "black") +
+  
+# Mirror x and y axes
+  coord_equal() +
+
+
+  theme_minimal() +
+  labs(
+    title = "Observed vs Fitted ATT8SCR (Original Scale)",
+    x = "Modelled Attainment 8, 2022-23",
+    y = "Observed Attainment 8, 2022-23"
+  )
+```
+
+```{r}
+# 1. Ensure the 'lmerTest' package (or 'lme4') is loaded
+#install.packages("lmerTest")
+library(lmerTest) 
+# Note: Since you already ran lmer, the necessary functions are likely available.
+
+# 1. Extract the fitted values
+fitted_lme9 <- fitted(lme9)
+
+# 2. Extract the residuals
+resid_lme9 <- resid(lme9)
+
+# 3. Calculate the observed values used in the model
+# Observed = Fitted + Residuals
+observed_log_ATT8SCR_aligned <- fitted_lme9 + resid_lme9
+
+# 4. Compute the squared correlation (Pseudo R-squared)
+# Use 'pairwise.complete.obs' to handle NA values correctly
+pseudo_R_squared <- cor(observed_log_ATT8SCR_aligned, 
+                        fitted_lme9, 
+                        use = "pairwise.complete.obs")^2
+
+# 5. Display the result
+print(paste("Pseudo R-squared (Conditional):", round(pseudo_R_squared, 4)))
+```
+
+
