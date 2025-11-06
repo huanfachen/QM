@@ -286,6 +286,69 @@
       "Maintainer": "Martin Maechler <mmaechler+Matrix@gmail.com>",
       "Repository": "CRAN"
     },
+    "MuMIn": {
+      "Package": "MuMIn",
+      "Version": "1.48.11",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Multi-Model Inference",
+      "Date": "2025-03-31",
+      "Encoding": "UTF-8",
+      "Authors@R": "c( person(\"Kamil\", \"Bartoń\", role=c(\"aut\", \"cre\"),  email=\"kamil.barton@go2.pl\", comment = c(ORCID = \"0000-0001-5562-8274\")) )",
+      "Author": "Kamil Bartoń [aut, cre] (<https://orcid.org/0000-0001-5562-8274>)",
+      "Maintainer": "Kamil Bartoń <kamil.barton@go2.pl>",
+      "Description": "Tools for model selection and model averaging with support for a  wide range of statistical models. Automated model selection through subsets of the maximum model, with optional constraints for model  inclusion. Averaging of model parameters and predictions based on  model weights derived from information criteria (AICc and alike)  or custom model weighting schemes.",
+      "License": "GPL-2",
+      "Depends": [
+        "R (>= 4.4.0)"
+      ],
+      "Imports": [
+        "graphics",
+        "methods",
+        "Matrix",
+        "stats",
+        "stats4",
+        "nlme",
+        "insight"
+      ],
+      "Suggests": [
+        "lme4 (>= 1.1.0)",
+        "mgcv (>= 1.7.5)",
+        "gamm4",
+        "MASS",
+        "nnet",
+        "survival (>= 3.1.0)",
+        "geepack",
+        "performance"
+      ],
+      "Enhances": [
+        "aod",
+        "betareg",
+        "caper",
+        "coxme (>= 2.2.4)",
+        "cplm",
+        "gee",
+        "glmmML",
+        "logistf",
+        "MCMCglmm",
+        "ordinal",
+        "pscl",
+        "spatialreg",
+        "splm",
+        "unmarked (>= 1.4.0)",
+        "geeM (>= 0.7.5)",
+        "gamlss",
+        "RMark",
+        "glmmTMB",
+        "brglm",
+        "quantreg",
+        "maxlike"
+      ],
+      "LazyData": "yes",
+      "ByteCompile": "yes",
+      "NeedsCompilation": "no",
+      "Repository": "CRAN"
+    },
     "R6": {
       "Package": "R6",
       "Version": "2.6.1",
@@ -4623,6 +4686,41 @@
       "NeedsCompilation": "yes",
       "Author": "Douglas Bates [aut] (<https://orcid.org/0000-0001-8316-9503>), Martin Maechler [aut] (<https://orcid.org/0000-0002-8685-9910>), Ben Bolker [aut, cre] (<https://orcid.org/0000-0002-2127-0443>), Steven Walker [aut] (<https://orcid.org/0000-0002-4394-9078>), Rune Haubo Bojesen Christensen [ctb] (<https://orcid.org/0000-0002-4494-3399>), Henrik Singmann [ctb] (<https://orcid.org/0000-0002-4842-3657>), Bin Dai [ctb], Fabian Scheipl [ctb] (<https://orcid.org/0000-0001-8172-3603>), Gabor Grothendieck [ctb], Peter Green [ctb] (<https://orcid.org/0000-0002-0238-9852>), John Fox [ctb], Alexander Bauer [ctb], Pavel N. Krivitsky [ctb, cph] (<https://orcid.org/0000-0002-9101-3362>, shared copyright on simulate.formula), Emi Tanaka [ctb] (<https://orcid.org/0000-0002-1455-259X>), Mikael Jagan [ctb] (<https://orcid.org/0000-0002-3542-2938>), Ross D. Boylan [ctb] (<https://orcid.org/0009-0003-4123-8090>)",
       "Maintainer": "Ben Bolker <bbolker+lme4@gmail.com>",
+      "Repository": "CRAN"
+    },
+    "lmerTest": {
+      "Package": "lmerTest",
+      "Version": "3.1-3",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Tests in Linear Mixed Effects Models",
+      "Authors@R": "c(person(\"Alexandra\", \"Kuznetsova\", role = c(\"aut\")), person(\"Per\", \"Bruun Brockhoff\", role = c(\"aut\", \"ths\"), email = \"perbb@dtu.dk\"), person(\"Rune\", \"Haubo Bojesen Christensen\", role =  c(\"aut\", \"cre\"), email = \"Rune.Haubo@gmail.com\"), person(\"Sofie\", \"Pødenphant Jensen\", role=c(\"ctb\"), email=\"sofp@dtu.dk\"))",
+      "Depends": [
+        "R (>= 3.2.5)",
+        "lme4 (>= 1.1-10)",
+        "stats",
+        "methods"
+      ],
+      "Imports": [
+        "numDeriv",
+        "MASS",
+        "ggplot2"
+      ],
+      "Suggests": [
+        "pbkrtest (>= 0.4-3)",
+        "tools"
+      ],
+      "Description": "Provides p-values in type I, II or III anova and summary tables for lmer model fits (cf. lme4) via Satterthwaite's degrees of freedom method. A Kenward-Roger method is also available via the pbkrtest package. Model selection methods include step, drop1 and anova-like tables for random effects (ranova). Methods for Least-Square means (LS-means) and tests of linear contrasts of fixed effects are also available.",
+      "License": "GPL (>= 2)",
+      "Encoding": "UTF-8",
+      "LazyData": "true",
+      "URL": "https://github.com/runehaubo/lmerTestR",
+      "BugReports": "https://github.com/runehaubo/lmerTestR/issues",
+      "RoxygenNote": "7.1.1",
+      "Collate": "'anova_contrasts.R' 'contest.R' 'contrast_utils.R' 'data_documentation.R' 'drop1.R' 'estimability.R' 'legacy.R' 'lmer.R' 'lmerTest.R' 'lmer_anova.R' 'lmer_summary.R' 'ls_means.R' 'ranova.R' 'step.R' 'terms_utils.R' 'utils.R'",
+      "NeedsCompilation": "no",
+      "Author": "Alexandra Kuznetsova [aut], Per Bruun Brockhoff [aut, ths], Rune Haubo Bojesen Christensen [aut, cre], Sofie Pødenphant Jensen [ctb]",
+      "Maintainer": "Rune Haubo Bojesen Christensen <Rune.Haubo@gmail.com>",
       "Repository": "CRAN"
     },
     "lpSolve": {

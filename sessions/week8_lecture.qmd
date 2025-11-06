@@ -697,18 +697,18 @@ print(density_p8mea)
 
 `y ~ fixed_effect_x1 + (random_effect_slope_term_x1 | random_effect_group_g1)`
 
-`y ~ fixed_effect_x1 + fixed_effect_x2 + fixed_effect_xn + (random_effect_slope_term_x1 | random_effect_group_g1) + (random_effect_slope_term_x2 | random_effect_group_g2) (random_effect_slope_term_xn | random_effect_group_gn)`
+`y ~ fixed_effect_x1 + fixed_effect_x2 + fixed_effect_xn + (random_effect_slope_term_x1 | random_effect_group_g1) + (random_effect_slope_term_x2 | random_effect_group_g2) + (random_effect_slope_term_xn | random_effect_group_gn)`
 
 
 ## The Null Model - Syntax
 -   Using Paul Johnson's excellent guide for syntax, the null model in R follows this format: `y ~ 1 + (1 | g)`
 -   Here the fixed effects appear outside of the brackets. The first `1` outside of the brackets just tells the model to use a fixed global intercept
 -   The random effects are inside the brackets `(...|...)`
-    -    To the *left* of the pipe symbol `|` we have a `1` as all slopes are the same in the null model
+    -    To the *left* of the pipe symbol `|` we have a `1` as all slopes are fixed in the null model
     -    To the *right* of the vertical bar or pipe symbol `|` we have the grouping variable `g`. 
 -   The full model in R would like like: 
 
-$$\text{lme_model1} <- \text{lmer}(\text{P8MEA} \sim 1 + (1|\text{OFSTEDRATING}), \text{data} = \dots)$$
+`lme_model1 <- lmer(P8MEA ~ 1 + (1 | OFSTEDRATING), data = ...)`
 
 <https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/>
 
@@ -722,15 +722,23 @@ $$\text{lme_model1} <- \text{lmer}(\text{P8MEA} \sim 1 + (1|\text{OFSTEDRATING})
 library(lme4)
 library(performance)
 
-lm1 <- lm(P8MEA ~ PTFSM6CLA1A + OFSTEDRATING, data = england_filtered_clean)
-summary(lm1)
+#lm1 <- lm(P8MEA ~ PTFSM6CLA1A + OFSTEDRATING, data = england_filtered_clean)
+#summary(lm1)
 
 lme1 <- lmer(P8MEA ~ 1 + (1|OFSTEDRATING), data = england_filtered_clean)
 summary(lme1)
 
-icc(lme1, by_group = T)
-
 ```
+
+## The ICC
+
+```{r}
+#| echo: true
+library(performance)
+icc(lme1, by_group = T)
+```
+
+## NULL Model Visualisation
 
 ```{r}
 #| message: false
