@@ -7,15 +7,15 @@ title: "Week 5"
 
 ## Introduction
 
-This week, we’ll explore how to *tell if several groups are truly different* and how to *measure the strength and direction of the relationship between two variables*.
+This week, we’ll explore how to *measure the strength and direction of the relationship between two variables* and how to *tell if several groups are truly different*.
 
 ## Learning Objectives
 
 By the end of this week, you will be able to:
 
-1. Understand ANOVA.
-2. Understand correlation between two variables.
-3. Understand the difference of Pearson and Spearman correlation.
+1. Understand covariance and correlation between two variables.
+2. Understand the difference of Pearson and Spearman correlation.
+3. Understand ANOVA.
 
 ## Lecture 
 

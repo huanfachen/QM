@@ -13,3 +13,5 @@ folium
 scikit-learn
 branca
 contextily
+tabulate
+pingouin
