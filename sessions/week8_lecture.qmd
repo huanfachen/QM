@@ -285,10 +285,16 @@ england_model1 <- lm(log(ATT8SCR) ~ log(PTFSM6CLA1A), data = england_filtered_cl
 
 ## Drawbacks of OLS with Interaction
 
--   OLS assumes all observations (schools) are independent of each other, when in reality, they may have characteristics which mean they are not independent - i.e. they are in the same local authority or have similar Ofsted ratings which mean they share some characteristics with each other in terms of governance etc.
+-   OLS assumes all observations (schools) are independent of each other
+    -   In reality, they may have characteristics which mean they are not independent - i.e. Being in the same local authority or having similar Ofsted ratings could mean that effects are ***clustered***.
 -   OLS assumes the effects (parameters) are constant (fixed) across the whole population / dataset
--   OLS assumes the errors are independent
+-   OLS assumes the errors are independent, ***not clustered*** by space, time or some other group
 -   OLS only has one global intercept with group level differences in the data only crudely represented with dummy variables
+
+## Spotting Important Clustering / non-independence
+
+-   It's possible to visualise clusters / sources of non-independence in our model through plotting relationships for different categorical variables
+-   We are likely to have clustering / non-independence if these plots produce different slopes and intercepts
 
 ## Different Slopes and Intercepts - Attainment 8
 
@@ -485,7 +491,9 @@ ggplot(england_filtered_clean, aes(y = P8MEA, x = PTFSM6CLA1A, colour = OFSTEDRA
 ## Different Slopes and Intercepts
 
 -   Solution: can we just partition our data and run different models for different groups?
--   Answer: Well yes, you could, but we couldn't then answer questions about whether variation between individual schools is more important than between groups (e.g. local authorities or Ofsted ratings)
+-   Answer: Well yes, you could, but we couldn't then answer questions about:
+    -   whether variation between individual schools (***within groups***) is more important than ***between groups*** (e.g. local authorities or Ofsted ratings)
+    -   how much variation the groups account for themselves
 
 In order to model these grouping factors more explicitly and understand their general impact, we need a new type of model - a ***linear mixed effects model***
 
@@ -495,31 +503,29 @@ In order to model these grouping factors more explicitly and understand their ge
 -   ***Fixed Effects*** - A Fixed Effect is your traditional explanatory variable (or covariate) whose relationship with the outcome you are primarily interested in estimating for its own sake.
     -   Example: Proportion of disadvantaged students in a school. You want the single, best-estimated coefficient ($\beta$) for this factor.
 -   ***Random Effects*** - A Random Effect is a grouping factor (or nesting factor) whose variability you want to account for, but whose specific individual levels you don't necessarily want to draw conclusions about.
-    -   Example: The different Ofsted ratings (or individual Schools). You're interested in how much the relationship varies across these groups, not the specific effect of 'Longhill School'
+    -   Example: The different Ofsted ratings (or individual Schools). You're interested in how much the relationship varies across these groups, not the specific effect of 'outstanding' or 'Longhill School'
 
 ## Fixed Effects - More Detail
 
--   Fixed effects estimate the mean relationship across all groups. They represent the "fixed" part of the model that applies to every observation.
-    -   You estimate a single $\beta$ coefficient for a fixed effect, which represents the population average effect of that variable.
+-   Fixed effects estimate the mean relationship across all groups. They represent the "fixed" part of the model that applies to *every observation*.
+    -   You estimate a single $\beta$ coefficient for a fixed effect - the population average effect of that variable.
     -   Fixed effects can be either continuous (e.g., % of disadvantaged students in a school) or categorical (region, Ofsted rating).
 -   Depending on how you formulate your model, a fixed effect could be a random effect in a different context.
-
 
 ## Random Effects - More Detail
 
 -   Random effects, (random intercepts and slopes) represent the deviations of each group's effect from the overall fixed-effect average.
     -   When you model a grouping factor (like Ofsted Rating) as a random effect, you are not estimating five separate coefficients (one for each rating).
     -   Instead, you estimate a variance term ($\sigma^2_{\text{group}}$) that quantifies how much the true group effects (intercepts and/or slopes) scatter around the overall mean effect.
-    -   This approach is used when the groups (e.g., the 5 Ofsted categories or the hundreds of individual schools) are considered a random sample from a larger, unobserved population of groups.
+    -   Remember: Higher variance = Higher uncertainty, so higher variance groups have less weight in the model
     -   This allows the model to "borrow strength" across groups to stabilise estimates (the principle of shrinkage).
-    
+
 ## Random Effects vs Dummy Variables
 
 -   Random Effects and Dummy Variables are often exactly the same variable, they are just treated differently in a LME vs OLS model
 -   In an OLS, the Dummy variable gets a specific coefficient value
 -   In a LME, the random effect represents the overall variability that that variable brings to the explanation (i.e. how much variability in attainment is down to schools themselves ***generally***, rather than a particular school ***specifically***)
 -   Where you might have lots of Dummy categories, a random effect might be more suitable
-
 
 ## Linear Mixed Effects Models
 
@@ -536,11 +542,11 @@ In order to model these grouping factors more explicitly and understand their ge
 
 Multilevel Data Structures (Source:[Gelman & Hill (2006)](http://www.stat.columbia.edu/~gelman/arm/)) and <https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/>
 
-## Linear Mixed Effects Models
-
 ```{r}
+#| eval: false
 #| message: false
 #| warning: false
+#| include: false
 library(GGally)
 
 ggpairs(england_filtered_clean, , mapping = aes(color = OFSTEDRATING), columns = c("P8MEA", "PTFSM6CLA1A", "PERCTOT", "OFSTEDRATING"))
@@ -567,6 +573,7 @@ ggpairs(england_filtered_clean, , mapping = aes(color = OFSTEDRATING), columns =
 
 # 1. Load the necessary library for plotting
 library(ggplot2)
+library(lme4)
 
 # --- Ensure OFSTEDRATING is an ordered factor for better plotting ---
 # It appears you have six levels based on the OLS output, so we order them logically.
@@ -579,17 +586,23 @@ england_filtered_clean$OFSTEDRATING <- factor(
 )
 
 
+#Fit the model
+lme1 <- lmer(P8MEA ~ 1 + (1 | OFSTEDRATING), data = england_filtered_clean)
+# Extract the fixed-effect intercept and store in a variable
+global_mean <- fixef(lme1)[1]
+# Check the value
+global_mean
+
+
 ## ## 1. Boxplot Visualization (Level 1 and Level 2 Variance) ## ##
 boxplot_p8mea <- ggplot(england_filtered_clean, aes(x = OFSTEDRATING, y = P8MEA, fill = OFSTEDRATING)) +
   geom_boxplot(alpha = 0.7) +
-  geom_hline(yintercept = mean(england_filtered_clean$P8MEA, na.rm = TRUE),
-             linetype = "dashed", color = "black", linewidth = 1) +
-  labs(
-    title = "P8MEA Distribution Across Ofsted Ratings (The Null Model Structure)",
-    subtitle = "Fixed Grand Mean (Dashed Line) and Random Intercepts (Box Medians)",
-    x = "Ofsted Rating",
-    y = "Progress 8 Score (P8MEA)"
-  ) +
+  geom_hline(yintercept = global_mean, linetype = "dashed", color = "black", linewidth = 1) +
+  geom_hline(yintercept = mean(england_filtered_clean$P8MEA, na.rm = TRUE), linetype = "dotted", color = "#d62728", linewidth = 0.5) +
+  labs(title = "P8MEA Distribution Across Ofsted Ratings (The Null Model Structure)",
+       subtitle = "Fixed Grand Mean (Dashed Line) and Random Intercepts (Box Medians)",
+       x = "Ofsted Rating",
+       y = "Progress 8 Score (P8MEA)") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none")
 
@@ -597,8 +610,185 @@ print(boxplot_p8mea)
 
 
 ```
+-   Most (as box plots hide counts) of the information in the two-level NULL model is contained in this plot!
 
--   All of the information in the two-level NULL model is contained in this plot!
+##  Shrinkage
+
+```{r}
+#| message: false
+#| warning: false
+#| out-width: 70%
+# Packages
+library(lme4)
+library(dplyr)
+library(tibble)
+library(ggplot2)
+library(ggbeeswarm)
+
+# (Re)fit the null model if needed
+lme1 <- lmer(P8MEA ~ 1 + (1 | OFSTEDRATING), data = england_filtered_clean)
+
+# Global mean (fixed intercept)
+global_mean <- fixef(lme1)[1]
+
+# Random effects (BLUPs) per group
+re <- ranef(lme1)$OFSTEDRATING %>%
+  rownames_to_column("OFSTEDRATING") %>%
+  rename(blup = `(Intercept)`)
+
+# Raw means and shrunken means
+means_df <- england_filtered_clean %>%
+  group_by(OFSTEDRATING) %>%
+  summarise(raw_mean = mean(P8MEA), .groups = "drop") %>%
+  left_join(re, by = "OFSTEDRATING") %>%
+  mutate(shrunken_mean = global_mean + blup)
+
+# --- Plot: beeswarm + shrinkage, no group-size dots, no legend ---
+set.seed(123)  # reproducible jitter
+jitter_beeswarm <- ggplot(england_filtered_clean, aes(x = OFSTEDRATING, y = P8MEA)) +
+  # 1) Jittered points coloured by Ofsted rating
+  geom_quasirandom(
+    aes(color = OFSTEDRATING),
+    varwidth = TRUE, width = 0.15,
+    alpha = 0.35, size = 1.1
+  ) +
+  # 2) Global mean (dashed)
+  geom_hline(yintercept = global_mean, linetype = "dashed",
+             color = "black", linewidth = 0.9) +
+  # 3) Shrinkage segments: raw mean -> shrunken mean
+  geom_segment(
+    data = means_df,
+    aes(x = OFSTEDRATING, xend = OFSTEDRATING, y = raw_mean, yend = shrunken_mean),
+    inherit.aes = FALSE, color = "grey35", linewidth = 1
+  ) +
+  # 4) Shrunken (model) mean — fixed-size semi-transparent red
+  geom_point(
+    data = means_df,
+    aes(x = OFSTEDRATING, y = shrunken_mean),
+    inherit.aes = FALSE,
+    shape = 21, fill = "#d62728", color = "white", stroke = 0.4,
+    size = 3, alpha = 0.55
+  ) +
+  # 5) Raw (sample) mean — solid blue, drawn last so it's visible
+  stat_summary(
+    fun = mean, geom = "point",
+    size = 3.2, shape = 21, fill = "#1f77b4", color = "white", stroke = 0.4,
+    alpha = 0.9
+  ) +
+  scale_color_brewer(palette = "Set2", name = "Ofsted rating") +
+  labs(
+    title = "P8MEA by Ofsted Rating — Beeswarm with shrinkage",
+    subtitle = "Jittered points coloured by Ofsted rating. Blue = raw group mean; \nsemi-transparent red = model (shrunken) mean.\nDashed line = global mean.",
+    x = "Ofsted Rating",
+    y = "Progress 8 Score (P8MEA)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "none"  # NEW: remove legend
+  )
+
+print(jitter_beeswarm)
+
+```
+-   Shrinkage accounts for the fact that some groups have few observations / high variance / unreliable means
+-   The means for these groups with few observations are 'shrunk' towards the overall mean
+
+## Shrinkage
+
+```{r}
+#| message: false
+#| warning: false
+#| out-width: 70%
+# Install (if needed) and load packages
+# install.packages(c("lme4", "ggplot2", "dplyr", "tibble", "purrr"))
+library(lme4)
+library(ggplot2)
+library(dplyr)
+library(tibble)
+library(purrr)
+
+set.seed(42)
+
+# --- 1) Simulate hierarchical data with unbalanced group sizes ---
+# 5 groups with very different sizes (to make shrinkage obvious)
+group_sizes <- c(G1 = 5, G2 = 10, G3 = 30, G4 = 200, G5 = 400)
+
+# "True" parameters (picked to resemble your earlier model)
+mu    <- -0.26          # global mean (fixed intercept)
+tau   <- 0.56           # SD of random intercepts (between-group)
+sigma <- 0.41           # residual SD (within-group)
+
+# Draw one random intercept per group
+u <- rnorm(length(group_sizes), mean = 0, sd = tau)
+names(u) <- names(group_sizes)
+
+# Build the dataset
+sim_dat <- purrr::map2_df(names(group_sizes), group_sizes, ~{
+  tibble(
+    group = .x,
+    u_g   = u[.x],
+    y     = mu + u_g + rnorm(.y, 0, sigma)
+  )
+})
+
+# --- 2) Fit a random-intercept model and extract BLUPs ---
+m1 <- lmer(y ~ 1 + (1 | group), data = sim_dat, REML = TRUE)
+
+# Fixed-effect (global mean)
+global_mean_hat <- fixef(m1)[1]
+
+# Random effects (BLUPs for group intercepts)
+re <- ranef(m1)$group %>%
+  rownames_to_column("group") %>%
+  rename(blup = `(Intercept)`)
+
+# Raw group means and sample sizes
+group_stats <- sim_dat %>%
+  group_by(group) %>%
+  summarise(n = n(), raw_mean = mean(y), .groups = "drop")
+
+# Combine: shrunken mean = global mean + BLUP
+plot_df <- group_stats %>%
+  left_join(re, by = "group") %>%
+  mutate(shrunken_mean = global_mean_hat + blup,
+         shrink_amount = raw_mean - shrunken_mean) %>%
+  arrange(group)
+
+# --- 3) ICC (share of variance between groups) ---
+vc <- as.data.frame(VarCorr(m1))
+tau2   <- vc$vcov[vc$grp == "group" & vc$var1 == "(Intercept)"]  # between-group variance
+sigma2 <- vc$vcov[vc$grp == "Residual"]                          # within-group variance
+ICC <- tau2 / (tau2 + sigma2)
+icc_txt <- sprintf("ICC = %.2f  (%.1f%% of variance between groups)", ICC, 100*ICC)
+
+# --- 4) Visualize shrinkage (groups on x-axis) ---
+p <- ggplot(plot_df, aes(x = group)) +
+  # line from raw mean to shrunken mean (vertical dumbbell per group)
+  geom_segment(aes(y = raw_mean, yend = shrunken_mean, xend = group),
+               color = "grey60", linewidth = 1) +
+  # points: raw (blue) vs shrunken (red) with alpha to show overlaps
+  geom_point(aes(y = raw_mean,  size = n), color = "#1f77b4", alpha = 0.75) +
+  geom_point(aes(y = shrunken_mean, size = n), color = "#d62728", alpha = 0.60) +
+  # global mean (dashed horizontal line)
+  geom_hline(yintercept = global_mean_hat, linetype = "dashed", color = "black") +
+  scale_size_continuous(name = "Group size (n)") +
+  labs(
+    title = "Shrinkage in a Random-Intercept Model",
+    subtitle = paste0(
+      "Smaller groups shrink more towards the global mean (dashed line)."),
+    x = "Group",
+    y = "Group mean"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
+
+print(p)
+```
+
+-   Shrinkage is another reason why LME models are better than OLS models where clustering exists in the data
+-   Small groups have less of an influence as their averages get pulled towards the mean - less uncertainty and avoids over-fitting to small groups
+
 
 ## The Null Model - a 2 Level example
 
@@ -606,7 +796,7 @@ $$Y_{ij} = \gamma_{00} + u_{0j} + \epsilon_{ij}$$ The total variability in outco
 
 -   **Fixed Effect**: $\gamma_{00}$ (The overall population average - **grand/global mean**).
 -   **Random Effect - Level 1**: $\epsilon_{ij}$ - **Within-Group Variance** - the height of each individual box and the length of its whiskers. Taller boxes and longer whiskers indicate more variability among schools within that single rating category.
--   **Random Effect - Level 2**: $u_{0j}$ - **Between-Group Variance** 
+-   **Random Effect - Level 2**: $u_{0j}$ - **Between-Group Variance**
 
 ## Level 1 - Within-Group Variance
 
@@ -621,14 +811,14 @@ $$
 
 ## Level 1 - Within-Group Variance
 
-$$\epsilon_{ij} \sim N(0, \sigma^2_{\epsilon})$$ 
+$$\epsilon_{ij} \sim N(0, \sigma^2_{\epsilon})$$
 
 |  |  |
-|----|----|
+|------------------------------------|------------------------------------|
 | **Notation** | **Meaning** |
-| $\epsilon_{ij}$ | The **Level 1 Residual Error** (or "within-group error") for the $i$-th school in the $j$-th Ofsted rating. | 
+| $\epsilon_{ij}$ | The **Level 1 Residual Error** (or "within-group error") for the $i$-th school in the $j$-th Ofsted rating. |
 | $\sim$ | "Is distributed as" or "Follows the distribution." |
-| $N(\dots)$ | The ***N***ormal (Gaussian) Distribution. 
+| $N(\dots)$ | The ***N***ormal (Gaussian) Distribution. |
 | $0$ | The **Mean** of the distribution = 0. |
 | $\sigma^2_{\epsilon}$ | The **Within-Group Variance** of the distribution. |
 
@@ -647,17 +837,10 @@ $$
 
 1.  **Between-Group Variance** ($\sigma^2_{\text{Between}}$ - or more generally $\sigma^2_{u_{0}}$): The variability in average P8MEA that exists ***between*** the different Ofsted ratings.
 2.  **Within-Group (Residual) Variance** ($\sigma^2_{\text{Within}}$ - or more generally $\sigma^2_{\epsilon}$): The variability in P8MEA that exists between schools ***within*** each rating (i.e., the school-level differences).
+
 -   Total Variance is simply the sum of these two
 
-$$\sigma^2_{\text{Total}} = \sigma^2_{\text{Between}} + \sigma^2_{\text{Within}}$$
-$$\sigma^2_{\text{Total}} = \sigma^2_{u_{0}} + \sigma^2_{\epsilon}$$
-
-## The Intraclass Correlation Coefficient (ICC)
-
-The ICC tells you the proportion of the total variability in the outcome that is accounted for by the grouping structure.
-
--   It answers the question in our case: "How much of the total difference in Progress 8 is due to the school's Ofsted rating?"
--   It can also be interpreted as the expected correlation between any two randomly chosen schools within the same Ofsted rating.
+$$\sigma^2_{\text{Total}} = \sigma^2_{\text{Between}} + \sigma^2_{\text{Within}}$$ $$\sigma^2_{\text{Total}} = \sigma^2_{u_{0}} + \sigma^2_{\epsilon}$$
 
 ## The Intraclass Correlation Coefficient (ICC)
 
@@ -667,7 +850,7 @@ $$\text{ICC} = \frac{\text{Between-Group Variance}}{\text{Total Variance}} = \fr
 -   The higher the ICC (closer to 1), the more variance is due to differences between groups (i.e. differences between the Ofsted rating of schools) than within groups (i.e. between schools within Ofsted rating bands)
 -   **A high ICC is a strong indication that a multilevel model is a suitable modelling strategy to pursue to try and explain these group-level differences**
 
-## The ICC
+## Visualising The ICC
 
 ```{r}
 #| message: false
@@ -693,24 +876,16 @@ print(density_p8mea)
 -   High ICC = distinct, non-overlapping humps
 -   Low ICC = density plots all overlapping on-top of each other
 
-## Linear Mixed Effects Model - General Syntax
+## The Null Model - Fixed Global Intercept & Fixed Random Effect Slopes
 
-`y ~ fixed_effect_x1 + (random_effect_slope_term_x1 | random_effect_group_g1)`
-
-`y ~ fixed_effect_x1 + fixed_effect_x2 + fixed_effect_xn + (random_effect_slope_term_x1 | random_effect_group_g1) + (random_effect_slope_term_x2 | random_effect_group_g2) + (random_effect_slope_term_xn | random_effect_group_gn)`
-
-
-## The Null Model - Syntax
--   Using Paul Johnson's excellent guide for syntax, the null model in R follows this format: `y ~ 1 + (1 | g)`
--   Here the fixed effects appear outside of the brackets. The first `1` outside of the brackets just tells the model to use a fixed global intercept
--   The random effects are inside the brackets `(...|...)`
-    -    To the *left* of the pipe symbol `|` we have a `1` as all slopes are fixed in the null model
-    -    To the *right* of the vertical bar or pipe symbol `|` we have the grouping variable `g`. 
--   The full model in R would like like: 
-
-`lme_model1 <- lmer(P8MEA ~ 1 + (1 | OFSTEDRATING), data = ...)`
-
-<https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/>
+-   Using [Paul Johnson's](https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/) excellent guide for syntax, the null model in R follows this format:
+`y ~ 1 + (1 | g)`
+-   **Fixed effects outside of the brackets**. The first `1` just tells the model to use a fixed global intercept
+-   **Random Effects are inside the brackets** `(...|...)`
+    -   To the *left* of the pipe symbol `|` we have a `1` as all slopes are fixed
+    -   To the *right* of the vertical bar or pipe symbol `|` we have the grouping variable `g`.
+-   The full model in R would like like:
+`lme_model1 <- lmer(P8MEA ~ 1 + (1|OFSTEDRATING), data = ...)`
 
 ## Running The Null Model
 
@@ -729,14 +904,22 @@ lme1 <- lmer(P8MEA ~ 1 + (1|OFSTEDRATING), data = england_filtered_clean)
 summary(lme1)
 
 ```
+-   Global Average Progress 8 is -0.26
+-   Progress 8 varies by 0.31 points on average ***between*** Ofsted categories
+-   Variation between schools ***within*** categories is smaller: 0.17 points
 
-## The ICC
+## The NULL model ICC
 
 ```{r}
 #| echo: true
 library(performance)
 icc(lme1, by_group = T)
 ```
+
+-   ICC of 0.647 means around 65% of the total variation in Progress 8 scores is explained by differences between OFSTED rating groups, 
+-   The remaining 35% is due to variation within those groups (i.e. between individual schools)
+-   ICC of 65% is very high - Schools in the same OFSTED category tend to have very similar Progress 8 scores
+-   High ICC means clustering is important. Ignoring it (e.g., using OLS) would underestimate uncertainty - justifies LME
 
 ## NULL Model Visualisation
 
@@ -766,13 +949,21 @@ ggplot(ranef_df, aes(x = OFSTEDRATING, y = `(Intercept)`)) +
   theme_minimal()
 ```
 
+## Model with a Fixed Effect Predictor
+-   `y ~ x + (1 | g)`
+-   In this model, each group in the Random Effect part of the model has it's own intercept and fixed slope still - `(1 | g)`
+-   Adding a variable into the Fixed Effect part of the model shows how `x` influences `y` across all groups
+-   The Null Model asks: "How much do groups differ, ignoring everything else?"
+-   This model asks: "How does `x` affect `y`, while still accounting for group differences?"
 
+## Model with a Fixed Effect Predictor
 
 ```{r}
 lme2 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|OFSTEDRATING), data = england_filtered_clean)
 summary(lme2)
 ```
 
+## Model with a Fixed Effect Predictor
 
 ```{r}
 library(lme4)
@@ -810,11 +1001,14 @@ ggplot(pred_df, aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING)) +
   theme_minimal()
 ```
 
+## Random Intercept and Random Slope Model
+
 ```{r}
 lme3 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A|OFSTEDRATING), data = england_filtered_clean)
 summary(lme3)
 ```
 
+## Random Intercept and Random Slope Model
 
 ```{r}
 library(lme4)
@@ -871,6 +1065,7 @@ ggplot(pred_df_lme3, aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING)) +
   theme_minimal()
 ```
 
+## Random Intercept and Random Slope Model
 
 ```{r}
 ## 1. Fit the New Model with Uncorrelated Random Slopes and Intercepts
@@ -878,6 +1073,7 @@ lme4 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A || OFSTEDRATING), data = england
 summary(lme4)
 ```
 
+## Random Intercept and Random Slope Model
 
 ```{r}
 library(lme4)
@@ -931,6 +1127,7 @@ ggplot(pred_df_lme4, aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING)) +
   theme_minimal()
 ```
 
+## Nested Multi-level effects
 
 ```{r}
 lme5 <- lmer(P8MEA ~ 1 + (1|gor_name/LANAME), data = england_filtered_clean)
@@ -938,26 +1135,29 @@ summary(lme5)
 
 ```
 
+## Nested Multi-level effects
 
 ```{r}
 lme6 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME), data = england_filtered_clean)
 summary(lme6)
 ```
 
+
+
 ```{r}
 lme7 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME) + (1|OFSTEDRATING), data = england_filtered_clean)
 summary(lme7)
 ```
 
+$$\texttt{lmer(P8MEA ~ PTFSM6CLA1A + (1 | gor_name/LANAME) + (1 | OFSTEDRATING), data = england\_filtered\_clean)}$$ 
 
-$$\texttt{lmer(P8MEA ~ PTFSM6CLA1A + (1 | gor_name/LANAME) + (1 | OFSTEDRATING), data = england\_filtered\_clean)}$$
-#kitchen sink model!!
+## kitchen sink model!!
 
 ```{r}
-
-
+#| eval: false
+#| include: false
 lme8 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME) + (1|OFSTEDRATING), data = england_filtered_clean)
-summary(lme7)
+summary(lme8)
 ```
 
 ```{r}
@@ -1027,7 +1227,7 @@ eng_clean_log <- subset(eng_clean_log,
 
 
 lme9 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1 | OFSTEDRATING) + (1 | gor_name/LANAME), data = eng_clean_log, na.action = na.exclude, REML = TRUE)
-summary(lme9)
+#summary(lme9)
 
 mm <- model.matrix(~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT, data = eng_clean_log)
 
@@ -1039,7 +1239,7 @@ table(eng_clean_log$gor_name)
 with(eng_clean_log, table(gor_name, LANAME))[1:5, 1:5]  # spot check
 ```
 
-
+## kitchen sink model!!
 
 ```{r}
 england_filtered_clean <- england_filtered_clean %>%
@@ -1056,6 +1256,8 @@ summary(lme9)
 #    label = if_else(highlight, SCHNAME.x, NA_character_)
 #  )
 ```
+
+## kitchen sink model!!
 
 ```{r}
 #| message: false
@@ -1109,6 +1311,8 @@ ggplot(england_filtered_clean, aes(x = fitted_lme9, y = ATT8SCR)) +
   )
 ```
 
+## Compare with OLS
+
 ```{r}
 # 1. Ensure the 'lmerTest' package (or 'lme4') is loaded
 #install.packages("lmerTest")
@@ -1149,6 +1353,7 @@ r2_mumin
 r2_perf <- performance::r2_nakagawa(lme9)
 r2_perf
 ```
+## Compare with OLS
 
 ```{r}
 # Refit your LMM by ML for fair AIC/BIC comparisons across LMMs
@@ -1172,8 +1377,6 @@ sjPlot::plot_model(lme9, type = "re", sort.est = TRUE, group.terms = "OFSTEDRATI
 sjPlot::plot_model(lme9, type = "re", sort.est = TRUE, group.terms = "gor_name")
 sjPlot::plot_model(lme9, type = "re", sort.est = TRUE, group.terms = "LANAME:gor_name")
 ```
-
-
 
 ```{r}
 library(lattice)
@@ -1220,6 +1423,7 @@ rslope_ofsted_ml <- lmer(
 )
 anova(base_ml, rslope_ofsted_ml)
 ```
+
 ```{r}
 lme_interact_ofsted <- lmer(
   log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
@@ -1231,4 +1435,3 @@ lme_interact_ofsted <- lmer(
 summary(lme_interact_ofsted)
 anova(lme9_ml, lme_interact_ofsted)  # test added interaction (ML)
 ```
-
