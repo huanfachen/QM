@@ -880,10 +880,10 @@ print(density_p8mea)
 
 -   Using [Paul Johnson's](https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/) excellent guide for syntax, the null model in R follows this format:
 `y ~ 1 + (1 | g)`
--   **Fixed effects outside of the brackets**. The first `1` just tells the model to use a fixed global intercept
+-   **Fixed effects outside of the brackets**. The first `1` just tells the model to use a fixed global intercept (global average `y`)
 -   **Random Effects are inside the brackets** `(...|...)`
-    -   To the *left* of the pipe symbol `|` we have a `1` as all slopes are fixed
-    -   To the *right* of the vertical bar or pipe symbol `|` we have the grouping variable `g`.
+    -   To the *left* of the pipe symbol `|` we have a `1` as all slopes are fixed as group `g` average of `y`
+    -   To the *right* of the vertical bar or pipe symbol `|` we have the grouping variable `g` itself.
 -   The full model in R would like like:
 `lme_model1 <- lmer(P8MEA ~ 1 + (1|OFSTEDRATING), data = ...)`
 
@@ -893,7 +893,7 @@ print(density_p8mea)
 #| message: false
 #| warning: false
 #| align: center
-#| out-width: 80%
+#| out-width: 70%
 library(lme4)
 library(performance)
 
@@ -904,9 +904,9 @@ lme1 <- lmer(P8MEA ~ 1 + (1|OFSTEDRATING), data = england_filtered_clean)
 summary(lme1)
 
 ```
--   Global Average Progress 8 is -0.26
--   Progress 8 varies by 0.31 points on average ***between*** Ofsted categories
--   Variation between schools ***within*** categories is smaller: 0.17 points
+-   Fixed Effect: Global Average `y` (Progress 8) is -0.26
+-   Random Effect: Progress 8 varies by 0.31 points on average ***between*** Ofsted categories
+-   Residual variation between schools ***within*** categories is smaller: 0.17 points
 
 ## The NULL model ICC
 
@@ -916,10 +916,10 @@ library(performance)
 icc(lme1, by_group = T)
 ```
 
--   ICC of 0.647 means around 65% of the total variation in Progress 8 scores is explained by differences between OFSTED rating groups, 
--   The remaining 35% is due to variation within those groups (i.e. between individual schools)
+-   ICC of 0.647 means around 65% of the total variation in Progress 8 scores is explained by differences ***between*** OFSTED rating groups 
+-   The remaining 35% is due to variation ***within*** those groups (i.e. between individual schools)
 -   ICC of 65% is very high - Schools in the same OFSTED category tend to have very similar Progress 8 scores
--   High ICC means clustering is important. Ignoring it (e.g., using OLS) would underestimate uncertainty - justifies LME
+-   High ICC means clustering is important. Ignoring it (e.g., using OLS) would underestimate uncertainty - justifies using a LME model
 
 ## NULL Model Visualisation
 
@@ -959,46 +959,286 @@ ggplot(ranef_df, aes(x = OFSTEDRATING, y = `(Intercept)`)) +
 ## Model with a Fixed Effect Predictor
 
 ```{r}
+library(lme4)
+library(ggplot2)
+library(dplyr)
+library(tibble)
+
+# Fit the model
+lme2 <- lmer(P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING), data = england_filtered_clean)
+
+# Fixed effects
+fixed_intercept <- fixef(lme2)[1]
+slope <- fixef(lme2)[2]
+
+# Random intercepts (BLUPs) per OFSTED group
+ranef_df <- ranef(lme2)$OFSTEDRATING %>%
+  as.data.frame() %>%
+  rownames_to_column("OFSTEDRATING") %>%
+  rename(blup = `(Intercept)`)
+
+# Prediction grid across the observed range of PTFSM6CLA1A
+pop_range <- seq(
+  min(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  max(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  length.out = 100
+)
+
+# Lines for each OFSTED group: same slope, group-specific intercept
+pred_df <- do.call(rbind, lapply(seq_len(nrow(ranef_df)), function(i) {
+  intercept_i <- fixed_intercept + ranef_df$blup[i]
+  data.frame(
+    PTFSM6CLA1A = pop_range,
+    P8MEA = intercept_i + slope * pop_range,
+    OFSTEDRATING = ranef_df$OFSTEDRATING[i],
+    stringsAsFactors = FALSE
+  )
+}))
+
+# Optional: overall (fixed-effects only) line
+overall_df <- data.frame(
+  PTFSM6CLA1A = pop_range,
+  P8MEA = fixed_intercept + slope * pop_range
+)
+
+# Plot: raw points overlaid + group prediction lines
+ggplot() +
+  # Raw points, coloured by OFSTED group
+  geom_point(
+    data = england_filtered_clean,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    alpha = 0.35, size = 1.2, na.rm = TRUE
+  ) +
+  # Group-specific prediction lines (random intercepts)
+  geom_line(
+    data = pred_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    linewidth = 1.1, alpha = 0.9
+  ) +
+  # Optional: overall fixed-effects line (no random intercept)
+  geom_line(
+    data = overall_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA),
+    color = "black", linetype = "dashed", linewidth = 0.9
+  ) +
+  scale_color_brewer(palette = "Set2") +
+  labs(
+    title = "P8MEA vs Disadvantaged (%): Raw data and group-specific fitted lines",
+    subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING)\nLines share the same slope; intercepts vary by OFSTED rating",
+    x = "PTFSM6CLA1A",
+    y = "P8MEA",
+    color = "OFSTED rating"
+  ) +
+  theme_minimal(base_size = 12)
+```
+
+## Model with a Fixed Effect Predictor {.smaller}
+
+```{r}
 lme2 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|OFSTEDRATING), data = england_filtered_clean)
 summary(lme2)
+
 ```
+
+-   Adding the fixed effect variable reduces Random Effect Ofsted group variance from 0.31 to 0.23. Some between group variance now captured by PTFSM6CLA1A
+-   Fixed effect of % disadvantaged students highly significant
+-   REML criterion: 3156.8 → 2729.2 indicating better fit
+
+## Model with a Fixed Effect Predictor
+
+```{r}
+#| echo: true
+#| warning: false
+# Random effects (BLUPs): deviations from the global intercept, by group
+ranef(lme1)$OFSTEDRATING
+```
+
+-   While the main summary doesn't show the specific intercepts for each group, these can be extracted from the model object using the `ranef` (random effect) function in R
+-   These Random Effect intercepts are the deviation from the global mean and effectively show what is on the plot when combined with the Fixed Effect parameter
 
 ## Model with a Fixed Effect Predictor
 
 ```{r}
 library(lme4)
 library(ggplot2)
+library(dplyr)
+library(tibble)
+library(RColorBrewer)
 
 # Fit the model
-lme2 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|OFSTEDRATING), data = england_filtered_clean)
+lme2 <- lmer(P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING), data = england_filtered_clean)
 
-# Get fixed effect and random intercepts
+# Fixed effects
 fixed_intercept <- fixef(lme2)[1]
-slope <- fixef(lme2)[2]
-ranef_df <- as.data.frame(ranef(lme2)$OFSTEDRATING)
-ranef_df$OFSTEDRATING <- rownames(ranef(lme2)$OFSTEDRATING)
+slope           <- fixef(lme2)[2]
 
-# Create prediction grid
-pop_range <- seq(min(england_filtered_clean$PTFSM6CLA1A),
-                 max(england_filtered_clean$PTFSM6CLA1A), length.out = 100)
+# Ensure a consistent factor order for colours/facets
+england_filtered_clean <- england_filtered_clean %>%
+  mutate(OFSTEDRATING = factor(OFSTEDRATING))
 
-pred_df <- do.call(rbind, lapply(1:nrow(ranef_df), function(i) {
-  intercept <- fixed_intercept + ranef_df$`(Intercept)`[i]
+lvl <- levels(england_filtered_clean$OFSTEDRATING)
+
+# Define a named colour palette (same mapping everywhere)
+pal <- setNames(brewer.pal(max(3, length(lvl)), "Set2")[seq_along(lvl)], lvl)
+
+# Random intercepts (BLUPs) per OFSTED group
+ranef_df <- ranef(lme2)$OFSTEDRATING %>%
+  as.data.frame() %>%
+  rownames_to_column("OFSTEDRATING") %>%
+  rename(blup = `(Intercept)`) %>%
+  mutate(OFSTEDRATING = factor(OFSTEDRATING, levels = lvl))
+
+# Prediction grid across the observed range of PTFSM6CLA1A
+pop_range <- seq(
+  min(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  max(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  length.out = 100
+)
+
+# Lines for each OFSTED group: same slope, group-specific intercept
+pred_df <- do.call(rbind, lapply(seq_len(nrow(ranef_df)), function(i) {
+  intercept_i <- fixed_intercept + ranef_df$blup[i]
   data.frame(
     PTFSM6CLA1A = pop_range,
-    P8MEA = intercept + slope * pop_range,
-    OFSTEDRATING = ranef_df$OFSTEDRATING[i]
+    P8MEA       = intercept_i + slope * pop_range,
+    OFSTEDRATING = ranef_df$OFSTEDRATING[i],
+    stringsAsFactors = FALSE
+  )
+})) %>%
+  mutate(OFSTEDRATING = factor(OFSTEDRATING, levels = lvl))
+
+# Overall (fixed-effects only) line
+overall_df <- data.frame(
+  PTFSM6CLA1A = pop_range,
+  P8MEA       = fixed_intercept + slope * pop_range
+)
+
+# ---- Plot with coloured dots matching OFSTED groups ----
+ggplot() +
+  # Raw points: colour by OFSTEDRATING (matches palette)
+  geom_point(
+    data = england_filtered_clean,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    alpha = 0.35, size = 1.2, na.rm = TRUE
+  ) +
+  # Group-specific prediction lines (OPTION 1: match group colour)
+  geom_line(
+    data = pred_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    linewidth = 1.1, show.legend = FALSE
+  ) +
+  # If you prefer *all* group lines blue, replace the block above with:
+  # geom_line(data = pred_df, aes(x = PTFSM6CLA1A, y = P8MEA),
+  #           color = "#1f77b4", linewidth = 1.1) +
+  #
+  # Overall fixed-effects line (same in every facet)
+  geom_line(
+    data = overall_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA),
+    color = "black", linetype = "dashed", linewidth = 0.9
+  ) +
+  facet_wrap(~ OFSTEDRATING, ncol = 3, scales = "fixed") +
+  scale_color_manual(values = pal, guide = "none") +  # hide legend; keep consistent colours
+  labs(
+    title = "P8MEA vs FSM (%): group-specific fits by Ofsted rating",
+    subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING)\nPoints and lines coloured by Ofsted group; dashed line is fixed-effects only",
+    x = "PTFSM6CLA1A",
+    y = "P8MEA"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "none",
+    strip.background = element_rect(fill = "#f2f2f2", color = NA),
+    strip.text = element_text(face = "bold")
+  )
+```
+
+## Random Intercept and Random Slope Model
+
+-   Right back at the beginning of the lecture when we plotted each Ofsted Subset as a separate regression model, it was clear that the relationship between % Disadvantaged Pupils in a school & Progress 8 had different slopes as well as intercepts
+-   `y ~ x + (x | g)`
+-   Adding the random slopes simply requires the predictor variable to the left of the pipe in the Random effects bracket `(x | g)`
+-   In this model each group has its own baseline (intercept) and its own relationship between `x` and `y` (whereas in the last model the relationship between `x` and `y` was assumed constant across groups)
+
+
+## Random Intercept and Random Slope Model
+
+```{r}
+# Packages
+library(lme4)
+library(ggplot2)
+library(dplyr)
+library(tibble)
+
+# --- Fit random intercept + random slope model
+lme_rs <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A | OFSTEDRATING),
+               data = england_filtered_clean)
+
+# Fixed effects
+fixed_intercept <- fixef(lme_rs)[["(Intercept)"]]
+fixed_slope     <- fixef(lme_rs)[["PTFSM6CLA1A"]]
+
+# Random effects (BLUPs) per group: intercept and slope
+re_df <- ranef(lme_rs)$OFSTEDRATING %>%
+  rownames_to_column("OFSTEDRATING") %>%
+  rename(
+    b0 = `(Intercept)`,   # random intercept deviation
+    b1 = `PTFSM6CLA1A`    # random slope deviation
+  )
+
+# Prediction grid across observed range of PTFSM6CLA1A
+x_range <- seq(
+  min(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  max(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  length.out = 100
+)
+
+# Build per-group prediction lines with varying intercepts AND slopes
+pred_df <- do.call(rbind, lapply(seq_len(nrow(re_df)), function(i) {
+  intercept_i <- fixed_intercept + re_df$b0[i]
+  slope_i     <- fixed_slope     + re_df$b1[i]
+  data.frame(
+    OFSTEDRATING = re_df$OFSTEDRATING[i],
+    PTFSM6CLA1A  = x_range,
+    P8MEA        = intercept_i + slope_i * x_range,
+    stringsAsFactors = FALSE
   )
 }))
 
-# Plot
-ggplot(pred_df, aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING)) +
-  geom_line(size = 1.2) +
-  labs(title = "Predicted P8MEA vs Population by OFSTED Rating",
-       subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING)",
-       x = "PTFSM6CLA1A (Population Measure)",
-       y = "Predicted P8MEA") +
-  theme_minimal()
+# Optional: overall (fixed-effects only) regression line
+overall_df <- data.frame(
+  PTFSM6CLA1A = x_range,
+  P8MEA       = fixed_intercept + fixed_slope * x_range
+)
+
+# --- Plot: raw data + group-specific fitted lines (varying slopes & intercepts)
+ggplot() +
+  # 1) Raw points coloured by group
+  geom_point(
+    data = england_filtered_clean,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    alpha = 0.35, size = 1.2, na.rm = TRUE
+  ) +
+  # 2) Group-specific lines (random intercepts + random slopes)
+  geom_line(
+    data = pred_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    linewidth = 1.1, alpha = 0.9
+  ) +
+  # 3) Overall fixed-effects line (no random effects)
+  geom_line(
+    data = overall_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA),
+    color = "black", linetype = "dashed", linewidth = 0.9
+  ) +
+  scale_color_brewer(palette = "Set2", name = "Ofsted rating") +
+  labs(
+    title = "P8MEA vs % Disadvantage: Raw data and group-specific fitted lines",
+    subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A | OFSTEDRATING)\nLines vary in both intercept and slope by Ofsted rating",
+    x = "PTFSM6CLA1A",
+    y = "P8MEA"
+  ) +
+  theme_minimal(base_size = 12)
 ```
 
 ## Random Intercept and Random Slope Model
@@ -1008,62 +1248,7 @@ lme3 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A|OFSTEDRATING), data = england_fi
 summary(lme3)
 ```
 
-## Random Intercept and Random Slope Model
 
-```{r}
-library(lme4)
-library(ggplot2)
-
-
-# 1. Load Libraries (Assuming they are already loaded)
-# library(lme4)
-# library(ggplot2)
-
-# 2. Fit the New Model with Random Slopes and Intercepts
-lme3 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A | OFSTEDRATING), data = england_filtered_clean)
-
-# 3. Get Fixed Effects and Random Effects
-fixed_intercept <- fixef(lme3)[1] # Fixed overall intercept
-fixed_slope <- fixef(lme3)[2]     # Fixed overall slope for PTFSM6CLA1A
-
-# Extract Random Effects for both Intercept and Slope
-ranef_df <- as.data.frame(ranef(lme3)$OFSTEDRATING)
-ranef_df$OFSTEDRATING <- rownames(ranef(lme3)$OFSTEDRATING)
-
-# Rename columns for clarity
-colnames(ranef_df) <- c("RandomIntercept", "RandomSlope", "OFSTEDRATING")
-
-# 4. Create Prediction Grid
-# Use the same range for the predictor as before
-pop_range <- seq(min(england_filtered_clean$PTFSM6CLA1A),
-                 max(england_filtered_clean$PTFSM6CLA1A), length.out = 100)
-
-pred_df_lme3 <- do.call(rbind, lapply(1:nrow(ranef_df), function(i) {
-  
-  # Calculate the group-specific intercept and slope:
-  # Group Intercept = Fixed Intercept + Random Intercept for the Group
-  group_intercept <- fixed_intercept + ranef_df$RandomIntercept[i]
-  
-  # Group Slope = Fixed Slope + Random Slope for the Group
-  group_slope <- fixed_slope + ranef_df$RandomSlope[i]
-  
-  # Calculate predicted P8MEA for this group
-  data.frame(
-    PTFSM6CLA1A = pop_range,
-    P8MEA = group_intercept + group_slope * pop_range,
-    OFSTEDRATING = ranef_df$OFSTEDRATING[i]
-  )
-}))
-
-# 5. Plot the Results
-ggplot(pred_df_lme3, aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING)) +
-  geom_line(size = 1.2) +
-  labs(title = "Predicted P8MEA vs Population by OFSTED Rating (Random Slopes)",
-       subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A | OFSTEDRATING)",
-       x = "PTFSM6CLA1A (Population Measure)",
-       y = "Predicted P8MEA") +
-  theme_minimal()
-```
 
 ## Random Intercept and Random Slope Model
 
@@ -1076,56 +1261,102 @@ summary(lme4)
 ## Random Intercept and Random Slope Model
 
 ```{r}
+# Packages
 library(lme4)
 library(ggplot2)
+library(dplyr)
+library(tibble)
+library(RColorBrewer)
 
+# --- Fit random intercept + random slope model
+lme_rs <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A | OFSTEDRATING),
+               data = england_filtered_clean)
 
-## 1. Fit the New Model with Uncorrelated Random Slopes and Intercepts
-lme4 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A || OFSTEDRATING), data = england_filtered_clean)
+# --- Fixed effects
+fixed_intercept <- fixef(lme_rs)[["(Intercept)"]]
+fixed_slope     <- fixef(lme_rs)[["PTFSM6CLA1A"]]
 
-# 2. Get Fixed Effects and Random Effects
-fixed_intercept <- fixef(lme4)[1] # Fixed overall intercept
-fixed_slope <- fixef(lme4)[2]     # Fixed overall slope for PTFSM6CLA1A
+# --- Ensure a consistent factor order for colours/facets
+england_filtered_clean <- england_filtered_clean %>%
+  mutate(OFSTEDRATING = factor(OFSTEDRATING))
+lvl <- levels(england_filtered_clean$OFSTEDRATING)
 
-# Extract Random Effects for both Intercept and Slope
-# Note: ranef() returns the random effects in the same order as the fixed effects
-ranef_df_lme4 <- as.data.frame(ranef(lme4)$OFSTEDRATING)
+# Named colour palette (consistent mapping everywhere)
+pal <- setNames(brewer.pal(max(3, length(lvl)), "Set2")[seq_along(lvl)], lvl)
 
-# Since the structure is (PTFSM6CLA1A || OFSTEDRATING), lme4 separates the two terms
-# The columns are named based on the formula structure for uncorrelated terms
-colnames(ranef_df_lme4) <- c("RandomIntercept", "RandomSlope") 
-ranef_df_lme4$OFSTEDRATING <- rownames(ranef_df_lme4)
+# --- Random effects (BLUPs) per group: intercept and slope
+re_df <- ranef(lme_rs)$OFSTEDRATING %>%
+  as.data.frame() %>%
+  rownames_to_column("OFSTEDRATING") %>%
+  rename(
+    b0 = `(Intercept)`,     # random intercept deviation
+    b1 = `PTFSM6CLA1A`      # random slope deviation
+  ) %>%
+  mutate(OFSTEDRATING = factor(OFSTEDRATING, levels = lvl))
 
-# 3. Create Prediction Grid
-pop_range <- seq(min(england_filtered_clean$PTFSM6CLA1A),
-                 max(england_filtered_clean$PTFSM6CLA1A), length.out = 100)
+# --- Prediction grid across the observed range of PTFSM6CLA1A
+x_range <- seq(
+  min(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  max(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  length.out = 100
+)
 
-pred_df_lme4 <- do.call(rbind, lapply(1:nrow(ranef_df_lme4), function(i) {
-  
-  # Calculate the group-specific intercept and slope:
-  # Group Intercept = Fixed Intercept + Random Intercept for the Group
-  group_intercept <- fixed_intercept + ranef_df_lme4$RandomIntercept[i]
-  
-  # Group Slope = Fixed Slope + Random Slope for the Group
-  group_slope <- fixed_slope + ranef_df_lme4$RandomSlope[i]
-  
-  # Calculate predicted P8MEA for this group
+# --- Lines for each group: varying intercepts AND slopes
+pred_df <- do.call(rbind, lapply(seq_len(nrow(re_df)), function(i) {
+  intercept_i <- fixed_intercept + re_df$b0[i]
+  slope_i     <- fixed_slope     + re_df$b1[i]
   data.frame(
-    PTFSM6CLA1A = pop_range,
-    P8MEA = group_intercept + group_slope * pop_range,
-    OFSTEDRATING = ranef_df_lme4$OFSTEDRATING[i]
+    PTFSM6CLA1A  = x_range,
+    P8MEA        = intercept_i + slope_i * x_range,
+    OFSTEDRATING = re_df$OFSTEDRATING[i],
+    stringsAsFactors = FALSE
   )
-}))
+})) %>%
+  mutate(OFSTEDRATING = factor(OFSTEDRATING, levels = lvl))
 
-# 4. Plot the Results
-ggplot(pred_df_lme4, aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING)) +
-  geom_line(size = 1.2) +
-  labs(title = "Predicted P8MEA by OFSTED Rating (Uncorrelated Random Slopes)",
-       subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A || OFSTEDRATING)",
-       x = "PTFSM6CLA1A (Population Measure)",
-       y = "Predicted P8MEA") +
-  theme_minimal()
+# --- Overall (fixed-effects only) line
+overall_df <- data.frame(
+  PTFSM6CLA1A = x_range,
+  P8MEA       = fixed_intercept + fixed_slope * x_range
+)
+
+# --- Faceted plot
+ggplot() +
+  # Raw points: colour by OFSTEDRATING (matches palette)
+  geom_point(
+    data = england_filtered_clean,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    alpha = 0.35, size = 1.2, na.rm = TRUE
+  ) +
+  # Group-specific prediction lines (varying slopes & intercepts)
+  geom_line(
+    data = pred_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    linewidth = 1.1, show.legend = FALSE
+  ) +
+  # Overall fixed-effects line (same in every facet)
+  geom_line(
+    data = overall_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA),
+    color = "black", linetype = "dashed", linewidth = 0.9
+  ) +
+  facet_wrap(~ OFSTEDRATING, ncol = 3, scales = "fixed") +
+  scale_color_manual(values = pal, guide = "none") +  # hide legend; keep consistent colours
+  labs(
+    title = "P8MEA vs FSM (%): group-specific fits by Ofsted rating",
+    subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A | OFSTEDRATING)\nLines vary in both intercept and slope; dashed line is fixed-effects only",
+    x = "PTFSM6CLA1A",
+    y = "P8MEA"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "none",
+    strip.background = element_rect(fill = "#f2f2f2", color = NA),
+    strip.text = element_text(face = "bold")
+  )
+
 ```
+
 
 ## Nested Multi-level effects
 
