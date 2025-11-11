@@ -1037,7 +1037,7 @@ summary(lm_fit)
 
 ## Linear Regression - Running the Model
 
-![](L6_images/the_Call.png)
+![](L6_images/the_call.png)
 
 -   This is the code representation of the model equation we saw earlier:
     -   `lm()` is the function that fits a linear model
