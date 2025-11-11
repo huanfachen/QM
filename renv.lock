@@ -106,80 +106,6 @@
       "Maintainer": "Kirill Müller <kirill@cynkra.com>",
       "Repository": "CRAN"
     },
-    "GGally": {
-      "Package": "GGally",
-      "Version": "2.4.0",
-      "Source": "Repository",
-      "Type": "Package",
-      "Title": "Extension to 'ggplot2'",
-      "Authors@R": "c( person(\"Barret\", \"Schloerke\", , \"schloerke@gmail.com\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0001-9986-114X\")), person(\"Di\", \"Cook\", , \"dicook@monash.edu\", role = c(\"aut\", \"ths\"), comment = c(ORCID = \"0000-0002-3813-7155\")), person(\"Joseph\", \"Larmarange\", , \"joseph@larmarange.net\", role = \"aut\", comment = c(ORCID = \"0000-0001-7097-700X\")), person(\"Francois\", \"Briatte\", , \"f.briatte@gmail.com\", role = \"aut\"), person(\"Moritz\", \"Marbach\", , \"mmarbach@mail.uni-mannheim.de\", role = \"aut\"), person(\"Edwin\", \"Thoen\", , \"edwinthoen@gmail.com\", role = \"aut\"), person(\"Amos\", \"Elberg\", , \"amos.elberg@gmail.com\", role = \"aut\"), person(\"Ott\", \"Toomet\", , \"otoomet@gmail.com\", role = \"ctb\"), person(\"Jason\", \"Crowley\", , \"crowley.jason.s@gmail.com\", role = \"aut\"), person(\"Heike\", \"Hofmann\", , \"hhofmann4@unl.edu\", role = \"ths\", comment = c(ORCID = \"0000-0001-6216-5183\")), person(\"Hadley\", \"Wickham\", , \"h.wickham@gmail.com\", role = \"ths\", comment = c(ORCID = \"0000-0003-4757-117X\")) )",
-      "Description": "The R package 'ggplot2' is a plotting system based on the grammar of graphics.  'GGally' extends 'ggplot2' by adding several functions to reduce the complexity of combining geometric objects with transformed data.  Some of these functions include a pairwise plot matrix, a two group pairwise plot matrix, a parallel coordinates plot, a survival plot, and several functions to plot networks.",
-      "License": "GPL (>= 2.0)",
-      "URL": "https://ggobi.github.io/ggally/, https://github.com/ggobi/ggally",
-      "BugReports": "https://github.com/ggobi/ggally/issues",
-      "Depends": [
-        "ggplot2 (>= 3.5.2)",
-        "R (>= 4.3)"
-      ],
-      "Imports": [
-        "cli",
-        "dplyr (>= 1.1.0)",
-        "ggstats (>= 0.9.0)",
-        "grDevices",
-        "grid",
-        "gtable (>= 0.2.0)",
-        "lifecycle",
-        "magrittr",
-        "progress",
-        "RColorBrewer",
-        "rlang",
-        "S7 (>= 0.2.0)",
-        "scales (>= 1.3.0)",
-        "tidyr (>= 1.3.0)",
-        "utils"
-      ],
-      "Suggests": [
-        "airports",
-        "broom (>= 0.7.0)",
-        "broom.helpers (>= 1.3.0)",
-        "chemometrics",
-        "crosstalk",
-        "emmeans",
-        "geosphere (>= 1.5-1)",
-        "ggforce",
-        "Hmisc",
-        "igraph (>= 1.0.1)",
-        "intergraph (>= 2.0-2)",
-        "knitr",
-        "labelled",
-        "mapproj",
-        "maps (>= 3.1.0)",
-        "network (>= 1.17.1)",
-        "nnet",
-        "rmarkdown",
-        "scagnostics",
-        "sna (>= 2.3-2)",
-        "spelling",
-        "survival",
-        "testthat (>= 3.0.0)",
-        "vdiffr"
-      ],
-      "RdMacros": "lifecycle",
-      "Config/Needs/website": "tidyverse/tidytemplate",
-      "Config/testthat/edition": "3",
-      "Config/usethis/last-upkeep": "2025-06-13",
-      "Encoding": "UTF-8",
-      "Language": "en-US",
-      "LazyData": "true",
-      "LazyLoad": "yes",
-      "RoxygenNote": "7.3.2",
-      "SystemRequirements": "openssl",
-      "Collate": "'GGally-package.R' 'data-australia-pisa-2012.R' 'data-baseball.R' 'data-flea.R' 'data-happy.R' 'data-nasa.R' 'data-nba_ppg_2008.R' 'data-pigs.R' 'data-psychademic.R' 'data-tips.R' 'data-twitter_spambots.R' 'deprecated.R' 'find-combo.R' 'gg-plots.R' 'ggally_colbar.R' 'ggally_cross.R' 'ggaly_trends.R' 'ggbivariate.R' 'ggcoef.R' 'ggcorr.R' 'ggfacet.R' 'gglyph.R' 'ggpairs_getput.R' 'ggmatrix.R' 'ggmatrix_gtable.R' 'ggmatrix_gtable_helpers.R' 'ggmatrix_legend.R' 'ggmatrix_make_plot.R' 'ggmatrix_print.R' 'ggmatrix_progress.R' 'ggnet.R' 'ggnet2.R' 'ggnetworkmap.R' 'ggnostic.R' 'ggpairs.R' 'ggpairs_add.R' 'ggpairs_internal_plots.R' 'ggparcoord.R' 'ggsave.R' 'ggscatmat.R' 'ggsurv.R' 'ggtable.R' 'reexports.R' 'utils-pipe.R' 'utils.R' 'vig_ggally.R' 'zzz.R'",
-      "NeedsCompilation": "no",
-      "Author": "Barret Schloerke [aut, cre] (ORCID: <https://orcid.org/0000-0001-9986-114X>), Di Cook [aut, ths] (ORCID: <https://orcid.org/0000-0002-3813-7155>), Joseph Larmarange [aut] (ORCID: <https://orcid.org/0000-0001-7097-700X>), Francois Briatte [aut], Moritz Marbach [aut], Edwin Thoen [aut], Amos Elberg [aut], Ott Toomet [ctb], Jason Crowley [aut], Heike Hofmann [ths] (ORCID: <https://orcid.org/0000-0001-6216-5183>), Hadley Wickham [ths] (ORCID: <https://orcid.org/0000-0003-4757-117X>)",
-      "Maintainer": "Barret Schloerke <schloerke@gmail.com>",
-      "Repository": "CRAN"
-    },
     "KernSmooth": {
       "Package": "KernSmooth",
       "Version": "2.23-26",
@@ -711,6 +637,29 @@
       "NeedsCompilation": "no",
       "Author": "Dominique Makowski [aut, cre] (ORCID: <https://orcid.org/0000-0001-5375-9967>), Daniel Lüdecke [aut] (ORCID: <https://orcid.org/0000-0002-8895-3206>), Mattan S. Ben-Shachar [aut] (ORCID: <https://orcid.org/0000-0002-4287-4801>), Indrajeet Patil [aut] (ORCID: <https://orcid.org/0000-0003-1995-6531>), Micah K. Wilson [aut] (ORCID: <https://orcid.org/0000-0003-4143-7308>), Brenton M. Wiernik [aut] (ORCID: <https://orcid.org/0000-0001-9560-6336>), Paul-Christian Bürkner [rev], Tristan Mahr [rev] (ORCID: <https://orcid.org/0000-0002-8890-5116>), Henrik Singmann [ctb] (ORCID: <https://orcid.org/0000-0002-4842-3657>), Quentin F. Gronau [ctb] (ORCID: <https://orcid.org/0000-0001-5510-6943>), Sam Crawley [ctb] (ORCID: <https://orcid.org/0000-0002-7847-0411>)",
       "Repository": "CRAN"
+    },
+    "beeswarm": {
+      "Package": "beeswarm",
+      "Version": "0.4.0",
+      "Source": "Repository",
+      "Title": "The Bee Swarm Plot, an Alternative to Stripchart",
+      "Description": "The bee swarm plot is a one-dimensional scatter plot like \"stripchart\", but with closely-packed, non-overlapping points.",
+      "Date": "2021-05-07",
+      "Authors@R": "c( person(\"Aron\", \"Eklund\", , \"aroneklund@gmail.com\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0003-0861-1001\")), person(\"James\", \"Trimble\", role = \"aut\", comment = c(ORCID = \"0000-0001-7282-8745\")) )",
+      "Imports": [
+        "stats",
+        "graphics",
+        "grDevices",
+        "utils"
+      ],
+      "NeedsCompilation": "yes",
+      "License": "Artistic-2.0",
+      "URL": "https://github.com/aroneklund/beeswarm",
+      "BugReports": "https://github.com/aroneklund/beeswarm/issues",
+      "Author": "Aron Eklund [aut, cre] (<https://orcid.org/0000-0003-0861-1001>), James Trimble [aut] (<https://orcid.org/0000-0001-7282-8745>)",
+      "Maintainer": "Aron Eklund <aroneklund@gmail.com>",
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "bit": {
       "Package": "bit",
@@ -2718,6 +2667,38 @@
       "Author": "Thomas Lin Pedersen [aut, cre] (ORCID: <https://orcid.org/0000-0002-5147-4711>), David Robinson [aut], Posit, PBC [cph, fnd]",
       "Repository": "CRAN"
     },
+    "ggbeeswarm": {
+      "Package": "ggbeeswarm",
+      "Version": "0.7.2",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Categorical Scatter (Violin Point) Plots",
+      "Date": "2023-04-28",
+      "Authors@R": "c( person(given=\"Erik\", family=\"Clarke\", role=c(\"aut\", \"cre\"), email=\"erikclarke@gmail.com\"), person(given=\"Scott\", family=\"Sherrill-Mix\", role=c(\"aut\"), email=\"sherrillmix@gmail.com\"), person(given=\"Charlotte\", family=\"Dawson\", role=c(\"aut\"), email=\"csdaw@outlook.com\"))",
+      "Description": "Provides two methods of plotting categorical scatter plots such that the arrangement of points within a category reflects the density of data at that region, and avoids over-plotting.",
+      "URL": "https://github.com/eclarke/ggbeeswarm",
+      "BugReports": "https://github.com/eclarke/ggbeeswarm/issues",
+      "Encoding": "UTF-8",
+      "License": "GPL (>= 3)",
+      "Depends": [
+        "R (>= 3.5.0)",
+        "ggplot2 (>= 3.3.0)"
+      ],
+      "Imports": [
+        "beeswarm",
+        "lifecycle",
+        "vipor",
+        "cli"
+      ],
+      "Suggests": [
+        "gridExtra"
+      ],
+      "RoxygenNote": "7.2.2",
+      "NeedsCompilation": "no",
+      "Author": "Erik Clarke [aut, cre], Scott Sherrill-Mix [aut], Charlotte Dawson [aut]",
+      "Maintainer": "Erik Clarke <erikclarke@gmail.com>",
+      "Repository": "CRAN"
+    },
     "ggdist": {
       "Package": "ggdist",
       "Version": "3.3.3",
@@ -3061,65 +3042,6 @@
       "Collate": "'utils-ggproto.R' 'utils-calls.R' 'utils-ggplot2-reimpl-.R' 'utils-constructors.R' 'side-layer.R' 'constructor-.R' 'utils-.R' 'ggside.R' 'utils-side-facet.R' 'side-facet_.R' 'utils-side-coord.R' 'side-coord-cartesian.R' 'add_gg.R' 'ggplot_add.R' 'side-layout-.r' 'all_classes.r' 'geom-sideabline.r' 'geom-sidebar.r' 'geom-sideboxplot.r' 'geom-sidecol.r' 'geom-sidedensity.r' 'geom-sidefreqpoly.r' 'geom-sidefunction.r' 'geom-sidehistogram.r' 'geom-sidehline.r' 'geom-sidelabel.r' 'geom-sideline.r' 'geom-sidepath.r' 'geom-sidepoint.r' 'geom-sidesegment.r' 'geom-sidetext.r' 'geom-sidetile.r' 'geom-sideviolin.r' 'geom-sidevline.r' 'ggside-ggproto.r' 'ggside-package.r' 'ggside-themes.R' 'plot-construction.R' 'position_rescale.r' 'scales-sides-.R' 'scales-xycolour.R' 'scales-xyfill.R' 'utils-ggplot2-reimpl-facet.R' 'side-facet-wrap.R' 'side-facet-grid.R' 'side-facet-null.R' 'stats.r' 'update_ggplot.R' 'z-depricated.R' 'zzz.R'",
       "NeedsCompilation": "no",
       "Author": "Justin Landis [aut, cre] (ORCID: <https://orcid.org/0000-0001-5501-4934>)",
-      "Repository": "CRAN"
-    },
-    "ggstats": {
-      "Package": "ggstats",
-      "Version": "0.11.0",
-      "Source": "Repository",
-      "Type": "Package",
-      "Title": "Extension to 'ggplot2' for Plotting Stats",
-      "Authors@R": "c( person( \"Joseph\", \"Larmarange\", , \"joseph@larmarange.net\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0001-7097-700X\") ) )",
-      "Description": "Provides new statistics, new geometries and new positions for  'ggplot2' and a suite of functions to facilitate the creation of  statistical plots.",
-      "License": "GPL (>= 3)",
-      "URL": "https://larmarange.github.io/ggstats/, https://github.com/larmarange/ggstats",
-      "BugReports": "https://github.com/larmarange/ggstats/issues",
-      "Depends": [
-        "R (>= 4.2)"
-      ],
-      "Imports": [
-        "cli",
-        "dplyr",
-        "forcats",
-        "ggplot2 (>= 4.0.0)",
-        "lifecycle",
-        "patchwork",
-        "purrr",
-        "rlang",
-        "scales",
-        "stats",
-        "stringr",
-        "utils",
-        "tidyr"
-      ],
-      "Suggests": [
-        "betareg",
-        "broom",
-        "broom.helpers (>= 1.20.0)",
-        "emmeans",
-        "glue",
-        "gtsummary",
-        "knitr",
-        "labelled (>= 2.11.0)",
-        "reshape",
-        "rmarkdown",
-        "nnet",
-        "parameters",
-        "pscl",
-        "testthat (>= 3.0.0)",
-        "spelling",
-        "survey",
-        "survival",
-        "vdiffr"
-      ],
-      "Encoding": "UTF-8",
-      "RoxygenNote": "7.3.2",
-      "Config/testthat/edition": "3",
-      "Language": "en-US",
-      "VignetteBuilder": "knitr",
-      "NeedsCompilation": "no",
-      "Author": "Joseph Larmarange [aut, cre] (ORCID: <https://orcid.org/0000-0001-7097-700X>)",
-      "Maintainer": "Joseph Larmarange <joseph@larmarange.net>",
       "Repository": "CRAN"
     },
     "ggtext": {
@@ -8492,6 +8414,39 @@
       "Author": "Hadley Wickham [aut], Lionel Henry [aut], Davis Vaughan [aut, cre], data.table team [cph] (Radix sort based on data.table's forder() and their contribution to R's order()), Posit Software, PBC [cph, fnd]",
       "Maintainer": "Davis Vaughan <davis@posit.co>",
       "Repository": "CRAN"
+    },
+    "vipor": {
+      "Package": "vipor",
+      "Version": "0.4.7",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Plot Categorical Data Using Quasirandom Noise and Density Estimates",
+      "Date": "2023-12-15",
+      "Author": "Scott Sherrill-Mix, Erik Clarke",
+      "Maintainer": "Scott Sherrill-Mix <ssm@msu.edu>",
+      "Description": "Generate a violin point plot, a combination of a violin/histogram plot and a scatter plot by offsetting points within a category based on their density using quasirandom noise.",
+      "License": "GPL (>= 2)",
+      "LazyData": "True",
+      "Depends": [
+        "R (>= 3.5.0)"
+      ],
+      "Imports": [
+        "stats",
+        "graphics"
+      ],
+      "Suggests": [
+        "testthat",
+        "beeswarm",
+        "lattice",
+        "ggplot2",
+        "beanplot",
+        "vioplot",
+        "ggbeeswarm"
+      ],
+      "RoxygenNote": "7.2.3",
+      "NeedsCompilation": "no",
+      "Repository": "CRAN",
+      "Encoding": "UTF-8"
     },
     "viridis": {
       "Package": "viridis",
