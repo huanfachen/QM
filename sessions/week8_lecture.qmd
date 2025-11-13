@@ -610,9 +610,10 @@ print(boxplot_p8mea)
 
 
 ```
+
 -   Most (as box plots hide counts) of the information in the two-level NULL model is contained in this plot!
 
-##  Shrinkage
+## Shrinkage
 
 ```{r}
 #| message: false
@@ -691,8 +692,10 @@ jitter_beeswarm <- ggplot(england_filtered_clean, aes(x = OFSTEDRATING, y = P8ME
 print(jitter_beeswarm)
 
 ```
--   Shrinkage accounts for the fact that some groups have few observations / high variance / unreliable means
--   The means for these groups with few observations are 'shrunk' towards the overall mean
+
+-   The global mean in the null model is not just a simple average
+-   Groups have few observations / high variance / unreliable means are given less importance in the average in a process called ***shrinkage***
+-   Groups with few observations are 'shrunk' towards the overall mean
 
 ## Shrinkage
 
@@ -789,7 +792,6 @@ print(p)
 -   Shrinkage is another reason why LME models are better than OLS models where clustering exists in the data
 -   Small groups have less of an influence as their averages get pulled towards the mean - less uncertainty and avoids over-fitting to small groups
 
-
 ## The Null Model - a 2 Level example
 
 $$Y_{ij} = \gamma_{00} + u_{0j} + \epsilon_{ij}$$ The total variability in outcome $Y_{ij}$ (Progress 8) for the $i^{th}$ school in the $j^{th}$ Ofsted rating is decomposed into:
@@ -878,14 +880,12 @@ print(density_p8mea)
 
 ## The Null Model - Fixed Global Intercept & Fixed Random Effect Slopes
 
--   Using [Paul Johnson's](https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/) excellent guide for syntax, the null model in R follows this format:
-`y ~ 1 + (1 | g)`
+-   Using [Paul Johnson's](https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/) excellent guide for syntax, the null model in R follows this format: `y ~ 1 + (1 | g)`
 -   **Fixed effects outside of the brackets**. The first `1` just tells the model to use a fixed global intercept (global average `y`)
 -   **Random Effects are inside the brackets** `(...|...)`
     -   To the *left* of the pipe symbol `|` we have a `1` as all slopes are fixed as group `g` average of `y`
     -   To the *right* of the vertical bar or pipe symbol `|` we have the grouping variable `g` itself.
--   The full model in R would like like:
-`lme_model1 <- lmer(P8MEA ~ 1 + (1|OFSTEDRATING), data = ...)`
+-   The full model in R would like like: `lme_model1 <- lmer(P8MEA ~ 1 + (1|OFSTEDRATING), data = ...)`
 
 ## Running The Null Model
 
@@ -904,6 +904,7 @@ lme1 <- lmer(P8MEA ~ 1 + (1|OFSTEDRATING), data = england_filtered_clean)
 summary(lme1)
 
 ```
+
 -   Fixed Effect: Global Average `y` (Progress 8) is -0.26
 -   Random Effect: Progress 8 varies by 0.31 points on average ***between*** Ofsted categories
 -   Residual variation between schools ***within*** categories is smaller: 0.17 points
@@ -916,7 +917,7 @@ library(performance)
 icc(lme1, by_group = T)
 ```
 
--   ICC of 0.647 means around 65% of the total variation in Progress 8 scores is explained by differences ***between*** OFSTED rating groups 
+-   ICC of 0.647 means around 65% of the total variation in Progress 8 scores is explained by differences ***between*** OFSTED rating groups
 -   The remaining 35% is due to variation ***within*** those groups (i.e. between individual schools)
 -   ICC of 65% is very high - Schools in the same OFSTED category tend to have very similar Progress 8 scores
 -   High ICC means clustering is important. Ignoring it (e.g., using OLS) would underestimate uncertainty - justifies using a LME model
@@ -950,8 +951,9 @@ ggplot(ranef_df, aes(x = OFSTEDRATING, y = `(Intercept)`)) +
 ```
 
 ## Model with a Fixed Effect Predictor
+
 -   `y ~ x + (1 | g)`
--   In this model, each group in the Random Effect part of the model has it's own intercept and fixed slope still - `(1 | g)`
+-   In this model, each group in the Random Effect part of the model has it's own intercept but a fixed slope still - `(1 | g)`
 -   Adding a variable into the Fixed Effect part of the model shows how `x` influences `y` across all groups
 -   The Null Model asks: "How much do groups differ, ignoring everything else?"
 -   This model asks: "How does `x` affect `y`, while still accounting for group differences?"
@@ -1160,7 +1162,6 @@ ggplot() +
 -   Adding the random slopes simply requires the predictor variable to the left of the pipe in the Random effects bracket `(x | g)`
 -   In this model each group has its own baseline (intercept) and its own relationship between `x` and `y` (whereas in the last model the relationship between `x` and `y` was assumed constant across groups)
 
-
 ## Random Intercept and Random Slope Model
 
 ```{r}
@@ -1241,24 +1242,47 @@ ggplot() +
   theme_minimal(base_size = 12)
 ```
 
-## Random Intercept and Random Slope Model
+-   Most Ofsted Groups are similar to the mean
+-   Although for Outstanding schools, the proportions of disadvantage appear to have very little effect on Progress 8
+
+## Random Intercept and Random Slope Model {.smaller}
 
 ```{r}
 lme3 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A|OFSTEDRATING), data = england_filtered_clean)
 summary(lme3)
 ```
 
-
+-   REML dropped from 2744 → 2702, meaning the second model fits slightly better (lower REML = better fit)
+-   However, slope variance 3.549e-05 (0.000035) very small (i.e. possibly not worth additional complexity compared to fixed slope model)
+-   And correlation of 1.0 between slope and intercept in Random effects is problematic
+-   Suggests visual difference in Outstanding Ofsted not statistically reliable.
 
 ## Random Intercept and Random Slope Model
 
 ```{r}
-## 1. Fit the New Model with Uncorrelated Random Slopes and Intercepts
-lme4 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A || OFSTEDRATING), data = england_filtered_clean)
-summary(lme4)
+#| echo: true
+# Extract random effects for each OFSTED group
+ranef_values <- ranef(lme3)$OFSTEDRATING
+
+# Fixed slope
+fixed_slope <- fixef(lme3)["PTFSM6CLA1A"]
+
+# Add random deviations to get group-specific slopes
+group_slopes <- fixed_slope + ranef_values$PTFSM6CLA1A
+
+# Combine into a tidy data frame
+slopes_df <- data.frame(
+  OFSTEDRATING = rownames(ranef_values),
+  slope = group_slopes
+)
+
+print(slopes_df)
+
 ```
 
-## Random Intercept and Random Slope Model
+-   Again, while the standard model outputs don't print the slope parameters, these can be extracted
+
+## Random Intercept and Random Slope Model {.smaller}
 
 ```{r}
 # Packages
@@ -1357,42 +1381,26 @@ ggplot() +
 
 ```
 
+## Other Linear Mixed Effects Models  {.smaller}
 
-## Nested Multi-level effects
+| Element | Meaning | Sample Equation |
+|------------------------|------------------------|------------------------|
+| `(1|g)` | Null Model or Varying Intercept Model | `P8 ~ 1 + (1 | OFSTEDRATING)` |
+| `(1|g1/g2)` | Multilevel Model with intercept varying within g1 and for g2 within g1 | `P8 ~ 1 + (1 | LocalAuthority/Region)` |
+| `(1|g1) + (1|g2)` | Intercept varying among g1 and g2 | `P8 ~ 1 + (1 | OFSTEDRATING) + (1 | Region)` |
+| `(0+x|g)` | Varying Slope Model | `P8 ~ Disadvantage + (0 + Disadvantage | OFSTEDRATING)` |
+| `x + (x|g)` | Varying and correlated intercepts and slopes | `P8 ~ Disadvantage + (Disadvantage | OFSTEDRATING)` |
+| `x + (x||g)` | Uncorrelated Intercepts and Slopes | `P8 ~ Disadvantage + (Disadvantage || OFSTEDRATING)` |
 
-```{r}
-lme5 <- lmer(P8MEA ~ 1 + (1|gor_name/LANAME), data = england_filtered_clean)
-summary(lme5)
+::: aside
+Borrowed from Levi Wolf and Paul Johnson
+:::
 
-```
-
-## Nested Multi-level effects
-
-```{r}
-lme6 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME), data = england_filtered_clean)
-summary(lme6)
-```
-
-
-
-```{r}
-lme7 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME) + (1|OFSTEDRATING), data = england_filtered_clean)
-summary(lme7)
-```
-
-$$\texttt{lmer(P8MEA ~ PTFSM6CLA1A + (1 | gor_name/LANAME) + (1 | OFSTEDRATING), data = england\_filtered\_clean)}$$ 
 
 ## kitchen sink model!!
 
 ```{r}
-#| eval: false
 #| include: false
-lme8 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME) + (1|OFSTEDRATING), data = england_filtered_clean)
-summary(lme8)
-```
-
-```{r}
-
 # drop some rows with 0s in
 england_filtered_clean <- england_filtered_clean %>%
   filter(PTFSM6CLA1A > 0, PERCTOT > 0, PNUMEAL > 0)
@@ -1441,6 +1449,7 @@ eng_clean_log <- droplevels(england_filtered_clean[finite_idx, ])
 ```
 
 ```{r}
+#| include: false
 eng_clean_log <- transform(
   england_filtered_clean,
   log_ATT8SCR      = log(ATT8SCR),
@@ -1470,7 +1479,27 @@ table(eng_clean_log$gor_name)
 with(eng_clean_log, table(gor_name, LANAME))[1:5, 1:5]  # spot check
 ```
 
-## kitchen sink model!!
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+lme9 <- lmer(
+  log(ATT8SCR) ~ 
+    log(PTFSM6CLA1A) +
+    log(PERCTOT) +
+    log(PNUMEAL) +
+    PTPRIORLO +
+    ADMPOL_PT +
+    (1 | OFSTEDRATING) +
+    (1 | gor_name / LANAME),
+  data = england_filtered_clean,
+  na.action = na.exclude
+)
+```
+
+
+## My Final kitchen sink model!! {.smaller}
 
 ```{r}
 england_filtered_clean <- england_filtered_clean %>%
@@ -1487,8 +1516,16 @@ summary(lme9)
 #    label = if_else(highlight, SCHNAME.x, NA_character_)
 #  )
 ```
+## My Final kitchen sink model!! {.smaller}
+```{r}
+#| fig-width: 8
+#| fig-height: 10
+check_model(lme9)
+```
 
-## kitchen sink model!!
+
+
+## My Final kitchen sink model!!
 
 ```{r}
 #| message: false
@@ -1531,7 +1568,7 @@ ggplot(england_filtered_clean, aes(x = fitted_lme9, y = ATT8SCR)) +
   geom_smooth(method = "lm", se = TRUE, color = "black") +
   
 # Mirror x and y axes
-  coord_equal() +
+  #coord_equal() +
 
 
   theme_minimal() +
@@ -1568,8 +1605,22 @@ pseudo_R_squared <- cor(observed_log_ATT8SCR_aligned,
 
 # 5. Display the result
 print(paste("Pseudo R-squared (Conditional):", round(pseudo_R_squared, 4)))
+
+# Refit your LMM by ML for fair AIC/BIC comparisons across LMMs
+lme9_ml <- update(lme9, REML = FALSE)
+
+# Refit OLS if needed (lm is fine as-is for logLik/AIC)
+england_model7 <- lm(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + OFSTEDRATING + gor_name + PTPRIORLO + ADMPOL_PT, data = england_filtered_clean, na.action = na.exclude)
+
+# Compare AIC/BIC
+AIC(england_model7, lme9_ml)
+BIC(england_model7, lme9_ml)
+
+# You can also compare nested LMMs via LRT (example below in step 4).
 ```
 
+
+## Compare with OLS
 ```{r}
 # If you haven't yet, fit the LMM (REML=TRUE equivalent to your lme9)
 # lme9 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
@@ -1584,38 +1635,45 @@ r2_mumin
 r2_perf <- performance::r2_nakagawa(lme9)
 r2_perf
 ```
+
 ## Compare with OLS
 
-```{r}
-# Refit your LMM by ML for fair AIC/BIC comparisons across LMMs
-lme9_ml <- update(lme9, REML = FALSE)
-
-# Refit OLS if needed (lm is fine as-is for logLik/AIC)
-england_model7 <- lm(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + OFSTEDRATING + gor_name + PTPRIORLO + ADMPOL_PT, data = england_filtered_clean, na.action = na.exclude)
-
-# Compare AIC/BIC
-AIC(england_model7, lme9_ml)
-BIC(england_model7, lme9_ml)
-
-# You can also compare nested LMMs via LRT (example below in step 4).
-```
-
-```{r}
-# Caterpillar plots by grouping factor
-sjPlot::plot_model(lme9, type = "re", sort.est = TRUE)
-# You can specify groups:
-sjPlot::plot_model(lme9, type = "re", sort.est = TRUE, group.terms = "OFSTEDRATING")
-sjPlot::plot_model(lme9, type = "re", sort.est = TRUE, group.terms = "gor_name")
-sjPlot::plot_model(lme9, type = "re", sort.est = TRUE, group.terms = "LANAME:gor_name")
-```
 
 ## Caterpillars
 
 ```{r}
-library(lattice)
-re_list <- ranef(lme9, condVar = TRUE)  # includes conditional variances
-# Dotplots for each grouping level
-dotplot(re_list, scales = list(y = list(cex = 0.6)))
+
+# Extract random effects and conditional variances
+re_list <- ranef(lme9, condVar = TRUE)
+re_df <- as.data.frame(re_list$`LANAME:gor_name`)
+re_df$group <- rownames(re_list$`LANAME:gor_name`)
+
+# Compute standard errors from conditional variances
+se <- sqrt(attr(re_list$`LANAME:gor_name`, "postVar")[1, 1, ])
+re_df$se <- se
+
+
+ggplot(re_df, aes(x = reorder(group, `(Intercept)`), y = `(Intercept)`)) +
+  geom_point(size = 2, color = "steelblue") +
+  geom_errorbar(aes(ymin = `(Intercept)` - 1.96 * se,
+                    ymax = `(Intercept)` + 1.96 * se),
+                width = 0.2, color = "grey40") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
+  geom_text_repel(
+    data = subset(re_df, group %in% extreme_groups),
+    aes(label = group),
+    size = 3,
+    nudge_x = 0,            # keep horizontally aligned
+    nudge_y = 0.1,          # push labels vertically for more spread
+    direction = "both",     # allow spreading in both axes
+    force = 5,
+    max.overlaps = Inf
+  ) +
+  labs(title = "Random Intercepts: LANAME within gor_name",
+       x = "Group", y = "Effect Size") +
+  theme_minimal() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
 ```
 
 ```{r}
