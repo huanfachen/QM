@@ -1162,7 +1162,7 @@ ggplot() +
 -   Adding the random slopes simply requires the predictor variable to the left of the pipe in the Random effects bracket `(x | g)`
 -   In this model each group has its own baseline (intercept) and its own relationship between `x` and `y` (whereas in the last model the relationship between `x` and `y` was assumed constant across groups)
 
-## Random Intercept and Random Slope Model
+## Random Intercept and Random Slope Model {.smaller}
 
 ```{r}
 # Packages
@@ -1381,7 +1381,7 @@ ggplot() +
 
 ```
 
-## Other Linear Mixed Effects Models  {.smaller}
+## Other Linear Mixed Effects Models {.smaller}
 
 | Element | Meaning | Sample Equation |
 |------------------------|------------------------|------------------------|
@@ -1396,8 +1396,7 @@ ggplot() +
 Borrowed from Levi Wolf and Paul Johnson
 :::
 
-
-## kitchen sink model!!
+## Last Week's Attainment 8 Best Model {.smaller}
 
 ```{r}
 #| include: false
@@ -1427,7 +1426,7 @@ str(england_filtered_clean$LANAME)
 str(england_filtered_clean$ADMPOL_PT)
 
 # Convert to factor if needed and drop unused levels
-england_filtered_clean$OFSTEDRATING <- droplevels(as.factor(england_filtered_clean$OFSTEDRATING))
+#england_filtered_clean$OFSTEDRATING <- droplevels(as.factor(england_filtered_clean$OFSTEDRATING))
 england_filtered_clean$gor_name      <- droplevels(as.factor(england_filtered_clean$gor_name))
 england_filtered_clean$LANAME        <- droplevels(as.factor(england_filtered_clean$LANAME))
 england_filtered_clean$ADMPOL_PT     <- droplevels(as.factor(england_filtered_clean$ADMPOL_PT))
@@ -1447,6 +1446,15 @@ sum(!finite_idx)  # rows to be dropped
 
 eng_clean_log <- droplevels(england_filtered_clean[finite_idx, ])
 ```
+
+
+```{r}
+england_model7 <- lm(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + OFSTEDRATING + gor_name + PTPRIORLO + ADMPOL_PT, data = england_filtered_clean, na.action = na.exclude)
+summary(england_model7)
+```
+
+## A Linear Mixed Effects Revision {.smaller}
+
 
 ```{r}
 #| include: false
@@ -1479,6 +1487,7 @@ table(eng_clean_log$gor_name)
 with(eng_clean_log, table(gor_name, LANAME))[1:5, 1:5]  # spot check
 ```
 
+"He threw everything but the kitchen sink at it!"
 
 ```{r}
 #| echo: true
@@ -1498,12 +1507,18 @@ lme9 <- lmer(
 )
 ```
 
+-   Not quite everything, but
+-   Fixed Effects: % Disadvantaged Students, % pupils where English not first language, % Overall Absence, % of pupils at the end of key stage 4 with low prior attainment at the end of key stage 2, Admissions Policy
+-   Random Effects: Ofsted Rating and *nested* (multilevel) Local Authority and Regional Geographic effects
 
 ## My Final kitchen sink model!! {.smaller}
 
 ```{r}
 england_filtered_clean <- england_filtered_clean %>%
   filter(PTFSM6CLA1A > 0, PERCTOT > 0, PNUMEAL > 0)
+
+# Before fitting the model:
+contrasts(england_filtered_clean$OFSTEDRATING) <- contr.treatment(levels(england_filtered_clean$OFSTEDRATING))
 
 lme9 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1|OFSTEDRATING) + (1|gor_name/LANAME), data = england_filtered_clean, na.action = na.exclude)
 summary(lme9)
@@ -1516,14 +1531,20 @@ summary(lme9)
 #    label = if_else(highlight, SCHNAME.x, NA_character_)
 #  )
 ```
+
+
+
 ## My Final kitchen sink model!! {.smaller}
+
 ```{r}
 #| fig-width: 8
 #| fig-height: 10
-check_model(lme9)
+check_model(lme9, check = c("linearity"))
+check_model(lme9, check = c("homogeneity"))
+check_model(lme9, check = c("qq"))
+plot(check_collinearity(lme9))
+plot(check_heteroscedasticity(lme9))
 ```
-
-
 
 ## My Final kitchen sink model!!
 
@@ -1579,64 +1600,92 @@ ggplot(england_filtered_clean, aes(x = fitted_lme9, y = ATT8SCR)) +
   )
 ```
 
-## Compare with OLS
+-   Very good fit, $R^2$ = 86%
+
+## Compare with OLS {.smaller}
 
 ```{r}
-# 1. Ensure the 'lmerTest' package (or 'lme4') is loaded
-#install.packages("lmerTest")
-library(lmerTest) 
-# Note: Since you already ran lmer, the necessary functions are likely available.
+# Install once if needed:
+# install.packages(c("modelsummary", "broom.mixed", "performance", "sandwich"))
 
-# 1. Extract the fitted values
-fitted_lme9 <- fitted(lme9)
+library(modelsummary)
+library(broom.mixed)
+library(performance)
+library(sandwich)
 
-# 2. Extract the residuals
-resid_lme9 <- resid(lme9)
+## 1) Robust SE for OLS (HC3)
+vc_ols <- sandwich::vcovHC(england_model7, type = "HC3")
 
-# 3. Calculate the observed values used in the model
-# Observed = Fitted + Residuals
-observed_log_ATT8SCR_aligned <- fitted_lme9 + resid_lme9
+## 2) Extract random-effect SDs and ICC for the LMM (programmatic)
+re_pars <- broom.mixed::tidy(lme9, effects = "ran_pars")
 
-# 4. Compute the squared correlation (Pseudo R-squared)
-# Use 'pairwise.complete.obs' to handle NA values correctly
-pseudo_R_squared <- cor(observed_log_ATT8SCR_aligned, 
-                        fitted_lme9, 
-                        use = "pairwise.complete.obs")^2
+get_sd <- function(df, grp) {
+  x <- subset(df, group == grp & term == "sd__(Intercept)")
+  if (nrow(x) == 0) return(NA_real_)
+  x$estimate
+}
 
-# 5. Display the result
-print(paste("Pseudo R-squared (Conditional):", round(pseudo_R_squared, 4)))
+sd_ofsted <- get_sd(re_pars, "OFSTEDRATING")
+sd_region <- get_sd(re_pars, "gor_name")
+sd_la     <- get_sd(re_pars, "LANAME:gor_name")
 
-# Refit your LMM by ML for fair AIC/BIC comparisons across LMMs
-lme9_ml <- update(lme9, REML = FALSE)
+icc_val <- tryCatch({
+  as.numeric(performance::icc(lme9)$ICC_adjusted)
+}, error = function(e) NA_real_)
 
-# Refit OLS if needed (lm is fine as-is for logLik/AIC)
-england_model7 <- lm(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + OFSTEDRATING + gor_name + PTPRIORLO + ADMPOL_PT, data = england_filtered_clean, na.action = na.exclude)
+## 3) Optional: marginal/conditional R2 for LMM
+r2_lmm <- tryCatch(performance::r2(lme9), error = function(e) NULL)
+r2_marg <- if (!is.null(r2_lmm)) r2_lmm$R2_marginal else NA_real_
+r2_cond <- if (!is.null(r2_lmm)) r2_lmm$R2_conditional else NA_real_
 
-# Compare AIC/BIC
-AIC(england_model7, lme9_ml)
-BIC(england_model7, lme9_ml)
+## 4) GOF rows (base R data.frame to avoid tribble)
+gof <- data.frame(
+  term = c("RE SD: OFSTED",
+           "RE SD: Region",
+           "RE SD: LA within Region",
+           "Residual SD",
+           "ICC (total)",
+           "R2 (Adj / Marginal)",
+           "R2 (Conditional)"),
+  OLS = c(NA_real_,
+          NA_real_,
+          NA_real_,
+          sigma(england_model7),
+          NA_real_,
+          summary(england_model7)$adj.r.squared,
+          NA_real_),
+  LMM = c(sd_ofsted,
+          sd_region,
+          sd_la,
+          sigma(lme9),
+          icc_val,
+          r2_marg,
+          r2_cond),
+  stringsAsFactors = FALSE
+)
 
-# You can also compare nested LMMs via LRT (example below in step 4).
+## 5) Build and render table with inline SEs and stars
+models <- list("OLS" = england_model7, "LMM" = lme9)
+vcovs  <- list("OLS" = vc_ols, "LMM" = NULL)
+
+modelsummary(
+  models,
+  vcov = vcovs,
+  # Put estimate, SE, and stars inline on one row:
+  estimate  = "{estimate} ({std.error}){stars}",
+  statistic = NULL,                  # prevents a second line
+  fmt = 3,                           # digits
+  stars = c('*' = .05, '**' = .01, '***' = .001),
+  gof_omit = "AIC|BIC|Log.Lik|RMSE", # optional
+  add_rows = gof,
+  output = "markdown"                # or "html", "word", "latex"
+)
 ```
 
 
-## Compare with OLS
-```{r}
-# If you haven't yet, fit the LMM (REML=TRUE equivalent to your lme9)
-# lme9 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
-#               PTPRIORLO + ADMPOL_PT + (1|OFSTEDRATING) + (1|gor_name/LANAME),
-#             data = england_filtered_clean, na.action = na.exclude, REML = TRUE)
-
-# MuMIn’s Nakagawa & Schielzeth R2 (marginal = fixed only; conditional = fixed + random)
-r2_mumin <- MuMIn::r.squaredGLMM(lme9)
-r2_mumin
-
-# Alternative via performance (should match closely)
-r2_perf <- performance::r2_nakagawa(lme9)
-r2_perf
-```
 
 ## Compare with OLS
+
 
 
 ## Caterpillars
@@ -1651,6 +1700,12 @@ re_df$group <- rownames(re_list$`LANAME:gor_name`)
 # Compute standard errors from conditional variances
 se <- sqrt(attr(re_list$`LANAME:gor_name`, "postVar")[1, 1, ])
 re_df$se <- se
+
+# Select extremes (top and bottom 5)
+extreme_groups <- c(
+  head(re_df$group[order(re_df$`(Intercept)`)], 10),
+  tail(re_df$group[order(re_df$`(Intercept)`)], 10)
+)
 
 
 ggplot(re_df, aes(x = reorder(group, `(Intercept)`), y = `(Intercept)`)) +
@@ -1685,44 +1740,4 @@ re_la <- subset(re_tidy, grepl("^LANAME:gor_name", group))
 
 ```
 
-```{r}
-# Start from ML-fitted baseline (random intercepts)
-base_ml <- lme9_ml
 
-# Add random slope for PTPRIORLO by LA within region
-# Note: nesting as in your model: (1 + PTPRIORLO | gor_name:LANAME)
-rslope_la_ml <- lmer(
-  log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
-    PTPRIORLO + ADMPOL_PT +
-    (1 | OFSTEDRATING) + (1 | gor_name/LANAME) +
-    (0 + PTPRIORLO | gor_name:LANAME),  # use 0+ to avoid correlation if convergence issues
-  data = england_filtered_clean, na.action = na.exclude, REML = FALSE
-)
-
-# Alternatively try a correlated slope:
-# (1 + PTPRIORLO | gor_name:LANAME)
-
-# LRT for nested models (base vs slope model)
-anova(base_ml, rslope_la_ml)
-
-# Try random slope by OFSTEDRATING instead:
-rslope_ofsted_ml <- lmer(
-  log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
-    PTPRIORLO + ADMPOL_PT +
-    (1 + PTPRIORLO | OFSTEDRATING) + (1 | gor_name/LANAME),
-  data = england_filtered_clean, na.action = na.exclude, REML = FALSE
-)
-anova(base_ml, rslope_ofsted_ml)
-```
-
-```{r}
-lme_interact_ofsted <- lmer(
-  log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
-    PTPRIORLO * OFSTEDRATING + ADMPOL_PT +
-    (1 | OFSTEDRATING) + (1 | gor_name/LANAME),
-  data = england_filtered_clean, na.action = na.exclude, REML = FALSE
-)
-
-summary(lme_interact_ofsted)
-anova(lme9_ml, lme_interact_ofsted)  # test added interaction (ML)
-```
