@@ -1447,14 +1447,12 @@ sum(!finite_idx)  # rows to be dropped
 eng_clean_log <- droplevels(england_filtered_clean[finite_idx, ])
 ```
 
-
 ```{r}
 england_model7 <- lm(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + OFSTEDRATING + gor_name + PTPRIORLO + ADMPOL_PT, data = england_filtered_clean, na.action = na.exclude)
 summary(england_model7)
 ```
 
 ## A Linear Mixed Effects Revision {.smaller}
-
 
 ```{r}
 #| include: false
@@ -1507,7 +1505,7 @@ lme9 <- lmer(
 )
 ```
 
--   Not quite everything, but
+-   Not quite everything, but:
 -   Fixed Effects: % Disadvantaged Students, % pupils where English not first language, % Overall Absence, % of pupils at the end of key stage 4 with low prior attainment at the end of key stage 2, Admissions Policy
 -   Random Effects: Ofsted Rating and *nested* (multilevel) Local Authority and Regional Geographic effects
 
@@ -1523,6 +1521,10 @@ contrasts(england_filtered_clean$OFSTEDRATING) <- contr.treatment(levels(england
 lme9 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1|OFSTEDRATING) + (1|gor_name/LANAME), data = england_filtered_clean, na.action = na.exclude)
 summary(lme9)
 
+#null9 <- lmer(log(ATT8SCR) ~ 1 + (1|OFSTEDRATING), data = england_filtered_clean, na.action = na.exclude)
+
+#summary(null9)
+
 # Convert fitted values back to original scale
 #england_filtered_clean <- england_filtered_clean %>%
 #  mutate(
@@ -1532,19 +1534,37 @@ summary(lme9)
 #  )
 ```
 
+## My Final kitchen sink model!! {.smaller}
 
+::::: columns
+::: {.column width="50%"}
+```{r}
+check_model(lme9, check = c("linearity"))
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+check_model(lme9, check = c("homogeneity"))
+```
+:::
+:::::
 
 ## My Final kitchen sink model!! {.smaller}
 
+::::: columns
+::: {.column width="50%"}
 ```{r}
-#| fig-width: 8
-#| fig-height: 10
-check_model(lme9, check = c("linearity"))
-check_model(lme9, check = c("homogeneity"))
 check_model(lme9, check = c("qq"))
-plot(check_collinearity(lme9))
-plot(check_heteroscedasticity(lme9))
 ```
+:::
+
+::: {.column width="50%"}
+```{r}
+plot(check_collinearity(lme9))
+```
+:::
+:::::
 
 ## My Final kitchen sink model!!
 
@@ -1601,6 +1621,59 @@ ggplot(england_filtered_clean, aes(x = fitted_lme9, y = ATT8SCR)) +
 ```
 
 -   Very good fit, $R^2$ = 86%
+
+## Interpreting the Final Model {.smaller}
+
+Random Effects:
+
+| Group                         | Std. Dev |
+|-------------------------------|----------|
+| SD (Intercept gor_name)       | 0.016    |
+| SD (Intercept OFSTEDRATING)   | 0.057    |
+| SD (Observations)             | 0.071    |
+| SD (Intercept LANAMEgor_name) | 0.026    |
+
+-   Random effects represent variation across groups
+-   SD tells us the typical size of deviation from the overall mean for a group.
+-   A typical OFSTED group differs from the overall mean by about ±1 SD (≈ 0.057 on the log scale)
+-   $exp(\sigma^2_{\text{OFSTEDRATING}})-1 ≈ exp(0.0573)−1 ≈ 0.059 ≈ 5.9\%$
+-   Baseline Attainment 8 (from null model) - $exp(3.75644) = 42.8$
+-   Average jump between Ofsted Rating Groups worth $42.8 \times 0.059 ≈ 2.52$ GCSE points
+
+## Interpreting the Final Model {.smaller}
+
+What about specific point differences between Ofsted Groups?
+
+```{r}
+ri <- lme4::ranef(lme9, condVar = TRUE)$OFSTEDRATING  # random intercepts per OFSTED category
+print(ri)
+# Example (adjust names as they appear in your data):
+d_log_Good_vs_RI <- ri["Good", "(Intercept)"] - ri["Requires Improvement", "(Intercept)"]
+d_log_Out_vs_Good <- ri["Outstanding", "(Intercept)"] - ri["Good", "(Intercept)"]
+
+# Convert to % change and then to raw points using a baseline (e.g., mean Att8 = 50)
+pct_Good_vs_RI <- (exp(d_log_Good_vs_RI) - 1) * 100
+pct_Out_vs_Good <- (exp(d_log_Out_vs_Good) - 1) * 100
+
+baseline <- 42.8  # or compute a predicted baseline from the model at chosen covariates
+raw_Good_vs_RI  <- baseline * pct_Good_vs_RI / 100
+raw_Out_vs_Good <- baseline * pct_Out_vs_Good / 100
+```
+
+-   Good vs Requires Improvement: $\Delta\log = 0.0308−(−0.0194) = 0.0502$
+-   Good vs RI: $exp(0.0502) ≈ 1.0515 → +5.15\%$
+-   Good vs RI: $42.8 \times ≈ 0.0515 ≈ 2.2$ GCSE Points
+
+## Interpreting the Final Model {.smaller}
+
+| Predictor                | Scenario   | Log shift           | \% change | Raw points |
+|---------------|---------------|---------------|---------------|---------------|
+| **Absence (PERCTOT)**    | 40% → 30%  | −0.2238 × ln(30/40) | +6.7%     | +3.33      |
+|                          | 20% → 10%  | −0.2238 × ln(10/20) | +16.8%    | +8.39      |
+| **Disadvantage (FSM6)**  | 40% → 30%  | −0.0754 × ln(30/40) | +2.2%     | +1.10      |
+|                          | 20% → 10%  | −0.0754 × ln(10/20) | +5.4%     | +2.68      |
+| **Prior low attainment** | 40 → 30 pp | −0.00686 × (−10)    | +7.1%     | +3.55      |
+|                          | 20 → 10 pp | same                | +7.1%     | +3.55      |
 
 ## Compare with OLS {.smaller}
 
@@ -1682,11 +1755,7 @@ modelsummary(
 )
 ```
 
-
-
 ## Compare with OLS
-
-
 
 ## Caterpillars
 
@@ -1739,5 +1808,3 @@ head(re_tidy)
 re_la <- subset(re_tidy, grepl("^LANAME:gor_name", group))
 
 ```
-
-
