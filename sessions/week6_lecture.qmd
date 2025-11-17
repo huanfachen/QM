@@ -7,7 +7,15 @@ email: "a.dennett@ucl.ac.uk"
 date-as-string: "1st August 2024"
 other: "CASA0007 Quantitative Methods"
 from: markdown+emoji
-format: revealjs
+format:
+  revealjs: 
+    # logo: "L6_images/CASA_logo.svg"
+    template-partials: 
+      - title-slide.html
+    transition: none
+    slide-number: TRUE
+    preview-links: auto
+    theme: casa-slides
     
 filters:
  - code-visibility
