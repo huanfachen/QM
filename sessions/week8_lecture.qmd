@@ -9,7 +9,7 @@ other: "CASA0007 Quantitative Methods"
 from: markdown+emoji
 format:
   revealjs: 
-    logo: "L6_images/CASA_logo.svg"
+    # logo: "L6_images/CASA_logo.svg"
     template-partials: 
       - title-slide.html
     transition: none
