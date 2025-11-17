@@ -1250,7 +1250,7 @@ base_ml: log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIOR
 rslope_la_ml: log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1 | OFSTEDRATING) + (1 | gor_name/LANAME) + (0 + PTPRIORLO | gor_name:LANAME)
              npar     AIC     BIC logLik -2*log(L)  Chisq Df Pr(&gt;Chisq)    
 base_ml        11 -6910.2 -6844.5 3466.1   -6932.2                         
-rslope_la_ml   12 -6928.7 -6857.0 3476.3   -6952.7 20.481  1  6.022e-06 ***
+rslope_la_ml   12 -6928.7 -6857.0 3476.3   -6952.7 20.481  1  6.021e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -1261,7 +1261,7 @@ base_ml: log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIOR
 rslope_ofsted_ml: log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1 + PTPRIORLO | OFSTEDRATING) + (1 | gor_name/LANAME)
                  npar     AIC     BIC logLik -2*log(L)  Chisq Df Pr(&gt;Chisq)  
 base_ml            11 -6910.2 -6844.5 3466.1   -6932.2                       
-rslope_ofsted_ml   13 -6914.6 -6837.0 3470.3   -6940.6 8.4254  2    0.01481 *
+rslope_ofsted_ml   13 -6914.6 -6837.0 3470.3   -6940.6 8.4199  2    0.01485 *
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
