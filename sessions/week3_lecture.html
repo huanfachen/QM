@@ -7,11 +7,11 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-95f147d06fdb9f8ce149f95e323965f4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-68c8bffd90dad8f2b55c52d7b6410dc0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.25">
+  <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Beatrice Taylor">
   <title>Quantitative Methods – Hypothesis Testing</title>
@@ -1381,7 +1381,7 @@ D_{n,m} = \sup_x \, | F_n(x) - G_m(x) |
 <section id="kde-of-simulated-heights" class="slide level2">
 <h2>KDE of simulated heights</h2>
 <p>It’s easy to fit a KDE to data in Python:</p>
-<div id="afb4d496" class="cell" data-execution_count="1">
+<div id="a4f248c9" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb4-3"><a></a><span class="im">from</span> scipy.stats <span class="im">import</span> gaussian_kde</span>
@@ -1505,7 +1505,7 @@ df = n_1 + n_2 - 2 = 95 + 103 - 2 = 196
 <section id="example---step-4---calculate-the-p-value" class="slide level2">
 <h2>Example - step 4 - calculate the p value</h2>
 <p>Traditionally this uses look up tables - we’re going to use Python.</p>
-<div id="a1e6bde2" class="cell" data-execution_count="2">
+<div id="cfa11c47" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
 <span id="cb5-2"><a></a></span>
 <span id="cb5-3"><a></a>t_val <span class="op">=</span> <span class="op">-</span><span class="fl">12.7</span></span>
