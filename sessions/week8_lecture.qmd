@@ -2000,14 +2000,12 @@ Given levels of variables are school specific, exploring those at each school ca
 1) Longhill High School (baseline ≈ 36.8)
 Profile highlights: PERCTOT=13.4; PTPRIORLO=34; PTFSM=29.
 Top levers:
-
 Reduce overall absence (PERCTOT) — biggest bang-per-buck, and Longhill starts higher than Patcham.
     −   1 pp (13.4 → 12.4): +1.75% ATT8 ⇒ ≈ +0.64 points
     −   2 pp (13.4 → 11.4): +3.68% ATT8 ⇒ ≈ +1.36 points
 2. Reduce prior low attainment (PTPRIORLO) — strong, feasible medium‑term via targeted KS3 catch‑up, transition, tutoring.
     −   5 pp (34 → 29): +3.49% ⇒ ≈ +1.28 points
     −   10 pp (34 → 24): +7.10% ⇒ ≈ +2.61 points
-
 Attendance is the fastest, most controllable lever with meaningful point gains even for small pp reductions; PTPRIORLO is the next best lever via academic catch‑up. Better policy might be to focus on mitigation rather than changing intake.
 
 ## Final Policy Thoughts {.smaller}
