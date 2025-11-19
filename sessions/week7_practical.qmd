@@ -148,19 +148,6 @@ This week we won't look at individual local authorities, but will focus on the w
 
 -   Experiment with interacting some of the variables in your best multiple regression model and see if this adds any more explanatory nuance to your main analysis
 
-::: multicode
-#### ![](L6_images/python-logo-only.png){width="30"}
-
-```{python}
-
-```
-
-#### ![](L6_images/Rlogo.png){width="41" height="30"}
-
-```{r}
-
-```
-:::
 
 ## Task 1 - Baseline Model
 

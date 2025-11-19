@@ -1,93 +1,106 @@
 ---
-title: 'Practical XXX: XXX'
-subtitle: "XXX"
+title: "Prof D's Regression Sessions - Vol 3"
+subtitle: "AKA - In the (Linear) Mix(ed effects model world)"
 format:
-  html: default
+  html:
+    code-fold: true
+    code-tools: true
   ipynb: default
+
 filters:
   - qna
-  - quarto
+  - multicode
+  - quarto # keep Quarto’s built-ins as the last filter or it won't work
 ---
 
-This week is focussed on XXX.
+```{r}
+#| message: false
+#| warning: false
+#| include: false
 
-## To add a callout-note
+library(here)
+here()
 
-:::{.callout-note}
-
-Suggestions for a Better Learning Experience:
-
--   XXX
-:::
-
-## To add Python code without running them ...
-``` python
-import pandas as pd
-
-# Read CSV file, skipping first 5 rows, using row 6 as header, and handling comma as thousands separator
-df_pop = pd.read_csv(
-    'L1_data/UK_census_population.csv',
-    skiprows=5,        # Skip first 5 rows. Wnhy?
-    thousands=',',     # Interpret commas as thousands separators
-    header=0           # After skipping, the first row becomes the header
-)
-
-print(df_pop.head())
 ```
 
-## To add and run Python code
+```{r}
+#| message: false
+#| warning: false
+#| include: false
+
+## Notes - make sure that reticulate is pointing to a local reticulate install of python or things might go squiffy.
+
+## in terminal type: where python - to find out where reticulate might have stashed a version of the python.exe
+
+## make sure you point to it before installing these packages using:
+## reticulate::use_python("C:/Path/To/Your/Python/python.exe", required = TRUE)
+
+#renv::install("C:/GitHubRepos/casaviz.zip")
+# Get all packages from the lockfile
+#lockfile <- renv::load("renv.lock")
+#packages <- setdiff(names(lockfile$Packages), "casaviz")
+
+# Restore only the selected packages
+#renv::restore(packages = packages)
+#Sys.unsetenv("VIRTUAL_ENV")
+library(reticulate)
+
+#use_python("/QM_Fork/venv/Scripts/python.exe", required = TRUE)
+# point reticulate to the right python installation - ideally the one reticulate installed. 
+#reticulate::use_python("C:/Users/Adam/AppData/Local/R/cache/R/reticulate/uv/cache/archive-v0/EiTNi4omakhlev5ckz2WP/Scripts/python.exe", required = TRUE)
+#use_condaenv("qmEnv", conda = "C:/Users/adam_/anaconda3/Scripts/conda.exe", required = TRUE)
+#reticulate::use_python("C:/Users/adam_/anaconda3/envs/qmEnv/python.exe", required = TRUE)
+#py_run_string("import pyproj; print(pyproj.CRS.from_epsg(27700))")
+
+#virtualenv_create("r-reticulate", python = "C:/Users/Adam/AppData/Local/R/cache/R/reticulate/uv/cache/archive-v0/EiTNi4omakhlev5ckz2WP/Scripts/python.exe")
+
+#virtualenv_install("r-reticulate", packages = c("pyyaml", "jupyter", "statsmodels","pyjanitor","pathlib","matplotlib","pandas", "numpy", "scipy", "seaborn", "geopandas", "folium", "branca"))
+  #use_virtualenv("r-reticulate", required = TRUE)
+
+#py_install(packages = c(
+#  "pyyaml", "jupyter", "statsmodels", "pyjanitor", "pathlib",
+#  "matplotlib", "pandas", "numpy", "scipy", "seaborn",
+#  "geopandas", "folium", "branca", "plotly", "contexily"
+#))
+
+
+# reticulate::py_config()
+# reticulate::py_require("pyyaml")
+# reticulate::py_require("jupyter")
+# reticulate::py_require("statsmodels")
+# reticulate::py_require("pandas")
+# reticulate::py_require("numpy")
+# reticulate::py_require("pyjanitor")
+# reticulate::py_require("pathlib") 
+# reticulate::py_require("matplotlib") 
+# reticulate::py_require("seaborn") 
+
+#reticulate::py_install("folium")
+#reticulate::py_install("geopandas") 
+#reticulate::py_install("contextily", pip = TRUE)
+#reticulate::py_install("scikit-learn", pip = TRUE)
+
+
+```
+
+```{=html}
+<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1mzn6ZJiEWwCsHTrr4ms0j?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+```
+
+## Preamble
+
+We're going back in Volume 3 of the Regression Sessions, so clearly we are going to have to have volume 4 of the Progression Sessions. Yes, where is vol 3, I hear you ask. I don't know. Someone has lost it and it's not up on Spotify, so we'll have to make do and jump to volume 4 - Enjoy!
+
+::: multicode
+#### ![](L6_images/python-logo-only.png){width="30"}
 
 ```{python}
-import pandas as pd
 
-# Read CSV file, skipping first 5 rows, using row 6 as header, and handling comma as thousands separator
-df_pop = pd.read_csv(
-    'L1_data/UK_census_population.csv',
-    skiprows=5,        # Skip first 5 rows. Wnhy?
-    thousands=',',     # Interpret commas as thousands separators
-    header=0           # After skipping, the first row becomes the header
-)
-
-print(df_pop.head())
 ```
 
-## To add a photo - replace the path. Using relative path is also okay.
+#### ![](L6_images/Rlogo.png){width="41" height="30"}
 
-![]({{< var module.web >}}/sessions/L1_images/uk_pop_csv_screenshot.jpg){width="600"} 
+```{r}
 
-<!-- ![](L1_images/uk_pop_csv_screenshot.jpg){width=600} -->
-
-## To add some "questions"
-
-The qmd file will be rendered as two files in sessions folder, including a html and ipynb format. The html file will contain both *question* and *answer*, while the ipynb file will contain only the *question*.
-
-For the effect, please check [HTML](https://huanfachen.github.io/QM/sessions/weekX_practical.html) and [ipynb](https://huanfachen.github.io/QM/sessions/weekX_practical.ipynb).
-
-::: qna
-#### Question
-
-```python
-if ??
-    ??
-else:
-    ??
-```
-
-#### Answer
-
-#### Answer
-
-```{python}
-if 'Moscow' in ['Moscow', 'Beijing']:
-    print("Moscow is in the cities list.")
-else:
-    print("Moscow is not in the cities list.")
 ```
 :::
-
-## You're Done!
-
-Congratulations on completing the first QM practical session! If you are still working on it, take you time.
-
-Don’t worry about understanding every detail of the Python code — what matters most is knowing which functions to use for a specific task, like checking minimum and maximum values or generating boxplots, and knowing how to debug when it goes wrong. Remember, practice makes perfect.
-

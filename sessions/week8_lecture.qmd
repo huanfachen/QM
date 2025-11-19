@@ -822,7 +822,7 @@ $$\epsilon_{ij} \sim N(0, \sigma^2_{\epsilon})$$
 | $\sim$ | "Is distributed as" or "Follows the distribution." |
 | $N(\dots)$ | The ***N***ormal (Gaussian) Distribution. |
 | $0$ | The **Mean** of the distribution = 0. |
-| $\sigma^2_{\epsilon}$ | The **Within-Group Variance** of the distribution. |
+| $\sigma^2_{\epsilon}$ | The **Within-Group Variance** of the the error term. Sigma - $\sigma$ is commonly used to represent standard deviation. Variance is $\sigma^2$  |
 
 ## Level 2 - Between-Group Variance
 
