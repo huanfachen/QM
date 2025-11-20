@@ -803,6 +803,7 @@ leaflet(data = england_sf) %>%
 ## Variable Reclassification
 
 A Quick Aside:
+
 -   One potentially useful strategy in regression modelling is the reclassification of an independent variable.
 -   Continuous -\> Categorical or Weak Ordinal (e.g. various measurements of height into short, average and tall at different thresholds)
 -   Categorical -\> Categorical with fewer categories (e.g. short, average, tall into below average and above average)

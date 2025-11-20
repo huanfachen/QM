@@ -515,7 +515,7 @@ Here is some code in R and Python to help you carry out the setting of the refer
 
 ```{python}
 #| eval: false
-#| include: false
+#| include: true
 import pandas as pd
 from pandas.api.types import CategoricalDtype
 
