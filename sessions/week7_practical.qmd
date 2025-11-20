@@ -175,7 +175,7 @@ from pathlib import Path
 import statsmodels.api as sm
 
 # little function to define the file root on different machines
-def find_qm_root(start_path: Path = Path.cwd(), anchor: str = "QM") -> Path:
+def find_qm_root(start_path: Path = Path.cwd(), anchor: str = "QM_Fork") -> Path:
     """
     Traverse up from the start_path until the anchor folder (e.g. 'QM' or 'QM_Fork')      is found. Returns the path to the anchor folder.
     """
@@ -749,7 +749,31 @@ When you think you have your best model, move on to Task 4 below
 ```{python}
 #| message: false
 #| warning: false
-#| 
+
+import numpy as np
+import statsmodels.formula.api as smf
+
+# Filter rows where all log-transformed variables are > 0
+england_filtered_clean = england_filtered_clean[
+    (england_filtered_clean['PTFSM6CLA1A'] > 0) &
+    (england_filtered_clean['PERCTOT'] > 0) &
+    (england_filtered_clean['PNUMEAL'] > 0)
+].copy()
+
+# Create log-transformed columns
+england_filtered_clean['log_ATT8SCR'] = np.log(england_filtered_clean['ATT8SCR'])
+england_filtered_clean['log_PTFSM6CLA1A'] = np.log(england_filtered_clean['PTFSM6CLA1A'])
+england_filtered_clean['log_PERCTOT'] = np.log(england_filtered_clean['PERCTOT'])
+england_filtered_clean['log_PNUMEAL'] = np.log(england_filtered_clean['PNUMEAL'])
+
+# Fit the model
+model = smf.ols(
+    formula='log_ATT8SCR ~ log_PTFSM6CLA1A + log_PERCTOT + log_PNUMEAL + OFSTEDRATING + gor_name + PTPRIORLO + ADMPOL_PT',
+    data=england_filtered_clean
+).fit()
+
+print(model.summary())
+
 ```
 
 #### ![](L6_images/Rlogo.png){width="41" height="30"}

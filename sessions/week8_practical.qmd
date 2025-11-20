@@ -13,6 +13,17 @@ filters:
   - quarto # keep Quarto’s built-ins as the last filter or it won't work
 ---
 
+::: multicode
+#### ![](L6_images/python-logo-only.png){width="30"}
+```{python}
+
+```
+#### ![](L6_images/Rlogo.png){width="41" height="30"}
+```{r}
+
+```
+:::
+
 ```{r}
 #| message: false
 #| warning: false
@@ -89,18 +100,561 @@ library(reticulate)
 
 ## Preamble
 
-We're going back in Volume 3 of the Regression Sessions, so clearly we are going to have to have volume 4 of the Progression Sessions. Yes, where is vol 3, I hear you ask. I don't know. Someone has lost it and it's not up on Spotify, so we'll have to make do and jump to volume 4 - Enjoy!
+We're going back in - Volume 3 of the Regression Sessions, so clearly we are going to have to have volume 4 of the Progression Sessions. Yes, "where is vol. 3?", I hear you ask. I don't know. Someone has lost it and it's not up on Spotify, so we'll have to make do and jump to volume 4 - Enjoy!
+
+## Practical Aims
+
+1.  Experiment with running some Linear Mixed Effects Models and converting last week's show-stopped multiple regression model into a Linear Mixed Effects version
+2.  Practice moving from an initial null model to a fully-fledged model with fixed effects and random effects
+3.  Practice interpreting your final model and seeing if you can use it to explain which local authority-level policy might be most effective at raising attainment
+
+## Read in your data
+
+You can use your data from last week, but I've created a nice clean dataset and added a few extra spicy variables about teachers and schools' workforce in there for fun. All of that data is from here: <https://explore-education-statistics.service.gov.uk/data-catalogue?themeId=b601b9ea-b1c7-4970-b354-d1f695c446f1&sortBy=newest&geographicLevel=SCH>
 
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
 
 ```{python}
+#| message: false
+#| warning: false
+import pandas as pd
+import numpy as np
+import janitor
+from pathlib import Path
+import statsmodels.api as sm
 
+# little function to define the file root on different machines
+def find_qm_root(start_path: Path = Path.cwd(), anchor: str = "QM_Fork") -> Path:
+    """
+    Traverse up from the start_path until the anchor folder (e.g. 'QM' or 'QM_Fork')      is found. Returns the path to the anchor folder.
+    """
+    for parent in [start_path] + list(start_path.parents):
+        if parent.name == anchor:
+            return parent
+    raise FileNotFoundError(f"Anchor folder '{anchor}' not found in path      hierarchy.")
+  
+qm_root = find_qm_root()
+base_path = qm_root / "sessions" / "L6_data" / "Performancetables_130242" / "2022-2023"
+na_all = ["", "NA", "SUPP", "NP", "NE", "SP", "SN", "LOWCOV", "NEW", "SUPPMAT", "NaN"]
+
+england_filtered = pd.read_csv(base_path / "school_data_2223.csv", na_values=na_all, dtype={"URN": str})
+
+# Log-transform safely: replace non-positive values with NaN
+england_filtered['log_ATT8SCR'] = np.where(england_filtered['ATT8SCR'] > 0, np.log(england_filtered['ATT8SCR']), np.nan)
+england_filtered['log_PTFSM6CLA1A'] = np.where(england_filtered['PTFSM6CLA1A'] > 0, np.log(england_filtered['PTFSM6CLA1A']), np.nan)
+
+# Drop rows with NaNs in either column
+england_filtered_clean = england_filtered.dropna(subset=['log_ATT8SCR', 'log_PTFSM6CLA1A'])
 ```
 
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
 
 ```{r}
+#| message: false
+#| warning: false
 
+library(tidyverse)
+
+## Note edit your base path to refer to the folder where you have stored your data
+base_path <- here("sessions", "L6_data", "Performancetables_130242", "2022-2023")
+na_all <- c("", "NA", "SUPP", "NP", "NE", "SP", "SN", "LOWCOV", "NEW", "SUPPMAT")
+
+england_filtered <- read_csv(file.path(base_path, "school_data_2223.csv"), na = na_all) |> mutate(URN = as.character(URN))
+
+#str(england_filtered)
+
+england_filtered_clean <- england_filtered[
+  !is.na(england_filtered$ATT8SCR) & 
+  !is.na(england_filtered$PTFSM6CLA1A) &
+  england_filtered$ATT8SCR > 0 &
+  england_filtered$PTFSM6CLA1A > 0, 
+]
+```
+:::
+
+
+## The Warm-up - Last week's Multiple Regression Show Stopper
+
+You might want to run yours, however mine looked like this (without any interaction effects):
+
+::: multicode
+#### ![](L6_images/python-logo-only.png){width="30"}
+```{python}
+import numpy as np
+import statsmodels.formula.api as smf
+
+# Filter rows where all log-transformed variables are > 0
+england_filtered_clean = england_filtered_clean[
+    (england_filtered_clean['PTFSM6CLA1A'] > 0) &
+    (england_filtered_clean['PERCTOT'] > 0) &
+    (england_filtered_clean['PNUMEAL'] > 0)
+].copy()
+
+# Create log-transformed columns
+england_filtered_clean['log_ATT8SCR'] = np.log(england_filtered_clean['ATT8SCR'])
+england_filtered_clean['log_PTFSM6CLA1A'] = np.log(england_filtered_clean['PTFSM6CLA1A'])
+england_filtered_clean['log_PERCTOT'] = np.log(england_filtered_clean['PERCTOT'])
+england_filtered_clean['log_PNUMEAL'] = np.log(england_filtered_clean['PNUMEAL'])
+
+# Fit the model
+model = smf.ols(
+    formula='log_ATT8SCR ~ log_PTFSM6CLA1A + log_PERCTOT + log_PNUMEAL + OFSTEDRATING + gor_name + PTPRIORLO + ADMPOL_PT',
+    data=england_filtered_clean
+).fit()
+
+print(model.summary())
+
+```
+#### ![](L6_images/Rlogo.png){width="41" height="30"}
+```{r}
+england_filtered_clean <- england_filtered_clean %>%
+  filter(PTFSM6CLA1A > 0, PERCTOT > 0, PNUMEAL > 0)
+
+england_model7 <- lm(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + OFSTEDRATING + gor_name + PTPRIORLO + ADMPOL_PT, data = england_filtered_clean, na.action = na.exclude)
+summary(england_model7)
+
+```
+:::
+
+## Building Our Linear Mixed Effects Model
+
+### Stage 1 - The Null Model for Ofsted Ratings
+
+::: multicode
+#### ![](L6_images/python-logo-only.png){width="30"}
+```{python}
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import seaborn as sns
+import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+
+sns.set_theme(style="whitegrid")
+
+# --- Ensure OFSTEDRATING is clean and categorical ---
+rating_order = ["Special Measures", "Serious Weaknesses", "Requires improvement", "Good", "Outstanding"]
+england_filtered_clean["OFSTEDRATING"] = england_filtered_clean["OFSTEDRATING"].astype(str)
+england_filtered_clean["OFSTEDRATING"] = pd.Categorical(
+    england_filtered_clean["OFSTEDRATING"],
+    categories=rating_order,
+    ordered=True
+)
+
+# --- Keep valid rows (ATT8SCR present and rating in our order) ---
+df = england_filtered_clean.dropna(subset=["ATT8SCR"]).copy()
+df = df[df["OFSTEDRATING"].isin(rating_order)]
+
+# --- Fit MixedLM null model (random intercept by OFSTEDRATING) ---
+mixed_model = sm.MixedLM.from_formula("ATT8SCR ~ 1", groups="OFSTEDRATING", data=df)
+mixed_fit = mixed_model.fit(method="lbfgs")
+
+# --- Global mean (fixed intercept) ---
+global_mean = mixed_fit.params["Intercept"] if "Intercept" in mixed_fit.params.index else float(mixed_fit.params.iloc[0])
+
+# --- Robust random-effects extraction ---
+def get_re_value(effect):
+    # effect may be a pandas Series (with/without 'Intercept'), ndarray, or list
+    if isinstance(effect, pd.Series):
+        return float(effect["Intercept"]) if "Intercept" in effect.index else float(effect.iloc[0])
+    arr = np.asarray(effect).ravel()
+    return float(arr[0]) if arr.size > 0 else np.nan
+
+random_effects = mixed_fit.random_effects  # dict: {group_label: effect_vector}
+group_effects = {str(k): get_re_value(v) for k, v in random_effects.items()}
+
+ranef_df = pd.DataFrame({
+    "OFSTEDRATING": list(group_effects.keys()),
+    "ranef": list(group_effects.values())
+}).sort_values("OFSTEDRATING")
+
+# --- Actual intercepts = global mean + random effect ---
+ranef_df["actual_intercept"] = global_mean + ranef_df["ranef"]
+
+# --- Overall mean from raw data ---
+overall_mean = df["ATT8SCR"].mean()
+
+# --- Plot: boxplots + lines + actual intercept markers ---
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.boxplot(data=df, x="OFSTEDRATING", y="ATT8SCR", palette="Set2", ax=ax)
+
+# Reference lines
+ax.axhline(global_mean, color="black", linestyle="--", linewidth=1)
+ax.axhline(overall_mean, color="#d62728", linestyle=":", linewidth=1)
+
+# Overlay actual intercepts (blue diamonds) per rating
+sns.scatterplot(
+    data=ranef_df,
+    x="OFSTEDRATING", y="actual_intercept",
+    marker="D", s=100, color="blue",
+    ax=ax
+)
+
+# Titles & labels
+ax.set_title("ATT8SCR Distribution Across Ofsted Ratings (Null Model Structure)", fontsize=14)
+fig.suptitle("Dashed: Global Mean (MixedLM); Dotted: Overall Mean; Blue Diamonds: Actual Intercepts", fontsize=10)
+ax.set_xlabel("Ofsted Rating")
+ax.set_ylabel("Attainment 8 Score (ATT8SCR)")
+plt.xticks(rotation=45)
+
+# --- Manual legend handles (prevents 'Axes has no legend attached') ---
+legend_handles = [
+    Line2D([0], [0], color='black', linestyle='--', linewidth=1, label='Global Mean (MixedLM)'),
+    Line2D([0], [0], color='#d62728', linestyle=':', linewidth=1, label='Overall Mean'),
+    Line2D([0], [0], marker='D', color='blue', linestyle='None', markersize=8, label='Actual Intercept (Global + RE)')
+]
+ax.legend(legend_handles, [h.get_label() for h in legend_handles],
+          loc="lower center", bbox_to_anchor=(0.5, -0.25), ncol=2, frameon=False)
+
+plt.tight_layout()
+plt.show()
+```
+#### ![](L6_images/Rlogo.png){width="41" height="30"}
+```{r}
+#| message: false
+#| warning: false
+#| align: center
+#| out-width: 80%
+
+# 1. Load the necessary library for plotting
+library(ggplot2)
+library(lme4)
+
+# --- Ensure OFSTEDRATING is an ordered factor for better plotting ---
+# It appears you have six levels based on the OLS output, so we order them logically.
+# Adjust the order if the true levels/baseline are different in your data.
+rating_order <- c("Special Measures", "Serious Weaknesses", "Requires improvement", "Good", "Outstanding")
+england_filtered_clean$OFSTEDRATING <- factor(
+  england_filtered_clean$OFSTEDRATING,
+  levels = rating_order,
+  ordered = TRUE
+)
+
+#Fit the model
+lme1 <- lmer(ATT8SCR ~ 1 + (1 | OFSTEDRATING), data = england_filtered_clean)
+# Extract the fixed-effect intercept and store in a variable
+global_mean <- fixef(lme1)[1]
+# Check the value
+global_mean
+
+
+## ## 1. Boxplot Visualization (Level 1 and Level 2 Variance) ## ##
+boxplot_att8scr <- ggplot(england_filtered_clean, aes(x = OFSTEDRATING, y = ATT8SCR, fill = OFSTEDRATING)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_hline(yintercept = global_mean, linetype = "dashed", color = "black", linewidth = 1) +
+  geom_hline(yintercept = mean(england_filtered_clean$ATT8SCR, na.rm = TRUE), linetype = "dotted", color = "#d62728", linewidth = 0.5) +
+  labs(title = "ATT8SCR Distribution Across Ofsted Ratings (The Null Model Structure)",
+       subtitle = "Fixed Grand Mean (Dashed Line) and Random Intercepts (Box Medians)",
+       x = "Ofsted Rating",
+       y = "Attainment 8 Score (ATT8SCR)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none")
+
+print(boxplot_att8scr)
+```
+:::
+
+
+
+::: multicode
+#### ![](L6_images/python-logo-only.png){width="30"}
+```{python}
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.set_theme(style="whitegrid")
+
+# Ensure ordered categories
+rating_order = ["Special Measures", "Serious Weaknesses", "Requires improvement", "Good", "Outstanding"]
+england_filtered_clean["OFSTEDRATING"] = pd.Categorical(
+    england_filtered_clean["OFSTEDRATING"],
+    categories=rating_order,
+    ordered=True
+)
+
+# Drop missing values
+plot_df = england_filtered_clean.dropna(subset=["ATT8SCR", "OFSTEDRATING"]).copy()
+
+# Figure-level density plot with hue
+g = sns.displot(
+    data=plot_df,
+    x="ATT8SCR",
+    hue="OFSTEDRATING",
+    hue_order=rating_order,
+    kind="kde",
+    fill=True,
+    alpha=0.4,
+    common_norm=False,
+    linewidth=1.2,
+    height=6,
+    aspect=10/6,
+)
+
+# Titles & labels
+g.fig.suptitle("Density of Attainment 8 (ATT8SCR) by Ofsted Rating", fontsize=14)
+g.fig.subplots_adjust(top=0.90)
+g.set_xlabels("Attainment 8 Score (ATT8SCR)")
+g.set_ylabels("Density")
+
+# Move legend to bottom (use the FacetGrid, not the Axes)
+sns.move_legend(
+    g,
+    "lower center",
+    bbox_to_anchor=(0.5, -0.25),
+    ncol=3,
+    title="Ofsted Rating",
+    frameon=False,
+)
+
+plt.show()
+```
+#### ![](L6_images/Rlogo.png){width="41" height="30"}
+```{r}
+#| message: false
+#| warning: false
+#| align: center
+#| out-width: 80%
+## ## 2. Density Plot Visualization (Comparing the Two Variance Components) ## ##
+# This plot visually shows how much the groups overlap (small overlap means high ICC).
+density_att8scr <- ggplot(england_filtered_clean, aes(x = ATT8SCR, fill = OFSTEDRATING, color = OFSTEDRATING)) +
+  geom_density(alpha = 0.4) +
+  labs(
+    title = "Density of Attainment 8 (ATT8SCR) by Ofsted Rating",
+    subtitle = "Low overlap suggests large differences between ratings (High ICC)",
+    x = "Attainment 8 Score (P8MEA)",
+    y = "Density"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+print(density_att8scr)
+```
+:::
+
+## Running the Null Model and Calculating the Inter-Class Correlation Coefficient (ICC)
+
+
+::: multicode
+#### ![](L6_images/python-logo-only.png){width="30"}
+```{python}
+import pandas as pd
+import statsmodels.api as sm
+
+# Ensure OFSTEDRATING is categorical
+rating_order = ["Special Measures", "Serious Weaknesses", "Requires improvement", "Good", "Outstanding"]
+england_filtered_clean["OFSTEDRATING"] = pd.Categorical(
+    england_filtered_clean["OFSTEDRATING"],
+    categories=rating_order,
+    ordered=True
+)
+
+# Drop missing values for P8MEA and OFSTEDRATING
+df = england_filtered_clean.dropna(subset=["ATT8SCR", "OFSTEDRATING"]).copy()
+
+# Fit null model: random intercept for OFSTEDRATING
+null_model = sm.MixedLM.from_formula("ATT8SCR ~ 1", groups="OFSTEDRATING", data=df)
+null_fit = null_model.fit()
+
+# Summary
+print(null_fit.summary())
+```
+#### ![](L6_images/Rlogo.png){width="41" height="30"}
+```{r}
+#| message: false
+#| warning: false
+#| align: center
+#| out-width: 70%
+library(lme4)
+library(performance)
+
+#lm1 <- lm(P8MEA ~ PTFSM6CLA1A + OFSTEDRATING, data = england_filtered_clean)
+#summary(lm1)
+
+lme1 <- lmer(ATT8SCR ~ 1 + (1|OFSTEDRATING), data = england_filtered_clean)
+summary(lme1)
+```
+:::
+
+::: multicode
+#### ![](L6_images/python-logo-only.png){width="30"}
+```{python}
+var_components = null_fit.cov_re.iloc[0, 0]  # random intercept variance
+resid_var = null_fit.scale                   # residual variance
+icc = var_components / (var_components + resid_var)
+print(f"ICC: {icc:.3f}")
+```
+#### ![](L6_images/Rlogo.png){width="41" height="30"}
+```{r}
+library(performance)
+
+icc_value <- performance::icc(lme1, by_group = T)
+print(icc_value)
+
+```
+:::
+
+## Null Model Visualisation
+
+::: multicode
+#### ![](L6_images/python-logo-only.png){width="30"}
+```{python}
+import pandas as pd
+import statsmodels.api as sm
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Ensure OFSTEDRATING is categorical
+rating_order = ["Special Measures", "Serious Weaknesses", "Requires improvement", "Good", "Outstanding"]
+england_filtered_clean["OFSTEDRATING"] = pd.Categorical(
+    england_filtered_clean["OFSTEDRATING"],
+    categories=rating_order,
+    ordered=True
+)
+
+# Drop missing values
+df = england_filtered_clean.dropna(subset=["ATT8SCR", "OFSTEDRATING"]).copy()
+
+# Fit null model: random intercept for OFSTEDRATING
+null_model = sm.MixedLM.from_formula("ATT8SCR ~ 1", groups="OFSTEDRATING", data=df)
+null_fit = null_model.fit()
+
+# Extract global mean (fixed effect intercept)
+global_mean = null_fit.params["Intercept"]
+
+# Extract random effects for each group (take first value from each Series)
+random_effects = null_fit.random_effects
+ranef_df = pd.DataFrame({
+    "OFSTEDRATING": list(random_effects.keys()),
+    "Intercept": [float(effect.iloc[0]) for effect in random_effects.values()]
+})
+
+# Plot random intercepts
+plt.figure(figsize=(8, 6))
+sns.scatterplot(data=ranef_df, x="OFSTEDRATING", y="Intercept", s=100, color="blue", marker="D")
+
+# Add dashed line for global mean
+plt.axhline(global_mean, color="red", linestyle="--", linewidth=1, label="Global Mean")
+
+# Titles and labels
+plt.title("Varying Intercepts by OFSTED Rating", fontsize=14)
+plt.suptitle("Model: ATT8SCR ~ 1 + (1 | OFSTEDRATING)", fontsize=10)
+plt.xlabel("Ofsted Rating")
+plt.ylabel("Random Intercept")
+plt.xticks(rotation=45)
+plt.legend()
+plt.tight_layout()
+plt.show()
+```
+#### ![](L6_images/Rlogo.png){width="41" height="30"}
+```{r}
+#| message: false
+#| warning: false
+#| align: center
+#| out-width: 80%
+library(lme4)
+library(ggplot2)
+
+# Fit the model
+lme1 <- lmer(ATT8SCR ~ 1 + (1|OFSTEDRATING), data = england_filtered_clean)
+
+# Extract random effects
+ranef_df <- as.data.frame(ranef(lme1)$OFSTEDRATING)
+ranef_df$OFSTEDRATING <- rownames(ranef(lme1)$OFSTEDRATING)
+
+ranef_df$actual_intercept <- ranef_df$`(Intercept)` + fixef(lme1)[1]
+
+ggplot(ranef_df, aes(x = OFSTEDRATING, y = actual_intercept)) +
+  geom_point(size = 3) +
+  geom_hline(yintercept = fixef(lme1)[1], linetype = "dashed", color = "red") +
+  labs(title = "Actual Intercepts by OFSTED Rating",
+       subtitle = "Model: ATT8SCR ~ 1 + (1 | OFSTEDRATING)",
+       x = "Ofsted Rating",
+       y = "Intercept") +
+  theme_minimal()
+```
+:::
+
+## Model with a Fixed Effect Predictor
+
+::: multicode
+#### ![](L6_images/python-logo-only.png){width="30"}
+```{python}
+
+```
+#### ![](L6_images/Rlogo.png){width="41" height="30"}
+```{r}
+library(lme4)
+library(ggplot2)
+library(dplyr)
+library(tibble)
+
+# Fit the model
+lme2 <- lmer(P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING), data = england_filtered_clean)
+
+# Fixed effects
+fixed_intercept <- fixef(lme2)[1]
+slope <- fixef(lme2)[2]
+
+# Random intercepts (BLUPs) per OFSTED group
+ranef_df <- ranef(lme2)$OFSTEDRATING %>%
+  as.data.frame() %>%
+  rownames_to_column("OFSTEDRATING") %>%
+  rename(blup = `(Intercept)`)
+
+# Prediction grid across the observed range of PTFSM6CLA1A
+pop_range <- seq(
+  min(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  max(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  length.out = 100
+)
+
+# Lines for each OFSTED group: same slope, group-specific intercept
+pred_df <- do.call(rbind, lapply(seq_len(nrow(ranef_df)), function(i) {
+  intercept_i <- fixed_intercept + ranef_df$blup[i]
+  data.frame(
+    PTFSM6CLA1A = pop_range,
+    P8MEA = intercept_i + slope * pop_range,
+    OFSTEDRATING = ranef_df$OFSTEDRATING[i],
+    stringsAsFactors = FALSE
+  )
+}))
+
+# Optional: overall (fixed-effects only) line
+overall_df <- data.frame(
+  PTFSM6CLA1A = pop_range,
+  P8MEA = fixed_intercept + slope * pop_range
+)
+
+# Plot: raw points overlaid + group prediction lines
+ggplot() +
+  # Raw points, coloured by OFSTED group
+  geom_point(
+    data = england_filtered_clean,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    alpha = 0.35, size = 1.2, na.rm = TRUE
+  ) +
+  # Group-specific prediction lines (random intercepts)
+  geom_line(
+    data = pred_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    linewidth = 1.1, alpha = 0.9
+  ) +
+  # Optional: overall fixed-effects line (no random intercept)
+  geom_line(
+    data = overall_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA),
+    color = "black", linetype = "dashed", linewidth = 0.9
+  ) +
+  scale_color_brewer(palette = "Set2") +
+  labs(
+    title = "P8MEA vs Disadvantaged (%): Raw data and group-specific fitted lines",
+    subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING)\nLines share the same slope; intercepts vary by OFSTED rating",
+    x = "PTFSM6CLA1A",
+    y = "P8MEA",
+    color = "OFSTED rating"
+  ) +
+  theme_minimal(base_size = 12)
 ```
 :::

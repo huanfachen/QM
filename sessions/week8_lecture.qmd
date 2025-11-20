@@ -152,7 +152,7 @@ calculate_gorard_segregation <- function(df, col_A, col_T) {
 
 
 # Apply the functions to each LEA and create a new dataframe with the results
-results_df <- england_school_2022_23_not_special %>%
+results_df <- eng_sch_2022_23_not_special_plus %>%
   group_by(LEA) %>%
   group_map(~ tibble(
     LEA = .y$LEA,
@@ -174,13 +174,13 @@ library(plotly)
 # index_of_dissimilarity, gorard_segregation, la_name, region_name
 
 fig <- plot_ly(
-  data = merged_df,
+  data = results_df,
   x = ~index_of_dissimilarity,
   y = ~gorard_segregation,
   type = 'scatter',
   mode = 'markers',
-  color = ~region_name,       # Color by region
-  text = ~la_name,            # Hover shows Local Authority name
+  color = ~LEA,       # Color by region
+  text = ~LEA,            # Hover shows Local Authority name
   hoverinfo = 'text+x+y',
   marker = list(size = 6, opacity = 0.7)
 ) %>%
@@ -211,14 +211,131 @@ england_filtered_clean <- england_filtered[
   england_filtered$PTFSM6CLA1A > 0, 
 ]
 
+merged_df <- england_filtered_clean %>%
+  left_join(results_df, by = "LEA")
+
+#write_csv(merged_df, "E:/school_data.csv")
+
 ```
+
+```{r}
+#| eval: false
+#| include: false
+# For something else, but just getting a load of teacher data too
+
+teacher_turnover <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/1df9bfbf-b573-4f1d-ba87-06a36387f2e5/csv")
+teacher_pay <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/760ad614-44ac-4e8a-8fdd-a8080c762770/csv")
+teacher_occasional <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/ba01ed55-b482-4d20-a38d-11c91dcf0b0a/csv")
+teacher_vaccancies <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/0ed37c66-2867-4851-8454-73851606705d/csv")
+teacher_pupil_ratios <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/12849f4a-1427-4dc2-9f7a-e069087824aa/csv")
+teacher_sickness <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/aa13e99e-534c-4f70-9c43-c7f9544296b3/csv")
+teacher_third_party_support <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/aa13e99e-534c-4f70-9c43-c7f9544296b3/csv")
+teacher_workforce_size <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/6cb459c2-5cc5-41be-87c8-01c0986514e8/csv")
+
+str(teacher_turnover)
+str(teacher_pay)
+str(teacher_occasional)
+str(teacher_vaccancies)
+str(teacher_pupil_ratios)
+str(teacher_sickness)
+str(teacher_third_party_support)
+str(teacher_workforce_size)
+
+library(dplyr)
+library(purrr)
+
+# List all teacher data frames
+teacher_dfs <- list(
+  teacher_workforce_size,
+  teacher_sickness,
+  teacher_third_party_support,
+  teacher_vaccancies,
+  teacher_pupil_ratios,
+  teacher_turnover,
+  teacher_pay,
+  teacher_occasional
+)
+
+# Convert URN to character and filter to time_period == 202223 for each
+teacher_dfs_filtered <- map(teacher_dfs, ~ .x %>%
+  mutate(school_urn = as.character(school_urn)) %>%
+  filter(time_period == 202223))
+
+# Combine all into one dataset by full join on school_urn
+combined_teacher_df <- reduce(teacher_dfs_filtered, full_join, by = "school_urn")
+
+# Ensure one row per unique URN (if duplicates exist after join)
+combined_teacher_df <- combined_teacher_df %>%
+  distinct(school_urn, .keep_all = TRUE)
+
+library(dplyr)
+
+combined_teacher_df <- combined_teacher_df %>%
+  select(-c(
+    time_period.x, time_identifier.x, geographic_level.x, country_code.x, country_name.x,
+    region_code.x, region_name.x, old_la_code.x, new_la_code.x, la_name.x, school_laestab.x,
+    school_name.x, school_type.x, number_schools.x,
+    hc_workforce, hc_all_teachers, hc_classroom_teachers, hc_leadership_teachers,
+    hc_head_teachers, hc_deputy_head_teachers, hc_assistant_head_teachers,
+    hc_all_teachers_without_qts, hc_occasional_teachers, hc_ft_all_teachers,
+    hc_ft_classroom_teachers, hc_ft_leadership_teachers, hc_ft_head_teachers,
+    hc_ft_deputy_head_teachers, hc_ft_assistant_head_teachers, hc_ft_all_teachers_without_qts,
+    hc_pt_all_teachers, hc_pt_classroom_teachers, hc_pt_leadership_teachers,
+    hc_pt_head_teachers, hc_pt_deputy_head_teachers, hc_pt_assistant_head_teachers,
+    hc_pt_all_teachers_without_qts, hc_all_support_staff, hc_teaching_assistants,
+    hc_other_school_support_staff, hc_administrative_staff, hc_technicians,
+    hc_auxiliary_staff, hc_leadership_non_teachers, hc_school_business_professionals,
+    hc_third_party_support_staff, hc_ft_all_support_staff, hc_ft_teaching_assistants,
+    hc_ft_other_school_support_staff, hc_ft_administrative_staff, hc_ft_technicians,
+    hc_ft_auxiliary_staff, hc_ft_leadership_non_teachers, hc_ft_school_business_professionals,
+    hc_pt_all_support_staff, hc_pt_teaching_assistants, hc_pt_other_school_support_staff,
+    hc_pt_administrative_staff, hc_pt_technicians, hc_pt_auxiliary_staff,
+    hc_pt_leadership_non_teachers, hc_pt_school_business_professionals,
+    time_period.y, time_identifier.y, geographic_level.y, country_code.y, country_name.y,
+    region_code.y, region_name.y, old_la_code.y, new_la_code.y, la_name.y, school_laestab.y,
+    school_name.y, school_type.y,
+    time_period.x.x, time_identifier.x.x, geographic_level.x.x, country_code.x.x,
+    country_name.x.x, region_code.x.x, region_name.x.x, old_la_code.x.x, new_la_code.x.x,
+    la_name.x.x, school_laestab.x.x, school_name.x.x, school_type.x.x,
+    total_teachers_taking_absence.y, percentage_taking_absence.y,
+    total_number_of_days_lost.y, average_number_of_days_taken.y,
+    average_number_of_days_all_teachers.y,
+    time_period.y.y, time_identifier.y.y, geographic_level.y.y, country_code.y.y,
+    country_name.y.y, region_code.y.y, region_name.y.y, old_la_code.y.y, new_la_code.y.y,
+    la_name.y.y, school_laestab.y.y, school_name.y.y, school_type.y.y,
+    time_period.x.x.x, time_identifier.x.x.x, geographic_level.x.x.x, country_code.x.x.x,
+    country_name.x.x.x, region_code.x.x.x, region_name.x.x.x, old_la_code.x.x.x,
+    new_la_code.x.x.x, la_name.x.x.x, school_laestab.x.x.x, school_name.x.x.x,
+    school_type.x.x.x, number_schools.y,
+    time_period.y.y.y, time_identifier.y.y.y, geographic_level.y.y.y, country_code.y.y.y,
+    country_name.y.y.y, school_laestab.y.y.y, school_name.y.y.y, school_type.y.y.y,
+    time_period.x.x.x.x, time_identifier.x.x.x.x, geographic_level.x.x.x.x,
+    country_code.x.x.x.x, country_name.x.x.x.x, region_code.y.y.y, region_name.y.y.y,
+    old_la_code.y.y.y, new_la_code.y.y.y, la_name.y.y.y, school_laestab.x.x.x.x,
+    school_name.x.x.x.x, time_period.y.y.y.y, time_identifier.y.y.y.y,
+    geographic_level.y.y.y.y, country_code.y.y.y.y, country_name.y.y.y.y, region_name,
+    region_code, la_name, old_la_code, new_la_code, school_laestab.y.y.y.y,
+    school_name.y.y.y.y
+  ))
+
+# Check result
+str(combined_teacher_df)
+
+
+final_combined_df <- merged_df %>%
+  left_join(combined_teacher_df, by = c("URN" = "school_urn"))
+
+write_csv(final_combined_df, "E:/school_data_2223.csv")
+
+```
+
 
 # This week
 
 ## Recap
 
 -   Last week we saw how multiple regression models can allow us to understand complex relationships between predictor and outcome variables
--   We began to explore how by increasing the complexity of our regression models, we can begin to observe how the effects of different variables can confound (obscrure) and mediate (partially cause) the effects of others, giving us a deeper understanding of our system of interest
+-   We began to explore how by increasing the complexity of our regression models, we can begin to observe how the effects of different variables can confound (obscure) and mediate (partially cause) the effects of others, giving us a deeper understanding of our system of interest
 -   We were able to see that with just a relatively small number of variables, we could explain most of the variation in school-level attainment scores in England
 
 ## OLS regression with interaction terms
@@ -816,13 +933,13 @@ $$
 $$\epsilon_{ij} \sim N(0, \sigma^2_{\epsilon})$$
 
 |  |  |
-|--------------------|----------------------------------------------------|
+|----------------------|--------------------------------------------------|
 | **Notation** | **Meaning** |
 | $\epsilon_{ij}$ | The **Level 1 Residual Error** (or "within-group error") for the $i$-th school in the $j$-th Ofsted rating. |
 | $\sim$ | "Is distributed as" or "Follows the distribution." |
 | $N(\dots)$ | The ***N***ormal (Gaussian) Distribution. |
 | $0$ | The **Mean** of the distribution = 0. |
-| $\sigma^2_{\epsilon}$ | The **Within-Group Variance** of the the error term. Sigma - $\sigma$ is commonly used to represent standard deviation. Variance is $\sigma^2$  |
+| $\sigma^2_{\epsilon}$ | The **Within-Group Variance** of the the error term. Sigma - $\sigma$ is commonly used to represent standard deviation. Variance is $\sigma^2$ |
 
 ## Level 2 - Between-Group Variance
 
@@ -1720,7 +1837,7 @@ ggplot(re_df, aes(x = reorder(group, `(Intercept)`), y = `(Intercept)`)) +
 ```
 
 -   Extracting the random effects and their variances for individual groups and plotting them in a caterpillar plot allows you to see which groups are meaningfully different from the average
--   If a group's confidence interval doesn't cross the 0 line, it's an interesting case
+-   If a group's confidence interval doesn't cross the 0 line, it's an interesting case (oh look, there's Brighton!)
 -   Similar to looking for significant dummies in an OLS model - although these are shrunken estimates
 
 ## Interpreting the Final Model - Fixed Effects {.smaller}
@@ -1823,7 +1940,7 @@ Fixed Effects
 ## Interpreting the Final Model - Fixed Effects {.smaller}
 
 | Predictor | Scenario | Log shift = equation for % change | \% change | Raw points = 42.8 baseline x % change |
-|-------------|-------------|--------------------|-------------|-------------|
+|---------------|---------------|---------------|---------------|---------------|
 | **% Overall Absence - log(PERCTOT)** | 40% → 30% | −0.2238 × log(30/40) | +6.65% | +2.85 |
 |  | 20% → 10% | −0.2238 × log(10/20) | +16.78% | +7.18 |
 | **% Disadvantage - log(PTFSM6CLA1A)** | 40% → 30% | −0.0754 × log(30/40) | +2.19% | +0.94 |
@@ -1831,7 +1948,7 @@ Fixed Effects
 | **Prior low attainment - (PTPRIORLO)** | 40 → 30 pp | −0.00686 × (−10) | +7.10% | +3.04 |
 |  | 20 → 10 pp | −0.00686 × (−10) | +7.10% | +3.04 |
 
--   **Note** - final column only illustrative
+-   **Note** - final column only illustrative as using global average
 
 ## Wrapping it all up {.smaller}
 
@@ -1849,7 +1966,7 @@ Fixed Effects
 -   What are the implications of this for local policy?
 -   Can regression help us and, if it can, how can we go about carefully building a regression model to help us answer these questions?
 
-## tables {.smaller}
+## Custom Policy - Brighton Schools {.smaller}
 
 ```{r}
 # Packages
@@ -1860,8 +1977,8 @@ library(lme4)
 library(tibble)
 
 # --- Schools of interest ---
-target_urns  <- c("114581", "14608")
-target_names <- c("Longhill High School", "Patcham High School")
+target_urns  <- c("114581", "14608", "136164")
+target_names <- c("Longhill High School", "Patcham High School", "Brighton Aldridge Community Academy")
 
 # --- Variables of interest (from your model) ---
 vars_of_interest <- c(
@@ -1988,31 +2105,34 @@ display_tbl <- schools_with_re %>%
   arrange(Variable)
 
 # Final table with model inputs + random effects + baselines
-display_tbl
+#display_tbl
 
 
 ```
 
-## Final Policy Thoughts {.smaller}
+```{r}
+#| label: tbl-display-min
+#| echo: false
+library(knitr)
 
-Given levels of variables are school specific, exploring those at each school can give us a useful hint to what might have the most important impact on attainment
+knitr::kable(
+  display_tbl %>% arrange(Variable),
+  align = "l"
+)
+```
 
-1) Longhill High School (baseline ≈ 36.8)
-Profile highlights: PERCTOT=13.4; PTPRIORLO=34; PTFSM=29.
-Top levers:
-Reduce overall absence (PERCTOT) — biggest bang-per-buck, and Longhill starts higher than Patcham.
-    −   1 pp (13.4 → 12.4): +1.75% ATT8 ⇒ ≈ +0.64 points
-    −   2 pp (13.4 → 11.4): +3.68% ATT8 ⇒ ≈ +1.36 points
-2. Reduce prior low attainment (PTPRIORLO) — strong, feasible medium‑term via targeted KS3 catch‑up, transition, tutoring.
-    −   5 pp (34 → 29): +3.49% ⇒ ≈ +1.28 points
-    −   10 pp (34 → 24): +7.10% ⇒ ≈ +2.61 points
-Attendance is the fastest, most controllable lever with meaningful point gains even for small pp reductions; PTPRIORLO is the next best lever via academic catch‑up. Better policy might be to focus on mitigation rather than changing intake.
+## Custom Policy - Longhill Example {.smaller}
+-   Longhill High School (baseline ≈ 36.8) Profile highlights: PERCTOT=13.4; PTPRIORLO=34; PTFSM=29.
+-   Top levers:
+    -   Reduce overall absence (PERCTOT) — biggest bang-per-buck, and Longhill starts higher than Patcham. − 1 pp (13.4% → 12.4%): +1.75% ATT8 ⇒ ≈ +0.64 GCSE points − 2 pp (13.4% → 11.4)%: +3.68% ATT8 ⇒ ≈ +1.36 GCSE points. No collateral damage.
+    -   Reduce prior low attainment effects (PTPRIORLO) — strong, feasible medium‑term via targeted KS3 catch‑up, transition, targeted support. − 5 pp (34% → 29%): +3.49% ⇒ ≈ +1.28 GCSE points − 10 pp (34 → 24): +7.10% ⇒ ≈ +2.61 GCSE points. No collateral damage.
+    -   To contrast, reducing the numbers of disadvantaged students (PTFSM6CLA1A) in the school by 10 pp from 29% to 19%, is only worth ≈ +1.19 GCSE points (less than reducing absence by just 2 percentage points). Busing children across the city to achieve this, high collateral damage. 
 
-## Final Policy Thoughts {.smaller}
+## Custom Policy - Longhill Example {.smaller}
 
-Bottom line for Longhill
--   A move RI → Good in this model corresponds to ~+5.1% in ATT8, i.e., ~+1.9 points from a 36.8 baseline.
--   That’s roughly equivalent to:
-    -   Reducing overall absence by ~2.7 percentage points (13.4 → ~10.7), or
-    -   Reducing prior-low attainment by ~7.3 percentage points (34 → ~26.7).
-Among actionable levers, attendance remains the fastest high-return route; PTPRIORLO reduction is similarly powerful but typically requires sustained academic interventions across KS3/KS4.
+-   Attendance is the fastest, most controllable lever with meaningful point gains even for small pp reductions;
+-   PTPRIORLO is the next best lever via academic catch‑up. Better policy might be to focus on mitigation rather than changing intake.
+-   Bottom line for Longhill:
+    -   A move RI → Good in this model corresponds to \~+5.1% in ATT8, i.e., \~+1.9 points from a 36.8 baseline.
+    -   That’s roughly equivalent to: - Reducing overall absence by \~2.7 percentage points (13.4 → \~10.7), or - Reducing prior-low attainment by \~7.3 percentage points (34 → \~26.7).
+    -   Among actionable levers, attendance remains the fastest high-return route; PTPRIORLO reduction is similarly powerful but typically requires sustained academic interventions across KS3/KS4.
