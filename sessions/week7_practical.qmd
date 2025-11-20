@@ -810,7 +810,7 @@ england_filtered_clean$fitted7 <- fitted_vals
     -   Do you have any issues of multicollinearity or residual independence? Does your model pass the standard tests?
     -   You should also plot your model estimates (fitted values) against your original $Y$ variable as I have done below (possibly overlay your local authorities from last week as well) and map your residuals too.
     
-Here's my best model compared with some of the others I built as I went along:
+Here's my best model in R compared with some of the others I built as I went along:
 
 ```{r}
 names(coef(england_model3))
