@@ -175,7 +175,7 @@ from pathlib import Path
 import statsmodels.api as sm
 
 # little function to define the file root on different machines
-def find_qm_root(start_path: Path = Path.cwd(), anchor: str = "QM_Fork") -> Path:
+def find_qm_root(start_path: Path = Path.cwd(), anchor: str = "QM") -> Path:
     """
     Traverse up from the start_path until the anchor folder (e.g. 'QM' or 'QM_Fork')      is found. Returns the path to the anchor folder.
     """

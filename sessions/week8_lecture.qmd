@@ -223,14 +223,16 @@ merged_df <- england_filtered_clean %>%
 #| include: false
 # For something else, but just getting a load of teacher data too
 
-teacher_turnover <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/1df9bfbf-b573-4f1d-ba87-06a36387f2e5/csv")
-teacher_pay <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/760ad614-44ac-4e8a-8fdd-a8080c762770/csv")
-teacher_occasional <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/ba01ed55-b482-4d20-a38d-11c91dcf0b0a/csv")
-teacher_vaccancies <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/0ed37c66-2867-4851-8454-73851606705d/csv")
-teacher_pupil_ratios <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/12849f4a-1427-4dc2-9f7a-e069087824aa/csv")
-teacher_sickness <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/aa13e99e-534c-4f70-9c43-c7f9544296b3/csv")
-teacher_third_party_support <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/aa13e99e-534c-4f70-9c43-c7f9544296b3/csv")
-teacher_workforce_size <- read.csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/6cb459c2-5cc5-41be-87c8-01c0986514e8/csv")
+na_all <- c("", "NA", "SUPP", "NP", "NE", "SP", "SN", "LOWCOV", "NEW", "SUPPMAT", "x", "z", "c", "u")
+
+teacher_turnover <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/1df9bfbf-b573-4f1d-ba87-06a36387f2e5/csv", na = na_all)
+teacher_pay <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/760ad614-44ac-4e8a-8fdd-a8080c762770/csv", na = na_all)
+teacher_occasional <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/ba01ed55-b482-4d20-a38d-11c91dcf0b0a/csv", na = na_all)
+teacher_vaccancies <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/0ed37c66-2867-4851-8454-73851606705d/csv", na = na_all)
+teacher_pupil_ratios <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/12849f4a-1427-4dc2-9f7a-e069087824aa/csv", na = na_all)
+teacher_sickness <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/aa13e99e-534c-4f70-9c43-c7f9544296b3/csv", na = na_all)
+teacher_third_party_support <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/aa13e99e-534c-4f70-9c43-c7f9544296b3/csv", na = na_all)
+teacher_workforce_size <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/6cb459c2-5cc5-41be-87c8-01c0986514e8/csv", na = na_all)
 
 str(teacher_turnover)
 str(teacher_pay)
@@ -319,18 +321,21 @@ combined_teacher_df <- combined_teacher_df %>%
   ))
 
 # Check result
-str(combined_teacher_df)
-
+#str(combined_teacher_df)
 
 final_combined_df <- merged_df %>%
   left_join(combined_teacher_df, by = c("URN" = "school_urn"))
 
-write_csv(final_combined_df, "E:/school_data_2223.csv")
+#write_csv(final_combined_df, "E:/school_data_2223.csv")
 
 ```
 
 
 # This week
+
+Another long lecture - sorry!!
+
+I'll try and stop for another break in the middle
 
 ## Recap
 
@@ -2136,3 +2141,13 @@ knitr::kable(
     -   A move RI → Good in this model corresponds to \~+5.1% in ATT8, i.e., \~+1.9 points from a 36.8 baseline.
     -   That’s roughly equivalent to: - Reducing overall absence by \~2.7 percentage points (13.4 → \~10.7), or - Reducing prior-low attainment by \~7.3 percentage points (34 → \~26.7).
     -   Among actionable levers, attendance remains the fastest high-return route; PTPRIORLO reduction is similarly powerful but typically requires sustained academic interventions across KS3/KS4.
+    
+## Conclusions
+
+-   Phew!! That was a lot!
+
+## Conclusions
+
+-   Linear Mixed Effects Models are a useful extension to OLS standard regression when there are logical groups, hierarchies or repeated measurements within your data
+
+

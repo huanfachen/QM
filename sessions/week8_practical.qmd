@@ -125,7 +125,7 @@ from pathlib import Path
 import statsmodels.api as sm
 
 # little function to define the file root on different machines
-def find_qm_root(start_path: Path = Path.cwd(), anchor: str = "QM_Fork") -> Path:
+def find_qm_root(start_path: Path = Path.cwd(), anchor: str = "QM") -> Path:
     """
     Traverse up from the start_path until the anchor folder (e.g. 'QM' or 'QM_Fork')      is found. Returns the path to the anchor folder.
     """
@@ -181,6 +181,8 @@ You might want to run yours, however mine looked like this (without any interact
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
 ```{python}
+#| message: false
+#| warning: false
 import numpy as np
 import statsmodels.formula.api as smf
 
@@ -208,6 +210,8 @@ print(model.summary())
 ```
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
 ```{r}
+#| message: false
+#| warning: false
 england_filtered_clean <- england_filtered_clean %>%
   filter(PTFSM6CLA1A > 0, PERCTOT > 0, PNUMEAL > 0)
 
@@ -224,6 +228,8 @@ summary(england_model7)
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
 ```{python}
+#| message: false
+#| warning: false
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm
@@ -360,13 +366,14 @@ print(boxplot_att8scr)
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
 ```{python}
+#| message: false
+#| warning: false
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
 sns.set_theme(style="whitegrid")
 
-# Ensure ordered categories
 rating_order = ["Special Measures", "Serious Weaknesses", "Requires improvement", "Good", "Outstanding"]
 england_filtered_clean["OFSTEDRATING"] = pd.Categorical(
     england_filtered_clean["OFSTEDRATING"],
@@ -374,41 +381,33 @@ england_filtered_clean["OFSTEDRATING"] = pd.Categorical(
     ordered=True
 )
 
-# Drop missing values
 plot_df = england_filtered_clean.dropna(subset=["ATT8SCR", "OFSTEDRATING"]).copy()
 
-# Figure-level density plot with hue
-g = sns.displot(
-    data=plot_df,
-    x="ATT8SCR",
-    hue="OFSTEDRATING",
-    hue_order=rating_order,
-    kind="kde",
-    fill=True,
-    alpha=0.4,
-    common_norm=False,
-    linewidth=1.2,
-    height=6,
-    aspect=10/6,
-)
+# Create figure and axis manually
+fig, ax = plt.subplots(figsize=(8, 5))
+
+# Plot KDE for each category
+for rating in rating_order:
+    subset = plot_df[plot_df["OFSTEDRATING"] == rating]
+    sns.kdeplot(
+        data=subset,
+        x="ATT8SCR",
+        fill=True,
+        alpha=0.4,
+        linewidth=1.2,
+        ax=ax,
+        label=rating
+    )
 
 # Titles & labels
-g.fig.suptitle("Density of Attainment 8 (ATT8SCR) by Ofsted Rating", fontsize=14)
-g.fig.subplots_adjust(top=0.90)
-g.set_xlabels("Attainment 8 Score (ATT8SCR)")
-g.set_ylabels("Density")
+ax.set_title("Density of Attainment 8 (ATT8SCR) by Ofsted Rating", fontsize=14)
+ax.set_xlabel("Attainment 8 Score (ATT8SCR)")
+ax.set_ylabel("Density")
+ax.legend(title="Ofsted Rating", loc="lower center", bbox_to_anchor=(0.5, -0.25), ncol=3)
 
-# Move legend to bottom (use the FacetGrid, not the Axes)
-sns.move_legend(
-    g,
-    "lower center",
-    bbox_to_anchor=(0.5, -0.25),
-    ncol=3,
-    title="Ofsted Rating",
-    frameon=False,
-)
-
+plt.tight_layout()
 plt.show()
+
 ```
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
 ```{r}
@@ -435,10 +434,11 @@ print(density_att8scr)
 
 ## Running the Null Model and Calculating the Inter-Class Correlation Coefficient (ICC)
 
-
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
 ```{python}
+#| message: false
+#| warning: false
 import pandas as pd
 import statsmodels.api as sm
 
@@ -480,6 +480,8 @@ summary(lme1)
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
 ```{python}
+#| message: false
+#| warning: false
 var_components = null_fit.cov_re.iloc[0, 0]  # random intercept variance
 resid_var = null_fit.scale                   # residual variance
 icc = var_components / (var_components + resid_var)
@@ -487,6 +489,8 @@ print(f"ICC: {icc:.3f}")
 ```
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
 ```{r}
+#| message: false
+#| warning: false
 library(performance)
 
 icc_value <- performance::icc(lme1, by_group = T)
@@ -500,6 +504,8 @@ print(icc_value)
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
 ```{python}
+#| message: false
+#| warning: false
 import pandas as pd
 import statsmodels.api as sm
 import seaborn as sns
@@ -576,85 +582,746 @@ ggplot(ranef_df, aes(x = OFSTEDRATING, y = actual_intercept)) +
 ```
 :::
 
-## Model with a Fixed Effect Predictor
+## Stage 2 - Adding an initial Fixed Effect
+
+### Model with a Fixed Effect Predictor
 
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
 ```{python}
+#| message: false
+#| warning: false
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import statsmodels.formula.api as smf
 
+# 1. Clean data and check
+df = england_filtered_clean.copy()
+print("Original shape:", df.shape)
+
+# Drop missing values
+df = df.dropna(subset=["ATT8SCR", "PTFSM6CLA1A", "OFSTEDRATING"])
+print("After dropna:", df.shape)
+
+# Ensure correct types
+df["OFSTEDRATING"] = df["OFSTEDRATING"].astype(str)
+print("Groups:", df["OFSTEDRATING"].unique())
+
+if df.empty:
+    raise ValueError("No data left after cleaning. Check column names and missing values.")
+
+# 2. Apply log transformation
+df["log_ATT8SCR"] = np.log(df["ATT8SCR"])
+df["log_PTFSM6CLA1A"] = np.log(df["PTFSM6CLA1A"])
+
+# 3. Fit simple linear model (fixed effect)
+lm = smf.ols("log_ATT8SCR ~ log_PTFSM6CLA1A", data=df).fit()
+fixed_intercept = lm.params["Intercept"]
+slope = lm.params["log_PTFSM6CLA1A"]
+print("Fixed effects:", lm.params)
+
+# 4. Compute group-specific intercept adjustments
+df["residual"] = df["log_ATT8SCR"] - (fixed_intercept + slope * df["log_PTFSM6CLA1A"])
+group_adjustments = df.groupby("OFSTEDRATING")["residual"].mean().reset_index()
+group_adjustments.rename(columns={"residual": "blup"}, inplace=True)
+print("Group adjustments:", group_adjustments)
+
+# 5. Prediction grid (log scale)
+pop_range = np.linspace(df["log_PTFSM6CLA1A"].min(), df["log_PTFSM6CLA1A"].max(), 100)
+
+# Build predictions for each group
+pred_list = []
+for _, row in group_adjustments.iterrows():
+    intercept_i = fixed_intercept + row["blup"]
+    pred_list.append(pd.DataFrame({
+        "log_PTFSM6CLA1A": pop_range,
+        "log_ATT8SCR": intercept_i + slope * pop_range,
+        "OFSTEDRATING": row["OFSTEDRATING"]
+    }))
+pred_df = pd.concat(pred_list, ignore_index=True)
+
+# Back-transform predictions to original scale
+pred_df["PTFSM6CLA1A"] = np.exp(pred_df["log_PTFSM6CLA1A"])
+pred_df["ATT8SCR"] = np.exp(pred_df["log_ATT8SCR"])
+
+# Overall line
+overall_df = pd.DataFrame({
+    "log_PTFSM6CLA1A": pop_range,
+    "log_ATT8SCR": fixed_intercept + slope * pop_range
+})
+overall_df["PTFSM6CLA1A"] = np.exp(overall_df["log_PTFSM6CLA1A"])
+overall_df["ATT8SCR"] = np.exp(overall_df["log_ATT8SCR"])
+
+# 6. Plot (original scale)
+sns.set_theme(style="whitegrid")
+fig, ax = plt.subplots(figsize=(8, 6))
+
+# Raw points
+sns.scatterplot(
+    data=df,
+    x="PTFSM6CLA1A", y="ATT8SCR", hue="OFSTEDRATING",
+    alpha=0.35, s=30, ax=ax
+)
+
+# Group-specific lines
+sns.lineplot(
+    data=pred_df,
+    x="PTFSM6CLA1A", y="ATT8SCR", hue="OFSTEDRATING",
+    linewidth=1.1, alpha=0.9, ax=ax, legend=False
+)
+
+# Overall line
+sns.lineplot(
+    data=overall_df,
+    x="PTFSM6CLA1A", y="ATT8SCR",
+    color="black", linestyle="--", linewidth=0.9, ax=ax
+)
+
+# Titles & labels
+ax.set_title("ATT8SCR vs Disadvantaged (%): Log-transformed model predictions", fontsize=14)
+ax.set_xlabel("PTFSM6CLA1A")
+ax.set_ylabel("ATT8SCR")
+ax.legend(title="OFSTED rating", loc="lower center", bbox_to_anchor=(0.5, -0.25), ncol=3)
+
+ax.set_xscale("log")
+ax.set_yscale("log")
+
+plt.tight_layout()
+plt.show()
 ```
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
 ```{r}
+#| message: false
+#| warning: false
 library(lme4)
 library(ggplot2)
 library(dplyr)
 library(tibble)
 
 # Fit the model
-lme2 <- lmer(P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING), data = england_filtered_clean)
+lme2 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + (1 | OFSTEDRATING), data = england_filtered_clean)
 
 # Fixed effects
 fixed_intercept <- fixef(lme2)[1]
 slope <- fixef(lme2)[2]
 
-# Random intercepts (BLUPs) per OFSTED group
+# Random intercepts (BLUPs)
 ranef_df <- ranef(lme2)$OFSTEDRATING %>%
   as.data.frame() %>%
   rownames_to_column("OFSTEDRATING") %>%
   rename(blup = `(Intercept)`)
 
-# Prediction grid across the observed range of PTFSM6CLA1A
+# Prediction grid across observed range (raw values)
 pop_range <- seq(
   min(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
   max(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
   length.out = 100
 )
 
-# Lines for each OFSTED group: same slope, group-specific intercept
+# Lines for each OFSTED group: apply log in prediction
 pred_df <- do.call(rbind, lapply(seq_len(nrow(ranef_df)), function(i) {
   intercept_i <- fixed_intercept + ranef_df$blup[i]
   data.frame(
     PTFSM6CLA1A = pop_range,
-    P8MEA = intercept_i + slope * pop_range,
+    ATT8SCR = exp(intercept_i + slope * log(pop_range)),  # back-transform to original scale
     OFSTEDRATING = ranef_df$OFSTEDRATING[i],
     stringsAsFactors = FALSE
   )
 }))
 
-# Optional: overall (fixed-effects only) line
+# Overall fixed-effects line
 overall_df <- data.frame(
   PTFSM6CLA1A = pop_range,
-  P8MEA = fixed_intercept + slope * pop_range
+  ATT8SCR = exp(fixed_intercept + slope * log(pop_range))  # back-transform
 )
 
-# Plot: raw points overlaid + group prediction lines
+# Plot: raw points and fitted lines
 ggplot() +
-  # Raw points, coloured by OFSTED group
   geom_point(
     data = england_filtered_clean,
-    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    aes(x = log(PTFSM6CLA1A), y = log(ATT8SCR), color = OFSTEDRATING),
     alpha = 0.35, size = 1.2, na.rm = TRUE
   ) +
-  # Group-specific prediction lines (random intercepts)
   geom_line(
     data = pred_df,
-    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    aes(x = log(PTFSM6CLA1A), y = log(ATT8SCR), color = OFSTEDRATING),
     linewidth = 1.1, alpha = 0.9
   ) +
-  # Optional: overall fixed-effects line (no random intercept)
   geom_line(
     data = overall_df,
-    aes(x = PTFSM6CLA1A, y = P8MEA),
+    aes(x = log(PTFSM6CLA1A), y = log(ATT8SCR)),
     color = "black", linetype = "dashed", linewidth = 0.9
   ) +
   scale_color_brewer(palette = "Set2") +
   labs(
-    title = "P8MEA vs Disadvantaged (%): Raw data and group-specific fitted lines",
-    subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING)\nLines share the same slope; intercepts vary by OFSTED rating",
-    x = "PTFSM6CLA1A",
-    y = "P8MEA",
+    title = "log(ATT8SCR) vs log(Disadvantaged): Raw data and fitted lines",
+    subtitle = "Model: log(ATT8SCR) ~ log(PTFSM6CLA1A) + (1 | OFSTEDRATING)",
+    x = "log(PTFSM6CLA1A)",
+    y = "log(ATT8SCR)",
     color = "OFSTED rating"
   ) +
   theme_minimal(base_size = 12)
 ```
 :::
+
+### Random Intercept and Random Slope Model
+
+::: multicode
+#### ![](L6_images/python-logo-only.png){width="30"}
+```{python}
+#| message: false
+#| warning: false
+import pandas as pd
+import numpy as np
+import statsmodels.formula.api as smf
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = england_filtered_clean.copy()
+df["log_ATT8SCR"] = np.log(df["ATT8SCR"])
+df["log_PTFSM6CLA1A"] = np.log(df["PTFSM6CLA1A"])
+
+# Drop rows with missing values in any relevant column
+df = df.dropna(subset=["log_ATT8SCR", "log_PTFSM6CLA1A", "OFSTEDRATING"])
+
+# Fit mixed model with random intercepts and slopes
+model = smf.mixedlm(
+    "log_ATT8SCR ~ log_PTFSM6CLA1A",
+    df,
+    groups=df["OFSTEDRATING"],
+    re_formula="~log_PTFSM6CLA1A"
+)
+lme_rs = model.fit(reml=False, method="lbfgs")
+
+# Fixed effects
+fixed_intercept = lme_rs.fe_params["Intercept"]
+fixed_slope = lme_rs.fe_params["log_PTFSM6CLA1A"]
+
+# Random effects per group (intercept and slope deviations)
+ranef = lme_rs.random_effects
+re_df = pd.DataFrame([
+    {
+        "OFSTEDRATING": g,
+        "b0": v.get("Intercept", v.get("0", 0)),  # intercept deviation
+        "b1": v.get("log_PTFSM6CLA1A", 0)         # slope deviation
+    }
+    for g, v in ranef.items()
+])
+
+# Prediction grid (log scale)
+x_range_log = np.linspace(np.log(df["PTFSM6CLA1A"].min()), np.log(df["PTFSM6CLA1A"].max()), 100)
+
+# Build predictions for each group
+pred_list = []
+for _, row in re_df.iterrows():
+    intercept_i = fixed_intercept + row["b0"]
+    slope_i = fixed_slope + row["b1"]
+    pred_list.append(pd.DataFrame({
+        "OFSTEDRATING": row["OFSTEDRATING"],
+        "PTFSM6CLA1A": np.exp(x_range_log),
+        "ATT8SCR": np.exp(intercept_i + slope_i * x_range_log)
+    }))
+pred_df = pd.concat(pred_list)
+
+# Overall fixed-effects line
+overall_df = pd.DataFrame({
+    "PTFSM6CLA1A": np.exp(x_range_log),
+    "ATT8SCR": np.exp(fixed_intercept + fixed_slope * x_range_log)
+})
+
+# Plot
+sns.set_theme(style="whitegrid")
+fig, ax = plt.subplots(figsize=(8, 6))
+
+sns.scatterplot(data=df, x="PTFSM6CLA1A", y="ATT8SCR", hue="OFSTEDRATING", alpha=0.35, s=30, ax=ax)
+sns.lineplot(data=pred_df, x="PTFSM6CLA1A", y="ATT8SCR", hue="OFSTEDRATING", linewidth=1.1, alpha=0.9, ax=ax, legend=False)
+sns.lineplot(data=overall_df, x="PTFSM6CLA1A", y="ATT8SCR", color="black", linestyle="--", linewidth=0.9, ax=ax)
+
+ax.set_xscale("log")
+ax.set_yscale("log")
+ax.set_title("ATT8SCR vs Disadvantaged (%): Log-transformed mixed-effects model", fontsize=14)
+ax.set_xlabel("% Disadvantaged (PTFSM6CLA1A)")
+ax.set_ylabel("Attainment 8 Score (ATT8SCR)")
+ax.legend(title="Ofsted rating", loc="lower center", bbox_to_anchor=(0.5, -0.25), ncol=3)
+
+plt.tight_layout()
+plt.show()
+```
+#### ![](L6_images/Rlogo.png){width="41" height="30"}
+```{r}
+#| message: false
+#| warning: false
+# Packages
+library(lme4)
+library(ggplot2)
+library(dplyr)
+library(tibble)
+
+# --- Prepare log-transformed variables
+england_filtered_clean <- england_filtered_clean %>%
+  mutate(
+    log_ATT8SCR = log(ATT8SCR),
+    log_PTFSM6CLA1A = log(PTFSM6CLA1A)
+  )
+
+# --- Fit random intercept + random slope model
+lme_rs <- lmer(log_ATT8SCR ~ log_PTFSM6CLA1A + (log_PTFSM6CLA1A | OFSTEDRATING),
+               data = england_filtered_clean)
+
+# Fixed effects
+fixed_intercept <- fixef(lme_rs)[["(Intercept)"]]
+fixed_slope     <- fixef(lme_rs)[["log_PTFSM6CLA1A"]]
+
+# Random effects (BLUPs) per group: intercept and slope
+re_df <- ranef(lme_rs)$OFSTEDRATING %>%
+  rownames_to_column("OFSTEDRATING") %>%
+  rename(
+    b0 = `(Intercept)`,          # random intercept deviation
+    b1 = `log_PTFSM6CLA1A`       # random slope deviation
+  )
+
+# Prediction grid across observed range (log scale)
+x_range_log <- seq(
+  min(log(england_filtered_clean$PTFSM6CLA1A), na.rm = TRUE),
+  max(log(england_filtered_clean$PTFSM6CLA1A), na.rm = TRUE),
+  length.out = 100
+)
+
+# Build per-group prediction lines (varying intercepts & slopes)
+pred_df <- do.call(rbind, lapply(seq_len(nrow(re_df)), function(i) {
+  intercept_i <- fixed_intercept + re_df$b0[i]
+  slope_i     <- fixed_slope     + re_df$b1[i]
+  data.frame(
+    OFSTEDRATING = re_df$OFSTEDRATING[i],
+    PTFSM6CLA1A  = exp(x_range_log),
+    ATT8SCR      = exp(intercept_i + slope_i * x_range_log),
+    stringsAsFactors = FALSE
+  )
+}))
+
+# Overall fixed-effects line
+overall_df <- data.frame(
+  PTFSM6CLA1A = exp(x_range_log),
+  ATT8SCR     = exp(fixed_intercept + fixed_slope * x_range_log)
+)
+
+# --- Plot: raw data + group-specific fitted lines
+ggplot() +
+  # Raw points
+  geom_point(
+    data = england_filtered_clean,
+    aes(x = PTFSM6CLA1A, y = ATT8SCR, color = OFSTEDRATING),
+    alpha = 0.35, size = 1.2, na.rm = TRUE
+  ) +
+  # Group-specific lines
+  geom_line(
+    data = pred_df,
+    aes(x = PTFSM6CLA1A, y = ATT8SCR, color = OFSTEDRATING),
+    linewidth = 1.1, alpha = 0.9
+  ) +
+  # Overall line
+  geom_line(
+    data = overall_df,
+    aes(x = PTFSM6CLA1A, y = ATT8SCR),
+    color = "black", linetype = "dashed", linewidth = 0.9
+  ) +
+  scale_color_brewer(palette = "Set2", name = "Ofsted rating") +
+  scale_x_log10() +
+  scale_y_log10() +
+  labs(
+    title = "ATT8SCR vs Disadvantaged (%): Log-transformed mixed-effects model",
+    subtitle = "Model: log(ATT8SCR) ~ log(PTFSM6CLA1A) + (log(PTFSM6CLA1A) | OFSTEDRATING)\nLines vary in both intercept and slope by Ofsted rating",
+    x = "% Disadvantaged (PTFSM6CLA1A)",
+    y = "Attainment 8 Score (ATT8SCR)"
+  ) +
+  theme_minimal(base_size = 12)
+```
+:::
+
+### Fitting a Basic Random Effect and Random Slope Model
+
+::: multicode
+#### ![](L6_images/python-logo-only.png){width="30"}
+```{python}
+import pandas as pd
+import statsmodels.formula.api as smf
+
+df_clean = df.dropna(subset=["log_ATT8SCR", "log_PTFSM6CLA1A", "OFSTEDRATING"])
+
+# Example
+model = smf.mixedlm(
+    "log_ATT8SCR ~ log_PTFSM6CLA1A",
+    data=df_clean,
+    groups=df_clean["OFSTEDRATING"],
+    re_formula="~log_PTFSM6CLA1A"
+)
+
+result = model.fit()
+print(result.summary())
+```
+#### ![](L6_images/Rlogo.png){width="41" height="30"}
+```{r}
+lme3 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + (log(PTFSM6CLA1A)|OFSTEDRATING), data = england_filtered_clean)
+summary(lme3)
+```
+:::
+
+### Interpretation
+
+**NB - this applies to these models above, you will have different interpretations depending on the variables you have chosen**
+
+Here we have fitted a basic random intercept and random slope model using comparable methods in R and Python. 
+
+#### Fixed Effects
+
+Intercept (≈ 4.39)
+This is the expected value of log(ATT8SCR) when log(PTFSM6CLA1A) is zero (i.e., when the predictor is at its baseline). In practical terms, it’s the average log score for schools at the reference level of the predictor.
+
+Slope for log(PTFSM6CLA1A) (≈ −0.195)
+For each 1-unit increase in the log of PTFSM6CLA1A, the log of ATT8SCR decreases by about 0.195. Since both variables are logged, this is roughly an elasticity: higher PTFSM6CLA1A is associated with lower ATT8SCR.
+
+#### Random Effects
+
+OFSTEDRATING intercept variance (≈ 0.00021)
+There’s very little variation in baseline performance across OFSTED categories after accounting for the fixed effect.
+
+Random slope variance (≈ 0.00138)
+The effect of log(PTFSM6CLA1A) barely varies by OFSTED category—almost zero. The correlation between intercept and slope is estimated as 1.00, which is why you see the “singular fit” warning (R) and Convergence Warnings in Pyton: the model is on the boundary, meaning the random slope is not really supported by the data.
+
+Residual variance (≈ 0.014)
+This is the within-group variability not explained by the model.
+
+## Experimenting with your own linear mixed effects models
+
+At this point, this is about all you need to know, for now, to run your own linear mixed effects model. 
+
+In general you might find it's a bit easier to run these models in R using the lme4 package, however, there are Python Packages that allow you to run linear mixed effects models using R-like syntax like Pymer4. 
+
+Please experiment - I was running into problems with Pymer4 in this practical, so you might need to persevere a bit if you want to persist on the Python track. 
+
+Pymer4 - https://eshinjolly.com/pymer4/ 
+lme4 - https://github.com/lme4/lme4/
+
+I didn't touch on the Bayesian versions of these models either (a world that would have taken us many more weeks to get into!). But you can run Bayesian Linear Mixed Effects models too and there are packages in both R and Python to do this. 
+
+In Python you have bambi - https://bambinos.github.io/bambi/
+In R you have R Stan - https://mc-stan.org/rstan/index.html 
+
+
+
+If you remember from the lecture, there are a range of variations on the basic model which may or may not be appropriate in different situations. I'll reproduce the table below:
+
+| Element | Meaning | Sample Equation |
+|------------------|------------------------------|------------------------|
+| `(1|g)` | Null Model or Varying Intercept Model | `P8 ~ 1 + (1 | OFSTEDRATING)` |
+| `(1|g1/g2)` | Multilevel Model with intercept varying within g1 and for g2 within g1 | `P8 ~ 1 + (1 | LocalAuthority/Region)` |
+| `(1|g1) + (1|g2)` | Intercept varying among g1 and g2 | `P8 ~ 1 + (1 | OFSTEDRATING) + (1 | Region)` |
+| `(0+x|g)` | Varying Slope Model | `P8 ~ Disadvantage + (0 + Disadvantage | OFSTEDRATING)` |
+| `x + (x|g)` | Varying and correlated intercepts and slopes | `P8 ~ Disadvantage + (Disadvantage | OFSTEDRATING)` |
+| `x + (x||g)` | Uncorrelated Intercepts and Slopes | `P8 ~ Disadvantage + (Disadvantage || OFSTEDRATING)` |
+
+
+
+
+```{r}
+england_filtered_clean <- england_filtered_clean %>%
+  filter(PTFSM6CLA1A > 0, PERCTOT > 0, PNUMEAL > 0)
+
+# Before fitting the model:
+contrasts(england_filtered_clean$OFSTEDRATING) <- contr.treatment(levels(england_filtered_clean$OFSTEDRATING))
+
+lme9 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1|OFSTEDRATING) + (1|gor_name/LANAME), data = england_filtered_clean, na.action = na.exclude)
+summary(lme9)
+```
+```{r}
+library(lme4)
+library(dplyr)
+library(ggplot2)
+library(ggrepel)
+
+# Filter and prepare data
+england_filtered_clean <- england_filtered_clean %>%
+  filter(PTFSM6CLA1A > 0, PERCTOT > 0, PNUMEAL > 0)
+
+# Fit mixed-effects model
+lme9 <- lmer(
+  log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
+    PTPRIORLO + ADMPOL_PT + (1 | OFSTEDRATING) + (1 | gor_name/LANAME),
+  data = england_filtered_clean,
+  na.action = na.exclude
+)
+
+# Add fitted values (back-transform to original scale)
+england_filtered_clean <- england_filtered_clean %>%
+  mutate(fitted_ATT8SCR = exp(fitted(lme9)))
+
+# Compute R²
+r2 <- cor(england_filtered_clean$ATT8SCR, england_filtered_clean$fitted_ATT8SCR, use = "complete.obs")^2
+
+# Identify Brighton schools
+brighton_schools <- england_filtered_clean %>%
+  filter(LANAME == "Brighton and Hove")
+
+# Plot
+ggplot(england_filtered_clean, aes(x = fitted_ATT8SCR, y = ATT8SCR)) +
+  geom_point(color = "grey70", alpha = 0.6) +
+  geom_point(data = brighton_schools, color = "orange", size = 2) +
+  geom_text_repel(data = brighton_schools,
+                  aes(label = SCHNAME.x),
+                  color = "black",
+                  size = 3,
+                  max.overlaps = 20) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "black") +
+  labs(
+    title = paste0("Observed vs Fitted ATT8SCR (R² = ", round(r2, 3), ")"),
+    x = "Fitted ATT8SCR",
+    y = "Observed ATT8SCR"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+lme10 <- lmer(
+  log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
+    PTPRIORLO + ADMPOL_PT + gorard_segregation +
+    (1 | OFSTEDRATING) + (1 | gor_name/LANAME),
+  data = england_filtered_clean,
+  na.action = na.exclude
+)
+summary(lme10)
+```
+
+```{r}
+library(dplyr)
+
+# Filter out rows with zeros or negatives in variables to be logged
+england_filtered_clean <- england_filtered_clean %>%
+  filter(
+    ATT8SCR > 0,
+    PTFSM6CLA1A > 0,
+    PERCTOT > 0,
+    PNUMEAL > 0,
+    average_number_of_days_taken.x > 0,
+    remained_in_the_same_school > 0
+  )
+
+# Log-transform variables
+england_filtered_clean <- england_filtered_clean %>%
+  mutate(
+    log_ATT8SCR = log(ATT8SCR),
+    log_days_taken = log(average_number_of_days_taken.x),
+    log_remained = log(remained_in_the_same_school)
+  )
+
+england_filtered_clean <- england_filtered_clean %>% 
+  mutate(
+    retention_rate <- remained_in_the_same_school / teacher_fte_in_census_year
+  )
+
+# Fit the linear model
+england_model_test <- lm(
+  log_ATT8SCR ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
+    OFSTEDRATING + gor_name + PTPRIORLO + ADMPOL_PT + gorard_segregation +
+    log_remained + teachers_on_leadership_pay_range_percent + log_days_taken,
+  data = england_filtered_clean,
+  na.action = na.exclude
+)
+
+# View summary
+summary(england_model_test)
+```
+
+
+```{r}
+lme11 <- lmer(
+  log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
+    PTPRIORLO + ADMPOL_PT + gorard_segregation +
+    log(remained_in_the_same_school) + teachers_on_leadership_pay_range_percent + log(average_number_of_days_taken.x) + 
+    (1 | OFSTEDRATING) + (1 | gor_name/LANAME),
+  data = england_filtered_clean,
+  na.action = na.exclude
+)
+
+summary(lme11)
+```
+```{r}
+# Add fitted values (back-transform to original scale)
+england_filtered_clean <- england_filtered_clean %>%
+  mutate(fitted_ATT8SCR = exp(fitted(lme11)))
+
+# Compute R²
+r2 <- cor(england_filtered_clean$ATT8SCR, england_filtered_clean$fitted_ATT8SCR, use = "complete.obs")^2
+
+# Identify Brighton schools
+brighton_schools <- england_filtered_clean %>%
+  filter(LANAME == "Brighton and Hove")
+
+# Plot
+ggplot(england_filtered_clean, aes(x = fitted_ATT8SCR, y = ATT8SCR)) +
+  geom_point(color = "grey70", alpha = 0.6) +
+  geom_point(data = brighton_schools, color = "orange", size = 2) +
+  geom_text_repel(data = brighton_schools,
+                  aes(label = SCHNAME.x),
+                  color = "black",
+                  size = 3,
+                  max.overlaps = 20) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "black") +
+  labs(
+    title = paste0("Observed vs Fitted ATT8SCR (R² = ", round(r2, 3), ")"),
+    x = "Fitted ATT8SCR",
+    y = "Observed ATT8SCR"
+  ) +
+  theme_minimal()
+```
+
+
+```{r}
+#| fig-width: 8
+#| fig-height: 10
+library(performance)
+check_model(lme11)
+```
+
+```{r}
+# Packages
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(lme4)
+library(tibble)
+
+# --- Schools of interest ---
+target_urns  <- c("114581", "14608", "136164", "114580")
+target_names <- c("Longhill High School", "Patcham High School", "Brighton Aldridge Community Academy", "Dorothy Stringer School")
+
+# --- Variables of interest (from your final model) ---
+vars_of_interest <- c(
+  "PERCTOT",        # % overall absence
+  "PTFSM6CLA1A",    # % disadvantaged
+  "PNUMEAL",        # cohort size proxy
+  "PTPRIORLO",      # prior low attainment
+  "ADMPOL_PT",      # admissions policy
+  "gorard_segregation", # LA-level segregation
+  "remained_in_the_same_school",   # total teachers remained_in_the_same_school
+  "teachers_on_leadership_pay_range_percent", # leadership pay %
+  "average_number_of_days_taken.x"  # average sick days
+)
+
+# 1) Subset to target schools
+schools_sub <- england_filtered_clean %>%
+  filter(URN %in% target_urns | SCHNAME.x %in% target_names) %>%
+  select(URN, SCHNAME.x, OFSTEDRATING, gor_name, LANAME, all_of(vars_of_interest)) %>%
+  distinct()
+
+# 2) Extract random effects from lme11
+re_list <- lme4::ranef(lme11)
+
+# 2a) OFSTEDRATING random intercepts
+re_ofsted <- re_list$OFSTEDRATING %>%
+  as.data.frame() %>%
+  rownames_to_column("OFSTEDRATING") %>%
+  rename(re_OFSTEDRATING = `(Intercept)`)
+
+# 2b) gor_name random intercepts
+re_gor <- re_list$gor_name %>%
+  as.data.frame() %>%
+  rownames_to_column("gor_name") %>%
+  rename(re_gor_name = `(Intercept)`)
+
+# 2c) Nested random intercepts for LANAME:gor_name
+grp_names <- names(re_list)
+lan_gor_grp <- grp_names[grepl("LANAME.*gor_name|gor_name.*LANAME", grp_names)][1]
+
+if (grepl("^LANAME", lan_gor_grp)) {
+  re_lan_gor <- re_list[[lan_gor_grp]] %>%
+    as.data.frame() %>%
+    rownames_to_column("key") %>%
+    separate(key, into = c("LANAME", "gor_name"), sep = ":", remove = TRUE) %>%
+    rename(re_LANAME_gor = `(Intercept)`)
+} else {
+  re_lan_gor <- re_list[[lan_gor_grp]] %>%
+    as.data.frame() %>%
+    rownames_to_column("key") %>%
+    separate(key, into = c("gor_name", "LANAME"), sep = ":", remove = TRUE) %>%
+    rename(re_LANAME_gor = `(Intercept)`) %>%
+    relocate(LANAME, gor_name)
+}
+
+# 3) Join random effects and compute total RE
+schools_with_re <- schools_sub %>%
+  left_join(re_ofsted, by = "OFSTEDRATING") %>%
+  left_join(re_gor, by = "gor_name") %>%
+  left_join(re_lan_gor, by = c("LANAME", "gor_name")) %>%
+  mutate(RE_total = re_OFSTEDRATING + re_gor_name + re_LANAME_gor)
+
+# 4) Predictions (log scale -> back-transform)
+pred_log_fixed <- predict(lme11, newdata = schools_with_re, re.form = NA)
+pred_log_cond  <- predict(lme11, newdata = schools_with_re, re.form = NULL)
+
+# Bias correction
+sigma2 <- sigma(lme11)^2
+bias_factor <- exp(0.5 * sigma2)
+
+schools_with_re <- schools_with_re %>%
+  mutate(
+    pred_fixed   = exp(pred_log_fixed),
+    pred_cond    = exp(pred_log_cond),
+    pred_cond_bc = pred_cond * bias_factor
+  )
+
+# 5) Display table
+row_order <- c(
+  "PERCTOT", "PTFSM6CLA1A", "PNUMEAL", "PTPRIORLO", "ADMPOL_PT",
+  "gorard_segregation", "remained_in_the_same_school", "teachers_on_leadership_pay_range_percent", "average_number_of_days_taken.x",
+  "RE: OFSTEDRATING", "RE: gor_name", "RE: LANAME:gor_name", "RE: total",
+  "Baseline ATT8 (fixed only)", "Baseline ATT8 (incl. RE)", "Baseline ATT8 (incl. RE, bias-corrected)"
+)
+
+display_tbl <- schools_with_re %>%
+  transmute(
+    SCHNAME.x,
+    PERCTOT = formatC(PERCTOT, format = "f", digits = 1),
+    PTFSM6CLA1A = formatC(PTFSM6CLA1A, format = "f", digits = 1),
+    PNUMEAL = formatC(PNUMEAL, format = "f", digits = 1),
+    PTPRIORLO = formatC(PTPRIORLO, format = "f", digits = 1),
+    ADMPOL_PT = as.character(ADMPOL_PT),
+    gorard_segregation = formatC(gorard_segregation, format = "f", digits = 3),
+    remained_in_the_same_school = formatC(remained_in_the_same_school, format = "f", digits = 3),
+    teachers_on_leadership_pay_range_percent = formatC(teachers_on_leadership_pay_range_percent, format = "f", digits = 1),
+    average_number_of_days_taken.x = formatC(average_number_of_days_taken.x, format = "f", digits = 3),
+    `RE: OFSTEDRATING` = formatC(re_OFSTEDRATING, format = "f", digits = 3),
+    `RE: gor_name` = formatC(re_gor_name, format = "f", digits = 3),
+    `RE: LANAME:gor_name` = formatC(re_LANAME_gor, format = "f", digits = 3),
+    `RE: total` = formatC(RE_total, format = "f", digits = 3),
+    `Baseline ATT8 (fixed only)` = formatC(pred_fixed, format = "f", digits = 1),
+    `Baseline ATT8 (incl. RE)` = formatC(pred_cond, format = "f", digits = 1),
+    `Baseline ATT8 (incl. RE, bias-corrected)` = formatC(pred_cond_bc, format = "f", digits = 1)
+  ) %>%
+  pivot_longer(cols = -SCHNAME.x, names_to = "Variable", values_to = "Value") %>%
+  pivot_wider(names_from = SCHNAME.x, values_from = Value) %>%
+  mutate(Variable = factor(Variable, levels = row_order)) %>%
+  arrange(Variable)
+
+
+knitr::kable(
+  display_tbl %>% arrange(Variable),
+  align = "l"
+)
+```
+
+```{r}
+lme12 <- lmer(
+  log(ATT8SCR_FSM6CLA1A) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
+    PTPRIORLO + ADMPOL_PT + gorard_segregation +
+    log(remained_in_the_same_school) + teachers_on_leadership_pay_range_percent + log(average_number_of_days_taken.x) + 
+    (1 | OFSTEDRATING) + (1 | gor_name/LANAME),
+  data = england_filtered_clean,
+  na.action = na.exclude
+)
+
+summary(lme12)
+summary(lme11)
+```
+
