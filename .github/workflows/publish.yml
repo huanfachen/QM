@@ -77,27 +77,44 @@ jobs:
           echo "RETICULATE_PYTHON=${{ env.pythonLocation }}/bin/python" >> $GITHUB_ENV
           echo "RETICULATE_AUTOCONFIGURE=FALSE" >> $GITHUB_ENV
 
-      # Force a clean install of pandas-flavor==0.2.0 and then all deps
-      - name: Install Python dependencies (with pandas-flavor pin)
+      # Create a constraints file to prevent transitive upgrades of pandas-flavor
+      - name: Create pip constraints file
+        run: |
+          cat > constraints.txt <<'TXT'
+          pandas-flavor==0.2.0
+          TXT
+          cat constraints.txt
+
+      # Clean install with constraints (prevents deps from overriding our pin)
+      - name: Install Python dependencies (constrained)
         run: |
           pip install --upgrade pip
           python -c "import sys; print('Using Python:', sys.executable)"
           pip uninstall -y pandas-flavor || true
-          pip install --no-cache-dir 'pandas-flavor==0.2.0'
-          pip install --no-cache-dir -r requirements.txt
+          # Install our hard pin explicitly (no deps so it can't pull/upgrade)
+          pip install --no-cache-dir --no-deps 'pandas-flavor==0.2.0'
+          # Install your requirements with the constraints
+          pip install --no-cache-dir -r requirements.txt --constraint constraints.txt --upgrade-strategy only-if-needed
+          # Show final resolved set
           python -m pip freeze
 
       # Verify from Python that the decorator exists and where the module lives
       - name: Verify pandas-flavor from Python
         run: |
           python - <<'PY'
-          import pandas_flavor, inspect
-          print("pandas_flavor version:", getattr(pandas_flavor, "__version__", "unknown"))
+          import inspect, importlib.metadata, sys
+          import pandas_flavor
+          try:
+              ver = importlib.metadata.version("pandas-flavor")
+          except Exception:
+              ver = getattr(pandas_flavor, "__version__", "unknown")
+          print("pandas_flavor version:", ver)
           print("has register_groupby_method:", hasattr(pandas_flavor, "register_groupby_method"))
           print("module file:", inspect.getsourcefile(pandas_flavor))
+          print("Python exe:", sys.executable)
           PY
 
-      # Use heredoc for R verification with NO indentation inside Python strings
+      # Verify reticulate sees the same Python and pandas_flavor before rendering
       - name: Verify reticulate Python and pandas_flavor from R
         shell: bash
         run: |
@@ -109,7 +126,7 @@ jobs:
           reticulate::use_python(Sys.getenv("RETICULATE_PYTHON"), required = TRUE)
 
           reticulate::py_run_string("import sys; print('reticulate Python:', sys.executable)")
-          reticulate::py_run_string("import pandas_flavor, inspect; print('pandas_flavor version:', getattr(pandas_flavor, '__version__', 'unknown'))")
+          reticulate::py_run_string("import importlib.metadata as im; print('pandas_flavor version:', (lambda: im.version('pandas-flavor'))())")
           reticulate::py_run_string("import pandas_flavor; print('has register_groupby_method:', hasattr(pandas_flavor, 'register_groupby_method'))")
           reticulate::py_run_string("import pandas_flavor, inspect; print('module file:', inspect.getsourcefile(pandas_flavor))")
           RS
