@@ -82,13 +82,9 @@ jobs:
         run: |
           pip install --upgrade pip
           python -c "import sys; print('Using Python:', sys.executable)"
-          # Remove any pre-existing pandas_flavor to avoid conflicts
           pip uninstall -y pandas-flavor || true
-          # Install the compatible version WITHOUT using cache
           pip install --no-cache-dir 'pandas-flavor==0.2.0'
-          # Install your requirements (can be unpinned)
           pip install --no-cache-dir -r requirements.txt
-          # Show what is installed
           python -m pip freeze
 
       # Verify from Python that the decorator exists and where the module lives
@@ -101,12 +97,25 @@ jobs:
           print("module file:", inspect.getsourcefile(pandas_flavor))
           PY
 
-      # Verify reticulate sees the same Python and pandas_flavor before rendering
+      # ✅ FIXED: Use heredoc for R verification to avoid quoting errors
       - name: Verify reticulate Python and pandas_flavor from R
+        shell: bash
         run: |
-          Rscript -e 'cat(\"\\n=== reticulate::py_config() ===\\n\"); print(reticulate::py_config())'
-          Rscript -e 'reticulate::use_python(Sys.getenv(\"RETICULATE_PYTHON\"), required = TRUE); reticulate::py_run_string(\"import sys; print(\\\"reticulate Python:\\\", sys.executable)\")'
-          Rscript -e 'reticulate::py_run_string(\"import pandas_flavor, inspect; print(\\\"pandas_flavor version:\\\", getattr(pandas_flavor, \\\"__version__\\\", \\\"unknown\\\")); print(\\\"has register_groupby_method:\\\", hasattr(pandas_flavor, \\\"register_groupby_method\\\")); print(\\\"module file:\\\", inspect.getsourcefile(pandas_flavor))\")'
+          Rscript - <<'RS'
+          cat("\n=== reticulate::py_config() ===\n")
+          print(reticulate::py_config())
+
+          Sys.setenv(RETICULATE_AUTOCONFIGURE = "FALSE")
+          reticulate::use_python(Sys.getenv("RETICULATE_PYTHON"), required = TRUE)
+
+          reticulate::py_run_string("import sys; print('reticulate Python:', sys.executable)")
+          reticulate::py_run_string("
+            import pandas_flavor, inspect
+            print('pandas_flavor version:', getattr(pandas_flavor, '__version__', 'unknown'))
+            print('has register_groupby_method:', hasattr(pandas_flavor, 'register_groupby_method'))
+            print('module file:', inspect.getsourcefile(pandas_flavor))
+          ")
+          RS
 
       - name: Copy custom SCSS theme to Quarto directory
         run: |
