@@ -97,7 +97,7 @@ jobs:
           print("module file:", inspect.getsourcefile(pandas_flavor))
           PY
 
-      # ✅ FIXED: Use heredoc for R verification to avoid quoting errors
+      # Use heredoc for R verification with NO indentation inside Python strings
       - name: Verify reticulate Python and pandas_flavor from R
         shell: bash
         run: |
@@ -109,12 +109,9 @@ jobs:
           reticulate::use_python(Sys.getenv("RETICULATE_PYTHON"), required = TRUE)
 
           reticulate::py_run_string("import sys; print('reticulate Python:', sys.executable)")
-          reticulate::py_run_string("
-            import pandas_flavor, inspect
-            print('pandas_flavor version:', getattr(pandas_flavor, '__version__', 'unknown'))
-            print('has register_groupby_method:', hasattr(pandas_flavor, 'register_groupby_method'))
-            print('module file:', inspect.getsourcefile(pandas_flavor))
-          ")
+          reticulate::py_run_string("import pandas_flavor, inspect; print('pandas_flavor version:', getattr(pandas_flavor, '__version__', 'unknown'))")
+          reticulate::py_run_string("import pandas_flavor; print('has register_groupby_method:', hasattr(pandas_flavor, 'register_groupby_method'))")
+          reticulate::py_run_string("import pandas_flavor, inspect; print('module file:', inspect.getsourcefile(pandas_flavor))")
           RS
 
       - name: Copy custom SCSS theme to Quarto directory
