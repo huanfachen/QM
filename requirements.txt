@@ -1,6 +1,6 @@
 # Core scientific stack
 numpy
-pandas>=2.2.2
+pandas
 
 # Jupyter tooling
 jupyter
@@ -17,12 +17,9 @@ pingouin
 # YAML
 pyyaml
 
-# Data cleaning helpers (pyjanitor uses pandas-flavor under the hood)
-# --- PINNED to an older version that uses the deprecated pandas-flavor API ---
-pyjanitor==0.26.0
-
-# --- PINNED to a version that still contains 'register_groupby_method' (removed in 0.7.0) ---
-pandas-flavor==0.6.0
+# Data cleaning helpers (pyjanitor requires pandas-flavor)
+pyjanitor
+pandas-flavor
 
 # Geo stack
 geopandas
