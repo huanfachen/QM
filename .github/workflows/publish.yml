@@ -77,58 +77,63 @@ jobs:
           echo "RETICULATE_PYTHON=${{ env.pythonLocation }}/bin/python" >> $GITHUB_ENV
           echo "RETICULATE_AUTOCONFIGURE=FALSE" >> $GITHUB_ENV
 
-      # Create a constraints file to prevent transitive upgrades of pandas-flavor
+      # Create a constraints file to pin critical versions (prevents transitive overrides)
       - name: Create pip constraints file
         run: |
           cat > constraints.txt <<'TXT'
+          # Needed for your decorator usage
           pandas-flavor==0.2.0
+          # Make pyjanitor use the fixed import logic
+          pyjanitor>=0.32.0
+          # Ensure compatibility with NumPy>=2.0 (Actions has NumPy 2.2.x)
+          pandas>=2.2.2
           TXT
           cat constraints.txt
 
-      # Clean install with constraints (prevents deps from overriding our pin)
+      # Clean install with constraints
       - name: Install Python dependencies (constrained)
         run: |
           pip install --upgrade pip
           python -c "import sys; print('Using Python:', sys.executable)"
-          pip uninstall -y pandas-flavor || true
-          # Install our hard pin explicitly (no deps so it can't pull/upgrade)
+          # Remove possibly pre-installed conflicting deps
+          pip uninstall -y pandas-flavor pyjanitor pandas || true
+
+          # Install hard pins without deps first so they can't be overridden
           pip install --no-cache-dir --no-deps 'pandas-flavor==0.2.0'
-          # Install your requirements with the constraints
+          # Now install project requirements honoring constraints
           pip install --no-cache-dir -r requirements.txt --constraint constraints.txt --upgrade-strategy only-if-needed
-          # Show final resolved set
+
+          # Show resolved versions
           python -m pip freeze
 
-      # Verify from Python that the decorator exists and where the module lives
-      - name: Verify pandas-flavor from Python
+      # Verify from Python that key packages are correct
+      - name: Verify Python package versions
         run: |
           python - <<'PY'
-          import inspect, importlib.metadata, sys
-          import pandas_flavor
-          try:
-              ver = importlib.metadata.version("pandas-flavor")
-          except Exception:
-              ver = getattr(pandas_flavor, "__version__", "unknown")
-          print("pandas_flavor version:", ver)
-          print("has register_groupby_method:", hasattr(pandas_flavor, "register_groupby_method"))
-          print("module file:", inspect.getsourcefile(pandas_flavor))
+          import importlib.metadata as im, sys, pandas_flavor
+          def ver(p): 
+              try: return im.version(p)
+              except Exception: return 'unknown'
           print("Python exe:", sys.executable)
+          print("numpy:", ver("numpy"))
+          print("pandas:", ver("pandas"))
+          print("pyjanitor:", ver("pyjanitor"))
+          print("pandas-flavor:", ver("pandas-flavor"))
+          print("has pandas_flavor.register_groupby_method:", hasattr(pandas_flavor, "register_groupby_method"))
           PY
 
-      # Verify reticulate sees the same Python and pandas_flavor before rendering
-      - name: Verify reticulate Python and pandas_flavor from R
+      # R-side check via reticulate (heredoc to avoid quoting issues)
+      - name: Verify reticulate Python and deps from R
         shell: bash
         run: |
           Rscript - <<'RS'
           cat("\n=== reticulate::py_config() ===\n")
           print(reticulate::py_config())
-
           Sys.setenv(RETICULATE_AUTOCONFIGURE = "FALSE")
           reticulate::use_python(Sys.getenv("RETICULATE_PYTHON"), required = TRUE)
-
           reticulate::py_run_string("import sys; print('reticulate Python:', sys.executable)")
-          reticulate::py_run_string("import importlib.metadata as im; print('pandas_flavor version:', (lambda: im.version('pandas-flavor'))())")
+          reticulate::py_run_string("import importlib.metadata as im; print('numpy:', im.version('numpy')); print('pandas:', im.version('pandas')); print('pyjanitor:', im.version('pyjanitor')); print('pandas-flavor:', im.version('pandas-flavor'))")
           reticulate::py_run_string("import pandas_flavor; print('has register_groupby_method:', hasattr(pandas_flavor, 'register_groupby_method'))")
-          reticulate::py_run_string("import pandas_flavor, inspect; print('module file:', inspect.getsourcefile(pandas_flavor))")
           RS
 
       - name: Copy custom SCSS theme to Quarto directory
