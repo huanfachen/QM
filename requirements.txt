@@ -32,6 +32,6 @@ scikit-learn
 
 # --- Critical pin to restore deprecated API used in your code ---
 # This version provides pandas_flavor.register_groupby_method
-pyjanitor==0.24.0        # compatible with older pandas-flavor API
+pyjanitor==0.32.0        # compatible with older pandas-flavor API
 pandas-flavor==0.2.0     # provides register_groupby_method
 
