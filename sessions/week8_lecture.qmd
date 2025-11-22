@@ -2145,9 +2145,32 @@ knitr::kable(
 ## Conclusions
 
 -   Phew!! That was a lot!
+-   We've come a long way since the start of the Regression Sessions 3 weeks ago
+-   Mainly I hope we've learned a step-by-step recipe which can be applied to many different quantitative modelling applications
+-   Hope we've demystified, through visualisation and worked examples, some of the esoteric elements of regression modelling
 
 ## Conclusions
 
--   Linear Mixed Effects Models are a useful extension to OLS standard regression when there are logical groups, hierarchies or repeated measurements within your data
+-   If we start with a simple model guided by sound theory and an understanding of the system of interest, we can start to build complexity and explanatory power though successive modelling iterations
+-   By the final iteration, it's possible to derive deep insights into your system of interest
+-   Careful interpretation of your outputs, relative to policy ambitions, can present a powerful message (whether policy makers will listen is a different matter!) 
+
+## Conclusions
+
+-   Linear Mixed Effects Models are just one useful extension to OLS standard regression. They work well particularly when there are logical groups, hierarchies or repeated measurements within your data
+-   Other regression variants (not yet covered in this course) might be more appropriate in other situations:
+    -   Generalised Linear Models 
+        -   Logistic Regression (binary or multinomial outcomes)
+        -   Poisson Regression / Negative Binomal Regression (count data)
+        -   Generalised Additive Models (non-linear relationships)
+    -   Geographically Weighted or Spatial Regression Models
+    -   Lasso and Ridge Regression (incorporating shrinkage)
+-   Now you have a good grounding in the basics of linear regression, these other methods should be much easier learn in future
+
+## Today's Practical
+
+-   Regression Sessions Vol 3 - A linear mixed effects model walkthrough. 
+
+        
 
 
