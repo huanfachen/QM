@@ -1,3 +1,4 @@
+
 on:
   workflow_dispatch:
   push:
@@ -69,30 +70,43 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pip'
-      
+
       - name: Set RETICULATE_PYTHON environment variable
         run: echo "RETICULATE_PYTHON=${{ env.pythonLocation }}/bin/python" >> $GITHUB_ENV
 
+      # ⬇️ Updated: explicitly install pandas-flavor==0.2.0 before requirements
       - name: Install Python dependencies
         run: |
           pip install --upgrade pip
+          pip install "pandas-flavor==0.2.0"
           pip install -r requirements.txt
+
+      # (Optional) quick preflight to confirm the decorator exists
+      - name: Verify pandas-flavor API
+        run: |
+          python - <<'PY'
+          import pandas_flavor, inspect
+          print("pandas_flavor version:", getattr(pandas_flavor, "__version__", "unknown"))
+          print("has register_groupby_method:", hasattr(pandas_flavor, "register_groupby_method"))
+          print("has register_dataframe_method:", hasattr(pandas_flavor, "register_dataframe_method"))
+          print("module file:", inspect.getsourcefile(pandas_flavor))
+          PY
 
       - name: Copy custom SCSS theme to Quarto directory
         run: |
           sudo cp css/casa-slides.scss /opt/quarto/share/formats/revealjs/themes/
-      
+
       - name: Render Quarto project
         run: quarto render
-      
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site/
-      
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
