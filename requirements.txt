@@ -1,17 +1,35 @@
+
+# Core scientific stack
 numpy
 pandas
+
+# Jupyter tooling
 jupyter
+
+# Scientific/plotting
 scipy
 matplotlib
 plotly
-pyyaml
-statsmodels
-pyjanitor
 seaborn
-geopandas
-folium
-scikit-learn
-branca
-contextily
+statsmodels
 tabulate
 pingouin
+
+# YAML
+pyyaml
+
+# Data cleaning helpers (pyjanitor uses pandas-flavor under the hood)
+pyjanitor
+
+# Geo stack
+geopandas
+folium
+branca
+contextily
+
+# Machine learning
+scikit-learn
+
+# --- Critical pin to restore deprecated API used in your code ---
+# This version provides pandas_flavor.register_groupby_method
+pandas-flavor==0.2.0
