@@ -1,7 +1,7 @@
 
 # Core scientific stack
 numpy
-pandas
+pandas>=2.2.2
 
 # Jupyter tooling
 jupyter
