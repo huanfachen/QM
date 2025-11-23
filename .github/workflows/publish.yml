@@ -1,4 +1,3 @@
-
 on:
   workflow_dispatch:
   push:
@@ -77,15 +76,20 @@ jobs:
           echo "RETICULATE_PYTHON=${{ env.pythonLocation }}/bin/python" >> $GITHUB_ENV
           echo "RETICULATE_AUTOCONFIGURE=FALSE" >> $GITHUB_ENV
 
+      ## --- START: CRITICAL FIX FOR pandas-flavor ATTRIBUTEERROR ---
+      
       # Create a constraints file to pin critical versions (prevents transitive overrides)
       - name: Create pip constraints file
         run: |
           cat > constraints.txt <<'TXT'
-          # Needed for your decorator usage
-          pandas-flavor==0.2.0
-          # Make pyjanitor use the fixed import logic
-          pyjanitor>=0.32.0
-          # Ensure compatibility with NumPy>=2.0 (Actions has NumPy 2.2.x)
+          # CRITICAL PIN: Fixes the AttributeError by using the last compatible version 
+          # (register_groupby_method was removed in 0.7.0).
+          pandas-flavor==0.6.0
+          
+          # Pin pyjanitor to a compatible version that relies on the pandas-flavor API
+          pyjanitor==0.26.0
+
+          # Ensure compatibility with pandas >= 2.2.2
           pandas>=2.2.2
           TXT
           cat constraints.txt
@@ -99,13 +103,17 @@ jobs:
           pip uninstall -y pandas-flavor pyjanitor pandas || true
 
           # Install hard pins without deps first so they can't be overridden
-          pip install --no-cache-dir --no-deps 'pandas-flavor==0.2.0'
+          pip install --no-cache-dir --no-deps 'pandas-flavor==0.6.0'
+          pip install --no-cache-dir --no-deps 'pyjanitor==0.26.0'
+
           # Now install project requirements honoring constraints
           pip install --no-cache-dir -r requirements.txt --constraint constraints.txt --upgrade-strategy only-if-needed
 
           # Show resolved versions
           python -m pip freeze
-
+      
+      ## --- END: CRITICAL FIX ---
+      
       # Verify from Python that key packages are correct
       - name: Verify Python package versions
         run: |
