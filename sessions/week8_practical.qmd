@@ -6,19 +6,24 @@ format:
     code-fold: true
     code-tools: true
   ipynb: default
-
 filters:
   - qna
   - multicode
   - quarto # keep Quarto’s built-ins as the last filter or it won't work
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
+
 ```{python}
 
 ```
+
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
+
 ```{r}
 
 ```
@@ -54,11 +59,26 @@ here()
 # Restore only the selected packages
 #renv::restore(packages = packages)
 #Sys.unsetenv("VIRTUAL_ENV")
+
+#Sys.setenv(RETICULATE_PYTHON = "C:/Users/adam_/anaconda3/envs/qmEnv/python.exe")
+
+#library(reticulate)
+# Point reticulate to the virtual environment's Python
+#Sys.setenv(RETICULATE_PYTHON = "C:/GitHubRepos/QM_Fork/.venv/Scripts/python.exe")
+
+# Check configuration
+#py_config()
+
+#library(reticulate)
+#py_config()
+
 library(reticulate)
 
 #use_python("/QM_Fork/venv/Scripts/python.exe", required = TRUE)
+#use_python("/GitHubRepos/QM_Fork/venv/Scripts/python.exe", required = TRUE)
 # point reticulate to the right python installation - ideally the one reticulate installed. 
 #reticulate::use_python("C:/Users/Adam/AppData/Local/R/cache/R/reticulate/uv/cache/archive-v0/EiTNi4omakhlev5ckz2WP/Scripts/python.exe", required = TRUE)
+#use_condaenv("qmEnv", conda = "C:/Users/adam_/anaconda3/Scripts/conda.exe", required = TRUE)
 #use_condaenv("qmEnv", conda = "C:/Users/adam_/anaconda3/Scripts/conda.exe", required = TRUE)
 #reticulate::use_python("C:/Users/adam_/anaconda3/envs/qmEnv/python.exe", required = TRUE)
 #py_run_string("import pyproj; print(pyproj.CRS.from_epsg(27700))")
@@ -100,24 +120,38 @@ library(reticulate)
 
 ## Preamble
 
-We're going back in - Volume 3 of the Regression Sessions, so clearly we are going to have to have volume 4 of the Progression Sessions. Yes, "where is vol. 3?", I hear you ask. I don't know. Someone has lost it and it's not up on Spotify, so we'll have to make do and jump to volume 4 - Enjoy!
+We're going back in - Volume 3 of the Regression Sessions, so clearly we
+are going to have to have volume 4 of the Progression Sessions. Yes,
+"where is vol. 3?", I hear you ask. I don't know. Someone has lost it
+and it's not up on Spotify, so we'll have to make do and jump to volume
+4 - Enjoy!
 
 ## Practical Aims
 
-1.  Experiment with running some Linear Mixed Effects Models and converting last week's show-stopped multiple regression model into a Linear Mixed Effects version
-2.  Practice moving from an initial null model to a fully-fledged model with fixed effects and random effects
-3.  Practice interpreting your final model and seeing if you can use it to explain which local authority-level policy might be most effective at raising attainment
+1.  Experiment with running some Linear Mixed Effects Models and
+    converting last week's show-stopper multiple regression model into a
+    Linear Mixed Effects version
+2.  Practice moving from an initial null model to a fully-fledged model
+    with fixed effects and random effects
+3.  Practice interpreting your final model and seeing if you can use it
+    to explain which local authority-level policy might be most
+    effective at raising attainment
 
 ## Read in your data
 
-You can use your data from last week, but I've created a nice clean dataset and added a few extra spicy variables about teachers and schools' workforce in there for fun. All of that data is from here: <https://explore-education-statistics.service.gov.uk/data-catalogue?themeId=b601b9ea-b1c7-4970-b354-d1f695c446f1&sortBy=newest&geographicLevel=SCH>
+You can use your data from last week, but I've created a nice clean
+dataset and added a few extra spicy variables about teachers and
+schools' workforce in there for fun. All of that data is from here:
+<https://explore-education-statistics.service.gov.uk/data-catalogue?themeId=b601b9ea-b1c7-4970-b354-d1f695c446f1&sortBy=newest&geographicLevel=SCH>
+
+To save time, you might just want to download it directly from here:
+https://github.com/adamdennett/QM/blob/main/sessions/L6_data/Performancetables_130242/2022-2023/school_data_2223.csv
 
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
 
 ```{python}
-#| message: false
-#| warning: false
+
 import pandas as pd
 import numpy as np
 import janitor
@@ -134,6 +168,10 @@ def find_qm_root(start_path: Path = Path.cwd(), anchor: str = "QM") -> Path:
             return parent
     raise FileNotFoundError(f"Anchor folder '{anchor}' not found in path      hierarchy.")
   
+qm_root = find_qm_root()
+base_path = qm_root / "sessions" / "L6_data" / "Performancetables_130242" / "2022-2023"
+na_all = ["", "NA", "SUPP", "NP", "NE", "SP", "SN", "LOWCOV", "NEW", "SUPPMAT", "NaN"]
+
 qm_root = find_qm_root()
 base_path = qm_root / "sessions" / "L6_data" / "Performancetables_130242" / "2022-2023"
 na_all = ["", "NA", "SUPP", "NP", "NE", "SP", "SN", "LOWCOV", "NEW", "SUPPMAT", "NaN"]
@@ -173,16 +211,20 @@ england_filtered_clean <- england_filtered[
 ```
 :::
 
-
 ## The Warm-up - Last week's Multiple Regression Show Stopper
 
-You might want to run yours, however mine looked like this (without any interaction effects):
+-   To get us going we are going to run our 'show-stopper' model from
+    last week so that we can compare this with a final linear mixed
+    effects version at the end of the practical.
+-   You should run your best model (without any interaction effects)
+    from last week, however, to help you along my best model from last
+    week looked like this:
 
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
+
 ```{python}
-#| message: false
-#| warning: false
+
 import numpy as np
 import statsmodels.formula.api as smf
 
@@ -208,7 +250,9 @@ model = smf.ols(
 print(model.summary())
 
 ```
+
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
+
 ```{r}
 #| message: false
 #| warning: false
@@ -223,13 +267,26 @@ summary(england_model7)
 
 ## Building Our Linear Mixed Effects Model
 
-### Stage 1 - The Null Model for Ofsted Ratings
+### Stage 1 - The Null / Variance Components Model for Ofsted Ratings
+
+-   If you remember from the lecture, in order to determine whether
+    running a linear mixed effects / multilevel model is necessary, if
+    you have categorical / grouping factors in your data set (**random
+    effects**), you should run the null model to see how much variance
+    the groups in your data are explaining.
+-   In our data, we had a couple of different grouping variable
+    candidates:
+    -   Ofsted Rating (how 'good' or otherwise a school is as determined
+        by the Office for Standards in Education - Ofsted)
+    -   Geographical groups. In our data these are Regions and the Local
+        Authorities within those regions.
+-   Below is some code to visualise those groups as boxplots.
 
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
+
 ```{python}
-#| message: false
-#| warning: false
+
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm
@@ -316,7 +373,9 @@ ax.legend(legend_handles, [h.get_label() for h in legend_handles],
 plt.tight_layout()
 plt.show()
 ```
+
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
+
 ```{r}
 #| message: false
 #| warning: false
@@ -361,13 +420,27 @@ print(boxplot_att8scr)
 ```
 :::
 
+### The Interclass Correlation Coefficient - ICC
 
+-   Again, if you recall from the lecture, the ICC is simply the ratio
+    between the between the between group variance and the total
+    variance
+-   The higher the ICC (closer to 1), the more variance is due to
+    differences between groups (i.e. differences between the Ofsted
+    rating of schools) than within groups (i.e. between schools within
+    Ofsted rating bands)
+-   This can be judged visually with a stacked density plot:
+    -   High ICC = distinct, non-overlapping humps
+    -   Low ICC = density plots all overlapping on-top of each other
+-   **Remember** A high ICC is a strong indication that a multilevel /
+    mixed effects model is a suitable modelling strategy to pursue to
+    try and explain these group-level differences
 
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
+
 ```{python}
-#| message: false
-#| warning: false
+
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -409,7 +482,9 @@ plt.tight_layout()
 plt.show()
 
 ```
+
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
+
 ```{r}
 #| message: false
 #| warning: false
@@ -434,11 +509,17 @@ print(density_att8scr)
 
 ## Running the Null Model and Calculating the Inter-Class Correlation Coefficient (ICC)
 
+-   You will also remember from the lecture, that we can run our null
+    model using standard statistical software. - In R, we use the `lmer`
+    package, whereas in Python for now we'll use `statsmodels`
+
+-   First run the model as below:
+
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
+
 ```{python}
-#| message: false
-#| warning: false
+
 import pandas as pd
 import statsmodels.api as sm
 
@@ -460,7 +541,9 @@ null_fit = null_model.fit()
 # Summary
 print(null_fit.summary())
 ```
+
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
+
 ```{r}
 #| message: false
 #| warning: false
@@ -477,17 +560,21 @@ summary(lme1)
 ```
 :::
 
+-   Once we have run the model we can calculate the ICC:
+
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
+
 ```{python}
-#| message: false
-#| warning: false
+
 var_components = null_fit.cov_re.iloc[0, 0]  # random intercept variance
 resid_var = null_fit.scale                   # residual variance
 icc = var_components / (var_components + resid_var)
 print(f"ICC: {icc:.3f}")
 ```
+
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
+
 ```{r}
 #| message: false
 #| warning: false
@@ -501,11 +588,17 @@ print(icc_value)
 
 ## Null Model Visualisation
 
+-   You will know by know that I am a big advovate of visualising
+    everything as we go, so here is a visualisation of the null model
+    which shows the different intercept values for the different group
+-   Remember, we can think of the intercept as the 'baseline' expected
+    for our dependent variable
+
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
+
 ```{python}
-#| message: false
-#| warning: false
+
 import pandas as pd
 import statsmodels.api as sm
 import seaborn as sns
@@ -553,7 +646,9 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 ```
+
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
+
 ```{r}
 #| message: false
 #| warning: false
@@ -584,13 +679,21 @@ ggplot(ranef_df, aes(x = OFSTEDRATING, y = actual_intercept)) +
 
 ## Stage 2 - Adding an initial Fixed Effect
 
-### Model with a Fixed Effect Predictor
+### Model with a Fixed Effect Predictor (random intercepts, fixed slopes)
+
+-   In the lecture you saw that after running the null model (assuming
+    the ICC indicates that a mixed effects model is recommended) the
+    next stage is to test that model by adding in a predictor variable
+-   You can use any predictor you like and once you get used to running
+    these models, you can even skip this step, but for now we are going
+    to build gradually and I am going to experiment with the %
+    disadvantaged variable
 
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
+
 ```{python}
-#| message: false
-#| warning: false
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -691,7 +794,9 @@ ax.set_yscale("log")
 plt.tight_layout()
 plt.show()
 ```
+
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
+
 ```{r}
 #| message: false
 #| warning: false
@@ -766,13 +871,18 @@ ggplot() +
 ```
 :::
 
-### Random Intercept and Random Slope Model
+### Random Intercepts and Random Slopes Model
+
+-   And again, in the lecture we saw that the next stage once you have
+    allowed your intercepts to vary, is to allow your slopes to vary as
+    well
+-   Here's the visualisation of those varying slopes and intercepts:
 
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
+
 ```{python}
-#| message: false
-#| warning: false
+
 import pandas as pd
 import numpy as np
 import statsmodels.formula.api as smf
@@ -849,7 +959,9 @@ ax.legend(title="Ofsted rating", loc="lower center", bbox_to_anchor=(0.5, -0.25)
 plt.tight_layout()
 plt.show()
 ```
+
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
+
 ```{r}
 #| message: false
 #| warning: false
@@ -942,8 +1054,11 @@ ggplot() +
 
 ### Fitting a Basic Random Effect and Random Slope Model
 
+-   And now we can also fit the model using statistical software
+
 ::: multicode
 #### ![](L6_images/python-logo-only.png){width="30"}
+
 ```{python}
 import pandas as pd
 import statsmodels.formula.api as smf
@@ -961,7 +1076,9 @@ model = smf.mixedlm(
 result = model.fit()
 print(result.summary())
 ```
+
 #### ![](L6_images/Rlogo.png){width="41" height="30"}
+
 ```{r}
 lme3 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + (log(PTFSM6CLA1A)|OFSTEDRATING), data = england_filtered_clean)
 summary(lme3)
@@ -970,48 +1087,69 @@ summary(lme3)
 
 ### Interpretation
 
-**NB - this applies to these models above, you will have different interpretations depending on the variables you have chosen**
+**NB - this applies to these models above, you will have different
+interpretations depending on the variables you have chosen**
 
-Here we have fitted a basic random intercept and random slope model using comparable methods in R and Python. 
+Here we have fitted a basic random intercept and random slope model
+using comparable methods in R and Python.
 
 #### Fixed Effects
 
-Intercept (≈ 4.39)
-This is the expected value of log(ATT8SCR) when log(PTFSM6CLA1A) is zero (i.e., when the predictor is at its baseline). In practical terms, it’s the average log score for schools at the reference level of the predictor.
+Intercept (≈ 4.39) This is the expected value of log(ATT8SCR) when
+log(PTFSM6CLA1A) is zero (i.e., when the predictor is at its baseline).
+In practical terms, it’s the average log score for schools at the
+reference level of the predictor.
 
-Slope for log(PTFSM6CLA1A) (≈ −0.195)
-For each 1-unit increase in the log of PTFSM6CLA1A, the log of ATT8SCR decreases by about 0.195. Since both variables are logged, this is roughly an elasticity: higher PTFSM6CLA1A is associated with lower ATT8SCR.
+Slope for log(PTFSM6CLA1A) (≈ −0.195) For each 1-unit increase in the
+log of PTFSM6CLA1A, the log of ATT8SCR decreases by about 0.195. Since
+both variables are logged, this is roughly an elasticity: higher
+PTFSM6CLA1A is associated with lower ATT8SCR.
 
 #### Random Effects
 
-OFSTEDRATING intercept variance (≈ 0.00021)
-There’s very little variation in baseline performance across OFSTED categories after accounting for the fixed effect.
+OFSTEDRATING intercept variance (≈ 0.00021) There’s very little
+variation in baseline performance across OFSTED categories after
+accounting for the fixed effect.
 
-Random slope variance (≈ 0.00138)
-The effect of log(PTFSM6CLA1A) barely varies by OFSTED category—almost zero. The correlation between intercept and slope is estimated as 1.00, which is why you see the “singular fit” warning (R) and Convergence Warnings in Pyton: the model is on the boundary, meaning the random slope is not really supported by the data.
+Random slope variance (≈ 0.00138) The effect of log(PTFSM6CLA1A) barely
+varies by OFSTED category—almost zero. The correlation between intercept
+and slope is estimated as 1.00, which is why you see the “singular fit”
+warning (R) and Convergence Warnings in Python: the model is on the
+boundary, meaning the random slope is not really supported by the data.
 
-Residual variance (≈ 0.014)
-This is the within-group variability not explained by the model.
+Residual variance (≈ 0.014) This is the within-group variability not
+explained by the model.
 
 ## Experimenting with your own linear mixed effects models
 
-At this point, this is about all you need to know, for now, to run your own linear mixed effects model. 
+At this point, this is about all you need to know, for now, to run your
+own linear mixed effects model.
 
-In general you might find it's a bit easier to run these models in R using the lme4 package, however, there are Python Packages that allow you to run linear mixed effects models using R-like syntax like Pymer4. 
+In general you might find it's a bit easier to run these models in R
+using the `lme4` package, however, there are Python Packages that allow
+you to run linear mixed effects models using R-like syntax like
+`Pymer4`.
 
-Please experiment - I was running into problems with Pymer4 in this practical, so you might need to persevere a bit if you want to persist on the Python track. 
+Please experiment - I was running into problems with `Pymer4` in this
+practical, so you might need to persevere a bit if you want to persist
+on the Python track.
 
-Pymer4 - https://eshinjolly.com/pymer4/ 
-lme4 - https://github.com/lme4/lme4/
+`Pymer4` - <https://eshinjolly.com/pymer4/>
 
-I didn't touch on the Bayesian versions of these models either (a world that would have taken us many more weeks to get into!). But you can run Bayesian Linear Mixed Effects models too and there are packages in both R and Python to do this. 
+`lme4` - <https://github.com/lme4/lme4/>
 
-In Python you have bambi - https://bambinos.github.io/bambi/
-In R you have R Stan - https://mc-stan.org/rstan/index.html 
+I didn't touch on the Bayesian versions of these models either (a world
+that would have taken us many more weeks to get into!). But you can run
+Bayesian Linear Mixed Effects models too and there are packages in both
+R and Python to do this.
 
+In Python you have `bambi` - <https://bambinos.github.io/bambi/>
 
+In R you have `RStan` - <https://mc-stan.org/rstan/index.html>
 
-If you remember from the lecture, there are a range of variations on the basic model which may or may not be appropriate in different situations. I'll reproduce the table below:
+If you remember from the lecture, there are a range of variations on the
+basic model which may or may not be appropriate in different situations.
+I'll reproduce the table below:
 
 | Element | Meaning | Sample Equation |
 |------------------|------------------------------|------------------------|
@@ -1023,9 +1161,13 @@ If you remember from the lecture, there are a range of variations on the basic m
 | `x + (x||g)` | Uncorrelated Intercepts and Slopes | `P8 ~ Disadvantage + (Disadvantage || OFSTEDRATING)` |
 
 
+### Final Task
+
 
 
 ```{r}
+#| eval: false
+#| include: false
 england_filtered_clean <- england_filtered_clean %>%
   filter(PTFSM6CLA1A > 0, PERCTOT > 0, PNUMEAL > 0)
 
@@ -1035,7 +1177,9 @@ contrasts(england_filtered_clean$OFSTEDRATING) <- contr.treatment(levels(england
 lme9 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1|OFSTEDRATING) + (1|gor_name/LANAME), data = england_filtered_clean, na.action = na.exclude)
 summary(lme9)
 ```
+
 ```{r}
+#| include: false
 library(lme4)
 library(dplyr)
 library(ggplot2)
@@ -1083,6 +1227,8 @@ ggplot(england_filtered_clean, aes(x = fitted_ATT8SCR, y = ATT8SCR)) +
 ```
 
 ```{r}
+#| eval: false
+#| include: false
 lme10 <- lmer(
   log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
     PTPRIORLO + ADMPOL_PT + gorard_segregation +
@@ -1094,6 +1240,7 @@ summary(lme10)
 ```
 
 ```{r}
+#| include: false
 library(dplyr)
 
 # Filter out rows with zeros or negatives in variables to be logged
@@ -1133,7 +1280,6 @@ england_model_test <- lm(
 summary(england_model_test)
 ```
 
-
 ```{r}
 lme11 <- lmer(
   log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
@@ -1146,6 +1292,7 @@ lme11 <- lmer(
 
 summary(lme11)
 ```
+
 ```{r}
 # Add fitted values (back-transform to original scale)
 england_filtered_clean <- england_filtered_clean %>%
@@ -1175,7 +1322,6 @@ ggplot(england_filtered_clean, aes(x = fitted_ATT8SCR, y = ATT8SCR)) +
   ) +
   theme_minimal()
 ```
-
 
 ```{r}
 #| fig-width: 8
@@ -1324,4 +1470,3 @@ lme12 <- lmer(
 summary(lme12)
 summary(lme11)
 ```
-
