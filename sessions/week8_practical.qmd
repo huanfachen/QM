@@ -1,6 +1,6 @@
 ---
 title: "Prof D's Regression Sessions - Vol 3"
-subtitle: "AKA - In the (Linear) Mix(ed effects model world)"
+subtitle: "AKA - In the (Linear) Mix(ed effects model practical for the next few hours)"
 format:
   html:
     code-fold: true
@@ -15,19 +15,7 @@ editor:
     wrap: 72
 ---
 
-::: multicode
-#### ![](L6_images/python-logo-only.png){width="30"}
 
-```{python}
-
-```
-
-#### ![](L6_images/Rlogo.png){width="41" height="30"}
-
-```{r}
-
-```
-:::
 
 ```{r}
 #| message: false
@@ -1160,10 +1148,18 @@ I'll reproduce the table below:
 | `x + (x|g)` | Varying and correlated intercepts and slopes | `P8 ~ Disadvantage + (Disadvantage | OFSTEDRATING)` |
 | `x + (x||g)` | Uncorrelated Intercepts and Slopes | `P8 ~ Disadvantage + (Disadvantage || OFSTEDRATING)` |
 
+-   You might want to experiment with only one or two of these linear
+    mixed effects models. Below you will see I have incorporated both
+    multilevel (local authorities nested within regions) and varying
+    intercepts. There are almost infinite combinations.
 
 ### Final Task
 
-
+-   You should try and extend your final multiple regression showstopper
+    model to incorporate one or more logical random effect. What can you
+    say about the random effects in your model?
+-   I have played around with a few additional variables too, you don't
+    have to do this, but you can if you wish.
 
 ```{r}
 #| eval: false
@@ -1280,6 +1276,20 @@ england_model_test <- lm(
 summary(england_model_test)
 ```
 
+#### My final mixed effects model
+
+::: multicode
+#### ![](L6_images/python-logo-only.png){width="30"}
+
+```{python}
+#Sorry, I really tried to get this working properly with pymer, but I couldn't - too much pain. 
+
+# Try the R version instead, or, if you manage to get as far as getting pymer4 to work, you can translate my model below into pymer4 syntax (as it uses R under the hood)
+
+```
+
+#### ![](L6_images/Rlogo.png){width="41" height="30"}
+
 ```{r}
 lme11 <- lmer(
   log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
@@ -1292,6 +1302,16 @@ lme11 <- lmer(
 
 summary(lme11)
 ```
+:::
+
+
+
+#### Fitted Values vs Observed Attainment 8 (how good is the model?)
+
+-   Here I have overlaid the Brighton Schools again - anything above the
+    line (a positive residual) shows the school is doing better than
+    expected, given the variables we have used to predict attainment.
+    Anything below, the school is performing worse than expected.
 
 ```{r}
 # Add fitted values (back-transform to original scale)
@@ -1323,12 +1343,124 @@ ggplot(england_filtered_clean, aes(x = fitted_ATT8SCR, y = ATT8SCR)) +
   theme_minimal()
 ```
 
+-   We can also run some diagnostic plots to double check our model
+    adheres to the various assumptions required
+
 ```{r}
 #| fig-width: 8
 #| fig-height: 10
 library(performance)
 check_model(lme11)
 ```
+
+### Interpreting your outputs
+
+#### Random Effects
+
+Turning the **Std.Dev** to an **approximate percentage difference**:
+$\%= 100 \times (exp(SD) - 1)$. This gives a feel for how much
+Attainment 8 changes for a **+1 SD higher** group intercept.
+
+##### lme11 (Overall Attainment 8)
+
+-   **OFSTEDRATING**: Var = 0.0026, **SD = 0.051** → \~**+5.2%** per +1
+    SD
+
+-   **Region (gor_name)**: Var = 0.00024, **SD = 0.015** → \~**+1.5%**
+
+-   **LA within Region**: Var = 0.00066, **SD = 0.026** → \~**+2.6%**
+
+-   **Residual (school-level/unexplained)**: Var = 0.00471, **SD =
+    0.069** → \~**+7.1%**
+
+Taking the sum of all the variances and dividing each individual
+variance by this total gives the proportion of variance explained by
+each random effect:
+
+-   **OFSTEDRATING**: **31.8%**
+
+-   **Region**: **2.9%**
+
+-   **LA within Region**: **8.1%**
+
+-   **Residual**: **57.3%**
+
+-   **Total variance**: 0.00822
+
+While Ofsted Rating helps explain a lot of the variance - some 32%, most
+of the variability is between individual schools within each group.
+
+#### Fixed Effects
+
+From **lme11 (overall attainment)**:
+
+-   **Most influential negative factors**:
+
+    -   **Overall absence (log(PERCTOT))**: t ≈ -28.6 → Higher absence
+        strongly reduces attainment.
+
+    -   **Prior low attainment (PTPRIORLO)**: t ≈ -28.5 → Schools with
+        more students entering low-performing do worse.
+
+    -   **Proportion disadvantaged (log(PTFSM6CLA1A))**: t ≈ -17.1 →
+        Higher concentration of disadvantaged pupils lowers overall
+        attainment, but is much less important than the first two
+        factors.
+
+-   **Positive factors**:
+
+    -   **Selective admissions (ADMPOL_PTSEL)**: t ≈ 9.0 → Selective
+        schools boost attainment.
+
+    -   **Proportion EAL (log(PNUMEAL))**: t ≈ 7.5 → Linguistic
+        diversity slightly improves outcomes.
+
+    -   **Teacher Stability (log(remained_in_the_same_school))**: t ≈
+        6.4 → Teachers remaining in the same school helps.
+
+-   **Moderate negatives**:
+
+    -   **Teacher Absence days**: t ≈ -5.6.
+
+    -   **Proportion of Teachers on Leadership pay %**: t ≈ -3.0.
+
+-   **Not significant**: Other admission policy, segregation index.
+
+#### Overall Fit
+
+Comparing the Observed and Fitted Values and calculating an $R^2$ value
+from that, we can explain almost 90% of the variation in Attainment 8.
+Schools in Brighton are mainly showing positive residuals - in other
+words, performing much better than other similar schools in England with
+similar profiles.
+
+#### Benefits of LME over OLS
+
+-   **Accounts for clustering** (schools within OFSTED/regions).
+
+<!-- -->
+
+-   **Shrinkage / "Partial pooling"** reduces overfitting and improves
+    predictions.
+
+<!-- -->
+
+-   **Decomposes variance** across levels so we can see how, for
+    example, having a better Ofsted score might compare with lowering
+    absence.
+
+<!-- -->
+
+-   **School-specific predictions** are more useful.
+
+### Policy Interpretations and Using AI to help with the specific, contextual translation of outputs
+
+-   Below I have pulled out some of the schools in Brighton.
+-   One of the nice things about AI is it is very good at quickly
+    turning specific situations into policy-relevant examples using the
+    models we have just built. Have a look at the table below and I will
+    give you an example of a question that produces some very
+    interesting results:
 
 ```{r}
 # Packages
@@ -1457,7 +1589,47 @@ knitr::kable(
 )
 ```
 
+::: {.callout-tip title="Question for my AI"}
+Given the outputs from the model above and the specific detail the
+variables for each school. Considering Longhill and Patcham schools, can
+you show what percentage point change would be required for each
+variable to affect an increase of 5 more Attainment 8 points?
+:::
+
+| Variable | Change (unit) | Longhill Current | Longhill Required Δ | Patcham Current | Patcham Required Δ |
+|------------|------------|------------|------------|------------|------------|
+| **PERCTOT** (overall absence) *(log)* | pp | 13.4 | **−5.9 pp** | 9.2 | **−3.3 pp** |
+| **PTFSM6CLA1A** (% disadvantaged) *(log)* | pp | 29.0 | −24.3 pp | 19.0 | −14.2 pp |
+
+This output is highly illustrative and shows that given the different
+starting points for each school, not only are different levels of effort
+required to reach the same outcomes (Patcham would need to reduce
+absence by fewer percentage points to achieve the same 5 point
+attainment 8 increase), but we can see how much more effective reducing
+absence is than reducing levels of disadvantage - with Longhill needing
+to reduce its levels of disadvantaged students down from 29% to to 5% to
+achieve the same point score improvement.
+
+Given the policy levers that Brighton and Hove Council tried to pull,
+this is very important information.
+
+### Task
+
+See if you can experiment with feeding your own tame AI (Copilot/Chat
+GPT, ClaudeAI, Gemini etc. will all do this slightly differently and
+with greater or lesser success) with your model outputs and some specifics about some schools or local authorities, and then ask some questions of it to aid in some insightful interpretation.
+
+::: {.callout-caution}
+I shouldn't need to tell you to proceed with caution when asking an AI to interpret your outputs. It will get things wrong so don't just copy and paste! Interrogate, ask follow-up questions. Ask for reinterpretations or to explain specific features. 
+:::
+
+## Extension Activities
+
+I think you've probably had enough at this point, but you will hopefully find many uses for these models in your future work. 
+
 ```{r}
+#| eval: false
+#| include: false
 lme12 <- lmer(
   log(ATT8SCR_FSM6CLA1A) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
     PTPRIORLO + ADMPOL_PT + gorard_segregation +
