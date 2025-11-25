@@ -152,7 +152,7 @@ calculate_gorard_segregation <- function(df, col_A, col_T) {
 
 
 # Apply the functions to each LEA and create a new dataframe with the results
-results_df <- england_school_2022_23_not_special %>%
+results_df <- eng_sch_2022_23_not_special_plus %>%
   group_by(LEA) %>%
   group_map(~ tibble(
     LEA = .y$LEA,
@@ -174,13 +174,13 @@ library(plotly)
 # index_of_dissimilarity, gorard_segregation, la_name, region_name
 
 fig <- plot_ly(
-  data = merged_df,
+  data = results_df,
   x = ~index_of_dissimilarity,
   y = ~gorard_segregation,
   type = 'scatter',
   mode = 'markers',
-  color = ~region_name,       # Color by region
-  text = ~la_name,            # Hover shows Local Authority name
+  color = ~LEA,       # Color by region
+  text = ~LEA,            # Hover shows Local Authority name
   hoverinfo = 'text+x+y',
   marker = list(size = 6, opacity = 0.7)
 ) %>%
@@ -211,14 +211,136 @@ england_filtered_clean <- england_filtered[
   england_filtered$PTFSM6CLA1A > 0, 
 ]
 
+merged_df <- england_filtered_clean %>%
+  left_join(results_df, by = "LEA")
+
+#write_csv(merged_df, "E:/school_data.csv")
+
 ```
 
+```{r}
+#| eval: false
+#| include: false
+# For something else, but just getting a load of teacher data too
+
+na_all <- c("", "NA", "SUPP", "NP", "NE", "SP", "SN", "LOWCOV", "NEW", "SUPPMAT", "x", "z", "c", "u")
+
+teacher_turnover <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/1df9bfbf-b573-4f1d-ba87-06a36387f2e5/csv", na = na_all)
+teacher_pay <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/760ad614-44ac-4e8a-8fdd-a8080c762770/csv", na = na_all)
+teacher_occasional <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/ba01ed55-b482-4d20-a38d-11c91dcf0b0a/csv", na = na_all)
+teacher_vaccancies <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/0ed37c66-2867-4851-8454-73851606705d/csv", na = na_all)
+teacher_pupil_ratios <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/12849f4a-1427-4dc2-9f7a-e069087824aa/csv", na = na_all)
+teacher_sickness <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/aa13e99e-534c-4f70-9c43-c7f9544296b3/csv", na = na_all)
+teacher_third_party_support <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/aa13e99e-534c-4f70-9c43-c7f9544296b3/csv", na = na_all)
+teacher_workforce_size <- read_csv("https://explore-education-statistics.service.gov.uk/data-catalogue/data-set/6cb459c2-5cc5-41be-87c8-01c0986514e8/csv", na = na_all)
+
+str(teacher_turnover)
+str(teacher_pay)
+str(teacher_occasional)
+str(teacher_vaccancies)
+str(teacher_pupil_ratios)
+str(teacher_sickness)
+str(teacher_third_party_support)
+str(teacher_workforce_size)
+
+library(dplyr)
+library(purrr)
+
+# List all teacher data frames
+teacher_dfs <- list(
+  teacher_workforce_size,
+  teacher_sickness,
+  teacher_third_party_support,
+  teacher_vaccancies,
+  teacher_pupil_ratios,
+  teacher_turnover,
+  teacher_pay,
+  teacher_occasional
+)
+
+# Convert URN to character and filter to time_period == 202223 for each
+teacher_dfs_filtered <- map(teacher_dfs, ~ .x %>%
+  mutate(school_urn = as.character(school_urn)) %>%
+  filter(time_period == 202223))
+
+# Combine all into one dataset by full join on school_urn
+combined_teacher_df <- reduce(teacher_dfs_filtered, full_join, by = "school_urn")
+
+# Ensure one row per unique URN (if duplicates exist after join)
+combined_teacher_df <- combined_teacher_df %>%
+  distinct(school_urn, .keep_all = TRUE)
+
+library(dplyr)
+
+combined_teacher_df <- combined_teacher_df %>%
+  select(-c(
+    time_period.x, time_identifier.x, geographic_level.x, country_code.x, country_name.x,
+    region_code.x, region_name.x, old_la_code.x, new_la_code.x, la_name.x, school_laestab.x,
+    school_name.x, school_type.x, number_schools.x,
+    hc_workforce, hc_all_teachers, hc_classroom_teachers, hc_leadership_teachers,
+    hc_head_teachers, hc_deputy_head_teachers, hc_assistant_head_teachers,
+    hc_all_teachers_without_qts, hc_occasional_teachers, hc_ft_all_teachers,
+    hc_ft_classroom_teachers, hc_ft_leadership_teachers, hc_ft_head_teachers,
+    hc_ft_deputy_head_teachers, hc_ft_assistant_head_teachers, hc_ft_all_teachers_without_qts,
+    hc_pt_all_teachers, hc_pt_classroom_teachers, hc_pt_leadership_teachers,
+    hc_pt_head_teachers, hc_pt_deputy_head_teachers, hc_pt_assistant_head_teachers,
+    hc_pt_all_teachers_without_qts, hc_all_support_staff, hc_teaching_assistants,
+    hc_other_school_support_staff, hc_administrative_staff, hc_technicians,
+    hc_auxiliary_staff, hc_leadership_non_teachers, hc_school_business_professionals,
+    hc_third_party_support_staff, hc_ft_all_support_staff, hc_ft_teaching_assistants,
+    hc_ft_other_school_support_staff, hc_ft_administrative_staff, hc_ft_technicians,
+    hc_ft_auxiliary_staff, hc_ft_leadership_non_teachers, hc_ft_school_business_professionals,
+    hc_pt_all_support_staff, hc_pt_teaching_assistants, hc_pt_other_school_support_staff,
+    hc_pt_administrative_staff, hc_pt_technicians, hc_pt_auxiliary_staff,
+    hc_pt_leadership_non_teachers, hc_pt_school_business_professionals,
+    time_period.y, time_identifier.y, geographic_level.y, country_code.y, country_name.y,
+    region_code.y, region_name.y, old_la_code.y, new_la_code.y, la_name.y, school_laestab.y,
+    school_name.y, school_type.y,
+    time_period.x.x, time_identifier.x.x, geographic_level.x.x, country_code.x.x,
+    country_name.x.x, region_code.x.x, region_name.x.x, old_la_code.x.x, new_la_code.x.x,
+    la_name.x.x, school_laestab.x.x, school_name.x.x, school_type.x.x,
+    total_teachers_taking_absence.y, percentage_taking_absence.y,
+    total_number_of_days_lost.y, average_number_of_days_taken.y,
+    average_number_of_days_all_teachers.y,
+    time_period.y.y, time_identifier.y.y, geographic_level.y.y, country_code.y.y,
+    country_name.y.y, region_code.y.y, region_name.y.y, old_la_code.y.y, new_la_code.y.y,
+    la_name.y.y, school_laestab.y.y, school_name.y.y, school_type.y.y,
+    time_period.x.x.x, time_identifier.x.x.x, geographic_level.x.x.x, country_code.x.x.x,
+    country_name.x.x.x, region_code.x.x.x, region_name.x.x.x, old_la_code.x.x.x,
+    new_la_code.x.x.x, la_name.x.x.x, school_laestab.x.x.x, school_name.x.x.x,
+    school_type.x.x.x, number_schools.y,
+    time_period.y.y.y, time_identifier.y.y.y, geographic_level.y.y.y, country_code.y.y.y,
+    country_name.y.y.y, school_laestab.y.y.y, school_name.y.y.y, school_type.y.y.y,
+    time_period.x.x.x.x, time_identifier.x.x.x.x, geographic_level.x.x.x.x,
+    country_code.x.x.x.x, country_name.x.x.x.x, region_code.y.y.y, region_name.y.y.y,
+    old_la_code.y.y.y, new_la_code.y.y.y, la_name.y.y.y, school_laestab.x.x.x.x,
+    school_name.x.x.x.x, time_period.y.y.y.y, time_identifier.y.y.y.y,
+    geographic_level.y.y.y.y, country_code.y.y.y.y, country_name.y.y.y.y, region_name,
+    region_code, la_name, old_la_code, new_la_code, school_laestab.y.y.y.y,
+    school_name.y.y.y.y
+  ))
+
+# Check result
+#str(combined_teacher_df)
+
+final_combined_df <- merged_df %>%
+  left_join(combined_teacher_df, by = c("URN" = "school_urn"))
+
+#write_csv(final_combined_df, "E:/school_data_2223.csv")
+
+```
+
+
 # This week
+
+Another long lecture - sorry!!
+
+I'll try and stop for another break in the middle
 
 ## Recap
 
 -   Last week we saw how multiple regression models can allow us to understand complex relationships between predictor and outcome variables
--   We began to explore how by increasing the complexity of our regression models, we can begin to observe how the effects of different variables can confound (obscrure) and mediate (partially cause) the effects of others, giving us a deeper understanding of our system of interest
+-   We began to explore how by increasing the complexity of our regression models, we can begin to observe how the effects of different variables can confound (obscure) and mediate (partially cause) the effects of others, giving us a deeper understanding of our system of interest
 -   We were able to see that with just a relatively small number of variables, we could explain most of the variation in school-level attainment scores in England
 
 ## OLS regression with interaction terms
@@ -285,10 +407,16 @@ england_model1 <- lm(log(ATT8SCR) ~ log(PTFSM6CLA1A), data = england_filtered_cl
 
 ## Drawbacks of OLS with Interaction
 
--   OLS assumes all observations (schools) are independent of each other, when in reality, they may have characteristics which mean they are not independent - i.e. they are in the same local authority or have similar Ofsted ratings which mean they share some characteristics with each other in terms of governance etc.
+-   OLS assumes all observations (schools) are independent of each other
+    -   In reality, they may have characteristics which mean they are not independent - i.e. Being in the same local authority or having similar Ofsted ratings could mean that effects are ***clustered***.
 -   OLS assumes the effects (parameters) are constant (fixed) across the whole population / dataset
--   OLS assumes the errors are independent
+-   OLS assumes the errors are independent, ***not clustered*** by space, time or some other group
 -   OLS only has one global intercept with group level differences in the data only crudely represented with dummy variables
+
+## Spotting Important Clustering / non-independence
+
+-   It's possible to visualise clusters / sources of non-independence in our model through plotting relationships for different categorical variables
+-   We are likely to have clustering / non-independence if these plots produce different slopes and intercepts
 
 ## Different Slopes and Intercepts - Attainment 8
 
@@ -485,7 +613,9 @@ ggplot(england_filtered_clean, aes(y = P8MEA, x = PTFSM6CLA1A, colour = OFSTEDRA
 ## Different Slopes and Intercepts
 
 -   Solution: can we just partition our data and run different models for different groups?
--   Answer: Well yes, you could, but we couldn't then answer questions about whether variation between individual schools is more important than between groups (e.g. local authorities or Ofsted ratings)
+-   Answer: Well yes, you could, but we couldn't then answer questions about:
+    -   whether variation between individual schools (***within groups***) is more important than ***between groups*** (e.g. local authorities or Ofsted ratings)
+    -   how much variation the groups account for themselves
 
 In order to model these grouping factors more explicitly and understand their general impact, we need a new type of model - a ***linear mixed effects model***
 
@@ -495,31 +625,29 @@ In order to model these grouping factors more explicitly and understand their ge
 -   ***Fixed Effects*** - A Fixed Effect is your traditional explanatory variable (or covariate) whose relationship with the outcome you are primarily interested in estimating for its own sake.
     -   Example: Proportion of disadvantaged students in a school. You want the single, best-estimated coefficient ($\beta$) for this factor.
 -   ***Random Effects*** - A Random Effect is a grouping factor (or nesting factor) whose variability you want to account for, but whose specific individual levels you don't necessarily want to draw conclusions about.
-    -   Example: The different Ofsted ratings (or individual Schools). You're interested in how much the relationship varies across these groups, not the specific effect of 'Longhill School'
+    -   Example: The different Ofsted ratings (or individual Schools). You're interested in how much the relationship varies across these groups, not the specific effect of 'outstanding' or 'Longhill School'
 
 ## Fixed Effects - More Detail
 
--   Fixed effects estimate the mean relationship across all groups. They represent the "fixed" part of the model that applies to every observation.
-    -   You estimate a single $\beta$ coefficient for a fixed effect, which represents the population average effect of that variable.
+-   Fixed effects estimate the mean relationship across all groups. They represent the "fixed" part of the model that applies to *every observation*.
+    -   You estimate a single $\beta$ coefficient for a fixed effect - the population average effect of that variable.
     -   Fixed effects can be either continuous (e.g., % of disadvantaged students in a school) or categorical (region, Ofsted rating).
 -   Depending on how you formulate your model, a fixed effect could be a random effect in a different context.
-
 
 ## Random Effects - More Detail
 
 -   Random effects, (random intercepts and slopes) represent the deviations of each group's effect from the overall fixed-effect average.
     -   When you model a grouping factor (like Ofsted Rating) as a random effect, you are not estimating five separate coefficients (one for each rating).
     -   Instead, you estimate a variance term ($\sigma^2_{\text{group}}$) that quantifies how much the true group effects (intercepts and/or slopes) scatter around the overall mean effect.
-    -   This approach is used when the groups (e.g., the 5 Ofsted categories or the hundreds of individual schools) are considered a random sample from a larger, unobserved population of groups.
+    -   Remember: Higher variance = Higher uncertainty, so higher variance groups have less weight in the model
     -   This allows the model to "borrow strength" across groups to stabilise estimates (the principle of shrinkage).
-    
+
 ## Random Effects vs Dummy Variables
 
 -   Random Effects and Dummy Variables are often exactly the same variable, they are just treated differently in a LME vs OLS model
 -   In an OLS, the Dummy variable gets a specific coefficient value
 -   In a LME, the random effect represents the overall variability that that variable brings to the explanation (i.e. how much variability in attainment is down to schools themselves ***generally***, rather than a particular school ***specifically***)
 -   Where you might have lots of Dummy categories, a random effect might be more suitable
-
 
 ## Linear Mixed Effects Models
 
@@ -536,11 +664,11 @@ In order to model these grouping factors more explicitly and understand their ge
 
 Multilevel Data Structures (Source:[Gelman & Hill (2006)](http://www.stat.columbia.edu/~gelman/arm/)) and <https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/>
 
-## Linear Mixed Effects Models
-
 ```{r}
+#| eval: false
 #| message: false
 #| warning: false
+#| include: false
 library(GGally)
 
 ggpairs(england_filtered_clean, , mapping = aes(color = OFSTEDRATING), columns = c("P8MEA", "PTFSM6CLA1A", "PERCTOT", "OFSTEDRATING"))
@@ -567,6 +695,7 @@ ggpairs(england_filtered_clean, , mapping = aes(color = OFSTEDRATING), columns =
 
 # 1. Load the necessary library for plotting
 library(ggplot2)
+library(lme4)
 
 # --- Ensure OFSTEDRATING is an ordered factor for better plotting ---
 # It appears you have six levels based on the OLS output, so we order them logically.
@@ -579,17 +708,23 @@ england_filtered_clean$OFSTEDRATING <- factor(
 )
 
 
+#Fit the model
+lme1 <- lmer(P8MEA ~ 1 + (1 | OFSTEDRATING), data = england_filtered_clean)
+# Extract the fixed-effect intercept and store in a variable
+global_mean <- fixef(lme1)[1]
+# Check the value
+global_mean
+
+
 ## ## 1. Boxplot Visualization (Level 1 and Level 2 Variance) ## ##
 boxplot_p8mea <- ggplot(england_filtered_clean, aes(x = OFSTEDRATING, y = P8MEA, fill = OFSTEDRATING)) +
   geom_boxplot(alpha = 0.7) +
-  geom_hline(yintercept = mean(england_filtered_clean$P8MEA, na.rm = TRUE),
-             linetype = "dashed", color = "black", linewidth = 1) +
-  labs(
-    title = "P8MEA Distribution Across Ofsted Ratings (The Null Model Structure)",
-    subtitle = "Fixed Grand Mean (Dashed Line) and Random Intercepts (Box Medians)",
-    x = "Ofsted Rating",
-    y = "Progress 8 Score (P8MEA)"
-  ) +
+  geom_hline(yintercept = global_mean, linetype = "dashed", color = "black", linewidth = 1) +
+  geom_hline(yintercept = mean(england_filtered_clean$P8MEA, na.rm = TRUE), linetype = "dotted", color = "#d62728", linewidth = 0.5) +
+  labs(title = "P8MEA Distribution Across Ofsted Ratings (The Null Model Structure)",
+       subtitle = "Fixed Grand Mean (Dashed Line) and Random Intercepts (Box Medians)",
+       x = "Ofsted Rating",
+       y = "Progress 8 Score (P8MEA)") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none")
 
@@ -598,15 +733,194 @@ print(boxplot_p8mea)
 
 ```
 
--   All of the information in the two-level NULL model is contained in this plot!
+-   Most (as box plots hide counts) of the information in the two-level NULL model is contained in this plot!
+
+## Shrinkage
+
+```{r}
+#| message: false
+#| warning: false
+#| out-width: 70%
+# Packages
+library(lme4)
+library(dplyr)
+library(tibble)
+library(ggplot2)
+library(ggbeeswarm)
+
+# (Re)fit the null model if needed
+lme1 <- lmer(P8MEA ~ 1 + (1 | OFSTEDRATING), data = england_filtered_clean)
+
+# Global mean (fixed intercept)
+global_mean <- fixef(lme1)[1]
+
+# Random effects (BLUPs) per group
+re <- ranef(lme1)$OFSTEDRATING %>%
+  rownames_to_column("OFSTEDRATING") %>%
+  rename(blup = `(Intercept)`)
+
+# Raw means and shrunken means
+means_df <- england_filtered_clean %>%
+  group_by(OFSTEDRATING) %>%
+  summarise(raw_mean = mean(P8MEA), .groups = "drop") %>%
+  left_join(re, by = "OFSTEDRATING") %>%
+  mutate(shrunken_mean = global_mean + blup)
+
+# --- Plot: beeswarm + shrinkage, no group-size dots, no legend ---
+set.seed(123)  # reproducible jitter
+jitter_beeswarm <- ggplot(england_filtered_clean, aes(x = OFSTEDRATING, y = P8MEA)) +
+  # 1) Jittered points coloured by Ofsted rating
+  geom_quasirandom(
+    aes(color = OFSTEDRATING),
+    varwidth = TRUE, width = 0.15,
+    alpha = 0.35, size = 1.1
+  ) +
+  # 2) Global mean (dashed)
+  geom_hline(yintercept = global_mean, linetype = "dashed",
+             color = "black", linewidth = 0.9) +
+  # 3) Shrinkage segments: raw mean -> shrunken mean
+  geom_segment(
+    data = means_df,
+    aes(x = OFSTEDRATING, xend = OFSTEDRATING, y = raw_mean, yend = shrunken_mean),
+    inherit.aes = FALSE, color = "grey35", linewidth = 1
+  ) +
+  # 4) Shrunken (model) mean — fixed-size semi-transparent red
+  geom_point(
+    data = means_df,
+    aes(x = OFSTEDRATING, y = shrunken_mean),
+    inherit.aes = FALSE,
+    shape = 21, fill = "#d62728", color = "white", stroke = 0.4,
+    size = 3, alpha = 0.55
+  ) +
+  # 5) Raw (sample) mean — solid blue, drawn last so it's visible
+  stat_summary(
+    fun = mean, geom = "point",
+    size = 3.2, shape = 21, fill = "#1f77b4", color = "white", stroke = 0.4,
+    alpha = 0.9
+  ) +
+  scale_color_brewer(palette = "Set2", name = "Ofsted rating") +
+  labs(
+    title = "P8MEA by Ofsted Rating — Beeswarm with shrinkage",
+    subtitle = "Jittered points coloured by Ofsted rating. Blue = raw group mean; \nsemi-transparent red = model (shrunken) mean.\nDashed line = global mean.",
+    x = "Ofsted Rating",
+    y = "Progress 8 Score (P8MEA)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "none"  # NEW: remove legend
+  )
+
+print(jitter_beeswarm)
+
+```
+
+-   The global mean in the null model is not just a simple average
+-   Groups have few observations / high variance / unreliable means are given less importance in the average in a process called ***shrinkage***
+-   Groups with few observations are 'shrunk' towards the overall mean
+
+## Shrinkage
+
+```{r}
+#| message: false
+#| warning: false
+#| out-width: 70%
+# Install (if needed) and load packages
+# install.packages(c("lme4", "ggplot2", "dplyr", "tibble", "purrr"))
+library(lme4)
+library(ggplot2)
+library(dplyr)
+library(tibble)
+library(purrr)
+
+set.seed(42)
+
+# --- 1) Simulate hierarchical data with unbalanced group sizes ---
+# 5 groups with very different sizes (to make shrinkage obvious)
+group_sizes <- c(G1 = 5, G2 = 10, G3 = 30, G4 = 200, G5 = 400)
+
+# "True" parameters (picked to resemble your earlier model)
+mu    <- -0.26          # global mean (fixed intercept)
+tau   <- 0.56           # SD of random intercepts (between-group)
+sigma <- 0.41           # residual SD (within-group)
+
+# Draw one random intercept per group
+u <- rnorm(length(group_sizes), mean = 0, sd = tau)
+names(u) <- names(group_sizes)
+
+# Build the dataset
+sim_dat <- purrr::map2_df(names(group_sizes), group_sizes, ~{
+  tibble(
+    group = .x,
+    u_g   = u[.x],
+    y     = mu + u_g + rnorm(.y, 0, sigma)
+  )
+})
+
+# --- 2) Fit a random-intercept model and extract BLUPs ---
+m1 <- lmer(y ~ 1 + (1 | group), data = sim_dat, REML = TRUE)
+
+# Fixed-effect (global mean)
+global_mean_hat <- fixef(m1)[1]
+
+# Random effects (BLUPs for group intercepts)
+re <- ranef(m1)$group %>%
+  rownames_to_column("group") %>%
+  rename(blup = `(Intercept)`)
+
+# Raw group means and sample sizes
+group_stats <- sim_dat %>%
+  group_by(group) %>%
+  summarise(n = n(), raw_mean = mean(y), .groups = "drop")
+
+# Combine: shrunken mean = global mean + BLUP
+plot_df <- group_stats %>%
+  left_join(re, by = "group") %>%
+  mutate(shrunken_mean = global_mean_hat + blup,
+         shrink_amount = raw_mean - shrunken_mean) %>%
+  arrange(group)
+
+# --- 3) ICC (share of variance between groups) ---
+vc <- as.data.frame(VarCorr(m1))
+tau2   <- vc$vcov[vc$grp == "group" & vc$var1 == "(Intercept)"]  # between-group variance
+sigma2 <- vc$vcov[vc$grp == "Residual"]                          # within-group variance
+ICC <- tau2 / (tau2 + sigma2)
+icc_txt <- sprintf("ICC = %.2f  (%.1f%% of variance between groups)", ICC, 100*ICC)
+
+# --- 4) Visualize shrinkage (groups on x-axis) ---
+p <- ggplot(plot_df, aes(x = group)) +
+  # line from raw mean to shrunken mean (vertical dumbbell per group)
+  geom_segment(aes(y = raw_mean, yend = shrunken_mean, xend = group),
+               color = "grey60", linewidth = 1) +
+  # points: raw (blue) vs shrunken (red) with alpha to show overlaps
+  geom_point(aes(y = raw_mean,  size = n), color = "#1f77b4", alpha = 0.75) +
+  geom_point(aes(y = shrunken_mean, size = n), color = "#d62728", alpha = 0.60) +
+  # global mean (dashed horizontal line)
+  geom_hline(yintercept = global_mean_hat, linetype = "dashed", color = "black") +
+  scale_size_continuous(name = "Group size (n)") +
+  labs(
+    title = "Shrinkage in a Random-Intercept Model",
+    subtitle = paste0(
+      "Smaller groups shrink more towards the global mean (dashed line)."),
+    x = "Group",
+    y = "Group mean"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
+
+print(p)
+```
+
+-   Shrinkage is another reason why LME models are better than OLS models where clustering exists in the data
+-   Small groups have less of an influence as their averages get pulled towards the mean - less uncertainty and avoids over-fitting to small groups
 
 ## The Null Model - a 2 Level example
 
 $$Y_{ij} = \gamma_{00} + u_{0j} + \epsilon_{ij}$$ The total variability in outcome $Y_{ij}$ (Progress 8) for the $i^{th}$ school in the $j^{th}$ Ofsted rating is decomposed into:
 
--   **Fixed Effect**: $\gamma_{00}$ (The overall population average - **grand/global mean**).
+-   **Fixed Effect**: $\gamma_{00}$ (gamma - the overall population average - **grand/global mean**).
 -   **Random Effect - Level 1**: $\epsilon_{ij}$ - **Within-Group Variance** - the height of each individual box and the length of its whiskers. Taller boxes and longer whiskers indicate more variability among schools within that single rating category.
--   **Random Effect - Level 2**: $u_{0j}$ - **Between-Group Variance** 
+-   **Random Effect - Level 2**: $u_{0j}$ - **Between-Group Variance**
 
 ## Level 1 - Within-Group Variance
 
@@ -619,18 +933,18 @@ $$
 -   **The Level 1 residual error**: $\epsilon_{ij}$ (or "school-level error"). This is the deviation of the $i^{th}$ school's P8MEA from its own Ofsted group's mean ($\beta_{0j}$).
     -   Assumption: $\epsilon_{ij} \sim N(0, \sigma^2_{\epsilon})$ where $\sigma^2_{\epsilon}$
 
-## Level 1 - Within-Group Variance
+## Level 1 - Within-Group Variance {.smaller}
 
-$$\epsilon_{ij} \sim N(0, \sigma^2_{\epsilon})$$ 
+$$\epsilon_{ij} \sim N(0, \sigma^2_{\epsilon})$$
 
 |  |  |
-|----|----|
+|----------------------|--------------------------------------------------|
 | **Notation** | **Meaning** |
-| $\epsilon_{ij}$ | The **Level 1 Residual Error** (or "within-group error") for the $i$-th school in the $j$-th Ofsted rating. | 
+| $\epsilon_{ij}$ | The **Level 1 Residual Error** (or "within-group error") for the $i$-th school in the $j$-th Ofsted rating. |
 | $\sim$ | "Is distributed as" or "Follows the distribution." |
-| $N(\dots)$ | The ***N***ormal (Gaussian) Distribution. 
+| $N(\dots)$ | The ***N***ormal (Gaussian) Distribution. |
 | $0$ | The **Mean** of the distribution = 0. |
-| $\sigma^2_{\epsilon}$ | The **Within-Group Variance** of the distribution. |
+| $\sigma^2_{\epsilon}$ | The **Within-Group Variance** of the the error term. Sigma - $\sigma$ is commonly used to represent standard deviation. Variance is $\sigma^2$ |
 
 ## Level 2 - Between-Group Variance
 
@@ -647,17 +961,10 @@ $$
 
 1.  **Between-Group Variance** ($\sigma^2_{\text{Between}}$ - or more generally $\sigma^2_{u_{0}}$): The variability in average P8MEA that exists ***between*** the different Ofsted ratings.
 2.  **Within-Group (Residual) Variance** ($\sigma^2_{\text{Within}}$ - or more generally $\sigma^2_{\epsilon}$): The variability in P8MEA that exists between schools ***within*** each rating (i.e., the school-level differences).
+
 -   Total Variance is simply the sum of these two
 
-$$\sigma^2_{\text{Total}} = \sigma^2_{\text{Between}} + \sigma^2_{\text{Within}}$$
-$$\sigma^2_{\text{Total}} = \sigma^2_{u_{0}} + \sigma^2_{\epsilon}$$
-
-## The Intraclass Correlation Coefficient (ICC)
-
-The ICC tells you the proportion of the total variability in the outcome that is accounted for by the grouping structure.
-
--   It answers the question in our case: "How much of the total difference in Progress 8 is due to the school's Ofsted rating?"
--   It can also be interpreted as the expected correlation between any two randomly chosen schools within the same Ofsted rating.
+$$\sigma^2_{\text{Total}} = \sigma^2_{\text{Between}} + \sigma^2_{\text{Within}}$$ $$\sigma^2_{\text{Total}} = \sigma^2_{u_{0}} + \sigma^2_{\epsilon}$$
 
 ## The Intraclass Correlation Coefficient (ICC)
 
@@ -667,7 +974,7 @@ $$\text{ICC} = \frac{\text{Between-Group Variance}}{\text{Total Variance}} = \fr
 -   The higher the ICC (closer to 1), the more variance is due to differences between groups (i.e. differences between the Ofsted rating of schools) than within groups (i.e. between schools within Ofsted rating bands)
 -   **A high ICC is a strong indication that a multilevel model is a suitable modelling strategy to pursue to try and explain these group-level differences**
 
-## The ICC
+## Visualising The ICC
 
 ```{r}
 #| message: false
@@ -693,32 +1000,22 @@ print(density_p8mea)
 -   High ICC = distinct, non-overlapping humps
 -   Low ICC = density plots all overlapping on-top of each other
 
-## Linear Mixed Effects Model - General Syntax
+## The Null Model - Fixed Global Intercept & Fixed Random Effect Slopes
 
-`y ~ fixed_effect_x1 + (random_effect_slope_term_x1 | random_effect_group_g1)`
+-   Using [Paul Johnson's](https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/) excellent guide for syntax, the null model in R follows this format: `y ~ 1 + (1 | g)`
+-   **Fixed effects outside of the brackets**. The first `1` just tells the model to use a fixed global intercept (global average `y`)
+-   **Random Effects are inside the brackets** `(...|...)`
+    -   To the *left* of the pipe symbol `|` we have a `1` as all slopes are fixed as group `g` average of `y`
+    -   To the *right* of the vertical bar or pipe symbol `|` we have the grouping variable `g` itself.
+-   The full model in R would like like: `lme_model1 <- lmer(P8MEA ~ 1 + (1|OFSTEDRATING), data = ...)`
 
-`y ~ fixed_effect_x1 + fixed_effect_x2 + fixed_effect_xn + (random_effect_slope_term_x1 | random_effect_group_g1) + (random_effect_slope_term_x2 | random_effect_group_g2) + (random_effect_slope_term_xn | random_effect_group_gn)`
-
-
-## The Null Model - Syntax
--   Using Paul Johnson's excellent guide for syntax, the null model in R follows this format: `y ~ 1 + (1 | g)`
--   Here the fixed effects appear outside of the brackets. The first `1` outside of the brackets just tells the model to use a fixed global intercept
--   The random effects are inside the brackets `(...|...)`
-    -    To the *left* of the pipe symbol `|` we have a `1` as all slopes are fixed in the null model
-    -    To the *right* of the vertical bar or pipe symbol `|` we have the grouping variable `g`. 
--   The full model in R would like like: 
-
-`lme_model1 <- lmer(P8MEA ~ 1 + (1 | OFSTEDRATING), data = ...)`
-
-<https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/>
-
-## Running The Null Model
+## Running The Null Model {.smaller}
 
 ```{r}
 #| message: false
 #| warning: false
 #| align: center
-#| out-width: 80%
+#| out-width: 70%
 library(lme4)
 library(performance)
 
@@ -730,13 +1027,22 @@ summary(lme1)
 
 ```
 
-## The ICC
+-   Fixed Effect: Global Average `y` (Progress 8) is -0.26
+-   Random Effect: Progress 8 varies by 0.31 points on average ***between*** Ofsted categories
+-   Residual variation between schools ***within*** categories is smaller: 0.17 points
+
+## The NULL model ICC
 
 ```{r}
 #| echo: true
 library(performance)
 icc(lme1, by_group = T)
 ```
+
+-   ICC of 0.647 means around 65% of the total variation in Progress 8 scores is explained by differences ***between*** OFSTED rating groups
+-   The remaining 35% is due to variation ***within*** those groups (i.e. between individual schools)
+-   ICC of 65% is very high - Schools in the same OFSTED category tend to have very similar Progress 8 scores
+-   High ICC means clustering is important. Ignoring it (e.g., using OLS) would underestimate uncertainty - justifies using a LME model
 
 ## NULL Model Visualisation
 
@@ -766,202 +1072,456 @@ ggplot(ranef_df, aes(x = OFSTEDRATING, y = `(Intercept)`)) +
   theme_minimal()
 ```
 
+## Model with a Fixed Effect Predictor
 
+-   `y ~ x + (1 | g)`
+-   In this model, each group in the Random Effect part of the model has it's own intercept but a fixed slope still - `(1 | g)`
+-   Adding a variable into the Fixed Effect part of the model shows how `x` influences `y` across all groups
+-   The Null Model asks: "How much do groups differ, ignoring everything else?"
+-   This model asks: "How does `x` affect `y`, while still accounting for group differences?"
 
-```{r}
-lme2 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|OFSTEDRATING), data = england_filtered_clean)
-summary(lme2)
-```
-
+## Model with a Fixed Effect Predictor
 
 ```{r}
 library(lme4)
 library(ggplot2)
+library(dplyr)
+library(tibble)
 
 # Fit the model
-lme2 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|OFSTEDRATING), data = england_filtered_clean)
+lme2 <- lmer(P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING), data = england_filtered_clean)
 
-# Get fixed effect and random intercepts
+# Fixed effects
 fixed_intercept <- fixef(lme2)[1]
 slope <- fixef(lme2)[2]
-ranef_df <- as.data.frame(ranef(lme2)$OFSTEDRATING)
-ranef_df$OFSTEDRATING <- rownames(ranef(lme2)$OFSTEDRATING)
 
-# Create prediction grid
-pop_range <- seq(min(england_filtered_clean$PTFSM6CLA1A),
-                 max(england_filtered_clean$PTFSM6CLA1A), length.out = 100)
+# Random intercepts (BLUPs) per OFSTED group
+ranef_df <- ranef(lme2)$OFSTEDRATING %>%
+  as.data.frame() %>%
+  rownames_to_column("OFSTEDRATING") %>%
+  rename(blup = `(Intercept)`)
 
-pred_df <- do.call(rbind, lapply(1:nrow(ranef_df), function(i) {
-  intercept <- fixed_intercept + ranef_df$`(Intercept)`[i]
+# Prediction grid across the observed range of PTFSM6CLA1A
+pop_range <- seq(
+  min(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  max(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  length.out = 100
+)
+
+# Lines for each OFSTED group: same slope, group-specific intercept
+pred_df <- do.call(rbind, lapply(seq_len(nrow(ranef_df)), function(i) {
+  intercept_i <- fixed_intercept + ranef_df$blup[i]
   data.frame(
     PTFSM6CLA1A = pop_range,
-    P8MEA = intercept + slope * pop_range,
-    OFSTEDRATING = ranef_df$OFSTEDRATING[i]
+    P8MEA = intercept_i + slope * pop_range,
+    OFSTEDRATING = ranef_df$OFSTEDRATING[i],
+    stringsAsFactors = FALSE
   )
 }))
 
-# Plot
-ggplot(pred_df, aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING)) +
-  geom_line(size = 1.2) +
-  labs(title = "Predicted P8MEA vs Population by OFSTED Rating",
-       subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING)",
-       x = "PTFSM6CLA1A (Population Measure)",
-       y = "Predicted P8MEA") +
-  theme_minimal()
+# Optional: overall (fixed-effects only) line
+overall_df <- data.frame(
+  PTFSM6CLA1A = pop_range,
+  P8MEA = fixed_intercept + slope * pop_range
+)
+
+# Plot: raw points overlaid + group prediction lines
+ggplot() +
+  # Raw points, coloured by OFSTED group
+  geom_point(
+    data = england_filtered_clean,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    alpha = 0.35, size = 1.2, na.rm = TRUE
+  ) +
+  # Group-specific prediction lines (random intercepts)
+  geom_line(
+    data = pred_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    linewidth = 1.1, alpha = 0.9
+  ) +
+  # Optional: overall fixed-effects line (no random intercept)
+  geom_line(
+    data = overall_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA),
+    color = "black", linetype = "dashed", linewidth = 0.9
+  ) +
+  scale_color_brewer(palette = "Set2") +
+  labs(
+    title = "P8MEA vs Disadvantaged (%): Raw data and group-specific fitted lines",
+    subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING)\nLines share the same slope; intercepts vary by OFSTED rating",
+    x = "PTFSM6CLA1A",
+    y = "P8MEA",
+    color = "OFSTED rating"
+  ) +
+  theme_minimal(base_size = 12)
 ```
+
+## Model with a Fixed Effect Predictor {.smaller}
+
+```{r}
+lme2 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|OFSTEDRATING), data = england_filtered_clean)
+summary(lme2)
+
+```
+
+-   Adding the fixed effect variable reduces Random Effect Ofsted group variance from 0.31 to 0.23. Some between group variance now captured by PTFSM6CLA1A
+-   Fixed effect of % disadvantaged students highly significant
+-   REML criterion: 3156.8 → 2729.2 indicating better fit
+
+## Model with a Fixed Effect Predictor
+
+```{r}
+#| echo: true
+#| warning: false
+# Random effects (BLUPs): deviations from the global intercept, by group
+ranef(lme1)$OFSTEDRATING
+```
+
+-   While the main summary doesn't show the specific intercepts for each group, these can be extracted from the model object using the `ranef` (random effect) function in R
+-   These Random Effect intercepts are the deviation from the global mean and effectively show what is on the plot when combined with the Fixed Effect parameter
+
+## Model with a Fixed Effect Predictor
+
+```{r}
+library(lme4)
+library(ggplot2)
+library(dplyr)
+library(tibble)
+library(RColorBrewer)
+
+# Fit the model
+lme2 <- lmer(P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING), data = england_filtered_clean)
+
+# Fixed effects
+fixed_intercept <- fixef(lme2)[1]
+slope           <- fixef(lme2)[2]
+
+# Ensure a consistent factor order for colours/facets
+england_filtered_clean <- england_filtered_clean %>%
+  mutate(OFSTEDRATING = factor(OFSTEDRATING))
+
+lvl <- levels(england_filtered_clean$OFSTEDRATING)
+
+# Define a named colour palette (same mapping everywhere)
+pal <- setNames(brewer.pal(max(3, length(lvl)), "Set2")[seq_along(lvl)], lvl)
+
+# Random intercepts (BLUPs) per OFSTED group
+ranef_df <- ranef(lme2)$OFSTEDRATING %>%
+  as.data.frame() %>%
+  rownames_to_column("OFSTEDRATING") %>%
+  rename(blup = `(Intercept)`) %>%
+  mutate(OFSTEDRATING = factor(OFSTEDRATING, levels = lvl))
+
+# Prediction grid across the observed range of PTFSM6CLA1A
+pop_range <- seq(
+  min(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  max(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  length.out = 100
+)
+
+# Lines for each OFSTED group: same slope, group-specific intercept
+pred_df <- do.call(rbind, lapply(seq_len(nrow(ranef_df)), function(i) {
+  intercept_i <- fixed_intercept + ranef_df$blup[i]
+  data.frame(
+    PTFSM6CLA1A = pop_range,
+    P8MEA       = intercept_i + slope * pop_range,
+    OFSTEDRATING = ranef_df$OFSTEDRATING[i],
+    stringsAsFactors = FALSE
+  )
+})) %>%
+  mutate(OFSTEDRATING = factor(OFSTEDRATING, levels = lvl))
+
+# Overall (fixed-effects only) line
+overall_df <- data.frame(
+  PTFSM6CLA1A = pop_range,
+  P8MEA       = fixed_intercept + slope * pop_range
+)
+
+# ---- Plot with coloured dots matching OFSTED groups ----
+ggplot() +
+  # Raw points: colour by OFSTEDRATING (matches palette)
+  geom_point(
+    data = england_filtered_clean,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    alpha = 0.35, size = 1.2, na.rm = TRUE
+  ) +
+  # Group-specific prediction lines (OPTION 1: match group colour)
+  geom_line(
+    data = pred_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    linewidth = 1.1, show.legend = FALSE
+  ) +
+  # If you prefer *all* group lines blue, replace the block above with:
+  # geom_line(data = pred_df, aes(x = PTFSM6CLA1A, y = P8MEA),
+  #           color = "#1f77b4", linewidth = 1.1) +
+  #
+  # Overall fixed-effects line (same in every facet)
+  geom_line(
+    data = overall_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA),
+    color = "black", linetype = "dashed", linewidth = 0.9
+  ) +
+  facet_wrap(~ OFSTEDRATING, ncol = 3, scales = "fixed") +
+  scale_color_manual(values = pal, guide = "none") +  # hide legend; keep consistent colours
+  labs(
+    title = "P8MEA vs FSM (%): group-specific fits by Ofsted rating",
+    subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (1 | OFSTEDRATING)\nPoints and lines coloured by Ofsted group; dashed line is fixed-effects only",
+    x = "PTFSM6CLA1A",
+    y = "P8MEA"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "none",
+    strip.background = element_rect(fill = "#f2f2f2", color = NA),
+    strip.text = element_text(face = "bold")
+  )
+```
+
+## Random Intercept and Random Slope Model
+
+-   Right back at the beginning of the lecture when we plotted each Ofsted Subset as a separate regression model, it was clear that the relationship between % Disadvantaged Pupils in a school & Progress 8 had different slopes as well as intercepts
+-   `y ~ x + (x | g)`
+-   Adding the random slopes simply requires the predictor variable to the left of the pipe in the Random effects bracket `(x | g)`
+-   In this model each group has its own baseline (intercept) and its own relationship between `x` and `y` (whereas in the last model the relationship between `x` and `y` was assumed constant across groups)
+
+## Random Intercept and Random Slope Model {.smaller}
+
+```{r}
+# Packages
+library(lme4)
+library(ggplot2)
+library(dplyr)
+library(tibble)
+
+# --- Fit random intercept + random slope model
+lme_rs <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A | OFSTEDRATING),
+               data = england_filtered_clean)
+
+# Fixed effects
+fixed_intercept <- fixef(lme_rs)[["(Intercept)"]]
+fixed_slope     <- fixef(lme_rs)[["PTFSM6CLA1A"]]
+
+# Random effects (BLUPs) per group: intercept and slope
+re_df <- ranef(lme_rs)$OFSTEDRATING %>%
+  rownames_to_column("OFSTEDRATING") %>%
+  rename(
+    b0 = `(Intercept)`,   # random intercept deviation
+    b1 = `PTFSM6CLA1A`    # random slope deviation
+  )
+
+# Prediction grid across observed range of PTFSM6CLA1A
+x_range <- seq(
+  min(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  max(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  length.out = 100
+)
+
+# Build per-group prediction lines with varying intercepts AND slopes
+pred_df <- do.call(rbind, lapply(seq_len(nrow(re_df)), function(i) {
+  intercept_i <- fixed_intercept + re_df$b0[i]
+  slope_i     <- fixed_slope     + re_df$b1[i]
+  data.frame(
+    OFSTEDRATING = re_df$OFSTEDRATING[i],
+    PTFSM6CLA1A  = x_range,
+    P8MEA        = intercept_i + slope_i * x_range,
+    stringsAsFactors = FALSE
+  )
+}))
+
+# Optional: overall (fixed-effects only) regression line
+overall_df <- data.frame(
+  PTFSM6CLA1A = x_range,
+  P8MEA       = fixed_intercept + fixed_slope * x_range
+)
+
+# --- Plot: raw data + group-specific fitted lines (varying slopes & intercepts)
+ggplot() +
+  # 1) Raw points coloured by group
+  geom_point(
+    data = england_filtered_clean,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    alpha = 0.35, size = 1.2, na.rm = TRUE
+  ) +
+  # 2) Group-specific lines (random intercepts + random slopes)
+  geom_line(
+    data = pred_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    linewidth = 1.1, alpha = 0.9
+  ) +
+  # 3) Overall fixed-effects line (no random effects)
+  geom_line(
+    data = overall_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA),
+    color = "black", linetype = "dashed", linewidth = 0.9
+  ) +
+  scale_color_brewer(palette = "Set2", name = "Ofsted rating") +
+  labs(
+    title = "P8MEA vs % Disadvantage: Raw data and group-specific fitted lines",
+    subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A | OFSTEDRATING)\nLines vary in both intercept and slope by Ofsted rating",
+    x = "PTFSM6CLA1A",
+    y = "P8MEA"
+  ) +
+  theme_minimal(base_size = 12)
+```
+
+-   Most Ofsted Groups are similar to the mean
+-   Although for Outstanding schools, the proportions of disadvantage appear to have very little effect on Progress 8
+
+## Random Intercept and Random Slope Model {.smaller}
 
 ```{r}
 lme3 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A|OFSTEDRATING), data = england_filtered_clean)
 summary(lme3)
 ```
 
+-   REML dropped from 2744 → 2702, meaning the second model fits slightly better (lower REML = better fit)
+-   However, slope variance 3.549e-05 (0.000035) very small (i.e. possibly not worth additional complexity compared to fixed slope model)
+-   And correlation of 1.0 between slope and intercept in Random effects is problematic
+-   Suggests visual difference in Outstanding Ofsted not statistically reliable.
+
+## Random Intercept and Random Slope Model
 
 ```{r}
+#| echo: true
+# Extract random effects for each OFSTED group
+ranef_values <- ranef(lme3)$OFSTEDRATING
+
+# Fixed slope
+fixed_slope <- fixef(lme3)["PTFSM6CLA1A"]
+
+# Add random deviations to get group-specific slopes
+group_slopes <- fixed_slope + ranef_values$PTFSM6CLA1A
+
+# Combine into a tidy data frame
+slopes_df <- data.frame(
+  OFSTEDRATING = rownames(ranef_values),
+  slope = group_slopes
+)
+
+print(slopes_df)
+
+```
+
+-   Again, while the standard model outputs don't print the slope parameters, these can be extracted
+
+## Random Intercept and Random Slope Model {.smaller}
+
+```{r}
+# Packages
 library(lme4)
 library(ggplot2)
+library(dplyr)
+library(tibble)
+library(RColorBrewer)
 
+# --- Fit random intercept + random slope model
+lme_rs <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A | OFSTEDRATING),
+               data = england_filtered_clean)
 
-# 1. Load Libraries (Assuming they are already loaded)
-# library(lme4)
-# library(ggplot2)
+# --- Fixed effects
+fixed_intercept <- fixef(lme_rs)[["(Intercept)"]]
+fixed_slope     <- fixef(lme_rs)[["PTFSM6CLA1A"]]
 
-# 2. Fit the New Model with Random Slopes and Intercepts
-lme3 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A | OFSTEDRATING), data = england_filtered_clean)
+# --- Ensure a consistent factor order for colours/facets
+england_filtered_clean <- england_filtered_clean %>%
+  mutate(OFSTEDRATING = factor(OFSTEDRATING))
+lvl <- levels(england_filtered_clean$OFSTEDRATING)
 
-# 3. Get Fixed Effects and Random Effects
-fixed_intercept <- fixef(lme3)[1] # Fixed overall intercept
-fixed_slope <- fixef(lme3)[2]     # Fixed overall slope for PTFSM6CLA1A
+# Named colour palette (consistent mapping everywhere)
+pal <- setNames(brewer.pal(max(3, length(lvl)), "Set2")[seq_along(lvl)], lvl)
 
-# Extract Random Effects for both Intercept and Slope
-ranef_df <- as.data.frame(ranef(lme3)$OFSTEDRATING)
-ranef_df$OFSTEDRATING <- rownames(ranef(lme3)$OFSTEDRATING)
+# --- Random effects (BLUPs) per group: intercept and slope
+re_df <- ranef(lme_rs)$OFSTEDRATING %>%
+  as.data.frame() %>%
+  rownames_to_column("OFSTEDRATING") %>%
+  rename(
+    b0 = `(Intercept)`,     # random intercept deviation
+    b1 = `PTFSM6CLA1A`      # random slope deviation
+  ) %>%
+  mutate(OFSTEDRATING = factor(OFSTEDRATING, levels = lvl))
 
-# Rename columns for clarity
-colnames(ranef_df) <- c("RandomIntercept", "RandomSlope", "OFSTEDRATING")
+# --- Prediction grid across the observed range of PTFSM6CLA1A
+x_range <- seq(
+  min(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  max(england_filtered_clean$PTFSM6CLA1A, na.rm = TRUE),
+  length.out = 100
+)
 
-# 4. Create Prediction Grid
-# Use the same range for the predictor as before
-pop_range <- seq(min(england_filtered_clean$PTFSM6CLA1A),
-                 max(england_filtered_clean$PTFSM6CLA1A), length.out = 100)
-
-pred_df_lme3 <- do.call(rbind, lapply(1:nrow(ranef_df), function(i) {
-  
-  # Calculate the group-specific intercept and slope:
-  # Group Intercept = Fixed Intercept + Random Intercept for the Group
-  group_intercept <- fixed_intercept + ranef_df$RandomIntercept[i]
-  
-  # Group Slope = Fixed Slope + Random Slope for the Group
-  group_slope <- fixed_slope + ranef_df$RandomSlope[i]
-  
-  # Calculate predicted P8MEA for this group
+# --- Lines for each group: varying intercepts AND slopes
+pred_df <- do.call(rbind, lapply(seq_len(nrow(re_df)), function(i) {
+  intercept_i <- fixed_intercept + re_df$b0[i]
+  slope_i     <- fixed_slope     + re_df$b1[i]
   data.frame(
-    PTFSM6CLA1A = pop_range,
-    P8MEA = group_intercept + group_slope * pop_range,
-    OFSTEDRATING = ranef_df$OFSTEDRATING[i]
+    PTFSM6CLA1A  = x_range,
+    P8MEA        = intercept_i + slope_i * x_range,
+    OFSTEDRATING = re_df$OFSTEDRATING[i],
+    stringsAsFactors = FALSE
   )
-}))
+})) %>%
+  mutate(OFSTEDRATING = factor(OFSTEDRATING, levels = lvl))
 
-# 5. Plot the Results
-ggplot(pred_df_lme3, aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING)) +
-  geom_line(size = 1.2) +
-  labs(title = "Predicted P8MEA vs Population by OFSTED Rating (Random Slopes)",
-       subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A | OFSTEDRATING)",
-       x = "PTFSM6CLA1A (Population Measure)",
-       y = "Predicted P8MEA") +
-  theme_minimal()
-```
+# --- Overall (fixed-effects only) line
+overall_df <- data.frame(
+  PTFSM6CLA1A = x_range,
+  P8MEA       = fixed_intercept + fixed_slope * x_range
+)
 
-
-```{r}
-## 1. Fit the New Model with Uncorrelated Random Slopes and Intercepts
-lme4 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A || OFSTEDRATING), data = england_filtered_clean)
-summary(lme4)
-```
-
-
-```{r}
-library(lme4)
-library(ggplot2)
-
-
-## 1. Fit the New Model with Uncorrelated Random Slopes and Intercepts
-lme4 <- lmer(P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A || OFSTEDRATING), data = england_filtered_clean)
-
-# 2. Get Fixed Effects and Random Effects
-fixed_intercept <- fixef(lme4)[1] # Fixed overall intercept
-fixed_slope <- fixef(lme4)[2]     # Fixed overall slope for PTFSM6CLA1A
-
-# Extract Random Effects for both Intercept and Slope
-# Note: ranef() returns the random effects in the same order as the fixed effects
-ranef_df_lme4 <- as.data.frame(ranef(lme4)$OFSTEDRATING)
-
-# Since the structure is (PTFSM6CLA1A || OFSTEDRATING), lme4 separates the two terms
-# The columns are named based on the formula structure for uncorrelated terms
-colnames(ranef_df_lme4) <- c("RandomIntercept", "RandomSlope") 
-ranef_df_lme4$OFSTEDRATING <- rownames(ranef_df_lme4)
-
-# 3. Create Prediction Grid
-pop_range <- seq(min(england_filtered_clean$PTFSM6CLA1A),
-                 max(england_filtered_clean$PTFSM6CLA1A), length.out = 100)
-
-pred_df_lme4 <- do.call(rbind, lapply(1:nrow(ranef_df_lme4), function(i) {
-  
-  # Calculate the group-specific intercept and slope:
-  # Group Intercept = Fixed Intercept + Random Intercept for the Group
-  group_intercept <- fixed_intercept + ranef_df_lme4$RandomIntercept[i]
-  
-  # Group Slope = Fixed Slope + Random Slope for the Group
-  group_slope <- fixed_slope + ranef_df_lme4$RandomSlope[i]
-  
-  # Calculate predicted P8MEA for this group
-  data.frame(
-    PTFSM6CLA1A = pop_range,
-    P8MEA = group_intercept + group_slope * pop_range,
-    OFSTEDRATING = ranef_df_lme4$OFSTEDRATING[i]
+# --- Faceted plot
+ggplot() +
+  # Raw points: colour by OFSTEDRATING (matches palette)
+  geom_point(
+    data = england_filtered_clean,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    alpha = 0.35, size = 1.2, na.rm = TRUE
+  ) +
+  # Group-specific prediction lines (varying slopes & intercepts)
+  geom_line(
+    data = pred_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING),
+    linewidth = 1.1, show.legend = FALSE
+  ) +
+  # Overall fixed-effects line (same in every facet)
+  geom_line(
+    data = overall_df,
+    aes(x = PTFSM6CLA1A, y = P8MEA),
+    color = "black", linetype = "dashed", linewidth = 0.9
+  ) +
+  facet_wrap(~ OFSTEDRATING, ncol = 3, scales = "fixed") +
+  scale_color_manual(values = pal, guide = "none") +  # hide legend; keep consistent colours
+  labs(
+    title = "P8MEA vs FSM (%): group-specific fits by Ofsted rating",
+    subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A | OFSTEDRATING)\nLines vary in both intercept and slope; dashed line is fixed-effects only",
+    x = "PTFSM6CLA1A",
+    y = "P8MEA"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "none",
+    strip.background = element_rect(fill = "#f2f2f2", color = NA),
+    strip.text = element_text(face = "bold")
   )
-}))
-
-# 4. Plot the Results
-ggplot(pred_df_lme4, aes(x = PTFSM6CLA1A, y = P8MEA, color = OFSTEDRATING)) +
-  geom_line(size = 1.2) +
-  labs(title = "Predicted P8MEA by OFSTED Rating (Uncorrelated Random Slopes)",
-       subtitle = "Model: P8MEA ~ PTFSM6CLA1A + (PTFSM6CLA1A || OFSTEDRATING)",
-       x = "PTFSM6CLA1A (Population Measure)",
-       y = "Predicted P8MEA") +
-  theme_minimal()
-```
-
-
-```{r}
-lme5 <- lmer(P8MEA ~ 1 + (1|gor_name/LANAME), data = england_filtered_clean)
-summary(lme5)
 
 ```
 
+## Other Linear Mixed Effects Models {.smaller}
+
+| Element | Meaning | Sample Equation |
+|------------------|------------------------------|------------------------|
+| `(1|g)` | Null Model or Varying Intercept Model | `P8 ~ 1 + (1 | OFSTEDRATING)` |
+| `(1|g1/g2)` | Multilevel Model with intercept varying within g1 and for g2 within g1 | `P8 ~ 1 + (1 | LocalAuthority/Region)` |
+| `(1|g1) + (1|g2)` | Intercept varying among g1 and g2 | `P8 ~ 1 + (1 | OFSTEDRATING) + (1 | Region)` |
+| `(0+x|g)` | Varying Slope Model | `P8 ~ Disadvantage + (0 + Disadvantage | OFSTEDRATING)` |
+| `x + (x|g)` | Varying and correlated intercepts and slopes | `P8 ~ Disadvantage + (Disadvantage | OFSTEDRATING)` |
+| `x + (x||g)` | Uncorrelated Intercepts and Slopes | `P8 ~ Disadvantage + (Disadvantage || OFSTEDRATING)` |
+
+::: aside
+Borrowed from Levi Wolf and Paul Johnson
+:::
+
+## Last Week's Attainment 8 Best Model {.smaller}
 
 ```{r}
-lme6 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME), data = england_filtered_clean)
-summary(lme6)
-```
-
-```{r}
-lme7 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME) + (1|OFSTEDRATING), data = england_filtered_clean)
-summary(lme7)
-```
-
-
-$$\texttt{lmer(P8MEA ~ PTFSM6CLA1A + (1 | gor_name/LANAME) + (1 | OFSTEDRATING), data = england\_filtered\_clean)}$$
-#kitchen sink model!!
-
-```{r}
-
-
-lme8 <- lmer(P8MEA ~ PTFSM6CLA1A + (1|gor_name/LANAME) + (1|OFSTEDRATING), data = england_filtered_clean)
-summary(lme7)
-```
-
-```{r}
-
+#| include: false
 # drop some rows with 0s in
 england_filtered_clean <- england_filtered_clean %>%
   filter(PTFSM6CLA1A > 0, PERCTOT > 0, PNUMEAL > 0)
@@ -988,7 +1548,7 @@ str(england_filtered_clean$LANAME)
 str(england_filtered_clean$ADMPOL_PT)
 
 # Convert to factor if needed and drop unused levels
-england_filtered_clean$OFSTEDRATING <- droplevels(as.factor(england_filtered_clean$OFSTEDRATING))
+#england_filtered_clean$OFSTEDRATING <- droplevels(as.factor(england_filtered_clean$OFSTEDRATING))
 england_filtered_clean$gor_name      <- droplevels(as.factor(england_filtered_clean$gor_name))
 england_filtered_clean$LANAME        <- droplevels(as.factor(england_filtered_clean$LANAME))
 england_filtered_clean$ADMPOL_PT     <- droplevels(as.factor(england_filtered_clean$ADMPOL_PT))
@@ -1010,6 +1570,14 @@ eng_clean_log <- droplevels(england_filtered_clean[finite_idx, ])
 ```
 
 ```{r}
+england_model7 <- lm(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + OFSTEDRATING + gor_name + PTPRIORLO + ADMPOL_PT, data = england_filtered_clean, na.action = na.exclude)
+summary(england_model7)
+```
+
+## A Linear Mixed Effects Revision {.smaller}
+
+```{r}
+#| include: false
 eng_clean_log <- transform(
   england_filtered_clean,
   log_ATT8SCR      = log(ATT8SCR),
@@ -1027,7 +1595,7 @@ eng_clean_log <- subset(eng_clean_log,
 
 
 lme9 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1 | OFSTEDRATING) + (1 | gor_name/LANAME), data = eng_clean_log, na.action = na.exclude, REML = TRUE)
-summary(lme9)
+#summary(lme9)
 
 mm <- model.matrix(~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT, data = eng_clean_log)
 
@@ -1039,14 +1607,45 @@ table(eng_clean_log$gor_name)
 with(eng_clean_log, table(gor_name, LANAME))[1:5, 1:5]  # spot check
 ```
 
+"He threw everything but the kitchen sink at it!"
 
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+lme9 <- lmer(
+  log(ATT8SCR) ~ 
+    log(PTFSM6CLA1A) +
+    log(PERCTOT) +
+    log(PNUMEAL) +
+    PTPRIORLO +
+    ADMPOL_PT +
+    (1 | OFSTEDRATING) +
+    (1 | gor_name / LANAME),
+  data = england_filtered_clean,
+  na.action = na.exclude
+)
+```
+
+-   Not quite everything, but:
+-   Fixed Effects: % Disadvantaged Students, % pupils where English not first language, % Overall Absence, % of pupils at the end of key stage 4 with low prior attainment at the end of key stage 2, Admissions Policy
+-   Random Effects: Ofsted Rating and *nested* (multilevel) Local Authority and Regional Geographic effects
+
+## My Final kitchen sink model!! {.smaller}
 
 ```{r}
 england_filtered_clean <- england_filtered_clean %>%
   filter(PTFSM6CLA1A > 0, PERCTOT > 0, PNUMEAL > 0)
 
+# Before fitting the model:
+contrasts(england_filtered_clean$OFSTEDRATING) <- contr.treatment(levels(england_filtered_clean$OFSTEDRATING))
+
 lme9 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1|OFSTEDRATING) + (1|gor_name/LANAME), data = england_filtered_clean, na.action = na.exclude)
 summary(lme9)
+
+#null9 <- lmer(log(ATT8SCR) ~ 1 + (1|OFSTEDRATING), data = england_filtered_clean, na.action = na.exclude)
+
+#summary(null9)
 
 # Convert fitted values back to original scale
 #england_filtered_clean <- england_filtered_clean %>%
@@ -1056,6 +1655,40 @@ summary(lme9)
 #    label = if_else(highlight, SCHNAME.x, NA_character_)
 #  )
 ```
+
+## My Final kitchen sink model!! {.smaller}
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+check_model(lme9, check = c("linearity"))
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+check_model(lme9, check = c("homogeneity"))
+```
+:::
+:::::
+
+## My Final kitchen sink model!! {.smaller}
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+check_model(lme9, check = c("qq"))
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+plot(check_collinearity(lme9))
+```
+:::
+:::::
+
+## My Final kitchen sink model!!
 
 ```{r}
 #| message: false
@@ -1098,7 +1731,7 @@ ggplot(england_filtered_clean, aes(x = fitted_lme9, y = ATT8SCR)) +
   geom_smooth(method = "lm", se = TRUE, color = "black") +
   
 # Mirror x and y axes
-  coord_equal() +
+  #coord_equal() +
 
 
   theme_minimal() +
@@ -1109,126 +1742,435 @@ ggplot(england_filtered_clean, aes(x = fitted_lme9, y = ATT8SCR)) +
   )
 ```
 
+-   Very good fit, $R^2$ = 86%
+
+## Interpreting the Final Model - Random Effects {.smaller}
+
+| Group                                       | Variance    | Std. Dev  |
+|---------------------------------------------|-------------|-----------|
+| **Intercept Local Authority Within Region** | **0.00069** | **0.026** |
+| **Intercept Region**                        | **0.00025** | **0.016** |
+| **Intercept OFSTEDRATING**                  | **0.00328** | **0.057** |
+| Residual School-to-School                   | 0.00500     | 0.071     |
+
+-   Random effects represent variation across levels (categories) within a grouping factor
+-   Larger variance = more difference between those levels (e.g. London to SE in Region)
+-   SD (sqrt(variance)) is typical size of deviation from the overall mean for a group.
+-   A typical OFSTED level differs from the overall mean by about ±1 SD (≈ 0.057 on the log scale)
+-   $exp(\sigma^2_{\text{OFSTEDRATING}})-1 ≈ exp(0.0573)−1 ≈ 0.059 ≈ 5.9\%$
+-   Baseline Attainment 8 (from null model) - $exp(3.75644) = 42.8$
+-   Average jump between Ofsted Rating Groups worth $42.8 \times 0.059 ≈ 2.52$ GCSE points
+
+## Interpreting the Final Model - Random Effects {.smaller}
+
+| Group                                   | Variance    | Std. Dev  |
+|-----------------------------------------|-------------|-----------|
+| Intercept Local Authority Within Region | 0.00069     | 0.026     |
+| Intercept Region                        | 0.00025     | 0.016     |
+| Intercept OFSTEDRATING                  | 0.00328     | 0.057     |
+| **Residual School-to-School**           | **0.00500** | **0.071** |
+
+-   Residual variance (0.0050) represents the within-group variation—differences between individual schools after accounting for fixed effects and the random intercepts for OFSTED, LA, and region
+-   Since 0.0050 (residual) \> 0.00328 (OFSTED) and much larger than LA or region variances, most of the unexplained variation is within groups (school-to-school differences) rather than between OFSTED categories or geographic clusters.
+
+## Interpreting the Final Model - Random Effects {.smaller}
+
+What about specific point differences between Ofsted Groups?
+
 ```{r}
-# 1. Ensure the 'lmerTest' package (or 'lme4') is loaded
-#install.packages("lmerTest")
-library(lmerTest) 
-# Note: Since you already ran lmer, the necessary functions are likely available.
+ri <- lme4::ranef(lme9, condVar = TRUE)$OFSTEDRATING  # random intercepts per OFSTED category
+print(ri)
+# Example (adjust names as they appear in your data):
+d_log_Good_vs_RI <- ri["Good", "(Intercept)"] - ri["Requires Improvement", "(Intercept)"]
+d_log_Out_vs_Good <- ri["Outstanding", "(Intercept)"] - ri["Good", "(Intercept)"]
 
-# 1. Extract the fitted values
-fitted_lme9 <- fitted(lme9)
+# Convert to % change and then to raw points using a baseline (e.g., mean Att8 = 50)
+pct_Good_vs_RI <- (exp(d_log_Good_vs_RI) - 1) * 100
+pct_Out_vs_Good <- (exp(d_log_Out_vs_Good) - 1) * 100
 
-# 2. Extract the residuals
-resid_lme9 <- resid(lme9)
-
-# 3. Calculate the observed values used in the model
-# Observed = Fitted + Residuals
-observed_log_ATT8SCR_aligned <- fitted_lme9 + resid_lme9
-
-# 4. Compute the squared correlation (Pseudo R-squared)
-# Use 'pairwise.complete.obs' to handle NA values correctly
-pseudo_R_squared <- cor(observed_log_ATT8SCR_aligned, 
-                        fitted_lme9, 
-                        use = "pairwise.complete.obs")^2
-
-# 5. Display the result
-print(paste("Pseudo R-squared (Conditional):", round(pseudo_R_squared, 4)))
+baseline <- 42.8  # or compute a predicted baseline from the model at chosen covariates
+raw_Good_vs_RI  <- baseline * pct_Good_vs_RI / 100
+raw_Out_vs_Good <- baseline * pct_Out_vs_Good / 100
 ```
 
-```{r}
-# If you haven't yet, fit the LMM (REML=TRUE equivalent to your lme9)
-# lme9 <- lmer(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
-#               PTPRIORLO + ADMPOL_PT + (1|OFSTEDRATING) + (1|gor_name/LANAME),
-#             data = england_filtered_clean, na.action = na.exclude, REML = TRUE)
+-   Good vs Requires Improvement: $\Delta\log = 0.0308−(−0.0194) = 0.0502$
+-   Good vs RI: $exp(0.0502) ≈ 1.0515 → +5.15\%$
+-   Good vs RI: $42.8 \times ≈ 0.0515 ≈ 2.2$ GCSE Points
 
-# MuMIn’s Nakagawa & Schielzeth R2 (marginal = fixed only; conditional = fixed + random)
-r2_mumin <- MuMIn::r.squaredGLMM(lme9)
-r2_mumin
-
-# Alternative via performance (should match closely)
-r2_perf <- performance::r2_nakagawa(lme9)
-r2_perf
-```
+## Interpreting the Final Model - Random Effects {.smaller}
 
 ```{r}
-# Refit your LMM by ML for fair AIC/BIC comparisons across LMMs
-lme9_ml <- update(lme9, REML = FALSE)
+#| align: center
+#| out-width: 80%
+# Extract random effects and conditional variances
+re_list <- ranef(lme9, condVar = TRUE)
+re_df <- as.data.frame(re_list$`LANAME:gor_name`)
+re_df$group <- rownames(re_list$`LANAME:gor_name`)
 
-# Refit OLS if needed (lm is fine as-is for logLik/AIC)
-england_model7 <- lm(log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + OFSTEDRATING + gor_name + PTPRIORLO + ADMPOL_PT, data = england_filtered_clean, na.action = na.exclude)
+# Compute standard errors from conditional variances
+se <- sqrt(attr(re_list$`LANAME:gor_name`, "postVar")[1, 1, ])
+re_df$se <- se
 
-# Compare AIC/BIC
-AIC(england_model7, lme9_ml)
-BIC(england_model7, lme9_ml)
-
-# You can also compare nested LMMs via LRT (example below in step 4).
-```
-
-```{r}
-# Caterpillar plots by grouping factor
-sjPlot::plot_model(lme9, type = "re", sort.est = TRUE)
-# You can specify groups:
-sjPlot::plot_model(lme9, type = "re", sort.est = TRUE, group.terms = "OFSTEDRATING")
-sjPlot::plot_model(lme9, type = "re", sort.est = TRUE, group.terms = "gor_name")
-sjPlot::plot_model(lme9, type = "re", sort.est = TRUE, group.terms = "LANAME:gor_name")
-```
-
-
-
-```{r}
-library(lattice)
-re_list <- ranef(lme9, condVar = TRUE)  # includes conditional variances
-# Dotplots for each grouping level
-dotplot(re_list, scales = list(y = list(cex = 0.6)))
-```
-
-```{r}
-# Tidy random effects (BLUPs) with SEs
-re_tidy <- broom.mixed::tidy(lme9, effects = "ran_vals", conf.int = TRUE)
-head(re_tidy)
-# Example: filter LA-level intercepts
-re_la <- subset(re_tidy, grepl("^LANAME:gor_name", group))
-
-```
-
-```{r}
-# Start from ML-fitted baseline (random intercepts)
-base_ml <- lme9_ml
-
-# Add random slope for PTPRIORLO by LA within region
-# Note: nesting as in your model: (1 + PTPRIORLO | gor_name:LANAME)
-rslope_la_ml <- lmer(
-  log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
-    PTPRIORLO + ADMPOL_PT +
-    (1 | OFSTEDRATING) + (1 | gor_name/LANAME) +
-    (0 + PTPRIORLO | gor_name:LANAME),  # use 0+ to avoid correlation if convergence issues
-  data = england_filtered_clean, na.action = na.exclude, REML = FALSE
+# Select extremes (top and bottom 5)
+extreme_groups <- c(
+  head(re_df$group[order(re_df$`(Intercept)`)], 10),
+  tail(re_df$group[order(re_df$`(Intercept)`)], 10)
 )
 
-# Alternatively try a correlated slope:
-# (1 + PTPRIORLO | gor_name:LANAME)
 
-# LRT for nested models (base vs slope model)
-anova(base_ml, rslope_la_ml)
-
-# Try random slope by OFSTEDRATING instead:
-rslope_ofsted_ml <- lmer(
-  log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
-    PTPRIORLO + ADMPOL_PT +
-    (1 + PTPRIORLO | OFSTEDRATING) + (1 | gor_name/LANAME),
-  data = england_filtered_clean, na.action = na.exclude, REML = FALSE
-)
-anova(base_ml, rslope_ofsted_ml)
+ggplot(re_df, aes(x = reorder(group, `(Intercept)`), y = `(Intercept)`)) +
+  geom_point(size = 2, color = "steelblue") +
+  geom_errorbar(aes(ymin = `(Intercept)` - 1.96 * se,
+                    ymax = `(Intercept)` + 1.96 * se),
+                width = 0.2, color = "grey40") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
+  geom_text_repel(
+    data = subset(re_df, group %in% extreme_groups),
+    aes(label = group),
+    size = 3,
+    nudge_x = 0,            # keep horizontally aligned
+    nudge_y = 0.1,          # push labels vertically for more spread
+    direction = "both",     # allow spreading in both axes
+    force = 5,
+    max.overlaps = Inf
+  ) +
+  labs(title = "Random Intercepts: LANAME within gor_name",
+       x = "Group", y = "Effect Size") +
+  theme_minimal() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
 ```
+
+-   Extracting the random effects and their variances for individual groups and plotting them in a caterpillar plot allows you to see which groups are meaningfully different from the average
+-   If a group's confidence interval doesn't cross the 0 line, it's an interesting case (oh look, there's Brighton!)
+-   Similar to looking for significant dummies in an OLS model - although these are shrunken estimates
+
+## Interpreting the Final Model - Fixed Effects {.smaller}
+
 ```{r}
-lme_interact_ofsted <- lmer(
-  log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +
-    PTPRIORLO * OFSTEDRATING + ADMPOL_PT +
-    (1 | OFSTEDRATING) + (1 | gor_name/LANAME),
-  data = england_filtered_clean, na.action = na.exclude, REML = FALSE
+# Install once if needed:
+# install.packages(c("modelsummary", "broom.mixed", "performance", "sandwich"))
+
+library(modelsummary)
+library(broom.mixed)
+library(performance)
+library(sandwich)
+
+## 1) Robust SE for OLS (HC3)
+vc_ols <- sandwich::vcovHC(england_model7, type = "HC3")
+
+## 2) Extract random-effect SDs and ICC for the LMM (programmatic)
+re_pars <- broom.mixed::tidy(lme9, effects = "ran_pars")
+
+get_sd <- function(df, grp) {
+  x <- subset(df, group == grp & term == "sd__(Intercept)")
+  if (nrow(x) == 0) return(NA_real_)
+  x$estimate
+}
+
+sd_ofsted <- get_sd(re_pars, "OFSTEDRATING")
+sd_region <- get_sd(re_pars, "gor_name")
+sd_la     <- get_sd(re_pars, "LANAME:gor_name")
+
+icc_val <- tryCatch({
+  as.numeric(performance::icc(lme9)$ICC_adjusted)
+}, error = function(e) NA_real_)
+
+## 3) Optional: marginal/conditional R2 for LMM
+r2_lmm <- tryCatch(performance::r2(lme9), error = function(e) NULL)
+r2_marg <- if (!is.null(r2_lmm)) r2_lmm$R2_marginal else NA_real_
+r2_cond <- if (!is.null(r2_lmm)) r2_lmm$R2_conditional else NA_real_
+
+## 4) GOF rows (base R data.frame to avoid tribble)
+gof <- data.frame(
+  term = c("RE SD: OFSTED",
+           "RE SD: Region",
+           "RE SD: LA within Region",
+           "Residual SD",
+           "ICC (total)",
+           "R2 (Adj / Marginal)",
+           "R2 (Conditional)"),
+  OLS = c(NA_real_,
+          NA_real_,
+          NA_real_,
+          sigma(england_model7),
+          NA_real_,
+          summary(england_model7)$adj.r.squared,
+          NA_real_),
+  LMM = c(sd_ofsted,
+          sd_region,
+          sd_la,
+          sigma(lme9),
+          icc_val,
+          r2_marg,
+          r2_cond),
+  stringsAsFactors = FALSE
 )
 
-summary(lme_interact_ofsted)
-anova(lme9_ml, lme_interact_ofsted)  # test added interaction (ML)
+## 5) Build and render table with inline SEs and stars
+models <- list("OLS" = england_model7, "LMM" = lme9)
+vcovs  <- list("OLS" = vc_ols, "LMM" = NULL)
+
+# modelsummary(
+#   models,
+#   vcov = vcovs,
+#   # Put estimate, SE, and stars inline on one row:
+#   estimate  = "{estimate} ({std.error}){stars}",
+#   statistic = NULL,                  # prevents a second line
+#   fmt = 3,                           # digits
+#   stars = c('*' = .05, '**' = .01, '***' = .001),
+#   gof_omit = "AIC|BIC|Log.Lik|RMSE", # optional
+#   add_rows = gof,
+#   output = "markdown"                # or "html", "word", "latex"
+# )
 ```
+
+Fixed Effects
+
+|                        | OLS                  | LMM                  |
+|------------------------|----------------------|----------------------|
+| (Intercept)            | 4.597 (0.023)\*\*\*  | 4.635 (0.032)\*\*\*  |
+| log(PTFSM6CLA1A)       | -0.070 (0.004)\*\*\* | -0.075 (0.004)\*\*\* |
+| log(PERCTOT)           | -0.224 (0.010)\*\*\* | -0.224 (0.007)\*\*\* |
+| log(PNUMEAL)           | 0.018 (0.002)\*\*\*  | 0.014 (0.002)\*\*\*  |
+| PTPRIORLO              | -0.007 (0.000)\*\*\* | -0.007 (0.000)\*\*\* |
+| ADMPOL_PTOTHER NON SEL | 0.015 (0.006)\*      | 0.006 (0.009)        |
+| ADMPOL_PTSEL           | 0.081 (0.010)\*\*\*  | 0.075 (0.010)\*\*\*  |
+| R2 (Conditional)       | 0.843                | 0.856                |
+
+-   Very little change in the fixed effects from the original OLS model
+-   Only the very small 'other non selective school' group loses significance
+-   Most coefficients and the overall intercept very similar
+
+## Interpreting the Final Model - Fixed Effects {.smaller}
+
+| Predictor | Scenario | Log shift = equation for % change | \% change | Raw points = 42.8 baseline x % change |
+|---------------|---------------|---------------|---------------|---------------|
+| **% Overall Absence - log(PERCTOT)** | 40% → 30% | −0.2238 × log(30/40) | +6.65% | +2.85 |
+|  | 20% → 10% | −0.2238 × log(10/20) | +16.78% | +7.18 |
+| **% Disadvantage - log(PTFSM6CLA1A)** | 40% → 30% | −0.0754 × log(30/40) | +2.19% | +0.94 |
+|  | 20% → 10% | −0.0754 × log(10/20) | +5.36% | +2.30 |
+| **Prior low attainment - (PTPRIORLO)** | 40 → 30 pp | −0.00686 × (−10) | +7.10% | +3.04 |
+|  | 20 → 10 pp | −0.00686 × (−10) | +7.10% | +3.04 |
+
+-   **Note** - final column only illustrative as using global average
+
+## Wrapping it all up {.smaller}
+
+-   In our final model we are to see that controlling for:
+    -   absence, disadvantage, prior attainment, selectivity in admissions and English not as a first language while also controlling for the variability within and between geographical locations and Ofsted ratings, Prior Low Attainment at KS2 is the most important predictor of Attainment 8
+-   The effects of prior low attainment are linear, but the effects of absence and disadvantage are felt more strongly where low levels change and less strongly where higher levels change
+-   Reducing absence is significantly more likely to improve Attainment 8 than reducing levels of disadvantage in a school
+-   In terms of random effects, while not causal a jump between Ofsted ratings is worth, on average, about 2.5 GSCE points - similar to a reduction in disadvanage in a school from 20%-10%.
+
+## Back to our Week 6 Reserarch Question(s)
+
+-   What are the factors that affect school-level educational attainment in Brighton and Hove?
+-   To what extent is attainment driven by social mixing?
+-   Are there any other factors that are relevant?
+-   What are the implications of this for local policy?
+-   Can regression help us and, if it can, how can we go about carefully building a regression model to help us answer these questions?
+
+## Custom Policy - Brighton Schools {.smaller}
+
+```{r}
+# Packages
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(lme4)
+library(tibble)
+
+# --- Schools of interest ---
+target_urns  <- c("114581", "14608", "136164")
+target_names <- c("Longhill High School", "Patcham High School", "Brighton Aldridge Community Academy")
+
+# --- Variables of interest (from your model) ---
+vars_of_interest <- c(
+  "PERCTOT",        # % overall absence
+  "PTFSM6CLA1A",    # % disadvantaged
+  "PNUMEAL",        # cohort size proxy
+  "PTPRIORLO",      # prior low attainment (pp)
+  "ADMPOL_PT"       # admissions policy
+)
+
+# 1) Subset to the two target schools (by URN or name), keep needed columns
+schools_sub <- btn_sub %>%
+  filter(URN %in% target_urns | SCHNAME.x %in% target_names) %>%
+  select(URN, SCHNAME.x, OFSTEDRATING, gor_name, LANAME, all_of(vars_of_interest)) %>%
+  distinct()
+
+# 2) Extract random effects from the model
+re_list <- lme4::ranef(lme9)
+
+# 2a) OFSTEDRATING random intercepts
+re_ofsted <- re_list$OFSTEDRATING %>%
+  as.data.frame() %>%
+  rownames_to_column("OFSTEDRATING") %>%
+  rename(`re_OFSTEDRATING` = `(Intercept)`)
+
+# 2b) gor_name random intercepts
+re_gor <- re_list$gor_name %>%
+  as.data.frame() %>%
+  rownames_to_column("gor_name") %>%
+  rename(`re_gor_name` = `(Intercept)`)
+
+# 2c) Nested random intercepts: identify the interaction group programmatically
+grp_names <- names(re_list)
+lan_gor_grp <- grp_names[grepl("LANAME.*gor_name|gor_name.*LANAME", grp_names)][1]
+
+# Separate the interaction level into LANAME and gor_name in the correct order
+if (grepl("^LANAME", lan_gor_grp)) {
+  re_lan_gor <- re_list[[lan_gor_grp]] %>%
+    as.data.frame() %>%
+    rownames_to_column("key") %>%
+    tidyr::separate(key, into = c("LANAME", "gor_name"), sep = ":", remove = TRUE) %>%
+    rename(`re_LANAME_gor` = `(Intercept)`)
+} else {
+  re_lan_gor <- re_list[[lan_gor_grp]] %>%
+    as.data.frame() %>%
+    rownames_to_column("key") %>%
+    tidyr::separate(key, into = c("gor_name", "LANAME"), sep = ":", remove = TRUE) %>%
+    rename(`re_LANAME_gor` = `(Intercept)`) %>%
+    relocate(LANAME, gor_name)
+}
+
+# 3) Join random effects to each school and compute total RE
+schools_with_re <- schools_sub %>%
+  left_join(re_ofsted, by = "OFSTEDRATING") %>%
+  left_join(re_gor,    by = "gor_name") %>%
+  left_join(re_lan_gor, by = c("LANAME", "gor_name")) %>%
+  mutate(RE_total = re_OFSTEDRATING + re_gor_name + re_LANAME_gor)
+
+# 4) Model-based baseline predictions
+#    predict() returns predictions on the **log(ATT8SCR)** scale (because the model's response is log(ATT8SCR))
+#    We back-transform with exp().
+pred_log_fixed <- predict(lme9, newdata = schools_with_re, re.form = NA)     # fixed effects only
+pred_log_cond  <- predict(lme9, newdata = schools_with_re, re.form = NULL)   # includes random effects
+
+# Optional tiny log-normal bias correction factor (negligible, ~0.25%)
+sigma2 <- sigma(lme9)^2     # residual variance on log scale
+bias_factor <- exp(0.5 * sigma2)
+
+schools_with_re <- schools_with_re %>%
+  mutate(
+    pred_fixed      = exp(pred_log_fixed),                 # baseline (fixed-effects only)
+    pred_cond       = exp(pred_log_cond),                  # baseline (incl. RE)
+    pred_cond_bc    = pred_cond * bias_factor,             # optional bias-corrected baseline
+    # Formatting for display (strings), to allow mixing numerics and strings in one table:
+    PERCTOT_disp        = formatC(PERCTOT, format = "f", digits = 1),
+    PTFSM6CLA1A_disp    = formatC(PTFSM6CLA1A, format = "f", digits = 1),
+    PNUMEAL_disp        = formatC(PNUMEAL, format = "f", digits = 1),
+    PTPRIORLO_disp      = formatC(PTPRIORLO, format = "f", digits = 1),
+    ADMPOL_PT_disp      = as.character(ADMPOL_PT),
+    re_OFSTEDRATING_disp = formatC(re_OFSTEDRATING, format = "f", digits = 3),
+    re_gor_name_disp     = formatC(re_gor_name,     format = "f", digits = 3),
+    re_LANAME_gor_disp   = formatC(re_LANAME_gor,   format = "f", digits = 3),
+    RE_total_disp        = formatC(RE_total,        format = "f", digits = 3),
+    pred_fixed_disp      = formatC(pred_fixed,      format = "f", digits = 1),
+    pred_cond_disp       = formatC(pred_cond,       format = "f", digits = 1),
+    pred_cond_bc_disp    = formatC(pred_cond_bc,    format = "f", digits = 1)
+  )
+
+# 5) Build a display table: variables as rows, schools as columns
+row_order <- c(
+  "PERCTOT", "PTFSM6CLA1A", "PNUMEAL", "PTPRIORLO", "ADMPOL_PT",
+  "RE: OFSTEDRATING", "RE: gor_name", "RE: LANAME:gor_name", "RE: total",
+  "Baseline ATT8 (fixed only)",
+  "Baseline ATT8 (incl. RE)",
+  "Baseline ATT8 (incl. RE, bias-corrected)"  # optional row
+)
+
+display_tbl <- schools_with_re %>%
+  transmute(
+    SCHNAME.x,
+    `PERCTOT`                         = PERCTOT_disp,
+    `PTFSM6CLA1A`                     = PTFSM6CLA1A_disp,
+    `PNUMEAL`                         = PNUMEAL_disp,
+    `PTPRIORLO`                       = PTPRIORLO_disp,
+    `ADMPOL_PT`                       = ADMPOL_PT_disp,
+    `RE: OFSTEDRATING`                = re_OFSTEDRATING_disp,
+    `RE: gor_name`                    = re_gor_name_disp,
+    `RE: LANAME:gor_name`             = re_LANAME_gor_disp,
+    `RE: total`                       = RE_total_disp,
+    `Baseline ATT8 (fixed only)`      = pred_fixed_disp,
+    `Baseline ATT8 (incl. RE)`        = pred_cond_disp,
+    `Baseline ATT8 (incl. RE, bias-corrected)` = pred_cond_bc_disp
+  ) %>%
+  pivot_longer(
+    cols = -SCHNAME.x,
+    names_to = "Variable",
+    values_to = "Value"
+  ) %>%
+  pivot_wider(
+    names_from = SCHNAME.x,
+    values_from = Value
+  ) %>%
+  mutate(Variable = factor(Variable, levels = row_order)) %>%
+  arrange(Variable)
+
+# Final table with model inputs + random effects + baselines
+#display_tbl
+
+
+```
+
+```{r}
+#| label: tbl-display-min
+#| echo: false
+library(knitr)
+
+knitr::kable(
+  display_tbl %>% arrange(Variable),
+  align = "l"
+)
+```
+
+## Custom Policy - Longhill Example {.smaller}
+-   Longhill High School (baseline ≈ 36.8) Profile highlights: PERCTOT=13.4; PTPRIORLO=34; PTFSM=29.
+-   Top levers:
+    -   Reduce overall absence (PERCTOT) — biggest bang-per-buck, and Longhill starts higher than Patcham. − 1 pp (13.4% → 12.4%): +1.75% ATT8 ⇒ ≈ +0.64 GCSE points − 2 pp (13.4% → 11.4)%: +3.68% ATT8 ⇒ ≈ +1.36 GCSE points. No collateral damage.
+    -   Reduce prior low attainment effects (PTPRIORLO) — strong, feasible medium‑term via targeted KS3 catch‑up, transition, targeted support. − 5 pp (34% → 29%): +3.49% ⇒ ≈ +1.28 GCSE points − 10 pp (34 → 24): +7.10% ⇒ ≈ +2.61 GCSE points. No collateral damage.
+    -   To contrast, reducing the numbers of disadvantaged students (PTFSM6CLA1A) in the school by 10 pp from 29% to 19%, is only worth ≈ +1.19 GCSE points (less than reducing absence by just 2 percentage points). Busing children across the city to achieve this, high collateral damage. 
+
+## Custom Policy - Longhill Example {.smaller}
+
+-   Attendance is the fastest, most controllable lever with meaningful point gains even for small pp reductions;
+-   PTPRIORLO is the next best lever via academic catch‑up. Better policy might be to focus on mitigation rather than changing intake.
+-   Bottom line for Longhill:
+    -   A move RI → Good in this model corresponds to \~+5.1% in ATT8, i.e., \~+1.9 points from a 36.8 baseline.
+    -   That’s roughly equivalent to: - Reducing overall absence by \~2.7 percentage points (13.4 → \~10.7), or - Reducing prior-low attainment by \~7.3 percentage points (34 → \~26.7).
+    -   Among actionable levers, attendance remains the fastest high-return route; PTPRIORLO reduction is similarly powerful but typically requires sustained academic interventions across KS3/KS4.
+    
+## Conclusions
+
+-   Phew!! That was a lot!
+-   We've come a long way since the start of the Regression Sessions 3 weeks ago
+-   Mainly I hope we've learned a step-by-step recipe which can be applied to many different quantitative modelling applications
+-   Hope we've demystified, through visualisation and worked examples, some of the esoteric elements of regression modelling
+
+## Conclusions
+
+-   If we start with a simple model guided by sound theory and an understanding of the system of interest, we can start to build complexity and explanatory power though successive modelling iterations
+-   By the final iteration, it's possible to derive deep insights into your system of interest
+-   Careful interpretation of your outputs, relative to policy ambitions, can present a powerful message (whether policy makers will listen is a different matter!) 
+
+## Conclusions
+
+-   Linear Mixed Effects Models are just one useful extension to OLS standard regression. They work well particularly when there are logical groups, hierarchies or repeated measurements within your data
+-   Other regression variants (not yet covered in this course) might be more appropriate in other situations:
+    -   Generalised Linear Models 
+        -   Logistic Regression (binary or multinomial outcomes)
+        -   Poisson Regression / Negative Binomal Regression (count data)
+        -   Generalised Additive Models (non-linear relationships)
+    -   Geographically Weighted or Spatial Regression Models
+    -   Lasso and Ridge Regression (incorporating shrinkage)
+-   Now you have a good grounding in the basics of linear regression, these other methods should be much easier learn in future
+
+## Today's Practical
+
+-   Regression Sessions Vol 3 - A linear mixed effects model walkthrough. 
+
+        
+
 

@@ -148,19 +148,6 @@ This week we won't look at individual local authorities, but will focus on the w
 
 -   Experiment with interacting some of the variables in your best multiple regression model and see if this adds any more explanatory nuance to your main analysis
 
-::: multicode
-#### ![](L6_images/python-logo-only.png){width="30"}
-
-```{python}
-
-```
-
-#### ![](L6_images/Rlogo.png){width="41" height="30"}
-
-```{r}
-
-```
-:::
 
 ## Task 1 - Baseline Model
 
@@ -762,7 +749,31 @@ When you think you have your best model, move on to Task 4 below
 ```{python}
 #| message: false
 #| warning: false
-#| 
+
+import numpy as np
+import statsmodels.formula.api as smf
+
+# Filter rows where all log-transformed variables are > 0
+england_filtered_clean = england_filtered_clean[
+    (england_filtered_clean['PTFSM6CLA1A'] > 0) &
+    (england_filtered_clean['PERCTOT'] > 0) &
+    (england_filtered_clean['PNUMEAL'] > 0)
+].copy()
+
+# Create log-transformed columns
+england_filtered_clean['log_ATT8SCR'] = np.log(england_filtered_clean['ATT8SCR'])
+england_filtered_clean['log_PTFSM6CLA1A'] = np.log(england_filtered_clean['PTFSM6CLA1A'])
+england_filtered_clean['log_PERCTOT'] = np.log(england_filtered_clean['PERCTOT'])
+england_filtered_clean['log_PNUMEAL'] = np.log(england_filtered_clean['PNUMEAL'])
+
+# Fit the model
+model = smf.ols(
+    formula='log_ATT8SCR ~ log_PTFSM6CLA1A + log_PERCTOT + log_PNUMEAL + OFSTEDRATING + gor_name + PTPRIORLO + ADMPOL_PT',
+    data=england_filtered_clean
+).fit()
+
+print(model.summary())
+
 ```
 
 #### ![](L6_images/Rlogo.png){width="41" height="30"}

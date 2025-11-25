@@ -1,25 +1,44 @@
 ---
 format: html
 date: last-modified
-author: "XXX"
-title: "Week XXX"
+author: "Adam Dennett"
+title: "Week 8 - Prof D's Regression Sessions Vol 3"
 ---
+
+![](L6_images/regression2.PNG)
 
 ## Introduction
 
-This week will introduce XXX.
+This week we build on the work we have been doing still further and introduce a new class of regression model - the ***Linear Mixed Effects Model***
+
+Linear Mixed Effects Models are like regular OLS regression models, but with extra flexibility to handle grouped or clustered data - like schools within local authorities or repeated measures over time.
+
+| Feature | Ordinary Least Squares (OLS) | Linear Mixed Effects (LME) |
+|-------------------|------------------------|-----------------------------|
+| **Data Structure** | Assumes all observations are independent | Handles grouped or hierarchical data (e.g., repeated measures - temporal, clusters) |
+| **Effects Modelled** | Fixed effects only | Fixed effects **and** random effects |
+| **Group-Level Variation** | Not accounted for | Accounts for variation across groups (e.g., random intercepts/slopes) |
+| **Assumptions** | Homogeneous relationships across all observations | Allows relationships to vary by group |
+| **Use Case** | Simple regression with independent data | Complex data with clustering or repeated measures |
+| **Example** | Predicting house prices by size and location | Predicting school attainment across local authorities |
+
+
 
 ## Learning Objectives
 
-By the end of this week, you will be able to:
+By the end of this week, you will:
 
-1. XXX
-2. XXX
-3. XXX
+1.  Extend your understanding of linear regression even further by learning how we might incorporate grouping structures into our data
+2.  Understand the difference between ***Fixed Effects*** and ***Random Effects*** (classic stats jargon that you'll now feel confident in spraying around liberally)
+3.  Understand what a ***multilevel model*** is and how it relates to linear mixed effects models
+4.  Understand what Variance Components / Null Model is
+5.  Appreciate the idea of ***shrinkage*** (if not the full detail)
+6.  Understand what the ***Interclass Correletion Coefficient*** is and how you can use it to justify using a LME model over a standard OLS model
+7.  How to run different types of LME model using standard syntax across Python and R and interpret the outputs
 
-## Lecture 
+## Lecture
 
-To access the lecture notes: [Lecture](weekXXX_lecture.qmd)
+To access the lecture notes: [Lecture](week8_lecture.html)
 
 ## Quiz
 
@@ -27,15 +46,13 @@ To access the quiz on Moodle, please check [Moodle page](https://moodle.ucl.ac.u
 
 ## Practical
 
-:::{.callout-note}
-
+::: callout-note
 To save a copy of notebook to your own GitHub Repo: follow the GitHub link, click on `Raw` and then `Save File As...` to save it to your own computer. Make sure to change the extension from `.ipynb.txt` (which will probably be the default) to `.ipynb`before adding the file to *your* GitHub repository.
-
 :::
 
 To access the practical:
 
-1. [Preview](weekX_practical.html)
-2. [Download](weekX_practical.ipynb)
+1.  [Main Practical Page](week8_practical.html)
+2.  [Download](week8_practical.ipynb)
 
 ## Further resources
