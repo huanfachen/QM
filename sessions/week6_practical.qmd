@@ -193,13 +193,39 @@ What is the regex function doing and why might I be searching out those characte
 ```{python}
 import pandas as pd
 import numpy as np
+# --- pandas_flavor compatibility shim (run this before importing janitor) ---
+import pandas_flavor as pf
 import janitor
+from janitor import clean_names
 from pathlib import Path
+
+
+# If groupby decorator doesn't exist, alias it to the dataframe decorator
+if not hasattr(pf, "register_groupby_method") and hasattr(pf, "register_dataframe_method"):
+    pf.register_groupby_method = pf.register_dataframe_method
+# ---------------------------------------------------------------------------
+
+try:
+    from janitor import clean_names as jn_clean_names
+    HAS_JANITOR = True
+except Exception as e:
+    HAS_JANITOR = False
+    print(f"pyjanitor unavailable or failed to import: {e}\nUsing local clean_names fallback.")
+
+def clean_names_fallback(df: pd.DataFrame) -> pd.DataFrame:
+    def _clean(s):
+        s = str(s).strip().lower().replace(" ", "_").replace("-", "_")
+        s = s.encode("ascii", "ignore").decode()
+        while "__" in s:
+            s = s.replace("__", "_")
+        return s
+    return df.rename(columns=_clean)
+
 
 # little function to define the file root on different machines
 def find_qm_root(start_path: Path = Path.cwd(), anchor: str = "QM") -> Path:
     """
-    Traverse up from the start_path until the anchor folder (e.g., 'QM')      is found. Returns the path to the anchor folder.
+    Traverse up from the start_path until the anchor folder (e.g., 'QM_Fork')      is found. Returns the path to the anchor folder.
     """
     for parent in [start_path] + list(start_path.parents):
         if parent.name == anchor:
@@ -216,7 +242,7 @@ edubase_schools = pd.read_csv(
     low_memory=False,
     dtype={"URN": str}
 )
-edubase_schools = edubase_schools.clean_names()
+edubase_schools = jn_clean_names(edubase_schools) if HAS_JANITOR else clean_names_fallback(edubase_schools)
 #py_edubase_schools.dtypes
 #dtype_df = py_edubase_schools.dtypes.reset_index()
 #dtype_df.columns = ["column_name", "dtype"]

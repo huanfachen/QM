@@ -606,8 +606,8 @@ ggplot(england_filtered, aes(x = PTFSM6CLA1A)) +
 ::: {.column width="50%"}
 ```{mermaid}
 flowchart TD
-    A["<img src='L6_images/Data.png'>"] --> B[<img src='L6_images/Book.png'>]
-    B[<img src='L6_images/Book.png'>] --> A["<img src='L6_images/Data.png'>"]
+    A["Data"] --> B["Background Research"]
+    B["Background Research"] --> A["Data"]
     
 ```
 :::

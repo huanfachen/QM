@@ -1,17 +1,31 @@
+# Core scientific stack
 numpy
 pandas
+
+# Jupyter tooling
 jupyter
+
+# Scientific/plotting
 scipy
 matplotlib
 plotly
-pyyaml
-statsmodels
-pyjanitor
 seaborn
-geopandas
-folium
-scikit-learn
-branca
-contextily
+statsmodels
 tabulate
 pingouin
+
+# YAML
+pyyaml
+
+# Data cleaning helpers (pyjanitor requires pandas-flavor)
+pyjanitor
+pandas-flavor
+
+# Geo stack
+geopandas
+folium
+branca
+contextily
+
+# Machine learning
+scikit-learn
