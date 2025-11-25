@@ -222,13 +222,14 @@
 <section>
 <section id="this-week" class="title-slide slide level1 center">
 <h1>This week</h1>
-
+<p>Another long lecture - sorry!!</p>
+<p>I’ll try and stop for another break in the middle</p>
 </section>
 <section id="recap" class="slide level2">
 <h2>Recap</h2>
 <ul>
 <li>Last week we saw how multiple regression models can allow us to understand complex relationships between predictor and outcome variables</li>
-<li>We began to explore how by increasing the complexity of our regression models, we can begin to observe how the effects of different variables can confound (obscrure) and mediate (partially cause) the effects of others, giving us a deeper understanding of our system of interest</li>
+<li>We began to explore how by increasing the complexity of our regression models, we can begin to observe how the effects of different variables can confound (obscure) and mediate (partially cause) the effects of others, giving us a deeper understanding of our system of interest</li>
 <li>We were able to see that with just a relatively small number of variables, we could explain most of the variation in school-level attainment scores in England</li>
 </ul>
 </section>
@@ -238,7 +239,7 @@
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></a></p>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -258,10 +259,20 @@
 <section id="drawbacks-of-ols-with-interaction" class="slide level2">
 <h2>Drawbacks of OLS with Interaction</h2>
 <ul>
-<li>OLS assumes all observations (schools) are independent of each other, when in reality, they may have characteristics which mean they are not independent - i.e.&nbsp;they are in the same local authority or have similar Ofsted ratings which mean they share some characteristics with each other in terms of governance etc.</li>
+<li>OLS assumes all observations (schools) are independent of each other
+<ul>
+<li>In reality, they may have characteristics which mean they are not independent - i.e.&nbsp;Being in the same local authority or having similar Ofsted ratings could mean that effects are <strong><em>clustered</em></strong>.</li>
+</ul></li>
 <li>OLS assumes the effects (parameters) are constant (fixed) across the whole population / dataset</li>
-<li>OLS assumes the errors are independent</li>
+<li>OLS assumes the errors are independent, <strong><em>not clustered</em></strong> by space, time or some other group</li>
 <li>OLS only has one global intercept with group level differences in the data only crudely represented with dummy variables</li>
+</ul>
+</section>
+<section id="spotting-important-clustering-non-independence" class="slide level2">
+<h2>Spotting Important Clustering / non-independence</h2>
+<ul>
+<li>It’s possible to visualise clusters / sources of non-independence in our model through plotting relationships for different categorical variables</li>
+<li>We are likely to have clustering / non-independence if these plots produce different slopes and intercepts</li>
 </ul>
 </section>
 <section id="different-slopes-and-intercepts---attainment-8" class="slide level2">
@@ -270,7 +281,7 @@
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></a></p>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -282,7 +293,7 @@
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></a></p>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -294,7 +305,7 @@
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></a></p>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -306,7 +317,7 @@
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></a></p>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -316,7 +327,11 @@
 <h2>Different Slopes and Intercepts</h2>
 <ul>
 <li>Solution: can we just partition our data and run different models for different groups?</li>
-<li>Answer: Well yes, you could, but we couldn’t then answer questions about whether variation between individual schools is more important than between groups (e.g.&nbsp;local authorities or Ofsted ratings)</li>
+<li>Answer: Well yes, you could, but we couldn’t then answer questions about:
+<ul>
+<li>whether variation between individual schools (<strong><em>within groups</em></strong>) is more important than <strong><em>between groups</em></strong> (e.g.&nbsp;local authorities or Ofsted ratings)</li>
+<li>how much variation the groups account for themselves</li>
+</ul></li>
 </ul>
 <p>In order to model these grouping factors more explicitly and understand their general impact, we need a new type of model - a <strong><em>linear mixed effects model</em></strong></p>
 </section>
@@ -330,16 +345,16 @@
 </ul></li>
 <li><strong><em>Random Effects</em></strong> - A Random Effect is a grouping factor (or nesting factor) whose variability you want to account for, but whose specific individual levels you don’t necessarily want to draw conclusions about.
 <ul>
-<li>Example: The different Ofsted ratings (or individual Schools). You’re interested in how much the relationship varies across these groups, not the specific effect of ‘Longhill School’</li>
+<li>Example: The different Ofsted ratings (or individual Schools). You’re interested in how much the relationship varies across these groups, not the specific effect of ‘outstanding’ or ‘Longhill School’</li>
 </ul></li>
 </ul>
 </section>
 <section id="fixed-effects---more-detail" class="slide level2">
 <h2>Fixed Effects - More Detail</h2>
 <ul>
-<li>Fixed effects estimate the mean relationship across all groups. They represent the “fixed” part of the model that applies to every observation.
+<li>Fixed effects estimate the mean relationship across all groups. They represent the “fixed” part of the model that applies to <em>every observation</em>.
 <ul>
-<li>You estimate a single <span class="math inline">\(\beta\)</span> coefficient for a fixed effect, which represents the population average effect of that variable.</li>
+<li>You estimate a single <span class="math inline">\(\beta\)</span> coefficient for a fixed effect - the population average effect of that variable.</li>
 <li>Fixed effects can be either continuous (e.g., % of disadvantaged students in a school) or categorical (region, Ofsted rating).</li>
 </ul></li>
 <li>Depending on how you formulate your model, a fixed effect could be a random effect in a different context.</li>
@@ -352,7 +367,7 @@
 <ul>
 <li>When you model a grouping factor (like Ofsted Rating) as a random effect, you are not estimating five separate coefficients (one for each rating).</li>
 <li>Instead, you estimate a variance term (<span class="math inline">\(\sigma^2_{\text{group}}\)</span>) that quantifies how much the true group effects (intercepts and/or slopes) scatter around the overall mean effect.</li>
-<li>This approach is used when the groups (e.g., the 5 Ofsted categories or the hundreds of individual schools) are considered a random sample from a larger, unobserved population of groups.</li>
+<li>Remember: Higher variance = Higher uncertainty, so higher variance groups have less weight in the model</li>
 <li>This allows the model to “borrow strength” across groups to stabilise estimates (the principle of shrinkage).</li>
 </ul></li>
 </ul>
@@ -385,18 +400,6 @@
 </ul>
 <p>Multilevel Data Structures (Source:<a href="http://www.stat.columbia.edu/~gelman/arm/">Gelman &amp; Hill (2006)</a>) and <a href="https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/" class="uri">https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/</a></p>
 </section>
-<section id="linear-mixed-effects-models-2" class="slide level2">
-<h2>Linear Mixed Effects Models</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
 <section id="the-null-model" class="slide level2">
 <h2>The Null Model</h2>
 <ul>
@@ -417,23 +420,60 @@
 <section id="the-null-model---a-2-level-example" class="slide level2">
 <h2>The Null Model - a 2 Level example</h2>
 <div class="cell" data-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) 
+ -0.2646198 </code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-12-1.png" style="width:80.0%"></a></p>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-13-1.png" style="width:80.0%"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <ul>
-<li>All of the information in the two-level NULL model is contained in this plot!</li>
+<li>Most (as box plots hide counts) of the information in the two-level NULL model is contained in this plot!</li>
+</ul>
+</section>
+<section id="shrinkage" class="slide level2">
+<h2>Shrinkage</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-14-1.png" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The global mean in the null model is not just a simple average</li>
+<li>Groups have few observations / high variance / unreliable means are given less importance in the average in a process called <strong><em>shrinkage</em></strong></li>
+<li>Groups with few observations are ‘shrunk’ towards the overall mean</li>
+</ul>
+</section>
+<section id="shrinkage-1" class="slide level2">
+<h2>Shrinkage</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-15-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:70.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Shrinkage is another reason why LME models are better than OLS models where clustering exists in the data</li>
+<li>Small groups have less of an influence as their averages get pulled towards the mean - less uncertainty and avoids over-fitting to small groups</li>
 </ul>
 </section>
 <section id="the-null-model---a-2-level-example-1" class="slide level2">
 <h2>The Null Model - a 2 Level example</h2>
 <p><span class="math display">\[Y_{ij} = \gamma_{00} + u_{0j} + \epsilon_{ij}\]</span> The total variability in outcome <span class="math inline">\(Y_{ij}\)</span> (Progress 8) for the <span class="math inline">\(i^{th}\)</span> school in the <span class="math inline">\(j^{th}\)</span> Ofsted rating is decomposed into:</p>
 <ul>
-<li><strong>Fixed Effect</strong>: <span class="math inline">\(\gamma_{00}\)</span> (The overall population average - <strong>grand/global mean</strong>).</li>
+<li><strong>Fixed Effect</strong>: <span class="math inline">\(\gamma_{00}\)</span> (gamma - the overall population average - <strong>grand/global mean</strong>).</li>
 <li><strong>Random Effect - Level 1</strong>: <span class="math inline">\(\epsilon_{ij}\)</span> - <strong>Within-Group Variance</strong> - the height of each individual box and the length of its whiskers. Taller boxes and longer whiskers indicate more variability among schools within that single rating category.</li>
 <li><strong>Random Effect - Level 2</strong>: <span class="math inline">\(u_{0j}\)</span> - <strong>Between-Group Variance</strong></li>
 </ul>
@@ -453,13 +493,13 @@ Y_{ij} = \beta_{0j} + \epsilon_{ij}
 </ul></li>
 </ul>
 </section>
-<section id="level-1---within-group-variance-1" class="slide level2">
+<section id="level-1---within-group-variance-1" class="slide level2 smaller">
 <h2>Level 1 - Within-Group Variance</h2>
 <p><span class="math display">\[\epsilon_{ij} \sim N(0, \sigma^2_{\epsilon})\]</span></p>
 <table class="caption-top">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 30%">
+<col style="width: 69%">
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -484,7 +524,7 @@ Y_{ij} = \beta_{0j} + \epsilon_{ij}
 </tr>
 <tr class="even">
 <td><span class="math inline">\(\sigma^2_{\epsilon}\)</span></td>
-<td>The <strong>Within-Group Variance</strong> of the distribution.</td>
+<td>The <strong>Within-Group Variance</strong> of the the error term. Sigma - <span class="math inline">\(\sigma\)</span> is commonly used to represent standard deviation. Variance is <span class="math inline">\(\sigma^2\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -516,14 +556,6 @@ Y_{ij} = \beta_{0j} + \epsilon_{ij}
 </section>
 <section id="the-intraclass-correlation-coefficient-icc" class="slide level2">
 <h2>The Intraclass Correlation Coefficient (ICC)</h2>
-<p>The ICC tells you the proportion of the total variability in the outcome that is accounted for by the grouping structure.</p>
-<ul>
-<li>It answers the question in our case: “How much of the total difference in Progress 8 is due to the school’s Ofsted rating?”</li>
-<li>It can also be interpreted as the expected correlation between any two randomly chosen schools within the same Ofsted rating.</li>
-</ul>
-</section>
-<section id="the-intraclass-correlation-coefficient-icc-1" class="slide level2">
-<h2>The Intraclass Correlation Coefficient (ICC)</h2>
 <p><span class="math display">\[\text{ICC} = \frac{\text{Between-Group Variance}}{\text{Total Variance}} = \frac{\sigma^2_{u_{0}}}{\sigma^2_{u_{0}} + \sigma^2_{\epsilon}}\]</span></p>
 <ul>
 <li>This ICC is simply the ratio between the between the between group variance and the total variance</li>
@@ -531,13 +563,13 @@ Y_{ij} = \beta_{0j} + \epsilon_{ij}
 <li><strong>A high ICC is a strong indication that a multilevel model is a suitable modelling strategy to pursue to try and explain these group-level differences</strong></li>
 </ul>
 </section>
-<section id="the-icc" class="slide level2">
-<h2>The ICC</h2>
+<section id="visualising-the-icc" class="slide level2">
+<h2>Visualising The ICC</h2>
 <div class="cell" data-align="center">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-13-1.png" style="width:80.0%"></a></p>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-16-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-16-1.png" style="width:80.0%"></a></p>
 </figure>
 </div>
 </div>
@@ -547,27 +579,20 @@ Y_{ij} = \beta_{0j} + \epsilon_{ij}
 <li>Low ICC = density plots all overlapping on-top of each other</li>
 </ul>
 </section>
-<section id="linear-mixed-effects-model---general-syntax" class="slide level2">
-<h2>Linear Mixed Effects Model - General Syntax</h2>
-<p><code>y ~ fixed_effect_x1 + (random_effect_slope_term_x1 | random_effect_group_g1)</code></p>
-<p><code>y ~ fixed_effect_x1 + fixed_effect_x2 + fixed_effect_xn + (random_effect_slope_term_x1 | random_effect_group_g1) + (random_effect_slope_term_x2 | random_effect_group_g2) + (random_effect_slope_term_xn | random_effect_group_gn)</code></p>
-</section>
-<section id="the-null-model---syntax" class="slide level2">
-<h2>The Null Model - Syntax</h2>
+<section id="the-null-model---fixed-global-intercept-fixed-random-effect-slopes" class="slide level2">
+<h2>The Null Model - Fixed Global Intercept &amp; Fixed Random Effect Slopes</h2>
 <ul>
-<li>Using Paul Johnson’s excellent guide for syntax, the null model in R follows this format: <code>y ~ 1 + (1 | g)</code></li>
-<li>Here the fixed effects appear outside of the brackets. The first <code>1</code> outside of the brackets just tells the model to use a fixed global intercept</li>
-<li>The random effects are inside the brackets <code>(...|...)</code>
+<li>Using <a href="https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/">Paul Johnson’s</a> excellent guide for syntax, the null model in R follows this format: <code>y ~ 1 + (1 | g)</code></li>
+<li><strong>Fixed effects outside of the brackets</strong>. The first <code>1</code> just tells the model to use a fixed global intercept (global average <code>y</code>)</li>
+<li><strong>Random Effects are inside the brackets</strong> <code>(...|...)</code>
 <ul>
-<li>To the <em>left</em> of the pipe symbol <code>|</code> we have a <code>1</code> as all slopes are fixed in the null model</li>
-<li>To the <em>right</em> of the vertical bar or pipe symbol <code>|</code> we have the grouping variable <code>g</code>.</li>
+<li>To the <em>left</em> of the pipe symbol <code>|</code> we have a <code>1</code> as all slopes are fixed as group <code>g</code> average of <code>y</code></li>
+<li>To the <em>right</em> of the vertical bar or pipe symbol <code>|</code> we have the grouping variable <code>g</code> itself.</li>
 </ul></li>
-<li>The full model in R would like like:</li>
+<li>The full model in R would like like: <code>lme_model1 &lt;- lmer(P8MEA ~ 1 + (1|OFSTEDRATING), data = ...)</code></li>
 </ul>
-<p><code>lme_model1 &lt;- lmer(P8MEA ~ 1 + (1 | OFSTEDRATING), data = ...)</code></p>
-<p><a href="https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/" class="uri">https://paulrjohnson.net/blog/2022-11-01-multilevel-model-r-cheatsheet/</a></p>
 </section>
-<section id="running-the-null-model" class="slide level2">
+<section id="running-the-null-model" class="slide level2 smaller">
 <h2>Running The Null Model</h2>
 <div class="cell" data-align="center">
 <div class="cell-output cell-output-stdout">
@@ -592,12 +617,17 @@ Fixed effects:
 (Intercept)  -0.2646     0.2523  -1.049</code></pre>
 </div>
 </div>
+<ul>
+<li>Fixed Effect: Global Average <code>y</code> (Progress 8) is -0.26</li>
+<li>Random Effect: Progress 8 varies by 0.31 points on average <strong><em>between</em></strong> Ofsted categories</li>
+<li>Residual variation between schools <strong><em>within</em></strong> categories is smaller: 0.17 points</li>
+</ul>
 </section>
-<section id="the-icc-1" class="slide level2">
-<h2>The ICC</h2>
+<section id="the-null-model-icc" class="slide level2">
+<h2>The NULL model ICC</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(performance)</span>
-<span id="cb2-2"><a></a><span class="fu">icc</span>(lme1, <span class="at">by_group =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(performance)</span>
+<span id="cb3-2"><a></a><span class="fu">icc</span>(lme1, <span class="at">by_group =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># ICC by Group
 
@@ -606,6 +636,12 @@ Group        |   ICC
 OFSTEDRATING | 0.647</code></pre>
 </div>
 </div>
+<ul>
+<li>ICC of 0.647 means around 65% of the total variation in Progress 8 scores is explained by differences <strong><em>between</em></strong> OFSTED rating groups</li>
+<li>The remaining 35% is due to variation <strong><em>within</em></strong> those groups (i.e.&nbsp;between individual schools)</li>
+<li>ICC of 65% is very high - Schools in the same OFSTED category tend to have very similar Progress 8 scores</li>
+<li>High ICC means clustering is important. Ignoring it (e.g., using OLS) would underestimate uncertainty - justifies using a LME model</li>
+</ul>
 </section>
 <section id="null-model-visualisation" class="slide level2">
 <h2>NULL Model Visualisation</h2>
@@ -613,11 +649,36 @@ OFSTEDRATING | 0.647</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-16-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-16-1.png" style="width:80.0%"></a></p>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-19-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-19-1.png" style="width:80.0%"></a></p>
 </figure>
 </div>
 </div>
 </div>
+</section>
+<section id="model-with-a-fixed-effect-predictor" class="slide level2">
+<h2>Model with a Fixed Effect Predictor</h2>
+<ul>
+<li><code>y ~ x + (1 | g)</code></li>
+<li>In this model, each group in the Random Effect part of the model has it’s own intercept but a fixed slope still - <code>(1 | g)</code></li>
+<li>Adding a variable into the Fixed Effect part of the model shows how <code>x</code> influences <code>y</code> across all groups</li>
+<li>The Null Model asks: “How much do groups differ, ignoring everything else?”</li>
+<li>This model asks: “How does <code>x</code> affect <code>y</code>, while still accounting for group differences?”</li>
+</ul>
+</section>
+<section id="model-with-a-fixed-effect-predictor-1" class="slide level2">
+<h2>Model with a Fixed Effect Predictor</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-20-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="model-with-a-fixed-effect-predictor-2" class="slide level2 smaller">
+<h2>Model with a Fixed Effect Predictor</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
@@ -646,15 +707,70 @@ Correlation of Fixed Effects:
 PTFSM6CLA1A -0.071</code></pre>
 </div>
 </div>
+<ul>
+<li>Adding the fixed effect variable reduces Random Effect Ofsted group variance from 0.31 to 0.23. Some between group variance now captured by PTFSM6CLA1A</li>
+<li>Fixed effect of % disadvantaged students highly significant</li>
+<li>REML criterion: 3156.8 → 2729.2 indicating better fit</li>
+</ul>
+</section>
+<section id="model-with-a-fixed-effect-predictor-3" class="slide level2">
+<h2>Model with a Fixed Effect Predictor</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># Random effects (BLUPs): deviations from the global intercept, by group</span></span>
+<span id="cb6-2"><a></a><span class="fu">ranef</span>(lme1)<span class="sc">$</span>OFSTEDRATING</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     (Intercept)
+Special Measures      -0.5358379
+Serious Weaknesses    -0.3498755
+Requires improvement  -0.2039681
+Good                   0.2300834
+Outstanding            0.8595982</code></pre>
+</div>
+</div>
+<ul>
+<li>While the main summary doesn’t show the specific intercepts for each group, these can be extracted from the model object using the <code>ranef</code> (random effect) function in R</li>
+<li>These Random Effect intercepts are the deviation from the global mean and effectively show what is on the plot when combined with the Fixed Effect parameter</li>
+</ul>
+</section>
+<section id="model-with-a-fixed-effect-predictor-4" class="slide level2">
+<h2>Model with a Fixed Effect Predictor</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-18-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></a></p>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-23-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
+</section>
+<section id="random-intercept-and-random-slope-model" class="slide level2">
+<h2>Random Intercept and Random Slope Model</h2>
+<ul>
+<li>Right back at the beginning of the lecture when we plotted each Ofsted Subset as a separate regression model, it was clear that the relationship between % Disadvantaged Pupils in a school &amp; Progress 8 had different slopes as well as intercepts</li>
+<li><code>y ~ x + (x | g)</code></li>
+<li>Adding the random slopes simply requires the predictor variable to the left of the pipe in the Random effects bracket <code>(x | g)</code></li>
+<li>In this model each group has its own baseline (intercept) and its own relationship between <code>x</code> and <code>y</code> (whereas in the last model the relationship between <code>x</code> and <code>y</code> was assumed constant across groups)</li>
+</ul>
+</section>
+<section id="random-intercept-and-random-slope-model-1" class="slide level2 smaller">
+<h2>Random Intercept and Random Slope Model</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-24-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Most Ofsted Groups are similar to the mean</li>
+<li>Although for Outstanding schools, the proportions of disadvantage appear to have very little effect on Progress 8</li>
+</ul>
+</section>
+<section id="random-intercept-and-random-slope-model-2" class="slide level2 smaller">
+<h2>Random Intercept and Random Slope Model</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
@@ -686,305 +802,179 @@ optimizer (nloptwrap) convergence code: 0 (OK)
 boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
 </div>
+<ul>
+<li>REML dropped from 2744 → 2702, meaning the second model fits slightly better (lower REML = better fit)</li>
+<li>However, slope variance 3.549e-05 (0.000035) very small (i.e.&nbsp;possibly not worth additional complexity compared to fixed slope model)</li>
+<li>And correlation of 1.0 between slope and intercept in Random effects is problematic</li>
+<li>Suggests visual difference in Outstanding Ofsted not statistically reliable.</li>
+</ul>
+</section>
+<section id="random-intercept-and-random-slope-model-3" class="slide level2">
+<h2>Random Intercept and Random Slope Model</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># Extract random effects for each OFSTED group</span></span>
+<span id="cb9-2"><a></a>ranef_values <span class="ot">&lt;-</span> <span class="fu">ranef</span>(lme3)<span class="sc">$</span>OFSTEDRATING</span>
+<span id="cb9-3"><a></a></span>
+<span id="cb9-4"><a></a><span class="co"># Fixed slope</span></span>
+<span id="cb9-5"><a></a>fixed_slope <span class="ot">&lt;-</span> <span class="fu">fixef</span>(lme3)[<span class="st">"PTFSM6CLA1A"</span>]</span>
+<span id="cb9-6"><a></a></span>
+<span id="cb9-7"><a></a><span class="co"># Add random deviations to get group-specific slopes</span></span>
+<span id="cb9-8"><a></a>group_slopes <span class="ot">&lt;-</span> fixed_slope <span class="sc">+</span> ranef_values<span class="sc">$</span>PTFSM6CLA1A</span>
+<span id="cb9-9"><a></a></span>
+<span id="cb9-10"><a></a><span class="co"># Combine into a tidy data frame</span></span>
+<span id="cb9-11"><a></a>slopes_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-12"><a></a>  <span class="at">OFSTEDRATING =</span> <span class="fu">rownames</span>(ranef_values),</span>
+<span id="cb9-13"><a></a>  <span class="at">slope =</span> group_slopes</span>
+<span id="cb9-14"><a></a>)</span>
+<span id="cb9-15"><a></a></span>
+<span id="cb9-16"><a></a><span class="fu">print</span>(slopes_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          OFSTEDRATING        slope
+1     Special Measures -0.018639324
+2   Serious Weaknesses -0.017126695
+3 Requires improvement -0.016104820
+4                 Good -0.011586886
+5          Outstanding -0.003994586</code></pre>
+</div>
+</div>
+<ul>
+<li>Again, while the standard model outputs don’t print the slope parameters, these can be extracted</li>
+</ul>
+</section>
+<section id="random-intercept-and-random-slope-model-4" class="slide level2 smaller">
+<h2>Random Intercept and Random Slope Model</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-20-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></a></p>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-27-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-27-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: P8MEA ~ PTFSM6CLA1A + ((1 | OFSTEDRATING) + (0 + PTFSM6CLA1A |  
-    OFSTEDRATING))
-   Data: england_filtered_clean
+</section>
+<section id="other-linear-mixed-effects-models" class="slide level2 smaller">
+<h2>Other Linear Mixed Effects Models</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 41%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Meaning</th>
+<th>Sample Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>(1|g)</code></td>
+<td>Null Model or Varying Intercept Model</td>
+<td><code>P8 ~ 1 + (1 | OFSTEDRATING)</code></td>
+</tr>
+<tr class="even">
+<td><code>(1|g1/g2)</code></td>
+<td>Multilevel Model with intercept varying within g1 and for g2 within g1</td>
+<td><code>P8 ~ 1 + (1 | LocalAuthority/Region)</code></td>
+</tr>
+<tr class="odd">
+<td><code>(1|g1) + (1|g2)</code></td>
+<td>Intercept varying among g1 and g2</td>
+<td><code>P8 ~ 1 + (1 | OFSTEDRATING) + (1 | Region)</code></td>
+</tr>
+<tr class="even">
+<td><code>(0+x|g)</code></td>
+<td>Varying Slope Model</td>
+<td><code>P8 ~ Disadvantage + (0 + Disadvantage | OFSTEDRATING)</code></td>
+</tr>
+<tr class="odd">
+<td><code>x + (x|g)</code></td>
+<td>Varying and correlated intercepts and slopes</td>
+<td><code>P8 ~ Disadvantage + (Disadvantage | OFSTEDRATING)</code></td>
+</tr>
+<tr class="even">
+<td><code>x + (x||g)</code></td>
+<td>Uncorrelated Intercepts and Slopes</td>
+<td><code>P8 ~ Disadvantage + (Disadvantage || OFSTEDRATING)</code></td>
+</tr>
+</tbody>
+</table>
 
-REML criterion at convergence: 2710.8
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--4.1343 -0.6508 -0.0414  0.5938  4.6998 
-
-Random effects:
- Groups         Name        Variance  Std.Dev.
- OFSTEDRATING   (Intercept) 0.1175451 0.342849
- OFSTEDRATING.1 PTFSM6CLA1A 0.0000376 0.006132
- Residual                   0.1464578 0.382698
-Number of obs: 2906, groups:  OFSTEDRATING, 5
-
-Fixed effects:
-             Estimate Std. Error t value
-(Intercept)  0.160401   0.162253   0.989
-PTFSM6CLA1A -0.013120   0.003065  -4.280
-
-Correlation of Fixed Effects:
-            (Intr)
-PTFSM6CLA1A -0.128
-optimizer (nloptwrap) convergence code: 0 (OK)
-Model failed to converge with max|grad| = 0.0140472 (tol = 0.002, component 1)</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-22-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: P8MEA ~ 1 + (1 | gor_name/LANAME)
-   Data: england_filtered_clean
-
-REML criterion at convergence: 4095.9
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.8043 -0.6175  0.0103  0.6455  4.9912 
-
-Random effects:
- Groups          Name        Variance Std.Dev.
- LANAME:gor_name (Intercept) 0.02048  0.1431  
- gor_name        (Intercept) 0.02398  0.1548  
- Residual                    0.22015  0.4692  
-Number of obs: 2965, groups:  LANAME:gor_name, 151; gor_name, 9
-
-Fixed effects:
-            Estimate Std. Error t value
-(Intercept) -0.03162    0.05403  -0.585</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: P8MEA ~ PTFSM6CLA1A + (1 | gor_name/LANAME)
-   Data: england_filtered_clean
-
-REML criterion at convergence: 3069.6
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--4.0689 -0.6109 -0.0289  0.5821  5.2137 
-
-Random effects:
- Groups          Name        Variance Std.Dev.
- LANAME:gor_name (Intercept) 0.03333  0.1826  
- gor_name        (Intercept) 0.03027  0.1740  
- Residual                    0.15054  0.3880  
-Number of obs: 2965, groups:  LANAME:gor_name, 151; gor_name, 9
-
-Fixed effects:
-              Estimate Std. Error t value
-(Intercept)  0.5558667  0.0629237   8.834
-PTFSM6CLA1A -0.0218189  0.0006112 -35.701
-
-Correlation of Fixed Effects:
-            (Intr)
-PTFSM6CLA1A -0.263</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: P8MEA ~ PTFSM6CLA1A + (1 | gor_name/LANAME) + (1 | OFSTEDRATING)
-   Data: england_filtered_clean
-
-REML criterion at convergence: 2234.5
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--4.2767 -0.6055 -0.0213  0.5820  4.8390 
-
-Random effects:
- Groups          Name        Variance Std.Dev.
- LANAME:gor_name (Intercept) 0.02121  0.1456  
- gor_name        (Intercept) 0.01619  0.1272  
- OFSTEDRATING    (Intercept) 0.16600  0.4074  
- Residual                    0.11527  0.3395  
-Number of obs: 2906, groups:  
-LANAME:gor_name, 151; gor_name, 9; OFSTEDRATING, 5
-
-Fixed effects:
-              Estimate Std. Error t value
-(Intercept)  0.2151543  0.1897142   1.134
-PTFSM6CLA1A -0.0162784  0.0005639 -28.868
-
-Correlation of Fixed Effects:
-            (Intr)
-PTFSM6CLA1A -0.089</code></pre>
-</div>
-</div>
-<p><span class="math display">\[\texttt{lmer(P8MEA ~ PTFSM6CLA1A + (1 | gor_name/LANAME) + (1 | OFSTEDRATING), data = england\_filtered\_clean)}\]</span> #kitchen sink model!!</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: P8MEA ~ PTFSM6CLA1A + (1 | gor_name/LANAME) + (1 | OFSTEDRATING)
-   Data: england_filtered_clean
-
-REML criterion at convergence: 2234.5
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--4.2767 -0.6055 -0.0213  0.5820  4.8390 
-
-Random effects:
- Groups          Name        Variance Std.Dev.
- LANAME:gor_name (Intercept) 0.02121  0.1456  
- gor_name        (Intercept) 0.01619  0.1272  
- OFSTEDRATING    (Intercept) 0.16600  0.4074  
- Residual                    0.11527  0.3395  
-Number of obs: 2906, groups:  
-LANAME:gor_name, 151; gor_name, 9; OFSTEDRATING, 5
-
-Fixed effects:
-              Estimate Std. Error t value
-(Intercept)  0.2151543  0.1897142   1.134
-PTFSM6CLA1A -0.0162784  0.0005639 -28.868
-
-Correlation of Fixed Effects:
-            (Intr)
-PTFSM6CLA1A -0.089</code></pre>
-</div>
-</div>
+<aside><div>
+<p>Borrowed from Levi Wolf and Paul Johnson</p>
+</div></aside></section>
+<section id="last-weeks-attainment-8-best-model" class="slide level2 smaller">
+<h2>Last Week’s Attainment 8 Best Model</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-TRUE 
-2961 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-TRUE 
-2961 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-TRUE 
-2961 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-TRUE 
-2961 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 4
-   ATT8SCR PTFSM6CLA1A PERCTOT PNUMEAL
-     &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
- 1      NA          NA      NA      NA
- 2      NA          NA      NA      NA
- 3      NA          NA      NA      NA
- 4      NA          NA      NA      NA
- 5      NA          NA      NA      NA
- 6      NA          NA      NA      NA
- 7      NA          NA      NA      NA
- 8      NA          NA      NA      NA
- 9      NA          NA      NA      NA
-10      NA          NA      NA      NA</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code> Ord.factor w/ 5 levels "Special Measures"&lt;..: 4 4 4 4 4 4 5 4 4 3 ...</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code> chr [1:2961] "London" "London" "London" "London" "London" "London" ...</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code> chr [1:2961] "Camden" "Camden" "Camden" "Camden" "Camden" "Camden" ...</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code> chr [1:2961] "OTHER NON SEL" "OTHER NON SEL" "OTHER NON SEL" ...</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>OFSTEDRATING     gor_name       LANAME 
-          59            0            0 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
+Call:
+lm(formula = log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + 
+    log(PNUMEAL) + OFSTEDRATING + gor_name + PTPRIORLO + ADMPOL_PT, 
+    data = england_filtered_clean, na.action = na.exclude)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.37723 -0.04528  0.00333  0.04912  0.30081 
+
+Coefficients:
+                                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                       4.5966533  0.0178852 257.009  &lt; 2e-16 ***
+log(PTFSM6CLA1A)                 -0.0699264  0.0036900 -18.950  &lt; 2e-16 ***
+log(PERCTOT)                     -0.2244960  0.0074455 -30.152  &lt; 2e-16 ***
+log(PNUMEAL)                      0.0179676  0.0016174  11.109  &lt; 2e-16 ***
+OFSTEDRATING.L                    0.1141381  0.0134587   8.481  &lt; 2e-16 ***
+OFSTEDRATING.Q                    0.0223425  0.0113333   1.971 0.048773 *  
+OFSTEDRATING.C                    0.0094244  0.0118583   0.795 0.426824    
+OFSTEDRATING^4                   -0.0130171  0.0085375  -1.525 0.127442    
+gor_nameEast of England           0.0056999  0.0063522   0.897 0.369630    
+gor_nameLondon                    0.0266978  0.0065474   4.078 4.67e-05 ***
+gor_nameNorth East                0.0202813  0.0084342   2.405 0.016250 *  
+gor_nameNorth West               -0.0139159  0.0060835  -2.287 0.022239 *  
+gor_nameSouth East               -0.0128394  0.0060587  -2.119 0.034161 *  
+gor_nameSouth West                0.0254495  0.0065872   3.863 0.000114 ***
+gor_nameWest Midlands             0.0058630  0.0063008   0.931 0.352183    
+gor_nameYorkshire and the Humber  0.0199996  0.0065661   3.046 0.002341 ** 
+PTPRIORLO                        -0.0069371  0.0002201 -31.525  &lt; 2e-16 ***
+ADMPOL_PTOTHER NON SEL            0.0154098  0.0060930   2.529 0.011488 *  
+ADMPOL_PTSEL                      0.0806871  0.0098281   8.210 3.30e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.07492 on 2883 degrees of freedom
+  (59 observations deleted due to missingness)
+Multiple R-squared:  0.8443,    Adjusted R-squared:  0.8433 
+F-statistic: 868.5 on 18 and 2883 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
+</section>
+<section id="a-linear-mixed-effects-revision" class="slide level2 smaller">
+<h2>A Linear Mixed Effects Revision</h2>
+<p>“He threw everything but the kitchen sink at it!”</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +  
-    PTPRIORLO + ADMPOL_PT + (1 | OFSTEDRATING) + (1 | gor_name/LANAME)
-   Data: eng_clean_log
-
-REML criterion at convergence: -6867.1
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--5.7645 -0.5790  0.0301  0.6358  4.5633 
-
-Random effects:
- Groups          Name        Variance  Std.Dev.
- LANAME:gor_name (Intercept) 0.0006878 0.02623 
- gor_name        (Intercept) 0.0002478 0.01574 
- OFSTEDRATING    (Intercept) 0.0032801 0.05727 
- Residual                    0.0050031 0.07073 
-Number of obs: 2902, groups:  
-LANAME:gor_name, 151; gor_name, 9; OFSTEDRATING, 5
-
-Fixed effects:
-                         Estimate Std. Error t value
-(Intercept)             4.6350167  0.0320063 144.816
-log(PTFSM6CLA1A)       -0.0753777  0.0039754 -18.961
-log(PERCTOT)           -0.2237835  0.0073213 -30.566
-log(PNUMEAL)            0.0143445  0.0017594   8.153
-PTPRIORLO              -0.0068604  0.0002199 -31.202
-ADMPOL_PTOTHER NON SEL  0.0059090  0.0089869   0.658
-ADMPOL_PTSEL            0.0748478  0.0097318   7.691
-
-Correlation of Fixed Effects:
-            (Intr) l(PTFS l(PERC l(PNUM PTPRIO ADMPNS
-l(PTFSM6CLA -0.106                                   
-lg(PERCTOT) -0.377 -0.354                            
-lg(PNUMEAL) -0.080 -0.257  0.165                     
-PTPRIORLO    0.110 -0.412 -0.208 -0.150              
-ADMPOL_PTNS -0.265 -0.044  0.016 -0.013  0.074       
-ADMPOL_PTSE -0.254  0.180  0.015 -0.215  0.286  0.554</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>lme9 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
+<span id="cb12-2"><a></a>  <span class="fu">log</span>(ATT8SCR) <span class="sc">~</span> </span>
+<span id="cb12-3"><a></a>    <span class="fu">log</span>(PTFSM6CLA1A) <span class="sc">+</span></span>
+<span id="cb12-4"><a></a>    <span class="fu">log</span>(PERCTOT) <span class="sc">+</span></span>
+<span id="cb12-5"><a></a>    <span class="fu">log</span>(PNUMEAL) <span class="sc">+</span></span>
+<span id="cb12-6"><a></a>    PTPRIORLO <span class="sc">+</span></span>
+<span id="cb12-7"><a></a>    ADMPOL_PT <span class="sc">+</span></span>
+<span id="cb12-8"><a></a>    (<span class="dv">1</span> <span class="sc">|</span> OFSTEDRATING) <span class="sc">+</span></span>
+<span id="cb12-9"><a></a>    (<span class="dv">1</span> <span class="sc">|</span> gor_name <span class="sc">/</span> LANAME),</span>
+<span id="cb12-10"><a></a>  <span class="at">data =</span> england_filtered_clean,</span>
+<span id="cb12-11"><a></a>  <span class="at">na.action =</span> na.exclude</span>
+<span id="cb12-12"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Special Measures   Serious Weaknesses Requires improvement 
-                  16                   22                  348 
-                Good          Outstanding 
-                2076                  440 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-           East Midlands          East of England                   London 
-                     259                      335                      431 
-              North East               North West               South East 
-                     134                      417                      448 
-              South West            West Midlands Yorkshire and the Humber 
-                     290                      356                      291 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                 LANAME
-gor_name          Barking and Dagenham Barnet Barnsley
-  East Midlands                      0      0        0
-  East of England                    0      0        0
-  London                             8     24        0
-  North East                         0      0        0
-  North West                         0      0        0
-                 LANAME
-gor_name          Bath and North East Somerset Bedford
-  East Midlands                              0       0
-  East of England                            0      12
-  London                                     0       0
-  North East                                 0       0
-  North West                                 0       0</code></pre>
-</div>
-</div>
+<ul>
+<li>Not quite everything, but:</li>
+<li>Fixed Effects: % Disadvantaged Students, % pupils where English not first language, % Overall Absence, % of pupils at the end of key stage 4 with low prior attainment at the end of key stage 2, Admissions Policy</li>
+<li>Random Effects: Ofsted Rating and <em>nested</em> (multilevel) Local Authority and Regional Geographic effects</li>
+</ul>
+</section>
+<section id="my-final-kitchen-sink-model" class="slide level2 smaller">
+<h2>My Final kitchen sink model!!</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
@@ -1027,309 +1017,515 @@ ADMPOL_PTNS -0.265 -0.044  0.016 -0.013  0.074
 ADMPOL_PTSE -0.254  0.180  0.015 -0.215  0.286  0.554</code></pre>
 </div>
 </div>
+</section>
+<section id="my-final-kitchen-sink-model-1" class="slide level2 smaller">
+<h2>My Final kitchen sink model!!</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-30-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></a></p>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-33-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-34-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="my-final-kitchen-sink-model-2" class="slide level2 smaller">
+<h2>My Final kitchen sink model!!</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-35-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-35-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-36-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-36-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="my-final-kitchen-sink-model-3" class="slide level2">
+<h2>My Final kitchen sink model!!</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-37-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-37-1.png" width="960"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Very good fit, <span class="math inline">\(R^2\)</span> = 86%</li>
+</ul>
+</section>
+<section id="interpreting-the-final-model---random-effects" class="slide level2 smaller">
+<h2>Interpreting the Final Model - Random Effects</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 65%">
+<col style="width: 18%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Group</th>
+<th>Variance</th>
+<th>Std. Dev</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Intercept Local Authority Within Region</strong></td>
+<td><strong>0.00069</strong></td>
+<td><strong>0.026</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Intercept Region</strong></td>
+<td><strong>0.00025</strong></td>
+<td><strong>0.016</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Intercept OFSTEDRATING</strong></td>
+<td><strong>0.00328</strong></td>
+<td><strong>0.057</strong></td>
+</tr>
+<tr class="even">
+<td>Residual School-to-School</td>
+<td>0.00500</td>
+<td>0.071</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Random effects represent variation across levels (categories) within a grouping factor</li>
+<li>Larger variance = more difference between those levels (e.g.&nbsp;London to SE in Region)</li>
+<li>SD (sqrt(variance)) is typical size of deviation from the overall mean for a group.</li>
+<li>A typical OFSTED level differs from the overall mean by about ±1 SD (≈ 0.057 on the log scale)</li>
+<li><span class="math inline">\(exp(\sigma^2_{\text{OFSTEDRATING}})-1 ≈ exp(0.0573)−1 ≈ 0.059 ≈ 5.9\%\)</span></li>
+<li>Baseline Attainment 8 (from null model) - <span class="math inline">\(exp(3.75644) = 42.8\)</span></li>
+<li>Average jump between Ofsted Rating Groups worth <span class="math inline">\(42.8 \times 0.059 ≈ 2.52\)</span> GCSE points</li>
+</ul>
+</section>
+<section id="interpreting-the-final-model---random-effects-1" class="slide level2 smaller">
+<h2>Interpreting the Final Model - Random Effects</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Group</th>
+<th>Variance</th>
+<th>Std. Dev</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Intercept Local Authority Within Region</td>
+<td>0.00069</td>
+<td>0.026</td>
+</tr>
+<tr class="even">
+<td>Intercept Region</td>
+<td>0.00025</td>
+<td>0.016</td>
+</tr>
+<tr class="odd">
+<td>Intercept OFSTEDRATING</td>
+<td>0.00328</td>
+<td>0.057</td>
+</tr>
+<tr class="even">
+<td><strong>Residual School-to-School</strong></td>
+<td><strong>0.00500</strong></td>
+<td><strong>0.071</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Residual variance (0.0050) represents the within-group variation—differences between individual schools after accounting for fixed effects and the random intercepts for OFSTED, LA, and region</li>
+<li>Since 0.0050 (residual) &gt; 0.00328 (OFSTED) and much larger than LA or region variances, most of the unexplained variation is within groups (school-to-school differences) rather than between OFSTED categories or geographic clusters.</li>
+</ul>
+</section>
+<section id="interpreting-the-final-model---random-effects-2" class="slide level2 smaller">
+<h2>Interpreting the Final Model - Random Effects</h2>
+<p>What about specific point differences between Ofsted Groups?</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Pseudo R-squared (Conditional): 0.8657"</code></pre>
+<pre><code>                     (Intercept)
+Special Measures     -0.06084082
+Serious Weaknesses   -0.03189554
+Requires improvement -0.01942173
+Good                  0.03077845
+Outstanding           0.08137964</code></pre>
 </div>
 </div>
+<ul>
+<li>Good vs Requires Improvement: <span class="math inline">\(\Delta\log = 0.0308−(−0.0194) = 0.0502\)</span></li>
+<li>Good vs RI: <span class="math inline">\(exp(0.0502) ≈ 1.0515 → +5.15\%\)</span></li>
+<li>Good vs RI: <span class="math inline">\(42.8 \times ≈ 0.0515 ≈ 2.2\)</span> GCSE Points</li>
+</ul>
+</section>
+<section id="interpreting-the-final-model---random-effects-3" class="slide level2 smaller">
+<h2>Interpreting the Final Model - Random Effects</h2>
+<div class="cell" data-align="center">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-39-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-39-1.png" style="width:80.0%"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Extracting the random effects and their variances for individual groups and plotting them in a caterpillar plot allows you to see which groups are meaningfully different from the average</li>
+<li>If a group’s confidence interval doesn’t cross the 0 line, it’s an interesting case (oh look, there’s Brighton!)</li>
+<li>Similar to looking for significant dummies in an OLS model - although these are shrunken estimates</li>
+</ul>
+</section>
+<section id="interpreting-the-final-model---fixed-effects" class="slide level2 smaller">
+<h2>Interpreting the Final Model - Fixed Effects</h2>
+<p>Fixed Effects</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>OLS</th>
+<th>LMM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(Intercept)</td>
+<td>4.597 (0.023)***</td>
+<td>4.635 (0.032)***</td>
+</tr>
+<tr class="even">
+<td>log(PTFSM6CLA1A)</td>
+<td>-0.070 (0.004)***</td>
+<td>-0.075 (0.004)***</td>
+</tr>
+<tr class="odd">
+<td>log(PERCTOT)</td>
+<td>-0.224 (0.010)***</td>
+<td>-0.224 (0.007)***</td>
+</tr>
+<tr class="even">
+<td>log(PNUMEAL)</td>
+<td>0.018 (0.002)***</td>
+<td>0.014 (0.002)***</td>
+</tr>
+<tr class="odd">
+<td>PTPRIORLO</td>
+<td>-0.007 (0.000)***</td>
+<td>-0.007 (0.000)***</td>
+</tr>
+<tr class="even">
+<td>ADMPOL_PTOTHER NON SEL</td>
+<td>0.015 (0.006)*</td>
+<td>0.006 (0.009)</td>
+</tr>
+<tr class="odd">
+<td>ADMPOL_PTSEL</td>
+<td>0.081 (0.010)***</td>
+<td>0.075 (0.010)***</td>
+</tr>
+<tr class="even">
+<td>R2 (Conditional)</td>
+<td>0.843</td>
+<td>0.856</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Very little change in the fixed effects from the original OLS model</li>
+<li>Only the very small ‘other non selective school’ group loses significance</li>
+<li>Most coefficients and the overall intercept very similar</li>
+</ul>
+</section>
+<section id="interpreting-the-final-model---fixed-effects-1" class="slide level2 smaller">
+<h2>Interpreting the Final Model - Fixed Effects</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Predictor</th>
+<th>Scenario</th>
+<th>Log shift = equation for % change</th>
+<th>% change</th>
+<th>Raw points = 42.8 baseline x % change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>% Overall Absence - log(PERCTOT)</strong></td>
+<td>40% → 30%</td>
+<td>−0.2238 × log(30/40)</td>
+<td>+6.65%</td>
+<td>+2.85</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>20% → 10%</td>
+<td>−0.2238 × log(10/20)</td>
+<td>+16.78%</td>
+<td>+7.18</td>
+</tr>
+<tr class="odd">
+<td><strong>% Disadvantage - log(PTFSM6CLA1A)</strong></td>
+<td>40% → 30%</td>
+<td>−0.0754 × log(30/40)</td>
+<td>+2.19%</td>
+<td>+0.94</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>20% → 10%</td>
+<td>−0.0754 × log(10/20)</td>
+<td>+5.36%</td>
+<td>+2.30</td>
+</tr>
+<tr class="odd">
+<td><strong>Prior low attainment - (PTPRIORLO)</strong></td>
+<td>40 → 30 pp</td>
+<td>−0.00686 × (−10)</td>
+<td>+7.10%</td>
+<td>+3.04</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>20 → 10 pp</td>
+<td>−0.00686 × (−10)</td>
+<td>+7.10%</td>
+<td>+3.04</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Note</strong> - final column only illustrative as using global average</li>
+</ul>
+</section>
+<section id="wrapping-it-all-up" class="slide level2 smaller">
+<h2>Wrapping it all up</h2>
+<ul>
+<li>In our final model we are to see that controlling for:
+<ul>
+<li>absence, disadvantage, prior attainment, selectivity in admissions and English not as a first language while also controlling for the variability within and between geographical locations and Ofsted ratings, Prior Low Attainment at KS2 is the most important predictor of Attainment 8</li>
+</ul></li>
+<li>The effects of prior low attainment are linear, but the effects of absence and disadvantage are felt more strongly where low levels change and less strongly where higher levels change</li>
+<li>Reducing absence is significantly more likely to improve Attainment 8 than reducing levels of disadvantage in a school</li>
+<li>In terms of random effects, while not causal a jump between Ofsted ratings is worth, on average, about 2.5 GSCE points - similar to a reduction in disadvanage in a school from 20%-10%.</li>
+</ul>
+</section>
+<section id="back-to-our-week-6-reserarch-questions" class="slide level2">
+<h2>Back to our Week 6 Reserarch Question(s)</h2>
+<ul>
+<li>What are the factors that affect school-level educational attainment in Brighton and Hove?</li>
+<li>To what extent is attainment driven by social mixing?</li>
+<li>Are there any other factors that are relevant?</li>
+<li>What are the implications of this for local policy?</li>
+<li>Can regression help us and, if it can, how can we go about carefully building a regression model to help us answer these questions?</li>
+</ul>
+</section>
+<section id="custom-policy---brighton-schools" class="slide level2 smaller">
+<h2>Custom Policy - Brighton Schools</h2>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>           R2m       R2c
-[1,] 0.7345229 0.8559252</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># R2 for Mixed Models
-
-  Conditional R2: 0.856
-     Marginal R2: 0.735</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>               df       AIC
-england_model7 20 -6783.777
-lme9_ml        11 -6910.187</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>               df       BIC
-england_model7 20 -6664.314
-lme9_ml        11 -6844.482</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]</code></pre>
-</div>
+<div id="tbl-display-min" class="cell quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-display-min-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1
+</figcaption>
+<div aria-describedby="tbl-display-min-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-34-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></a></p>
+<table class="do-not-create-environment caption-top">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 30%">
+<col style="width: 17%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Brighton Aldridge Community Academy</th>
+<th style="text-align: left;">Longhill High School</th>
+<th style="text-align: left;">Patcham High School</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PERCTOT</td>
+<td style="text-align: left;">16.2</td>
+<td style="text-align: left;">13.4</td>
+<td style="text-align: left;">9.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PTFSM6CLA1A</td>
+<td style="text-align: left;">45.0</td>
+<td style="text-align: left;">29.0</td>
+<td style="text-align: left;">19.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PNUMEAL</td>
+<td style="text-align: left;">12.3</td>
+<td style="text-align: left;">7.9</td>
+<td style="text-align: left;">6.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PTPRIORLO</td>
+<td style="text-align: left;">37.0</td>
+<td style="text-align: left;">34.0</td>
+<td style="text-align: left;">14.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ADMPOL_PT</td>
+<td style="text-align: left;">OTHER NON SEL</td>
+<td style="text-align: left;">OTHER NON SEL</td>
+<td style="text-align: left;">OTHER NON SEL</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RE: OFSTEDRATING</td>
+<td style="text-align: left;">-0.019</td>
+<td style="text-align: left;">-0.019</td>
+<td style="text-align: left;">0.031</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RE: gor_name</td>
+<td style="text-align: left;">-0.015</td>
+<td style="text-align: left;">-0.015</td>
+<td style="text-align: left;">-0.015</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RE: LANAME:gor_name</td>
+<td style="text-align: left;">0.037</td>
+<td style="text-align: left;">0.037</td>
+<td style="text-align: left;">0.037</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RE: total</td>
+<td style="text-align: left;">0.003</td>
+<td style="text-align: left;">0.003</td>
+<td style="text-align: left;">0.053</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Baseline ATT8 (fixed only)</td>
+<td style="text-align: left;">33.5</td>
+<td style="text-align: left;">36.7</td>
+<td style="text-align: left;">47.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Baseline ATT8 (incl.&nbsp;RE)</td>
+<td style="text-align: left;">33.7</td>
+<td style="text-align: left;">36.8</td>
+<td style="text-align: left;">49.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Baseline ATT8 (incl.&nbsp;RE, bias-corrected)</td>
+<td style="text-align: left;">33.7</td>
+<td style="text-align: left;">36.9</td>
+<td style="text-align: left;">49.8</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[2]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-34-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-34-2.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[3]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-34-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-34-3.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-34-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-34-4.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[2]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-34-5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-34-5.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[3]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-34-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-34-6.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-34-7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-34-7.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[2]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-34-8.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-34-8.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[3]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-34-9.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-34-9.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-34-10.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-34-10.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[2]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-34-11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-34-11.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[3]]</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-34-12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-34-12.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>$`LANAME:gor_name`</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-35-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-35-1.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-$gor_name</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-35-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-35-2.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-$OFSTEDRATING</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><a href="week8_lecture_files/figure-revealjs/unnamed-chunk-35-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="week8_lecture_files/figure-revealjs/unnamed-chunk-35-3.png" width="960"></a></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 8
-  effect   group           level     term  estimate std.error conf.low conf.high
-  &lt;chr&gt;    &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-1 ran_vals LANAME:gor_name Barking … (Int…  -0.0263    0.0189 -0.0634    0.0108 
-2 ran_vals LANAME:gor_name Barnet:L… (Int…   0.0397    0.0133  0.0135    0.0658 
-3 ran_vals LANAME:gor_name Barnsley… (Int…   0.0229    0.0180 -0.0124    0.0582 
-4 ran_vals LANAME:gor_name Bath and… (Int…   0.0177    0.0161 -0.0139    0.0492 
-5 ran_vals LANAME:gor_name Bedford:… (Int…   0.0366    0.0169  0.00350   0.0698 
-6 ran_vals LANAME:gor_name Bexley:L… (Int…  -0.0381    0.0161 -0.0696   -0.00649</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Data: england_filtered_clean
-Models:
-base_ml: log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1 | OFSTEDRATING) + (1 | gor_name/LANAME)
-rslope_la_ml: log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1 | OFSTEDRATING) + (1 | gor_name/LANAME) + (0 + PTPRIORLO | gor_name:LANAME)
-             npar     AIC     BIC logLik -2*log(L)  Chisq Df Pr(&gt;Chisq)    
-base_ml        11 -6910.2 -6844.5 3466.1   -6932.2                         
-rslope_la_ml   12 -6928.7 -6857.0 3476.3   -6952.7 20.481  1  6.022e-06 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Data: england_filtered_clean
-Models:
-base_ml: log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1 | OFSTEDRATING) + (1 | gor_name/LANAME)
-rslope_ofsted_ml: log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1 + PTPRIORLO | OFSTEDRATING) + (1 | gor_name/LANAME)
-                 npar     AIC     BIC logLik -2*log(L)  Chisq Df Pr(&gt;Chisq)  
-base_ml            11 -6910.2 -6844.5 3466.1   -6932.2                       
-rslope_ofsted_ml   13 -6914.6 -6837.0 3470.3   -6940.6 8.4254  2    0.01481 *
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite's
-  method [lmerModLmerTest]
-Formula: log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) +  
-    PTPRIORLO * OFSTEDRATING + ADMPOL_PT + (1 | OFSTEDRATING) +  
-    (1 | gor_name/LANAME)
-   Data: england_filtered_clean
-
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  -6929.9   -6816.4    3484.0   -6967.9      2883 
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--5.7964 -0.5822  0.0291  0.6407  4.6719 
-
-Random effects:
- Groups          Name        Variance  Std.Dev.
- LANAME:gor_name (Intercept) 0.0006858 0.02619 
- gor_name        (Intercept) 0.0002153 0.01467 
- OFSTEDRATING    (Intercept) 0.0000000 0.00000 
- Residual                    0.0049652 0.07046 
-Number of obs: 2902, groups:  
-LANAME:gor_name, 151; gor_name, 9; OFSTEDRATING, 5
-
-Fixed effects:
-                           Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)               4.624e+00  2.356e-02  1.450e+03 196.261  &lt; 2e-16 ***
-log(PTFSM6CLA1A)         -7.661e-02  3.978e-03  2.429e+03 -19.259  &lt; 2e-16 ***
-log(PERCTOT)             -2.209e-01  7.339e-03  2.893e+03 -30.104  &lt; 2e-16 ***
-log(PNUMEAL)              1.446e-02  1.753e-03  2.243e+03   8.249 2.68e-16 ***
-PTPRIORLO                -6.491e-03  5.504e-04  2.854e+03 -11.793  &lt; 2e-16 ***
-OFSTEDRATING.L            1.211e-01  3.818e-02  2.821e+03   3.172  0.00153 ** 
-OFSTEDRATING.Q           -9.121e-03  3.283e-02  2.827e+03  -0.278  0.78115    
-OFSTEDRATING.C           -3.449e-04  3.607e-02  2.829e+03  -0.010  0.99237    
-OFSTEDRATING^4            1.555e-03  2.631e-02  2.833e+03   0.059  0.95288    
-ADMPOL_PTOTHER NON SEL    4.868e-03  8.965e-03  4.800e+02   0.543  0.58735    
-ADMPOL_PTSEL              8.303e-02  1.001e-02  2.887e+03   8.291  &lt; 2e-16 ***
-PTPRIORLO:OFSTEDRATING.L  1.065e-04  1.330e-03  2.826e+03   0.080  0.93616    
-PTPRIORLO:OFSTEDRATING.Q  1.317e-03  1.143e-03  2.824e+03   1.152  0.24936    
-PTPRIORLO:OFSTEDRATING.C  4.109e-04  1.292e-03  2.824e+03   0.318  0.75050    
-PTPRIORLO:OFSTEDRATING^4 -3.972e-04  9.494e-04  2.830e+03  -0.418  0.67567    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>optimizer (nloptwrap) convergence code: 0 (OK)
-boundary (singular) fit: see help('isSingular')</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Data: england_filtered_clean
-Models:
-lme9_ml: log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO + ADMPOL_PT + (1 | OFSTEDRATING) + (1 | gor_name/LANAME)
-lme_interact_ofsted: log(ATT8SCR) ~ log(PTFSM6CLA1A) + log(PERCTOT) + log(PNUMEAL) + PTPRIORLO * OFSTEDRATING + ADMPOL_PT + (1 | OFSTEDRATING) + (1 | gor_name/LANAME)
-                    npar     AIC     BIC logLik -2*log(L)  Chisq Df Pr(&gt;Chisq)
-lme9_ml               11 -6910.2 -6844.5 3466.1   -6932.2                     
-lme_interact_ofsted   19 -6929.9 -6816.4 3484.0   -6967.9 35.734  8  1.964e-05
-                       
-lme9_ml                
-lme_interact_ofsted ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-</div>
+</section>
+<section id="custom-policy---longhill-example" class="slide level2 smaller">
+<h2>Custom Policy - Longhill Example</h2>
+<ul>
+<li>Longhill High School (baseline ≈ 36.8) Profile highlights: PERCTOT=13.4; PTPRIORLO=34; PTFSM=29.</li>
+<li>Top levers:
+<ul>
+<li>Reduce overall absence (PERCTOT) — biggest bang-per-buck, and Longhill starts higher than Patcham. − 1 pp (13.4% → 12.4%): +1.75% ATT8 ⇒ ≈ +0.64 GCSE points − 2 pp (13.4% → 11.4)%: +3.68% ATT8 ⇒ ≈ +1.36 GCSE points. No collateral damage.</li>
+<li>Reduce prior low attainment effects (PTPRIORLO) — strong, feasible medium‑term via targeted KS3 catch‑up, transition, targeted support. − 5 pp (34% → 29%): +3.49% ⇒ ≈ +1.28 GCSE points − 10 pp (34 → 24): +7.10% ⇒ ≈ +2.61 GCSE points. No collateral damage.</li>
+<li>To contrast, reducing the numbers of disadvantaged students (PTFSM6CLA1A) in the school by 10 pp from 29% to 19%, is only worth ≈ +1.19 GCSE points (less than reducing absence by just 2 percentage points). Busing children across the city to achieve this, high collateral damage.</li>
+</ul></li>
+</ul>
+</section>
+<section id="custom-policy---longhill-example-1" class="slide level2 smaller">
+<h2>Custom Policy - Longhill Example</h2>
+<ul>
+<li>Attendance is the fastest, most controllable lever with meaningful point gains even for small pp reductions;</li>
+<li>PTPRIORLO is the next best lever via academic catch‑up. Better policy might be to focus on mitigation rather than changing intake.</li>
+<li>Bottom line for Longhill:
+<ul>
+<li>A move RI → Good in this model corresponds to ~+5.1% in ATT8, i.e., ~+1.9 points from a 36.8 baseline.</li>
+<li>That’s roughly equivalent to: - Reducing overall absence by ~2.7 percentage points (13.4 → ~10.7), or - Reducing prior-low attainment by ~7.3 percentage points (34 → ~26.7).</li>
+<li>Among actionable levers, attendance remains the fastest high-return route; PTPRIORLO reduction is similarly powerful but typically requires sustained academic interventions across KS3/KS4.</li>
+</ul></li>
+</ul>
+</section>
+<section id="conclusions" class="slide level2">
+<h2>Conclusions</h2>
+<ul>
+<li>Phew!! That was a lot!</li>
+<li>We’ve come a long way since the start of the Regression Sessions 3 weeks ago</li>
+<li>Mainly I hope we’ve learned a step-by-step recipe which can be applied to many different quantitative modelling applications</li>
+<li>Hope we’ve demystified, through visualisation and worked examples, some of the esoteric elements of regression modelling</li>
+</ul>
+</section>
+<section id="conclusions-1" class="slide level2">
+<h2>Conclusions</h2>
+<ul>
+<li>If we start with a simple model guided by sound theory and an understanding of the system of interest, we can start to build complexity and explanatory power though successive modelling iterations</li>
+<li>By the final iteration, it’s possible to derive deep insights into your system of interest</li>
+<li>Careful interpretation of your outputs, relative to policy ambitions, can present a powerful message (whether policy makers will listen is a different matter!)</li>
+</ul>
+</section>
+<section id="conclusions-2" class="slide level2">
+<h2>Conclusions</h2>
+<ul>
+<li>Linear Mixed Effects Models are just one useful extension to OLS standard regression. They work well particularly when there are logical groups, hierarchies or repeated measurements within your data</li>
+<li>Other regression variants (not yet covered in this course) might be more appropriate in other situations:
+<ul>
+<li>Generalised Linear Models
+<ul>
+<li>Logistic Regression (binary or multinomial outcomes)</li>
+<li>Poisson Regression / Negative Binomal Regression (count data)</li>
+<li>Generalised Additive Models (non-linear relationships)</li>
+</ul></li>
+<li>Geographically Weighted or Spatial Regression Models</li>
+<li>Lasso and Ridge Regression (incorporating shrinkage)</li>
+</ul></li>
+<li>Now you have a good grounding in the basics of linear regression, these other methods should be much easier learn in future</li>
+</ul>
+</section>
+<section id="todays-practical" class="slide level2">
+<h2>Today’s Practical</h2>
+<ul>
+<li>Regression Sessions Vol 3 - A linear mixed effects model walkthrough.</li>
+</ul>
 
 
 </section></section>

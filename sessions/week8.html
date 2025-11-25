@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="XXX">
-<meta name="dcterms.date" content="2025-11-20">
+<meta name="author" content="Adam Dennett">
+<meta name="dcterms.date" content="2025-11-25">
 
-<title>Week XXX – Quantitative Methods</title>
+<title>Week 8 - Prof D’s Regression Sessions Vol 3 – Quantitative Methods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -50,6 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/bootstrap/bootstrap-5457fb42737ce7af87b82faab80c0026.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-5457fb42737ce7af87b82faab80c0026.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-5457fb42737ce7af87b82faab80c0026.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,9 +82,9 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Week XXX – Quantitative Methods">
+<meta property="og:title" content="Week 8 - Prof D’s Regression Sessions Vol 3 – Quantitative Methods">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://huanfachen.github.io/QM/sessions/img/logo/full_sm.png">
+<meta property="og:image" content="https://huanfachen.github.io/QM/sessions/L6_images/regression2.PNG">
 <meta property="og:site_name" content="Foundations">
 <meta property="og:locale" content="en_GB">
 </head>
@@ -204,7 +207,7 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-          <h1 class="quarto-secondary-nav-title">Week XXX</h1>
+          <h1 class="quarto-secondary-nav-title">Week 8 - Prof D’s Regression Sessions Vol 3</h1>
         </a>     
     </div>
   </nav>
@@ -350,7 +353,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Week XXX</h1>
+<h1 class="title d-none d-lg-block">Week 8 - Prof D’s Regression Sessions Vol 3</h1>
 </div>
 
 
@@ -360,14 +363,14 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>XXX </p>
+             <p>Adam Dennett </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 20, 2025</p>
+      <p class="date">November 25, 2025</p>
     </div>
   </div>
   
@@ -379,22 +382,74 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p><a href="L6_images/regression2.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="L6_images/regression2.PNG" class="img-fluid"></a></p>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>This week will introduce XXX.</p>
+<p>This week we build on the work we have been doing still further and introduce a new class of regression model - the <strong><em>Linear Mixed Effects Model</em></strong></p>
+<p>Linear Mixed Effects Models are like regular OLS regression models, but with extra flexibility to handle grouped or clustered data - like schools within local authorities or repeated measures over time.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 33%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Ordinary Least Squares (OLS)</th>
+<th>Linear Mixed Effects (LME)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Data Structure</strong></td>
+<td>Assumes all observations are independent</td>
+<td>Handles grouped or hierarchical data (e.g., repeated measures - temporal, clusters)</td>
+</tr>
+<tr class="even">
+<td><strong>Effects Modelled</strong></td>
+<td>Fixed effects only</td>
+<td>Fixed effects <strong>and</strong> random effects</td>
+</tr>
+<tr class="odd">
+<td><strong>Group-Level Variation</strong></td>
+<td>Not accounted for</td>
+<td>Accounts for variation across groups (e.g., random intercepts/slopes)</td>
+</tr>
+<tr class="even">
+<td><strong>Assumptions</strong></td>
+<td>Homogeneous relationships across all observations</td>
+<td>Allows relationships to vary by group</td>
+</tr>
+<tr class="odd">
+<td><strong>Use Case</strong></td>
+<td>Simple regression with independent data</td>
+<td>Complex data with clustering or repeated measures</td>
+</tr>
+<tr class="even">
+<td><strong>Example</strong></td>
+<td>Predicting house prices by size and location</td>
+<td>Predicting school attainment across local authorities</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
-<p>By the end of this week, you will be able to:</p>
+<p>By the end of this week, you will:</p>
 <ol type="1">
-<li>XXX</li>
-<li>XXX</li>
-<li>XXX</li>
+<li>Extend your understanding of linear regression even further by learning how we might incorporate grouping structures into our data</li>
+<li>Understand the difference between <strong><em>Fixed Effects</em></strong> and <strong><em>Random Effects</em></strong> (classic stats jargon that you’ll now feel confident in spraying around liberally)</li>
+<li>Understand what a <strong><em>multilevel model</em></strong> is and how it relates to linear mixed effects models</li>
+<li>Understand what Variance Components / Null Model is</li>
+<li>Appreciate the idea of <strong><em>shrinkage</em></strong> (if not the full detail)</li>
+<li>Understand what the <strong><em>Interclass Correletion Coefficient</em></strong> is and how you can use it to justify using a LME model over a standard OLS model</li>
+<li>How to run different types of LME model using standard syntax across Python and R and interpret the outputs</li>
 </ol>
 </section>
 <section id="lecture" class="level2">
 <h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
-<p>To access the lecture notes: <a href="weekXXX_lecture.qmd">Lecture</a></p>
+<p>To access the lecture notes: <a href="week8_lecture.html">Lecture</a></p>
 </section>
 <section id="quiz" class="level2">
 <h2 class="anchored" data-anchor-id="quiz">Quiz</h2>
@@ -417,8 +472,8 @@ Note
 </div>
 <p>To access the practical:</p>
 <ol type="1">
-<li><a href="weekX_practical.html">Preview</a></li>
-<li><a href="weekX_practical.ipynb">Download</a></li>
+<li><a href="week8_practical.html">Main Practical Page</a></li>
+<li><a href="week8_practical.ipynb">Download</a></li>
 </ol>
 </section>
 <section id="further-resources" class="level2">
@@ -867,6 +922,38 @@ Note
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
