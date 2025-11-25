@@ -9,9 +9,7 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pages: write
-      id-token: write
+      contents: write
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -69,80 +67,14 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pip'
-
-      # Ensure reticulate points to Actions Python
-      - name: Set RETICULATE_PYTHON environment variables
-        run: |
-          echo "RETICULATE_PYTHON=${{ env.pythonLocation }}/bin/python" >> $GITHUB_ENV
-          echo "RETICULATE_AUTOCONFIGURE=FALSE" >> $GITHUB_ENV
-
-      ## --- START: CRITICAL FIX FOR pandas-flavor ATTRIBUTEERROR ---
       
-      # Create a constraints file to pin critical versions (prevents transitive overrides)
-      - name: Create pip constraints file
-        run: |
-          cat > constraints.txt <<'TXT'
-          # CRITICAL PIN: Fixes the AttributeError by using the last compatible version 
-          # (register_groupby_method was removed in 0.7.0).
-          pandas-flavor==0.6.0
-          
-          # Pin pyjanitor to a compatible version that relies on the pandas-flavor API
-          pyjanitor==0.26.0
+      - name: Set RETICULATE_PYTHON environment variable
+        run: echo "RETICULATE_PYTHON=${{ env.pythonLocation }}/bin/python" >> $GITHUB_ENV
 
-          # Ensure compatibility with pandas >= 2.2.2
-          pandas>=2.2.2
-          TXT
-          cat constraints.txt
-
-      # Clean install with constraints
-      - name: Install Python dependencies (constrained)
+      - name: Install Python dependencies
         run: |
           pip install --upgrade pip
-          python -c "import sys; print('Using Python:', sys.executable)"
-          # Remove possibly pre-installed conflicting deps
-          pip uninstall -y pandas-flavor pyjanitor pandas || true
-
-          # Install hard pins without deps first so they can't be overridden
-          pip install --no-cache-dir --no-deps 'pandas-flavor==0.6.0'
-          pip install --no-cache-dir --no-deps 'pyjanitor==0.26.0'
-
-          # Now install project requirements honoring constraints
-          pip install --no-cache-dir -r requirements.txt --constraint constraints.txt --upgrade-strategy only-if-needed
-
-          # Show resolved versions
-          python -m pip freeze
-      
-      ## --- END: CRITICAL FIX ---
-      
-      # Verify from Python that key packages are correct
-      - name: Verify Python package versions
-        run: |
-          python - <<'PY'
-          import importlib.metadata as im, sys, pandas_flavor
-          def ver(p): 
-              try: return im.version(p)
-              except Exception: return 'unknown'
-          print("Python exe:", sys.executable)
-          print("numpy:", ver("numpy"))
-          print("pandas:", ver("pandas"))
-          print("pyjanitor:", ver("pyjanitor"))
-          print("pandas-flavor:", ver("pandas-flavor"))
-          print("has pandas_flavor.register_groupby_method:", hasattr(pandas_flavor, "register_groupby_method"))
-          PY
-
-      # R-side check via reticulate (heredoc to avoid quoting issues)
-      - name: Verify reticulate Python and deps from R
-        shell: bash
-        run: |
-          Rscript - <<'RS'
-          cat("\n=== reticulate::py_config() ===\n")
-          print(reticulate::py_config())
-          Sys.setenv(RETICULATE_AUTOCONFIGURE = "FALSE")
-          reticulate::use_python(Sys.getenv("RETICULATE_PYTHON"), required = TRUE)
-          reticulate::py_run_string("import sys; print('reticulate Python:', sys.executable)")
-          reticulate::py_run_string("import importlib.metadata as im; print('numpy:', im.version('numpy')); print('pandas:', im.version('pandas')); print('pyjanitor:', im.version('pyjanitor')); print('pandas-flavor:', im.version('pandas-flavor'))")
-          reticulate::py_run_string("import pandas_flavor; print('has register_groupby_method:', hasattr(pandas_flavor, 'register_groupby_method'))")
-          RS
+          pip install -r requirements.txt
 
       - name: Copy custom SCSS theme to Quarto directory
         run: |
