@@ -148,20 +148,8 @@ jobs:
         run: |
           sudo cp css/casa-slides.scss /opt/quarto/share/formats/revealjs/themes/
 
-      - name: Render Quarto project
-        run: quarto render
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site/
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Render and Publish
+        uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
         env:
