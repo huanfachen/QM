@@ -1,0 +1,391 @@
+---
+title: 'Practical 9: Dimensionality reduction'
+subtitle: ""
+format:
+  html: default
+  ipynb: default
+filters:
+  - qna
+  - quarto
+---
+
+This week, we will focus on conducting dimensionality reduction on the performance and disadvantage variables of schools in England, trying to understand which variables (or variable combinations) are important in distinguishing these schools.
+
+We will use the method of principal component analysis (PCA) for this task.
+
+```{python}
+
+import numpy as np
+import pandas as pd
+
+import matplotlib.pyplot as plt
+
+pd.set_option('display.max_columns', None)
+```
+
+## Dataset
+
+We're going to use a piece of filtered school data that has been used in W5 workshop (on correlations).
+
+```{python}
+# read in the dataset from Github
+df_school = pd.read_csv("https://raw.githubusercontent.com/huanfachen/QM/refs/heads/main/sessions/L6_data/Performancetables_130242/2022-2023/england_filtered.csv")
+```
+
+Check the shape and columns of this data frame.
+```{python}
+print(f"df_school has {df_school.shape[0]} rows and {df_school.shape[1]} columns.")
+print("First 5 rows:\n")
+print(df_school.head(5))
+```
+
+The metadata of this data is available [here](https://github.com/huanfachen/QM/blob/main/sessions/L6_data/Performancetables_130249/2022-2023/census_meta.csv). For convenience, the columns are described as below:  
+1. **URN**: Unique Reference Number identifying a school.  
+2. **SCHNAME.x**: School name as recorded in the official register.  
+3. **LEA**: Local Education Authority (code).  
+4. **LANAME**: Name of the Local Authority.  
+5. **TOWN.x**: Town in which the school is located.  
+6. **gor_name**: Government Office Region name.  
+7. **TOTPUPS**: Total number of pupils on roll.  
+8. **ATT8SCR**: Average Attainment 8 score for all pupils.  
+9. **ATT8SCRENG**: Average Attainment 8 score for English subject grouping.  
+10. **ATT8SCRMAT**: Average Attainment 8 score for Maths subject grouping.  
+11. **ATT8SCR_FSM6CLA1A**: Average Attainment 8 score for pupils eligible for Free School Meals in the last 6 years and/or Children Looked After.  
+12. **ATT8SCR_NFSM6CLA1A**: Average Attainment 8 score for pupils not eligible for Free School Meals in the last 6 years and not Children Looked After.  
+13. **ATT8SCR_BOYS**: Average Attainment 8 score for male pupils.  
+14. **ATT8SCR_GIRLS**: Average Attainment 8 score for female pupils.  
+15. **P8MEA**: Progress 8 measure for all pupils.  
+16. **P8MEA_FSM6CLA1A**: Progress 8 measure for disadvantaged pupils (FSM6 and/or CLA1A).  
+17. **P8MEA_NFSM6CLA1A**: Progress 8 measure for non-disadvantaged pupils.  
+18. **PTFSM6CLA1A**: Percentage of pupils eligible for FSM6 and/or CLA1A.  
+19. **PTNOTFSM6CLA1A**: Percentage of pupils not eligible for FSM6 and/or CLA1A.  
+20. **PNUMEAL**: Percentage of pupils whose first language is known or believed to be other than English.  
+21. **PNUMENGFL**: Percentage of pupils whose first language is English.  
+22. **PTPRIORLO**: Percentage of pupils with low prior attainment from Key Stage 2.  
+23. **PTPRIORHI**: Percentage of pupils with high prior attainment from Key Stage 2.  
+24. **NORB**: Number of boys on roll.  
+25. **NORG**: Number of girls on roll.  
+26. **PNUMFSMEVER**: Percentage of pupils who have been eligible for free school meals in the past six years (FSM6 measure).  
+27. **PERCTOT**: Percentage of total pupil absence (authorised and unauthorised combined).  
+28. **PPERSABS10**: Percentage of pupils who are persistently absent (overall absence rate 10% or more).  
+29. **SCHOOLTYPE.x**: Official classification of the school type (e.g., Academy, Community, Voluntary Aided).  
+30. **RELCHAR**: Religious character of the school (e.g., Church of England, Roman Catholic, None).  
+31. **ADMPOL.y**: Admission policy type (e.g., non-selective, selective).  
+32. **ADMPOL_PT**: Percentage breakdown related to admission policy (context-specific).  
+33. **gender_name**: Gender intake of the school (Mixed, Boys, Girls).  
+34. **OFSTEDRATING**: Latest Ofsted inspection overall effectiveness grade.  
+35. **MINORGROUP**: Ethnic minority group classification for aggregation purposes.  
+36. **easting**: Ordnance Survey Easting coordinate of school location.  
+37. **northing**: Ordnance Survey Northing coordinate of school location.  
+
+As the focus is to explore the performance and disadvantage ratio of schools, we will keep the following variables:
+
+1. **PTFSM6CLA1A** – Percentage of pupils eligible for Free School Meals in the past six years (FSM6) and/or Children Looked After (CLA1A).  
+2. **PTNOTFSM6CLA1A** – Percentage of pupils not eligible for FSM6 and not CLA1A.  
+3. **PNUMEAL** – Percentage of pupils whose first language is known or believed to be other than English.  
+4. **PNUMFSMEVER** – Percentage of pupils who have ever been eligible for Free School Meals in the past six years (FSM6 measure).  
+5. **ATT8SCR_FSM6CLA1A** – Average Attainment 8 score for pupils eligible for FSM6 and/or CLA1A.  
+6. **ATT8SCR_NFSM6CLA1A** – Average Attainment 8 score for pupils not eligible for FSM6 and not CLA1A.  
+7. **ATT8SCR_BOYS** – Average Attainment 8 score for male pupils.  
+8. **ATT8SCR_GIRLS** – Average Attainment 8 score for female pupils.  
+9. **P8MEA_FSM6CLA1A** – Progress 8 measure for disadvantaged pupils (FSM6 and/or CLA1A).  
+10. **P8MEA_NFSM6CLA1A** – Progress 8 measure for non-disadvantaged pupils.
+
+Please note - we don't use the count variables (e.g. NORB and NORG), as the count variables are affected by the pupil size of each school. We also remove variables that are redundant due to perfect correlation with those retained, such as PNUMENGFL, which is equal to 1-PNUMEAL.
+
+```{python}
+# Extract the selected columns
+df_school_reduced = df_school[
+    [
+        'PTFSM6CLA1A', 'PTNOTFSM6CLA1A', 'PNUMEAL', 'PNUMFSMEVER', 
+        'ATT8SCR_FSM6CLA1A', 'ATT8SCR_NFSM6CLA1A', 'ATT8SCR_BOYS', 'ATT8SCR_GIRLS', 
+        'P8MEA_FSM6CLA1A', 'P8MEA_NFSM6CLA1A'       
+    ]
+]
+
+# Display the first few rows
+print(df_school_reduced.head())
+```
+
+## Task one: to address missing values and to standardise variables
+
+We expect that all variabels in df_school_reduced are of numerical type. It is safe to check it before further analysis.
+
+```{Python}
+print("Numeric columns: {}".format(df_school_reduced.select_dtypes(include='number').columns.tolist()))
+print("Non-numeric columns: {}".format(df_school_reduced.select_dtypes(exclude='number').columns.tolist())))
+```
+
+To convert all columns to numeric, we can use the following code. Note that numeric columns are not affected.
+```{python}
+df_school_reduced = df_school_reduced.apply(pd.to_numeric, errors='coerce')
+```
+
+Now, let's check whether our dataset has any missing values — this is important because PCA in sklearn package cannot handle `NaN` values directly.  
+
+To display the number of missing entries for each column:
+
+```{python}
+# Check missing values column by column
+missing_counts = df_school_reduced.isnull().sum()
+print("Missing values per column:\n", missing_counts)
+```
+
+:::{.callout-note}
+
+There are two common ways to deal with missing values:
+
+1. Remove all rows with at least one missing values. In this dataset, this leads to loss of many rows (around 10%).
+2. Impute the missing values using a selected imputation method.
+
+:::
+
+To fill in these missing values, we will use the KNNImputer() from sklearn.impute.
+
+This method finds the k closest rows (neighbors) to the one with the missing value and uses their values to compute an average for imputation.
+
+It’s a smarter approach than simply filling with the mean or median because it considers patterns across all variables.
+
+```{python}
+from sklearn.impute import KNNImputer
+
+# Create our KNN imputer (k=5 is a common choice, but can be tuned)
+imputer = KNNImputer(n_neighbors=5)
+
+# Fit to our data and transform it
+df_school_reduced = pd.DataFrame(
+    imputer.fit_transform(df_school_reduced),
+    columns=df_school_reduced.columns,  # Keep original column names
+    index=df_school_reduced.index       # Keep original index
+)
+
+# Double-check that there are no more missing values
+print("Are there any missing values left?:", df_school_reduced.isnull().sum().sum() == 0)
+```
+
+Then, we will compare all variables in terms of their range, mean, and variance.
+
+```{python}
+df_school_reduced.describe()
+```
+
+The results show that most variables (except two Progress 8 variables) are on a scale of 0-100, while the Progress 8 variables are between -3 and 3. 
+
+Recall the definition of Progress 8: it measures the academic progress pupils make between the end of primary school (Key Stage 2) and the end of secondary school (Key stage 4) compared to other pupils nationally with similar starting points. In practice, this values often lie between -2.0 (very low progress) and +2.0 (exceptional progress).
+
+Therefore, we need to normalise these variables so that they are comparable before conducting PCA. Here, we will use the StandardScaler from sklearn package. According to [the documentation](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html), it standises each feature by removing the mean and scaling to unit variance, which is also called z-score standardisation.
+
+z = (x - u) / s
+
+Please note: using StandardScaler().fit_transform() on a DataFrame will output a numpy array, which differs from DataFrame and has no column names. If we would like to maintain a dataframe format, the numpy array should be wrapped back to DataFrame.
+
+```{python}
+# standardisation of df_school_reduced. This is essential for PCA.
+from sklearn.preprocessing import StandardScaler
+np_scaled = StandardScaler().fit_transform(df_school_reduced)
+
+# Fit and transform, then wrap back to DataFrame
+df_school_reduced = pd.DataFrame(
+    np_scaled,
+    columns=df_school_reduced.columns,   # preserve column names
+    index=df_school_reduced.index        # preserve row labels
+)
+```
+
+We can double check the scale of variables after the standardisation.
+
+```{python}
+df_school_reduced.describe()
+df_school_reduced.info()
+```
+
+After the standardisation, all variables have unit variance (close to 1) and similar ranges.
+
+## Task two: to conduct PCA
+
+We will use the following code to conduct PCA. First, a PCA object is created using ```PCA()```. Then, this object is applied to fit and transform df_school_reduced.
+
+```{python}
+from sklearn.decomposition import PCA
+pca = PCA()
+# fit the components
+pca_np_school_reduced = pca.fit_transform(df_school_reduced)
+# type of output
+print("Type of PCA output:{}".format(pca_np_school_reduced.__class__))
+```
+
+```pca``` stores the relationship between the original and new variables, while ```pca_np_school_reduced``` is a numpy array that stores the new coordinates under the new variables for each school.
+
+How many new variables (or Principle Components) have been generated? 
+
+```{python}
+print("Number of PCs: {}".format(pca_np_school_reduced.shape[1]))
+```
+
+What are the importance of each PC? In other words, to what extent does each PC explain the variance of performance and disadvantage of schools?
+```{python}
+print('Explained variance ratio of each PC:')
+print(pca.explained_variance_ratio_.round(3))
+# the sum of explained variance should be equal to 1.0 or 100%
+print('Sum of explained variance ratio of all PCs：{}'.format(pca.explained_variance_ratio_.sum())) 
+```
+
+The first PC (which is also the most important PC) accounts for 61.0% of the variance of the original dataset, while the second and third PC accounts for 25.4% and 5.25%, respectively. In total, the top two PCs accounts for 86.4% of the variance between schools.
+
+To check the relationship between the original and new variables:
+
+```{python}
+df_PC = pd.DataFrame(pca.components_, columns = df_school_reduced.columns.to_list()) # the list_var_X is used as the column names
+df_PC
+```
+
+To interpret, the first row represents how the first PC is generated from a linear combination of the original variables:
+
+- Some variables have a negative coefficient, such as PTFSM6CLA1A and PNUMFSMEVER.
+- The ATT8SCR_GIRLS variable contributes to the PC1 more than the other variables. *Can you explain this?*
+
+## Task three: to validate and visualise the selected PCs
+
+How do school look like and distribute in the top two PCs? To visualise them, we can use the following code:
+
+```{python}
+
+plt.figure(figsize=(7, 5))
+plt.scatter(pca_np_school_reduced[:, 0], 
+pca_np_school_reduced[:, 1], 
+alpha=0.1,              
+edgecolor='none')
+plt.xlabel(f"PC1 ({pca.explained_variance_ratio_[0]*100:.2f}% variance)")
+plt.ylabel(f"PC2 ({pca.explained_variance_ratio_[1]*100:.2f}% variance)")
+plt.title("PCA Scatter Plot")
+plt.show()
+```
+
+:::{.callout-note}
+
+If you would like to reduce the overlap between dots, you can try lowering the `alpha` parameter of `plt.scatter()`. The lower alpha, the more transparent.
+
+:::
+
+This plot doesn't tell much. We can include additional variable to this plot, such as the overall attainment 8 score for all pupils. This would reveal how the overall attainment looks like in this new feature space.
+
+```{python}
+# Create DataFrame from PCA output
+df_pca_school_reduced = pd.DataFrame(
+    pca_np_school_reduced,
+    columns=[f"PC{i}" for i in range(1, pca_np_school_reduced.shape[1]+1)] #PC1, PC2, ...
+)
+
+# Append ATT8SCR column from df_school (same row order)
+df_pca_school_reduced = df_pca_school_reduced.assign(ATT8SCR = df_school.ATT8SCR)
+
+# Plot scatter using viridis colormap
+plt.figure(figsize=(7, 5))
+scatter = plt.scatter(
+    df_pca_school_reduced['PC1'],
+    df_pca_school_reduced['PC2'],
+    c=df_pca_school_reduced['ATT8SCR'],
+    cmap='viridis',
+    alpha=0.8,       # transparency for better visibility
+    edgecolor='none'
+)
+
+# Labels and title
+plt.xlabel(f"PC1 ({pca.explained_variance_ratio_[0]*100:.2f}% variance)")
+plt.ylabel(f"PC2 ({pca.explained_variance_ratio_[1]*100:.2f}% variance)")
+plt.title("PCA Scatter Plot Colored by ATT8SCR")
+
+# Colorbar
+plt.colorbar(scatter, label='ATT8SCR')
+
+plt.show()
+
+```
+
+```{python}
+# Create DataFrame from PCA output and append ATT8SCR
+df_pca_school_reduced = pd.DataFrame(
+    pca_np_school_reduced,
+    columns=[f"PC{i}" for i in range(1, pca_np_school_reduced.shape[1] + 1)]
+).assign(ATT8SCR=df_school['ATT8SCR'])
+
+# Plot using DataFrame's plot.scatter
+ax = df_pca_school_reduced.plot.scatter(
+    x='PC1',
+    y='PC2',
+    c='ATT8SCR',
+    alpha=0.8,
+    figsize=(7, 5),
+    edgecolor='none'
+)
+
+# Add labels and title
+ax.set_xlabel(f"PC1 ({pca.explained_variance_ratio_[0]*100:.2f}% variance)")
+ax.set_ylabel(f"PC2 ({pca.explained_variance_ratio_[1]*100:.2f}% variance)")
+ax.set_title("PCA Scatter Plot Colored by ATT8SCR")
+
+plt.show()
+```
+
+This plot shows that PC1 is higher correlated with the overall Attainment 8 score.
+
+How about visualising **absence** in this new feature space?
+
+::: qna
+#### Question
+
+``` python
+# Append PERCTOT column from df_school
+df_pca_school_reduced = ???.???(PERCTOT = df_school.???)
+
+# Plot using DataFrame's plot.scatter
+ax = df_pca_school_reduced.plot.scatter(
+    x='??',
+    y='??',
+    c='??',
+    alpha=0.8,
+    figsize=(7, 5),
+    edgecolor='none'
+)
+
+# Add labels and title
+ax.set_xlabel(f"PC1 ({pca.explained_variance_ratio_[0]*100:.2f}% variance)")
+ax.set_ylabel(f"PC2 ({pca.explained_variance_ratio_[1]*100:.2f}% variance)")
+ax.set_title("PCA Scatter Plot Colored by PERCTOT")
+
+plt.show()
+```
+
+#### Answer
+
+```{python}
+
+df_pca_school_reduced = df_pca_school_reduced.assign(PERCTOT = df_school.PERCTOT)
+
+# Plot using DataFrame's plot.scatter
+ax = df_pca_school_reduced.plot.scatter(
+    x='PC1',
+    y='PC2',
+    c='PERCTOT',
+    alpha=0.8,
+    figsize=(7, 5),
+    edgecolor='none'
+)
+
+# Add labels and title
+ax.set_xlabel(f"PC1 ({pca.explained_variance_ratio_[0]*100:.2f}% variance)")
+ax.set_ylabel(f"PC2 ({pca.explained_variance_ratio_[1]*100:.2f}% variance)")
+ax.set_title("PCA Scatter Plot Colored by PERCTOT")
+
+plt.show()
+```
+
+:::
+
+## You're Done!
+
+Congratulations on completing the practical on dimensionality reduction.
+
+It takes time to learn - remember practice makes perfect! 
+
+If you have time, please think about applying this technique to other variables in the school data, or your own datasets.
