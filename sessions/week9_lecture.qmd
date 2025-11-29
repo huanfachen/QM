@@ -6,7 +6,6 @@ email: "huanfa.chen@ucl.ac.uk"
 date-as-string: "17th November 2025"
 from: markdown+emoji
 other: "CASA0007 Quantitative Methods"
-from: markdown+emoji
 format:
   revealjs: 
     template-partials: 
@@ -44,83 +43,84 @@ Looked at:
 - Understand the principle of Principal Component Analysis
 - Can apply PCA to school datasets or other datasets
 
-## Questions
+# High-dimensional data
 
-- In school data, there are many variables relating to disadvantages.
-- Is it possible to compress these variables into a few, without sacrificing much information?
-
-## Classification of statistical analysis
+## Dimensionality
 
 ::: {.incremental}
-- *Univariate* analysis (for one variable) (W1/2)
-- *Bivariate* analysis (for two variables) (W5)
-- *Multivariate* analysis (for multiple variables) (Further weeks; *very common in GIS*)
+- Defition: number of variables or features for each data point
+- *A tabular data of M rows, N numerical columns* has a dimensionality of **N** (not *M*)
+- *A column representing seasons in a year* has a dimensionality of **4**, or 3 (if using one-hot encoding and K-1 dummy variables)
 :::
 
+## Dimensionality
 
-## Dimensionality Reduction
+:::: {.columns}
 
-New representations in lower-dimensional space: the process of reducing the number of variables by obtaining a set of relevant factors.  
-It is *unsupervised learning*, so there is no ground truth to validate the result.
+::: {.column width="50%"}
 
-Input: *n* columns → Output: *k* columns.
+<div style="text-align:center;">
+  <img 
+    src="https://www.photofacts.nl/fotografie/foto/nh/nando_eosr6mk2.jpg" 
+    alt="Canon EOR R8" 
+    style="width:450px">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+    Image credit: [photofacts](https://www.photofacts.nl/fotografie/rubriek/reviews/review-canon-eos-r8-full-frame-mirrorless-camera.asp)
+  </div>
+</div>
 
----
+:::
 
-## Two Classes of Dimensionality Reduction
+::: {.column width="50%"}
 
-- **Linear DR**: each new dimension is a linear function of the original dimensions.  
-  Example: PCA.
-- **Non-linear DR**: examples include kernel PCA and LLE.
+Canon EOR R8 has a maximum resolution of 6000 * 4000 pixels for JPEG/HEIF, where every pixel corresponds to three colour channels (RGB). What is the dimensionality of an image from EOR R8?
 
----
+:::
 
-## Key Questions for a DR Algorithm
+::::
 
-1. Is it linear or non-linear?  
-2. What is the objective?  
-3. What is the application of the outputs?  
-4. What are the hyperparameters? How to tune them?---
+- **A.** 6000 * 4000
+- **B.** 6000 * 4000 * 3
+- **C.** 1
+- **D.** 6000 * 4000 * 3 * 2
 
-## DR and Map Projection Analogy
+## High-dimensional data (*Curse of dimensionality*)
 
-![Map projection analogy](L9_images/Picture2.jpg)  
-DR is similar to map projections such as Mercator: both reduce dimensions, both lead to information loss.
+- Analysis is hard, e.g. multicollinearity & variable selection in linear models
+- Interpretation is challenging
+- Visualisation is impossible
+- Storage is expensive
 
----
+## Exploitable properties 
 
-## Motivations
+- Many dimensions are redundant and can be explained by a combination of other dimensions
+- Many dimensions are correlated
+- The data often lies in an underlying lower-dimensional space
 
-| Perspective    | Details                                              |
-|----------------|------------------------------------------------------|
-| Visualisation  | To visualise the data in 2D or 3D                     |
-| Computation    | To reduce time and storage space                      |
-| Modelling      | To reduce features, avoid overfitting                 |
-| Others         | To avoid the curse of dimensionality                  |---
+## Dimensionality reduction
 
-## Curse of Dimensionality
+- Reducing the dimensionality of data by generating a new set of (fewer) dimensions  
+- Often at cost of information loss
+- Doesn't change the number of data points
+- It is *unsupervised learning*, and there is no ground truth to validate the result
+- Can be viewed as *data compression*
 
-### Difficulty in High Dimensions
+## Dimensionality reduction as compression
 
-- Possibilities grow exponentially with dimensions.  
-- Each additional dimension triples grid search effort.
-- High dimensions cause overfitting — more features than records risks severe overfit.
-- Distance functions become meaningless — points appear equidistant.
+- *Music*: WAV → MP3 (typical size reduction ≈ 10:1, e.g. ∼50 MB → 5 MB for an album)
+- *Image*: TIFF → JPEG (typical size reduction ≈ 5:1 to 10:1)
+- *Map projection*: Earth (3D ellipsoid) → 2D map (dimension reduction 3→2, with distortion of area/shape/distance)
 
-Example:  
-![Candy clustering colours](L9_images/Picture3.jpg)  
-In high dimensions, meaningful clusters may vanish.
+# Principal component analysis
 
----
+## PCA
 
-## DR for Curse of Dimensionality
+- A method for linear dimensionality reduction
+- Each new dimension is a linear combination of original ones
+- Proposed by Pearson (1901)* and Hotelling (1933)
+- Still one of the most popular technical for data compression and visualisation
 
-![Transform candies](L9_images/Picture2.jpg)  
-Using DR reveals clusters matching visual observation.
-
-Many features may be constant or correlated; DR learns a lower-dimensional subspace.
-
----
+*Pearson, Karl. "LIII. On lines and planes of closest fit to systems of points in space." The London, Edinburgh, and Dublin philosophical magazine and journal of science 2.11 (1901): 559-572.*
 
 ## Principal Component Analysis (PCA)
 
