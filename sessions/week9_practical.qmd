@@ -111,7 +111,7 @@ print(df_school_reduced.head())
 
 We expect that all variabels in df_school_reduced are of numerical type. It is safe to check it before further analysis.
 
-```{Python}
+```{python}
 print("Numeric columns: {}".format(df_school_reduced.select_dtypes(include='number').columns.tolist()))
 print("Non-numeric columns: {}".format(df_school_reduced.select_dtypes(exclude='number').columns.tolist())))
 ```
@@ -199,7 +199,7 @@ df_school_reduced.describe()
 df_school_reduced.info()
 ```
 
-After the standardisation, all variables have unit variance (close to 1) and similar ranges.
+After the standardisation, all variables have zero mean and unit variance (close to 1) so that they are comparable.
 
 ## Task two: to conduct PCA
 
@@ -301,6 +301,8 @@ plt.colorbar(scatter, label='ATT8SCR')
 plt.show()
 
 ```
+
+While the code above is equivalent to the code in the next cell, the code in the next cell is more concise and elegant.
 
 ```{python}
 # Create DataFrame from PCA output and append ATT8SCR

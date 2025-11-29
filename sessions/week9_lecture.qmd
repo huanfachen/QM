@@ -1,0 +1,255 @@
+---
+title: "Dimensionality Reduction"
+author: 
+  - name: "Huanfa Chen"
+email: "huanfa.chen@ucl.ac.uk"
+date-as-string: "17th November 2025"
+from: markdown+emoji
+other: "CASA0007 Quantitative Methods"
+from: markdown+emoji
+format:
+  revealjs: 
+    template-partials: 
+      - title-slide.html
+    transition: none
+    slide-number: TRUE
+    preview-links: auto
+    theme: casa-slides
+    chalkboard: true
+---
+
+## Last week
+**Lecture 8 - multilevel regression**
+
+Looked at:
+
+::: {.incremental}
+- Understand Ordinary Least Squares (OLS) and Linear Mixed Effects (LME) models 
+- Understand the difference between *Fixed Effects* and *Random Effects*
+- Can use Python or R to run OLS and LME
+:::
+
+# This week
+
+<div style="text-align:center;">
+  <img src="L9_images/Wild_unsupervised_learning.png" alt="Wild of Unsupervised Learning" style="max-width:90%">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+    Image credit: Google Gemini
+  </div>
+</div>
+
+## Objectives
+
+- Understand the motivation of dimensionality reduction
+- Understand the principle of Principal Component Analysis
+- Can apply PCA to school datasets or other datasets
+
+## Questions
+
+- In school data, there are many variables relating to disadvantages.
+- Is it possible to compress these variables into a few, without sacrificing much information?
+
+## Classification of statistical analysis
+
+::: {.incremental}
+- *Univariate* analysis (for one variable) (W1/2)
+- *Bivariate* analysis (for two variables) (W5)
+- *Multivariate* analysis (for multiple variables) (Further weeks; *very common in GIS*)
+:::
+
+
+## Dimensionality Reduction
+
+New representations in lower-dimensional space: the process of reducing the number of variables by obtaining a set of relevant factors.  
+It is *unsupervised learning*, so there is no ground truth to validate the result.
+
+Input: *n* columns → Output: *k* columns.
+
+---
+
+## Two Classes of Dimensionality Reduction
+
+- **Linear DR**: each new dimension is a linear function of the original dimensions.  
+  Example: PCA.
+- **Non-linear DR**: examples include kernel PCA and LLE.
+
+---
+
+## Key Questions for a DR Algorithm
+
+1. Is it linear or non-linear?  
+2. What is the objective?  
+3. What is the application of the outputs?  
+4. What are the hyperparameters? How to tune them?---
+
+## DR and Map Projection Analogy
+
+![Map projection analogy](L9_images/Picture2.jpg)  
+DR is similar to map projections such as Mercator: both reduce dimensions, both lead to information loss.
+
+---
+
+## Motivations
+
+| Perspective    | Details                                              |
+|----------------|------------------------------------------------------|
+| Visualisation  | To visualise the data in 2D or 3D                     |
+| Computation    | To reduce time and storage space                      |
+| Modelling      | To reduce features, avoid overfitting                 |
+| Others         | To avoid the curse of dimensionality                  |---
+
+## Curse of Dimensionality
+
+### Difficulty in High Dimensions
+
+- Possibilities grow exponentially with dimensions.  
+- Each additional dimension triples grid search effort.
+- High dimensions cause overfitting — more features than records risks severe overfit.
+- Distance functions become meaningless — points appear equidistant.
+
+Example:  
+![Candy clustering colours](L9_images/Picture3.jpg)  
+In high dimensions, meaningful clusters may vanish.
+
+---
+
+## DR for Curse of Dimensionality
+
+![Transform candies](L9_images/Picture2.jpg)  
+Using DR reveals clusters matching visual observation.
+
+Many features may be constant or correlated; DR learns a lower-dimensional subspace.
+
+---
+
+## Principal Component Analysis (PCA)
+
+### Steps
+1. Find principal components (PCs) — linear combinations of original dimensions.  
+2. Rank PCs by variance (importance).  
+3. Keep first *k* PCs (selection rules).  
+4. Project data into new space.
+
+**Example Table**:  
+| Component | Combination                  | Variance |
+|-----------|------------------------------|----------|
+| 1st (e)   | 0.5a + 0.6b + 0.1c + 0.3d     | 0.8      |
+| 2nd (f)   | 0.6a + 0.1b + 0.2c + 0.5d     | 0.1      |
+
+---
+
+![Variance projection](L9_images/Picture2.jpg)  
+PCA searches for uncorrelated dimensions capturing most variance.
+
+Eigenvalues ∝ variance explained on a PC.
+
+---
+
+### Choosing Number of Factors
+
+1. For visualisation: k = 2 or 3.  
+2. Keep components with eigenvalues > 1.  
+3. Scree plot (elbow method).
+
+---
+
+### PCA Summary
+
+- Requires data standardisation.  
+- Produces uncorrelated features (no multicollinearity).  
+- Common uses: visualisation, clustering check.  
+- Outputs usable for classification/regression.
+
+---
+
+## PCA Limitations
+
+![Swiss roll dataset](L9_images/Picture2.jpg)  
+Does not work well for 'twisted' datasets — use non-linear DR such as manifold learning.
+
+---
+
+## Manifold Learning
+
+Assumes high-dimensional data lies near a lower-dimensional manifold.
+
+### PCA vs Manifold Learning
+Manifold learning can reveal clusters PCA misses.
+
+---
+
+## Kernel PCA (kPCA)
+
+Uses kernel trick: map data to higher dimension, then apply PCA.  
+Finds patterns missed by linear DR.
+
+![kPCA example](L9_images/Picture7.jpg)  
+Hyperparameters: kernel type (linear, rbf, sigmoid), gamma for rbf.
+
+---
+
+## Locally Linear Embedding (LLE)
+
+Preserves local relations instead of global variance.  
+Steps:
+1. Measure relation to neighbours (weighted sum).  
+2. Find low-dim representation preserving these local relations.
+
+Example: Unrolling the Swiss roll while keeping neighbour relations.  
+![Swiss roll LLE](L9_images/Picture2.jpg)
+
+---
+
+## Comparison Table
+
+|            | PCA                               | kPCA                               | LLE                             |
+|------------|-----------------------------------|------------------------------------|---------------------------------|
+| Principle  | Preserve global variance          | Preserve global variance           | Preserve local relations        |
+| Meaning    | Linear combination of features    | Unclear                            | Unclear                         |
+| Flexibility| Deterministic                     | Adjustable via hyperparameters     | Adjustable via n_neighbors      |
+| Input use  | Yes                               | Yes                                | Yes                             |
+| Cost       | Low                               | Low                                | Low                             |---
+
+## DR Suggestions
+
+First choice: PCA baseline.  
+If PCA is slow or ineffective, use kPCA or LLE.
+
+---
+
+## When NOT to Use DR
+
+- Fewer than ~20 features (manageable by most ML methods).  
+- DR leads to information loss.  
+- Some DR outputs are hard to interpret.
+
+---
+
+## Other DR Methods
+
+- **t-SNE**: preserves similar instances close, pushes apart dissimilar ones.  
+- **MDS**: preserves instance distances.  
+- **ISOMAP**: preserves geodesic distances.
+
+---
+
+## Summary
+
+- DR combats curse of dimensionality.  
+- PCA: linear, interpretable, baseline choice.  
+- kPCA & LLE: non-linear, powerful but less interpretable.
+
+---
+
+## Key takeaways 
+
+- Can use Pearson/Spearman correlation to measure the relationship between two variables.
+- Choose Pearson or Spearman correlation metric based on the dataset and interpret them correctly.
+- To measure difference [between two groups]{style="color:blue"}, use [(paired) samples t-test]{style="color:red"}
+- To measure difference between [multiple groups]{style="color:blue"}, use [one-way ANOVA]{style="color:red"}
+- To measure difference [across two factors]{style="color:blue"}, use [two-way ANOVA]{style="color:red"}
+
+## Practical 
+- The practical will focus on calculating and interpreting correlation metrics.  
+- Have you questions prepared! 
+
