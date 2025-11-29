@@ -269,7 +269,7 @@
 <li>PCA from 2D to 1D</li>
 <li>Aim to find a ‘direction’ (i.e.&nbsp;a line) that keeps the most information (or variance) between data points in 2D</li>
 </ul>
-<div id="43f3d0be" class="cell" data-execution_count="1">
+<div id="6dab9516" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -283,7 +283,7 @@
 <h2>Which direction is the best?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="2e89967f" class="cell" data-execution_count="2">
+<div id="b44cb87f" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -293,17 +293,56 @@
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="b9107678" class="cell" data-results="asis" data-execution_count="3">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-| Direction                | Variance (explained) | Proportion of total |
-|--------------------------|----------------------|---------------------|
-| Original data (total)    | 43.8053 | 1.0000              |
-| Projection on $x_1$ axis | 8.7971     | 0.2008        |
-| Projection on $x_2$ axis | 35.0083     | 0.7992        |
-| Projection on $y=2x+0.1$ | 43.8013  | 0.9999     |
-| Projection on $y=x$      | 39.4468  | 0.9005     |
-</code></pre>
+<div id="4bdb1231" class="cell" data-results="asis" data-execution_count="3">
+<div class="cell-output cell-output-display cell-output-markdown">
+<table class="caption-top">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 33%">
+<col style="width: 31%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;"></th>
+<th style="text-align: left;">Direction</th>
+<th style="text-align: right;">Variance (explained)</th>
+<th style="text-align: right;">Proportion of total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">Original data (total)</td>
+<td style="text-align: right;">43.8053</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Projection on <span class="math inline">\(x_1\)</span> axis</td>
+<td style="text-align: right;">8.79708</td>
+<td style="text-align: right;">0.200822</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Projection on <span class="math inline">\(x_2\)</span> axis</td>
+<td style="text-align: right;">35.0083</td>
+<td style="text-align: right;">0.799178</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Projection on <span class="math inline">\(y=2x+0.1\)</span></td>
+<td style="text-align: right;">43.8013</td>
+<td style="text-align: right;">0.999908</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Projection on <span class="math inline">\(y=x\)</span></td>
+<td style="text-align: right;">39.4468</td>
+<td style="text-align: right;">0.900502</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div></div>
@@ -318,7 +357,15 @@
 <li>Not overlapping the information already captured by the first direction</li>
 </ul></li>
 </ul>
-<p>****python code****</p>
+<div id="e12bc637" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="week9_lecture_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="week9_lecture_files/figure-revealjs/cell-5-output-1.png" width="559" height="566"></a></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="generalisation-to-m-dimensional-data-points" class="slide level2">
 <h2>Generalisation to M-dimensional data points</h2>
