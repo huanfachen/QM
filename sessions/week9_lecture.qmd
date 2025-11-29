@@ -28,7 +28,7 @@ Looked at:
 - Can use Python or R to run OLS and LME
 :::
 
-# This week
+## This week
 
 <div style="text-align:center;">
   <img src="L9_images/Wild_unsupervised_learning.png" alt="Wild of Unsupervised Learning" style="max-width:90%">
@@ -65,7 +65,12 @@ Looked at:
     alt="Canon EOR R8" 
     style="width:450px">
   <div style="font-size:0.8em; color: #555; margin-top:4px;">
-    Image credit: [photofacts](https://www.photofacts.nl/fotografie/rubriek/reviews/review-canon-eos-r8-full-frame-mirrorless-camera.asp)
+    Image credit: 
+    <a href="https://www.photofacts.nl/fotografie/rubriek/reviews/review-canon-eos-r8-full-frame-mirrorless-camera.asp"
+       target="_blank"
+       rel="noopener noreferrer">
+      photofacts
+    </a>
   </div>
 </div>
 
@@ -122,7 +127,197 @@ Canon EOR R8 has a maximum resolution of 6000 * 4000 pixels for JPEG/HEIF, where
 
 *Pearson, Karl. "LIII. On lines and planes of closest fit to systems of points in space." The London, Edinburgh, and Dublin philosophical magazine and journal of science 2.11 (1901): 559-572.*
 
-## Principal Component Analysis (PCA)
+## Illustration
+
+- PCA from 2D to 1D
+- Aim to find a 1D space (i.e. a line) that keeps the most information (or variance) between data points in 2D
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# For reproducibility
+
+rng = np.random.default_rng(0)
+
+# ---- generate data ----
+
+n = 80
+x = rng.uniform(-5, 5, size=n) # x in [-5, 5]
+noise = rng.normal(0, 0.15, size=n) # small Gaussian noise
+y = 2 * x + 0.1 + noise # y = 2x + 0.1 + noise
+
+df = pd.DataFrame({"x1": x, "x2": y})
+
+# ---- make scatterplot ----
+
+fig, ax = plt.subplots(figsize=(4, 4))
+
+ax.scatter(df["x1"], df["x2"], s=25, color="navy")
+
+# Axes through origin
+
+ax.axhline(0, color="black", linewidth=1)
+ax.axvline(0, color="black", linewidth=1)
+
+ax.set_xlim(-12, 12)
+ax.set_ylim(-12, 12)
+
+ax.set_xlabel(r"x1")
+ax.set_ylabel(r"x2")
+
+ax.set_aspect("equal", adjustable="box")
+plt.tight_layout()
+plt.show()
+```
+
+## Which projection is the best?
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Reuse df from the previous cell
+x = df["x1"].to_numpy()
+y = df["x2"].to_numpy()
+
+# ---- define projection directions ----
+# x1 axis: direction (1, 0)
+ux = np.array([1.0, 0.0])
+
+# x2 axis: direction (0, 1)
+uy = np.array([0.0, 1.0])
+
+# line y = 2x + 0.1: direction (1, 2), normalized
+u_line = np.array([1.0, 2.0])
+u_line = u_line / np.linalg.norm(u_line)
+
+# line y = x: direction (1, 1), normalized
+u_diag = np.array([1.0, 1.0])
+u_diag = u_diag / np.linalg.norm(u_diag)
+
+# put points into a 2 x n matrix
+P = np.vstack([x, y])
+
+def project_onto_direction(P, u):
+    """
+    Orthogonal projection of points P (2 x n) onto 1D subspace spanned by u (2,).
+    Returns projected points (2 x n).
+    """
+    # scalar coefficients for each point
+    alpha = u @ P          # shape (n,)
+    # projected points = u * alpha
+    return np.outer(u, alpha)
+
+P_x  = project_onto_direction(P, ux)
+P_y  = project_onto_direction(P, uy)
+P_l  = project_onto_direction(P, u_line)
+P_d  = project_onto_direction(P, u_diag)
+
+# ---- plotting ----
+fig, ax = plt.subplots(figsize=(5, 5))
+
+# original points
+ax.scatter(x, y, s=25, color="black", label="Data")
+
+# projection points
+ax.scatter(P_x[0], P_x[1], s=20, color="tab:blue", label="Proj. on $x_1$ axis", alpha=0.2)
+ax.scatter(P_y[0], P_y[1], s=20, color="tab:orange", label="Proj. on $x_2$ axis", alpha=0.2)
+ax.scatter(P_l[0], P_l[1], s=20, color="tab:green", label=r"Proj. on $y=2x+0.1$", alpha=0.2)
+ax.scatter(P_d[0], P_d[1], s=20, color="tab:red", label=r"Proj. on $y=x$", alpha=0.2)
+
+# draw guide lines for the two non-axis directions
+xx = np.linspace(-5, 5, 100)
+ax.plot(xx, 2*xx + 0.1, color="tab:green", alpha=0.4)
+ax.plot(xx, xx,         color="tab:red",   alpha=0.4)
+
+# axes through origin
+ax.axhline(0, color="black", linewidth=1)
+ax.axvline(0, color="black", linewidth=1)
+
+# ax.set_xlim(-5, 5)
+# ax.set_ylim(-5, 5)
+ax.set_xlabel(r"$x_1$")
+ax.set_ylabel(r"$x_2$")
+
+ax.set_aspect("equal", adjustable="box")
+ax.legend(loc="upper left", fontsize=5)
+plt.tight_layout()
+plt.show()
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{python}
+import numpy as np
+import pandas as pd
+
+# ---- define projection directions ----
+ux = np.array([1.0, 0.0])   # x1 axis
+uy = np.array([0.0, 1.0])   # x2 axis
+
+u_line = np.array([1.0, 2.0])
+u_line = u_line / np.linalg.norm(u_line)   # for y = 2x + 0.1
+
+u_diag = np.array([1.0, 1.0])
+u_diag = u_diag / np.linalg.norm(u_diag)   # for y = x
+
+# data points in 2 x n matrix
+P = np.vstack([x, y])
+
+def project_onto_direction(P, u):
+    # orthogonal projection of columns of P onto direction u
+    alpha = u @ P           # (n,)
+    return np.outer(u, alpha)  # 2 x n
+
+# projections
+P_x  = project_onto_direction(P, ux)
+P_y  = project_onto_direction(P, uy)
+P_l  = project_onto_direction(P, u_line)
+P_d  = project_onto_direction(P, u_diag)
+
+# ---- variance calculations ----
+# variance of original data along both coordinates
+var_x1 = np.var(x, ddof=1)
+var_x2 = np.var(y, ddof=1)
+total_variance = var_x1 + var_x2
+
+def explained_variance(P_proj):
+    # sum of variances of x and y components of the projected points
+    var_proj = np.var(P_proj[0], ddof=1) + np.var(P_proj[1], ddof=1)
+    proportion = var_proj / total_variance
+    return var_proj, proportion
+
+var_proj_x, prop_x = explained_variance(P_x)
+var_proj_y, prop_y = explained_variance(P_y)
+var_proj_line, prop_line = explained_variance(P_l)
+var_proj_diag, prop_diag = explained_variance(P_d)
+
+# ---- markdown table ----
+table = f"""
+| Direction                | Variance (explained) | Proportion of total |
+|--------------------------|----------------------|---------------------|
+| Original data (total)    | {total_variance:.4f} | 1.0000              |
+| Projection on $x_1$ axis | {var_proj_x:.4f}     | {prop_x:.4f}        |
+| Projection on $x_2$ axis | {var_proj_y:.4f}     | {prop_y:.4f}        |
+| Projection on $y=2x+0.1$ | {var_proj_line:.4f}  | {prop_line:.4f}     |
+| Projection on $y=x$      | {var_proj_diag:.4f}  | {prop_diag:.4f}     |
+"""
+
+print(table)
+```
+
+:::
+
+::::
+
+
 
 ### Steps
 1. Find principal components (PCs) — linear combinations of original dimensions.  
