@@ -269,7 +269,7 @@
 <li>PCA from 2D to 1D</li>
 <li>Aim to find a ‘direction’ (i.e.&nbsp;a line) that keeps the most information (or variance) between data points in 2D</li>
 </ul>
-<div id="ee39b0d8" class="cell" data-execution_count="1">
+<div id="e44bdbf8" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -283,7 +283,7 @@
 <h2>Which direction is the best?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="4fda6cdf" class="cell" data-execution_count="2">
+<div id="d2acdb22" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -293,18 +293,17 @@
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="1a7e8813" class="cell" data-results="asis" data-execution_count="3">
+<div id="baf60ef8" class="cell" data-results="asis" data-execution_count="3">
 <div class="cell-output cell-output-display cell-output-markdown">
+<div style="font-size: 12px;">
 <table class="caption-top">
 <colgroup>
-<col style="width: 5%">
-<col style="width: 33%">
+<col style="width: 35%">
+<col style="width: 32%">
 <col style="width: 31%">
-<col style="width: 29%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;"></th>
 <th style="text-align: left;">Direction</th>
 <th style="text-align: right;">Variance (explained)</th>
 <th style="text-align: right;">Proportion of total</th>
@@ -312,31 +311,26 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">0</td>
 <td style="text-align: left;">Original data (total)</td>
 <td style="text-align: right;">43.8053</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">1</td>
 <td style="text-align: left;">Projection on <span class="math inline">\(x_1\)</span> axis</td>
 <td style="text-align: right;">8.79708</td>
 <td style="text-align: right;">0.200822</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">2</td>
 <td style="text-align: left;">Projection on <span class="math inline">\(x_2\)</span> axis</td>
 <td style="text-align: right;">35.0083</td>
 <td style="text-align: right;">0.799178</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">3</td>
 <td style="text-align: left;">Projection on <span class="math inline">\(y=2x+0.1\)</span></td>
 <td style="text-align: right;">43.8013</td>
 <td style="text-align: right;">0.999908</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">4</td>
 <td style="text-align: left;">Projection on <span class="math inline">\(y=x\)</span></td>
 <td style="text-align: right;">39.4468</td>
 <td style="text-align: right;">0.900502</td>
@@ -345,23 +339,24 @@
 </table>
 </div>
 </div>
+</div>
 </div></div>
 </section>
-<section id="pca-as-a-sequential-search-for-informative-projections" class="slide level2">
-<h2>PCA as a sequential search for informative projections</h2>
+<section id="pca-automatically-searching-for-informative-directions" class="slide level2">
+<h2>PCA automatically searching for informative directions</h2>
 <ul>
-<li>We’ve found the most informative direction (y=2x+0.1), called the <strong>first principal component (PC)</strong></li>
+<li>PCA automatically searches the most informative direction, called the <strong>first principal component (PC)</strong></li>
 <li>After finding this one, PCA looks for a second PC:
 <ul>
-<li>Also with big spread between data points</li>
-<li>Not overlapping the information already captured by the first direction</li>
+<li>With big spread between data points</li>
+<li>Not overlapping the information already captured by the first PC</li>
 </ul></li>
 </ul>
-<div id="a65a920e" class="cell" data-execution_count="4">
+<div id="a681307c" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="week9_lecture_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="week9_lecture_files/figure-revealjs/cell-5-output-1.png" width="559" height="566"></a></p>
+<p><a href="week9_lecture_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="week9_lecture_files/figure-revealjs/cell-5-output-1.png" width="498" height="470"></a></p>
 </figure>
 </div>
 </div>
@@ -379,10 +374,10 @@
 <section id="different-ways-to-understand-pca" class="slide level2">
 <h2>Different ways to understand PCA</h2>
 <ul>
-<li>Maximum Variance Perspective (our perspective)</li>
-<li>Projection perspective*</li>
-<li>Engenvector Computation and Low-Rank Approximations*</li>
-<li><em>See </em>Chapter 10, Mathematics for Machine Learning*</li>
+<li><p>Maximum variance perspective (we did it!)</p></li>
+<li><p>Projection perspective*</p></li>
+<li><p>Engenvector Computation and Low-Rank Approximations*</p></li>
+<li><p><em>See </em>Chapter 10, Mathematics for Machine Learning*</p></li>
 </ul>
 </section></section>
 <section>
@@ -402,13 +397,11 @@
 <section id="practical-question-how-to-choose-k" class="slide level2">
 <h2>Practical question: how to choose k?</h2>
 <ul>
-<li><p><em>No golden rules; some guidelines</em></p></li>
-<li><p>For visualisation: k = 2 or 3<br>
-</p></li>
-<li><p>Keep components with eigenvalues &gt; 1<br>
-</p></li>
-<li><p>Scree plot (elbow method).</p></li>
-<li><p><em>Eigenvalue</em> of a PC is proportional to variance explained by this PC</p></li>
+<li><em>No golden rules; some guidelines</em></li>
+<li>For visualisation: k = 2 or 3<br>
+</li>
+<li>Keep components with eigenvalues &gt; 1. <em>Eigenvalue</em> of a PC is proportional to variance explained by this PC</li>
+<li>Scree plot (elbow method).</li>
 </ul>
 </section>
 <section id="scree-plot" class="slide level2">
@@ -416,25 +409,29 @@
 <ul>
 <li>In this case, choose k=2.</li>
 </ul>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div style="text-align:center;">
-<img src="L9_images/example_scree_plot_1.jpg" alt="Scree plot 1" style="max-width:90%">
+<img src="L9_images/example_scree_plot_1.jpg" alt="Scree plot 1" style="max-width:40%">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
 
 </div>
 </div>
+</div><div class="column" style="width:50%;">
 <div style="text-align:center;">
-<img src="L9_images/example_scree_plot_2.jpg" alt="Scree plot 2" style="max-width:90%">
+<img src="L9_images/example_scree_plot_2.jpg" alt="Scree plot 2" style="max-width:40%">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
 <pre><code>Rogerson, P.A. (2020) Statistical Methods for Geography: A Student’s Guide, Fifth. Sage, London, pp 242-243</code></pre>
 </div>
 </div>
+</div></div>
 </section>
 <section id="how-many-data-points-are-sufficient-for-pca" class="slide level2">
 <h2>How many data points are sufficient for PCA</h2>
 <ul>
-<li><span style="color:blue">Rule #1</span>: “5-10 times as many subjects as variables”</li>
-<li>e.g.&nbsp;with 10 variables, we need at least 50 or 100 data points</li>
-<li><span style="color:blue">Rule #2</span>: with several hundred observations, PCA are probably reliable.</li>
+<li><p><span style="color:blue">Rule #1</span>: “5-10 times as many subjects as variables”</p></li>
+<li><p>e.g.&nbsp;with 10 variables, we need at least 50 or 100 data points</p></li>
+<li><p><span style="color:blue">Rule #2</span>: with several hundred observations, PCA are probably reliable.</p></li>
 </ul>
 </section>
 <section id="pca-is-not-factor-analysis" class="slide level2">
@@ -444,7 +441,7 @@
 <li><span style="color:blue">FA</span> aims to find hidden factors that underlie or <em>cause</em> the observed variables.</li>
 </ul>
 <div style="text-align:center;">
-<img src="L9_images/PCA_FA.jpg" alt="Wild of Unsupervised Learning" style="max-width:90%">
+<img src="L9_images/PCA_FA.jpg" alt="Wild of Unsupervised Learning" style="max-width:120%">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
 <pre><code>Source: R in Action</code></pre>
 </div>
