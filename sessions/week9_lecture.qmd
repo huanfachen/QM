@@ -250,6 +250,8 @@ plt.show()
 ::: {.column width="50%"}
 
 ```{python}
+#| results: asis
+
 import numpy as np
 import pandas as pd
 
