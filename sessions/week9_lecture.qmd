@@ -48,9 +48,9 @@ Looked at:
 ## Dimensionality
 
 ::: {.incremental}
-- Defition: number of variables or features for each data point
-- *A tabular data of M rows, N numerical columns* has a dimensionality of **N** (not *M*)
-- *A column representing seasons in a year* has a dimensionality of **4**, or 3 (if using one-hot encoding and K-1 dummy variables)
+- Definition: number of variables for each data point
+- A tabular data of *M rows, N numerical columns* has a dimensionality of **N** (not *M*)
+- Note - *A column representing seasons in a year* has a dimensionality of **4**, or **3** (if using one-hot encoding and K-1 dummy variables), rather than **1**
 :::
 
 ## Dimensionality
@@ -65,12 +65,7 @@ Looked at:
     alt="Canon EOR R8" 
     style="width:450px">
   <div style="font-size:0.8em; color: #555; margin-top:4px;">
-    Image credit: 
-    <a href="https://www.photofacts.nl/fotografie/rubriek/reviews/review-canon-eos-r8-full-frame-mirrorless-camera.asp"
-       target="_blank"
-       rel="noopener noreferrer">
-      photofacts
-    </a>
+    Image credit: www.photofacts.nl
   </div>
 </div>
 
