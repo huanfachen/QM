@@ -113,7 +113,7 @@ We expect that all variabels in df_school_reduced are of numerical type. It is s
 
 ```{python}
 print("Numeric columns: {}".format(df_school_reduced.select_dtypes(include='number').columns.tolist()))
-print("Non-numeric columns: {}".format(df_school_reduced.select_dtypes(exclude='number').columns.tolist())))
+print("Non-numeric columns: {}".format(df_school_reduced.select_dtypes(exclude='number').columns.tolist()))
 ```
 
 To convert all columns to numeric, we can use the following code. Note that numeric columns are not affected.
