@@ -272,9 +272,9 @@
 <h2>Illustration</h2>
 <ul>
 <li>PCA from 2D to 1D</li>
-<li>Aim to find a 1D space (i.e.&nbsp;a line) that keeps the most information (or variance) between data points in 2D</li>
+<li>Aim to find a ‘direction’ (i.e.&nbsp;a line) that keeps the most information (or variance) between data points in 2D</li>
 </ul>
-<div id="b7f70858" class="cell" data-execution_count="1">
+<div id="82a923a0" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -284,11 +284,11 @@
 </div>
 </div>
 </section>
-<section id="which-projection-is-the-best" class="slide level2">
-<h2>Which projection is the best?</h2>
+<section id="which-direction-is-the-best" class="slide level2">
+<h2>Which direction is the best?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="389fdaa1" class="cell" data-execution_count="2">
+<div id="79cb6af0" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -298,7 +298,7 @@
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="e7644f26" class="cell" data-execution_count="3">
+<div id="3e7d4587" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 | Direction                | Variance (explained) | Proportion of total |
@@ -312,175 +312,126 @@
 </div>
 </div>
 </div></div>
-<h3 id="steps">Steps</h3>
-<ol type="1">
-<li>Find principal components (PCs) — linear combinations of original dimensions.<br>
-</li>
-<li>Rank PCs by variance (importance).<br>
-</li>
-<li>Keep first <em>k</em> PCs (selection rules).<br>
-</li>
-<li>Project data into new space.</li>
-</ol>
-<p><strong>Example Table</strong>:<br>
-| Component | Combination | Variance | |———–|——————————|———-| | 1st (e) | 0.5a + 0.6b + 0.1c + 0.3d | 0.8 | | 2nd (f) | 0.6a + 0.1b + 0.2c + 0.5d | 0.1 |</p>
 </section>
-<section class="slide level2">
+<section id="pca-as-a-sequential-search-for-informative-projections" class="slide level2">
+<h2>PCA as a sequential search for informative projections</h2>
+<ul>
+<li>We’ve found the most informative direction (y=2x+0.1), called the <strong>first principal component (PC)</strong></li>
+<li>After finding this one, PCA looks for a second PC:
+<ul>
+<li>Also with big spread between data points</li>
+<li>Not overlapping the information already captured by the first direction</li>
+</ul></li>
+</ul>
+<p>****python code****</p>
+</section>
+<section id="generalisation-to-m-dimensional-data-points" class="slide level2">
+<h2>Generalisation to M-dimensional data points</h2>
+<ul>
+<li>PCA method will find M (or fewer than M) directions (or PCs) as a new space to represent the data points</li>
+<li>These PCs are ranked by variance explained, i.e.&nbsp;#1 PC with maximal variance</li>
+<li>These PCs are uncorrelated with each other</li>
+<li>We can retain the first <em>k</em> PCs for analysis (usually k=2,3)</li>
+</ul>
+</section>
+<section id="different-ways-to-understand-pca" class="slide level2">
+<h2>Different ways to understand PCA</h2>
+<ul>
+<li>Maximum Variance Perspective (our perspective)</li>
+<li>Projection perspective*</li>
+<li>Engenvector Computation and Low-Rank Approximations*</li>
+<li><em>See </em>Chapter 10, Mathematics for Machine Learning*</li>
+</ul>
+</section></section>
+<section>
+<section id="pca-in-practice" class="title-slide slide level1 center">
+<h1>PCA in practice</h1>
 
-<p><img data-src="L9_images/Picture2.jpg" alt="Variance projection"><br>
-PCA searches for uncorrelated dimensions capturing most variance.</p>
-<p>Eigenvalues ∝ variance explained on a PC.</p>
 </section>
-<section class="slide level2">
+<section id="illustrating-steps-of-pca" class="slide level2">
+<h2>Illustrating steps of PCA</h2>
+<div style="text-align:center;">
+<img src="L9_images/example_PCA_steps.jpg" alt="Wild of Unsupervised Learning" style="max-width:90%">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Image credit: Mathematics for Machine Learning</code></pre>
+</div>
+</div>
+</section>
+<section id="practical-question-how-to-choose-k" class="slide level2">
+<h2>Practical question: how to choose k?</h2>
+<ul>
+<li><p><em>No golden rules; some guidelines</em></p></li>
+<li><p>For visualisation: k = 2 or 3<br>
+</p></li>
+<li><p>Keep components with eigenvalues &gt; 1<br>
+</p></li>
+<li><p>Scree plot (elbow method).</p></li>
+<li><p><em>Eigenvalue</em> of a PC is proportional to variance explained by this PC</p></li>
+</ul>
+</section>
+<section id="scree-plot" class="slide level2">
+<h2>Scree plot</h2>
+<ul>
+<li>In this case, choose k=2.</li>
+</ul>
+<div style="text-align:center;">
+<img src="L9_images/example_scree_plot_1.jpg" alt="Scree plot 1" style="max-width:90%">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
 
-<h3 id="choosing-number-of-factors">Choosing Number of Factors</h3>
-<ol type="1">
-<li>For visualisation: k = 2 or 3.<br>
-</li>
-<li>Keep components with eigenvalues &gt; 1.<br>
-</li>
-<li>Scree plot (elbow method).</li>
-</ol>
+</div>
+</div>
+<div style="text-align:center;">
+<img src="L9_images/example_scree_plot_2.jpg" alt="Scree plot 2" style="max-width:90%">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Rogerson, P.A. (2020) Statistical Methods for Geography: A Student’s Guide, Fifth. Sage, London, pp 242-243</code></pre>
+</div>
+</div>
 </section>
-<section class="slide level2">
-
-<h3 id="pca-summary">PCA Summary</h3>
+<section id="how-many-data-points-are-sufficient-for-pca" class="slide level2">
+<h2>How many data points are sufficient for PCA</h2>
 <ul>
-<li>Requires data standardisation.<br>
-</li>
-<li>Produces uncorrelated features (no multicollinearity).<br>
-</li>
-<li>Common uses: visualisation, clustering check.<br>
-</li>
-<li>Outputs usable for classification/regression.</li>
+<li><span style="color:blue">Rule #1</span>: “5-10 times as many subjects as variables”</li>
+<li>e.g.&nbsp;with 10 variables, we need at least 50 or 100 data points</li>
+<li><span style="color:blue">Rule #2</span>: with several hundred observations, PCA are probably reliable.</li>
 </ul>
 </section>
-<section id="pca-limitations" class="slide level2">
-<h2>PCA Limitations</h2>
-<p><img data-src="L9_images/Picture2.jpg" alt="Swiss roll dataset"><br>
-Does not work well for ‘twisted’ datasets — use non-linear DR such as manifold learning.</p>
-</section>
-<section id="manifold-learning" class="slide level2">
-<h2>Manifold Learning</h2>
-<p>Assumes high-dimensional data lies near a lower-dimensional manifold.</p>
-<h3 id="pca-vs-manifold-learning">PCA vs Manifold Learning</h3>
-<p>Manifold learning can reveal clusters PCA misses.</p>
-</section>
-<section id="kernel-pca-kpca" class="slide level2">
-<h2>Kernel PCA (kPCA)</h2>
-<p>Uses kernel trick: map data to higher dimension, then apply PCA.<br>
-Finds patterns missed by linear DR.</p>
-<p><img data-src="L9_images/Picture7.jpg" alt="kPCA example"><br>
-Hyperparameters: kernel type (linear, rbf, sigmoid), gamma for rbf.</p>
-</section>
-<section id="locally-linear-embedding-lle" class="slide level2">
-<h2>Locally Linear Embedding (LLE)</h2>
-<p>Preserves local relations instead of global variance.<br>
-Steps: 1. Measure relation to neighbours (weighted sum).<br>
-2. Find low-dim representation preserving these local relations.</p>
-<p>Example: Unrolling the Swiss roll while keeping neighbour relations.<br>
-<img data-src="L9_images/Picture2.jpg" alt="Swiss roll LLE"></p>
-</section>
-<section id="comparison-table" class="slide level2">
-<h2>Comparison Table</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 10%">
-<col style="width: 30%">
-<col style="width: 31%">
-<col style="width: 28%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>PCA</th>
-<th>kPCA</th>
-<th>LLE</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Principle</td>
-<td>Preserve global variance</td>
-<td>Preserve global variance</td>
-<td>Preserve local relations</td>
-</tr>
-<tr class="even">
-<td>Meaning</td>
-<td>Linear combination of features</td>
-<td>Unclear</td>
-<td>Unclear</td>
-</tr>
-<tr class="odd">
-<td>Flexibility</td>
-<td>Deterministic</td>
-<td>Adjustable via hyperparameters</td>
-<td>Adjustable via n_neighbors</td>
-</tr>
-<tr class="even">
-<td>Input use</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td>Cost</td>
-<td>Low</td>
-<td>Low</td>
-<td>Low</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="dr-suggestions" class="slide level2">
-<h2>DR Suggestions</h2>
-<p>First choice: PCA baseline.<br>
-If PCA is slow or ineffective, use kPCA or LLE.</p>
-</section>
-<section id="when-not-to-use-dr" class="slide level2">
-<h2>When NOT to Use DR</h2>
+<section id="pca-is-not-factor-analysis" class="slide level2">
+<h2><em>PCA</em> is not <em>factor analysis</em></h2>
 <ul>
-<li>Fewer than ~20 features (manageable by most ML methods).<br>
-</li>
-<li>DR leads to information loss.<br>
-</li>
-<li>Some DR outputs are hard to interpret.</li>
+<li><span style="color:blue">PCA</span> aims to find PCs that are combination of original variables for maximising the variance explained.</li>
+<li><span style="color:blue">FA</span> aims to find hidden factors that underlie or <em>cause</em> the observed variables.</li>
 </ul>
+<div style="text-align:center;">
+<img src="L9_images/PCA_FA.jpg" alt="Wild of Unsupervised Learning" style="max-width:90%">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Source: R in Action</code></pre>
+</div>
+</div>
 </section>
-<section id="other-dr-methods" class="slide level2">
-<h2>Other DR Methods</h2>
-<ul>
-<li><strong>t-SNE</strong>: preserves similar instances close, pushes apart dissimilar ones.<br>
-</li>
-<li><strong>MDS</strong>: preserves instance distances.<br>
-</li>
-<li><strong>ISOMAP</strong>: preserves geodesic distances.</li>
-</ul>
-</section>
-<section id="summary" class="slide level2">
-<h2>Summary</h2>
-<ul>
-<li>DR combats curse of dimensionality.<br>
-</li>
-<li>PCA: linear, interpretable, baseline choice.<br>
-</li>
-<li>kPCA &amp; LLE: non-linear, powerful but less interpretable.</li>
-</ul>
+<section id="example-of-pca-on-mnist-digit-recognition" class="slide level2">
+<h2>Example of PCA on MNIST digit recognition</h2>
+<p>60,000 exmaples of handwritten digits 0~9. Each digit is an 28*28 image or 784 pixels (dimensions)</p>
+<div style="text-align:center;">
+<img src="L9_images/MNIST_example.jpg" alt="MNIST" style="max-width:90%">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Source: Chapter 10, Mathematics for Machine Learning</code></pre>
+</div>
+</div>
 </section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways</h2>
 <ul>
-<li>Can use Pearson/Spearman correlation to measure the relationship between two variables.</li>
-<li>Choose Pearson or Spearman correlation metric based on the dataset and interpret them correctly.</li>
-<li>To measure difference <span style="color:blue">between two groups</span>, use <span style="color:red">(paired) samples t-test</span></li>
-<li>To measure difference between <span style="color:blue">multiple groups</span>, use <span style="color:red">one-way ANOVA</span></li>
-<li>To measure difference <span style="color:blue">across two factors</span>, use <span style="color:red">two-way ANOVA</span></li>
+<li>High-dimensional data often lies in lower-dimensional space, thus dimensionality reduction is possible.</li>
+<li>PCA is a linear dimensionality reduction method.</li>
+<li>PCA aims to maximise variance explained by PCs.</li>
+<li>The output PCs are ranked by the explained variance, and these PCs are not correlated.</li>
+<li>PCA results can be used for visualisation or as input to regression/clustering.</li>
 </ul>
 </section>
 <section id="practical" class="slide level2">
 <h2>Practical</h2>
 <ul>
-<li>The practical will focus on calculating and interpreting correlation metrics.<br>
+<li>The practical will focus on calculating and interpreting PCA.<br>
 </li>
 <li>Have you questions prepared!</li>
 </ul>
