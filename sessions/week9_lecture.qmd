@@ -75,14 +75,16 @@ Looked at:
 
 Canon EOR R8 has a maximum resolution of 6000 * 4000 pixels for JPEG/HEIF, where every pixel corresponds to three colour channels (RGB). What is the dimensionality of an image from EOR R8?
 
-:::
-
-::::
-
 - **A.** 6000 * 4000
 - **B.** 6000 * 4000 * 3
 - **C.** 1
 - **D.** 6000 * 4000 * 3 * 2
+
+:::
+
+::::
+
+
 
 ## High-dimensional data (*Curse of dimensionality*)
 
@@ -234,8 +236,9 @@ ax.plot(xx, xx,         color="tab:red",   alpha=0.4)
 ax.axhline(0, color="black", linewidth=1)
 ax.axvline(0, color="black", linewidth=1)
 
-# ax.set_xlim(-5, 5)
-# ax.set_ylim(-5, 5)
+ax.set_xlim(-12, 12)
+ax.set_ylim(-12, 12)
+
 ax.set_xlabel(r"$x_1$")
 ax.set_ylabel(r"$x_2$")
 
@@ -327,7 +330,7 @@ df = pd.DataFrame(data)
 md_table = df.to_markdown(index=False)
 
 html = f"""
-<div style="font-size: 12px;">
+<div style="font-size: 15px;">
 {md_table}
 </div>
 """
@@ -341,10 +344,17 @@ display(Markdown(html))
 
 ## PCA automatically searching for informative directions
 
+:::: {.columns}
+
+::: {.column width="50%"}
 - PCA automatically searches the most informative direction, called the **first principal component (PC)**
 - After finding this one, PCA looks for a second PC:
-  - With big spread between data points
   - Not overlapping the information already captured by the first PC
+  - With as spread as possible between data points
+  - Not needed when #1 PC explains 100% variance
+:::
+
+::: {.column width="50%"}
 
 ```{python}
 import numpy as np
@@ -412,6 +422,9 @@ m2, b2 = line_params_from_point_and_dir(x_mean, y_mean, pc2[0], pc2[1])
 # ------------------------------------------------------------------
 fig, ax = plt.subplots(figsize=(5, 5))
 
+ax.set_xlim(-12, 12)
+ax.set_ylim(-12, 12)
+
 # Scatter of original points
 ax.scatter(X[:, 0], X[:, 1], alpha=0.5, label="Data points")
 
@@ -455,13 +468,16 @@ plt.tight_layout()
 plt.show()
 
 ```
+:::
+
+::::
 
 ## Generalisation to M-dimensional data points
 
 - PCA method will find M (or fewer than M) directions (or PCs) as a new space to represent the data points
-- These PCs are ranked by variance explained, i.e. #1 PC with maximal variance
+- These PCs are ranked by variance explained, i.e. #1 PC with maximal variance, followed by #2, #3
 - These PCs are uncorrelated with each other
-- We can retain the first *k* PCs for analysis (usually k=2,3)
+- We will choose the first *k* PCs for analysis, usually $k$=2,3
 
 ## Different ways to understand PCA
 
@@ -490,14 +506,12 @@ plt.show()
 
 ## Scree plot
 
-- In this case, choose k=2.
-
 :::: {.columns}
 
 ::: {.column width="50%"}
 
 <div style="text-align:center;">
-  <img src="L9_images/example_scree_plot_1.jpg" alt="Scree plot 1" style="max-width:40%">
+  <img src="L9_images/example_scree_plot_1.jpg" alt="Scree plot 1" style="max-width:70%">
   <div style="font-size:0.8em; color: #555; margin-top:4px;">
   </div>
 </div>
@@ -507,11 +521,12 @@ plt.show()
 ::: {.column width="50%"}
 
 <div style="text-align:center;">
-  <img src="L9_images/example_scree_plot_2.jpg" alt="Scree plot 2" style="max-width:40%">
+  <img src="L9_images/example_scree_plot_2.jpg" alt="Scree plot 2" style="max-width:70%">
   <div style="font-size:0.8em; color: #555; margin-top:4px;">
     Rogerson, P.A. (2020) Statistical Methods for Geography: A Student’s Guide, Fifth. Sage, London, pp 242-243
   </div>
 </div>
+In this case, choose k=2.
 
 :::
 
@@ -519,10 +534,12 @@ plt.show()
 
 ## How many data points are sufficient for PCA
 
-- [Rule #1]{style="color:blue"}: "5-10 times as many subjects as variables"
-- e.g. with 10 variables, we need at least 50 or 100 data points
+::: {.incremental}
 
+- [Rule #1]{style="color:blue"}: "5-10 times as many subjects as variables"
+  - e.g. with 10 variables, we need at least 50 or 100 data points
 - [Rule #2]{style="color:blue"}: with several hundred observations, PCA are probably reliable.
+:::
 
 ## *PCA* is not *factor analysis*
 
