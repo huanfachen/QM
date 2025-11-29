@@ -130,7 +130,7 @@ Canon EOR R8 has a maximum resolution of 6000 * 4000 pixels for JPEG/HEIF, where
 ## Illustration
 
 - PCA from 2D to 1D
-- Aim to find a 1D space (i.e. a line) that keeps the most information (or variance) between data points in 2D
+- Aim to find a 'direction' (i.e. a line) that keeps the most information (or variance) between data points in 2D
 
 ```{python}
 import numpy as np
@@ -172,7 +172,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Which projection is the best?
+## Which direction is the best?
 
 :::: {.columns}
 
@@ -317,134 +317,104 @@ print(table)
 
 ::::
 
+## PCA as a sequential search for informative projections
 
+- We've found the most informative direction (y=2x+0.1), called the **first principal component (PC)**
+- After finding this one, PCA looks for a second PC:
+  - Also with big spread between data points
+  - Not overlapping the information already captured by the first direction
 
-### Steps
-1. Find principal components (PCs) — linear combinations of original dimensions.  
-2. Rank PCs by variance (importance).  
-3. Keep first *k* PCs (selection rules).  
-4. Project data into new space.
+****python code****
 
-**Example Table**:  
-| Component | Combination                  | Variance |
-|-----------|------------------------------|----------|
-| 1st (e)   | 0.5a + 0.6b + 0.1c + 0.3d     | 0.8      |
-| 2nd (f)   | 0.6a + 0.1b + 0.2c + 0.5d     | 0.1      |
+## Generalisation to M-dimensional data points
 
----
+- PCA method will find M (or fewer than M) directions (or PCs) as a new space to represent the data points
+- These PCs are ranked by variance explained, i.e. #1 PC with maximal variance
+- These PCs are uncorrelated with each other
+- We can retain the first *k* PCs for analysis (usually k=2,3)
 
-![Variance projection](L9_images/Picture2.jpg)  
-PCA searches for uncorrelated dimensions capturing most variance.
+## Different ways to understand PCA
 
-Eigenvalues ∝ variance explained on a PC.
+- Maximum Variance Perspective (our perspective)
+- Projection perspective*
+- Engenvector Computation and Low-Rank Approximations*
+- *See *Chapter 10, Mathematics for Machine Learning*
 
----
+# PCA in practice
 
-### Choosing Number of Factors
+## Illustrating steps of PCA
+<div style="text-align:center;">
+  <img src="L9_images/example_PCA_steps.jpg" alt="Wild of Unsupervised Learning" style="max-width:90%">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+    Image credit: Mathematics for Machine Learning
+  </div>
+</div>
 
-1. For visualisation: k = 2 or 3.  
-2. Keep components with eigenvalues > 1.  
-3. Scree plot (elbow method).
+## Practical question: how to choose k?
 
----
+- *No golden rules; some guidelines*
+- For visualisation: k = 2 or 3  
+- Keep components with eigenvalues > 1  
+- Scree plot (elbow method).
 
-### PCA Summary
+- *Eigenvalue* of a PC is proportional to variance explained by this PC
 
-- Requires data standardisation.  
-- Produces uncorrelated features (no multicollinearity).  
-- Common uses: visualisation, clustering check.  
-- Outputs usable for classification/regression.
+## Scree plot
 
----
+- In this case, choose k=2.
 
-## PCA Limitations
+<div style="text-align:center;">
+  <img src="L9_images/example_scree_plot_1.jpg" alt="Scree plot 1" style="max-width:90%">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+  </div>
+</div>
 
-![Swiss roll dataset](L9_images/Picture2.jpg)  
-Does not work well for 'twisted' datasets — use non-linear DR such as manifold learning.
+<div style="text-align:center;">
+  <img src="L9_images/example_scree_plot_2.jpg" alt="Scree plot 2" style="max-width:90%">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+    Rogerson, P.A. (2020) Statistical Methods for Geography: A Student’s Guide, Fifth. Sage, London, pp 242-243
+  </div>
+</div>
 
----
+## How many data points are sufficient for PCA
 
-## Manifold Learning
+- [Rule #1]{style="color:blue"}: "5-10 times as many subjects as variables"
+- e.g. with 10 variables, we need at least 50 or 100 data points
+- [Rule #2]{style="color:blue"}: with several hundred observations, PCA are probably reliable.
 
-Assumes high-dimensional data lies near a lower-dimensional manifold.
+## *PCA* is not *factor analysis*
 
-### PCA vs Manifold Learning
-Manifold learning can reveal clusters PCA misses.
+- [PCA]{style="color:blue"} aims to find PCs that are combination of original variables for maximising the variance explained.
+- [FA]{style="color:blue"} aims to find hidden factors that underlie or *cause* the observed variables.
 
----
+<div style="text-align:center;">
+  <img src="L9_images/PCA_FA.jpg" alt="Wild of Unsupervised Learning" style="max-width:90%">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+    Source: R in Action
+  </div>
+</div>
 
-## Kernel PCA (kPCA)
+## Example of PCA on MNIST digit recognition
 
-Uses kernel trick: map data to higher dimension, then apply PCA.  
-Finds patterns missed by linear DR.
+60,000 exmaples of handwritten digits 0~9.
+Each digit is an 28*28 image or 784 pixels (dimensions)
 
-![kPCA example](L9_images/Picture7.jpg)  
-Hyperparameters: kernel type (linear, rbf, sigmoid), gamma for rbf.
-
----
-
-## Locally Linear Embedding (LLE)
-
-Preserves local relations instead of global variance.  
-Steps:
-1. Measure relation to neighbours (weighted sum).  
-2. Find low-dim representation preserving these local relations.
-
-Example: Unrolling the Swiss roll while keeping neighbour relations.  
-![Swiss roll LLE](L9_images/Picture2.jpg)
-
----
-
-## Comparison Table
-
-|            | PCA                               | kPCA                               | LLE                             |
-|------------|-----------------------------------|------------------------------------|---------------------------------|
-| Principle  | Preserve global variance          | Preserve global variance           | Preserve local relations        |
-| Meaning    | Linear combination of features    | Unclear                            | Unclear                         |
-| Flexibility| Deterministic                     | Adjustable via hyperparameters     | Adjustable via n_neighbors      |
-| Input use  | Yes                               | Yes                                | Yes                             |
-| Cost       | Low                               | Low                                | Low                             |---
-
-## DR Suggestions
-
-First choice: PCA baseline.  
-If PCA is slow or ineffective, use kPCA or LLE.
-
----
-
-## When NOT to Use DR
-
-- Fewer than ~20 features (manageable by most ML methods).  
-- DR leads to information loss.  
-- Some DR outputs are hard to interpret.
-
----
-
-## Other DR Methods
-
-- **t-SNE**: preserves similar instances close, pushes apart dissimilar ones.  
-- **MDS**: preserves instance distances.  
-- **ISOMAP**: preserves geodesic distances.
-
----
-
-## Summary
-
-- DR combats curse of dimensionality.  
-- PCA: linear, interpretable, baseline choice.  
-- kPCA & LLE: non-linear, powerful but less interpretable.
-
----
+<div style="text-align:center;">
+  <img src="L9_images/MNIST_example.jpg" alt="MNIST" style="max-width:90%">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+    Source: Chapter 10, Mathematics for Machine Learning
+  </div>
+</div>
 
 ## Key takeaways 
 
-- Can use Pearson/Spearman correlation to measure the relationship between two variables.
-- Choose Pearson or Spearman correlation metric based on the dataset and interpret them correctly.
-- To measure difference [between two groups]{style="color:blue"}, use [(paired) samples t-test]{style="color:red"}
-- To measure difference between [multiple groups]{style="color:blue"}, use [one-way ANOVA]{style="color:red"}
-- To measure difference [across two factors]{style="color:blue"}, use [two-way ANOVA]{style="color:red"}
+- High-dimensional data often lies in lower-dimensional space, thus dimensionality reduction is possible.
+- PCA is a linear dimensionality reduction method.
+- PCA aims to maximise variance explained by PCs.
+- The output PCs are ranked by the explained variance, and these PCs are not correlated.
+- PCA results can be used for visualisation or as input to regression/clustering.
 
 ## Practical 
-- The practical will focus on calculating and interpreting correlation metrics.  
+- The practical will focus on calculating and interpreting PCA.  
 - Have you questions prepared! 
 
