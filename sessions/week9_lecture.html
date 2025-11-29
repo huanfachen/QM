@@ -7,7 +7,10 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-68c8bffd90dad8f2b55c52d7b6410dc0.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-68c8bffd90dad8f2b55c52d7b6410dc0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Huanfa Chen">
@@ -159,9 +162,8 @@
 <li class="fragment">Can use Python or R to run OLS and LME</li>
 </ul>
 </section>
-<section>
-<section id="this-week" class="title-slide slide level1 center">
-<h1>This week</h1>
+<section id="this-week" class="slide level2">
+<h2>This week</h2>
 <div style="text-align:center;">
 <img src="L9_images/Wild_unsupervised_learning.png" alt="Wild of Unsupervised Learning" style="max-width:90%">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
@@ -176,7 +178,7 @@
 <li>Understand the principle of Principal Component Analysis</li>
 <li>Can apply PCA to school datasets or other datasets</li>
 </ul>
-</section></section>
+</section>
 <section>
 <section id="high-dimensional-data" class="title-slide slide level1 center">
 <h1>High-dimensional data</h1>
@@ -197,7 +199,12 @@
 <div style="text-align:center;">
 <img src="https://www.photofacts.nl/fotografie/foto/nh/nando_eosr6mk2.jpg" alt="Canon EOR R8" style="width:450px">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
-<pre><code>Image credit: [photofacts](https://www.photofacts.nl/fotografie/rubriek/reviews/review-canon-eos-r8-full-frame-mirrorless-camera.asp)</code></pre>
+<pre><code>Image credit: 
+&lt;a href="https://www.photofacts.nl/fotografie/rubriek/reviews/review-canon-eos-r8-full-frame-mirrorless-camera.asp"
+   target="_blank"
+   rel="noopener noreferrer"&gt;
+  photofacts
+&lt;/a&gt;</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
@@ -261,8 +268,50 @@
 </ul>
 <p><em>Pearson, Karl. “LIII. On lines and planes of closest fit to systems of points in space.” The London, Edinburgh, and Dublin philosophical magazine and journal of science 2.11 (1901): 559-572.</em></p>
 </section>
-<section id="principal-component-analysis-pca" class="slide level2">
-<h2>Principal Component Analysis (PCA)</h2>
+<section id="illustration" class="slide level2">
+<h2>Illustration</h2>
+<ul>
+<li>PCA from 2D to 1D</li>
+<li>Aim to find a 1D space (i.e.&nbsp;a line) that keeps the most information (or variance) between data points in 2D</li>
+</ul>
+<div id="b7f70858" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="week9_lecture_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="week9_lecture_files/figure-revealjs/cell-2-output-1.png" width="375" height="360"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="which-projection-is-the-best" class="slide level2">
+<h2>Which projection is the best?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div id="389fdaa1" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="week9_lecture_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="week9_lecture_files/figure-revealjs/cell-3-output-1.png" width="391" height="470"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div id="e7644f26" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+| Direction                | Variance (explained) | Proportion of total |
+|--------------------------|----------------------|---------------------|
+| Original data (total)    | 43.8053 | 1.0000              |
+| Projection on $x_1$ axis | 8.7971     | 0.2008        |
+| Projection on $x_2$ axis | 35.0083     | 0.7992        |
+| Projection on $y=2x+0.1$ | 43.8013  | 0.9999     |
+| Projection on $y=x$      | 39.4468  | 0.9005     |
+</code></pre>
+</div>
+</div>
+</div></div>
 <h3 id="steps">Steps</h3>
 <ol type="1">
 <li>Find principal components (PCs) — linear combinations of original dimensions.<br>
@@ -824,6 +873,38 @@ If PCA is slow or ineffective, use kPCA or LLE.</p>
         }
       });
       </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>
