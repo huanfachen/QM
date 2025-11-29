@@ -204,13 +204,13 @@
 </div>
 </div><div class="column" style="width:50%;">
 <p>Canon EOR R8 has a maximum resolution of 6000 * 4000 pixels for JPEG/HEIF, where every pixel corresponds to three colour channels (RGB). What is the dimensionality of an image from EOR R8?</p>
-</div></div>
 <ul>
 <li><strong>A.</strong> 6000 * 4000</li>
 <li><strong>B.</strong> 6000 * 4000 * 3</li>
 <li><strong>C.</strong> 1</li>
 <li><strong>D.</strong> 6000 * 4000 * 3 * 2</li>
 </ul>
+</div></div>
 </section>
 <section id="high-dimensional-data-curse-of-dimensionality" class="slide level2">
 <h2>High-dimensional data (<em>Curse of dimensionality</em>)</h2>
@@ -269,7 +269,7 @@
 <li>PCA from 2D to 1D</li>
 <li>Aim to find a ‘direction’ (i.e.&nbsp;a line) that keeps the most information (or variance) between data points in 2D</li>
 </ul>
-<div id="e44bdbf8" class="cell" data-execution_count="1">
+<div id="c79ff2e7" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -283,19 +283,19 @@
 <h2>Which direction is the best?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="d2acdb22" class="cell" data-execution_count="2">
+<div id="ed38074e" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="week9_lecture_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="week9_lecture_files/figure-revealjs/cell-3-output-1.png" width="391" height="470"></a></p>
+<p><a href="week9_lecture_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="week9_lecture_files/figure-revealjs/cell-3-output-1.png" width="471" height="456"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="baf60ef8" class="cell" data-results="asis" data-execution_count="3">
+<div id="47951e2e" class="cell" data-results="asis" data-execution_count="3">
 <div class="cell-output cell-output-display cell-output-markdown">
-<div style="font-size: 12px;">
+<div style="font-size: 15px;">
 <table class="caption-top">
 <colgroup>
 <col style="width: 35%">
@@ -344,31 +344,36 @@
 </section>
 <section id="pca-automatically-searching-for-informative-directions" class="slide level2">
 <h2>PCA automatically searching for informative directions</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
 <li>PCA automatically searches the most informative direction, called the <strong>first principal component (PC)</strong></li>
 <li>After finding this one, PCA looks for a second PC:
 <ul>
-<li>With big spread between data points</li>
 <li>Not overlapping the information already captured by the first PC</li>
+<li>With as spread as possible between data points</li>
+<li>Not needed when #1 PC explains 100% variance</li>
 </ul></li>
 </ul>
-<div id="a681307c" class="cell" data-execution_count="4">
+</div><div class="column" style="width:50%;">
+<div id="7326ce6a" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="week9_lecture_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="week9_lecture_files/figure-revealjs/cell-5-output-1.png" width="498" height="470"></a></p>
+<p><a href="week9_lecture_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="week9_lecture_files/figure-revealjs/cell-5-output-1.png" width="499" height="383"></a></p>
 </figure>
 </div>
 </div>
 </div>
+</div></div>
 </section>
 <section id="generalisation-to-m-dimensional-data-points" class="slide level2">
 <h2>Generalisation to M-dimensional data points</h2>
 <ul>
 <li>PCA method will find M (or fewer than M) directions (or PCs) as a new space to represent the data points</li>
-<li>These PCs are ranked by variance explained, i.e.&nbsp;#1 PC with maximal variance</li>
+<li>These PCs are ranked by variance explained, i.e.&nbsp;#1 PC with maximal variance, followed by #2, #3</li>
 <li>These PCs are uncorrelated with each other</li>
-<li>We can retain the first <em>k</em> PCs for analysis (usually k=2,3)</li>
+<li>We will choose the first <em>k</em> PCs for analysis, usually <span class="math inline">\(k\)</span>=2,3</li>
 </ul>
 </section>
 <section id="different-ways-to-understand-pca" class="slide level2">
@@ -406,32 +411,32 @@
 </section>
 <section id="scree-plot" class="slide level2">
 <h2>Scree plot</h2>
-<ul>
-<li>In this case, choose k=2.</li>
-</ul>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div style="text-align:center;">
-<img src="L9_images/example_scree_plot_1.jpg" alt="Scree plot 1" style="max-width:40%">
+<img src="L9_images/example_scree_plot_1.jpg" alt="Scree plot 1" style="max-width:70%">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
 
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <div style="text-align:center;">
-<img src="L9_images/example_scree_plot_2.jpg" alt="Scree plot 2" style="max-width:40%">
+<img src="L9_images/example_scree_plot_2.jpg" alt="Scree plot 2" style="max-width:70%">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
 <pre><code>Rogerson, P.A. (2020) Statistical Methods for Geography: A Student’s Guide, Fifth. Sage, London, pp 242-243</code></pre>
 </div>
 </div>
+<p>In this case, choose k=2.</p>
 </div></div>
 </section>
 <section id="how-many-data-points-are-sufficient-for-pca" class="slide level2">
 <h2>How many data points are sufficient for PCA</h2>
 <ul>
-<li><p><span style="color:blue">Rule #1</span>: “5-10 times as many subjects as variables”</p></li>
-<li><p>e.g.&nbsp;with 10 variables, we need at least 50 or 100 data points</p></li>
-<li><p><span style="color:blue">Rule #2</span>: with several hundred observations, PCA are probably reliable.</p></li>
+<li class="fragment"><span style="color:blue">Rule #1</span>: “5-10 times as many subjects as variables”
+<ul>
+<li class="fragment">e.g.&nbsp;with 10 variables, we need at least 50 or 100 data points</li>
+</ul></li>
+<li class="fragment"><span style="color:blue">Rule #2</span>: with several hundred observations, PCA are probably reliable.</li>
 </ul>
 </section>
 <section id="pca-is-not-factor-analysis" class="slide level2">
