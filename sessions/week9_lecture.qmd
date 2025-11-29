@@ -296,18 +296,34 @@ var_proj_y, prop_y = explained_variance(P_y)
 var_proj_line, prop_line = explained_variance(P_l)
 var_proj_diag, prop_diag = explained_variance(P_d)
 
-# ---- markdown table ----
-table = f"""
-| Direction                | Variance (explained) | Proportion of total |
-|--------------------------|----------------------|---------------------|
-| Original data (total)    | {total_variance:.4f} | 1.0000              |
-| Projection on $x_1$ axis | {var_proj_x:.4f}     | {prop_x:.4f}        |
-| Projection on $x_2$ axis | {var_proj_y:.4f}     | {prop_y:.4f}        |
-| Projection on $y=2x+0.1$ | {var_proj_line:.4f}  | {prop_line:.4f}     |
-| Projection on $y=x$      | {var_proj_diag:.4f}  | {prop_diag:.4f}     |
-"""
+# ---- table ----
+data = {
+    "Direction": [
+        "Original data (total)",
+        "Projection on $x_1$ axis",
+        "Projection on $x_2$ axis",
+        "Projection on $y=2x+0.1$",
+        "Projection on $y=x$",
+    ],
+    "Variance (explained)": [
+        total_variance,
+        var_proj_x,
+        var_proj_y,
+        var_proj_line,
+        var_proj_diag,
+    ],
+    "Proportion of total": [
+        1.0,
+        prop_x,
+        prop_y,
+        prop_line,
+        prop_diag,
+    ],
+}
 
-print(table)
+df = pd.DataFrame(data)
+
+display(Markdown(df.to_markdown()))
 ```
 
 :::
