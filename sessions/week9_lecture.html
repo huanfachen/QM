@@ -187,9 +187,9 @@
 <section id="dimensionality" class="slide level2">
 <h2>Dimensionality</h2>
 <ul>
-<li class="fragment">Defition: number of variables or features for each data point</li>
-<li class="fragment"><em>A tabular data of M rows, N numerical columns</em> has a dimensionality of <strong>N</strong> (not <em>M</em>)</li>
-<li class="fragment"><em>A column representing seasons in a year</em> has a dimensionality of <strong>4</strong>, or 3 (if using one-hot encoding and K-1 dummy variables)</li>
+<li class="fragment">Definition: number of variables for each data point</li>
+<li class="fragment">A tabular data of <em>M rows, N numerical columns</em> has a dimensionality of <strong>N</strong> (not <em>M</em>)</li>
+<li class="fragment">Note - <em>A column representing seasons in a year</em> has a dimensionality of <strong>4</strong>, or <strong>3</strong> (if using one-hot encoding and K-1 dummy variables), rather than <strong>1</strong></li>
 </ul>
 </section>
 <section id="dimensionality-1" class="slide level2">
@@ -199,12 +199,7 @@
 <div style="text-align:center;">
 <img src="https://www.photofacts.nl/fotografie/foto/nh/nando_eosr6mk2.jpg" alt="Canon EOR R8" style="width:450px">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
-<pre><code>Image credit: 
-&lt;a href="https://www.photofacts.nl/fotografie/rubriek/reviews/review-canon-eos-r8-full-frame-mirrorless-camera.asp"
-   target="_blank"
-   rel="noopener noreferrer"&gt;
-  photofacts
-&lt;/a&gt;</code></pre>
+<pre><code>Image credit: www.photofacts.nl</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
@@ -274,7 +269,7 @@
 <li>PCA from 2D to 1D</li>
 <li>Aim to find a ‘direction’ (i.e.&nbsp;a line) that keeps the most information (or variance) between data points in 2D</li>
 </ul>
-<div id="82a923a0" class="cell" data-execution_count="1">
+<div id="43f3d0be" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -288,7 +283,7 @@
 <h2>Which direction is the best?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="79cb6af0" class="cell" data-execution_count="2">
+<div id="2e89967f" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -298,7 +293,7 @@
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="3e7d4587" class="cell" data-execution_count="3">
+<div id="b9107678" class="cell" data-results="asis" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 | Direction                | Variance (explained) | Proportion of total |
