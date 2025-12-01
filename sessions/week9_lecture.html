@@ -330,7 +330,7 @@ D. <span class="math display">\[14\]</span></p>
 <li>PCA from 2D to 1D</li>
 <li>Aim to find a ‘direction’ (i.e.&nbsp;a line) that keeps the most information (or variance) between data points in 2D</li>
 </ul>
-<div id="7854f78e" class="cell" data-execution_count="1">
+<div id="8378efb6" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -344,7 +344,7 @@ D. <span class="math display">\[14\]</span></p>
 <h2>Which direction is the best?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="b0c5ec89" class="cell" data-execution_count="2">
+<div id="1aba8b80" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -354,7 +354,7 @@ D. <span class="math display">\[14\]</span></p>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="053623b2" class="cell" data-results="asis" data-execution_count="3">
+<div id="f7ef40f4" class="cell" data-results="asis" data-execution_count="3">
 <div class="cell-output cell-output-display cell-output-markdown">
 <div style="font-size: 15px;">
 <table class="caption-top">
@@ -417,7 +417,7 @@ D. <span class="math display">\[14\]</span></p>
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="40fd1564" class="cell" data-execution_count="4">
+<div id="7c3583a2" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -477,69 +477,58 @@ D. <span class="math display">\[14\]</span></p>
 </section>
 <section id="example-pca-on-performance-disadvantage-attributes-of-school-data" class="slide level2">
 <h2>Example: PCA on performance &amp; disadvantage attributes of school data</h2>
-<div id="dc70a3ff" class="cell" data-execution_count="5">
+<div id="62d01332" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display cell-output-markdown">
+<div style="font-size: 12px;">
 <table class="caption-top">
 <colgroup>
-<col style="width: 2%">
-<col style="width: 13%">
-<col style="width: 83%">
+<col style="width: 14%">
+<col style="width: 85%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;"></th>
 <th style="text-align: left;">Attribute</th>
 <th style="text-align: left;">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">0</td>
 <td style="text-align: left;">PTFSM6CLA1A</td>
 <td style="text-align: left;">Percentage of pupils eligible for Free School Meals in the past six years (FSM6) and/or Children Looked After (CLA1A).</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">1</td>
 <td style="text-align: left;">PTNOTFSM6CLA1A</td>
 <td style="text-align: left;">Percentage of pupils not eligible for FSM6 and not CLA1A.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">2</td>
 <td style="text-align: left;">PNUMEAL</td>
 <td style="text-align: left;">Percentage of pupils whose first language is known or believed to be other than English.</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">3</td>
 <td style="text-align: left;">PNUMFSMEVER</td>
 <td style="text-align: left;">Percentage of pupils who have ever been eligible for Free School Meals in the past six years (FSM6 measure).</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">4</td>
 <td style="text-align: left;">ATT8SCR_FSM6CLA1A</td>
 <td style="text-align: left;">Average Attainment 8 score for pupils eligible for FSM6 and/or CLA1A.</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">5</td>
 <td style="text-align: left;">ATT8SCR_NFSM6CLA1A</td>
 <td style="text-align: left;">Average Attainment 8 score for pupils not eligible for FSM6 and not CLA1A.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">6</td>
 <td style="text-align: left;">ATT8SCR_BOYS</td>
 <td style="text-align: left;">Average Attainment 8 score for male pupils.</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">7</td>
 <td style="text-align: left;">ATT8SCR_GIRLS</td>
 <td style="text-align: left;">Average Attainment 8 score for female pupils.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">8</td>
 <td style="text-align: left;">P8MEA_FSM6CLA1A</td>
 <td style="text-align: left;">Progress 8 measure for disadvantaged pupils (FSM6 and/or CLA1A).</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">9</td>
 <td style="text-align: left;">P8MEA_NFSM6CLA1A</td>
 <td style="text-align: left;">Progress 8 measure for non-disadvantaged pupils.</td>
 </tr>
@@ -547,14 +536,15 @@ D. <span class="math display">\[14\]</span></p>
 </table>
 </div>
 </div>
+</div>
 </section>
 <section id="scree-plot" class="slide level2">
 <h2>Scree plot</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="5d52861e" class="cell" data-execution_count="6">
+<div id="e02635f5" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display cell-output-markdown">
-<div style="font-size: 15px;">
+<div style="font-size: 18px;">
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -620,7 +610,7 @@ D. <span class="math display">\[14\]</span></p>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="9074a4ea" class="cell" data-execution_count="7">
+<div id="5dc36798" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure>

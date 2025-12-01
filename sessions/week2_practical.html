@@ -320,7 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We are going to look at schools performance data in England.</p>
 <p>The data is sourced from gov.uk <a href="https://www.compare-school-performance.service.gov.uk/download-data">here</a> - HOWEVER I have also saved a copy of the relevant dataset to the Github repo (in case the dataset is removed from the website) which you can load directly in the code below. In this notebook we’re using the performance table for academic year 2022/23: ‘Performancetables_130242/2022-2023’.</p>
 <p>If you do want to download the data directly from the gov.uk website then you need to choose the academic year ‘2022 to 2023’, then ‘All of England’, then ‘Key stage 4 results (final)’. Then you’ll want to download the ‘Data in CSV format’ and also ‘Explanation of terminology used in the data files’.</p>
-<div id="778e7520" class="cell" data-execution_count="1">
+<div id="5b2ac59f" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
@@ -341,7 +341,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_23757/1412533053.py:7: DtypeWarning:
+<pre><code>/tmp/ipykernel_23733/1412533053.py:7: DtypeWarning:
 
 Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,147,148,149,150,151,152,177,178,179,180,181,182,183,186,187,188,189,190,191,192,194,195,196,198,199,200,202,203,204,206,207,208,210,211,212,214,215,216,218,219,220,222,223,224,230,233,234,235,236,237,238,239,242,243,244,245,246,247,248,251,252,253,254,255,256,257,266,267,268,269,270,271,272,281,282,283,284,285,286,287,296,297,298,299,300,301,302,311,312,313,314,315,316,317,335,336,337,340,341,342,345,346,347,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403,404,405,406,407,408,409,410) have mixed types. Specify dtype option on import or set low_memory=False.
 </code></pre>
@@ -488,7 +488,7 @@ Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,14
 <section id="describing-the-dataframe" class="level1">
 <h1>Describing the dataframe</h1>
 <p>The <code>pandas</code> library has lots of useful built in functions for analysing dataframes. Let’s start by seeing how much data we have.</p>
-<div id="25415d11" class="cell" data-execution_count="2">
+<div id="9c2550e0" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rows, cols <span class="op">=</span> df.shape</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span>rows<span class="sc">}</span><span class="ss">, Columns: </span><span class="sc">{</span>cols<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -555,7 +555,7 @@ Columns (75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,144,145,146,14
 </tr>
 </tbody>
 </table>
-<div id="89babb2e" class="cell" data-execution_count="3">
+<div id="3807fe87" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>RECTYPE           int64
@@ -570,12 +570,12 @@ dtype: object</code></pre>
 </div>
 </div>
 <p>OK, so we can see that not all the data types are quite as expected. Let’s reformat them to make it easier later.</p>
-<div id="c9c0da92" class="cell" data-execution_count="4">
+<div id="560d502f" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.loc[:, ebaccs_cols] <span class="op">=</span> df.loc[:, ebaccs_cols].<span class="bu">apply</span>(pd.to_numeric, errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'TOTPUPS'</span>] <span class="op">=</span> pd.to_numeric(df[<span class="st">'TOTPUPS'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>).fillna(<span class="dv">0</span>).astype(<span class="st">'int64'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>And we can check again:</p>
-<div id="3facbccf" class="cell" data-execution_count="5">
+<div id="615c82b9" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>RECTYPE           int64
@@ -593,7 +593,7 @@ dtype: object</code></pre>
 <section id="check-how-much-data-is-missing" class="level2">
 <h2 class="anchored" data-anchor-id="check-how-much-data-is-missing">Check how much data is missing</h2>
 <p>Let’s check how much data is missing for each column in the dataframe - this will help us understand the completeness of the data.</p>
-<div id="d83cc94d" class="cell" data-execution_count="6">
+<div id="efa3de8e" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&nbsp;print how much data is missing for each column</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df.isna().mean() <span class="op">*</span> <span class="dv">100</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -609,7 +609,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>It seems suspicious that the school names are missing for some of the entries - let’s check these.</p>
-<div id="4a24d4a5" class="cell" data-execution_count="7">
+<div id="b6a13619" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># return rows where SCHNAME is missing</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df[df[<span class="st">'SCHNAME'</span>].isna()]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
@@ -760,12 +760,12 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>So, these are all record type 4, 5, or 7. Looking back at the metadata I see that record types 4, 5 and 7 refer to aggregated data - i.e.&nbsp;they’re not individual schools! Let’s limit the selection to only individual schools, that is 1-mainstream schools and 2-special schools.</p>
-<div id="d7ca7191" class="cell" data-execution_count="8">
+<div id="6009b126" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># only keep rows where RECTYPE is 1 or 2 </span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">'RECTYPE'</span>].isin([<span class="dv">1</span>, <span class="dv">2</span>])].copy()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now we can check the data dimensions again.</p>
-<div id="633f9c07" class="cell" data-execution_count="9">
+<div id="c7751edc" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>rows, cols <span class="op">=</span> df.shape</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span>rows<span class="sc">}</span><span class="ss">, Columns: </span><span class="sc">{</span>cols<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -775,7 +775,7 @@ dtype: float64</code></pre>
 <section id="summary-statistics" class="level3">
 <h3 class="anchored" data-anchor-id="summary-statistics">Summary statistics</h3>
 <p>We can use the <code>describe</code> function in pandas to easily get the summary statistics for a dataframe.</p>
-<div id="78e5baf9" class="cell" data-execution_count="10">
+<div id="143f2bf7" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>numerical_cols <span class="op">=</span> [<span class="st">'TOTPUPS'</span>, <span class="st">'EBACCAPS'</span>, <span class="st">'EBACCAPS_LO'</span>, <span class="st">'EBACCAPS_MID'</span>, <span class="st">'EBACCAPS_HI'</span>]</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>df[numerical_cols].describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -870,7 +870,7 @@ dtype: float64</code></pre>
 <section id="histograms" class="level2">
 <h2 class="anchored" data-anchor-id="histograms">Histograms</h2>
 <p>Let’s try plotting the Average EBacc APS score per pupil.</p>
-<div id="1954a913" class="cell" data-execution_count="11">
+<div id="0c6449bf" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>n_bins <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -944,7 +944,7 @@ dtype: float64</code></pre>
 </ul>
 <p>One way to consider whether it is normally distributed is to overlay the normal distribution on top.</p>
 <p>We can use the package <code>scipy.stats</code> which has functions for generating probability density functions for common distributions. You can see which common distributions <a href="https://docs.scipy.org/doc/scipy/reference/stats.html">here</a>.</p>
-<div id="001455b9" class="cell" data-execution_count="13">
+<div id="83e4b010" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> sps</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># first let's get the mean and stand deviation </span></span>
@@ -1004,7 +1004,7 @@ dtype: float64</code></pre>
 <li>Skewed data: <em>points systematically deviate above or below the line</em></li>
 </ul>
 <p>We can plot the Q-Q plot in Python. Note that before we Q-Q plot the sample data we will need to normalise it - this accounts for the fact that our data is not centred around 0.</p>
-<div id="8730ce85" class="cell" data-execution_count="14">
+<div id="02863101" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop missing values</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> df[<span class="st">'EBACCAPS'</span>].dropna().values</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">len</span>(data)</span>
@@ -1043,7 +1043,7 @@ dtype: float64</code></pre>
 <section id="whats-causing-the-skew" class="level2">
 <h2 class="anchored" data-anchor-id="whats-causing-the-skew">What’s causing the skew?</h2>
 <p>If you remember above this dataset includes schools of two different types, we have mainstream schools and special schools. ‘special schools’ refers to schools which cater to students with special educational needs. Let’s see what happens when we split our histogram according to the type of school.</p>
-<div id="a0364584" class="cell" data-execution_count="15">
+<div id="9015605d" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram of # plot histogram of EBACCAPS by RECTYPE</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>n_bins <span class="op">=</span> {<span class="dv">1</span>:<span class="dv">40</span>, <span class="dv">2</span>:<span class="dv">20</span>}</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
