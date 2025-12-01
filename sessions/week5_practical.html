@@ -277,7 +277,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>This week is focused on measuring the relationship between two variables using Pearson/Spearman correlation coefficients.</p>
 <p>In the practical, we’re going to explore the correlation between different variables in the school dataset.</p>
-<div id="299a8e32" class="cell" data-execution_count="1">
+<div id="f5f53622" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -295,12 +295,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
 <p>We’re going to use a piece of filtered school data that is kindly provided by Adam. In W6, Adam will describe the source and processing of this dataset in details. For now, we just use this dataset as is.</p>
-<div id="4255cdfe" class="cell" data-execution_count="2">
+<div id="304aae60" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the dataset from Github</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_school <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/huanfachen/QM/refs/heads/main/sessions/L6_data/Performancetables_130242/2022-2023/england_filtered.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Check the shape and columns of this data frame.</p>
-<div id="101a2fcb" class="cell" data-execution_count="3">
+<div id="b807f050" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"df_school has </span><span class="sc">{</span>df_school<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> rows and </span><span class="sc">{</span>df_school<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> columns."</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"First 5 rows:</span><span class="ch">\n</span><span class="st">"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_school.head(<span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -397,7 +397,7 @@ First 5 rows:
 36. <strong>easting</strong>: Ordnance Survey Easting coordinate of school location.<br>
 37. <strong>northing</strong>: Ordnance Survey Northing coordinate of school location.</p>
 <p>To demonstrate, we will focus on 6 columns of this dataset. 1. <strong>LANAME</strong>: local authority name 2. <strong>SCHNAME.x</strong>: school name 3. <strong>ATT8SCR</strong>: Average Attainment 8 score per pupil (0-100) 4. <strong>PERCTOT</strong>: Percentage of total absence 5. <strong>PTFSM6CLA1A</strong>: Percentage of pupils eligible for FSM6 (free school meals at any point in the last six years) and/or CLA1A (proxy for socio-economic disadvantage). CLA1A stands for <em>Children Looked After (for at least one day)</em>, which identifies pupils who have been in the care of a local authority. 6. <strong>PNUMEAL</strong>: Percentage of pupils whose first language is known or believed to be other than English.</p>
-<div id="ab8f79f7" class="cell" data-execution_count="4">
+<div id="cdd06678" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the selected columns</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_school_reduced <span class="op">=</span> df_school[[<span class="st">'LANAME'</span>, <span class="st">'SCHNAME.x'</span>, <span class="st">'ATT8SCR'</span>, <span class="st">'PERCTOT'</span>, <span class="st">'PTFSM6CLA1A'</span>, <span class="st">'PNUMEAL'</span>]]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -423,7 +423,7 @@ First 5 rows:
 <section id="first-question-is-overall-absence-related-to-average-attainment-8-score" class="level2">
 <h2 class="anchored" data-anchor-id="first-question-is-overall-absence-related-to-average-attainment-8-score">First question: is overall absence related to average attainment 8 score?</h2>
 <p>We will start with investigating the relationship between percentage of overall absence and attainment 8 score. The very first step is to make a scatterplot:</p>
-<div id="ed5b8aa8" class="cell" data-execution_count="5">
+<div id="cb853f44" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot between PERCTOT and ATT8SCR</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(df_school_reduced[<span class="st">'PERCTOT'</span>], df_school_reduced[<span class="st">'ATT8SCR'</span>], alpha<span class="op">=</span><span class="fl">0.7</span>, edgecolor<span class="op">=</span><span class="st">'k'</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -448,7 +448,7 @@ First 5 rows:
 </div>
 <p>The plot shows a decreasing trend: the higher total absence, the lower average attainment.</p>
 <p>The records with PERCTOT greater than 25% look like outliers, which are printed as below:</p>
-<div id="6b89f078" class="cell" data-execution_count="6">
+<div id="47651d03" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter rows where PERCTOT &gt; 25</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>filtered_rows <span class="op">=</span> df_school_reduced[df_school_reduced[<span class="st">'PERCTOT'</span>] <span class="op">&gt;</span> <span class="dv">25</span>]</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -469,7 +469,7 @@ First 5 rows:
 </div>
 <p>For now, we are keeping these records because there is no evidence to confirm they are outliers</p>
 <p>As both variables are continous, we can use <strong>Pearson correlation</strong> to measure if they follow a linear relationship. we’ll use the <strong>pearsonr</strong> function the scipy.stats package, as this fucntion calculates the correlation coefficient and p values in one line.</p>
-<div id="154a0c7a" class="cell" data-execution_count="7">
+<div id="93f230d5" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Pearson correlation</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>corr_coef, p_value <span class="op">=</span> pearsonr(df_school_reduced[<span class="st">'PERCTOT'</span>], df_school_reduced[<span class="st">'ATT8SCR'</span>])</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -483,7 +483,7 @@ Two-tailed p-value: nan</code></pre>
 <p>Wait. We got an ERROR - <code>ValueError: array must not contain infs or NaNs</code>. Remember that we discussed <em>NA</em> or <em>NaN</em> values in W1. <em>You might want to remove the above code cell from the notebook, since it doesn’t run.</em></p>
 <p>Unfortunately, the <em>pearsonr</em> function doesn’t handle NaNs internally. We would have to handle NaNs before computing.</p>
 <p>The logic would be: 1. Retain the rows with no NaN in <em>PERCTOT</em> and <em>ATT8SCR</em>: <code>~np.isnan(df_school_reduced['PERCTOT']) &amp; ~np.isnan(df_school_reduced['ATT8SCR'])</code> returns a list of <strong>mask</strong>, which is <em>True</em> when no NaN values are in <em>PERCTOT</em> and <em>ATT8SCR</em>. 2. Calculate the Pearson correlation between <em>PERCTOT</em> and <em>ATT8SCR</em> in these rows.</p>
-<div id="7a6bb936" class="cell" data-execution_count="8">
+<div id="3027c8cb" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows with NaNs in either column</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> <span class="op">~</span>np.isnan(df_school_reduced[<span class="st">'PERCTOT'</span>]) <span class="op">&amp;</span> <span class="op">~</span>np.isnan(df_school_reduced[<span class="st">'ATT8SCR'</span>])</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -514,7 +514,7 @@ Two-tailed p-value:0.00</code></pre>
 <h2 class="anchored" data-anchor-id="second-attempt-using-spearman-correlation">Second attempt: using Spearman correlation</h2>
 <p>Can we apply Spearman correlation to these two variables? Definitely - Spearman correlation is applicable to continuous variables.</p>
 <p>Following a similar procedure:</p>
-<div id="12b0efa6" class="cell" data-execution_count="9">
+<div id="3ac931a8" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop rows with NaNs in either column</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> <span class="op">~</span>np.isnan(df_school_reduced[<span class="st">'PERCTOT'</span>]) <span class="op">&amp;</span> <span class="op">~</span>np.isnan(df_school_reduced[<span class="st">'ATT8SCR'</span>])</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -542,7 +542,7 @@ Two-tailed p-value:0.00</code></pre>
 <p>The df_school_reduced dataframe contains four continous variables, and there are 6 possible pairs of variables.</p>
 <p>Is it possible to compute and visualise the correlation of all pairs in one line?</p>
 <p>The solution is to create and plot a correlation matrix, using <em>pandas</em>.</p>
-<div id="8cb9725d" class="cell" data-execution_count="10">
+<div id="0cd39dc6" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation matrix</span></span>
@@ -575,7 +575,7 @@ Two-tailed p-value:0.00</code></pre>
 <p>Interestingly, in the code above, we didn’t deal with the NaN values. The reason is that, using <code>DataFrame.corr()</code>, Pearson, Kendall, and Spearman correlation are currently computed using pairwise complete observations. In other words, this function deals with incomplete observations internally.</p>
 <p>A limitation of the code above is that it doesn’t calculate the p-value for each correlation. To calculate both correlation coefficients and p values in a batch, we can use a new package called <strong>pingouin</strong>.</p>
 <p>If you want to try out the code below, you would need to install pingouin using <code>pip install pingouin</code> on a terminal or <code>!pip install pingouin</code> in a Python notebook.</p>
-<div id="cefbd531" class="cell" data-execution_count="11">
+<div id="8313559e" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># !pip install pingouin</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pingouin <span class="im">as</span> pg</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -604,7 +604,7 @@ Two-tailed p-value:0.00</code></pre>
 </section>
 <section id="moving-to-anova---testing-difference-in-lads" class="level2">
 <h2 class="anchored" data-anchor-id="moving-to-anova---testing-difference-in-lads">Moving to ANOVA - testing difference in LADs</h2>
-<div id="bcc54817" class="cell" data-execution_count="12">
+<div id="8cd46f56" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter dataframe</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="op">=</span> df_school_reduced[df_school_reduced[<span class="st">'LANAME'</span>].isin([<span class="st">'Camden'</span>, <span class="st">'Westminster'</span>, <span class="st">'Islington'</span>])]</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -628,7 +628,7 @@ Two-tailed p-value:0.00</code></pre>
 </div>
 <p>The KDE plots of ATT8SCR for Camden, Westminster, and Islington overlap considerably, which indicates similar score distributions.</p>
 <p>We will use ANOVA to formally test if they are different.</p>
-<div id="c4c886d3" class="cell" data-execution_count="13">
+<div id="ae7e347f" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit ANOVA model</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------------</span></span>
@@ -708,7 +708,7 @@ Variances appear homogeneous.
 <li>The QQ plot of residuals shows that the residuals follow a normal distribution and there are no obvious outliers.</li>
 </ul>
 <p>To visualise the distribution of F-statistic and the p-value, we can use the following plot:</p>
-<div id="e8b9b091" class="cell" data-execution_count="14">
+<div id="da43847e" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract F statistic, p-value, and degrees of freedom from ANOVA table</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>F_stat <span class="op">=</span> anova_table[<span class="st">'F'</span>].iloc[<span class="dv">0</span>]</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>p_value <span class="op">=</span> anova_table[<span class="st">'PR(&gt;F)'</span>].iloc[<span class="dv">0</span>]</span>
@@ -751,7 +751,7 @@ Variances appear homogeneous.
 </div>
 </div>
 <p>We can also use <em>pingouin</em> to conduct ANOVA between <em>LANAME</em> and <em>ATT8SCR</em>. The grammar is much more concise than <em>statsmodels</em>.</p>
-<div id="11fa6a04" class="cell" data-execution_count="15">
+<div id="320dfa09" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One-way ANOVA using Pingouin</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>anova_results <span class="op">=</span> pg.anova(dv<span class="op">=</span><span class="st">'ATT8SCR'</span>, between<span class="op">=</span><span class="st">'LANAME'</span>, data<span class="op">=</span>df_filtered, detailed<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
