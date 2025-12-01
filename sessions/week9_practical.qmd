@@ -25,7 +25,7 @@ pd.set_option('display.max_columns', None)
 
 ## Dataset
 
-We're going to use a piece of filtered school data that has been used in W5 workshop (on correlations).
+We're going to use the filtered school data that has been used in previous practicals.
 
 ```{python}
 # read in the dataset from Github
@@ -91,7 +91,7 @@ As the focus is to explore the performance and disadvantage ratio of schools, we
 9. **P8MEA_FSM6CLA1A** – Progress 8 measure for disadvantaged pupils (FSM6 and/or CLA1A).  
 10. **P8MEA_NFSM6CLA1A** – Progress 8 measure for non-disadvantaged pupils.
 
-Please note - we don't use the count variables (e.g. NORB and NORG), as the count variables are affected by the pupil size of each school. We also remove variables that are redundant due to perfect correlation with those retained, such as PNUMENGFL, which is equal to 1-PNUMEAL.
+Please note - we remove the count variables (e.g. NORB and NORG), as the count variables are affected by the pupil size of each school. We also remove variables that are redundant due to perfect correlation with those retained, such as PNUMENGFL, which is equal to 1-PNUMEAL.
 
 ```{python}
 # Extract the selected columns
