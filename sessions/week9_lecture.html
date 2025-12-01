@@ -269,7 +269,7 @@
 <li>PCA from 2D to 1D</li>
 <li>Aim to find a ‘direction’ (i.e.&nbsp;a line) that keeps the most information (or variance) between data points in 2D</li>
 </ul>
-<div id="2e42b146" class="cell" data-execution_count="1">
+<div id="98a429c5" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -283,7 +283,7 @@
 <h2>Which direction is the best?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="d1080377" class="cell" data-execution_count="2">
+<div id="925af332" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -293,7 +293,7 @@
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="ea3343b9" class="cell" data-results="asis" data-execution_count="3">
+<div id="6f90b1b3" class="cell" data-results="asis" data-execution_count="3">
 <div class="cell-output cell-output-display cell-output-markdown">
 <div style="font-size: 15px;">
 <table class="caption-top">
@@ -356,7 +356,7 @@
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="3e91a017" class="cell" data-execution_count="4">
+<div id="a7b19c72" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -402,8 +402,8 @@
 </div>
 </div>
 </section>
-<section id="practical-question-how-to-choose-k" class="slide level2">
-<h2>Practical question: how to choose k?</h2>
+<section id="q-how-to-choose-k" class="slide level2">
+<h2>Q: how to choose k?</h2>
 <ul>
 <li><em>No golden rules; some guidelines</em></li>
 </ul>
@@ -414,52 +414,66 @@
 <li>Scree plot (elbow method): use the point where the bend happens, where the curve changes from <em>steep</em> to <em>flat</em></li>
 </ol>
 </section>
+<section id="exmaple-pca-on-performance-disadvantage-attributes-of-school-data" class="slide level2">
+<h2>Exmaple: PCA on performance &amp; disadvantage attributes of school data</h2>
+<div id="26369224" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<pre><code>'|    | Attribute          | Description                                                                                                            |\n|---:|:-------------------|:-----------------------------------------------------------------------------------------------------------------------|\n|  0 | PTFSM6CLA1A        | Percentage of pupils eligible for Free School Meals in the past six years (FSM6) and/or Children Looked After (CLA1A). |\n|  1 | PTNOTFSM6CLA1A     | Percentage of pupils not eligible for FSM6 and not CLA1A.                                                              |\n|  2 | PNUMEAL            | Percentage of pupils whose first language is known or believed to be other than English.                               |\n|  3 | PNUMFSMEVER        | Percentage of pupils who have ever been eligible for Free School Meals in the past six years (FSM6 measure).           |\n|  4 | ATT8SCR_FSM6CLA1A  | Average Attainment 8 score for pupils eligible for FSM6 and/or CLA1A.                                                  |\n|  5 | ATT8SCR_NFSM6CLA1A | Average Attainment 8 score for pupils not eligible for FSM6 and not CLA1A.                                             |\n|  6 | ATT8SCR_BOYS       | Average Attainment 8 score for male pupils.                                                                            |\n|  7 | ATT8SCR_GIRLS      | Average Attainment 8 score for female pupils.                                                                          |\n|  8 | P8MEA_FSM6CLA1A    | Progress 8 measure for disadvantaged pupils (FSM6 and/or CLA1A).                                                       |\n|  9 | P8MEA_NFSM6CLA1A   | Progress 8 measure for non-disadvantaged pupils.                                                                       |'</code></pre>
+</div>
+</div>
+</section>
 <section id="scree-plot" class="slide level2">
 <h2>Scree plot</h2>
-<div id="3e68ec49" class="cell" data-execution_count="5">
+<div id="d691a566" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-stdout">
-<pre><code>Table of explained variance
-   n_pc  explained_var  cum_var
-0     1          0.610    0.610
-1     2          0.255    0.865
-2     3          0.053    0.918
-3     4          0.038    0.955
-4     5          0.028    0.983
-5     6          0.007    0.990
-6     7          0.005    0.994
-7     8          0.005    0.999
-8     9          0.001    1.000
-9    10          0.000    1.000
-Chosen k based on turning-point elbow detection: 3</code></pre>
+<pre><code>|   n_pc |   explained_var |   cum_var |
+|-------:|----------------:|----------:|
+|      1 |     0.610268    |  0.610268 |
+|      2 |     0.254502    |  0.864771 |
+|      3 |     0.0528413   |  0.917612 |
+|      4 |     0.037728    |  0.95534  |
+|      5 |     0.027608    |  0.982948 |
+|      6 |     0.00663277  |  0.989581 |
+|      7 |     0.00483694  |  0.994418 |
+|      8 |     0.00453447  |  0.998952 |
+|      9 |     0.00104571  |  0.999998 |
+|     10 |     2.17529e-06 |  1        |</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="week9_lecture_files/figure-revealjs/cell-6-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week9_lecture_files/figure-revealjs/cell-6-output-2.png" width="663" height="449"></a></p>
+<p><a href="week9_lecture_files/figure-revealjs/cell-7-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week9_lecture_files/figure-revealjs/cell-7-output-2.png" width="663" height="376"></a></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="scree-plot-1" class="slide level2">
-<h2>Scree plot</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div style="text-align:center;">
-<img src="L9_images/example_scree_plot_1.jpg" alt="Scree plot 1" style="max-width:70%">
-<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<!-- ## Scree plot
 
-</div>
-</div>
-</div><div class="column" style="width:50%;">
+:::: {.columns}
+
+::: {.column width="50%"}
+
 <div style="text-align:center;">
-<img src="L9_images/example_scree_plot_2.jpg" alt="Scree plot 2" style="max-width:70%">
-<div style="font-size:0.8em; color: #555; margin-top:4px;">
-<pre><code>Rogerson, P.A. (2020) Statistical Methods for Geography: A Student’s Guide, Fifth. Sage, London, pp 242-243</code></pre>
+  <img src="L9_images/example_scree_plot_1.jpg" alt="Scree plot 1" style="max-width:70%">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+  </div>
 </div>
+
+:::
+
+::: {.column width="50%"}
+
+<div style="text-align:center;">
+  <img src="L9_images/example_scree_plot_2.jpg" alt="Scree plot 2" style="max-width:70%">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+    Rogerson, P.A. (2020) Statistical Methods for Geography: A Student’s Guide, Fifth. Sage, London, pp 242-243
+  </div>
 </div>
-<p>In this case, choose k=2.</p>
-</div></div>
+In this case, choose k=2.
+
+:::
+
+:::: -->
 </section>
 <section id="how-many-data-points-are-sufficient-for-pca" class="slide level2">
 <h2>How many data points are sufficient for PCA</h2>
