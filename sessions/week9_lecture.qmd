@@ -498,12 +498,47 @@ plt.show()
   </div>
 </div>
 
-## Practical question: how to choose k?
+## Q: how to choose k?
 
 - *No golden rules; some guidelines*
 1. For visualisation: k = 2 or 3  
 2. Keep components with eigenvalues > 1. *Eigenvalue* of a PC is proportional to variance explained by this PC
 3. Scree plot (elbow method): use the point where the bend happens, where the curve changes from *steep* to *flat*
+
+## Exmaple: PCA on performance & disadvantage attributes of school data
+
+```{python}
+import pandas as pd
+from IPython.display import display
+
+items = [
+    ("PTFSM6CLA1A",
+     "Percentage of pupils eligible for Free School Meals in the past six years (FSM6) and/or Children Looked After (CLA1A)."),
+    ("PTNOTFSM6CLA1A",
+     "Percentage of pupils not eligible for FSM6 and not CLA1A."),
+    ("PNUMEAL",
+     "Percentage of pupils whose first language is known or believed to be other than English."),
+    ("PNUMFSMEVER",
+     "Percentage of pupils who have ever been eligible for Free School Meals in the past six years (FSM6 measure)."),
+    ("ATT8SCR_FSM6CLA1A",
+     "Average Attainment 8 score for pupils eligible for FSM6 and/or CLA1A."),
+    ("ATT8SCR_NFSM6CLA1A",
+     "Average Attainment 8 score for pupils not eligible for FSM6 and not CLA1A."),
+    ("ATT8SCR_BOYS",
+     "Average Attainment 8 score for male pupils."),
+    ("ATT8SCR_GIRLS",
+     "Average Attainment 8 score for female pupils."),
+    ("P8MEA_FSM6CLA1A",
+     "Progress 8 measure for disadvantaged pupils (FSM6 and/or CLA1A)."),
+    ("P8MEA_NFSM6CLA1A",
+     "Progress 8 measure for non-disadvantaged pupils."),
+]
+
+# Create DataFrame
+df_attributes = pd.DataFrame(items, columns=["Attribute", "Description"])
+
+display(df_attributes.to_markdown(index=True))
+```
 
 ## Scree plot
 
@@ -567,8 +602,16 @@ df_explained_var = pd.DataFrame({
     "cum_var": np.cumsum(explained_var)
 })
 
-print("Table of explained variance")
-print(df_explained_var.round(3))
+# # print("Table of explained variance")
+# md_table = df_explained_var.to_markdown(index=False)
+
+# html = f"""
+# <div style="font-size: 15px;">
+# {md_table}
+# </div>
+# """
+
+print(df_explained_var.to_markdown(index=False))
 
 # --- Elbow detection using "turning point" (discrete second derivative) ---
 y = explained_var
@@ -582,10 +625,10 @@ else:
     turning_idx = np.argmax(np.abs(ddy))
     k = turning_idx + 2      # convert to 1-based PC index
 
-print(f"Chosen k based on turning-point elbow detection: {k}")
+# print(f"Chosen k based on turning-point elbow detection: {k}")
 
 # --- Visualise elbow on Scree plot ---
-plt.figure(figsize=(8, 5))
+plt.figure(figsize=(8, 4))
 plt.plot(pcs, explained_var, marker='o', label="Explained Variance Ratio")
 plt.scatter(
     k, explained_var[k - 1],
@@ -601,7 +644,7 @@ plt.legend()
 plt.show()
 ```
 
-## Scree plot
+<!-- ## Scree plot
 
 :::: {.columns}
 
@@ -627,7 +670,7 @@ In this case, choose k=2.
 
 :::
 
-::::
+:::: -->
 
 ## How many data points are sufficient for PCA
 
