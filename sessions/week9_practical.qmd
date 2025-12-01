@@ -261,7 +261,7 @@ df_explained_var = pd.DataFrame({
 print("Table of explained variance")
 print(df_explained_var.round(3))
 
-# Scree plot (Explained Variance ratio)
+# Scree plot (Explained variance ratio)
 plt.figure(figsize=(8, 5))
 pcs = np.arange(1, num_components + 1)
 plt.plot(pcs, explained_var, marker='o')
@@ -296,7 +296,7 @@ else:
 
 print(f"Chosen k based on turning-point elbow detection: {k}")
 
-# (Optional) visualize elbow on Scree plot
+# visualise elbow on Scree plot
 plt.figure(figsize=(8, 5))
 plt.plot(pcs, explained_var, marker='o', label="Explained Variance Ratio")
 plt.scatter(k, explained_var[k-1], color='red', s=80, zorder=5,

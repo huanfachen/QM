@@ -53,7 +53,7 @@ Looked at:
 - Note - *A column representing seasons in a year* has a dimensionality of **4**, or **3** (if using one-hot encoding and K-1 dummy variables), rather than **1**
 :::
 
-## Dimensionality
+## Dimensionality Quiz
 
 :::: {.columns}
 
@@ -84,7 +84,27 @@ Canon EOR R8 has a maximum resolution of 6000 * 4000 pixels for JPEG/HEIF, where
 
 ::::
 
+## Dimensionality Quiz
 
+**Question**
+
+You are given the following dataset (with 1000 rows and 3 columns)
+
+|   | x1   | x2   | month |
+|---|------|------|-------|
+| 0 | 1.2  | 4.5  | Jan   |
+| 1 | 3.4  | 2.2  | Feb   |
+| 2 | -0.5 | 3.3  | Mar   |
+| 3 | 2.1  | -1.1 | Apr   |
+| 4 | 0.0  | 0.7  | May   |
+| ... | ...  | ...  | ...   |
+
+**What is the dimensionality of the feature space for this dataset after one-hot encoding of the $$\text{month}$$ column (with one category dropped)?**
+
+A. $$2$$  
+B. $$11$$  
+C. $$13$$  
+D. $$14$$  
 
 ## High-dimensional data (*Curse of dimensionality*)
 
@@ -486,7 +506,7 @@ plt.show()
 2. Projection perspective*
 3. Engenvector Computation and Low-Rank Approximations*
 
-- *See *Chapter 10, Mathematics for Machine Learning*
+- See *Chapter 10, Mathematics for Machine Learning*
 
 # PCA in practice
 
@@ -505,11 +525,11 @@ plt.show()
 2. Keep components with eigenvalues > 1. *Eigenvalue* of a PC is proportional to variance explained by this PC
 3. Scree plot (elbow method): use the point where the bend happens, where the curve changes from *steep* to *flat*
 
-## Exmaple: PCA on performance & disadvantage attributes of school data
+## Example: PCA on performance & disadvantage attributes of school data
 
 ```{python}
 import pandas as pd
-from IPython.display import display
+from IPython.display import display, Markdown
 
 items = [
     ("PTFSM6CLA1A",
@@ -537,10 +557,14 @@ items = [
 # Create DataFrame
 df_attributes = pd.DataFrame(items, columns=["Attribute", "Description"])
 
-display(df_attributes.to_markdown(index=True))
+display(Markdown(df_attributes.to_markdown(index=True)))
 ```
 
 ## Scree plot
+
+:::: {.columns}
+
+::: {.column width="50%"}
 
 ```{python}
 # --- Imports ---
@@ -611,8 +635,17 @@ df_explained_var = pd.DataFrame({
 # </div>
 # """
 
-print(df_explained_var.to_markdown(index=False))
+display(Markdown(df_explained_var.to_markdown(index=True)))
 
+# print(df_explained_var.to_markdown(index=False))
+```
+
+
+:::
+
+::: {.column width="50%"}
+
+```{python}
 # --- Elbow detection using "turning point" (discrete second derivative) ---
 y = explained_var
 pcs = np.arange(1, num_components + 1)
@@ -643,34 +676,9 @@ plt.grid(True, linestyle='--', alpha=0.5)
 plt.legend()
 plt.show()
 ```
-
-<!-- ## Scree plot
-
-:::: {.columns}
-
-::: {.column width="50%"}
-
-<div style="text-align:center;">
-  <img src="L9_images/example_scree_plot_1.jpg" alt="Scree plot 1" style="max-width:70%">
-  <div style="font-size:0.8em; color: #555; margin-top:4px;">
-  </div>
-</div>
-
 :::
 
-::: {.column width="50%"}
-
-<div style="text-align:center;">
-  <img src="L9_images/example_scree_plot_2.jpg" alt="Scree plot 2" style="max-width:70%">
-  <div style="font-size:0.8em; color: #555; margin-top:4px;">
-    Rogerson, P.A. (2020) Statistical Methods for Geography: A Student’s Guide, Fifth. Sage, London, pp 242-243
-  </div>
-</div>
-In this case, choose k=2.
-
-:::
-
-:::: -->
+::::
 
 ## How many data points are sufficient for PCA
 
@@ -679,6 +687,9 @@ In this case, choose k=2.
 - [Rule #1]{style="color:blue"}: "5-10 times as many subjects as variables"
   - e.g. with 10 variables, we need at least 50 or 100 data points
 - [Rule #2]{style="color:blue"}: with several hundred observations, PCA are probably reliable.
+
+- Reference: R in Action, by Robert I Kabacoff
+- [Discussion on StackExchange](https://stats.stackexchange.com/questions/45820/minimum-sample-size-for-pca-or-fa-when-the-main-goal-is-to-estimate-only-few-com)
 :::
 
 ## *PCA* is not *factor analysis*
