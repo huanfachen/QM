@@ -567,7 +567,7 @@ items = [
 # Create DataFrame
 df_attributes = pd.DataFrame(items, columns=["Attribute", "Description"])
 
-md_table = df.df_attributes(index=False)
+md_table = df_attributes.to_markdown(index=False)
 
 html = f"""
 <div style="font-size: 12px;">
@@ -651,7 +651,7 @@ df_explained_var = pd.DataFrame({
 md_table = df_explained_var.round(3).to_markdown(index=False)
 
 html = f"""
-<div style="font-size: 15px;">
+<div style="font-size: 18px;">
 {md_table}
 </div>
 """
