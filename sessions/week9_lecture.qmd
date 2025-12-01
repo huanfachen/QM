@@ -86,7 +86,9 @@ Canon EOR R8 has a maximum resolution of 6000 * 4000 pixels for JPEG/HEIF, where
 
 ## Dimensionality Quiz
 
-**Question**
+:::: {.columns}
+
+::: {.column width="50%"}
 
 You are given the following dataset (with 1000 rows and 3 columns)
 
@@ -99,12 +101,20 @@ You are given the following dataset (with 1000 rows and 3 columns)
 | 4 | 0.0  | 0.7  | May   |
 | ... | ...  | ...  | ...   |
 
+:::
+
+::: {.column width="50%"}
+
+:::
+
 **What is the dimensionality of the feature space for this dataset after one-hot encoding of the $$\text{month}$$ column (with one category dropped)?**
 
 A. $$2$$  
 B. $$11$$  
 C. $$13$$  
 D. $$14$$  
+
+::::
 
 ## High-dimensional data (*Curse of dimensionality*)
 
@@ -627,15 +637,15 @@ df_explained_var = pd.DataFrame({
 })
 
 # # print("Table of explained variance")
-# md_table = df_explained_var.to_markdown(index=False)
+md_table = df_explained_var.round(3).to_markdown(index=False)
 
-# html = f"""
-# <div style="font-size: 15px;">
-# {md_table}
-# </div>
-# """
+html = f"""
+<div style="font-size: 15px;">
+{md_table}
+</div>
+"""
 
-display(Markdown(df_explained_var.to_markdown(index=True)))
+display(Markdown(html))
 
 # print(df_explained_var.to_markdown(index=False))
 ```
@@ -661,7 +671,7 @@ else:
 # print(f"Chosen k based on turning-point elbow detection: {k}")
 
 # --- Visualise elbow on Scree plot ---
-plt.figure(figsize=(8, 4))
+plt.figure(figsize=(6, 4))
 plt.plot(pcs, explained_var, marker='o', label="Explained Variance Ratio")
 plt.scatter(
     k, explained_var[k - 1],
