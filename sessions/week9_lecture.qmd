@@ -567,7 +567,18 @@ items = [
 # Create DataFrame
 df_attributes = pd.DataFrame(items, columns=["Attribute", "Description"])
 
-display(Markdown(df_attributes.to_markdown(index=True)))
+md_table = df.df_attributes(index=False)
+
+html = f"""
+<div style="font-size: 12px;">
+{md_table}
+</div>
+"""
+
+display(Markdown(html))
+
+
+# display(Markdown(df_attributes.to_markdown(index=True)))
 ```
 
 ## Scree plot
