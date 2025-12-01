@@ -192,8 +192,8 @@
 <li class="fragment">Note - <em>A column representing seasons in a year</em> has a dimensionality of <strong>4</strong>, or <strong>3</strong> (if using one-hot encoding and K-1 dummy variables), rather than <strong>1</strong></li>
 </ul>
 </section>
-<section id="dimensionality-1" class="slide level2">
-<h2>Dimensionality</h2>
+<section id="dimensionality-quiz" class="slide level2">
+<h2>Dimensionality Quiz</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div style="text-align:center;">
@@ -211,6 +211,64 @@
 <li><strong>D.</strong> 6000 * 4000 * 3 * 2</li>
 </ul>
 </div></div>
+</section>
+<section id="dimensionality-quiz-1" class="slide level2">
+<h2>Dimensionality Quiz</h2>
+<p><strong>Question</strong></p>
+<p>You are given the following dataset (with 1000 rows and 3 columns)</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th>x1</th>
+<th>x2</th>
+<th>month</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>1.2</td>
+<td>4.5</td>
+<td>Jan</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>3.4</td>
+<td>2.2</td>
+<td>Feb</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>-0.5</td>
+<td>3.3</td>
+<td>Mar</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>2.1</td>
+<td>-1.1</td>
+<td>Apr</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>0.0</td>
+<td>0.7</td>
+<td>May</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What is the dimensionality of the feature space for this dataset after one-hot encoding of the <span class="math display">\[\text{month}\]</span> column (with one category dropped)?</strong></p>
+<p>A. <span class="math display">\[2\]</span><br>
+B. <span class="math display">\[11\]</span><br>
+C. <span class="math display">\[13\]</span><br>
+D. <span class="math display">\[14\]</span></p>
 </section>
 <section id="high-dimensional-data-curse-of-dimensionality" class="slide level2">
 <h2>High-dimensional data (<em>Curse of dimensionality</em>)</h2>
@@ -269,7 +327,7 @@
 <li>PCA from 2D to 1D</li>
 <li>Aim to find a ‘direction’ (i.e.&nbsp;a line) that keeps the most information (or variance) between data points in 2D</li>
 </ul>
-<div id="98a429c5" class="cell" data-execution_count="1">
+<div id="daded1ce" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -283,7 +341,7 @@
 <h2>Which direction is the best?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="925af332" class="cell" data-execution_count="2">
+<div id="ea84bb20" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -293,7 +351,7 @@
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="6f90b1b3" class="cell" data-results="asis" data-execution_count="3">
+<div id="e2023ec8" class="cell" data-results="asis" data-execution_count="3">
 <div class="cell-output cell-output-display cell-output-markdown">
 <div style="font-size: 15px;">
 <table class="caption-top">
@@ -356,7 +414,7 @@
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="a7b19c72" class="cell" data-execution_count="4">
+<div id="78b6166b" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -385,7 +443,7 @@
 <li>Engenvector Computation and Low-Rank Approximations*</li>
 </ol>
 <ul>
-<li><em>See </em>Chapter 10, Mathematics for Machine Learning*</li>
+<li>See <em>Chapter 10, Mathematics for Machine Learning</em></li>
 </ul>
 </section></section>
 <section>
@@ -414,75 +472,181 @@
 <li>Scree plot (elbow method): use the point where the bend happens, where the curve changes from <em>steep</em> to <em>flat</em></li>
 </ol>
 </section>
-<section id="exmaple-pca-on-performance-disadvantage-attributes-of-school-data" class="slide level2">
-<h2>Exmaple: PCA on performance &amp; disadvantage attributes of school data</h2>
-<div id="26369224" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display">
-<pre><code>'|    | Attribute          | Description                                                                                                            |\n|---:|:-------------------|:-----------------------------------------------------------------------------------------------------------------------|\n|  0 | PTFSM6CLA1A        | Percentage of pupils eligible for Free School Meals in the past six years (FSM6) and/or Children Looked After (CLA1A). |\n|  1 | PTNOTFSM6CLA1A     | Percentage of pupils not eligible for FSM6 and not CLA1A.                                                              |\n|  2 | PNUMEAL            | Percentage of pupils whose first language is known or believed to be other than English.                               |\n|  3 | PNUMFSMEVER        | Percentage of pupils who have ever been eligible for Free School Meals in the past six years (FSM6 measure).           |\n|  4 | ATT8SCR_FSM6CLA1A  | Average Attainment 8 score for pupils eligible for FSM6 and/or CLA1A.                                                  |\n|  5 | ATT8SCR_NFSM6CLA1A | Average Attainment 8 score for pupils not eligible for FSM6 and not CLA1A.                                             |\n|  6 | ATT8SCR_BOYS       | Average Attainment 8 score for male pupils.                                                                            |\n|  7 | ATT8SCR_GIRLS      | Average Attainment 8 score for female pupils.                                                                          |\n|  8 | P8MEA_FSM6CLA1A    | Progress 8 measure for disadvantaged pupils (FSM6 and/or CLA1A).                                                       |\n|  9 | P8MEA_NFSM6CLA1A   | Progress 8 measure for non-disadvantaged pupils.                                                                       |'</code></pre>
+<section id="example-pca-on-performance-disadvantage-attributes-of-school-data" class="slide level2">
+<h2>Example: PCA on performance &amp; disadvantage attributes of school data</h2>
+<div id="675d24ad" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display cell-output-markdown">
+<table class="caption-top">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 13%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;"></th>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">PTFSM6CLA1A</td>
+<td style="text-align: left;">Percentage of pupils eligible for Free School Meals in the past six years (FSM6) and/or Children Looked After (CLA1A).</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">PTNOTFSM6CLA1A</td>
+<td style="text-align: left;">Percentage of pupils not eligible for FSM6 and not CLA1A.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">PNUMEAL</td>
+<td style="text-align: left;">Percentage of pupils whose first language is known or believed to be other than English.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">PNUMFSMEVER</td>
+<td style="text-align: left;">Percentage of pupils who have ever been eligible for Free School Meals in the past six years (FSM6 measure).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">ATT8SCR_FSM6CLA1A</td>
+<td style="text-align: left;">Average Attainment 8 score for pupils eligible for FSM6 and/or CLA1A.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">ATT8SCR_NFSM6CLA1A</td>
+<td style="text-align: left;">Average Attainment 8 score for pupils not eligible for FSM6 and not CLA1A.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">ATT8SCR_BOYS</td>
+<td style="text-align: left;">Average Attainment 8 score for male pupils.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">ATT8SCR_GIRLS</td>
+<td style="text-align: left;">Average Attainment 8 score for female pupils.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">P8MEA_FSM6CLA1A</td>
+<td style="text-align: left;">Progress 8 measure for disadvantaged pupils (FSM6 and/or CLA1A).</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">P8MEA_NFSM6CLA1A</td>
+<td style="text-align: left;">Progress 8 measure for non-disadvantaged pupils.</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </section>
 <section id="scree-plot" class="slide level2">
 <h2>Scree plot</h2>
-<div id="d691a566" class="cell" data-execution_count="6">
-<div class="cell-output cell-output-stdout">
-<pre><code>|   n_pc |   explained_var |   cum_var |
-|-------:|----------------:|----------:|
-|      1 |     0.610268    |  0.610268 |
-|      2 |     0.254502    |  0.864771 |
-|      3 |     0.0528413   |  0.917612 |
-|      4 |     0.037728    |  0.95534  |
-|      5 |     0.027608    |  0.982948 |
-|      6 |     0.00663277  |  0.989581 |
-|      7 |     0.00483694  |  0.994418 |
-|      8 |     0.00453447  |  0.998952 |
-|      9 |     0.00104571  |  0.999998 |
-|     10 |     2.17529e-06 |  1        |</code></pre>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div id="6a48e402" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display cell-output-markdown">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;"></th>
+<th style="text-align: right;">n_pc</th>
+<th style="text-align: right;">explained_var</th>
+<th style="text-align: right;">cum_var</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.61027</td>
+<td style="text-align: right;">0.61027</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.254501</td>
+<td style="text-align: right;">0.864771</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.0528412</td>
+<td style="text-align: right;">0.917612</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.037728</td>
+<td style="text-align: right;">0.95534</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.0276078</td>
+<td style="text-align: right;">0.982948</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.00663274</td>
+<td style="text-align: right;">0.989581</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.00483717</td>
+<td style="text-align: right;">0.994418</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.00453419</td>
+<td style="text-align: right;">0.998952</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.00104569</td>
+<td style="text-align: right;">0.999998</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">2.17529e-06</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
 </div>
+</div>
+</div><div class="column" style="width:50%;">
+<div id="5ae5054f" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="week9_lecture_files/figure-revealjs/cell-7-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week9_lecture_files/figure-revealjs/cell-7-output-2.png" width="663" height="376"></a></p>
+<p><a href="week9_lecture_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week9_lecture_files/figure-revealjs/cell-8-output-1.png" width="663" height="376"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<!-- ## Scree plot
-
-:::: {.columns}
-
-::: {.column width="50%"}
-
-<div style="text-align:center;">
-  <img src="L9_images/example_scree_plot_1.jpg" alt="Scree plot 1" style="max-width:70%">
-  <div style="font-size:0.8em; color: #555; margin-top:4px;">
-  </div>
-</div>
-
-:::
-
-::: {.column width="50%"}
-
-<div style="text-align:center;">
-  <img src="L9_images/example_scree_plot_2.jpg" alt="Scree plot 2" style="max-width:70%">
-  <div style="font-size:0.8em; color: #555; margin-top:4px;">
-    Rogerson, P.A. (2020) Statistical Methods for Geography: A Student’s Guide, Fifth. Sage, London, pp 242-243
-  </div>
-</div>
-In this case, choose k=2.
-
-:::
-
-:::: -->
+</div></div>
 </section>
 <section id="how-many-data-points-are-sufficient-for-pca" class="slide level2">
 <h2>How many data points are sufficient for PCA</h2>
 <ul>
-<li class="fragment"><span style="color:blue">Rule #1</span>: “5-10 times as many subjects as variables”
+<li class="fragment"><p><span style="color:blue">Rule #1</span>: “5-10 times as many subjects as variables”</p>
 <ul>
 <li class="fragment">e.g.&nbsp;with 10 variables, we need at least 50 or 100 data points</li>
 </ul></li>
-<li class="fragment"><span style="color:blue">Rule #2</span>: with several hundred observations, PCA are probably reliable.</li>
+<li class="fragment"><p><span style="color:blue">Rule #2</span>: with several hundred observations, PCA are probably reliable.</p></li>
+<li class="fragment"><p>Reference: R in Action, by Robert I Kabacoff</p></li>
+<li class="fragment"><p><a href="https://stats.stackexchange.com/questions/45820/minimum-sample-size-for-pca-or-fa-when-the-main-goal-is-to-estimate-only-few-com">Discussion on StackExchange</a></p></li>
 </ul>
 </section>
 <section id="pca-is-not-factor-analysis" class="slide level2">
