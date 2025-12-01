@@ -472,18 +472,19 @@ plt.show()
 
 ::::
 
-## Generalisation to M-dimensional data points
+## Generalisation to M-dimensional dataset
 
-- PCA method will find M (or fewer than M) directions (or PCs) as a new space to represent the data points
+- The example above is for illustration; [please don't apply PCA to a 2-D dataset in your work]{style="color:blue"} 
+- For data with M dimensions (not M columns), PCA method will find M (or fewer than M) PCs as a new space to represent the data points
 - These PCs are ranked by variance explained, i.e. #1 PC with maximal variance, followed by #2, #3
 - These PCs are uncorrelated with each other
 - We will choose the first *k* PCs for analysis, usually $k$=2,3
 
 ## Different ways to understand PCA
 
-- Maximum variance perspective (we did it!)
-- Projection perspective*
-- Engenvector Computation and Low-Rank Approximations*
+1. Maximum variance perspective (we did it!)
+2. Projection perspective*
+3. Engenvector Computation and Low-Rank Approximations*
 
 - *See *Chapter 10, Mathematics for Machine Learning*
 
@@ -500,9 +501,105 @@ plt.show()
 ## Practical question: how to choose k?
 
 - *No golden rules; some guidelines*
-- For visualisation: k = 2 or 3  
-- Keep components with eigenvalues > 1. *Eigenvalue* of a PC is proportional to variance explained by this PC
-- Scree plot (elbow method).
+1. For visualisation: k = 2 or 3  
+2. Keep components with eigenvalues > 1. *Eigenvalue* of a PC is proportional to variance explained by this PC
+3. Scree plot (elbow method): use the point where the bend happens, where the curve changes from *steep* to *flat*
+
+## Scree plot
+
+```{python}
+# --- Imports ---
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from sklearn.impute import KNNImputer
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+
+# --- Load data ---
+df_school = pd.read_csv(
+    "https://raw.githubusercontent.com/huanfachen/QM/refs/heads/main/"
+    "sessions/L6_data/Performancetables_130242/2022-2023/england_filtered.csv"
+)
+
+# --- Select numeric columns for PCA ---
+df_school_reduced = df_school[
+    [
+        'PTFSM6CLA1A', 'PTNOTFSM6CLA1A', 'PNUMEAL', 'PNUMFSMEVER',
+        'ATT8SCR_FSM6CLA1A', 'ATT8SCR_NFSM6CLA1A',
+        'ATT8SCR_BOYS', 'ATT8SCR_GIRLS',
+        'P8MEA_FSM6CLA1A', 'P8MEA_NFSM6CLA1A'
+    ]
+]
+
+# --- Imputation with KNNImputer ---
+imputer = KNNImputer(n_neighbors=5)
+df_school_reduced_imputed = imputer.fit_transform(df_school_reduced)
+
+# Put back into a DataFrame with the same column names
+df_school_reduced_imputed = pd.DataFrame(
+    df_school_reduced_imputed,
+    columns=df_school_reduced.columns
+)
+
+# --- Standardisation with StandardScaler ---
+scaler = StandardScaler()
+df_school_reduced_scaled = scaler.fit_transform(df_school_reduced_imputed)
+
+df_school_reduced_scaled = pd.DataFrame(
+    df_school_reduced_scaled,
+    columns=df_school_reduced.columns
+)
+
+# --- PCA ---
+pca = PCA()
+pca_np_school_reduced = pca.fit_transform(df_school_reduced_scaled)
+
+# Explained variance ratio
+explained_var = pca.explained_variance_ratio_
+num_components = len(explained_var)
+
+# Table of explained variance and cumulative variance
+df_explained_var = pd.DataFrame({
+    "n_pc": np.arange(1, num_components + 1),
+    "explained_var": explained_var,
+    "cum_var": np.cumsum(explained_var)
+})
+
+print("Table of explained variance")
+print(df_explained_var.round(3))
+
+# --- Elbow detection using "turning point" (discrete second derivative) ---
+y = explained_var
+pcs = np.arange(1, num_components + 1)
+
+if num_components < 3:
+    k = 1
+else:
+    dy = np.diff(y)          # first differences
+    ddy = np.diff(dy)        # second differences
+    turning_idx = np.argmax(np.abs(ddy))
+    k = turning_idx + 2      # convert to 1-based PC index
+
+print(f"Chosen k based on turning-point elbow detection: {k}")
+
+# --- Visualise elbow on Scree plot ---
+plt.figure(figsize=(8, 5))
+plt.plot(pcs, explained_var, marker='o', label="Explained Variance Ratio")
+plt.scatter(
+    k, explained_var[k - 1],
+    color='red', s=80, zorder=5,
+    label=f"Turning-point elbow (k={k})"
+)
+plt.title("Scree Plot with Turning-Point Elbow")
+plt.xlabel("Principal Component")
+plt.ylabel("Explained Variance Ratio")
+plt.xticks(pcs)
+plt.grid(True, linestyle='--', alpha=0.5)
+plt.legend()
+plt.show()
+```
 
 ## Scree plot
 

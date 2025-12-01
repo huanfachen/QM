@@ -11,7 +11,7 @@ filters:
 
 This week, we will focus on conducting dimensionality reduction on the performance and disadvantage variables of schools in England, trying to understand which variables (or variable combinations) are important in distinguishing these schools.
 
-We will use the method of principal component analysis (PCA) for this task.
+We will use the method of principal component analysis (PCA).
 
 ```{python}
 
@@ -244,9 +244,77 @@ To interpret, the first row represents how the first PC is generated from a line
 - Some variables have a negative coefficient, such as PTFSM6CLA1A and PNUMFSMEVER.
 - The ATT8SCR_GIRLS variable contributes to the PC1 more than the other variables. *Can you explain this?*
 
+We can choose the number of PCs using a Scree plot and elbow method, which is based on variance explained of each PC.
+
+```{python}
+# Explained variance ratio
+explained_var = pca.explained_variance_ratio_
+num_components = len(explained_var)
+
+# print explained_var and accumulative explained variance
+df_explained_var = pd.DataFrame({
+    "n_pc": np.arange(1, len(explained_var) + 1),
+    "explained_var": explained_var,
+    "cum_var": np.cumsum(explained_var)
+})
+
+print("Table of explained variance")
+print(df_explained_var.round(3))
+
+# Scree plot (Explained Variance ratio)
+plt.figure(figsize=(8, 5))
+pcs = np.arange(1, num_components + 1)
+plt.plot(pcs, explained_var, marker='o')
+plt.title("Scree Plot")
+plt.xlabel("Principal Component")
+plt.ylabel("Explained Variance ratio")
+plt.xticks(pcs)
+plt.grid(True, linestyle='--', alpha=0.5)
+plt.show()
+
+# Elbow detection using "turning point" (discrete second derivative)
+
+y = explained_var
+
+# Need at least 3 points to compute a second derivative
+if num_components < 3:
+    # Fallback: choose 1 component if fewer than 3 PCs
+    k = 1
+else:
+    # First differences: dy[i] = y[i+1] - y[i]
+    dy = np.diff(y)                  # length: num_components - 1
+
+    # Second differences: ddy[i] = dy[i+1] - dy[i]
+    ddy = np.diff(dy)                # length: num_components - 2
+
+    # Index of max absolute curvature (turning point)
+    # ddy[i] is curvature at original index i+1 (0-based)
+    turning_idx = np.argmax(np.abs(ddy))  # in range [0, num_components-3]
+
+    # Convert to PC index (1-based for plotting/human interpretation)
+    k = turning_idx + 2  # +1 for 0-based -> original index, +1 more because curvature is at i+1
+
+print(f"Chosen k based on turning-point elbow detection: {k}")
+
+# (Optional) visualize elbow on Scree plot
+plt.figure(figsize=(8, 5))
+plt.plot(pcs, explained_var, marker='o', label="Explained Variance Ratio")
+plt.scatter(k, explained_var[k-1], color='red', s=80, zorder=5,
+            label=f"Turning-point elbow (k={k})")
+plt.title("Scree Plot with Turning-Point Elbow")
+plt.xlabel("Principal Component")
+plt.ylabel("Explained Variance Ratio")
+plt.xticks(pcs)
+plt.grid(True, linestyle='--', alpha=0.5)
+plt.legend()
+plt.show()
+```
+
+The Scree plot and Elbow method suggested using k=3 PCs for further analysis.
+
 ## Task three: to validate and visualise the selected PCs
 
-How do school look like and distribute in the top two PCs? To visualise them, we can use the following code:
+How do school look like and distribute in the top two PCs? To visualise them, we can use the following code and two PCs.
 
 ```{python}
 
