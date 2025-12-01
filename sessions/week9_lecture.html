@@ -214,7 +214,8 @@
 </section>
 <section id="dimensionality-quiz-1" class="slide level2">
 <h2>Dimensionality Quiz</h2>
-<p><strong>Question</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p>You are given the following dataset (with 1000 rows and 3 columns)</p>
 <table class="caption-top">
 <thead>
@@ -264,11 +265,13 @@
 </tr>
 </tbody>
 </table>
-<p><strong>What is the dimensionality of the feature space for this dataset after one-hot encoding of the <span class="math display">\[\text{month}\]</span> column (with one category dropped)?</strong></p>
-<p>A. <span class="math display">\[2\]</span><br>
+</div><div class="column" style="width:50%;">
+
+</div><p><strong>What is the dimensionality of the feature space for this dataset after one-hot encoding of the <span class="math display">\[\text{month}\]</span> column (with one category dropped)?</strong></p><p>A. <span class="math display">\[2\]</span><br>
 B. <span class="math display">\[11\]</span><br>
 C. <span class="math display">\[13\]</span><br>
 D. <span class="math display">\[14\]</span></p>
+</div>
 </section>
 <section id="high-dimensional-data-curse-of-dimensionality" class="slide level2">
 <h2>High-dimensional data (<em>Curse of dimensionality</em>)</h2>
@@ -327,7 +330,7 @@ D. <span class="math display">\[14\]</span></p>
 <li>PCA from 2D to 1D</li>
 <li>Aim to find a ‘direction’ (i.e.&nbsp;a line) that keeps the most information (or variance) between data points in 2D</li>
 </ul>
-<div id="daded1ce" class="cell" data-execution_count="1">
+<div id="7854f78e" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -341,7 +344,7 @@ D. <span class="math display">\[14\]</span></p>
 <h2>Which direction is the best?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="ea84bb20" class="cell" data-execution_count="2">
+<div id="b0c5ec89" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -351,7 +354,7 @@ D. <span class="math display">\[14\]</span></p>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<div id="e2023ec8" class="cell" data-results="asis" data-execution_count="3">
+<div id="053623b2" class="cell" data-results="asis" data-execution_count="3">
 <div class="cell-output cell-output-display cell-output-markdown">
 <div style="font-size: 15px;">
 <table class="caption-top">
@@ -414,7 +417,7 @@ D. <span class="math display">\[14\]</span></p>
 </ul></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="78b6166b" class="cell" data-execution_count="4">
+<div id="40fd1564" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -474,7 +477,7 @@ D. <span class="math display">\[14\]</span></p>
 </section>
 <section id="example-pca-on-performance-disadvantage-attributes-of-school-data" class="slide level2">
 <h2>Example: PCA on performance &amp; disadvantage attributes of school data</h2>
-<div id="675d24ad" class="cell" data-execution_count="5">
+<div id="dc70a3ff" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display cell-output-markdown">
 <table class="caption-top">
 <colgroup>
@@ -549,12 +552,12 @@ D. <span class="math display">\[14\]</span></p>
 <h2>Scree plot</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="6a48e402" class="cell" data-execution_count="6">
+<div id="5d52861e" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display cell-output-markdown">
+<div style="font-size: 15px;">
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th style="text-align: right;"></th>
 <th style="text-align: right;">n_pc</th>
 <th style="text-align: right;">explained_var</th>
 <th style="text-align: right;">cum_var</th>
@@ -562,75 +565,66 @@ D. <span class="math display">\[14\]</span></p>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">0.61027</td>
-<td style="text-align: right;">0.61027</td>
+<td style="text-align: right;">0.61</td>
+<td style="text-align: right;">0.61</td>
 </tr>
 <tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.255</td>
+<td style="text-align: right;">0.865</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.053</td>
+<td style="text-align: right;">0.918</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.038</td>
+<td style="text-align: right;">0.955</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.028</td>
+<td style="text-align: right;">0.983</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.007</td>
+<td style="text-align: right;">0.99</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.005</td>
+<td style="text-align: right;">0.994</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.005</td>
+<td style="text-align: right;">0.999</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.001</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">0.254501</td>
-<td style="text-align: right;">0.864771</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">0.0528412</td>
-<td style="text-align: right;">0.917612</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">0.037728</td>
-<td style="text-align: right;">0.95534</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">0.0276078</td>
-<td style="text-align: right;">0.982948</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">0.00663274</td>
-<td style="text-align: right;">0.989581</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">0.00483717</td>
-<td style="text-align: right;">0.994418</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">0.00453419</td>
-<td style="text-align: right;">0.998952</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">0.00104569</td>
-<td style="text-align: right;">0.999998</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">9</td>
 <td style="text-align: right;">10</td>
-<td style="text-align: right;">2.17529e-06</td>
+<td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+</div>
 </div><div class="column" style="width:50%;">
-<div id="5ae5054f" class="cell" data-execution_count="7">
+<div id="9074a4ea" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="week9_lecture_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week9_lecture_files/figure-revealjs/cell-8-output-1.png" width="663" height="376"></a></p>
+<p><a href="week9_lecture_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="week9_lecture_files/figure-revealjs/cell-8-output-1.png" width="514" height="376"></a></p>
 </figure>
 </div>
 </div>
