@@ -160,7 +160,7 @@ df_school_reduced = pd.DataFrame(
 )
 
 # Double-check that there are no more missing values
-print("Are there any missing values left?:", df_school_reduced.isnull().sum().sum() == 0)
+print("Are all missing values handled?:", df_school_reduced.isnull().sum().sum() == 0)
 ```
 
 Then, we will compare all variables in terms of their range, mean, and variance.
@@ -173,7 +173,7 @@ The results show that most variables (except two Progress 8 variables) are on a 
 
 Recall the definition of Progress 8: it measures the academic progress pupils make between the end of primary school (Key Stage 2) and the end of secondary school (Key stage 4) compared to other pupils nationally with similar starting points. In practice, this values often lie between -2.0 (very low progress) and +2.0 (exceptional progress).
 
-Therefore, we need to normalise these variables so that they are comparable before conducting PCA. Here, we will use the StandardScaler from sklearn package. According to [the documentation](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html), it standises each feature by removing the mean and scaling to unit variance, which is also called z-score standardisation.
+Therefore, we need to normalise these variables so that they are comparable before conducting PCA. Here, we will use the StandardScaler from sklearn package. According to [the documentation](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html), it standardises each feature by removing the mean and scaling to unit variance, which is also called z-score standardisation.
 
 z = (x - u) / s
 
