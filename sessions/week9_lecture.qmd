@@ -107,12 +107,12 @@ You are given the following dataset (with 1000 rows and 3 columns)
 
 :::
 
-**What is the dimensionality of the feature space for this dataset after one-hot encoding of the $$\text{month}$$ column (with one category dropped)?**
+**What is the dimensionality of the feature space for this dataset after one-hot encoding of the **month** column (with one category dropped)?**
 
-A. $$2$$  
-B. $$11$$  
-C. $$13$$  
-D. $$14$$  
+A. 2
+B. 11  
+C. 13  
+D. 14  
 
 ::::
 
@@ -522,7 +522,7 @@ plt.show()
 
 ## Illustrating steps of PCA
 <div style="text-align:center;">
-  <img src="L9_images/example_PCA_steps.jpg" alt="Wild of Unsupervised Learning" style="max-width:90%">
+  <img src="L9_images/example_PCA_steps.jpg" alt="Wild of Unsupervised Learning" style="max-width:80%">
   <div style="font-size:0.8em; color: #555; margin-top:4px;">
     Image credit: Mathematics for Machine Learning
   </div>
@@ -727,7 +727,7 @@ plt.show()
 
 ## Example of PCA on MNIST digit recognition
 
-60,000 exmaples of handwritten digits 0~9.
+60,000 examples of handwritten digits 0~9.
 Each digit is an 28*28 image or 784 pixels (dimensions)
 
 <div style="text-align:center;">
