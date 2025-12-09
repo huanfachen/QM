@@ -86,9 +86,9 @@ Looked at:
 
 # K-Means
 
-## Steps
+## Steps {.nostretch}
 
-::: columns
+:::: columns
 ::: {.column width="40"}
 <div style="text-align:center;">
   <img src="L10_images/kmeans_iterations.gif" alt="LOAC" style="max-width:80%;">
@@ -107,7 +107,7 @@ Iterative process (*Expectation-Maximisation algorithm*)
 - Continue until centroid assignments no longer change
 
 :::
-:::
+::::
 
 ## Implications of *centroid as mean of data points in a cluster*
 
@@ -120,17 +120,39 @@ Iterative process (*Expectation-Maximisation algorithm*)
 
 ::: {.incremental}
 
-- Sensitive to outliers (solution: use another clustering method, or remove outliers)
-- Incapable of handling categorical variables (solution: k-modes or k-prototypes)
-- Requires knowledge of the number of clusters (*k*), which we may not know in advance (solution: Elbow method to find *k*);
-- Sensitive to centroid initialisation, which can lead to poor solutions (solution: try different random initialisation and pick up the best one);
+- Sensitive to outliers [(solution: use another clustering method, or remove outliers)]{style="color:blue"}
+- Incapable of handling categorical variables [(solution: k-modes or k-prototypes)]{style="color:blue"}
+- Requires knowledge of the number of clusters (*k*), which we may not know in advance [(solution: Elbow method to find *k*)]{style="color:blue"}
+- Sensitive to centroid initialisation, which can lead to poor solutions [(solution: try multiple random initialisation and pick up the best one; initialise centroid based on data distribution)]{style="color:blue"}
 
 :::
 
 ## K-Means implementation in *sklearn*
 
+- class sklearn.cluster.KMeans(n_clusters=8, *, [init='k-means++']{style="color:blue"}, [n_init='auto']{style="color:blue"}, max_iter=300, tol=0.0001, verbose=0, random_state=None, copy_x=True, algorithm='lloyd')
+- By default, this function uses *init='kmeans++'*, which selects initial cluster centroids using sampling based on an empirical probability distribution of the points’ contribution to the overall inertia
+
+## K-Means implementation in *sklearn*: output
+
+- cluster_centers_: ndarray of shape (n_clusters, n_features). Coordinates of cluster centers.
+- labels_: ndarray of shape (n_samples,). Labels of each point
+- [inertia_]{style="color:blue"}: float. [Sum of squared distances of samples to their closest cluster center]{style="color:blue"}, weighted by the sample weights if provided.
+- n_iter_: int. Number of iterations run.
+- n_features_in_: int. Number of features seen during fit.
 
 ## Selecting K
+
+1. Try different values of *k*.  
+2. Plot the **inertia** (within-cluster sum of squares).  
+3. Use the **elbow method** to pick a reasonable *k* where the decrease of inertia starts to flatten out.
+
+## Selecting K - example
+<div style="text-align:center;">
+  <img src="L10_images/kmeans_elbow_method.png" alt="elbow" style="max-width:80%;">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+    Image credit: 
+  </div>
+</div>
 
 # Hierarchical clustering
 
