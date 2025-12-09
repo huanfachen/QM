@@ -14,7 +14,7 @@
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Huanfa Chen">
-  <title>Quantitative Methods – Measuring Relationship</title>
+  <title>Quantitative Methods – Clustering analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -98,10 +98,12 @@
     code span.vs { color: #4070a0; } /* VerbatimString */
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-708fdb05d86516b6f171cd9cf793ecac.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-3d9a2287676b2fea48eb10fd22aaf47d.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -190,7 +192,7 @@
       margin-right: 0; 
     }
   </style>
-<meta property="og:title" content="Measuring Relationship – Quantitative Methods">
+<meta property="og:title" content="Clustering analysis – Quantitative Methods">
 <meta property="og:image" content="https://huanfachen.github.io/QM/sessions/img/logo/full_sm.png">
 <meta property="og:site_name" content="Foundations">
 <meta property="og:locale" content="en_GB">
@@ -205,22 +207,24 @@
 <br>
 <br>
 
-<h1 class="title">Measuring Relationship</h1>
+<h1 class="title">Clustering analysis</h1>
 
 
 <p><span style="margin:0px; font-weight:700;" class="author">Huanfa Chen</span> - huanfa.chen@ucl.ac.uk </p>
 
-<p style="opacity: 0.8">25th October 2025</p>
+<p style="opacity: 0.8">29th November 2025</p>
 
+<p style="opacity:0.8;">CASA0007 Quantitative Methods</p>
 
 </section>
 <section id="last-week" class="slide level2">
 <h2>Last week</h2>
-<p><strong>Lecture 4 - linear algebra</strong></p>
+<p><strong>Lecture 9 - dimensionality reduction</strong></p>
 <p>Looked at:</p>
 <ul>
-<li class="fragment">Can use mathematical notation to write equations in a univeral language</li>
-<li class="fragment">Linear algebra helps us to solve systems of linear equations<br>
+<li class="fragment">Understand the motivation of dimensionality reduction</li>
+<li class="fragment">Understand the principle of Principal Component Analysis</li>
+<li class="fragment">Can apply PCA to school datasets or other datasets<br>
 </li>
 </ul>
 </section>
@@ -232,13 +236,154 @@
 <section id="objectives" class="slide level2">
 <h2>Objectives</h2>
 <ul>
-<li>Understand and calculate Pearson and Spearman correlation between two variables.</li>
-<li>Understand the difference between Pearson and Spearman correlation.</li>
-<li>Understand ANOVA.</li>
+<li>Understand the motivation and principle of clustering analysis.</li>
+<li>Understand K-Means and hierarchical clustering.</li>
+<li>Interpret the results of clustering analysis.</li>
 </ul>
 </section>
-<section id="classification-of-statistical-analysis" class="slide level2">
-<h2>Classification of statistical analysis</h2>
+<section id="what-is-clustering" class="slide level2">
+<h2>What is clustering</h2>
+<ul>
+<li>Type of analysis that divides data points into groups based on some similarity criteria</li>
+<li>A <em>cluster</em> is a group of similar data points</li>
+</ul>
+<div style="text-align:center;">
+<img src="L10_images/clustering_illustration.png" alt="clusering_illustration" style="max-width:80%;">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Image credit: </code></pre>
+</div>
+</div>
+</section>
+<section id="motivation-of-clustering" class="slide level2">
+<h2>Motivation of clustering</h2>
+<ul>
+<li>Discover groups of similar data points</li>
+<li>Assist visualisation</li>
+</ul>
+</section>
+<section id="examples-of-clustering---booth-map" class="slide level2">
+<h2>Examples of clustering - Booth map</h2>
+<div style="text-align:center;">
+<img src="L10_images/Booth_map.jpg" alt="LOAC" style="max-width:80%;">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Image credit: https://booth.lse.ac.uk/map</code></pre>
+</div>
+</div>
+</section>
+<section id="examples-of-clustering---london-output-area-classification" class="slide level2">
+<h2>Examples of clustering - London Output Area Classification</h2>
+<ul>
+<li>Clustering OAs on 70+ socio-economic variables (non-spatial); 32000 OAs clustered into 8 groups</li>
+<li>Clusters have obvious spatial patterns but aren’t spatially connected</li>
+</ul>
+<div style="text-align:center;">
+<img src="L10_images/LOAC.jpg" alt="LOAC" style="max-width:80%;">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Image credit: https://mapmaker.geods.ac.uk/</code></pre>
+</div>
+</div>
+</section>
+<section id="process-of-conducting-clustering-analysis" class="slide level2">
+<h2>Process of conducting clustering analysis</h2>
+<ul>
+<li class="fragment">Standardise variables</li>
+<li class="fragment">Choose clustering algorithms (one or several)</li>
+<li class="fragment">Select parameters of the clustering algorithm</li>
+<li class="fragment">Interpret the results</li>
+<li class="fragment">Finalise the clustering model</li>
+</ul>
+</section></section>
+<section>
+<section id="k-means" class="title-slide slide level1 center">
+<h1>K-Means</h1>
+
+</section>
+<section id="steps" class="slide level2">
+<h2>Steps</h2>
+<div class="columns">
+<div class="column" style="width:40;">
+<div style="text-align:center;">
+<img src="L10_images/kmeans_iterations.gif" alt="LOAC" style="max-width:80%;">
+<div style="font-size:0.8em; color: #555; margin-top:4px;">
+<pre><code>Image credit: imageflip.com</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<p>Iterative process (<em>Expectation-Maximisation algorithm</em>)</p>
+<ul>
+<li>Place k centroids <span style="color:blue">randomly</span> within space</li>
+<li>Assign data points to nearest centroid</li>
+<li>Recalculate centroids as the new <span style="color:blue">mean</span> of the cluster</li>
+<li>Continue until centroid assignments no longer change</li>
+</ul>
+</div></div>
+</section>
+<section id="implications-of-centroid-as-mean-of-data-points-in-a-cluster" class="slide level2">
+<h2>Implications of <em>centroid as mean of data points in a cluster</em></h2>
+<ul>
+<li class="fragment">K-Means is incapable of handling categorical variables, as we can’t calculate the mean of a categorical variable</li>
+<li class="fragment">K-Means is <em>sensitive</em> to outliers, as an outlier significantly impacts the mean of a dataset</li>
+</ul>
+</section>
+<section id="problems-with-k-means-and-solutions" class="slide level2">
+<h2>Problems with K-Means and solutions</h2>
+<ul>
+<li class="fragment">Sensitive to outliers (solution: use another clustering method, or remove outliers)</li>
+<li class="fragment">Incapable of handling categorical variables (solution: k-modes or k-prototypes)</li>
+<li class="fragment">Requires knowledge of the number of clusters (<em>k</em>), which we may not know in advance (solution: Elbow method to find <em>k</em>);</li>
+<li class="fragment">Sensitive to centroid initialisation, which can lead to poor solutions (solution: try different random initialisation and pick up the best one);</li>
+</ul>
+</section>
+<section id="k-means-implementation-in-sklearn" class="slide level2">
+<h2>K-Means implementation in <em>sklearn</em></h2>
+</section>
+<section id="selecting-k" class="slide level2">
+<h2>Selecting K</h2>
+</section></section>
+<section>
+<section id="hierarchical-clustering" class="title-slide slide level1 center">
+<h1>Hierarchical clustering</h1>
+
+</section>
+<section id="selecting-number-of-clusters" class="slide level2">
+<h2>Selecting number of clusters</h2>
+</section></section>
+<section id="integrating-clustering-and-spatial-considerations" class="title-slide slide level1 center">
+<h1>Integrating clustering and spatial considerations</h1>
+
+</section>
+
+<section>
+<section id="interpreting-clustering" class="title-slide slide level1 center">
+<h1>Interpreting clustering</h1>
+
+</section>
+<section id="cluster-centroid-as-representative" class="slide level2">
+<h2>Cluster centroid as representative</h2>
+</section>
+<section id="mapping" class="slide level2">
+<h2>Mapping</h2>
+</section>
+<section id="key-takeaways" class="slide level2">
+<h2>Key takeaways</h2>
+<ul>
+<li>Can use Pearson/Spearman correlation to measure the relationship between two variables.</li>
+<li>Choose Pearson or Spearman correlation metric based on the dataset and interpret them correctly.</li>
+<li>To measure difference <span style="color:blue">between two groups</span>, use <span style="color:red">(paired) samples t-test</span></li>
+<li>To measure difference between <span style="color:blue">multiple groups</span>, use <span style="color:red">one-way ANOVA</span></li>
+<li>To measure difference <span style="color:blue">across two factors</span>, use <span style="color:red">two-way ANOVA</span></li>
+</ul>
+</section>
+<section id="practical" class="slide level2">
+<h2>Practical</h2>
+<ul>
+<li>The practical will focus on calculating and interpreting correlation metrics.<br>
+</li>
+<li>Have you questions prepared!</li>
+</ul>
+</section>
+<section class="slide level2">
+
 <ul>
 <li class="fragment"><em>Univariate</em> analysis (for one variable) (W1/2)</li>
 <li class="fragment"><em>Bivariate</em> analysis (for two variables) (W5)</li>
@@ -323,11 +468,11 @@
 <h2>Example</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<div id="87e56316" class="cell" data-fig-height="6" data-fig-width="6" data-execution_count="1">
+<div id="7141ff2e" class="cell" data-fig-height="6" data-fig-width="6" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="week5_lecture_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="week5_lecture_files/figure-revealjs/cell-2-output-1.png" width="566" height="566"></a></p>
+<p><a href="week10_lecture_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="week10_lecture_files/figure-revealjs/cell-2-output-1.png" width="566" height="566"></a></p>
 </figure>
 </div>
 </div>
@@ -551,12 +696,12 @@ Image credit: https://commons.wikimedia.org/wiki/File:Karl_Pearson,_1912.jpg</co
 </section>
 <section id="hypothesis-testing-and-p-values-of-pearson-correlation" class="slide level2">
 <h2>Hypothesis testing and p-values of Pearson correlation</h2>
-<div id="4830f739" class="cell" data-code-block-style="pycon" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-2"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
-<span id="cb3-3"><a></a>res <span class="op">=</span> stats.spearmanr([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">7</span>])</span>
-<span id="cb3-4"><a></a><span class="bu">print</span>(<span class="ss">f"Pearson correlation = </span><span class="sc">{</span>res<span class="sc">.</span>statistic<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb3-5"><a></a><span class="bu">print</span>(<span class="ss">f"P value = </span><span class="sc">{</span>res<span class="sc">.</span>pvalue<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="d8d260b3" class="cell" data-code-block-style="pycon" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb7-3"><a></a>res <span class="op">=</span> stats.spearmanr([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">7</span>])</span>
+<span id="cb7-4"><a></a><span class="bu">print</span>(<span class="ss">f"Pearson correlation = </span><span class="sc">{</span>res<span class="sc">.</span>statistic<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb7-5"><a></a><span class="bu">print</span>(<span class="ss">f"P value = </span><span class="sc">{</span>res<span class="sc">.</span>pvalue<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Pearson correlation = 0.8208
 P value = 0.0886</code></pre>
@@ -743,14 +888,14 @@ Question: does cor = 0 mean <span style="color:blue">no relationship</span> betw
 <li>Spearman correlation doesn’t tell if or how much the relationship is linear</li>
 <li>Spearman &amp; Pearson correlation on the same data are incomparable, as they tell different things.</li>
 </ul>
-<div id="bfb32895" class="cell" data-fig-height="6" data-fig-width="6" data-execution_count="5">
+<div id="4c1bddbb" class="cell" data-fig-height="6" data-fig-width="6" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 960x480 with 0 Axes&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="week5_lecture_files/figure-revealjs/cell-6-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="week5_lecture_files/figure-revealjs/cell-6-output-2.png" width="403" height="379"></a></p>
+<p><a href="week10_lecture_files/figure-revealjs/cell-6-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="week10_lecture_files/figure-revealjs/cell-6-output-2.png" width="403" height="379"></a></p>
 </figure>
 </div>
 </div>
@@ -991,7 +1136,7 @@ Question: does cor = 0 mean <span style="color:blue">no relationship</span> betw
 </tbody>
 </table>
 </section>
-<section id="key-takeaways" class="slide level2">
+<section id="key-takeaways-1" class="slide level2">
 <h2>Key takeaways</h2>
 <ul>
 <li>Can use Pearson/Spearman correlation to measure the relationship between two variables.</li>
@@ -1001,7 +1146,7 @@ Question: does cor = 0 mean <span style="color:blue">no relationship</span> betw
 <li>To measure difference <span style="color:blue">across two factors</span>, use <span style="color:red">two-way ANOVA</span></li>
 </ul>
 </section>
-<section id="practical" class="slide level2">
+<section id="practical-1" class="slide level2">
 <h2>Practical</h2>
 <ul>
 <li>The practical will focus on calculating and interpreting correlation metrics.<br>
@@ -1026,6 +1171,7 @@ Question: does cor = 0 mean <span style="color:blue">no relationship</span> betw
   <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -1047,7 +1193,8 @@ Question: does cor = 0 mean <span style="color:blue">no relationship</span> betw
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -1068,7 +1215,7 @@ Question: does cor = 0 mean <span style="color:blue">no relationship</span> betw
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -1218,7 +1365,7 @@ Question: does cor = 0 mean <span style="color:blue">no relationship</span> betw
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
