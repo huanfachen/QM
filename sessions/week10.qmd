@@ -35,7 +35,7 @@ To save a copy of notebook to your own GitHub Repo: follow the GitHub link, clic
 
 To access the practical:
 
-1. [Preview](week1_practical0.html)
-2. [Download](week1_practical0.ipynb)
+1. [Preview](week10_practical.html)
+2. [Download](week10_practical.ipynb)
 
 ## Further resources
