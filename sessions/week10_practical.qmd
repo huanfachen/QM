@@ -613,19 +613,18 @@ handles_h, _ = scatter_h.legend_elements(prop="colors", alpha=0.8)
 labels_h = [f"Cluster {i}" for i in range(n_clusters_hier)]
 
 # --- legend entries for Inner / Outer London ---
-inner_line_h = mlines.Line2D(
-    [], [], color=colors_boundary["Inner London"], linestyle="--", linewidth=1.5,
-    label="Inner London"
+inner_line = mlines.Line2D(
+    [], [], color="red", linestyle="--", linewidth=1.5, label="Inner London"
 )
-outer_line_h = mlines.Line2D(
-    [], [], color=colors_boundary["Outer London"], linestyle="--", linewidth=1.5,
-    label="Outer London"
+outer_line = mlines.Line2D(
+    [], [], color="blue", linestyle="--", linewidth=1.5, label="Outer London boundary"
 )
 
-handles_all_h = handles_h + [inner_line_h, outer_line_h]
-labels_all_h = labels_h + ["Inner London", "Outer London"]
+# combine legends
+handles_all = handles_clusters + [inner_line, outer_line]
+labels_all = labels_clusters + ["Inner London", "Outer London"]
 
-plt.legend(handles_all_h, labels_all_h,
+plt.legend(handles_all, labels_all,
            title="Hier. cluster",
            bbox_to_anchor=(1.05, 1), loc="upper left")
 
