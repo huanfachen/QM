@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>This week, we will focus on conducting dimensionality reduction on the performance and disadvantage variables of schools in England, trying to understand which variables (or variable combinations) are important in distinguishing these schools.</p>
 <p>We will use the method of principal component analysis (PCA).</p>
-<div id="6ccf43f1" class="cell" data-execution_count="1">
+<div id="3358e409" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -290,12 +290,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
 <p>We’re going to use the filtered school data that has been used in previous practicals.</p>
-<div id="8f2270c6" class="cell" data-execution_count="2">
+<div id="5608375b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the dataset from Github</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_school <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/huanfachen/QM/refs/heads/main/sessions/L6_data/Performancetables_130242/2022-2023/england_filtered.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Check the shape and columns of this data frame.</p>
-<div id="f2e211bf" class="cell" data-execution_count="3">
+<div id="af37ffdf" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"df_school has </span><span class="sc">{</span>df_school<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> rows and </span><span class="sc">{</span>df_school<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> columns."</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"First 5 rows:</span><span class="ch">\n</span><span class="st">"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_school.head(<span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -414,7 +414,7 @@ First 5 rows:
 <li><strong>P8MEA_NFSM6CLA1A</strong> – Progress 8 measure for non-disadvantaged pupils.</li>
 </ol>
 <p>Please note - we remove the count variables (e.g.&nbsp;NORB and NORG), as the count variables are affected by the pupil size of each school. We also remove variables that are redundant due to perfect correlation with those retained, such as PNUMENGFL, which is equal to 1-PNUMEAL.</p>
-<div id="ed15cbeb" class="cell" data-execution_count="4">
+<div id="d625e5a7" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the selected columns</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_school_reduced <span class="op">=</span> df_school[</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    [</span>
@@ -453,7 +453,7 @@ First 5 rows:
 <section id="task-one-to-address-missing-values-and-to-standardise-variables" class="level2">
 <h2 class="anchored" data-anchor-id="task-one-to-address-missing-values-and-to-standardise-variables">Task one: to address missing values and to standardise variables</h2>
 <p>We expect that all variabels in df_school_reduced are of numerical type. It is safe to check it before further analysis.</p>
-<div id="d910222e" class="cell" data-execution_count="5">
+<div id="120dafdc" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Numeric columns: </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(df_school_reduced.select_dtypes(include<span class="op">=</span><span class="st">'number'</span>).columns.tolist()))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Non-numeric columns: </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(df_school_reduced.select_dtypes(exclude<span class="op">=</span><span class="st">'number'</span>).columns.tolist()))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -462,12 +462,12 @@ Non-numeric columns: []</code></pre>
 </div>
 </div>
 <p>To convert all columns to numeric, we can use the following code. Note that numeric columns are not affected.</p>
-<div id="42aace35" class="cell" data-execution_count="6">
+<div id="d5eb6b14" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_school_reduced <span class="op">=</span> df_school_reduced.<span class="bu">apply</span>(pd.to_numeric, errors<span class="op">=</span><span class="st">'coerce'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now, let’s check whether our dataset has any missing values — this is important because PCA in sklearn package cannot handle <code>NaN</code> values directly.</p>
 <p>To display the number of missing entries for each column:</p>
-<div id="007e8cf8" class="cell" data-execution_count="7">
+<div id="bc5aad67" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check missing values column by column</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>missing_counts <span class="op">=</span> df_school_reduced.isnull().<span class="bu">sum</span>()</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Missing values per column:</span><span class="ch">\n</span><span class="st">"</span>, missing_counts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -506,7 +506,7 @@ Note
 <p>To fill in these missing values, we will use the KNNImputer() from sklearn.impute.</p>
 <p>This method finds the k closest rows (neighbors) to the one with the missing value and uses their values to compute an average for imputation.</p>
 <p>It’s a smarter approach than simply filling with the mean or median because it considers patterns across all variables.</p>
-<div id="56c90fd6" class="cell" data-execution_count="8">
+<div id="75514f99" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> KNNImputer</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create our KNN imputer (k=5 is a common choice, but can be tuned)</span></span>
@@ -526,7 +526,7 @@ Note
 </div>
 </div>
 <p>Then, we will compare all variables in terms of their range, mean, and variance.</p>
-<div id="fb242d86" class="cell" data-execution_count="9">
+<div id="8a20c79d" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_school_reduced.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
@@ -568,11 +568,11 @@ Note
 <td>73.716974</td>
 <td>17.585813</td>
 <td>27.736556</td>
-<td>38.282611</td>
+<td>38.282801</td>
 <td>50.095580</td>
 <td>45.456691</td>
 <td>48.868860</td>
-<td>-0.462441</td>
+<td>-0.462458</td>
 <td>0.151933</td>
 </tr>
 <tr class="odd">
@@ -581,11 +581,11 @@ Note
 <td>14.174652</td>
 <td>18.089990</td>
 <td>14.061207</td>
-<td>9.675041</td>
+<td>9.674974</td>
 <td>8.467086</td>
 <td>9.512178</td>
 <td>9.092088</td>
-<td>0.561274</td>
+<td>0.561285</td>
 <td>0.470823</td>
 </tr>
 <tr class="even">
@@ -611,7 +611,7 @@ Note
 <td>44.800000</td>
 <td>39.300000</td>
 <td>43.100000</td>
-<td>-0.830500</td>
+<td>-0.832000</td>
 <td>-0.150000</td>
 </tr>
 <tr class="even">
@@ -664,7 +664,7 @@ Note
 <p>Therefore, we need to normalise these variables so that they are comparable before conducting PCA. Here, we will use the StandardScaler from sklearn package. According to <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html">the documentation</a>, it standardises each feature by removing the mean and scaling to unit variance, which is also called z-score standardisation.</p>
 <p>z = (x - u) / s</p>
 <p>Please note: using StandardScaler().fit_transform() on a DataFrame will output a numpy array, which differs from DataFrame and has no column names. If we would like to maintain a dataframe format, the numpy array should be wrapped back to DataFrame.</p>
-<div id="95e4907a" class="cell" data-execution_count="10">
+<div id="5392f591" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># standardisation of df_school_reduced. This is essential for PCA.</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>np_scaled <span class="op">=</span> StandardScaler().fit_transform(df_school_reduced)</span>
@@ -677,7 +677,7 @@ Note
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can double check the scale of variables after the standardisation.</p>
-<div id="a99b9bf4" class="cell" data-execution_count="11">
+<div id="b3d034b9" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_school_reduced.describe()</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df_school_reduced.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -705,7 +705,7 @@ memory usage: 238.9 KB</code></pre>
 <section id="task-two-to-conduct-pca" class="level2">
 <h2 class="anchored" data-anchor-id="task-two-to-conduct-pca">Task two: to conduct PCA</h2>
 <p>We will use the following code to conduct PCA. First, a PCA object is created using <code>PCA()</code>. Then, this object is applied to fit and transform df_school_reduced.</p>
-<div id="aaaa3210" class="cell" data-execution_count="12">
+<div id="1c408797" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA()</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the components</span></span>
@@ -718,14 +718,14 @@ memory usage: 238.9 KB</code></pre>
 </div>
 <p><code>pca</code> stores the relationship between the original and new variables, while <code>pca_np_school_reduced</code> is a numpy array that stores the new coordinates under the new variables for each school.</p>
 <p>How many new variables (or Principle Components) have been generated?</p>
-<div id="202a46c8" class="cell" data-execution_count="13">
+<div id="4247069a" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Number of PCs: </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(pca_np_school_reduced.shape[<span class="dv">1</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of PCs: 10</code></pre>
 </div>
 </div>
 <p>What are the importance of each PC? In other words, to what extent does each PC explain the variance of performance and disadvantage of schools?</p>
-<div id="1d1140ec" class="cell" data-execution_count="14">
+<div id="6d20a72a" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Explained variance ratio of each PC:'</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pca.explained_variance_ratio_.<span class="bu">round</span>(<span class="dv">3</span>))</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the sum of explained variance should be equal to 1.0 or 100%</span></span>
@@ -733,12 +733,12 @@ memory usage: 238.9 KB</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Explained variance ratio of each PC:
 [0.61  0.255 0.053 0.038 0.028 0.007 0.005 0.005 0.001 0.   ]
-Sum of explained variance ratio of all PCs：0.9999999999999997</code></pre>
+Sum of explained variance ratio of all PCs：1.0000000000000002</code></pre>
 </div>
 </div>
 <p>The first PC (which is also the most important PC) accounts for 61.0% of the variance of the original dataset, while the second and third PC accounts for 25.4% and 5.25%, respectively. In total, the top two PCs accounts for 86.4% of the variance between schools.</p>
 <p>To check the relationship between the original and new variables:</p>
-<div id="8e494af0" class="cell" data-execution_count="15">
+<div id="e6691772" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_PC <span class="op">=</span> pd.DataFrame(pca.components_, columns <span class="op">=</span> df_school_reduced.columns.to_list()) <span class="co"># the list_var_X is used as the column names</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df_PC</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
@@ -764,120 +764,120 @@ Sum of explained variance ratio of all PCs：0.9999999999999997</code></pre>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
-<td>-0.289668</td>
-<td>0.289719</td>
-<td>0.004170</td>
-<td>-0.297055</td>
-<td>0.337594</td>
+<td>-0.289669</td>
+<td>0.289720</td>
+<td>0.004169</td>
+<td>-0.297056</td>
+<td>0.337598</td>
 <td>0.378880</td>
 <td>0.387132</td>
-<td>0.388071</td>
-<td>0.287653</td>
+<td>0.388072</td>
+<td>0.287645</td>
 <td>0.321187</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
-<td>0.414556</td>
-<td>-0.414507</td>
-<td>0.494571</td>
-<td>0.395244</td>
-<td>0.249434</td>
+<td>0.414554</td>
+<td>-0.414505</td>
+<td>0.494570</td>
+<td>0.395243</td>
+<td>0.249422</td>
 <td>0.113013</td>
-<td>0.072885</td>
+<td>0.072886</td>
 <td>0.069319</td>
-<td>0.337780</td>
-<td>0.237292</td>
+<td>0.337795</td>
+<td>0.237293</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
-<td>-0.278922</td>
-<td>0.278595</td>
-<td>0.789853</td>
-<td>-0.244469</td>
-<td>-0.217907</td>
-<td>-0.238182</td>
+<td>-0.278925</td>
+<td>0.278598</td>
+<td>0.789850</td>
+<td>-0.244470</td>
+<td>-0.217908</td>
+<td>-0.238183</td>
 <td>-0.169588</td>
 <td>-0.132951</td>
-<td>0.061538</td>
+<td>0.061541</td>
 <td>0.080728</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
-<td>-0.007539</td>
-<td>0.007277</td>
-<td>-0.343254</td>
+<td>-0.007550</td>
+<td>0.007289</td>
+<td>-0.343264</td>
 <td>-0.009157</td>
-<td>-0.342849</td>
-<td>-0.185413</td>
-<td>-0.232218</td>
-<td>-0.190336</td>
-<td>0.493684</td>
-<td>0.629430</td>
+<td>-0.342841</td>
+<td>-0.185421</td>
+<td>-0.232219</td>
+<td>-0.190334</td>
+<td>0.493698</td>
+<td>0.629416</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
-<td>-0.089285</td>
-<td>0.089245</td>
-<td>-0.107304</td>
-<td>-0.043019</td>
-<td>0.451706</td>
-<td>-0.364676</td>
-<td>-0.109797</td>
-<td>-0.143036</td>
-<td>0.606962</td>
-<td>-0.482446</td>
+<td>-0.089288</td>
+<td>0.089247</td>
+<td>-0.107298</td>
+<td>-0.043015</td>
+<td>0.451699</td>
+<td>-0.364663</td>
+<td>-0.109784</td>
+<td>-0.143023</td>
+<td>0.606959</td>
+<td>-0.482473</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">5</th>
-<td>0.031878</td>
-<td>-0.031810</td>
-<td>-0.005727</td>
-<td>-0.021328</td>
-<td>-0.088234</td>
-<td>0.022297</td>
-<td>-0.635282</td>
-<td>0.755326</td>
-<td>0.067218</td>
-<td>-0.102869</td>
+<td>0.031871</td>
+<td>-0.031803</td>
+<td>-0.005725</td>
+<td>-0.021311</td>
+<td>-0.088266</td>
+<td>0.022315</td>
+<td>-0.635267</td>
+<td>0.755332</td>
+<td>0.067232</td>
+<td>-0.102888</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">6</th>
-<td>-0.212042</td>
-<td>0.212464</td>
-<td>-0.041254</td>
-<td>0.371725</td>
-<td>0.556339</td>
-<td>-0.320021</td>
-<td>-0.238127</td>
-<td>-0.010058</td>
-<td>-0.381289</td>
-<td>0.394845</td>
+<td>-0.211811</td>
+<td>0.212233</td>
+<td>-0.041256</td>
+<td>0.371221</td>
+<td>0.556564</td>
+<td>-0.320157</td>
+<td>-0.238233</td>
+<td>-0.010084</td>
+<td>-0.381404</td>
+<td>0.394965</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">7</th>
-<td>-0.330121</td>
-<td>0.330523</td>
-<td>0.009840</td>
-<td>0.743169</td>
-<td>-0.313983</td>
-<td>0.200377</td>
-<td>0.113685</td>
-<td>0.058471</td>
-<td>0.191386</td>
-<td>-0.194086</td>
+<td>-0.330268</td>
+<td>0.330670</td>
+<td>0.009812</td>
+<td>0.743423</td>
+<td>-0.313608</td>
+<td>0.200152</td>
+<td>0.113562</td>
+<td>0.058447</td>
+<td>0.191107</td>
+<td>-0.193809</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">8</th>
-<td>-0.056905</td>
-<td>0.058570</td>
-<td>0.018593</td>
-<td>-0.053906</td>
-<td>0.197133</td>
-<td>0.690303</td>
-<td>-0.526178</td>
-<td>-0.442939</td>
-<td>0.026813</td>
-<td>-0.030378</td>
+<td>-0.056909</td>
+<td>0.058573</td>
+<td>0.018594</td>
+<td>-0.053896</td>
+<td>0.197121</td>
+<td>0.690309</td>
+<td>-0.526177</td>
+<td>-0.442936</td>
+<td>0.026826</td>
+<td>-0.030387</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">9</th>
@@ -904,7 +904,7 @@ Sum of explained variance ratio of all PCs：0.9999999999999997</code></pre>
 <li>The ATT8SCR_GIRLS variable contributes to the PC1 more than the other variables. <em>Can you explain this?</em></li>
 </ul>
 <p>We can choose the number of PCs using a Scree plot and elbow method, which is based on variance explained of each PC.</p>
-<div id="4508cfc0" class="cell" data-execution_count="16">
+<div id="13017369" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explained variance ratio</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>explained_var <span class="op">=</span> pca.explained_variance_ratio_</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>num_components <span class="op">=</span> <span class="bu">len</span>(explained_var)</span>
@@ -1003,7 +1003,7 @@ Sum of explained variance ratio of all PCs：0.9999999999999997</code></pre>
 <section id="task-three-to-validate-and-visualise-the-selected-pcs" class="level2">
 <h2 class="anchored" data-anchor-id="task-three-to-validate-and-visualise-the-selected-pcs">Task three: to validate and visualise the selected PCs</h2>
 <p>How do school look like and distribute in the top two PCs? To visualise them, we can use the following code and two PCs.</p>
-<div id="d4391b59" class="cell" data-execution_count="17">
+<div id="36afc4f7" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(pca_np_school_reduced[:, <span class="dv">0</span>], </span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>pca_np_school_reduced[:, <span class="dv">1</span>], </span>
@@ -1035,7 +1035,7 @@ Note
 </div>
 </div>
 <p>This plot doesn’t tell much. We can include additional variable to this plot, such as the overall attainment 8 score for all pupils. This would reveal how the overall attainment looks like in this new feature space.</p>
-<div id="7a7fa496" class="cell" data-execution_count="18">
+<div id="9ef76fbb" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame from PCA output</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df_pca_school_reduced <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    pca_np_school_reduced,</span>
@@ -1074,7 +1074,7 @@ Note
 </div>
 </div>
 <p>While the code above is equivalent to the code in the next cell, the code in the next cell is more concise and elegant.</p>
-<div id="7aeafabc" class="cell" data-execution_count="19">
+<div id="ca1d9895" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame from PCA output and append ATT8SCR</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>df_pca_school_reduced <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    pca_np_school_reduced,</span>
