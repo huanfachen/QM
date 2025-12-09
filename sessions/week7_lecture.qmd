@@ -16,7 +16,7 @@ format:
     slide-number: TRUE
     preview-links: auto
     theme: casa-slides
-    chalkboard: true
+    # chalkboard: true
     
 filters:
  - code-visibility
