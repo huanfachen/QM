@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>This week, we will focus on conducting dimensionality reduction on the performance and disadvantage variables of schools in England, trying to understand which variables (or variable combinations) are important in distinguishing these schools.</p>
 <p>We will use the method of principal component analysis (PCA).</p>
-<div id="f42da3f0" class="cell" data-execution_count="1">
+<div id="0ad7286e" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -290,12 +290,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
 <p>We’re going to use the filtered school data that has been used in previous practicals.</p>
-<div id="b10ecce2" class="cell" data-execution_count="2">
+<div id="1b120f53" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the dataset from Github</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_school <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/huanfachen/QM/refs/heads/main/sessions/L6_data/Performancetables_130242/2022-2023/england_filtered.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Check the shape and columns of this data frame.</p>
-<div id="f6388fb8" class="cell" data-execution_count="3">
+<div id="1e4dad6b" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"df_school has </span><span class="sc">{</span>df_school<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> rows and </span><span class="sc">{</span>df_school<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> columns."</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"First 5 rows:</span><span class="ch">\n</span><span class="st">"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_school.head(<span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -414,7 +414,7 @@ First 5 rows:
 <li><strong>P8MEA_NFSM6CLA1A</strong> – Progress 8 measure for non-disadvantaged pupils.</li>
 </ol>
 <p>Please note - we remove the count variables (e.g.&nbsp;NORB and NORG), as the count variables are affected by the pupil size of each school. We also remove variables that are redundant due to perfect correlation with those retained, such as PNUMENGFL, which is equal to 1-PNUMEAL.</p>
-<div id="ee1822e7" class="cell" data-execution_count="4">
+<div id="8e16fdf9" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the selected columns</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_school_reduced <span class="op">=</span> df_school[</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    [</span>
@@ -453,7 +453,7 @@ First 5 rows:
 <section id="task-one-to-address-missing-values-and-to-standardise-variables" class="level2">
 <h2 class="anchored" data-anchor-id="task-one-to-address-missing-values-and-to-standardise-variables">Task one: to address missing values and to standardise variables</h2>
 <p>We expect that all variabels in df_school_reduced are of numerical type. It is safe to check it before further analysis.</p>
-<div id="39ecc8a1" class="cell" data-execution_count="5">
+<div id="d675adc9" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Numeric columns: </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(df_school_reduced.select_dtypes(include<span class="op">=</span><span class="st">'number'</span>).columns.tolist()))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Non-numeric columns: </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(df_school_reduced.select_dtypes(exclude<span class="op">=</span><span class="st">'number'</span>).columns.tolist()))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -462,12 +462,12 @@ Non-numeric columns: []</code></pre>
 </div>
 </div>
 <p>To convert all columns to numeric, we can use the following code. Note that numeric columns are not affected.</p>
-<div id="46bd1d33" class="cell" data-execution_count="6">
+<div id="f519521b" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_school_reduced <span class="op">=</span> df_school_reduced.<span class="bu">apply</span>(pd.to_numeric, errors<span class="op">=</span><span class="st">'coerce'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now, let’s check whether our dataset has any missing values — this is important because PCA in sklearn package cannot handle <code>NaN</code> values directly.</p>
 <p>To display the number of missing entries for each column:</p>
-<div id="517ade78" class="cell" data-execution_count="7">
+<div id="9c7c7669" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check missing values column by column</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>missing_counts <span class="op">=</span> df_school_reduced.isnull().<span class="bu">sum</span>()</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Missing values per column:</span><span class="ch">\n</span><span class="st">"</span>, missing_counts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -506,7 +506,7 @@ Note
 <p>To fill in these missing values, we will use the KNNImputer() from sklearn.impute.</p>
 <p>This method finds the k closest rows (neighbors) to the one with the missing value and uses their values to compute an average for imputation.</p>
 <p>It’s a smarter approach than simply filling with the mean or median because it considers patterns across all variables.</p>
-<div id="451d0e06" class="cell" data-execution_count="8">
+<div id="add7b761" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> KNNImputer</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create our KNN imputer (k=5 is a common choice, but can be tuned)</span></span>
@@ -526,7 +526,7 @@ Note
 </div>
 </div>
 <p>Then, we will compare all variables in terms of their range, mean, and variance.</p>
-<div id="d5768ddf" class="cell" data-execution_count="9">
+<div id="6c5a2675" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_school_reduced.describe()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
@@ -664,7 +664,7 @@ Note
 <p>Therefore, we need to normalise these variables so that they are comparable before conducting PCA. Here, we will use the StandardScaler from sklearn package. According to <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html">the documentation</a>, it standardises each feature by removing the mean and scaling to unit variance, which is also called z-score standardisation.</p>
 <p>z = (x - u) / s</p>
 <p>Please note: using StandardScaler().fit_transform() on a DataFrame will output a numpy array, which differs from DataFrame and has no column names. If we would like to maintain a dataframe format, the numpy array should be wrapped back to DataFrame.</p>
-<div id="95d22858" class="cell" data-execution_count="10">
+<div id="56c66868" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># standardisation of df_school_reduced. This is essential for PCA.</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>np_scaled <span class="op">=</span> StandardScaler().fit_transform(df_school_reduced)</span>
@@ -677,7 +677,7 @@ Note
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can double check the scale of variables after the standardisation.</p>
-<div id="4dfadc37" class="cell" data-execution_count="11">
+<div id="a44fc4cd" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_school_reduced.describe()</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df_school_reduced.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -705,7 +705,7 @@ memory usage: 238.9 KB</code></pre>
 <section id="task-two-to-conduct-pca" class="level2">
 <h2 class="anchored" data-anchor-id="task-two-to-conduct-pca">Task two: to conduct PCA</h2>
 <p>We will use the following code to conduct PCA. First, a PCA object is created using <code>PCA()</code>. Then, this object is applied to fit and transform df_school_reduced.</p>
-<div id="43bfa52d" class="cell" data-execution_count="12">
+<div id="33cc756f" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA()</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the components</span></span>
@@ -718,14 +718,14 @@ memory usage: 238.9 KB</code></pre>
 </div>
 <p><code>pca</code> stores the relationship between the original and new variables, while <code>pca_np_school_reduced</code> is a numpy array that stores the new coordinates under the new variables for each school.</p>
 <p>How many new variables (or Principle Components) have been generated?</p>
-<div id="cd421bdf" class="cell" data-execution_count="13">
+<div id="aed1c46a" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Number of PCs: </span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(pca_np_school_reduced.shape[<span class="dv">1</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of PCs: 10</code></pre>
 </div>
 </div>
 <p>What are the importance of each PC? In other words, to what extent does each PC explain the variance of performance and disadvantage of schools?</p>
-<div id="69862870" class="cell" data-execution_count="14">
+<div id="c871c3e6" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Explained variance ratio of each PC:'</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pca.explained_variance_ratio_.<span class="bu">round</span>(<span class="dv">3</span>))</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the sum of explained variance should be equal to 1.0 or 100%</span></span>
@@ -738,7 +738,7 @@ Sum of explained variance ratio of all PCs：1.0000000000000002</code></pre>
 </div>
 <p>The first PC (which is also the most important PC) accounts for 61.0% of the variance of the original dataset, while the second and third PC accounts for 25.4% and 5.25%, respectively. In total, the top two PCs accounts for 86.4% of the variance between schools.</p>
 <p>To check the relationship between the original and new variables:</p>
-<div id="629e048e" class="cell" data-execution_count="15">
+<div id="080d21a1" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_PC <span class="op">=</span> pd.DataFrame(pca.components_, columns <span class="op">=</span> df_school_reduced.columns.to_list()) <span class="co"># the list_var_X is used as the column names</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df_PC</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
@@ -904,7 +904,7 @@ Sum of explained variance ratio of all PCs：1.0000000000000002</code></pre>
 <li>The ATT8SCR_GIRLS variable contributes to the PC1 more than the other variables. <em>Can you explain this?</em></li>
 </ul>
 <p>We can choose the number of PCs using a Scree plot and elbow method, which is based on variance explained of each PC.</p>
-<div id="b1ec572b" class="cell" data-execution_count="16">
+<div id="c701b1d5" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explained variance ratio</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>explained_var <span class="op">=</span> pca.explained_variance_ratio_</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>num_components <span class="op">=</span> <span class="bu">len</span>(explained_var)</span>
@@ -1003,7 +1003,7 @@ Sum of explained variance ratio of all PCs：1.0000000000000002</code></pre>
 <section id="task-three-to-validate-and-visualise-the-selected-pcs" class="level2">
 <h2 class="anchored" data-anchor-id="task-three-to-validate-and-visualise-the-selected-pcs">Task three: to validate and visualise the selected PCs</h2>
 <p>How do school look like and distribute in the top two PCs? To visualise them, we can use the following code and two PCs.</p>
-<div id="a8286e84" class="cell" data-execution_count="17">
+<div id="7b3440d1" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(pca_np_school_reduced[:, <span class="dv">0</span>], </span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>pca_np_school_reduced[:, <span class="dv">1</span>], </span>
@@ -1035,7 +1035,7 @@ Note
 </div>
 </div>
 <p>This plot doesn’t tell much. We can include additional variable to this plot, such as the overall attainment 8 score for all pupils. This would reveal how the overall attainment looks like in this new feature space.</p>
-<div id="b6c93025" class="cell" data-execution_count="18">
+<div id="e3cb56dc" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame from PCA output</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df_pca_school_reduced <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    pca_np_school_reduced,</span>
@@ -1074,7 +1074,7 @@ Note
 </div>
 </div>
 <p>While the code above is equivalent to the code in the next cell, the code in the next cell is more concise and elegant.</p>
-<div id="621bfd8e" class="cell" data-execution_count="19">
+<div id="0b77fadf" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create DataFrame from PCA output and append ATT8SCR</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>df_pca_school_reduced <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    pca_np_school_reduced,</span>
