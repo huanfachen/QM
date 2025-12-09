@@ -13,9 +13,9 @@ This week will introduce how to group similar data points together to discover p
 
 By the end of this week, you will be able to:
 
-1. Understand the principle and purpose of clustering analysis.
-2. Understand K-Means and apply K-Means to various datasets.
-3. Interpret the results of clustering analysis.
+1. Understand the principle and purpose of clustering analysis
+2. Understand K-Means and hierarchical clustering
+3. Interpret the results of clustering analysis
 
 ## Lecture 
 
