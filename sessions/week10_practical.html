@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Practical 10: Clustering analysis – Quantitative Methods</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="..//img/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ad727358b23ab71a57f124ef5e36212b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-ad727358b23ab71a57f124ef5e36212b.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ad727358b23ab71a57f124ef5e36212b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5457fb42737ce7af87b82faab80c0026.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-5457fb42737ce7af87b82faab80c0026.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-5457fb42737ce7af87b82faab80c0026.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Practical 10: Clustering analysis – Quantitative Methods">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://huanfachen.github.io/QM/sessions/week10_practical_files/figure-html/cell-10-output-1.png">
+<meta property="og:site_name" content="Foundations">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image:height" content="1060">
+<meta property="og:image:width" content="1370">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-md " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../img/logo/logo_only_sm.png" alt="" class="navbar-logo light-content">
+    <img src="../img/logo/logo_only_sm.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Quantitative Methods</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../setup/index.html"> 
+<span class="menu-text">Setup</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-week-by-week" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Week-by-Week</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-week-by-week">    
+        <li>
+    <a class="dropdown-item" href="../sessions/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Part 1: Basics</li>
+        <li>
+    <a class="dropdown-item" href="../sessions/week1.html">
+ <span class="dropdown-text">1. Explanatory Data Analysis #1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/week2.html">
+ <span class="dropdown-text">2. Explanatory Data Analysis #2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/week3.html">
+ <span class="dropdown-text">3. Hypothesis Testing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/week4.html">
+ <span class="dropdown-text">4. Introduction to Linear Algebra</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Part 2: Correlation and Regression</li>
+        <li>
+    <a class="dropdown-item" href="../sessions/week5.html">
+ <span class="dropdown-text">5. Measuring Relationship</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/week6.html">
+ <span class="dropdown-text">6. Introduction to Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/week7.html">
+ <span class="dropdown-text">7. Multiple Regression</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/week8.html">
+ <span class="dropdown-text">8. Multilevel Regression</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Part 3: Dimension Reduction &amp; Clustering</li>
+        <li>
+    <a class="dropdown-item" href="../sessions/week9.html">
+ <span class="dropdown-text">9. Dimension Reduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../sessions/week10.html">
+ <span class="dropdown-text">10. Clustering</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../references.qmd">
+ <span class="dropdown-text">Bibliography</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-assessments" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Assessments</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-assessments">    
+        <li>
+    <a class="dropdown-item" href="../assessments/index.html">
+ <span class="dropdown-text">Overview</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../help.html"> 
+<span class="menu-text">Getting Help</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#load-school-data" id="toc-load-school-data" class="nav-link" data-scroll-target="#load-school-data">Load school data</a></li>
+  <li><a href="#load-lad-to-county-lookup-and-filter-to-london" id="toc-load-lad-to-county-lookup-and-filter-to-london" class="nav-link" data-scroll-target="#load-lad-to-county-lookup-and-filter-to-london">Load LAD-to-county lookup and filter to London</a></li>
+  <li><a href="#select-clustering-variables" id="toc-select-clustering-variables" class="nav-link" data-scroll-target="#select-clustering-variables">Select clustering variables</a></li>
+  <li><a href="#check-and-handle-missing-values" id="toc-check-and-handle-missing-values" class="nav-link" data-scroll-target="#check-and-handle-missing-values">Check and handle missing values</a></li>
+  <li><a href="#standardise-variables" id="toc-standardise-variables" class="nav-link" data-scroll-target="#standardise-variables">Standardise variables</a></li>
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering">K-means clustering</a>
+  <ul class="collapse">
+  <li><a href="#elbow-plot-to-choose-k" id="toc-elbow-plot-to-choose-k" class="nav-link" data-scroll-target="#elbow-plot-to-choose-k">Elbow plot to choose <span class="math display">\[k\]</span></a></li>
+  <li><a href="#fit-k-means-with-chosen-k" id="toc-fit-k-means-with-chosen-k" class="nav-link" data-scroll-target="#fit-k-means-with-chosen-k">Fit K-means with chosen <span class="math display">\[k\]</span></a></li>
+  <li><a href="#inspect-k-means-cluster-centroids" id="toc-inspect-k-means-cluster-centroids" class="nav-link" data-scroll-target="#inspect-k-means-cluster-centroids">Inspect K-means cluster centroids</a></li>
+  <li><a href="#plot-of-k-means-cluster-centroids" id="toc-plot-of-k-means-cluster-centroids" class="nav-link" data-scroll-target="#plot-of-k-means-cluster-centroids">Plot of K-means cluster centroids</a></li>
+  <li><a href="#visualising-clusters-with-selected-variables" id="toc-visualising-clusters-with-selected-variables" class="nav-link" data-scroll-target="#visualising-clusters-with-selected-variables">Visualising clusters with selected variables</a></li>
+  </ul></li>
+  <li><a href="#hierarchical-agglomerative-clustering" id="toc-hierarchical-agglomerative-clustering" class="nav-link" data-scroll-target="#hierarchical-agglomerative-clustering">Hierarchical (Agglomerative) clustering</a>
+  <ul class="collapse">
+  <li><a href="#helper-function-to-plot-dendrogram" id="toc-helper-function-to-plot-dendrogram" class="nav-link" data-scroll-target="#helper-function-to-plot-dendrogram">Helper function to plot dendrogram</a></li>
+  <li><a href="#fit-hierarchical-model" id="toc-fit-hierarchical-model" class="nav-link" data-scroll-target="#fit-hierarchical-model">Fit hierarchical model</a></li>
+  <li><a href="#plot-truncated-dendrogram" id="toc-plot-truncated-dendrogram" class="nav-link" data-scroll-target="#plot-truncated-dendrogram">Plot truncated dendrogram</a></li>
+  <li><a href="#plot-of-hierarchical-cluster-centroids" id="toc-plot-of-hierarchical-cluster-centroids" class="nav-link" data-scroll-target="#plot-of-hierarchical-cluster-centroids">Plot of hierarchical cluster centroids</a></li>
+  <li><a href="#visualising-clusters-with-selected-variables-1" id="toc-visualising-clusters-with-selected-variables-1" class="nav-link" data-scroll-target="#visualising-clusters-with-selected-variables-1">Visualising clusters with selected variables</a></li>
+  </ul></li>
+  <li><a href="#map-london-schools-by-cluster" id="toc-map-london-schools-by-cluster" class="nav-link" data-scroll-target="#map-london-schools-by-cluster">Map London schools by cluster</a>
+  <ul class="collapse">
+  <li><a href="#map-with-k-means-clusters" id="toc-map-with-k-means-clusters" class="nav-link" data-scroll-target="#map-with-k-means-clusters">Map with K-means clusters</a></li>
+  <li><a href="#map-with-hierarchical-clusters" id="toc-map-with-hierarchical-clusters" class="nav-link" data-scroll-target="#map-with-hierarchical-clusters">Map with hierarchical clusters</a></li>
+  </ul></li>
+  <li><a href="#youre-done" id="toc-youre-done" class="nav-link" data-scroll-target="#youre-done">You’re Done!</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/huanfachen/QM/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="week10_practical.ipynb" download="week10_practical.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Practical 10: Clustering analysis</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This week, we will focus on clustering analysis on the attainment and disadvantage variables of schools in England, aiming to identify the groups within these schools in terms of attainment and disadvantange dimensions.</p>
+<p>The practical consists of the following steps:</p>
+<ol type="1">
+<li>Load the national school performance dataset.</li>
+<li>Filter to schools in Greater London.</li>
+<li>Select a subset of variables related to disadvantage and attainment.</li>
+<li>Handle missing values and standardise the data.</li>
+<li>Run <strong>K-means</strong> and <strong>hierarchical (agglomerative)</strong> clustering.</li>
+<li>Compare the two clustering results.</li>
+<li>Map the schools using their geospatial locations.</li>
+</ol>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>We first import the Python libraries needed for data handling, clustering, and plotting.</p>
+<div id="f39bd4ab" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> KNNImputer</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans, AgglomerativeClustering</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>, context<span class="op">=</span><span class="st">"notebook"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.figsize"</span>] <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="load-school-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-school-data">Load school data</h2>
+<p>We now load the DfE school dataset of 2022-2023.</p>
+<div id="a3d08bd9" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>url_school <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/huanfachen/QM/refs/heads/main/sessions/L6_data/Performancetables_130242/2022-2023/england_filtered.csv"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df_school <span class="op">=</span> pd.read_csv(url_school)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_school.shape)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_school.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(3056, 37)
+      URN                                  SCHNAME.x  LEA  LANAME  TOWN.x  \
+0  100053                     Acland Burghley School  202  Camden  London   
+1  100054                The Camden School for Girls  202  Camden  London   
+2  100052                           Hampstead School  202  Camden  London   
+3  100049                          Haverstock School  202  Camden  London   
+4  100059  La Sainte Union Catholic Secondary School  202  Camden  London   
+
+  gor_name  TOTPUPS  ATT8SCR  ATT8SCRENG  ATT8SCRMAT  ...  PPERSABS10  \
+0   London   1163.0     50.3        10.7        10.2  ...        24.7   
+1   London   1047.0     65.8        13.5        12.7  ...         6.6   
+2   London   1319.0     44.6         9.7         9.1  ...        24.0   
+3   London    982.0     41.7         8.7         8.8  ...        33.1   
+4   London    817.0     49.6        10.8         9.4  ...        33.8   
+
+             SCHOOLTYPE.x         RELCHAR       ADMPOL.y      ADMPOL_PT  \
+0  State-funded secondary  Does not apply  Non-selective  OTHER NON SEL   
+1  State-funded secondary             NaN  Non-selective  OTHER NON SEL   
+2  State-funded secondary  Does not apply  Non-selective  OTHER NON SEL   
+3  State-funded secondary  Does not apply  Non-selective  OTHER NON SEL   
+4  State-funded secondary  Roman Catholic  Non-selective  OTHER NON SEL   
+
+   gender_name  OFSTEDRATING         MINORGROUP   easting  northing  
+0        Mixed          Good  Maintained school  528962.0  185931.0  
+1        Girls          Good  Maintained school  529441.0  184659.0  
+2        Mixed          Good  Maintained school  524402.0  185633.0  
+3        Mixed          Good  Maintained school  528159.0  184498.0  
+4        Girls          Good  Maintained school  528379.0  186191.0  
+
+[5 rows x 37 columns]</code></pre>
+</div>
+</div>
+</section>
+<section id="load-lad-to-county-lookup-and-filter-to-london" class="level2">
+<h2 class="anchored" data-anchor-id="load-lad-to-county-lookup-and-filter-to-london">Load LAD-to-county lookup and filter to London</h2>
+<p>We need to keep only schools in <strong>Inner London</strong> or <strong>Outer London</strong>. To do this, we join a LAD-to-county lookup table to the school data.</p>
+<div id="f6cd26e8" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw link to the lookup table</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>url_lad_county <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/huanfachen/QM/refs/heads/main/sessions/L10_data/Local_Authority_District_to_County_(December_2024)_Lookup_in_EN.csv"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df_lad_county <span class="op">=</span> pd.read_csv(url_lad_county)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_lad_county.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     LAD24CD               LAD24NM    CTY24CD         CTY24NM  ObjectId
+0  E07000008             Cambridge  E10000003  Cambridgeshire         1
+1  E07000009   East Cambridgeshire  E10000003  Cambridgeshire         2
+2  E07000010               Fenland  E10000003  Cambridgeshire         3
+3  E07000011       Huntingdonshire  E10000003  Cambridgeshire         4
+4  E07000012  South Cambridgeshire  E10000003  Cambridgeshire         5</code></pre>
+</div>
+</div>
+<p>Now, we join the lookup to the school data:</p>
+<ul>
+<li>Match <code>LANAME</code> in <code>df_school</code> with <code>LAD24NM</code> in <code>df_lad_county</code>.<br>
+</li>
+<li>Keep only rows where <code>CTY24NM</code> is <strong>Inner London</strong> or <strong>Outer London</strong>.</li>
+</ul>
+<div id="3d0c656b" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge school data with LAD→County lookup</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_school_london <span class="op">=</span> df_school.merge(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    df_lad_county[[<span class="st">"LAD24NM"</span>, <span class="st">"CTY24NM"</span>]],</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    left_on<span class="op">=</span><span class="st">"LANAME"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    right_on<span class="op">=</span><span class="st">"LAD24NM"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    how<span class="op">=</span><span class="st">"left"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter to Inner and Outer London</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>london_filter <span class="op">=</span> df_school_london[<span class="st">"CTY24NM"</span>].isin([<span class="st">"Inner London"</span>, <span class="st">"Outer London"</span>])</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>df_school_london <span class="op">=</span> df_school_london[london_filter].copy()</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>df_school_london[<span class="st">"CTY24NM"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>CTY24NM
+Outer London    294
+Inner London    149
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="select-clustering-variables" class="level2">
+<h2 class="anchored" data-anchor-id="select-clustering-variables">Select clustering variables</h2>
+<p>The metadata of the school data is available <a href="https://github.com/huanfachen/QM/blob/main/sessions/L6_data/Performancetables_130249/2022-2023/census_meta.csv">here</a>. For convenience, the columns are described as below:<br>
+1. <strong>URN</strong>: Unique Reference Number identifying a school.<br>
+2. <strong>SCHNAME.x</strong>: School name as recorded in the official register.<br>
+3. <strong>LEA</strong>: Local Education Authority (code).<br>
+4. <strong>LANAME</strong>: Name of the Local Authority.<br>
+5. <strong>TOWN.x</strong>: Town in which the school is located.<br>
+6. <strong>gor_name</strong>: Government Office Region name.<br>
+7. <strong>TOTPUPS</strong>: Total number of pupils on roll.<br>
+8. <strong>ATT8SCR</strong>: Average Attainment 8 score for all pupils.<br>
+9. <strong>ATT8SCRENG</strong>: Average Attainment 8 score for English subject grouping.<br>
+10. <strong>ATT8SCRMAT</strong>: Average Attainment 8 score for Maths subject grouping.<br>
+11. <strong>ATT8SCR_FSM6CLA1A</strong>: Average Attainment 8 score for pupils eligible for Free School Meals in the last 6 years and/or Children Looked After.<br>
+12. <strong>ATT8SCR_NFSM6CLA1A</strong>: Average Attainment 8 score for pupils not eligible for Free School Meals in the last 6 years and not Children Looked After.<br>
+13. <strong>ATT8SCR_BOYS</strong>: Average Attainment 8 score for male pupils.<br>
+14. <strong>ATT8SCR_GIRLS</strong>: Average Attainment 8 score for female pupils.<br>
+15. <strong>P8MEA</strong>: Progress 8 measure for all pupils.<br>
+16. <strong>P8MEA_FSM6CLA1A</strong>: Progress 8 measure for disadvantaged pupils (FSM6 and/or CLA1A).<br>
+17. <strong>P8MEA_NFSM6CLA1A</strong>: Progress 8 measure for non-disadvantaged pupils.<br>
+18. <strong>PTFSM6CLA1A</strong>: Percentage of pupils eligible for FSM6 and/or CLA1A.<br>
+19. <strong>PTNOTFSM6CLA1A</strong>: Percentage of pupils not eligible for FSM6 and/or CLA1A.<br>
+20. <strong>PNUMEAL</strong>: Percentage of pupils whose first language is known or believed to be other than English.<br>
+21. <strong>PNUMENGFL</strong>: Percentage of pupils whose first language is English.<br>
+22. <strong>PTPRIORLO</strong>: Percentage of pupils with low prior attainment from Key Stage 2.<br>
+23. <strong>PTPRIORHI</strong>: Percentage of pupils with high prior attainment from Key Stage 2.<br>
+24. <strong>NORB</strong>: Number of boys on roll.<br>
+25. <strong>NORG</strong>: Number of girls on roll.<br>
+26. <strong>PNUMFSMEVER</strong>: Percentage of pupils who have been eligible for free school meals in the past six years (FSM6 measure).<br>
+27. <strong>PERCTOT</strong>: Percentage of total pupil absence (authorised and unauthorised combined).<br>
+28. <strong>PPERSABS10</strong>: Percentage of pupils who are persistently absent (overall absence rate 10% or more).<br>
+29. <strong>SCHOOLTYPE.x</strong>: Official classification of the school type (e.g., Academy, Community, Voluntary Aided).<br>
+30. <strong>RELCHAR</strong>: Religious character of the school (e.g., Church of England, Roman Catholic, None).<br>
+31. <strong>ADMPOL.y</strong>: Admission policy type (e.g., non-selective, selective).<br>
+32. <strong>ADMPOL_PT</strong>: Percentage breakdown related to admission policy (context-specific).<br>
+33. <strong>gender_name</strong>: Gender intake of the school (Mixed, Boys, Girls).<br>
+34. <strong>OFSTEDRATING</strong>: Latest Ofsted inspection overall effectiveness grade.<br>
+35. <strong>MINORGROUP</strong>: Ethnic minority group classification for aggregation purposes.<br>
+36. <strong>easting</strong>: Ordnance Survey Easting coordinate of school location.<br>
+37. <strong>northing</strong>: Ordnance Survey Northing coordinate of school location.</p>
+<p>As the focus is to explore the performance and disadvantage of schools, we will keep the following variables, which is the same as Week-9:</p>
+<ol type="1">
+<li><strong>PTFSM6CLA1A</strong> – Percentage of pupils eligible for Free School Meals in the past six years (FSM6) and/or Children Looked After (CLA1A).<br>
+</li>
+<li><strong>PTNOTFSM6CLA1A</strong> – Percentage of pupils not eligible for FSM6 and not CLA1A.<br>
+</li>
+<li><strong>PNUMEAL</strong> – Percentage of pupils whose first language is known or believed to be other than English.<br>
+</li>
+<li><strong>PNUMFSMEVER</strong> – Percentage of pupils who have ever been eligible for Free School Meals in the past six years (FSM6 measure).<br>
+</li>
+<li><strong>ATT8SCR_FSM6CLA1A</strong> – Average Attainment 8 score for pupils eligible for FSM6 and/or CLA1A.<br>
+</li>
+<li><strong>ATT8SCR_NFSM6CLA1A</strong> – Average Attainment 8 score for pupils not eligible for FSM6 and not CLA1A.<br>
+</li>
+<li><strong>ATT8SCR_BOYS</strong> – Average Attainment 8 score for male pupils.<br>
+</li>
+<li><strong>ATT8SCR_GIRLS</strong> – Average Attainment 8 score for female pupils.<br>
+</li>
+<li><strong>P8MEA_FSM6CLA1A</strong> – Progress 8 measure for disadvantaged pupils (FSM6 and/or CLA1A).<br>
+</li>
+<li><strong>P8MEA_NFSM6CLA1A</strong> – Progress 8 measure for non-disadvantaged pupils.</li>
+</ol>
+<div id="e4d4eaf8" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cols_for_clustering <span class="op">=</span> [</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PTFSM6CLA1A"</span>, <span class="st">"PTNOTFSM6CLA1A"</span>, <span class="st">"PNUMEAL"</span>, <span class="st">"PNUMFSMEVER"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ATT8SCR_FSM6CLA1A"</span>, <span class="st">"ATT8SCR_NFSM6CLA1A"</span>, <span class="st">"ATT8SCR_BOYS"</span>, <span class="st">"ATT8SCR_GIRLS"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"P8MEA_FSM6CLA1A"</span>, <span class="st">"P8MEA_NFSM6CLA1A"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>df_school_reduced <span class="op">=</span> df_school_london[cols_for_clustering].copy()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>df_school_reduced.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">PTFSM6CLA1A</th>
+<th data-quarto-table-cell-role="th">PTNOTFSM6CLA1A</th>
+<th data-quarto-table-cell-role="th">PNUMEAL</th>
+<th data-quarto-table-cell-role="th">PNUMFSMEVER</th>
+<th data-quarto-table-cell-role="th">ATT8SCR_FSM6CLA1A</th>
+<th data-quarto-table-cell-role="th">ATT8SCR_NFSM6CLA1A</th>
+<th data-quarto-table-cell-role="th">ATT8SCR_BOYS</th>
+<th data-quarto-table-cell-role="th">ATT8SCR_GIRLS</th>
+<th data-quarto-table-cell-role="th">P8MEA_FSM6CLA1A</th>
+<th data-quarto-table-cell-role="th">P8MEA_NFSM6CLA1A</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>37.0</td>
+<td>63.0</td>
+<td>23.6</td>
+<td>39.6</td>
+<td>34.8</td>
+<td>59.2</td>
+<td>51.5</td>
+<td>46.8</td>
+<td>-0.99</td>
+<td>0.34</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>36.0</td>
+<td>64.0</td>
+<td>25.5</td>
+<td>30.3</td>
+<td>54.7</td>
+<td>72.0</td>
+<td>NaN</td>
+<td>65.8</td>
+<td>0.25</td>
+<td>1.13</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>45.0</td>
+<td>55.0</td>
+<td>38.1</td>
+<td>51.3</td>
+<td>39.3</td>
+<td>49.0</td>
+<td>41.9</td>
+<td>47.1</td>
+<td>-0.18</td>
+<td>0.09</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>63.0</td>
+<td>37.0</td>
+<td>57.5</td>
+<td>69.8</td>
+<td>37.7</td>
+<td>48.5</td>
+<td>40.1</td>
+<td>43.7</td>
+<td>-0.44</td>
+<td>0.02</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>41.0</td>
+<td>59.0</td>
+<td>50.6</td>
+<td>42.7</td>
+<td>45.9</td>
+<td>52.2</td>
+<td>NaN</td>
+<td>49.6</td>
+<td>-0.20</td>
+<td>0.25</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="check-and-handle-missing-values" class="level2">
+<h2 class="anchored" data-anchor-id="check-and-handle-missing-values">Check and handle missing values</h2>
+<p>Clustering algorithms cannot directly work with missing values, so we have to handle them. We will use <strong>KNN imputation</strong>, which fills in missing values based on similar rows.</p>
+<div id="f929c2b5" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_school_reduced.isna().<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>PTFSM6CLA1A           11
+PTNOTFSM6CLA1A        11
+PNUMEAL                2
+PNUMFSMEVER            2
+ATT8SCR_FSM6CLA1A     20
+ATT8SCR_NFSM6CLA1A    19
+ATT8SCR_BOYS          86
+ATT8SCR_GIRLS         63
+P8MEA_FSM6CLA1A       23
+P8MEA_NFSM6CLA1A      21
+dtype: int64</code></pre>
+</div>
+</div>
+<div id="e89ccc3d" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use K-nearest neighbours imputation (k = 5)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>imputer <span class="op">=</span> KNNImputer(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>reduced_imputed_array <span class="op">=</span> imputer.fit_transform(df_school_reduced)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>df_reduced_imputed <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    reduced_imputed_array,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>cols_for_clustering,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>df_school_london.index</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>df_reduced_imputed.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">PTFSM6CLA1A</th>
+<th data-quarto-table-cell-role="th">PTNOTFSM6CLA1A</th>
+<th data-quarto-table-cell-role="th">PNUMEAL</th>
+<th data-quarto-table-cell-role="th">PNUMFSMEVER</th>
+<th data-quarto-table-cell-role="th">ATT8SCR_FSM6CLA1A</th>
+<th data-quarto-table-cell-role="th">ATT8SCR_NFSM6CLA1A</th>
+<th data-quarto-table-cell-role="th">ATT8SCR_BOYS</th>
+<th data-quarto-table-cell-role="th">ATT8SCR_GIRLS</th>
+<th data-quarto-table-cell-role="th">P8MEA_FSM6CLA1A</th>
+<th data-quarto-table-cell-role="th">P8MEA_NFSM6CLA1A</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>37.0</td>
+<td>63.0</td>
+<td>23.6</td>
+<td>39.6</td>
+<td>34.8</td>
+<td>59.2</td>
+<td>51.50</td>
+<td>46.8</td>
+<td>-0.99</td>
+<td>0.34</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>36.0</td>
+<td>64.0</td>
+<td>25.5</td>
+<td>30.3</td>
+<td>54.7</td>
+<td>72.0</td>
+<td>60.18</td>
+<td>65.8</td>
+<td>0.25</td>
+<td>1.13</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>45.0</td>
+<td>55.0</td>
+<td>38.1</td>
+<td>51.3</td>
+<td>39.3</td>
+<td>49.0</td>
+<td>41.90</td>
+<td>47.1</td>
+<td>-0.18</td>
+<td>0.09</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>63.0</td>
+<td>37.0</td>
+<td>57.5</td>
+<td>69.8</td>
+<td>37.7</td>
+<td>48.5</td>
+<td>40.10</td>
+<td>43.7</td>
+<td>-0.44</td>
+<td>0.02</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>41.0</td>
+<td>59.0</td>
+<td>50.6</td>
+<td>42.7</td>
+<td>45.9</td>
+<td>52.2</td>
+<td>48.12</td>
+<td>49.6</td>
+<td>-0.20</td>
+<td>0.25</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>For each missing value, KNNImputer looks at the 5 most similar schools and uses their values to fill the gap. This helps us keep as many London schools as possible in the analysis.</p>
+</section>
+<section id="standardise-variables" class="level2">
+<h2 class="anchored" data-anchor-id="standardise-variables">Standardise variables</h2>
+<p>Different variables are measured on different scales (e.g.&nbsp;ratio vs scores). To avoid one variable dominating the distance measure, we standardise them so each has mean <span class="math display">\[0\]</span> and standard deviation <span class="math display">\[1\]</span>.</p>
+<div id="9cb7ade2" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>scaled_array <span class="op">=</span> scaler.fit_transform(df_reduced_imputed)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>df_scaled <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    scaled_array,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>cols_for_clustering,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>df_school_london.index</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>df_scaled.describe().T</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">count</th>
+<th data-quarto-table-cell-role="th">mean</th>
+<th data-quarto-table-cell-role="th">std</th>
+<th data-quarto-table-cell-role="th">min</th>
+<th data-quarto-table-cell-role="th">25%</th>
+<th data-quarto-table-cell-role="th">50%</th>
+<th data-quarto-table-cell-role="th">75%</th>
+<th data-quarto-table-cell-role="th">max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">PTFSM6CLA1A</th>
+<td>443.0</td>
+<td>-1.122754e-16</td>
+<td>1.001131</td>
+<td>-2.058274</td>
+<td>-0.760004</td>
+<td>-0.045956</td>
+<td>0.733006</td>
+<td>2.875152</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">PTNOTFSM6CLA1A</th>
+<td>443.0</td>
+<td>5.453375e-16</td>
+<td>1.001131</td>
+<td>-2.874922</td>
+<td>-0.733408</td>
+<td>0.045324</td>
+<td>0.759162</td>
+<td>2.057049</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">PNUMEAL</th>
+<td>443.0</td>
+<td>-2.004917e-16</td>
+<td>1.001131</td>
+<td>-1.853002</td>
+<td>-0.769305</td>
+<td>-0.097718</td>
+<td>0.751942</td>
+<td>2.731088</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">PNUMFSMEVER</th>
+<td>443.0</td>
+<td>1.122754e-16</td>
+<td>1.001131</td>
+<td>-2.045314</td>
+<td>-0.731927</td>
+<td>-0.045829</td>
+<td>0.764420</td>
+<td>2.685495</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">ATT8SCR_FSM6CLA1A</th>
+<td>443.0</td>
+<td>1.603934e-16</td>
+<td>1.001131</td>
+<td>-3.122449</td>
+<td>-0.612879</td>
+<td>-0.115071</td>
+<td>0.423794</td>
+<td>4.195848</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">ATT8SCR_NFSM6CLA1A</th>
+<td>443.0</td>
+<td>-6.656326e-16</td>
+<td>1.001131</td>
+<td>-2.577729</td>
+<td>-0.634894</td>
+<td>-0.058202</td>
+<td>0.512891</td>
+<td>3.581115</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">ATT8SCR_BOYS</th>
+<td>443.0</td>
+<td>3.689048e-16</td>
+<td>1.001131</td>
+<td>-2.175972</td>
+<td>-0.675904</td>
+<td>-0.107455</td>
+<td>0.501233</td>
+<td>3.772215</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">ATT8SCR_GIRLS</th>
+<td>443.0</td>
+<td>8.019670e-16</td>
+<td>1.001131</td>
+<td>-2.820539</td>
+<td>-0.636080</td>
+<td>-0.072172</td>
+<td>0.486261</td>
+<td>3.793060</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">P8MEA_FSM6CLA1A</th>
+<td>443.0</td>
+<td>2.004917e-17</td>
+<td>1.001131</td>
+<td>-3.131726</td>
+<td>-0.683721</td>
+<td>-0.022580</td>
+<td>0.638560</td>
+<td>3.729837</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">P8MEA_NFSM6CLA1A</th>
+<td>443.0</td>
+<td>8.019670e-17</td>
+<td>1.001131</td>
+<td>-3.953417</td>
+<td>-0.635673</td>
+<td>0.061904</td>
+<td>0.682918</td>
+<td>4.340944</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>After scaling, each variable is on a similar scale, which makes distance-based methods like K-means and hierarchical clustering more sensible.</p>
+</section>
+<section id="k-means-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="k-means-clustering">K-means clustering</h2>
+<p>We now run <strong>K-means</strong> on the scaled data. We need to choose the number of clusters <span class="math display">\[k\]</span>. We will:</p>
+<ol type="1">
+<li>Try different values of <em>k</em>.<br>
+</li>
+<li>Plot the <strong>inertia</strong> (within-cluster sum of squares).<br>
+</li>
+<li>Use the <strong>elbow method</strong> to pick a reasonable <span class="math display">\[k\]</span>.</li>
+</ol>
+<section id="elbow-plot-to-choose-k" class="level3">
+<h3 class="anchored" data-anchor-id="elbow-plot-to-choose-k">Elbow plot to choose <span class="math display">\[k\]</span></h3>
+<div id="3b51a58f" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>inertias <span class="op">=</span> []</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>k_values <span class="op">=</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">11</span>)  <span class="co"># try k = 2 to 10</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> k_values:</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    kmeans <span class="op">=</span> KMeans(</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        n_clusters<span class="op">=</span>k,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        n_init<span class="op">=</span><span class="st">"auto"</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    kmeans.fit(df_scaled)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    inertias.append(kmeans.inertia_)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>plt.plot(k_values, inertias, marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of clusters (k)"</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Inertia (within-cluster sum of squares)"</span>)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"K-means: Elbow plot (London schools)"</span>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>plt.xticks(k_values)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week10_practical_files/figure-html/cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="week10_practical_files/figure-html/cell-10-output-1.png" width="685" height="530" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this elbow plot, each point shows how <em>tight</em> the clusters are for that <em>k</em>, and we are looking for a “bend” or “elbow” where increasing <em>k</em> gives only small improvements. This <em>k</em> represents a good trade-off between model complexity (i.e.&nbsp;number of clusters) and performance. Here, we will choose k=5</p>
+</section>
+<section id="fit-k-means-with-chosen-k" class="level3">
+<h3 class="anchored" data-anchor-id="fit-k-means-with-chosen-k">Fit K-means with chosen <span class="math display">\[k\]</span></h3>
+<div id="33e64fdf" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>k_val <span class="op">=</span> <span class="dv">5</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>kmeans_final <span class="op">=</span> KMeans(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    n_clusters<span class="op">=</span>k_val,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    n_init<span class="op">=</span><span class="st">"auto"</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>kmeans_final.fit(df_scaled)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>kmeans_labels <span class="op">=</span> kmeans_final.labels_</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Store labels in the London school dataframe</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>df_school_london[<span class="st">"cluster_kmeans"</span>] <span class="op">=</span> kmeans_labels</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_school_london[<span class="st">"cluster_kmeans"</span>].value_counts().sort_index())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>cluster_kmeans
+0     20
+1     83
+2    111
+3    118
+4    111
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="inspect-k-means-cluster-centroids" class="level3">
+<h3 class="anchored" data-anchor-id="inspect-k-means-cluster-centroids">Inspect K-means cluster centroids</h3>
+<p>We will look at the <em>typical</em> school in each cluster by examining the cluster centroids back in the original units.</p>
+<div id="c9c40138" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>centroids_scaled <span class="op">=</span> kmeans_final.cluster_centers_</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>centroids_original <span class="op">=</span> scaler.inverse_transform(centroids_scaled)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>df_centroids <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    centroids_original,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>cols_for_clustering</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>df_centroids.index <span class="op">=</span> [<span class="ss">f"Cluster </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(k_val)]</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_centroids)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           PTFSM6CLA1A  PTNOTFSM6CLA1A    PNUMEAL  PNUMFSMEVER  \
+Cluster 0     7.350000       92.700000  34.795000     8.125000   
+Cluster 1    44.602410       55.424096  44.860241    46.492771   
+Cluster 2    23.940741       76.059426  25.184156    25.829754   
+Cluster 3    44.986441       55.013559  53.217797    46.264407   
+Cluster 4    20.106306       79.902703  33.760360    21.265766   
+
+           ATT8SCR_FSM6CLA1A  ATT8SCR_NFSM6CLA1A  ATT8SCR_BOYS  ATT8SCR_GIRLS  \
+Cluster 0          76.120000           79.683000     78.516000      79.736000   
+Cluster 1          35.532048           44.074940     39.069157      42.077590   
+Cluster 2          39.858803           52.114166     47.990934      51.002290   
+Cluster 3          46.191864           53.223729     48.102203      51.559322   
+Cluster 4          50.031712           61.180180     57.813874      59.716036   
+
+           P8MEA_FSM6CLA1A  P8MEA_NFSM6CLA1A  
+Cluster 0         0.796200          0.953400  
+Cluster 1        -0.577301         -0.091373  
+Cluster 2        -0.430990          0.223202  
+Cluster 3         0.161915          0.535220  
+Cluster 4         0.397964          0.895892  </code></pre>
+</div>
+</div>
+</section>
+<section id="plot-of-k-means-cluster-centroids" class="level3">
+<h3 class="anchored" data-anchor-id="plot-of-k-means-cluster-centroids">Plot of K-means cluster centroids</h3>
+<p>We will use the following code to visualise the cluster centroids in multiple dimensions.</p>
+<div id="1db14824" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># adapted from this tutorial: https://towardsdatascience.com/how-to-make-stunning-radar-charts-with-python-implemented-in-matplotlib-and-plotly-91e21801d8ca</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> radar_plot_cluster_centroids(df_cluster_centroid):</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># parameters</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># df_cluster_centroid: a dataframe with rows representing a cluster centroid and columns representing variables</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># manually 'close' the line</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    categories <span class="op">=</span> df_cluster_centroid.columns.values.tolist()</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    categories <span class="op">=</span> [<span class="op">*</span>categories, categories[<span class="dv">0</span>]]</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    label_loc <span class="op">=</span> np.linspace(start<span class="op">=</span><span class="dv">0</span>, stop<span class="op">=</span><span class="dv">2</span> <span class="op">*</span> np.pi, num<span class="op">=</span><span class="bu">len</span>(categories))</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    plt.subplot(polar<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> index, row <span class="kw">in</span> df_cluster_centroid.iterrows():</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>        centroid <span class="op">=</span> row.tolist()</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        centroid <span class="op">=</span> [<span class="op">*</span>centroid, centroid[<span class="dv">0</span>]]</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        label <span class="op">=</span> <span class="st">"</span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(index)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        plt.plot(label_loc, centroid, label<span class="op">=</span>label)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Cluster centroid comparison'</span>, size<span class="op">=</span><span class="dv">20</span>, y<span class="op">=</span><span class="fl">1.05</span>)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    lines, labels <span class="op">=</span> plt.thetagrids(np.degrees(label_loc), labels<span class="op">=</span>categories)</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Can you observe and describe the difference between cluster centroids?</p>
+<div id="bcd24089" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>radar_plot_cluster_centroids(df_centroids)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week10_practical_files/figure-html/cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="week10_practical_files/figure-html/cell-14-output-1.png" width="793" height="682" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="visualising-clusters-with-selected-variables" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-clusters-with-selected-variables">Visualising clusters with selected variables</h3>
+<p>To visualise all data points coloured by the clusters, we can pick up two variables (such as Attainment 8 for FSM vs non-FSM students) and create a scatterplot.</p>
+<div id="002d460b" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>x_var <span class="op">=</span> <span class="st">"ATT8SCR_FSM6CLA1A"</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>y_var <span class="op">=</span> <span class="st">"ATT8SCR_NFSM6CLA1A"</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_school_london,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>x_var, y<span class="op">=</span>y_var,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"cluster_kmeans"</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">"tab10"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.7</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"K-means clusters (k=</span><span class="sc">{</span>k_val<span class="sc">}</span><span class="ss">) on </span><span class="sc">{</span>x_var<span class="sc">}</span><span class="ss"> vs </span><span class="sc">{</span>y_var<span class="sc">}</span><span class="ss"> (London schools)"</span>)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Cluster"</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.05</span>, <span class="dv">1</span>), loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week10_practical_files/figure-html/cell-15-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="week10_practical_files/figure-html/cell-15-output-1.png" width="785" height="559" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="hierarchical-agglomerative-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="hierarchical-agglomerative-clustering">Hierarchical (Agglomerative) clustering</h2>
+<p>We now apply <strong>hierarchical clustering</strong> using <code>AgglomerativeClustering</code>. This builds a tree (dendrogram) that shows how clusters are merged step-by-step.</p>
+<section id="helper-function-to-plot-dendrogram" class="level3">
+<h3 class="anchored" data-anchor-id="helper-function-to-plot-dendrogram">Helper function to plot dendrogram</h3>
+<p>We reconstruct a linkage matrix from the fitted model, following the pattern used in scikit-learn tutorials.</p>
+<div id="1dcece02" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_dendrogram(model, <span class="op">**</span>kwargs):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Plot a dendrogram for a fitted AgglomerativeClustering model.</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">    This reconstructs the linkage matrix from the model's children_ and distances_.</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Number of samples</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    n_samples <span class="op">=</span> <span class="bu">len</span>(model.labels_)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Count samples under each node</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    counts <span class="op">=</span> np.zeros(model.children_.shape[<span class="dv">0</span>])</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (left_child, right_child) <span class="kw">in</span> <span class="bu">enumerate</span>(model.children_):</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>        count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> child <span class="kw">in</span> (left_child, right_child):</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> child <span class="op">&lt;</span> n_samples:</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>                count <span class="op">+=</span> <span class="dv">1</span>  <span class="co"># leaf</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>                count <span class="op">+=</span> counts[child <span class="op">-</span> n_samples]</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>        counts[i] <span class="op">=</span> count</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    linkage_matrix <span class="op">=</span> np.column_stack(</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>        [model.children_, model.distances_, counts]</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    ).astype(<span class="bu">float</span>)</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    dendrogram(linkage_matrix, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="fit-hierarchical-model" class="level3">
+<h3 class="anchored" data-anchor-id="fit-hierarchical-model">Fit hierarchical model</h3>
+<p>We first fit a model that builds the full tree so that we can draw the dendrogram.</p>
+<div id="82d58dcb" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>agg_full <span class="op">=</span> AgglomerativeClustering(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    distance_threshold<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    n_clusters<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    metric<span class="op">=</span><span class="st">"euclidean"</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    linkage<span class="op">=</span><span class="st">"ward"</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>agg_full <span class="op">=</span> agg_full.fit(df_scaled)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="plot-truncated-dendrogram" class="level3">
+<h3 class="anchored" data-anchor-id="plot-truncated-dendrogram">Plot truncated dendrogram</h3>
+<p>We only show the top few levels so the plot is not too crowded.</p>
+<div id="42625d17" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Hierarchical Clustering Dendrogram (truncated) - London schools"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>plot_dendrogram(</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    agg_full,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    truncate_mode<span class="op">=</span><span class="st">"level"</span>,  <span class="co"># show only upper levels</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    p<span class="op">=</span><span class="dv">3</span>                     <span class="co"># number of levels to show</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Cluster index (not individual school)"</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Distance"</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week10_practical_files/figure-html/cell-18-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="week10_practical_files/figure-html/cell-18-output-1.png" width="945" height="562" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Each merge in the tree shows two clusters being joined.<br>
+</li>
+<li>A big vertical jump suggests a natural place to cut the tree into a small number of clusters.### Cut tree into a chosen number of clusters</li>
+</ul>
+<p>We now choose a number of clusters (e.g.&nbsp;5, for easier comparison with K-means).</p>
+<div id="95f84a39" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>n_clusters_hier <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>agg_cut <span class="op">=</span> AgglomerativeClustering(</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    n_clusters<span class="op">=</span>n_clusters_hier,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    metric<span class="op">=</span><span class="st">"euclidean"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    linkage<span class="op">=</span><span class="st">"ward"</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>hier_labels <span class="op">=</span> agg_cut.fit_predict(df_scaled)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>df_school_london <span class="op">=</span> df_school_london.assign(cluster_hier<span class="op">=</span>hier_labels)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>df_school_london[<span class="st">"cluster_hier"</span>].value_counts().sort_index()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>cluster_hier
+0    178
+1     54
+2    138
+3     19
+4     54
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="plot-of-hierarchical-cluster-centroids" class="level3">
+<h3 class="anchored" data-anchor-id="plot-of-hierarchical-cluster-centroids">Plot of hierarchical cluster centroids</h3>
+<div id="7ac3f43f" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df_hc <span class="op">=</span> df_school_reduced.copy()</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df_hc <span class="op">=</span> df_hc.assign(cluster_hier<span class="op">=</span>hier_labels)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>df_hc_centroid <span class="op">=</span> df_hc.groupby(<span class="st">'cluster_hier'</span>).mean()</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>radar_plot_cluster_centroids(df_hc_centroid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week10_practical_files/figure-html/cell-20-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="week10_practical_files/figure-html/cell-20-output-1.png" width="793" height="682" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="visualising-clusters-with-selected-variables-1" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-clusters-with-selected-variables-1">Visualising clusters with selected variables</h3>
+<p>We reuse the same two attainment variables but colour by hierarchical cluster.</p>
+<div id="954a1d87" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plt.figure()</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_school_london,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>x_var, y<span class="op">=</span>y_var,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"cluster_hier"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">"tab10"</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.7</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"Hierarchical clusters (n=</span><span class="sc">{</span>n_clusters_hier<span class="sc">}</span><span class="ss">) on </span><span class="sc">{</span>x_var<span class="sc">}</span><span class="ss"> vs </span><span class="sc">{</span>y_var<span class="sc">}</span><span class="ss"> (London schools)"</span>)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Cluster"</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.05</span>, <span class="dv">1</span>), loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week10_practical_files/figure-html/cell-21-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="week10_practical_files/figure-html/cell-21-output-1.png" width="799" height="559" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="map-london-schools-by-cluster" class="level2">
+<h2 class="anchored" data-anchor-id="map-london-schools-by-cluster">Map London schools by cluster</h2>
+<p>Finally, we map the London schools in 2D space using their <strong>easting</strong> and <strong>northing</strong> coordinates.</p>
+<p>Each point represents a school, and the colour shows its cluster. This is a simple scatter plot (not a full GIS map), but it still reveals spatial patterns. We will map:</p>
+<ul>
+<li>Once for <strong>K-means</strong> clusters.<br>
+</li>
+<li>Once for <strong>hierarchical</strong> clusters.</li>
+</ul>
+<section id="map-with-k-means-clusters" class="level3">
+<h3 class="anchored" data-anchor-id="map-with-k-means-clusters">Map with K-means clusters</h3>
+<div id="2679f2f7" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shapely.geometry <span class="im">import</span> Polygon, MultiPolygon</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.lines <span class="im">as</span> mlines</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># --- read and prepare boundaries (do this once in the document) ---</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>url_geojson <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/huanfachen/QM/refs/heads/main/sessions/L10_data/London_Boroughs.geojson"</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>gdf_boroughs <span class="op">=</span> gpd.read_file(url_geojson)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>gdf_boroughs[<span class="st">"BOROUGH"</span>] <span class="op">=</span> gdf_boroughs[<span class="st">"BOROUGH"</span>].<span class="bu">str</span>.replace(<span class="st">"&amp;"</span>, <span class="st">"and"</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Reproject to British National Grid (EPSG:27700)</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>gdf_boroughs <span class="op">=</span> gdf_boroughs.to_crs(epsg<span class="op">=</span><span class="dv">27700</span>)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge with df_lad_county to get Inner / Outer London label</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>gdf_london <span class="op">=</span> gdf_boroughs.merge(</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    df_lad_county[[<span class="st">"LAD24NM"</span>, <span class="st">"CTY24NM"</span>]],</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    left_on<span class="op">=</span><span class="st">"BOROUGH"</span>,</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>    right_on<span class="op">=</span><span class="st">"LAD24NM"</span>,</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>    how<span class="op">=</span><span class="st">"inner"</span></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Dissolve into single polygons for Inner / Outer London</span></span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>gdf_inner_outer <span class="op">=</span> gdf_london.dissolve(by<span class="op">=</span><span class="st">"CTY24NM"</span>)  <span class="co"># index: "Inner London", "Outer London"</span></span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a><span class="co"># --- build a single 'outer London' boundary from ALL boroughs (Inner + Outer) ---</span></span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a><span class="co"># union of all geometries gives whole London footprint</span></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>london_union <span class="op">=</span> gdf_london.unary_union      <span class="co"># Polygon or MultiPolygon</span></span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a><span class="co"># make GeoSeries so we can plot its boundary</span></span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>gseries_london_union <span class="op">=</span> gpd.GeoSeries([london_union], crs<span class="op">=</span>gdf_london.crs)</span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a><span class="co"># --- scatter of schools, coloured by K-means cluster ---</span></span>
+<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> plt.scatter(</span>
+<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a>    df_school_london[<span class="st">"easting"</span>],</span>
+<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a>    df_school_london[<span class="st">"northing"</span>],</span>
+<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>df_school_london[<span class="st">"cluster_kmeans"</span>],</span>
+<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"viridis"</span>,</span>
+<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.8</span>,</span>
+<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"k"</span>,</span>
+<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">0.2</span></span>
+<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">"equal"</span>, <span class="st">"box"</span>)</span>
+<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a><span class="co"># --- plot Inner London boundary (red, dashed) ---</span></span>
+<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a>inner_geom <span class="op">=</span> gdf_inner_outer.loc[<span class="st">"Inner London"</span>].geometry</span>
+<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a>gpd.GeoSeries([inner_geom], crs<span class="op">=</span>gdf_london.crs).boundary.plot(</span>
+<span id="cb28-53"><a href="#cb28-53" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb28-54"><a href="#cb28-54" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"red"</span>,</span>
+<span id="cb28-55"><a href="#cb28-55" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb28-56"><a href="#cb28-56" aria-hidden="true" tabindex="-1"></a>    linestyle<span class="op">=</span><span class="st">"--"</span>,</span>
+<span id="cb28-57"><a href="#cb28-57" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.9</span></span>
+<span id="cb28-58"><a href="#cb28-58" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-59"><a href="#cb28-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-60"><a href="#cb28-60" aria-hidden="true" tabindex="-1"></a><span class="co"># --- plot Outer London *overall* boundary from all boroughs (blue, dashed) ---</span></span>
+<span id="cb28-61"><a href="#cb28-61" aria-hidden="true" tabindex="-1"></a>gseries_london_union.boundary.plot(</span>
+<span id="cb28-62"><a href="#cb28-62" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb28-63"><a href="#cb28-63" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"blue"</span>,</span>
+<span id="cb28-64"><a href="#cb28-64" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb28-65"><a href="#cb28-65" aria-hidden="true" tabindex="-1"></a>    linestyle<span class="op">=</span><span class="st">"--"</span>,</span>
+<span id="cb28-66"><a href="#cb28-66" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.9</span></span>
+<span id="cb28-67"><a href="#cb28-67" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-68"><a href="#cb28-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-69"><a href="#cb28-69" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Easting"</span>)</span>
+<span id="cb28-70"><a href="#cb28-70" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Northing"</span>)</span>
+<span id="cb28-71"><a href="#cb28-71" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"London schools mapped by K-means clusters (k=</span><span class="sc">{</span>k_val<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb28-72"><a href="#cb28-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-73"><a href="#cb28-73" aria-hidden="true" tabindex="-1"></a><span class="co"># --- legend for clusters ---</span></span>
+<span id="cb28-74"><a href="#cb28-74" aria-hidden="true" tabindex="-1"></a>handles_clusters, _ <span class="op">=</span> scatter.legend_elements(prop<span class="op">=</span><span class="st">"colors"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb28-75"><a href="#cb28-75" aria-hidden="true" tabindex="-1"></a>labels_clusters <span class="op">=</span> [<span class="ss">f"Cluster </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(k_val)]</span>
+<span id="cb28-76"><a href="#cb28-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-77"><a href="#cb28-77" aria-hidden="true" tabindex="-1"></a><span class="co"># --- legend for Inner / Outer London boundaries ---</span></span>
+<span id="cb28-78"><a href="#cb28-78" aria-hidden="true" tabindex="-1"></a>inner_line <span class="op">=</span> mlines.Line2D(</span>
+<span id="cb28-79"><a href="#cb28-79" aria-hidden="true" tabindex="-1"></a>    [], [], color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">"Inner London"</span></span>
+<span id="cb28-80"><a href="#cb28-80" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-81"><a href="#cb28-81" aria-hidden="true" tabindex="-1"></a>outer_line <span class="op">=</span> mlines.Line2D(</span>
+<span id="cb28-82"><a href="#cb28-82" aria-hidden="true" tabindex="-1"></a>    [], [], color<span class="op">=</span><span class="st">"blue"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">"Outer London boundary"</span></span>
+<span id="cb28-83"><a href="#cb28-83" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-84"><a href="#cb28-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-85"><a href="#cb28-85" aria-hidden="true" tabindex="-1"></a><span class="co"># combine legends</span></span>
+<span id="cb28-86"><a href="#cb28-86" aria-hidden="true" tabindex="-1"></a>handles_all <span class="op">=</span> handles_clusters <span class="op">+</span> [inner_line, outer_line]</span>
+<span id="cb28-87"><a href="#cb28-87" aria-hidden="true" tabindex="-1"></a>labels_all <span class="op">=</span> labels_clusters <span class="op">+</span> [<span class="st">"Inner London"</span>, <span class="st">"Outer London"</span>]</span>
+<span id="cb28-88"><a href="#cb28-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-89"><a href="#cb28-89" aria-hidden="true" tabindex="-1"></a>plt.legend(</span>
+<span id="cb28-90"><a href="#cb28-90" aria-hidden="true" tabindex="-1"></a>    handles_all,</span>
+<span id="cb28-91"><a href="#cb28-91" aria-hidden="true" tabindex="-1"></a>    labels_all,</span>
+<span id="cb28-92"><a href="#cb28-92" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"K-means cluster"</span>,</span>
+<span id="cb28-93"><a href="#cb28-93" aria-hidden="true" tabindex="-1"></a>    bbox_to_anchor<span class="op">=</span>(<span class="fl">1.05</span>, <span class="dv">1</span>),</span>
+<span id="cb28-94"><a href="#cb28-94" aria-hidden="true" tabindex="-1"></a>    loc<span class="op">=</span><span class="st">"upper left"</span></span>
+<span id="cb28-95"><a href="#cb28-95" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-96"><a href="#cb28-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-97"><a href="#cb28-97" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb28-98"><a href="#cb28-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-99"><a href="#cb28-99" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Remove axis tick text (and ticks if you like)</span></span>
+<span id="cb28-100"><a href="#cb28-100" aria-hidden="true" tabindex="-1"></a>ax.set_xticks([])</span>
+<span id="cb28-101"><a href="#cb28-101" aria-hidden="true" tabindex="-1"></a>ax.set_yticks([])</span>
+<span id="cb28-102"><a href="#cb28-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-103"><a href="#cb28-103" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_34593/2539784033.py:29: DeprecationWarning:
+
+The 'unary_union' attribute is deprecated, use the 'union_all()' method instead.
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week10_practical_files/figure-html/cell-22-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="week10_practical_files/figure-html/cell-22-output-2.png" width="677" height="411" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="map-with-hierarchical-clusters" class="level3">
+<h3 class="anchored" data-anchor-id="map-with-hierarchical-clusters">Map with hierarchical clusters</h3>
+<div id="eb6202c1" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.lines <span class="im">as</span> mlines</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># --- scatter of schools, coloured by hierarchical cluster ---</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>scatter_h <span class="op">=</span> plt.scatter(</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    df_school_london[<span class="st">"easting"</span>],</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    df_school_london[<span class="st">"northing"</span>],</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>df_school_london[<span class="st">"cluster_hier"</span>],</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"viridis"</span>,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.8</span>,</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"k"</span>,</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">0.2</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">"equal"</span>, <span class="st">"box"</span>)</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="co"># --- plot Inner London boundary (red, dashed) ---</span></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>inner_geom <span class="op">=</span> gdf_inner_outer.loc[<span class="st">"Inner London"</span>].geometry</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>gpd.GeoSeries([inner_geom], crs<span class="op">=</span>gdf_london.crs).boundary.plot(</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"red"</span>,</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>    linestyle<span class="op">=</span><span class="st">"--"</span>,</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.9</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a><span class="co"># --- plot Outer London *overall* boundary from all boroughs (blue, dashed) ---</span></span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>gseries_london_union.boundary.plot(</span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax,</span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>    edgecolor<span class="op">=</span><span class="st">"blue"</span>,</span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>    linestyle<span class="op">=</span><span class="st">"--"</span>,</span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.9</span></span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Easting"</span>)</span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Northing"</span>)</span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"London schools mapped by hierarchical clusters (n=</span><span class="sc">{</span>n_clusters_hier<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a><span class="co"># --- legend for hierarchical clusters ---</span></span>
+<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a>handles_h, _ <span class="op">=</span> scatter_h.legend_elements(prop<span class="op">=</span><span class="st">"colors"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a>labels_h <span class="op">=</span> [<span class="ss">f"Cluster </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_clusters_hier)]</span>
+<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a><span class="co"># --- legend entries for Inner / Outer London ---</span></span>
+<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a>inner_line <span class="op">=</span> mlines.Line2D(</span>
+<span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a>    [], [], color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">"Inner London"</span></span>
+<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a>outer_line <span class="op">=</span> mlines.Line2D(</span>
+<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a>    [], [], color<span class="op">=</span><span class="st">"blue"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">"Outer London boundary"</span></span>
+<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a><span class="co"># combine legends</span></span>
+<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a>handles_all <span class="op">=</span> handles_clusters <span class="op">+</span> [inner_line, outer_line]</span>
+<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a>labels_all <span class="op">=</span> labels_clusters <span class="op">+</span> [<span class="st">"Inner London"</span>, <span class="st">"Outer London"</span>]</span>
+<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-58"><a href="#cb30-58" aria-hidden="true" tabindex="-1"></a>plt.legend(handles_all, labels_all,</span>
+<span id="cb30-59"><a href="#cb30-59" aria-hidden="true" tabindex="-1"></a>           title<span class="op">=</span><span class="st">"Hier. cluster"</span>,</span>
+<span id="cb30-60"><a href="#cb30-60" aria-hidden="true" tabindex="-1"></a>           bbox_to_anchor<span class="op">=</span>(<span class="fl">1.05</span>, <span class="dv">1</span>), loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb30-61"><a href="#cb30-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Remove axis tick text (and ticks if you like)</span></span>
+<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a>ax.set_xticks([])</span>
+<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a>ax.set_yticks([])</span>
+<span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="week10_practical_files/figure-html/cell-23-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="week10_practical_files/figure-html/cell-23-output-1.png" width="750" height="464" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We’ve seen two maps of clusters of London schools, each with 5 clusters. Please note that the cluster numbering (0-5) is nominal rather than ordinal; it doesn’t indicate an order. In addition, we can’t compare Cluster 0 from Kmeans with Cluster 0 from hierarchical clustering.</p>
+<p>The Kmeans clustering map shows that most schools in Cluster 3 are in Inner London, while most of the schools in Cluster 0 or 4 are outsider Inner London.</p>
+<p>In comparison, the hierarchical clustering map shows that Cluster 0 are mostly in Inner London. For further analysis, we can link the clustering with spatial or socio-economic variables to check why these clusters are concentrated in space.</p>
+</section>
+</section>
+<section id="youre-done" class="level2">
+<h2 class="anchored" data-anchor-id="youre-done">You’re Done!</h2>
+<p>In this practical, we’ve used clustering analysis to inspect the grouping of schools in London.</p>
+<p>If you have time, you can now: - Try different variable subsets or add in more variables on census and/or performance. - Add more interpretation about what each cluster represents in educational terms.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/huanfachen\.github\.io\/QM\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 2025–, Huanfa Chen, Adam Dennett, Bea Taylor</p>
+</div>   
+    <div class="nav-footer-center">
+<p><img src="../img/logo/logo_only_sm.png" height="25"> Quantitative Methods</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/huanfachen/QM/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/huanfachen/QM">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/huanfa-chen/">
+      <i class="bi bi-LinkedIn" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

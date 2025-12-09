@@ -7,7 +7,10 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-68c8bffd90dad8f2b55c52d7b6410dc0.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-68c8bffd90dad8f2b55c52d7b6410dc0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Huanfa Chen">
@@ -30,12 +33,10 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-3d9a2287676b2fea48eb10fd22aaf47d.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-708fdb05d86516b6f171cd9cf793ecac.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
@@ -209,7 +210,7 @@
 <li>Clusters have obvious spatial patterns but aren’t spatially connected</li>
 </ul>
 <div style="text-align:center;">
-<img src="L10_images/LOAC.jpg" alt="LOAC" style="max-width:80%;">
+<img src="L10_images/LOAC.jpg" alt="LOAC" style="max-width:60%;">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
 <pre><code>Image credit: https://mapmaker.geods.ac.uk/</code></pre>
 </div>
@@ -233,13 +234,8 @@
 <section id="steps" class="slide level2 nostretch">
 <h2>Steps</h2>
 <div class="columns">
-<div class="column" style="width:40;">
-<div style="text-align:center;">
-<img src="L10_images/kmeans_iterations.gif" alt="LOAC" style="max-width:80%;">
-<div style="font-size:0.8em; color: #555; margin-top:4px;">
-<pre><code>Image credit: imageflip.com</code></pre>
-</div>
-</div>
+<div class="column" style="width:40%;">
+<p><a href="L10_images/kmeans_iterations.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="L10_images/kmeans_iterations.gif"></a></p>
 </div><div class="column" style="width:60%;">
 <p>Iterative process (<em>Expectation-Maximisation algorithm</em>)</p>
 <ul>
@@ -305,6 +301,10 @@
 <section>
 <section id="hierarchical-clustering" class="title-slide slide level1 center">
 <h1>Hierarchical clustering</h1>
+
+</section>
+<section id="definition" class="slide level2">
+<h2>Definition</h2>
 <ul>
 <li>Two ways of hierarchical clustering
 <ul>
@@ -366,14 +366,14 @@
 </div>
 </section></section>
 <section>
-<section id="interpreting-clustering-agnostic-to-clustering-methods" class="title-slide slide level1 center">
-<h1>Interpreting clustering (agnostic to clustering methods)</h1>
+<section id="interpreting-clustering-clustering-method-agnostic" class="title-slide slide level1 center">
+<h1>Interpreting clustering (clustering method-agnostic)</h1>
 
 </section>
 <section id="cluster-centroid-as-representative" class="slide level2">
 <h2>Cluster centroid as representative</h2>
 <div style="text-align:center;">
-<img src="L10_images/kmeans_cluster_centroid_roseplot.png" alt="roseplot" style="max-width:120%;">
+<img src="L10_images/kmeans_cluster_centroid_roseplot.png" alt="roseplot" style="max-width:100%;">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
 
 </div>
@@ -382,7 +382,7 @@
 <section id="mapping" class="slide level2">
 <h2>Mapping</h2>
 <div style="text-align:center;">
-<img src="L10_images/kmeans_cluster_mapping.png" alt="elbow" style="max-width:120%;">
+<img src="L10_images/kmeans_cluster_mapping.png" alt="elbow" style="max-width:100%;">
 <div style="font-size:0.8em; color: #555; margin-top:4px;">
 <pre><code>To check if schools belonging to a cluster are geographically clustered</code></pre>
 </div>
@@ -420,7 +420,6 @@
   <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -442,8 +441,7 @@
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'chalkboard': {"buttons":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -614,7 +612,7 @@
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -791,6 +789,38 @@
         }
       });
       </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>
