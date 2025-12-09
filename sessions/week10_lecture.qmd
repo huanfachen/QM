@@ -159,7 +159,7 @@ Iterative process (*Expectation-Maximisation algorithm*)
 
 - Two ways of hierarchical clustering
   - [*agglomerative*]{style="color:blue"}: bottom-up; begin with one cluster per data point and gradually merge into larger clusters.
-  - *divisive*: top-down; Begins with one big cluster and gradually split into smaller clusters 
+  - *divisive*: top-down; begin with one big cluster and gradually split into smaller clusters 
 
 ## Process
 - Start with every point in its own cluster
@@ -172,23 +172,49 @@ Iterative process (*Expectation-Maximisation algorithm*)
 - No prior knowledge of data required
 - Users can choose the level in a hierarchy structure
 
-## Selecting number of clusters
+## Example of hierarchical clustering
 
-# Interpreting clustering
-
-## Cluster centroid as representative
-
-
-
-## Mapping
 <div style="text-align:center;">
-  <img src="L10_images/mapping_school_clusters.png" alt="elbow" style="max-width:80%;">
+  <img src="L10_images/hierarchical_illustration_step1.png" alt="roseplot" style="max-width:80%;">
   <div style="font-size:0.8em; color: #555; margin-top:4px;">
-    To check if schools belonging to a cluster are geographically clustered
+  </div>
+</div>
+
+## Example of hierarchical clustering (continued)
+
+<div style="text-align:center;">
+  <img src="L10_images/hierarchical_illustration_step2.png" alt="roseplot" style="max-width:80%;">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+  </div>
+</div>
+
+## Example of hierarchical clustering (continued)
+
+<div style="text-align:center;">
+  <img src="L10_images/hierarchical_illustration_step3.png" alt="roseplot" style="max-width:80%;">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
   </div>
 </div>
 
 
+## Selecting number of clusters
+
+# Interpreting clustering (agnostic to clustering methods)
+
+## Cluster centroid as representative
+<div style="text-align:center;">
+  <img src="L10_images/kmeans_cluster_centroid_roseplot.png" alt="roseplot" style="max-width:80%;">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+  </div>
+</div>
+
+## Mapping
+<div style="text-align:center;">
+  <img src="L10_images/kmeans_cluster_mapping.png" alt="elbow" style="max-width:80%;">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+    To check if schools belonging to a cluster are geographically clustered
+  </div>
+</div>
 
 ## Key takeaways 
 
