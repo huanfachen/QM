@@ -13,7 +13,7 @@ format:
     transition: none
     slide-number: TRUE
     preview-links: auto
-    theme: casa-slides
+    # theme: casa-slides
     # chalkboard: true
 ---
 
@@ -91,12 +91,6 @@ Looked at:
 :::: columns
 
 ::: {.column width="40%"}
-<div style="text-align:center;">
-  <img src="L10_images/kmeans_iterations.gif" alt="LOAC" style="max-width:80%;">
-  <div style="font-size:0.8em; color: #555; margin-top:4px;">
-    Image credit: imageflip.com
-  </div>
-</div>
 
 ![](L10_images/kmeans_iterations.gif)
 
