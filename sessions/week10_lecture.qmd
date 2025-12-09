@@ -6,7 +6,6 @@ email: "huanfa.chen@ucl.ac.uk"
 date-as-string: "29th November 2025"
 from: markdown+emoji
 other: "CASA0007 Quantitative Methods"
-from: markdown+emoji
 format:
   revealjs: 
     template-partials: 
@@ -100,17 +99,36 @@ Looked at:
 :::
 
 ::: {.column width="60%"}
-Iterative process (Expectation-Maximisation algorithm)
+Iterative process (*Expectation-Maximisation algorithm*)
 
-- Place k centroids randomly within space
-- Assign points to nearest centroid
-- Recalculate centroids as the new mean of the cluster
+- Place k centroids [randomly]{style="color:blue"} within space
+- Assign data points to nearest centroid
+- Recalculate centroids as the new [mean]{style="color:blue"} of the cluster
 - Continue until centroid assignments no longer change
 
 :::
 :::
 
-## Addressing randomness
+## Implications of *centroid as mean of data points in a cluster*
+
+::: {.incremental}
+- K-Means is incapable of handling categorical variables, as we can't calculate the mean of a categorical variable
+- K-Means is *sensitive* to outliers, as an outlier significantly impacts the mean of a dataset
+:::
+
+## Problems with K-Means and solutions
+
+::: {.incremental}
+
+- Sensitive to outliers (solution: use another clustering method, or remove outliers)
+- Incapable of handling categorical variables (solution: k-modes or k-prototypes)
+- Requires knowledge of the number of clusters (*k*), which we may not know in advance (solution: Elbow method to find *k*);
+- Sensitive to centroid initialisation, which can lead to poor solutions (solution: try different random initialisation and pick up the best one);
+
+:::
+
+## K-Means implementation in *sklearn*
+
 
 ## Selecting K
 
