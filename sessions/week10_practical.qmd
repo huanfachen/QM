@@ -421,10 +421,6 @@ df_school_london["cluster_hier"].value_counts().sort_index()
 ### Plot of hierarchical cluster centroids
 
 ```{python}
-df_hc.cluster_hier.head()
-```
-
-```{python}
 df_hc = df_school_reduced.copy()
 df_hc = df_hc.assign(cluster_hier=hier_labels)
 df_hc_centroid = df_hc.groupby('cluster_hier').mean()
