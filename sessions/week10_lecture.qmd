@@ -14,7 +14,7 @@ format:
     slide-number: TRUE
     preview-links: auto
     theme: casa-slides
-    chalkboard: true
+    # chalkboard: true
 ---
 
 ## Last week
