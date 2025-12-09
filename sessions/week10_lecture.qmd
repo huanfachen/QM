@@ -160,6 +160,8 @@ Iterative process (*Expectation-Maximisation algorithm*)
 
 # Hierarchical clustering
 
+## Definition
+
 - Two ways of hierarchical clustering
   - [*agglomerative*]{style="color:blue"}: bottom-up; begin with one cluster per data point and gradually merge into larger clusters.
   - *divisive*: top-down; begin with one big cluster and gradually split into smaller clusters 
@@ -207,18 +209,18 @@ Iterative process (*Expectation-Maximisation algorithm*)
 </div>
 
 
-# Interpreting clustering (agnostic to clustering methods)
+# Interpreting clustering (clustering method-agnostic)
 
 ## Cluster centroid as representative
 <div style="text-align:center;">
-  <img src="L10_images/kmeans_cluster_centroid_roseplot.png" alt="roseplot" style="max-width:120%;">
+  <img src="L10_images/kmeans_cluster_centroid_roseplot.png" alt="roseplot" style="max-width:100%;">
   <div style="font-size:0.8em; color: #555; margin-top:4px;">
   </div>
 </div>
 
 ## Mapping
 <div style="text-align:center;">
-  <img src="L10_images/kmeans_cluster_mapping.png" alt="elbow" style="max-width:120%;">
+  <img src="L10_images/kmeans_cluster_mapping.png" alt="elbow" style="max-width:100%;">
   <div style="font-size:0.8em; color: #555; margin-top:4px;">
     To check if schools belonging to a cluster are geographically clustered
   </div>
