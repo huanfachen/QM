@@ -52,6 +52,7 @@ format:
     theme:
       - css/casa-slides.scss # Must be valid *relative* path
     footer: "&copy; CASA &nbsp; | &nbsp; [ucl.ac.uk/bartlett/casa](https://www.ucl.ac.uk/bartlett/casa)"
+    embed-resources: true
 filters:
  - code-visibility
 lightbox: auto

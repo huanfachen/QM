@@ -68,7 +68,7 @@ Looked at:
 - Clusters have obvious spatial patterns but aren’t spatially connected
 
 <div style="text-align:center;">
-  <img src="L10_images/LOAC.jpg" alt="LOAC" style="max-width:80%;">
+  <img src="L10_images/LOAC.jpg" alt="LOAC" style="max-width:60%;">
   <div style="font-size:0.8em; color: #555; margin-top:4px;">
     Image credit: https://mapmaker.geods.ac.uk/
   </div>
@@ -90,13 +90,16 @@ Looked at:
 
 :::: columns
 
-::: {.column width="40"}
+::: {.column width="40%"}
 <div style="text-align:center;">
   <img src="L10_images/kmeans_iterations.gif" alt="LOAC" style="max-width:80%;">
   <div style="font-size:0.8em; color: #555; margin-top:4px;">
     Image credit: imageflip.com
   </div>
 </div>
+
+![](L10_images/kmeans_iterations.gif)
+
 :::
 
 ::: {.column width="60%"}
