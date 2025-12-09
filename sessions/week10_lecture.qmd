@@ -89,6 +89,7 @@ Looked at:
 ## Steps {.nostretch}
 
 :::: columns
+
 ::: {.column width="40"}
 <div style="text-align:center;">
   <img src="L10_images/kmeans_iterations.gif" alt="LOAC" style="max-width:80%;">
@@ -150,22 +151,42 @@ Iterative process (*Expectation-Maximisation algorithm*)
 <div style="text-align:center;">
   <img src="L10_images/kmeans_elbow_method.png" alt="elbow" style="max-width:80%;">
   <div style="font-size:0.8em; color: #555; margin-top:4px;">
-    Image credit: 
+    Result: k=5 is appropriate.
   </div>
 </div>
 
 # Hierarchical clustering
 
-## Selecting number of clusters
+- Two ways of hierarchical clustering
+  - [*agglomerative*]{style="color:blue"}: bottom-up; begin with one cluster per data point and gradually merge into larger clusters.
+  - *divisive*: top-down; Begins with one big cluster and gradually split into smaller clusters 
 
-# Integrating clustering and spatial considerations
+## Process
+- Start with every point in its own cluster
+- Merge points according to a linkage criterion (or distance)
+- Compute centroid of new clusters
+- Expand linkage threshold and continue until all points in one cluster
+
+## Advantage of hierarchical clustering
+
+- No prior knowledge of data required
+- Users can choose the level in a hierarchy structure
+
+## Selecting number of clusters
 
 # Interpreting clustering
 
 ## Cluster centroid as representative
 
-## Mapping
 
+
+## Mapping
+<div style="text-align:center;">
+  <img src="L10_images/mapping_school_clusters.png" alt="elbow" style="max-width:80%;">
+  <div style="font-size:0.8em; color: #555; margin-top:4px;">
+    To check if schools belonging to a cluster are geographically clustered
+  </div>
+</div>
 
 
 
@@ -178,7 +199,7 @@ Iterative process (*Expectation-Maximisation algorithm*)
 - To measure difference [across two factors]{style="color:blue"}, use [two-way ANOVA]{style="color:red"}
 
 ## Practical 
-- The practical will focus on calculating and interpreting correlation metrics.  
+- The practical will focus on clustering analysis of the school data.
 - Have you questions prepared! 
 
 -----
