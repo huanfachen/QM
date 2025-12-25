@@ -1,0 +1,118 @@
+---
+title: "Week 6 Quiz"
+subtitle: "Regression Foundations"
+author: 
+  - name: "Yikang Wang"
+email: "yikang.wang.21@ucl.ac.uk"
+date-as-string: "12 November 2025"
+from: markdown+emoji
+format: revealjs
+smaller: false
+---
+
+# Let's Review the Quiz
+
+---
+
+## Question 1
+
+After running a regression analysis, you find that the R-squared ($R^2$) value is 0.34. What is the correct interpretation of this value?
+
+A.  There is a 34% chance that the model's predictions are correct.
+B.  **34% of the variation in the dependent variable can be explained by the variation in the independent variable.** ✅
+C.  The correlation between the two variables is 0.34.
+D.  The model's predictions will be off by about 34%.
+
+::: {.fragment}
+
+**Recap:** From the lecture
+
+
+
+> [The fit of the model is represented by the ***coefficient of determination*** or $R^2$ value (0-1)... It describes how much of the variation in Y... is explained by the variation in X.]{style="color:#49a0c4"}
+
+:::
+
+---
+
+## Question 2
+
+You build a regression model using data from only 10 schools to predict attainment. Why should you be cautious about the reliability of this model?
+
+A.  The R-squared value will always be low with a small sample size.
+B.  It is impossible to calculate p-values with fewer than 20 observations.
+C.  **The model is likely overfitted and may not generalise well to other schools.** ✅
+D.  The slope of the model will be inaccurate.
+
+::: {.fragment}
+
+**Explanation:** With a small number of observations relative to the model parameters (low degrees of freedom), the model can fit the random noise in the specific data sample rather than the true underlying relationship. This is called ***overfitting***.
+
+:::
+
+---
+
+## Question 3
+
+Plotting the residuals of a linear regression (the errors) against the predicted values can help you check which of the model's assumptions?
+
+A.  **If there is a linear relationship between the variables (linearity).** ✅
+B.  If the sample size is large enough.
+C.  **If the residuals have a constant variance (homoscedasticity).** ✅
+D.  If the independent variable is measured in the correct units.
+
+::: {.fragment}
+
+**Recap:** From the lecture...
+
+> [Plotting the residuals against the fitted values ... The residuals should be randomly scattered around zero.]{style="color:#49a0c4"}
+
+**Explanation:** Any clear pattern (like a curve or a funnel shape) suggests assumptions of linearity and homoscedasticity have been violated.
+
+:::
+
+---
+
+## Question 4
+
+Which of the following statements about the P-value is true?
+
+A.  The P-value is the probability that the null hypothesis is true. 
+B.  The P-value is the probability that the alternative hypothesis is true.
+C.  The P-value is the probability of obtaining the observed or more extreme results if the alternative hypothesis is true.
+D.  **The P-value is the probability of obtaining the observed results, or more extreme results, if the null hypothesis is true.** ✅
+
+::: {.fragment}
+
+**Explanation:** This is the formal definition of a p-value. It quantifies how surprising your data is, assuming there is no actual effect (i.e., the null hypothesis is true). A small p-value means the data is very surprising under the null hypothesis, leading us to reject it.
+
+:::
+
+---
+
+## Question 5
+
+Two variables, y and x, are plotted on log-log axes. The plot shows a straight-line relationship. Which of the following statements are valid interpretations of this result?
+
+A.  y increases sub-linearly with x.
+B.  **The relationship can be described as a power law.** ✅
+C.  For large values of x, y will eventually be zero.
+D.  **The transformation suggests the original relationship was non-linear.** ✅
+
+---
+
+## Question 5 Explanation{.smaller}
+
+A straight line on a log-log plot means the logged variables have a linear relationship: $$ \log(y) = \beta_0 + \beta_1 \log(x) $$ 
+
+To find the original relationship, we exponentiate both sides: $$ e^{\log(y)} = e^{\beta_0 + \beta_1 \log(x)} $$ 
+
+Using the rule $e^{a+b} = e^a \times e^b$: $$ y = e^{\beta_0} \times e^{\beta_1 \log(x)} $$ 
+
+And using the rule $e^{k \log(x)} = x^k$: $$ y = e^{\beta_0} \times x^{\beta_1} $$ 
+
+$e^{\beta_0}$ is a constant. If we define a new constant $A = e^{\beta_0}$: $$ y = A x^{\beta_1} $$ 
+
+This is a **power-law relationship**.
+
+# Any questions?

@@ -1,0 +1,126 @@
+---
+title: "Week 3 Quiz"
+subtitle: "Hypothesis Testing"
+author: 
+  - name: "Yikang Wang"
+email: "yikang.wang.21@ucl.ac.uk"
+date-as-string: "15 October 2025"
+from: markdown+emoji
+format: revealjs
+smaller: false
+---
+
+# Let's Review the Quiz
+
+---
+
+## Question 1
+
+A researcher finds a strong positive correlation between the monthly sales of ice cream and the number of drowning incidents. Based on this information alone, what is the most sound conclusion?
+
+A.  Eating ice cream causes people to be more susceptible to drowning.
+B.  The increase in drowning incidents is causing people to buy more ice cream.
+C.  **There is likely a confounding variable, such as warm weather, that is influencing both ice cream sales and the number of people swimming.** ✅
+D.  There is no real statistical relationship between these two variables.
+
+::: {.fragment}
+
+***Explanation:** This is a classic example of correlation not implying causation. A third variable (a confounding variable) is the likely cause of both increases.*
+
+:::
+
+---
+
+## Question 2
+
+Which of the following statements about the p-value is true?
+
+A.  The p-value is the probability that the null hypothesis is true, if obtaining the observed or more extreme results. 
+B.  The p-value is the probability that the alternative hypothesis is true, obtaining the observed or more extreme results.
+C.  The p-value is the probability of obtaining the observed or more extreme results, if the alternative hypothesis is true. 
+D.  **The p-value is the probability of obtaining the observed or more extreme results, if the null hypothesis is true.** ✅
+
+::: {.fragment}
+
+***Explanation:** The p-value is the probability of seeing the evidence, or something even more extreme, if the null hypothesis is true.*
+
+:::
+
+---
+
+## Question 3
+
+Which of these would be a suitable null hypothesis ($H_0$) for a study?
+
+A.  **There is no difference in the mean cycling speed between TfL Standard bike users and private bike users.** ✅
+B.  The mean height of students in group A is greater than in group B.
+C.  People who work from home are more productive than those who work in an office.
+D.  There is a significant relationship between income and happiness.
+
+::: {.fragment}
+
+***Explanation:** A null hypothesis ($H_0$) is a statement of the "status quo" or "no effect". Options B, C, and D are statements of a difference or relationship, making them better suited as alternative hypotheses ($H_1$).*
+
+:::
+
+---
+
+## Question 4
+
+A Type I error (false positive) occurs when:
+
+A.  We accept a null hypothesis when it is not true.
+B.  **We reject a null hypothesis when it is true.** ✅
+
+::: {.fragment}
+
+***Explanation:***
+
+-   *Type I error; False positive; We reject a null hypothesis when it is true.*
+-   *Type II error; False negative; We accept a null hypothesis when it is not true.*
+
+:::
+
+---
+
+## Question 5
+
+You want to test if there has been a significant change in students' self-reported well-being scores at the beginning of the term compared to the end of the term. The same group of students is measured on both occasions. What statistical test is most suitable for this analysis?
+
+A.  One-sample t-test
+B.  **Paired samples t-test** ✅
+C.  Kolmogorov-Smirnov (K-S) test
+D.  Plot histograms and observe
+
+::: {.fragment}
+
+***Explanation:** Because you are comparing measurements from the same group at two different times, the data points are "paired". An independent t-test would be incorrect as it assumes the two groups are unrelated. A K-S test measures the distribution, but not the change on the same individual over time.* 
+
+:::
+
+---
+
+## Question 6
+
+Which of the following statements about the Kolmogorov-Smirnov (K-S) test are true?
+
+A.  **K-S test can be used to decide if a sample comes from a population with a specific distribution.** ✅
+B.  The K-S test is based on comparing the means of two distributions.
+C.  **The K-S test can be used to test whether two samples come from the same underlying distribution.** ✅
+D.  The K-S test is only suitable for discrete, count-based data.
+
+::: {.fragment}
+
+::: {style="font-size: 80%;"}
+
+***Recap:** Kolmogorov-Smirnov*
+
+- *Compares two probability distributions*
+- *Can be used to test whether an observed sample came from a given distribution*
+- *Or to test whether two samples both came from the same distribution*
+
+:::
+
+:::
+
+# Any questions?

@@ -25,6 +25,8 @@ To access the lecture notes: [Lecture](week1_lecture.qmd)
 
 To access the quiz on Moodle, please check [Moodle page](https://moodle.ucl.ac.uk/course/view.php?id=53568).
 
+To access the slides for the quiz: [Quiz Slides](week1_quiz.qmd).
+
 ## Practical
 
 :::{.callout-note}

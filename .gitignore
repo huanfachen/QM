@@ -27,3 +27,5 @@ cloud-config.yml
 *.quarto_ipynb
 
 /.luarc.json
+
+**/*.quarto_ipynb

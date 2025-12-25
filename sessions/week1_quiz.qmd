@@ -1,0 +1,224 @@
+---
+title: "Week 1 Quiz"
+subtitle: "Exploratory Data Analysis #1"
+author: 
+  - name: "Yikang Wang"
+email: "yikang.wang.21@ucl.ac.uk"
+date-as-string: "1 October 2025"
+from: markdown+emoji
+format: revealjs
+smaller: false
+
+---
+
+
+
+---
+
+## Recap: Levels of Measurement
+
+|                               |       Nominal        |                Ordinal                 |    Interval     |    Ratio    |
+| ----------------------------- | :------------------: | :------------------------------------: | :-------------: | :---------: |
+| Categorizes and labels        |          ✔           |                   ✔                    |        ✔        |      ✔      |
+| Ranks categories in order     |                      |                   ✔                    |        ✔        |      ✔      |
+| Has known, equal intervals    |                      |                                        |        ✔        |      ✔      |
+| Has a true or meaningful zero |                      |                                        |                 |      ✔      |
+| *Examples*                    | *London, Paris, ...* | *Mega city, Big city, Small city, ...* | *1970, 2025 AD* | *£0, £3.85* |
+
+# Let's Review the Quiz
+
+
+
+## Question 1
+
+For a variable measured on an **ordinal** scale (e.g., survey responses from 'completely disagree' to 'completely agree'), which of the following metrics can be meaningfully calculated?
+
+A.  Mean
+B.  Median ✅
+C.  Equality; mode ✅
+D.  Standard Deviation
+
+::: {.fragment}
+
+**Explanation:** Ordinal data allows for ranking (**Median**) and counting frequency (**Mode**), but because the intervals are not equal, arithmetic operations like mean and standard deviation are not meaningful.
+
+:::
+
+---
+
+
+
+## Question 2
+
+Which level of measurement is distinguished by having a true or meaningful zero, allowing for the calculation of ratios (e.g., "2kg is twice as heavy as 1kg")?
+
+A.  Nominal
+B.  Ordinal
+C.  Interval
+D.  Ratio ✅
+
+::: {.fragment}
+
+**Explanation:** The true zero is the key feature of the **Ratio** scale. It signifies the complete absence of the measured quantity, which is what allows us to say "twice as much". An Interval scale (like Celsius) has an arbitrary zero.
+
+:::
+
+---
+
+## Question 3
+
+The mean of a variable can be calculated if the variable has a data type of:
+
+A.  Nominal	
+B.  Ordinal
+C.  Interval ✅
+D.  Ratio ✅
+
+::: {.fragment}
+
+**Explanation:** To calculate a mean, we need to be able to add values and divide, which requires data to have **known, equal intervals**. This property begins at the **Interval** level of measurement.
+
+:::
+
+---
+
+## Question 4
+
+:::: {.columns}
+
+::: {.column width="55%"}
+Which of these metrics measure the variability (or spread) of an interval or ratio variable?
+
+A.  Standard deviation ✅
+B.  Range ✅
+C.  Variance ✅
+D.  Median
+:::
+
+::: {.column width="45%" .fragment}
+
+**Recap:** When describing a dataset, we look at
+
+-   Quantity
+-   **The middle**: mean, **median**, mode
+-   **The spread**: **variance**, **standard deviation**, **range**
+
+**Median** is a measure of the *middle* (central tendency), not the spread. The others all quantify how spread out the data points are.
+:::
+
+::::
+
+---
+
+## Question 5
+
+:::: {.columns}
+
+::: {.column width="55%"}
+In a dataset of UK city populations, which is typically highly skewed, you would generally expect:
+
+A.  The mean population to be higher than the median population. ✅
+B.  The median population to be higher than the mean population.
+C.  The mean and median to be approximately equal.
+:::
+
+::: {.column width="45%" .fragment}
+
+**Recap:** Mean vs Median
+
+-   The **mean** is sensitive to extreme values (outliers).
+-   The **median** is resistant to outliers.
+
+In a right-skewed distribution (like city populations), a few very large cities pull the mean upwards, while the median remains the "true" middle point.
+:::
+
+::::
+
+---
+
+## Question 6
+
+:::: {.columns}
+
+::: {.column width="55%"}
+When calculating the mean of a dataset, how should *null* values be handled according to the lecture?
+
+A.  They should be treated as zero.
+B.  They should be replaced with the mode.
+C.  They should be excluded from the calculation. ✅
+D.  They should be replaced with a blank space.
+:::
+
+::: {.column width="45%" .fragment}
+
+**Recap:** Null Values
+
+> -   Representing the absence of data or an unknown value.
+> -   Different from *zero* or *a blank space*.
+> -   **Null values should be excluded before computing mean or std**.
+
+
+:::
+
+::::
+
+---
+
+## Question 7
+
+:::: {.columns}
+
+::: {.column width="55%"}
+A dataset contains a 10-storey building with a recorded height of 1 metre. What type of outlier is this most likely to be?
+
+A.  Error Outlier ✅
+B.  Irregular Pattern Outlier
+C.  Influential Outlier
+D.  A regular data point.
+:::
+
+::: {.column width="45%" .fragment}
+
+**Recap:** Types of Outliers
+
+::: {style="font-size: 80%;"}
+
+| Type                  | Source                          | Handling                |
+| --------------------- | ------------------------------- | ----------------------- |
+| **Error Outliers**    | Data entry/measurement mistakes | Correct or remove       |
+| **Irregular Pattern** | Genuine but unusual events      | Investigate; may remove |
+| **Influential**       | Extreme but integral to pattern | Keep in analysis        |
+
+:::
+
+:::
+
+::::
+
+---
+
+## Question 8
+
+:::: {.columns}
+
+::: {.column width="55%"}
+What does the 'box' part of a boxplot typically represent?
+
+A.  The range from the minimum to the maximum value.
+B.  The area containing 95% of the data.
+C.  The interquartile range (IQR), which contains the middle 50% of the data. ✅
+D.  The range covered by one standard deviation.
+:::
+
+::: {.column width="45%" .fragment}
+
+**Recap:** Boxplots
+
+![]({{< var module.web >}}/sessions/L1_images/Boxplot.jpg){width="100%"}
+
+The **box** itself spans from the 1st quartile (Q1) to the 3rd quartile (Q3), representing the central 50% of the data.
+:::
+
+::::
+
+# Any questions?
